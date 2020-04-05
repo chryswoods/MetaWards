@@ -7,10 +7,8 @@ import versioneer
 from setuptools import setup, find_packages, Extension
 from Cython.Build import cythonize
 
-# Should automatically search for these paths and not just assume...
-gsl_include_dirs = ["/usr/local/include"]
-gsl_libraries = ["gsl", "gslcblas"]
-gsl_library_dirs = ["/usr/local/lib"]
+random_sources = ["src/metawards/ran_binomial/mt19937.c", 
+                  "src/metawards/ran_binomial/distributions.c"]
 
 # https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
 def no_cythonize(extensions, **_ignore):
@@ -49,18 +47,12 @@ extensions = [
     Extension("metawards._fill_in_gaps", ["src/metawards/_fill_in_gaps.pyx"]),
     Extension("metawards._build_play_matrix", ["src/metawards/_build_play_matrix.pyx"]),
     Extension("metawards._array", ["src/metawards/_array.pyx"]),
-    Extension("metawards._iterate", ["src/metawards/_iterate.pyx"],
-              include_dirs=gsl_include_dirs, libraries=gsl_libraries,
-              library_dirs=gsl_library_dirs),
+    Extension("metawards._iterate", ["src/metawards/_iterate.pyx"]),
     Extension("metawards._iterate_weekend", ["src/metawards/_iterate_weekend.pyx"]),
     Extension("metawards._extract_data", ["src/metawards/_extract_data.pyx"]),
     Extension("metawards._extract_data_for_graphics", ["src/metawards/_extract_data_for_graphics.pyx"]),
-    Extension("metawards._import_infection", ["src/metawards/_import_infection.pyx"],
-              include_dirs=gsl_include_dirs, libraries=gsl_libraries,
-              library_dirs=gsl_library_dirs),
-    Extension("metawards._ran_binomial", ["src/metawards/_ran_binomial.pyx"],
-              include_dirs=gsl_include_dirs, libraries=gsl_libraries,
-              library_dirs=gsl_library_dirs),
+    Extension("metawards._import_infection", ["src/metawards/_import_infection.pyx"]),
+    Extension("metawards._ran_binomial", ["src/metawards/_ran_binomial.pyx"]+random_sources),
 ]
 
 # disable bounds checking and wraparound globally as the code already

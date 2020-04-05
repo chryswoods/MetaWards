@@ -8,7 +8,7 @@ from ._parameters import Parameters
 from ._profiler import Profiler, NullProfiler
 from ._import_infection import import_infection
 
-from ._ran_binomial cimport _ran_binomial, _get_gsl_ptr, gsl_rng
+from ._ran_binomial cimport _ran_binomial, _get_binomial_ptr, binomial_rng
 
 __all__ = ["iterate"]
 
@@ -36,7 +36,7 @@ def iterate(network: Network, infections, play_infections,
 
     p = profiler.start("iterate")
 
-    cdef gsl_rng* r = _get_gsl_ptr(rng)
+    cdef binomial_rng* r = _get_binomial_ptr(rng)
 
     cdef double uv = params.UV
     cdef int ts = timestep

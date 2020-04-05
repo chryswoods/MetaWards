@@ -6,7 +6,7 @@ from ._parameters import Parameters
 from ._nodes import Nodes
 from ._links import Links
 from ._population import Population
-from ._ran_binomial import seed_ran_binomial
+from ._ran_binomial import seed_ran_binomial, ran_binomial
 
 __all__ = ["Network"]
 
@@ -47,12 +47,12 @@ class Network:
 
     @staticmethod
     def build(params: Parameters,
-              calculate_distances: bool=True,
+              calculate_distances: bool = True,
               build_function=None,
               distance_function=None,
-              max_nodes:int = 10050,
-              max_links:int = 2414000,
-              profile:bool = True):
+              max_nodes: int = 10050,
+              max_links: int = 2414000,
+              profile: bool = True):
         """Builds and returns a new Network that is described by the
            passed parameters. If 'calculate_distances' is True, then
            this will also read in the ward positions and add
@@ -146,7 +146,7 @@ class Network:
         distance_function(self)
 
         # now need to update the dynamic distance cutoff based on the
-        # maximum distance between nodes
+        # maximum distance between nodes
         print("Get min/max distances...")
         (_mindist, maxdist) = self.get_min_max_distances()
 
@@ -196,11 +196,11 @@ class Network:
         move_population_from_play_to_work(self)
 
     def run(self, population: Population,
-                  seed: int = None,
-                  output_dir: str = "tmp",
-                  nsteps: int = None,
-                  profile: bool = True,
-                  s: int = None):
+            seed: int = None,
+            output_dir: str = "tmp",
+            nsteps: int = None,
+            profile: bool = True,
+            s: int = None):
         """Run the model simulation for the passed population.
            The random number seed is given in 'seed'. If this
            is None, then a random seed is used.
@@ -216,6 +216,16 @@ class Network:
         """
         # Create the random number generator
         rng = seed_ran_binomial(seed=seed)
+
+        # Print the first five random numbers so that we can
+        # compare to other codes/runs, and be sure that we are
+        # generating the same random sequence
+        randnums = []
+        for i in range(0, 5):
+            randnums.append(str(ran_binomial(rng, 0.5, 100)))
+
+        print(f"First five random numbers equal {', '.join(randnums)}")
+        randnums = None
 
         # Create space to hold the results of the simulation
         print("Initialise infections...")

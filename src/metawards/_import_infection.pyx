@@ -4,7 +4,7 @@ cimport cython
 from ._network import Network
 from ._parameters import Parameters
 
-from ._ran_binomial cimport _ran_binomial, _get_gsl_ptr, gsl_rng
+from ._ran_binomial cimport _ran_binomial, _get_binomial_ptr, binomial_rng
 
 __all__ = ["import_infection"]
 
@@ -15,7 +15,7 @@ def import_infection(network: Network, infections, play_infections,
                      params: Parameters, rng,
                      population: int):
 
-    cdef gsl_rng* r = _get_gsl_ptr(rng)
+    cdef binomial_rng* r = _get_binomial_ptr(rng)
 
     links = network.to_links
     wards = network.nodes

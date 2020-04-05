@@ -13,28 +13,28 @@
 
 //#define WEEKENDS
 
-//#define VTKWARDS 
+//#define VTKWARDS
 //#define IMPORTS
 #define EXTRASEEDS
 
 #define NAMESIZEMAX 10
-#define MAXSIZE 10050 // this needs to be more or less accurate, plz. 
+#define MAXSIZE 10050 // this needs to be more or less accurate, plz.
 #define MAXLINKS 2414000
 #ifdef FLU
 	#define N_INF_CLASSES 5
 	#define START_SYMPTOM 2
-#endif 
+#endif
 #ifdef FLU2
 	#define N_INF_CLASSES 6
 	#define START_SYMPTOM 2
-#endif 
+#endif
 
 #ifdef POX
 	#define N_INF_CLASSES 11
 	#define START_SYMPTOM 5
 
 #endif
-#ifdef DEFAULT 
+#ifdef DEFAULT
 	#define N_INF_CLASSES 3
 	#define START_SYMPTOM 1
 #endif
@@ -51,17 +51,17 @@ typedef struct parameters{
 	char WorkName[100]; // WORK MATRIX
 	char PlayName[100]; // PLAY MATRIX
 	char WeekendName[100]; // WEEKENDMATRIX
-	char IdentifierName[100]; // WARD NAMES 
+	char IdentifierName[100]; // WARD NAMES
 	char IdentifierName2[100]; // WARD ID's (Communities, Counties, Districts, UA's etc);
 
-	char PositionName[100]; // CENTRE of BOUNDING BOXES	
-	char PlaySizeName[100]; // SIZE OF POPULATION IN THE PLAY PILE 
+	char PositionName[100]; // CENTRE of BOUNDING BOXES
+	char PlaySizeName[100]; // SIZE OF POPULATION IN THE PLAY PILE
 
 	char SeedName[100]; // LIST OF SEED NODES
 	char NodesToTrack[100]; // LIST OF NODES TO TRACK
 
 	char AdditionalSeeding[100]; // LIST OF EXTRA SEED WARDS...
-	
+
 	char UVFilename[100];
 
 	double beta[N_INF_CLASSES];
@@ -87,18 +87,45 @@ typedef struct parameters{
 	int GlobalDetectionThresh;
 	int DailyWardVaccinationCapacity;
 	double NeighbourWeightThreshold;
-	
+
 	double DailyImports; // proportion of daily imports if #IMPORTS is defined
   double UV;
 }parameters;
 
 
+#ifdef METAWARDS_USE_GSL
 #include <gsl/gsl_statistics_double.h>   // gnu scientific libraries
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_histogram.h>
 #include <gsl/gsl_heapsort.h>
 #include <gsl/gsl_sort_double.h>
+#else
+#include "../../src/metawards/ran_binomial/distributions.h"
+
+#define gsl_rng_default 0
+
+typedef binomial_rng gsl_rng;
+inline double gsl_rng_uniform(gsl_rng *rng){
+	return binomial_rng_uniform(rng);
+}
+
+inline int64_t gsl_ran_binomial(gsl_rng *rng, double p, int64_t n){
+	return ran_binomial(rng, p, n);
+}
+
+inline gsl_rng* gsl_rng_alloc(int _unused){
+	return binomial_rng_alloc();
+}
+
+inline void gsl_rng_set(gsl_rng *rng, int seed){
+	seed_ran_binomial(rng, seed);
+}
+
+inline void gsl_rng_free(gsl_rng *rng){
+	binomial_rng_free(rng);
+}
+#endif // if METAWARDS_USE_GSL // else // endif
 
 
 #endif

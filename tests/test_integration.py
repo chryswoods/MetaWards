@@ -61,11 +61,11 @@ def test_integration():
 
     # The original C code has this expected population after 47 steps
     expected = Population(initial=57104043,
-                          susceptibles=56081604,
-                          latent=192,
-                          total=48,
-                          recovereds=233,
-                          n_inf_wards=50)
+                          susceptibles=56081764,
+                          latent=122,
+                          total=43,
+                          recovereds=148,
+                          n_inf_wards=34)
 
     print(f"Expect output: {expected}")
 

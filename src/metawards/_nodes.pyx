@@ -1,9 +1,5 @@
 
-cimport cython
-
 from ._node import Node
-from ._array import create_double_array, create_int_array, \
-                    create_string_array, resize_array
 
 __all__ = ["Nodes"]
 
@@ -13,14 +9,15 @@ class Nodes:
        to store a list of Node objects as a "struct of arrays".
        This should improve speed of loading and access.
     """
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
     def __init__(self, N: int=0):
         """Create a container for up to "N" nodes"""
         if N <= 0:
             self._is_null = True
         else:
             self._is_null = False
+
+            from .utils._array import create_double_array, create_int_array, \
+                                      create_string_array
 
             # Struct of arrays for each piece of data. See the
             # Node class for information about what each variable
@@ -50,6 +47,9 @@ class Nodes:
 
             self.denominator_p = create_double_array(N, 0.0)
             self.denominator_pd = create_double_array(N, 0.0)
+
+            self.day_inf_prob = create_double_array(N, 0.0)
+            self.night_inf_prob = create_double_array(N, 0.0)
 
             self.x = create_double_array(N, 0.0)  # no good initialiser for x
             self.y = create_double_array(N, 0.0)  # no good initialiser for y
@@ -197,6 +197,7 @@ class Nodes:
         if N == size:
             return
 
+        from .utils._array import resize_array
         self.label = resize_array(self.label, N, -1)
         self.begin_to = resize_array(self.begin_to, N, -1)
         self.end_to = resize_array(self.end_to, N, -1)

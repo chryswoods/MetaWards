@@ -3,64 +3,75 @@ name: Build
 on:
   push:
     branches: [master, devel]
+    tags:
+    - '*'
   pull_request:
     branches: [master, devel]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     strategy:
       max-parallel: 4
       matrix:
+        os: [ubuntu-latest]  #, macos-latest]
         python-version: [3.7, 3.8]
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install libgsl-dev
-        run: sudo apt-get install libgsl-dev
+      - name: Get tags
+        run: python actions/get_tags.py
+      - name: Print branch information
+        run: echo ${{github.ref}}
       - name: Install Python dependencies
-        run: pip install cython numpy pytest
-      - name: Install pygsl
-        run: pip install pygsl
+        run: pip install -r requirements-dev.txt
       - name: Install MetaWards package
-        run: CYTHONIZE=1 python setup.py install
+        run: make -j 1
       - name: Clone MetaWards data
-        run: git clone https://github.com/chryswoods/MetaWardsData
+        run: git clone https://github.com/metawards/MetaWardsData
       - name: Run tests
-        run: METAWARDSDATA=./MetaWardsData pytest tests
-      - name: Install Sphinx
-        run: pip install sphinx sphinx_issues sphinx_rtd_theme
-        if: matrix.python-version == 3.8
-      - name: Build documentation
-        working-directory: ./doc
-        run: make html
-        if: matrix.python-version == 3.8
+        run: METAWARDSDATA=./MetaWardsData make test
+      - name: Install packaging requirements
+        run: pip install --upgrade setuptools wheel
+      - name: Make bdist package
+        run: |
+          pip install --upgrade setuptools wheel
+          python setup.py bdist_wheel
+        if: contains(github.ref, 'refs/tags/') && github.event_name == 'push'
+      - name: Make sdist package
+        run: python setup.py sdist
+        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && contains(github.ref, 'refs/tags/') && github.event_name == 'push'
+      - name: Upload sdist/bdist package(s)
+        uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: ./dist
+        if: contains(github.ref, 'refs/tags/') && github.event_name == 'push'
+      - name: Build Docs
+        run: python actions/build_docs.py
+        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && github.event_name == 'push'
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2
         with:
           ref: gh-pages
           path: gh-pages
-        if: matrix.python-version == 3.8
-      - name: Update website files
-        working-directory: ./gh-pages
-        run: cp -r ${{ github.workspace }}/doc/build/html/* .
-        if: matrix.python-version == 3.8
-      - name: Commit website changes
-        working-directory: ./gh-pages
+        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && github.event_name == 'push'
+      - name: Assemble Website
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -a -m "Update webstite."
-        if: matrix.python-version == 3.8
+          python actions/assemble_website.py
+          python actions/deduplicate_website.py
+          python actions/gitupdate_website.py
+        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && github.event_name == 'push'
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           branch: 'gh-pages'
           directory: 'gh-pages'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        if: matrix.python-version == 3.8
+        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && github.event_name == 'push'

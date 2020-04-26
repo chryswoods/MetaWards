@@ -1,11 +1,10 @@
 # MetaWards
 
-[![Build status](https://github.com/chryswoods/MetaWards/workflows/Build/badge.svg)](https://github.com/chryswoods/MetaWards/actions?query=workflow%3ABuild)
+[![Build status](https://github.com/metawards/MetaWards/workflows/Build/badge.svg)](https://github.com/metawards/MetaWards/actions?query=workflow%3ABuild)
 [![PyPI version](https://badge.fury.io/py/metawards.svg)](https://pypi.python.org/pypi/metawards)
 
 This is a Python port of the [MetaWards](https://github.com/ldanon/MetaWards)
-package originally written by Leon Danon. This is currently a work in progress
-and is not intended yet for production use. The port is kept in sync with
+package originally written by Leon Danon. The port is kept in sync with
 the original C code, with checks in place to ensure that the two codes
 give identical results. This improves the robustness of both codes, as
 it minimises the footprint to bugs that can evade both C and Python.
@@ -15,22 +14,26 @@ program, to improve robustness by adding in unit and integration test,
 and to also open up scope for further optimisation and parallelisation.
 
 The package makes heavy use of [cython](https://cython.org) which is used
-to compile bottleneck parts of the code to C. This enables this Python port
-to run at approximately the same speed as the original C program.
+with [OpenMP](https://openmp.org) to compile bottleneck parts of the
+code to parallelised C. This enables this Python port
+to run at approximately the same speed as the original C program on one core,
+and to run several times faster across multiple cores.
 
-There is still a lot of work to do, so please bear with us as we work to
-make this package into a well-documented, easily usable application that
-will help you to reproduce the model runs and analysis. Apologies in
-advance if we are slow to respond to any issues - we are working at high
-speed to get everything ready and aim to have most things completed by
-the beginning of Easter. We appreciate people want to help. At this stage
-adding more people won't speed things up, and we now have a team of
-professional [Research Software Engineers](https://www.bristol.ac.uk/acrc/research-software-engineering/) working on this package.
+The program compiles on any system that has a working C compiler that
+supports OpenMP, and a working Python >= 3.7. This include X86-64 and
+ARM64 servers.
+
+The software supports running over a cluster using MPI
+(via [mpi4py](https://mpi4py.readthedocs.io/en/stable/)) or via
+simple networking (via [scoop](http://scoop.readthedocs.io)).
+
+Full instructions on how to use the program, plus example job submission
+scripts can be found on the [project website](https://metawards.github.io).
 
 ## Data
 
 The data and input parameters needed to use this package are stored in
-the [MetaWardsData](https://github.com/chryswoods/MetaWardsData)
+the [MetaWardsData](https://github.com/metawards/MetaWardsData)
 repository. Please make sure that you clone this repository to your
 computer and supply the full path to that repository to the program
 when it runs. There are three ways to do this;
@@ -39,7 +42,7 @@ when it runs. There are three ways to do this;
    e.g. `export METAWARDSDATA=$HOME/GitHub/MetaWards`
 
 2. Pass the `repository` variable to the input data classes
-   [Disease](https://github.com/chryswoods/MetaWards/blob/devel/src/metawards/_disease.py), [InputFiles](https://github.com/chryswoods/MetaWards/blob/devel/src/metawards/_inputfiles.py) and [Parameters](https://github.com/chryswoods/MetaWards/blob/devel/src/metawards/_parameters.py)
+   [Disease](https://github.com/metawards/MetaWards/blob/devel/src/metawards/_disease.py), [InputFiles](https://github.com/metawards/MetaWards/blob/devel/src/metawards/_inputfiles.py) and [Parameters](https://github.com/metawards/MetaWards/blob/devel/src/metawards/_parameters.py)
 
 3. Or simply make sure you clone into the directory `$HOME/GitHub/MetaWardsData`
    as this is the default path.
@@ -59,42 +62,27 @@ medRxiv 2020.02.12.20022566; doi: [10.1101/2020.02.12.20022566](https://doi.org/
 
 ## Dependencies
 
-The code requires Python 3.7 or above and depends on
-[pygsl](http://pygsl.sourceforge.net) and [cython](https://cython.org).
-
-You will also need to install the [GNU Scientific Library](https://www.gnu.org/software/gsl/doc/html)
-(GSL). On macOS this can be installed using [Homebrew](https://brew.sh):
-
-```sh
-brew install gsl
-```
-
-On Linux, you can install the `libgsl` package, e.g. for Ubuntu:
-
-```sh
-apt-get install libgsl-dev
-```
-
-The `pygsl` Python package also requires `numpy`, which isn't installed
-automatically as a dependency if you install `pygsl` using [pip](https://pypi.org/project/pip).
-
-Only the `gsl_rng.binomial` function is used from GSL, so it is likely
-that this requirement will soon be dropped. The link to GSL forces us
-to use a GPL3 license for this Python package. Once we have replaced
-the binomial function we will re-evaluate the license under which this
-code is distributed.
+The code requires Python 3.7 or above, and requires no other dependencies
+to install. For development you will need [cython](https://cython.org)
+to build the code, plus [pytest](https://docs.pytest.org/en/latest/)
+for running the tests.
 
 ## Installation
 
-You can install the code from source by typing;
+[Full installation instructions are here](https://metawards.github.io/MetaWards/install.html).
+
+As you are here, I guess you want to install the latest code from GitHub ;-)
+
+To do that, type;
 
 ```
-git clone https://github.com/chryswoods/MetaWards
+git clone https://github.com/metawards/MetaWards
 cd MetaWards
+pip install -r requirements-dev.txt
 CYTHONIZE=1 python setup.py install
 ```
 
-(assuming that `python` is version 3.7 or above)
+(assuming that `python` is version 3.7)
 
 You can run tests using pytest, e.g.
 
@@ -102,13 +90,16 @@ You can run tests using pytest, e.g.
 METAWARDSDATA="/path/to/MetaWardsData" pytest tests
 ```
 
-You can also install via `pip` using
+You can generate the docs using
 
 ```
-pip install metawards
+cd docs
+make
 ```
 
 ## Running
+
+[Full usage instructions are here](https://metawards.github.io/MetaWards/usage.html)
 
 You can either load and use the Python classes directly, or you can
 run the `metawards` front-end command line program that is automatically installed.
@@ -120,7 +111,7 @@ metawards --help
 will print out all of the help for the program. For example;
 
 ```
-metawards --input tests/data/ncovparams.csv --seed 15324 --nsteps 30
+metawards --input tests/data/ncovparams.csv --seed 15324 --nsteps 30 --nthreads 1
 ```
 
 This will duplicate the run of the MetaWards C program that is bundled
@@ -131,13 +122,23 @@ in this repository that was run using;
 ```
 
 The original C code, command line and expected output are in the
-[original](https://github.com/chryswoods/MetaWards/tree/devel/original)
+[original](https://github.com/metawards/MetaWards/tree/devel/original)
 directory that is bundled in this repo.
 
 ### Running an ensemble
 
-We will be integrating this Python port with
-[multiprocessing](https://docs.python.org/3.7/library/multiprocessing.html) and
-[dask](https://dask.org) to enable multiple models and seeds
-to be run in parallel over distributed resources. The aim is to have
-this parallel code working by the beginning of Easter.
+This program supports parallel running of an ensemble of jobs using
+[multiprocessing](https://docs.python.org/3.7/library/multiprocessing.html)
+for single-node jobs, and [mpi4py](https://mpi4py.readthedocs.io/en/stable/)
+or [scoop](http://scoop.readthedocs.io) for multi-node cluster jobs.
+
+[Full instructions for running on a cluster are here](https://metawards.github.io/MetaWards/cluster_usage.html)
+
+### Next stages...
+
+The next stages of the program includes finishing up the custom extractor
+code, improving some of the analysis, providing more integrators,
+optimising the random number generator and finishing up the tutorial.
+
+In addition, we plan to integrate the software into the Bayesian / MCMC
+package [PyMC3](https://docs.pymc.io).

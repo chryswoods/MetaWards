@@ -195,7 +195,7 @@ network *BuildWardsNetworkDistance(parameters *par)
 
 	double total_distance = 0;
 
-	for(i=0;i<net->nlinks;i++){
+	for(i=1;i<=net->nlinks;i++){
 		x1=wards[links[i].ifrom].x;
 		y1=wards[links[i].ifrom].y;
 
@@ -204,16 +204,54 @@ network *BuildWardsNetworkDistance(parameters *par)
 
 		total_distance += sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 
-		links[i].distance=plinks[i].distance=sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+		links[i].distance=sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 #ifdef WEEKENDS
 		welinks[i].distance=links[i].distance;
 #endif
 	}
+
+    printf("Total distance %f\n", total_distance);
+
+    double total_play_distance = 0;
+
+    for (i=1;i<=net->plinks;i++){
+		x1=wards[plinks[i].ifrom].x;
+		y1=wards[plinks[i].ifrom].y;
+
+		x2=wards[plinks[i].ito].x;
+		y2=wards[plinks[i].ito].y;
+
+		total_play_distance += sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+
+		plinks[i].distance=sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+    }
+
 	fclose(locf);
 
-	printf("Total distance equals %f\n", total_distance);
+    printf("Total play distance %f\n", total_play_distance);
+	printf("Total distance equals %f\n", total_distance+total_play_distance);
 
 	return net;
+}
+
+double Radians(double x)
+{
+  return x * M_PI / 180;
+}
+
+double DistanceBetweenPlaces(
+    double lon1,
+    double lat1,
+    double lon2,
+    double lat2)
+{
+  double RADIUS = 6378.16;
+  double dlon = Radians(lon2 - lon1);
+  double dlat = Radians(lat2 - lat1);
+
+  double a = (sin(dlat / 2) * sin(dlat / 2)) + cos(Radians(lat1)) * cos(Radians(lat2)) * (sin(dlon / 2) * sin(dlon / 2));
+  double angle = 2 * atan2(sqrt(a), sqrt(1 - a));
+  return angle * RADIUS;
 }
 
 network *BuildWardsNetworkDistanceIdentifiers(parameters *par){
@@ -1149,7 +1187,8 @@ void RunModel(network *net, parameters *par, int **inf,
 		printf("\n%d %d\n",i,infecteds);
 
 		infecteds=ExtractData(net,inf,playinf,i,files);
-		ExtractDataForGraphicsToFile(net,inf,playinf,Export);
+		//ExtractDataForGraphicsToFile(net,inf,playinf,Export);
+		ExtractDataForGraphicsToFileIncidence(net,inf,playinf,Export);
 
 
 
@@ -1425,9 +1464,9 @@ int ExtractData(network *net,int **inf,int **pinf, int t, FILE **files){
 		fprintf(files[3],"%d ",PInfTot[i]);
 
 		if(i==1)
-		{
-			//printf("latent %d  %d\n", InfTot[i], PInfTot[i]);
-			Latent+=InfTot[i]+PInfTot[i];
+        {
+ 		    //printf("latent %d  %d\n", InfTot[i], PInfTot[i]);
+		    Latent+=InfTot[i]+PInfTot[i];
 		}
 		else if(i<N_INF_CLASSES-1 & i>1){
 			Total+=InfTot[i]+PInfTot[i];
@@ -1469,7 +1508,7 @@ int ExtractData(network *net,int **inf,int **pinf, int t, FILE **files){
 	printf("I: %d    ",Total);
 	printf("R: %d    ",Recovereds);
 	printf("IW: %d   ",nInfWards[0]);
- 	printf("TOTAL POPULATION %d\n",Susceptibles+Total+Recovereds);
+	printf("TOTAL POPULATION %d\n",Susceptibles+Latent+Total+Recovereds);
 
 	return (Total+Latent);
 }
@@ -1491,7 +1530,7 @@ int ExtractDataForGraphicsToFile(network *net, int **inf,int **pinf,FILE *outF){
 
 	int i,j;
 
-	int InfTot[N_INF_CLASSES];
+//	int InfTot[N_INF_CLASSES];
 	int TotalInfWard[N_INF_CLASSES][MAXSIZE];
 
 	int Total=0;
@@ -1500,47 +1539,87 @@ int ExtractDataForGraphicsToFile(network *net, int **inf,int **pinf,FILE *outF){
 
 	Recovereds=Susceptibles=0;
 
-	for(j=1;j<=net->nnodes;j++)TotalInfections[j]=0;
+	for(j=1;j<=net->nnodes;j++){
+	  TotalInfections[j]=0;
+	}
 
 	for(i=0;i<N_INF_CLASSES;i++){
 
 		for(j=1;j<=net->nnodes;j++)TotalInfWard[i][j]=0;
 
 
-		for(j=1;j<=net->nlinks;j++){
+		for(j=1;j<=net->nlinks;j++){ //commuters
 			if(inf[i][j]!=0){
-				InfTot[i]+=inf[i][j]; // number of infected links in class  i
 				TotalInfWard[i][links[j].ifrom]+=inf[i][j];
-				if(i<N_INF_CLASSES-1){
+				if(i<N_INF_CLASSES-1){ // sum up all the infectious classes.
 					TotalInfections[links[j].ifrom]+=inf[i][j];
 					Total+=inf[i][j];
 				}
 			}
 		}
 
-
-
-
-		for(j=1;j<=net->nnodes;j++){
-			TotalInfWard[i][j]+=pinf[i][j];
-			if(pinf[i][j]!=0 && i<N_INF_CLASSES-1){
-				TotalInfections[j]+=pinf[i][j];
-				Total+=pinf[i][j];
+		for(j=1;j<=net->nnodes;j++){ //non-commuters
+			if(pinf[i][j]!=0){
+			  TotalInfWard[i][j]+=pinf[i][j];
+			  if(i<N_INF_CLASSES-1){ // sum up all the infectious classes.
+				  TotalInfections[j]+=pinf[i][j];
+				  Total+=pinf[i][j];
 			}
-			if(i==2)fprintf(outF,"%d ",TotalInfections[j]);// incidence
 			//if(i==N_INF_CLASSES-1)fprintf(outF,"%d ",TotalInfections[j]); // prevalences
 			//if(i==N_INF_CLASSES-1)Prevalence[j]=TotalInfections[j];
 		}
+		if(i==2)fprintf(outF,"%d ",TotalInfections[j]);// prevalence up to i=2
 
 		  //if(i==N_INF_CLASSES-1)fprintf(outF,"%d ",TotalInfections[j]);// incidence
 
-	}
-
+		}
+	}//classes
 	fprintf(outF,"\n");
 	return Total;
 }
 
+int ExtractDataForGraphicsToFileIncidence(network *net, int **inf,int **pinf,FILE *outF){
 
+	  to_link *links=net->to_links;
+	  node *wards=net->nodes;
+
+	  int i,j;
+
+	  int TotalInfWard[N_INF_CLASSES][MAXSIZE]={0};
+
+	  int Total=0;
+	  int TotalInfections[MAXSIZE] = {0};
+
+
+	//  for(j=1;j<=net->nnodes;j++)TotalInfections[j]=0;
+
+
+	  for(i=0;i<N_INF_CLASSES;i++){ //loop over classes
+
+	    //for(j=1;j<=net->nnodes;j++)TotalInfWard[i][j]=0; //set to zero
+
+	    for(j=1;j<=net->nlinks;j++){ //loop over all links
+	      if(inf[i][j]!=0){
+	        TotalInfWard[i][links[j].ifrom]+=inf[i][j]; // WORKERS: For each class sum up infections of all the outgoing links
+	      }
+	    } //end commuter links
+	    for(j=1;j<=net->nnodes;j++){ //non-commuters
+	      if(pinf[i][j]!=0){
+	        TotalInfWard[i][j]+=pinf[i][j];// number of individuals in class i
+	        //if(i==N_INF_CLASSES-1)fprintf(outF,"%d ",TotalInfections[j]); // prevalences
+	        //if(i==N_INF_CLASSES-1)Prevalence[j]=TotalInfections[j];
+	      }
+
+	      //if(i==N_INF_CLASSES-1)fprintf(outF,"%d ",TotalInfections[j]);// incidence
+
+	    }// end of loop over all nodes (non commuters)
+	 if(i==2)fprintf(outF,"%d ",TotalInfWard[i][j]);//incidence
+	  }//end of loop over classes
+
+	  fprintf(outF,"\n");
+
+	  return Total;
+}
 
 
 
@@ -1578,9 +1657,9 @@ parameters *InitialiseParameters(){
 
 #ifdef NCOV
 	//double beta[N_INF_CLASSES]={	0, 0, 0.95, 0.95, 0};
-	double beta[N_INF_CLASSES]={	0, 0, 0.95, 0.95, 0};
+	double beta[N_INF_CLASSES]={	0, 0, 1.0/1.15, 1.0/1.15, 0};
 	//double Progress[N_INF_CLASSES]={	1, 1.0/5.2, 1.0/1.1, 1/1.1, 0};
-	double Progress[N_INF_CLASSES]={	1, 0.1923, 0.909091, 0.909091, 0};
+	double Progress[N_INF_CLASSES]={	1, 1.0/5.2, 1.0/1.15, 1.0/1.15, 0};
 	double TooIllToMove[N_INF_CLASSES]={ 0, 0, 0, 0.0, 0};
  	double ContribFOI[N_INF_CLASSES]={1, 1, 1, 1, 0}; // set to 1 for the time being;
 #endif
@@ -1651,6 +1730,7 @@ parameters *InitialiseParameters(){
 	par->DailyImports = json_object_get_double(daily_imports);
 	json_object_object_get_ex(parsed_json, "UV", &UV); /* e.g. 0.0 */
 	par->UV = json_object_get_double(UV);
+	printf("UV = %f\n", par->UV);
 
 	for(i=0;i<N_INF_CLASSES;i++){
 		par->beta[i]=beta[i];
@@ -1690,22 +1770,23 @@ void ReadParametersFile(parameters *par, char *fname,int lineno){
       i++;
     }
     fclose(file);
+    par->beta[2]=b2;
+    par->beta[3]=b3;
+    par->Progress[1]=s2;
+    par->Progress[2]=s3;
+    par->Progress[3]=s4;
   }
   else
   {
-    printf("ERROR: File %s not found\n",fname);//file doesn't exist
+    printf("ERROR: File %s not found\n",fname);//file doesn't exist default to hard-wirede parameters
   }
 
   //printf("Parameters used: b2: %lf b3:  %lf s2:  %lf s3:  %lf s4:  %lf\n",b2,b3,s2,s3,s4);
 
-  par->beta[2]=b2;
-  par->beta[3]=b3;
-  par->Progress[1]=s2;
-  par->Progress[2]=s3;
-  par->Progress[3]=s4;
 
-//    printf("Parameters used: b0: %lf b1:  %lf b2:  %lf b3:  %lf b4:  %lf\n",par->beta[0],par->beta[1],par->beta[2],par->beta[3],par->beta[4]);
-//    printf("prog0: %lf prog1:  %lf prog2:  %lf prog3:  %lf prog4:  %lf\n",par->Progress[0],par->Progress[1],par->Progress[2],par->Progress[3],par->Progress[4]);
+
+    printf("Parameters used: b0: %lf b1:  %lf b2:  %lf b3:  %lf b4:  %lf\n",par->beta[0],par->beta[1],par->beta[2],par->beta[3],par->beta[4]);
+    printf("prog0: %lf prog1:  %lf prog2:  %lf prog3:  %lf prog4:  %lf\n",par->Progress[0],par->Progress[1],par->Progress[2],par->Progress[3],par->Progress[4]);
 
   return;
 
@@ -1804,7 +1885,8 @@ void SetInputFileNames(int choice,parameters *par){
 void Iterate(network *net, int **inf, int **playinf, parameters *par, gsl_rng *r,int t){
 
 	int i,j,k;
-	double temp,uv=par->UV,uvscale=(1-uv/2.0+uv*cos(2*M_PI*(t)/365.0)/2.0); // starting day = 41
+	double temp,uv=par->UV,uvscale=1;
+
 	int staying, moving,playmove,l;
 	double InfProb,Rate;
 
@@ -1812,9 +1894,27 @@ void Iterate(network *net, int **inf, int **playinf, parameters *par, gsl_rng *r
 	double cum_prob,ProbScaled;
 	double cutoff=par->DynDistCutoff;
 
+    printf("Starting cutoff %f\n", cutoff);
+
 	double thresh=0.01;
 //	int DayInfW,DayInfP,NightInfW,NightInfP;
 
+  if(uv>0.0){
+    uvscale=(1-uv/2.0+uv*cos(2*M_PI*(t)/365.0)/2.0); // starting day = 41
+  }
+
+  printf("UV = %f uvscale = %f\n", uv, uvscale);
+
+  for(i=0;i<par->n_restrict;i++){
+    printf("control %d  %d  %f  %f  %f\n", i, t, par->controlsON[i], par->controlsOFF[i], par->controlScale[i]);
+    if(t > par->controlsON[i] && t < par->controlsOFF[i]){
+      uvscale = uvscale*par->controlScale[i];
+      cutoff = 1000;
+      printf("lockdown %d %d %f %f\n", t, i, par->controlScale[i], uvscale);
+    } // starts on day ON stops on day OFF
+  }
+
+    printf("Cutoff used is %f\n", cutoff);
 
 	to_link *links=net->to_links;
 	node *wards=net->nodes;

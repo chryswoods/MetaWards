@@ -1,0 +1,267 @@
+Input 1: random seed 15324
+
+WARNING - FIXING SEED FOR DEBUGGING
+DO NOT USE THIS CODE IN PRODUCTION
+random number 1 equals 42
+random number 2 equals 49
+random number 3 equals 51
+random number 4 equals 50
+random number 5 equals 52
+Input 2: parameter file name to be read Testing/ncovparams.csv
+Using parameters in /Users/chris/GitHub/MetaWardsData/parameters/march29.json 
+Input 3: line of parameter file to read 0
+
+line number 0
+
+
+
+
+
+Using files in /Users/chris/GitHub/MetaWardsData/model_data/2011Data/ 
+/Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat
+0x7fff924381a0 -- 
+2
+The file /Users/chris/GitHub/MetaWardsData/model_data/2011Data/EW1.dat was opened... excellent, carry on.
+Number of nodes equals 8588
+Number of links equals 2412393
+Number of nodes after filling equals 8588
+The file /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlayMatrix.dat was opened... excellent, carry on.
+The PlaySize file /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlaySize.dat was opened... excellent, carry on.
+Adding link 15 24 8588
+Adding link 16 27 8589
+Adding link 17 28 8590
+Adding link 19 31 8591
+Adding link 20 32 8592
+Adding link 21 33 8593
+Adding link 22 34 8594
+Adding link 23 36 8595
+Adding link 24 37 8596
+Adding link 26 41 8597
+Adding link 27 43 8598
+Adding link 29 45 8599
+Adding link 32 48 8600
+Adding link 33 49 8601
+Adding link 37 53 8602
+Adding link 38 54 8603
+Adding link 571 38 8604
+Adding link 735144 6817 8605
+Number of play links equals 2411396
+Number of nodes after play matrix equals 8606
+Location files /Users/chris/GitHub/MetaWardsData/model_data/2011Data/CBB2011.dat found, great, carry on.
+Total distance equals 132420818644.628891
+network built
+maxdist 668357.772297 mindist 0.000000
+
+
+RecalculatePlayDenominatorDay sum 1 33613071.999990 
+RecalculatePlayDenominatorDay sum 2 33613072.000000 
+recalculate_work_denominator_day sum = 22469005
+RecalculatePlayDenominatorDay sum 1 33613071.999990 
+RecalculatePlayDenominatorDay sum 2 33613072.000000 
+node_seed 0 (-1)
+ 
+S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+Loading additional seeds from /Users/chris/GitHub/MetaWardsData/model_data/2011Data/ExtraSeedsBrighton.dat
+1  2124  5
+
+0 0
+S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+SEEDING 1  2124  5
+
+1 0
+S: 56082072    E: 3    I: 0    R: 2    IW: 1   TOTAL POPULATION 56082074
+
+2 3
+S: 56082072    E: 5    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082072
+
+3 5
+S: 56082072    E: 4    I: 1    R: 0    IW: 0   TOTAL POPULATION 56082073
+
+4 5
+S: 56082072    E: 3    I: 2    R: 0    IW: 0   TOTAL POPULATION 56082074
+
+5 5
+S: 56082070    E: 2    I: 3    R: 2    IW: 2   TOTAL POPULATION 56082075
+
+6 5
+S: 56082067    E: 3    I: 3    R: 4    IW: 2   TOTAL POPULATION 56082074
+
+7 6
+S: 56082065    E: 3    I: 4    R: 5    IW: 2   TOTAL POPULATION 56082074
+
+8 7
+S: 56082061    E: 4    I: 4    R: 8    IW: 4   TOTAL POPULATION 56082073
+
+9 8
+S: 56082054    E: 7    I: 4    R: 12    IW: 9   TOTAL POPULATION 56082070
+
+10 11
+S: 56082053    E: 11    I: 6    R: 7    IW: 7   TOTAL POPULATION 56082066
+
+11 17
+S: 56082049    E: 7    I: 11    R: 10    IW: 7   TOTAL POPULATION 56082070
+
+12 18
+S: 56082039    E: 8    I: 12    R: 18    IW: 13   TOTAL POPULATION 56082069
+
+13 20
+S: 56082030    E: 15    I: 13    R: 19    IW: 13   TOTAL POPULATION 56082062
+
+14 28
+S: 56082022    E: 18    I: 15    R: 22    IW: 14   TOTAL POPULATION 56082059
+
+15 33
+S: 56082010    E: 19    I: 20    R: 28    IW: 18   TOTAL POPULATION 56082058
+
+16 39
+S: 56081987    E: 22    I: 22    R: 46    IW: 27   TOTAL POPULATION 56082055
+
+17 44
+S: 56081969    E: 30    I: 26    R: 52    IW: 35   TOTAL POPULATION 56082047
+
+18 56
+S: 56081955    E: 35    I: 34    R: 53    IW: 37   TOTAL POPULATION 56082042
+
+19 69
+S: 56081928    E: 40    I: 39    R: 70    IW: 40   TOTAL POPULATION 56082037
+
+20 79
+S: 56081897    E: 54    I: 48    R: 78    IW: 46   TOTAL POPULATION 56082023
+
+21 102
+S: 56081876    E: 62    I: 59    R: 80    IW: 47   TOTAL POPULATION 56082015
+
+22 121
+S: 56081847    E: 78    I: 67    R: 85    IW: 55   TOTAL POPULATION 56081999
+
+23 145
+S: 56081801    E: 80    I: 82    R: 114    IW: 70   TOTAL POPULATION 56081997
+
+24 162
+S: 56081741    E: 84    I: 105    R: 147    IW: 89   TOTAL POPULATION 56081993
+
+25 189
+S: 56081681    E: 110    I: 121    R: 165    IW: 95   TOTAL POPULATION 56081967
+
+26 231
+S: 56081586    E: 138    I: 141    R: 212    IW: 113   TOTAL POPULATION 56081939
+
+27 279
+S: 56081500    E: 154    I: 167    R: 256    IW: 143   TOTAL POPULATION 56081923
+
+28 321
+S: 56081389    E: 189    I: 197    R: 302    IW: 162   TOTAL POPULATION 56081888
+
+29 386
+S: 56081293    E: 223    I: 236    R: 325    IW: 164   TOTAL POPULATION 56081854
+
+30 459
+S: 56081128    E: 253    I: 275    R: 421    IW: 209   TOTAL POPULATION 56081824
+
+31 528
+S: 56080960    E: 317    I: 320    R: 480    IW: 229   TOTAL POPULATION 56081760
+
+32 637
+S: 56080769    E: 379    I: 382    R: 547    IW: 259   TOTAL POPULATION 56081698
+
+33 761
+S: 56080531    E: 455    I: 453    R: 638    IW: 288   TOTAL POPULATION 56081622
+
+34 908
+S: 56080274    E: 532    I: 532    R: 739    IW: 337   TOTAL POPULATION 56081545
+
+35 1064
+S: 56079956    E: 593    I: 645    R: 883    IW: 371   TOTAL POPULATION 56081484
+
+36 1238
+S: 56079581    E: 726    I: 734    R: 1036    IW: 428   TOTAL POPULATION 56081351
+
+37 1460
+S: 56079157    E: 840    I: 876    R: 1204    IW: 474   TOTAL POPULATION 56081237
+
+38 1716
+S: 56078688    E: 984    I: 1024    R: 1381    IW: 535   TOTAL POPULATION 56081093
+
+39 2008
+S: 56078106    E: 1120    I: 1202    R: 1649    IW: 618   TOTAL POPULATION 56080957
+
+40 2322
+S: 56077398    E: 1283    I: 1411    R: 1985    IW: 736   TOTAL POPULATION 56080794
+
+41 2694
+S: 56076661    E: 1495    I: 1646    R: 2275    IW: 803   TOTAL POPULATION 56080582
+
+42 3141
+S: 56075801    E: 1811    I: 1902    R: 2563    IW: 871   TOTAL POPULATION 56080266
+
+43 3713
+S: 56074842    E: 2103    I: 2224    R: 2908    IW: 943   TOTAL POPULATION 56079974
+
+44 4327
+S: 56073691    E: 2436    I: 2582    R: 3368    IW: 1056   TOTAL POPULATION 56079641
+
+45 5018
+S: 56072408    E: 2707    I: 3050    R: 3912    IW: 1173   TOTAL POPULATION 56079370
+
+46 5757
+S: 56070896    E: 3066    I: 3579    R: 4536    IW: 1314   TOTAL POPULATION 56079011
+
+47 6645
+S: 56069183    E: 3521    I: 4177    R: 5196    IW: 1438   TOTAL POPULATION 56078556
+
+48 7698
+S: 56067179    E: 4123    I: 4845    R: 5930    IW: 1560   TOTAL POPULATION 56077954
+
+49 8968
+S: 56064871    E: 4788    I: 5618    R: 6800    IW: 1771   TOTAL POPULATION 56077289
+
+50 10406
+S: 56062305    E: 5514    I: 6458    R: 7800    IW: 1925   TOTAL POPULATION 56076563
+
+51 11972
+S: 56059373    E: 6383    I: 7441    R: 8880    IW: 2136   TOTAL POPULATION 56075694
+
+52 13824
+S: 56056020    E: 7298    I: 8563    R: 10196    IW: 2321   TOTAL POPULATION 56074779
+
+53 15861
+S: 56052243    E: 8302    I: 9930    R: 11602    IW: 2535   TOTAL POPULATION 56073775
+
+54 18232
+S: 56047890    E: 9443    I: 11394    R: 13350    IW: 2744   TOTAL POPULATION 56072634
+
+55 20837
+S: 56042952    E: 10676    I: 13154    R: 15295    IW: 2960   TOTAL POPULATION 56071401
+
+56 23830
+S: 56037262    E: 12370    I: 15020    R: 17425    IW: 3201   TOTAL POPULATION 56069707
+
+57 27390
+S: 56030983    E: 14082    I: 17308    R: 19704    IW: 3415   TOTAL POPULATION 56067995
+
+58 31390
+S: 56023819    E: 16150    I: 19811    R: 22297    IW: 3637   TOTAL POPULATION 56065927
+
+59 35961
+S: 56015865    E: 18351    I: 22696    R: 25165    IW: 3848   TOTAL POPULATION 56063726
+
+60 41047
+S: 56006943    E: 20692    I: 25933    R: 28509    IW: 4098   TOTAL POPULATION 56061385
+
+61 46625
+S: 55996572    E: 23335    I: 29620    R: 32550    IW: 4341   TOTAL POPULATION 56058742
+
+62 52955
+S: 55985219    E: 26432    I: 33756    R: 36670    IW: 4649   TOTAL POPULATION 56055645
+
+63 60188
+S: 55972441    E: 29932    I: 38500    R: 41204    IW: 4882   TOTAL POPULATION 56052145
+
+64 68432
+S: 55958301    E: 33832    I: 43738    R: 46206    IW: 5108   TOTAL POPULATION 56048245
+
+65 77570
+S: 55942374    E: 38186    I: 49648    R: 51869    IW: 5351   TOTAL POPULATION 56043891
+
+66 87834
+S: 55924907    E: 43113    I: 56381    R: 57676    IW: 5538   TOTAL POPULATION

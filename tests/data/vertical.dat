@@ -1,0 +1,15 @@
+
+
+# something equals 5
+.something[1] = 5
+
+# something else is 100
+user.another[2]     100
+
+       # more comments
+.flag : True
+
+# commenting away!
+beta[3]  0.5
+
+#ends with a comment

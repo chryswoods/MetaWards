@@ -1,0 +1,11 @@
+{ "name"             : "SARS-Cov-2",
+  "version"          : "March 29th 2020",
+  "author(s)"        : "Leon Danon",
+  "contact(s)"       : "l.danon@bristol.ac.uk",
+  "reference(s)"     : "references...",  
+  "beta"             : [0.0, 0.0, 0.95, 0.95, 0.0],
+  "progress"         : [1.0, 0.1923, 0.909091, 0.909091, 0.0],
+  "too_ill_to_move"  : [0.0, 0.0, 0.0, 0.0, 0.0],
+  "contrib_foi"      : [1.0, 1.0, 1.0, 1.0, 0.0],
+  "start_symptom"    : 3
+}

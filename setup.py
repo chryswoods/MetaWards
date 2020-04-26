@@ -4,11 +4,34 @@
 
 import os
 import versioneer
-from setuptools import setup, find_packages, Extension
-from Cython.Build import cythonize
+from setuptools import setup, Extension
 
-random_sources = ["src/metawards/ran_binomial/mt19937.c", 
+try:
+    from Cython.Build import cythonize
+    have_cython = True
+except Exception:
+    have_cython = False
+
+cflags = '-O3 -march=native -Wall -fopenmp'
+
+nbuilders = int(os.getenv("CYTHON_NBUILDERS", 2))
+
+compiler_directives = {"language_level": 3, "embedsignature": True,
+                       "boundscheck": False, "cdivision": True,
+                       "initializedcheck": False, "cdivision_warnings": False,
+                       "wraparound": False, "binding": False,
+                       "nonecheck": False, "overflowcheck": False}
+
+if os.getenv("CYTHON_LINETRACE", 0):
+    print("Compiling with Cython line-tracing support - will be SLOW")
+    define_macros = [("CYTHON_TRACE", "1")]
+    compiler_directives["linetrace"] = True
+else:
+    define_macros = []
+
+random_sources = ["src/metawards/ran_binomial/mt19937.c",
                   "src/metawards/ran_binomial/distributions.c"]
+
 
 # https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
 def no_cythonize(extensions, **_ignore):
@@ -32,42 +55,92 @@ def no_cythonize(extensions, **_ignore):
 # init function" and the answers on stackoverflow didn't work.
 # If anyone can help please do :-)
 
-extensions = [
-    Extension("metawards._nodes", ["src/metawards/_nodes.pyx"]),
-    Extension("metawards._links", ["src/metawards/_links.pyx"]),
-    Extension("metawards._run_model", ["src/metawards/_run_model.pyx"]),
-    Extension("metawards._workspace", ["src/metawards/_workspace.pyx"]),
-    Extension("metawards._build_wards_network", ["src/metawards/_build_wards_network.pyx"]),
-    Extension("metawards._add_wards_network_distance", ["src/metawards/_add_wards_network_distance.pyx"]),
-    Extension("metawards._get_min_max_distances", ["src/metawards/_get_min_max_distances.pyx"]),
-    Extension("metawards._reset_everything", ["src/metawards/_reset_everything.pyx"]),
-    Extension("metawards._rescale_matrix", ["src/metawards/_rescale_matrix.pyx"]),
-    Extension("metawards._recalculate_denominators", ["src/metawards/_recalculate_denominators.pyx"]),
-    Extension("metawards._move_population", ["src/metawards/_move_population.pyx"]),
-    Extension("metawards._fill_in_gaps", ["src/metawards/_fill_in_gaps.pyx"]),
-    Extension("metawards._build_play_matrix", ["src/metawards/_build_play_matrix.pyx"]),
-    Extension("metawards._array", ["src/metawards/_array.pyx"]),
-    Extension("metawards._iterate", ["src/metawards/_iterate.pyx"]),
-    Extension("metawards._iterate_weekend", ["src/metawards/_iterate_weekend.pyx"]),
-    Extension("metawards._extract_data", ["src/metawards/_extract_data.pyx"]),
-    Extension("metawards._extract_data_for_graphics", ["src/metawards/_extract_data_for_graphics.pyx"]),
-    Extension("metawards._import_infection", ["src/metawards/_import_infection.pyx"]),
-    Extension("metawards._ran_binomial", ["src/metawards/_ran_binomial.pyx"]+random_sources),
-]
 
-# disable bounds checking and wraparound globally as the code already
-# checks for this and doesn't use negative indexing. It can be 
-# turned on as needed in the modules
-for e in extensions:
-    e.cython_directives = {"boundscheck": False, "wraparound": False}
+extensions = [
+    Extension("metawards._nodes", ["src/metawards/_nodes.pyx"],
+              define_macros=define_macros),
+    Extension("metawards._links", ["src/metawards/_links.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._workspace",
+              ["src/metawards/utils/_workspace.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._clear_all_infections",
+              ["src/metawards/utils/_clear_all_infections.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._build_wards_network",
+              ["src/metawards/utils/_build_wards_network.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._add_wards_network_distance",
+              ["src/metawards/utils/_add_wards_network_distance.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._get_min_max_distances",
+              ["src/metawards/utils/_get_min_max_distances.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._reset_everything",
+              ["src/metawards/utils/_reset_everything.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._rescale_matrix",
+              ["src/metawards/utils/_rescale_matrix.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._recalculate_denominators",
+              ["src/metawards/utils/_recalculate_denominators.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._move_population",
+              ["src/metawards/utils/_move_population.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._fill_in_gaps",
+              ["src/metawards/utils/_fill_in_gaps.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._build_play_matrix",
+              ["src/metawards/utils/_build_play_matrix.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._array", ["src/metawards/utils/_array.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._ran_binomial",
+              ["src/metawards/utils/_ran_binomial.pyx"]+random_sources,
+              define_macros=define_macros),
+    Extension("metawards.utils._assert_sane_network",
+              ["src/metawards/utils/_assert_sane_network.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.utils._get_array_ptr",
+              ["src/metawards/utils/_get_array_ptr.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.iterators._advance_play",
+              ["src/metawards/iterators/_advance_play.pyx"]+random_sources,
+              define_macros=define_macros),
+    Extension("metawards.iterators._advance_fixed",
+              ["src/metawards/iterators/_advance_fixed.pyx"]+random_sources,
+              define_macros=define_macros),
+    Extension("metawards.iterators._advance_infprob",
+              ["src/metawards/iterators/_advance_infprob.pyx"]+random_sources,
+              define_macros=define_macros),
+    Extension("metawards.iterators._advance_recovery",
+              ["src/metawards/iterators/_advance_recovery.pyx"]+random_sources,
+              define_macros=define_macros),
+    Extension("metawards.iterators._advance_foi",
+              ["src/metawards/iterators/_advance_foi.pyx"]+random_sources,
+              define_macros=define_macros),
+    Extension("metawards.iterators._advance_imports",
+              ["src/metawards/iterators/_advance_imports.pyx"]+random_sources,
+              define_macros=define_macros),
+    Extension("metawards.extractors._output_core",
+              ["src/metawards/extractors/_output_core.pyx"],
+              define_macros=define_macros),
+    Extension("metawards.extractors._output_dispersal",
+              ["src/metawards/extractors/_output_dispersal.pyx"],
+              define_macros=define_macros),
+]
 
 CYTHONIZE = bool(int(os.getenv("CYTHONIZE", 0)))
 
-os.environ['CFLAGS'] = '-O3 -march=native -Wall'
+if not have_cython:
+    CYTHONIZE = False
+
+os.environ['CFLAGS'] = cflags
 
 if CYTHONIZE:
-    compiler_directives = {"language_level": 3, "embedsignature": True}
-    extensions = cythonize(extensions, compiler_directives=compiler_directives)
+    extensions = cythonize(extensions, compiler_directives=compiler_directives,
+                           nthreads=nbuilders)
 else:
     extensions = no_cythonize(extensions)
 
@@ -88,7 +161,8 @@ setup(
     },
     entry_points={
         "console_scripts": [
-           "metawards = metawards.app.run:cli"
+           "metawards = metawards.app.run:cli",
+           "metawards-plot = metawards.app.plot:cli"
         ]
     }
 )

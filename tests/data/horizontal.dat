@@ -1,0 +1,7 @@
+
+# comment line
+user.something[1],    .another[2],   user.flag,  beta[3]
+
+
+# some variables are here
+5,  100, True, 0.5

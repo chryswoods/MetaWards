@@ -1,2 +1,4 @@
 include requirements*.txt
 include LICENSE.txt
+include versioneer.py
+include src/metawards/ran_binomial/*.h

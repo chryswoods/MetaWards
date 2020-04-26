@@ -12,7 +12,7 @@ JSON_C_LIB = -L/usr/local/include -ljson-c  # $(shell pkg-config --libs json-c)
 CFLAGS = $(JSON_C_INC) $(JSON_C_LIB)
 
 metawards: src/*.c src/*.h
-	$(CC) src/*.c ../src/metawards/ran_binomial/*.c -o metawards $(CFLAGS) -Isrc -lgsl -lm -O3
+	$(CC) src/*.c ../src/metawards/ran_binomial/*.c -o metawards $(CFLAGS) -Isrc -lm -O3
 
-clean:  
+clean:
 	rm metawards

@@ -1,0 +1,4 @@
+dateparser>=0.7.0
+pandas
+Pillow>=6.2.1
+pygifsicle

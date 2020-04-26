@@ -1,0 +1,17 @@
+#[paths]
+#source =
+#   src/metawards
+#   build/lib*/metawards
+
+[run]
+branch = true
+source =
+    metawards
+    tests
+parallel = true
+plugins = Cython.Coverage
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*

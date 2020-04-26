@@ -6,17 +6,32 @@ __all__ = ["Node"]
 
 @dataclass
 class Node:
-    """This is a node in the network"""
-    label: int = None           # The node's label
-    begin_to: int = None        # where to links begin in link list
-    end_to: int = None			# how many to links in link list
+    """This class represents an electoral ward (node) in the network"""
+
+    #: The node's label (int). This is the index of the node, which must
+    #: run from 1 up to len(nodes). A value of -1 implies a null node
+    label: int = None
+
+    #: The index (int) of the first link for this node in the
+    #: network Links list
+    begin_to: int = None
+
+    #: The number (int) of links for this node in the Links list
+    end_to: int = None
+
     self_w: int = None
 
-    begin_p: int = None         # play matrix begin and end in link vector
+    #: The index (int) of the first link for this node in the network
+    #: play Links list (play)
+    begin_p: int = None
+
+    #: The number (int) of links for this node in the Links play list
     end_p: int = None
     self_p: int = None
 
-    begin_we: int = None        # weekend begin and end
+    #: The index (int) of the first link for this node in the network
+    #: weekend Links list
+    begin_we: int = None
     end_we: int = None
     self_we: int = None
 
@@ -27,14 +42,20 @@ class Node:
     play_suscept: float = 0.0
     save_play_suscept: float = 0.0
 
-    denominator_n: float = 0.0  #Denominator only
+    denominator_n: float = 0.0  # Denominator only
     denominator_d: float = 0.0  # Maybe won't need
 
     denominator_p: float = 0.0
     denominator_pd: float = 0.0
+
+    #: x coordinate of the ward (location)
     x: float = 0.0
+
+    #: y coordinate of the ward (location)
     y: float = 0.0
+
     b: float = 0.0
 
+    #: the name of the ward, e.g. 'Bristol'
     id: str = None
     vacid: int = None

@@ -29,35 +29,35 @@ typedef struct network{
 
 
 typedef struct node{
-	int label;					// label of node 
-   
+	int label;					// label of node
+
 	int begin_to;				// where to links begin in link vector;
 	int end_to;					// how many to links in link vector
 	int self_w;
 
 	int begin_p;				// play matrix begin and end in link vector
-	int end_p;					// 
+	int end_p;					//
 	int self_p;
 
 	int begin_we;				// weekend begin and end
 	int end_we;					//
 	int self_we;
-	
+
 //	struct to_link *neigh;			// neighbour link list
 //	struct from_link *from_neigh; // incoming neightbour list
 
-//	struct attribute *attrib; 
+//	struct attribute *attrib;
 
 	double DayFOI;				// numerator only
 	double NightFOI;			// numerator only
-	double WeekendFOI;			// numerator only	
-	
+	double WeekendFOI;			// numerator only
+
 	double play_suscept;
 	double save_play_suscept;
-	
+
 	double Denominator_N;			// Denominator only
 	double Denominator_D;			// Maybe won't need
-	
+
 	double Denominator_P;
 	double Denominator_PD;
 	double x,y;
@@ -68,7 +68,7 @@ typedef struct node{
 
 }node;
 
-typedef struct attribute{		// non essential attributes. 
+typedef struct attribute{		// non essential attributes.
 	char name[NAMESIZEMAX];		// Name of node in string format (might not need
 	float x,y;					// position of node
 }attribute;
@@ -76,11 +76,11 @@ typedef struct attribute{		// non essential attributes.
 typedef struct to_link{
 //	node *from;					// origin node for link
 //	node *to;		// destination node for link
-	
+
 	int ifrom, ito;				// integers of origins and destinations
-	double weight;				// weight of link, used to save the original number of susceptibles in work matrix	
+	double weight;				// weight of link, used to save the original number of susceptibles in work matrix
 	double suscept;				// number of susceptibles in the case of the work matrix, used to save the weight of the play matrix
-								// 
+								//
 	double distance;			// the distance between two wards
 	int A;						// Age index...
 }to_link;
@@ -106,6 +106,15 @@ void RemoveFromList(from_link *l);
 network *BuildWardsNetwork(parameters *par);
 network *BuildWardsNetworkDistance(parameters *par);
 network *BuildWardsNetworkDistanceIdentifiers(parameters *par);
+
+double DistanceBetweenPlaces(
+    double lon1,
+    double lat1,
+    double lon2,
+    double lat2);
+
+double Radians(double x);
+
 int ApplyStaticDistanceCutoff(network *net, parameters *par);
 void FillInGaps(network *net);
 
@@ -133,7 +142,7 @@ int **InitialiseInfections(network *net);
 int **InitialisePlayInfections(network *net);
 void FreeInfections(int **p);
 
-void SeedInfectionAtRandomLink(network *net,parameters *par, 
+void SeedInfectionAtRandomLink(network *net,parameters *par,
 							   gsl_rng *r,char C,int **inf);
 void InfectAdditionalSeeds(network *net, parameters *par, int **inf,int **pinf,int t);
 void LoadAdditionalSeeds(char *fname);
@@ -170,6 +179,8 @@ void OutputWardData(FILE **files,int *to_track,network *net,int **winf,int **pin
 
 int ExtractData(network *net,int **inf,int **pinf, int t, FILE **files);
 int ExtractDataForGraphicsToFile(network *net,int **inf,int **pinf,FILE *outF);
+int ExtractDataForGraphicsToFileIncidence(network *net, int **inf,int **pinf,FILE *outF);
+
 
 double Rate2Prob(double R);
 
@@ -190,7 +201,7 @@ int IsSameCounty(char *id1,char *id2);
 
 void Vaccinate1(network *net, int iward, int **inf, int **pinf, size_t *vac,parameters *par);
 void FindWardsToVaccinate(network *net,size_t *wardsRA,int **inf,int **pinf,parameters *par);
-void FindWardsToVaccinate2(network *net,double RiskRA[MAXSIZE], size_t *wardsRA, 
+void FindWardsToVaccinate2(network *net,double RiskRA[MAXSIZE], size_t *wardsRA,
 						   int **inf, int **pinf, parameters *par);
 void CalculateWardRisk(network *net, double *RiskRA, int **inf, int **pinf,parameters *par);
 int compare_doubles (const double * a, const double * b);

@@ -1,4 +1,46 @@
-Could not find the repository version info in /Users/chris/GitHub/MetaWardsData/version.txt.Please make sure that you have run './version' in that repository to generate the version info.
+
+    ****************************************
+    metawards version 0.8.4+6.gccdb267.dirty
+    ****************************************
+
+            -- Source information --
+repository: https://github.com/metawards/MetaWards
+           branch: feature_lockdown2
+revision: ccdb267a9b675c8b987f59ba73e5c46cbdd9479c
+    last modified: 2020-04-23T18:21:50+0100
+
+WARNING: This version has not been committed to git,
+WARNING: so you may not be able to recover the original
+WARNING: source code that was used to generate this run!
+
+          -- Additional information --
+Visit https://metawards.github.io for more information
+  about metawards, its authors and its license
+
+Command used to run this job:
+/Users/chris/anaconda3/bin/metawards --seed 15324 --nthreads 1 -a ExtraSeedsBrighton.dat -i tests/data/ncovparams.csv -l 0 --iterator tests/iterators/lockdown.py
+
+Using parameters from line 0 of tests/data/ncovparams.csv
+Performing a single run of each set of parameters
+
+Number of threads to use for each model run is 1
+Number of processes used to parallelise model runs is 4
+Parallelisation will be achieved using multiprocessing
+
+Using random number seed 15324
+
+Day zero is Friday April 24 2020
+
+Using MetaWardsData at /Users/chris/GitHub/MetaWardsData
+This is cloned from https://github.com/metawards/MetaWardsData
+branch master, version 0.3.0-3-gac8965c
+
+******************************************
+*** To repeat this job use the command ***
+******************************************
+
+metawards --input tests/data/ncovparams.csv --line 0 --repeats 1 --seed 15324 --additional ExtraSeedsBrighton.dat --output output --start-date 2020-04-24 --start-day 0 --parameters march29 --repository /Users/chris/GitHub/MetaWardsData --population 57104043 --nsteps 730 --iterator tests/iterators/lockdown.py --UV 0.0 --nthreads 1 --nprocs 4 --max-nodes 16384 --max-links 4194304
+
 Using parameters:
 Parameters march29
 loaded from /Users/chris/GitHub/MetaWardsData/parameters/march29.json
@@ -6,8 +48,9 @@ version: 29 March 2020
 author(s): Leon Danon
 contact(s): l.danon@bristol.ac.uk
 references(s): ...
-repository: /Users/chris/GitHub/MetaWardsData
-repository_version: unknown
+repository: https://github.com/metawards/MetaWardsData
+repository_branch: master
+repository_version: 0.3.0-3-gac8965c
 
 length_day = 0.7
 plength_day = 0.5
@@ -24,6 +67,7 @@ daily_ward_vaccination_capacity = 5
 neighbour_weight_threshold = 0.0
 daily_imports = 0
 UV = 0.0
+additional_seeds = None
 
 
 Using disease
@@ -33,13 +77,15 @@ version: None
 author(s): Leon Danon
 contact(s): l.danon@bristol.ac.uk
 references(s): references...
-repository: /Users/chris/GitHub/MetaWardsData
-repository_version: unknown
+repository: https://github.com/metawards/MetaWardsData
+repository_branch: master
+repository_version: 0.3.0-3-gac8965c
 
-beta = [0.0, 0.0, 0.95, 0.95, 0.0]
-progress = [1.0, 0.1923, 0.909091, 0.909091, 0.0]
+beta = [0.0, 0.0, 0.8695652173913044, 0.8695652173913044, 0.0]
+progress = [1.0, 0.1923076923076923, 0.8695652173913044, 0.8695652173913044, 0.0]
 too_ill_to_move = [0.0, 0.0, 0.0, 0.0, 0.0]
 contrib_foi = [1.0, 1.0, 1.0, 1.0, 0.0]
+start_symptom = 3
 
 
 Using input files:
@@ -49,27 +95,29 @@ root directory /Users/chris/GitHub/MetaWardsData/model_data/2011Data
 author(s): Leon Danon
 contact(s): l.danon@bristol.ac.uk
 references(s): ...
-repository: /Users/chris/GitHub/MetaWardsData
-repository_version: unknown
+repository: https://github.com/metawards/MetaWardsData
+repository_branch: master
+repository_version: 0.3.0-3-gac8965c
 
 work = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/EW1.dat
 play = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlayMatrix.dat
 identifier = None
 identifier2 = None
 weekend = None
+work_size = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/WorkSize.dat
 play_size = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlaySize.dat
 position = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/CBB2011.dat
+coordinates = x/y
 seed = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat
 nodes_to_track = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat
-additional_seeding = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/ExtraSeedsBrighton.dat
 
 
-Reading in parameters from line 0 of tests/data/ncovparams.csv
-Updated beta = [0.0, 0.0, 0.95, 0.95, 0.0]
-Updated progress = [1.0, 0.19, 0.91, 0.91, 0.0]
+Loading additional seeds from ExtraSeedsBrighton.dat
+
 Building the network...
 Number of nodes equals 8588
 Number of links equals 2412393
+Number of added nodes equals 0
 Number of nodes after filling equals 8588
 ADDING LINK 15 24 8588
 ADDING LINK 16 27 8588
@@ -89,59 +137,24 @@ ADDING LINK 37 53 8588
 ADDING LINK 38 54 8588
 ADDING LINK 571 38 8588
 ADDING LINK 735144 6817 8588
+Number of added nodes equals 0
+Adding missing nodes from 8589 to 8588
 Number of play links equals 2411396
-Number of nodes after build play equals 8606
-Resize nodes to 8607
+Number of nodes after build play equals 8588
+Resize nodes to 8589
+Resize links to 2412394
+Resize play links to 2411397
 Reading in the positions...
 Calculating distances...
-2411397
-WARNING: DIFFERENT DISTANCES 12484 0.0 vs 30985.794341288092, 24 vs 25 and 24 vs 1
-2411397
-WARNING: DIFFERENT DISTANCES 12485 993.1739833826649 vs 20653.16456563405, 24 vs 25 and 27 vs 2
-2411397
-WARNING: DIFFERENT DISTANCES 12486 507.40660545845077 vs 33394.44859077001, 24 vs 25 and 28 vs 10
-2411397
-WARNING: DIFFERENT DISTANCES 12487 526.9008937398387 vs 32136.258749286724, 24 vs 25 and 30 vs 15
-2411397
-WARNING: DIFFERENT DISTANCES 12488 1280.5984147284857 vs 1481.1104207915273, 24 vs 25 and 31 vs 17
-2411397
-WARNING: DIFFERENT DISTANCES 12489 615.4690080808982 vs 4840.201212439807, 24 vs 25 and 32 vs 18
-2411397
-WARNING: DIFFERENT DISTANCES 12490 542.1300555166845 vs 6324.07843291276, 24 vs 25 and 33 vs 19
-2411397
-WARNING: DIFFERENT DISTANCES 12491 614.4735412536315 vs 4582.730748328061, 24 vs 25 and 34 vs 20
-2411397
-WARNING: DIFFERENT DISTANCES 12492 1787.2829331428754 vs 3406.4040785845636, 24 vs 25 and 36 vs 21
-2411397
-WARNING: DIFFERENT DISTANCES 12493 1076.4707259097877 vs 2852.52046844334, 24 vs 25 and 37 vs 22
-NOT PRINTING ANY MORE!
-WARNING: Set 2399862 invalid plink distances!
-Total distance equals 132420818644.62889
+Total links distance equals 132420818.64462519
+Total play distance equals 132407248.5969165
+Total distance equals 264828067.24154168
 Get min/max distances...
-maxdist 668357.7722971484 mindist 167.82459146549388
-The original code always gives a minimum distance of zero, so setting 167.82459146549388 to zero... (check if this is correct)
+maxdist 668.3577722971484 mindist 0.16782459146549497
 /Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat -- 
 [12.0]
 Number of seeds equals 1
 Reset everything...
-Missing a node at index 8589?
-Missing a node at index 8590?
-Missing a node at index 8591?
-Missing a node at index 8592?
-Missing a node at index 8593?
-Missing a node at index 8594?
-Missing a node at index 8595?
-Missing a node at index 8596?
-Missing a node at index 8597?
-Missing a node at index 8598?
-Missing a node at index 8599?
-Missing a node at index 8600?
-Missing a node at index 8601?
-Missing a node at index 8602?
-Missing a node at index 8603?
-Missing a node at index 8604?
-Missing a node at index 8605?
-Missing a node at index 8606?
 Rescale play matrix...
 recalculate_play_denominator_day sum 1 = 33613071.999989584
 recalculate_play_denominator_day sum 2 = 33613072.0
@@ -149,602 +162,492 @@ Move population from play to work...
 recalculate_work_denominator_day sum = 22469005.0
 recalculate_play_denominator_day sum 1 = 33613071.999989584
 recalculate_play_denominator_day sum 2 = 33613072.0
+
 Run the model...
+recalculate_play_denominator_day sum 1 = 33613071.999989584
+recalculate_play_denominator_day sum 2 = 33613072.0
+recalculate_work_denominator_day sum = 22469005.0
+recalculate_play_denominator_day sum 1 = 33613071.999989584
+recalculate_play_denominator_day sum 2 = 33613072.0
 Using random number seed: 15324
-Constructed 140723991126016
-Seeded...
 First five random numbers equal 42, 49, 51, 50, 52
+Number of threads used equals 1
 Initialise infections...
 Initialise play infections...
-Negative value of s? -1
-node_seed 0
-S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-Loading additional seeds from /Users/chris/GitHub/MetaWardsData/model_data/2011Data/ExtraSeedsBrighton.dat...
+Importing a custom iterator from tests/iterators/lockdown.py
+Loaded iterator from tests/iterators/lockdown.py
+Building a custom iterator for <function iterate_lockdown at 0x1039fb200>
+Setup by seeding all wards
+Loading additional seeds from /Users/chris/GitHub/MetaWardsData/extra_seeds/ExtraSeedsBrighton.dat...
 (1, 2124, 5)
+S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
 
  0 0
 S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+seeding play_infections[0][2124] += 5
 
  1 0
-S: 56082072    E: 5    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082072
+S: 56082072    E: 5    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
 
  2 5
-S: 56082072    E: 4    I: 1    R: 0    IW: 0   TOTAL POPULATION 56082073
+S: 56082072    E: 4    I: 1    R: 0    IW: 0   TOTAL POPULATION 56082077
 
  3 5
-S: 56082070    E: 4    I: 1    R: 2    IW: 2   TOTAL POPULATION 56082073
+S: 56082070    E: 4    I: 1    R: 2    IW: 2   TOTAL POPULATION 56082077
 
  4 5
-S: 56082069    E: 6    I: 1    R: 1    IW: 1   TOTAL POPULATION 56082071
+S: 56082069    E: 6    I: 1    R: 1    IW: 1   TOTAL POPULATION 56082077
 
  5 7
-S: 56082068    E: 7    I: 0    R: 2    IW: 1   TOTAL POPULATION 56082070
+S: 56082068    E: 7    I: 0    R: 2    IW: 1   TOTAL POPULATION 56082077
 
  6 7
-S: 56082068    E: 6    I: 2    R: 1    IW: 0   TOTAL POPULATION 56082071
+S: 56082068    E: 6    I: 2    R: 1    IW: 0   TOTAL POPULATION 56082077
 
  7 8
-S: 56082065    E: 4    I: 4    R: 4    IW: 3   TOTAL POPULATION 56082073
+S: 56082065    E: 4    I: 4    R: 4    IW: 3   TOTAL POPULATION 56082077
 
  8 8
-S: 56082054    E: 6    I: 3    R: 14    IW: 5   TOTAL POPULATION 56082071
+S: 56082054    E: 6    I: 3    R: 14    IW: 5   TOTAL POPULATION 56082077
 
  9 9
-S: 56082050    E: 17    I: 1    R: 9    IW: 2   TOTAL POPULATION 56082060
+S: 56082050    E: 17    I: 1    R: 9    IW: 2   TOTAL POPULATION 56082077
 
  10 18
-S: 56082048    E: 19    I: 3    R: 7    IW: 2   TOTAL POPULATION 56082058
+S: 56082048    E: 19    I: 3    R: 7    IW: 2   TOTAL POPULATION 56082077
 
  11 22
-S: 56082044    E: 20    I: 3    R: 10    IW: 2   TOTAL POPULATION 56082057
+S: 56082044    E: 20    I: 3    R: 10    IW: 2   TOTAL POPULATION 56082077
 
  12 23
-S: 56082039    E: 21    I: 5    R: 12    IW: 5   TOTAL POPULATION 56082056
+S: 56082038    E: 21    I: 5    R: 13    IW: 5   TOTAL POPULATION 56082077
 
  13 26
-S: 56082035    E: 23    I: 6    R: 13    IW: 3   TOTAL POPULATION 56082054
+S: 56082033    E: 24    I: 6    R: 14    IW: 4   TOTAL POPULATION 56082077
 
- 14 29
-S: 56082027    E: 26    I: 4    R: 20    IW: 4   TOTAL POPULATION 56082051
+ 14 30
+S: 56082025    E: 28    I: 4    R: 20    IW: 5   TOTAL POPULATION 56082077
 
- 15 30
-S: 56082025    E: 30    I: 6    R: 16    IW: 2   TOTAL POPULATION 56082047
+ 15 32
+S: 56082022    E: 33    I: 5    R: 17    IW: 3   TOTAL POPULATION 56082077
 
- 16 36
-S: 56082014    E: 26    I: 10    R: 27    IW: 11   TOTAL POPULATION 56082051
+ 16 38
+S: 56082014    E: 29    I: 10    R: 24    IW: 5   TOTAL POPULATION 56082077
 
- 17 36
-S: 56082005    E: 32    I: 11    R: 29    IW: 8   TOTAL POPULATION 56082045
+ 17 39
+S: 56082003    E: 34    I: 11    R: 29    IW: 8   TOTAL POPULATION 56082077
 
- 18 43
-S: 56081993    E: 35    I: 12    R: 37    IW: 12   TOTAL POPULATION 56082042
+ 18 45
+S: 56081991    E: 34    I: 16    R: 36    IW: 10   TOTAL POPULATION 56082077
 
- 19 47
-S: 56081983    E: 43    I: 11    R: 40    IW: 10   TOTAL POPULATION 56082034
+ 19 50
+S: 56081967    E: 36    I: 21    R: 53    IW: 19   TOTAL POPULATION 56082077
 
- 20 54
-S: 56081968    E: 45    I: 13    R: 51    IW: 11   TOTAL POPULATION 56082032
+ 20 57
+S: 56081950    E: 52    I: 19    R: 56    IW: 15   TOTAL POPULATION 56082077
 
- 21 58
-S: 56081959    E: 52    I: 17    R: 49    IW: 9   TOTAL POPULATION 56082025
+ 21 71
+S: 56081915    E: 57    I: 24    R: 81    IW: 24   TOTAL POPULATION 56082077
 
- 22 69
-S: 56081944    E: 52    I: 17    R: 64    IW: 15   TOTAL POPULATION 56082025
+ 22 81
+S: 56081888    E: 86    I: 24    R: 79    IW: 24   TOTAL POPULATION 56082077
 
- 23 69
-S: 56081925    E: 54    I: 22    R: 76    IW: 15   TOTAL POPULATION 56082023
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 24 76
-S: 56081900    E: 63    I: 24    R: 90    IW: 22   TOTAL POPULATION 56082014
+ 23 110
+S: 56081883    E: 92    I: 30    R: 72    IW: 5   TOTAL POPULATION 56082077
 
- 25 87
-S: 56081870    E: 77    I: 23    R: 107    IW: 25   TOTAL POPULATION 56082000
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 26 100
-S: 56081846    E: 93    I: 28    R: 110    IW: 22   TOTAL POPULATION 56081984
+ 24 122
+S: 56081880    E: 78    I: 42    R: 77    IW: 3   TOTAL POPULATION 56082077
 
- 27 121
-S: 56081802    E: 98    I: 35    R: 142    IW: 34   TOTAL POPULATION 56081979
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 28 133
-S: 56081764    E: 122    I: 43    R: 148    IW: 34   TOTAL POPULATION 56081955
+ 25 120
+S: 56081873    E: 68    I: 35    R: 101    IW: 7   TOTAL POPULATION 56082077
 
- 29 165
-S: 56081730    E: 134    I: 48    R: 165    IW: 28   TOTAL POPULATION 56081943
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 30 182
-S: 56081687    E: 148    I: 49    R: 193    IW: 38   TOTAL POPULATION 56081929
+ 26 103
+S: 56081870    E: 60    I: 32    R: 115    IW: 2   TOTAL POPULATION 56082077
 
- 31 197
-S: 56081642    E: 167    I: 47    R: 221    IW: 39   TOTAL POPULATION 56081910
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 32 214
-S: 56081593    E: 192    I: 49    R: 243    IW: 43   TOTAL POPULATION 56081885
+ 27 92
+S: 56081868    E: 50    I: 31    R: 128    IW: 2   TOTAL POPULATION 56082077
 
- 33 241
-S: 56081535    E: 203    I: 67    R: 272    IW: 47   TOTAL POPULATION 56081874
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 34 270
-S: 56081453    E: 230    I: 74    R: 320    IW: 68   TOTAL POPULATION 56081847
+ 28 81
+S: 56081862    E: 44    I: 23    R: 148    IW: 5   TOTAL POPULATION 56082077
 
- 35 304
-S: 56081386    E: 275    I: 71    R: 345    IW: 54   TOTAL POPULATION 56081802
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 36 346
-S: 56081312    E: 282    I: 99    R: 384    IW: 65   TOTAL POPULATION 56081795
+ 29 67
+S: 56081859    E: 41    I: 22    R: 155    IW: 3   TOTAL POPULATION 56082077
 
- 37 381
-S: 56081214    E: 306    I: 118    R: 439    IW: 79   TOTAL POPULATION 56081771
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 38 424
-S: 56081087    E: 344    I: 121    R: 525    IW: 99   TOTAL POPULATION 56081733
+ 30 63
+S: 56081858    E: 36    I: 20    R: 163    IW: 1   TOTAL POPULATION 56082077
 
- 39 465
-S: 56080944    E: 405    I: 142    R: 586    IW: 109   TOTAL POPULATION 56081672
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 40 547
-S: 56080783    E: 456    I: 166    R: 672    IW: 120   TOTAL POPULATION 56081621
+ 31 56
+S: 56081855    E: 31    I: 17    R: 174    IW: 2   TOTAL POPULATION 56082077
 
- 41 622
-S: 56080618    E: 531    I: 190    R: 738    IW: 132   TOTAL POPULATION 56081546
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 42 721
-S: 56080423    E: 591    I: 212    R: 851    IW: 155   TOTAL POPULATION 56081486
+ 32 48
+S: 56081854    E: 31    I: 10    R: 182    IW: 1   TOTAL POPULATION 56082077
 
- 43 803
-S: 56080195    E: 672    I: 232    R: 978    IW: 171   TOTAL POPULATION 56081405
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 44 904
-S: 56079940    E: 766    I: 267    R: 1104    IW: 189   TOTAL POPULATION 56081311
+ 33 41
+S: 56081852    E: 24    I: 13    R: 188    IW: 2   TOTAL POPULATION 56082077
 
- 45 1033
-S: 56079697    E: 885    I: 288    R: 1207    IW: 201   TOTAL POPULATION 56081192
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 46 1173
-S: 56079414    E: 977    I: 310    R: 1376    IW: 217   TOTAL POPULATION 56081100
+ 34 37
+S: 56081849    E: 22    I: 12    R: 194    IW: 3   TOTAL POPULATION 56082077
 
- 47 1287
-S: 56079112    E: 1079    I: 359    R: 1527    IW: 235   TOTAL POPULATION 56080998
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 48 1438
-S: 56078822    E: 1172    I: 418    R: 1665    IW: 235   TOTAL POPULATION 56080905
+ 35 34
+S: 56081846    E: 20    I: 10    R: 201    IW: 3   TOTAL POPULATION 56082077
 
- 49 1590
-S: 56078410    E: 1233    I: 477    R: 1957    IW: 305   TOTAL POPULATION 56080844
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 50 1710
-S: 56077971    E: 1410    I: 496    R: 2200    IW: 327   TOTAL POPULATION 56080667
+ 36 30
+S: 56081845    E: 16    I: 13    R: 203    IW: 1   TOTAL POPULATION 56082077
 
- 51 1906
-S: 56077516    E: 1576    I: 545    R: 2440    IW: 338   TOTAL POPULATION 56080501
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 52 2121
-S: 56077023    E: 1723    I: 620    R: 2711    IW: 364   TOTAL POPULATION 56080354
+ 37 29
+S: 56081843    E: 17    I: 10    R: 207    IW: 1   TOTAL POPULATION 56082077
 
- 53 2343
-S: 56076468    E: 1884    I: 690    R: 3035    IW: 409   TOTAL POPULATION 56080193
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 54 2574
-S: 56075853    E: 2068    I: 768    R: 3388    IW: 446   TOTAL POPULATION 56080009
+ 38 27
+S: 56081840    E: 15    I: 6    R: 216    IW: 3   TOTAL POPULATION 56082077
 
- 55 2836
-S: 56075183    E: 2301    I: 835    R: 3758    IW: 485   TOTAL POPULATION 56079776
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 56 3136
-S: 56074462    E: 2539    I: 895    R: 4181    IW: 524   TOTAL POPULATION 56079538
+ 39 21
+S: 56081839    E: 16    I: 6    R: 216    IW: 1   TOTAL POPULATION 56082077
 
- 57 3434
-S: 56073702    E: 2801    I: 956    R: 4618    IW: 547   TOTAL POPULATION 56079276
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 58 3757
-S: 56072868    E: 3066    I: 1042    R: 5101    IW: 593   TOTAL POPULATION 56079011
+ 40 22
+S: 56081835    E: 11    I: 10    R: 221    IW: 3   TOTAL POPULATION 56082077
 
- 59 4108
-S: 56072003    E: 3297    I: 1186    R: 5591    IW: 620   TOTAL POPULATION 56078780
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 60 4483
-S: 56071024    E: 3543    I: 1317    R: 6193    IW: 694   TOTAL POPULATION 56078534
+ 41 21
+S: 56081834    E: 13    I: 8    R: 222    IW: 1   TOTAL POPULATION 56082077
 
- 61 4860
-S: 56069976    E: 3857    I: 1400    R: 6844    IW: 732   TOTAL POPULATION 56078220
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 62 5257
-S: 56068897    E: 4180    I: 1516    R: 7484    IW: 778   TOTAL POPULATION 56077897
+ 42 21
+S: 56081833    E: 13    I: 3    R: 228    IW: 1   TOTAL POPULATION 56082077
 
- 63 5696
-S: 56067683    E: 4418    I: 1698    R: 8278    IW: 837   TOTAL POPULATION 56077659
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 64 6116
-S: 56066402    E: 4785    I: 1842    R: 9048    IW: 907   TOTAL POPULATION 56077292
+ 43 16
+S: 56081831    E: 9    I: 7    R: 230    IW: 2   TOTAL POPULATION 56082077
 
- 65 6627
-S: 56064991    E: 5159    I: 1931    R: 9996    IW: 960   TOTAL POPULATION 56076918
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 66 7090
-S: 56063469    E: 5616    I: 2039    R: 10953    IW: 1030   TOTAL POPULATION 56076461
+ 44 16
+S: 56081828    E: 5    I: 11    R: 233    IW: 2   TOTAL POPULATION 56082077
 
- 67 7655
-S: 56061969    E: 6029    I: 2224    R: 11855    IW: 1031   TOTAL POPULATION 56076048
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 68 8253
-S: 56060365    E: 6410    I: 2398    R: 12904    IW: 1122   TOTAL POPULATION 56075667
+ 45 16
+S: 56081823    E: 7    I: 8    R: 239    IW: 3   TOTAL POPULATION 56082077
 
- 69 8808
-S: 56058588    E: 6847    I: 2508    R: 14134    IW: 1213   TOTAL POPULATION 56075230
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 70 9355
-S: 56056820    E: 7324    I: 2673    R: 15260    IW: 1204   TOTAL POPULATION 56074753
+ 46 15
+S: 56081820    E: 11    I: 7    R: 239    IW: 2   TOTAL POPULATION 56082077
 
- 71 9997
-S: 56054885    E: 7753    I: 2868    R: 16571    IW: 1268   TOTAL POPULATION 56074324
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 72 10621
-S: 56052879    E: 8214    I: 3067    R: 17917    IW: 1343   TOTAL POPULATION 56073863
+ 47 18
+S: 56081820    E: 14    I: 2    R: 241    IW: 0   TOTAL POPULATION 56082077
 
- 73 11281
-S: 56050745    E: 8621    I: 3347    R: 19364    IW: 1424   TOTAL POPULATION 56073456
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 74 11968
-S: 56048458    E: 9112    I: 3554    R: 20953    IW: 1471   TOTAL POPULATION 56072965
+ 48 16
+S: 56081820    E: 13    I: 1    R: 243    IW: 0   TOTAL POPULATION 56082077
 
- 75 12666
-S: 56045990    E: 9796    I: 3529    R: 22762    IW: 1596   TOTAL POPULATION 56072281
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 76 13325
-S: 56043711    E: 10416    I: 3785    R: 24165    IW: 1496   TOTAL POPULATION 56071661
+ 49 14
+S: 56081819    E: 11    I: 3    R: 244    IW: 1   TOTAL POPULATION 56082077
 
- 77 14201
-S: 56041202    E: 10677    I: 4214    R: 25984    IW: 1651   TOTAL POPULATION 56071400
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 78 14891
-S: 56038492    E: 11120    I: 4441    R: 28024    IW: 1769   TOTAL POPULATION 56070957
+ 50 14
+S: 56081818    E: 10    I: 4    R: 245    IW: 1   TOTAL POPULATION 56082077
 
- 79 15561
-S: 56035641    E: 11707    I: 4581    R: 30148    IW: 1781   TOTAL POPULATION 56070370
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 80 16288
-S: 56032815    E: 12288    I: 4833    R: 32141    IW: 1800   TOTAL POPULATION 56069789
+ 51 14
+S: 56081818    E: 9    I: 4    R: 246    IW: 0   TOTAL POPULATION 56082077
 
- 81 17121
-S: 56029862    E: 12875    I: 4961    R: 34379    IW: 1840   TOTAL POPULATION 56069202
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 82 17836
-S: 56026863    E: 13335    I: 5209    R: 36670    IW: 1893   TOTAL POPULATION 56068742
+ 52 13
+S: 56081817    E: 8    I: 5    R: 247    IW: 1   TOTAL POPULATION 56082077
 
- 83 18544
-S: 56023803    E: 13799    I: 5521    R: 38954    IW: 1962   TOTAL POPULATION 56068278
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 84 19320
-S: 56020503    E: 14188    I: 5679    R: 41707    IW: 2054   TOTAL POPULATION 56067889
+ 53 13
+S: 56081814    E: 8    I: 3    R: 252    IW: 2   TOTAL POPULATION 56082077
 
- 85 19867
-S: 56017252    E: 14803    I: 5853    R: 44169    IW: 2056   TOTAL POPULATION 56067274
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 86 20656
-S: 56014037    E: 15281    I: 6000    R: 46759    IW: 2045   TOTAL POPULATION 56066796
+ 54 11
+S: 56081813    E: 9    I: 3    R: 252    IW: 1   TOTAL POPULATION 56082077
 
- 87 21281
-S: 56010776    E: 15505    I: 6308    R: 49488    IW: 2086   TOTAL POPULATION 56066572
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 88 21813
-S: 56007328    E: 15838    I: 6502    R: 52409    IW: 2204   TOTAL POPULATION 56066239
+ 55 12
+S: 56081813    E: 10    I: 2    R: 252    IW: 0   TOTAL POPULATION 56082077
 
- 89 22340
-S: 56003930    E: 16263    I: 6527    R: 55357    IW: 2205   TOTAL POPULATION 56065814
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 90 22790
-S: 56000513    E: 16567    I: 6672    R: 58325    IW: 2209   TOTAL POPULATION 56065510
+ 56 12
+S: 56081812    E: 8    I: 2    R: 255    IW: 1   TOTAL POPULATION 56082077
 
- 91 23239
-S: 55997137    E: 16789    I: 6871    R: 61280    IW: 2200   TOTAL POPULATION 56065288
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 92 23660
-S: 55993661    E: 17023    I: 6959    R: 64434    IW: 2235   TOTAL POPULATION 56065054
+ 57 10
+S: 56081812    E: 7    I: 4    R: 254    IW: 0   TOTAL POPULATION 56082077
 
- 93 23982
-S: 55990109    E: 17345    I: 6958    R: 67665    IW: 2360   TOTAL POPULATION 56064732
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 94 24303
-S: 55986676    E: 17593    I: 7089    R: 70719    IW: 2261   TOTAL POPULATION 56064484
+ 58 11
+S: 56081811    E: 6    I: 3    R: 257    IW: 1   TOTAL POPULATION 56082077
 
- 95 24682
-S: 55983289    E: 17738    I: 7277    R: 73773    IW: 2259   TOTAL POPULATION 56064339
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 96 25015
-S: 55979933    E: 17804    I: 7239    R: 77101    IW: 2262   TOTAL POPULATION 56064273
+ 59 9
+S: 56081811    E: 6    I: 2    R: 258    IW: 0   TOTAL POPULATION 56082077
 
- 97 25043
-S: 55976634    E: 17773    I: 7342    R: 80328    IW: 2233   TOTAL POPULATION 56064304
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 98 25115
-S: 55973328    E: 17664    I: 7471    R: 83614    IW: 2236   TOTAL POPULATION 56064413
+ 60 8
+S: 56081810    E: 4    I: 3    R: 260    IW: 1   TOTAL POPULATION 56082077
 
- 99 25135
-S: 55969929    E: 17586    I: 7437    R: 87125    IW: 2274   TOTAL POPULATION 56064491
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 100 25023
-S: 55966662    E: 17612    I: 7444    R: 90359    IW: 2190   TOTAL POPULATION 56064465
+ 61 7
+S: 56081810    E: 5    I: 2    R: 260    IW: 0   TOTAL POPULATION 56082077
 
- 101 25056
-S: 55963510    E: 17454    I: 7485    R: 93628    IW: 2195   TOTAL POPULATION 56064623
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 102 24939
-S: 55960365    E: 17307    I: 7389    R: 97016    IW: 2191   TOTAL POPULATION 56064770
+ 62 7
+S: 56081810    E: 4    I: 1    R: 262    IW: 0   TOTAL POPULATION 56082077
 
- 103 24696
-S: 55957319    E: 17187    I: 7194    R: 100377    IW: 2133   TOTAL POPULATION 56064890
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 104 24381
-S: 55954325    E: 16895    I: 7256    R: 103601    IW: 2132   TOTAL POPULATION 56065182
+ 63 5
+S: 56081810    E: 3    I: 2    R: 262    IW: 0   TOTAL POPULATION 56082077
 
- 105 24151
-S: 55951485    E: 16615    I: 7242    R: 106735    IW: 2076   TOTAL POPULATION 56065462
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 106 23857
-S: 55948730    E: 16313    I: 7086    R: 109948    IW: 1998   TOTAL POPULATION 56065764
+ 64 5
+S: 56081810    E: 2    I: 2    R: 263    IW: 0   TOTAL POPULATION 56082077
 
- 107 23399
-S: 55945987    E: 15907    I: 6926    R: 113257    IW: 2006   TOTAL POPULATION 56066170
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 108 22833
-S: 55943404    E: 15629    I: 6810    R: 116234    IW: 1966   TOTAL POPULATION 56066448
+ 65 4
+S: 56081810    E: 2    I: 2    R: 263    IW: 0   TOTAL POPULATION 56082077
 
- 109 22439
-S: 55940943    E: 15239    I: 6631    R: 119264    IW: 1857   TOTAL POPULATION 56066838
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 110 21870
-S: 55938612    E: 14938    I: 6358    R: 122169    IW: 1784   TOTAL POPULATION 56067139
+ 66 4
+S: 56081809    E: 2    I: 0    R: 266    IW: 1   TOTAL POPULATION 56082077
 
- 111 21296
-S: 55936407    E: 14335    I: 6305    R: 125030    IW: 1711   TOTAL POPULATION 56067742
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 112 20640
-S: 55934265    E: 13817    I: 6233    R: 127762    IW: 1697   TOTAL POPULATION 56068260
+ 67 2
+S: 56081809    E: 2    I: 1    R: 265    IW: 0   TOTAL POPULATION 56082077
 
- 113 20050
-S: 55932204    E: 13387    I: 5880    R: 130606    IW: 1627   TOTAL POPULATION 56068690
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 114 19267
-S: 55930289    E: 12867    I: 5696    R: 133225    IW: 1495   TOTAL POPULATION 56069210
+ 68 3
+S: 56081808    E: 1    I: 2    R: 266    IW: 1   TOTAL POPULATION 56082077
 
- 115 18563
-S: 55928491    E: 12360    I: 5506    R: 135720    IW: 1475   TOTAL POPULATION 56069717
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 116 17866
-S: 55926783    E: 11793    I: 5316    R: 138185    IW: 1405   TOTAL POPULATION 56070284
+ 69 3
+S: 56081807    E: 2    I: 2    R: 266    IW: 1   TOTAL POPULATION 56082077
 
- 117 17109
-S: 55925205    E: 11104    I: 5272    R: 140496    IW: 1321   TOTAL POPULATION 56070973
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 118 16376
-S: 55923634    E: 10657    I: 4915    R: 142871    IW: 1305   TOTAL POPULATION 56071420
+ 70 4
+S: 56081806    E: 3    I: 0    R: 268    IW: 1   TOTAL POPULATION 56082077
 
- 119 15572
-S: 55922190    E: 10265    I: 4485    R: 145137    IW: 1238   TOTAL POPULATION 56071812
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 120 14750
-S: 55920942    E: 9811    I: 4282    R: 147042    IW: 1078   TOTAL POPULATION 56072266
+ 71 3
+S: 56081806    E: 3    I: 1    R: 267    IW: 0   TOTAL POPULATION 56082077
 
- 121 14093
-S: 55919800    E: 9138    I: 4216    R: 148923    IW: 1006   TOTAL POPULATION 56072939
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 122 13354
-S: 55918659    E: 8562    I: 3982    R: 150874    IW: 1009   TOTAL POPULATION 56073515
+ 72 4
+S: 56081806    E: 3    I: 1    R: 267    IW: 0   TOTAL POPULATION 56082077
 
- 123 12544
-S: 55917667    E: 8032    I: 3744    R: 152634    IW: 888   TOTAL POPULATION 56074045
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 124 11776
-S: 55916751    E: 7500    I: 3521    R: 154305    IW: 827   TOTAL POPULATION 56074577
+ 73 4
+S: 56081804    E: 3    I: 0    R: 270    IW: 1   TOTAL POPULATION 56082077
 
- 125 11021
-S: 55915889    E: 6949    I: 3329    R: 155910    IW: 768   TOTAL POPULATION 56075128
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 126 10278
-S: 55915092    E: 6463    I: 3129    R: 157393    IW: 724   TOTAL POPULATION 56075614
+ 74 3
+S: 56081804    E: 5    I: 0    R: 268    IW: 0   TOTAL POPULATION 56082077
 
- 127 9592
-S: 55914366    E: 6035    I: 2846    R: 158830    IW: 667   TOTAL POPULATION 56076042
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 128 8881
-S: 55913686    E: 5641    I: 2608    R: 160142    IW: 629   TOTAL POPULATION 56076436
+ 75 5
+S: 56081804    E: 4    I: 1    R: 268    IW: 0   TOTAL POPULATION 56082077
 
- 129 8249
-S: 55913133    E: 5199    I: 2465    R: 161280    IW: 511   TOTAL POPULATION 56076878
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 130 7664
-S: 55912619    E: 4754    I: 2352    R: 162352    IW: 482   TOTAL POPULATION 56077323
+ 76 5
+S: 56081804    E: 4    I: 1    R: 268    IW: 0   TOTAL POPULATION 56082077
 
- 131 7106
-S: 55912141    E: 4362    I: 2110    R: 163464    IW: 447   TOTAL POPULATION 56077715
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 132 6472
-S: 55911733    E: 4009    I: 1935    R: 164400    IW: 381   TOTAL POPULATION 56078068
+ 77 5
+S: 56081804    E: 3    I: 1    R: 269    IW: 0   TOTAL POPULATION 56082077
 
- 133 5944
-S: 55911378    E: 3672    I: 1766    R: 165261    IW: 334   TOTAL POPULATION 56078405
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 134 5438
-S: 55911067    E: 3333    I: 1606    R: 166071    IW: 296   TOTAL POPULATION 56078744
+ 78 4
+S: 56081804    E: 3    I: 1    R: 269    IW: 0   TOTAL POPULATION 56082077
 
- 135 4939
-S: 55910824    E: 2984    I: 1500    R: 166769    IW: 234   TOTAL POPULATION 56079093
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 136 4484
-S: 55910548    E: 2674    I: 1335    R: 167520    IW: 263   TOTAL POPULATION 56079403
+ 79 4
+S: 56081804    E: 3    I: 0    R: 270    IW: 0   TOTAL POPULATION 56082077
 
- 137 4009
-S: 55910335    E: 2423    I: 1216    R: 168103    IW: 204   TOTAL POPULATION 56079654
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 138 3639
-S: 55910136    E: 2159    I: 1109    R: 168673    IW: 192   TOTAL POPULATION 56079918
+ 80 3
+S: 56081804    E: 3    I: 0    R: 270    IW: 0   TOTAL POPULATION 56082077
 
- 139 3268
-S: 55909962    E: 1959    I: 974    R: 169182    IW: 169   TOTAL POPULATION 56080118
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 140 2933
-S: 55909830    E: 1775    I: 855    R: 169617    IW: 127   TOTAL POPULATION 56080302
+ 81 3
+S: 56081804    E: 1    I: 2    R: 270    IW: 0   TOTAL POPULATION 56082077
 
- 141 2630
-S: 55909700    E: 1570    I: 781    R: 170026    IW: 123   TOTAL POPULATION 56080507
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 142 2351
-S: 55909588    E: 1396    I: 713    R: 170380    IW: 111   TOTAL POPULATION 56080681
+ 82 3
+S: 56081804    E: 1    I: 2    R: 270    IW: 0   TOTAL POPULATION 56082077
 
- 143 2109
-S: 55909480    E: 1248    I: 640    R: 170709    IW: 103   TOTAL POPULATION 56080829
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 144 1888
-S: 55909401    E: 1110    I: 553    R: 171013    IW: 77   TOTAL POPULATION 56080967
+ 83 3
+S: 56081804    E: 1    I: 1    R: 271    IW: 0   TOTAL POPULATION 56082077
 
- 145 1663
-S: 55909346    E: 993    I: 490    R: 171248    IW: 54   TOTAL POPULATION 56081084
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 146 1483
-S: 55909291    E: 854    I: 441    R: 171491    IW: 54   TOTAL POPULATION 56081223
+ 84 2
+S: 56081803    E: 1    I: 0    R: 273    IW: 1   TOTAL POPULATION 56082077
 
- 147 1295
-S: 55909238    E: 755    I: 393    R: 171691    IW: 51   TOTAL POPULATION 56081322
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 148 1148
-S: 55909196    E: 653    I: 356    R: 171872    IW: 41   TOTAL POPULATION 56081424
+ 85 1
+S: 56081803    E: 2    I: 0    R: 272    IW: 0   TOTAL POPULATION 56082077
 
- 149 1009
-S: 55909148    E: 568    I: 311    R: 172050    IW: 46   TOTAL POPULATION 56081509
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 150 879
-S: 55909121    E: 500    I: 271    R: 172185    IW: 27   TOTAL POPULATION 56081577
+ 86 2
+S: 56081803    E: 2    I: 0    R: 272    IW: 0   TOTAL POPULATION 56082077
 
- 151 771
-S: 55909104    E: 428    I: 241    R: 172304    IW: 17   TOTAL POPULATION 56081649
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 152 669
-S: 55909082    E: 362    I: 214    R: 172419    IW: 21   TOTAL POPULATION 56081715
+ 87 2
+S: 56081803    E: 2    I: 0    R: 272    IW: 0   TOTAL POPULATION 56082077
 
- 153 576
-S: 55909058    E: 316    I: 171    R: 172532    IW: 22   TOTAL POPULATION 56081761
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 154 487
-S: 55909044    E: 288    I: 136    R: 172609    IW: 14   TOTAL POPULATION 56081789
+ 88 2
+S: 56081803    E: 1    I: 1    R: 272    IW: 0   TOTAL POPULATION 56082077
 
- 155 424
-S: 55909036    E: 251    I: 114    R: 172676    IW: 8   TOTAL POPULATION 56081826
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 156 365
-S: 55909032    E: 212    I: 106    R: 172727    IW: 4   TOTAL POPULATION 56081865
+ 89 2
+S: 56081803    E: 1    I: 1    R: 272    IW: 0   TOTAL POPULATION 56082077
 
- 157 318
-S: 55909028    E: 178    I: 95    R: 172776    IW: 4   TOTAL POPULATION 56081899
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 158 273
-S: 55909024    E: 152    I: 76    R: 172825    IW: 4   TOTAL POPULATION 56081925
+ 90 2
+S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 159 228
-S: 55909021    E: 129    I: 64    R: 172863    IW: 3   TOTAL POPULATION 56081948
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 160 193
-S: 55909018    E: 104    I: 64    R: 172891    IW: 3   TOTAL POPULATION 56081973
+ 91 1
+S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 161 168
-S: 55909016    E: 90    I: 50    R: 172921    IW: 2   TOTAL POPULATION 56081987
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 162 140
-S: 55909014    E: 73    I: 45    R: 172945    IW: 2   TOTAL POPULATION 56082004
+ 92 1
+S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 163 118
-S: 55909009    E: 59    I: 38    R: 172971    IW: 5   TOTAL POPULATION 56082018
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 164 97
-S: 55909008    E: 53    I: 29    R: 172987    IW: 1   TOTAL POPULATION 56082024
+ 93 1
+S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 165 82
-S: 55909006    E: 44    I: 21    R: 173006    IW: 2   TOTAL POPULATION 56082033
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 166 65
-S: 55909006    E: 37    I: 20    R: 173014    IW: 0   TOTAL POPULATION 56082040
+ 94 1
+S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 167 57
-S: 55909006    E: 27    I: 21    R: 173023    IW: 0   TOTAL POPULATION 56082050
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 168 48
-S: 55909006    E: 23    I: 15    R: 173033    IW: 0   TOTAL POPULATION 56082054
+ 95 1
+S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 169 38
-S: 55909006    E: 17    I: 13    R: 173041    IW: 0   TOTAL POPULATION 56082060
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 170 30
-S: 55909006    E: 12    I: 12    R: 173047    IW: 0   TOTAL POPULATION 56082065
+ 96 1
+S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 171 24
-S: 55909006    E: 10    I: 8    R: 173053    IW: 0   TOTAL POPULATION 56082067
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 172 18
-S: 55909006    E: 9    I: 4    R: 173058    IW: 0   TOTAL POPULATION 56082068
+ 97 1
+S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 173 13
-S: 55909006    E: 8    I: 3    R: 173060    IW: 0   TOTAL POPULATION 56082069
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 174 11
-S: 55909006    E: 6    I: 3    R: 173062    IW: 0   TOTAL POPULATION 56082071
+ 98 1
+S: 56081803    E: 0    I: 1    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 175 9
-S: 55909006    E: 6    I: 2    R: 173063    IW: 0   TOTAL POPULATION 56082071
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 176 8
-S: 55909006    E: 5    I: 1    R: 173065    IW: 0   TOTAL POPULATION 56082072
+ 99 1
+S: 56081803    E: 0    I: 1    R: 273    IW: 0   TOTAL POPULATION 56082077
 
- 177 6
-S: 55909006    E: 5    I: 1    R: 173065    IW: 0   TOTAL POPULATION 56082072
+LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
 
- 178 6
-S: 55909006    E: 5    I: 0    R: 173066    IW: 0   TOTAL POPULATION 56082072
+ 100 1
+S: 56081802    E: 0    I: 0    R: 275    IW: 1   TOTAL POPULATION 56082077
+Infection died ... Ending on day 101
 
- 179 5
-S: 55909006    E: 5    I: 0    R: 173066    IW: 0   TOTAL POPULATION 56082072
-
- 180 5
-S: 55909006    E: 4    I: 1    R: 173066    IW: 0   TOTAL POPULATION 56082073
-
- 181 5
-S: 55909006    E: 3    I: 2    R: 173066    IW: 0   TOTAL POPULATION 56082074
-
- 182 5
-S: 55909006    E: 3    I: 2    R: 173066    IW: 0   TOTAL POPULATION 56082074
-
- 183 5
-S: 55909006    E: 2    I: 1    R: 173068    IW: 0   TOTAL POPULATION 56082075
-
- 184 3
-S: 55909006    E: 2    I: 1    R: 173068    IW: 0   TOTAL POPULATION 56082075
-
- 185 3
-S: 55909006    E: 2    I: 0    R: 173069    IW: 0   TOTAL POPULATION 56082075
-
- 186 2
-S: 55909006    E: 1    I: 1    R: 173069    IW: 0   TOTAL POPULATION 56082076
-
- 187 2
-S: 55909006    E: 1    I: 1    R: 173069    IW: 0   TOTAL POPULATION 56082076
-
- 188 2
-S: 55909006    E: 1    I: 0    R: 173070    IW: 0   TOTAL POPULATION 56082076
-
- 189 1
-S: 55909006    E: 1    I: 0    R: 173070    IW: 0   TOTAL POPULATION 56082076
-
- 190 1
-S: 55909006    E: 1    I: 0    R: 173070    IW: 0   TOTAL POPULATION 56082076
-
- 191 1
-S: 55909006    E: 0    I: 1    R: 173070    IW: 0   TOTAL POPULATION 56082077
-
- 192 1
-S: 55909006    E: 0    I: 1    R: 173070    IW: 0   TOTAL POPULATION 56082077
-
- 193 1
-S: 55909006    E: 0    I: 0    R: 173071    IW: 0   TOTAL POPULATION 56082077
-Infection died ... Ending at time 194
+Writing a summary of all results into the
+csv file /Users/chris/GitHub/MetaWards/output/results.csv.bz2.
+You can use this to quickly look at statistics across
+all runs using e.g. R or pandas
 End of the run
-Model output:  S: 55909006    E: 0    I: 0    R: 173071    IW: 0   TOTAL POPULATION 56082077
 
-python build/lib.macosx-10.9-x86_64-3.7/metawards/app/run.py --seed 15324      52.58s user 0.27s system 99% cpu 52.963 total
+metawards --seed 15324 --nthreads 1 -a ExtraSeedsBrighton.dat -i  -l 0   >   10.31s user 0.28s system 98% cpu 10.708 total
+

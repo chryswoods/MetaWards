@@ -1,0 +1,24 @@
+# Number of lockdown stages
+.nstages = 2
+
+# Day when the first stage of lockdown starts
+.start_day = 23
+
+# Initial estimated R0
+.R0 = 2.8
+
+##
+## Stage 1
+##
+.duration[0] = 30    # duration in days
+.scale_uv[0] = 0.2   # this will be divided by R0
+.cutoff[0]   = 1.0   # distances in km
+
+##
+## Stage 2 (initially a repeat of stage 1,
+##          but this will be changed during
+##          a parameter scan)
+##
+.duration[1] = 180   # take us beyond what will be modelled
+.scale_uv[1] = 0.2   # this will be divided by R0
+.cutoff[1]   = 1.0   # distances in km

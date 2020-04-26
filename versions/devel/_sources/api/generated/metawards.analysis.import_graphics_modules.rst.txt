@@ -1,0 +1,6 @@
+metawards.analysis.import\_graphics\_modules
+============================================
+
+.. currentmodule:: metawards.analysis
+
+.. autofunction:: import_graphics_modules

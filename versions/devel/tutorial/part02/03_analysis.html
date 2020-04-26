@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Analysing the output &mdash; MetaWards Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Running on a cluster" href="04_cluster.html" />
+    <link rel="prev" title="Adjustable Variables" href="02_adjustable.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_part01.html">Part 1 - Modelling outbreaks</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_part02.html">Part 2 - Refining the model</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="01_disease.html">Refining the disease model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02_adjustable.html">Adjustable Variables</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Analysing the output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#finding-peaks">Finding peaks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plotting-the-output">Plotting the output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jupyter-notebook">Jupyter notebook</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="04_cluster.html">Running on a cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05_refining.html">Refining the model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part03.html">Part 3 - Customising the outbreak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorial.html">Tutorial</a> &raquo;</li>
+        
+          <li><a href="../index_part02.html">Part 2 - Refining the model</a> &raquo;</li>
+        
+      <li>Analysing the output</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="04_cluster.html" class="btn btn-neutral float-right" title="Running on a cluster" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02_adjustable.html" class="btn btn-neutral float-left" title="Adjustable Variables" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="analysing-the-output">
+<h1>Analysing the output<a class="headerlink" href="#analysing-the-output" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">results.csv.bz2</span></code> file contains all of the population trajectories
+from the nine model runs. You can explore this using Python pandas, R,
+or Excel <a class="reference internal" href="../part01/02_repeating.html"><span class="doc">as you did before</span></a>. Using
+ipython or Jupyter notebooks with pandas, we can load up the file;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;output/results.csv.bz2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">     fingerprint  repeat  beta[2]  too_ill_to_move[2]  day  ...         S  E  I         R  IW</span>
+<span class="go">0            3_0       1      0.3                 0.0    0  ...  56082077  0  0         0   0</span>
+<span class="go">1            3_0       1      0.3                 0.0    1  ...  56082077  0  0         0   0</span>
+<span class="go">2            3_0       1      0.3                 0.0    2  ...  56082072  5  0         0   0</span>
+<span class="go">3            3_0       1      0.3                 0.0    3  ...  56082072  0  5         0   0</span>
+<span class="go">4            3_0       1      0.3                 0.0    4  ...  56082071  0  5         1   1</span>
+<span class="gp">... </span>         <span class="o">...</span>     <span class="o">...</span>      <span class="o">...</span>                 <span class="o">...</span>  <span class="o">...</span>  <span class="o">...</span>       <span class="o">...</span> <span class="o">..</span> <span class="o">..</span>       <span class="o">...</span>  <span class="o">..</span>
+<span class="go">1764         5_5       1      0.5                 0.5  172  ...   6304109  0  5  49777963   0</span>
+<span class="go">1765         5_5       1      0.5                 0.5  173  ...   6304109  0  4  49777964   0</span>
+<span class="go">1766         5_5       1      0.5                 0.5  174  ...   6304109  0  3  49777965   0</span>
+<span class="go">1767         5_5       1      0.5                 0.5  175  ...   6304109  0  1  49777967   0</span>
+<span class="go">1768         5_5       1      0.5                 0.5  176  ...   6304109  0  0  49777968   0</span>
+
+<span class="go">[1769 rows x 11 columns]</span>
+</pre></div>
+</div>
+<p>This is very similar to before, except now we have extra columns giving
+the values of the variables that are being adjusted (columns
+<code class="docutils literal notranslate"><span class="pre">beta[2]</span></code> and <code class="docutils literal notranslate"><span class="pre">too_ill_to_move[2]</span></code>. We also now have a use for the
+<code class="docutils literal notranslate"><span class="pre">fingerprint</span></code> column, which contains a unique identifier for each
+pair of adjustable variables.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The fingerprint is constructed by removing the leading <code class="docutils literal notranslate"><span class="pre">0.</span></code> from
+the value of the adjustable variable, and the joining the values
+together using underscores. Thus <code class="docutils literal notranslate"><span class="pre">0.3</span>&#160; <span class="pre">0.0</span></code> becomes <code class="docutils literal notranslate"><span class="pre">3_0</span></code>,
+while <code class="docutils literal notranslate"><span class="pre">0.5</span> <span class="pre">0.5</span></code> becomes <code class="docutils literal notranslate"><span class="pre">5_5</span></code>.</p>
+</div>
+<div class="section" id="finding-peaks">
+<h2>Finding peaks<a class="headerlink" href="#finding-peaks" title="Permalink to this headline">¶</a></h2>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">.groupby</span></code> to group the results with the same fingerprint
+together. Then the <code class="docutils literal notranslate"><span class="pre">.max</span></code> function can be used to show the maximum
+values of selected columns from each group, e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">)[[</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;IW&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="go">              day        E         I    IW         R</span>
+<span class="go"> fingerprint</span>
+<span class="go"> 3_0          204  1767303   8665472  8588  48105748</span>
+<span class="go"> 3_25         205  1908160   9296754  8588  48076343</span>
+<span class="go"> 3_5          215  1844377   9024418  8588  48036902</span>
+<span class="go"> 4_0          192  1947245   9532789  8588  49042717</span>
+<span class="go"> 4_25         210  1965166   9614400  8588  49009034</span>
+<span class="go"> 4_5          200  2095342  10179621  8588  48975523</span>
+<span class="go"> 5_0          175  2207896  10714530  8588  49857969</span>
+<span class="go"> 5_25         183  2120481  10326984  8588  49821966</span>
+<span class="go"> 5_5          176  2117730  10330952  8588  49777968</span>
+</pre></div>
+</div>
+<p>From this, we can see that higher peaks occured for higher values
+of <strong>beta</strong>, which is expected. However, different values of
+<strong>too_ill_to_move</strong> had little impact on the peaks.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not over-interpret the results of single runs, such as the above.
+There is a lot of random
+error in these calculations and multiple <em>model runs</em> must be
+averaged over to gain a good understanding.</p>
+</div>
+</div>
+<div class="section" id="plotting-the-output">
+<h2>Plotting the output<a class="headerlink" href="#plotting-the-output" title="Permalink to this headline">¶</a></h2>
+<p>There are lots of plots you would likely want to draw, so it is recommended
+that you use a tool such as R, Pandas or Excel to create the plots that
+will let you explore the data in full. For a quick set of plots, you
+can again use <code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code> to generate some overview plots. To
+do this type;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards-plot -i output/results.csv.bz2 --format jpg --dpi <span class="m">150</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We have used the ‘jpg’ image format here are we want to create animations.
+You can choose from many different formats, e.g. ‘pdf’ for publication
+quality graphs, ‘png’ etc. Use the <code class="docutils literal notranslate"><span class="pre">--dpi</span></code> option to set the
+resolution when creating bitmap (png, jpg) images.</p>
+</div>
+<p>As there are multiple fingerprints, this will produce multiple overview
+graphs (one overview per fingerprint, and if you have run multiple
+repeats, then one average per fingerprint too).</p>
+<p>The fingerprint value is included in the graph name, and they will
+all be plotted on the same axes. This means that they could be joined
+together into an animation. As well as plotting, <code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code> has
+an animation mode that can be used to join images together. To run this,
+use;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards-plot --animate output/overview*.jpg
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can only animate image files (e.g. jpg, png). You can’t animate
+pdfs (yet - although
+<a class="reference external" href="https://github.com/metawards/MetaWards/pulls">pull requests welcome</a>)</p>
+</div>
+<p>Here is the animation.</p>
+<img alt="Animated overview graphs from the parameter sweep" src="../../_images/tutorial_2_3.gif" />
+</div>
+<div class="section" id="jupyter-notebook">
+<h2>Jupyter notebook<a class="headerlink" href="#jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>In addition, to the <code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code> command, we also have a
+<a class="reference download internal" download="" href="../../_downloads/9c074a8ab169b5e0fed845f059d0718a/2_3_analysis.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">notebook</span></code></a>
+which you can look at which breaks down exactly how <code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code>
+uses pandas and matplotlib to render multi-fingerprint graphs.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="04_cluster.html" class="btn btn-neutral float-right" title="Running on a cluster" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02_adjustable.html" class="btn btn-neutral float-left" title="Adjustable Variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Apr 26, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

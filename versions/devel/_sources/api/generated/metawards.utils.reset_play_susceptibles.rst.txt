@@ -1,0 +1,6 @@
+metawards.utils.reset\_play\_susceptibles
+=========================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: reset_play_susceptibles

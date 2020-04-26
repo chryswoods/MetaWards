@@ -1,0 +1,6 @@
+metawards.utils.ran\_int
+========================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: ran_int

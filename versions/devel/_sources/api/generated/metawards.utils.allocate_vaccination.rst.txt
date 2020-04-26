@@ -1,0 +1,6 @@
+metawards.utils.allocate\_vaccination
+=====================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: allocate_vaccination

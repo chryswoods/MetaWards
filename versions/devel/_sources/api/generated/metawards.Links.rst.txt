@@ -1,0 +1,25 @@
+metawards.Links
+===============
+
+.. currentmodule:: metawards
+
+.. autoclass:: Links
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Links.assert_not_null
+      ~Links.assert_valid_index
+      ~Links.is_null
+      ~Links.resize
+   
+   

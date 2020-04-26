@@ -1,0 +1,6 @@
+metawards.utils.how\_many\_vaccinated
+=====================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: how_many_vaccinated

@@ -1,0 +1,6 @@
+metawards.iterators.advance\_foi\_omp
+=====================================
+
+.. currentmodule:: metawards.iterators
+
+.. autofunction:: advance_foi_omp

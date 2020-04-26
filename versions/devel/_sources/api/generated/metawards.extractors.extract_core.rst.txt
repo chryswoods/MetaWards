@@ -1,0 +1,6 @@
+metawards.extractors.extract\_core
+==================================
+
+.. currentmodule:: metawards.extractors
+
+.. autofunction:: extract_core

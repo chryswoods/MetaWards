@@ -1,0 +1,6 @@
+metawards.app.parse\_args
+=========================
+
+.. currentmodule:: metawards.app
+
+.. autofunction:: parse_args

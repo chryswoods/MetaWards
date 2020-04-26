@@ -1,0 +1,6 @@
+metawards.utils.read\_done\_file
+================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: read_done_file

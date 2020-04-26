@@ -1,0 +1,38 @@
+metawards.Population
+====================
+
+.. currentmodule:: metawards
+
+.. autoclass:: Population
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Population.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Population.date
+      ~Population.day
+      ~Population.infecteds
+      ~Population.initial
+      ~Population.latent
+      ~Population.n_inf_wards
+      ~Population.population
+      ~Population.recovereds
+      ~Population.scale_uv
+      ~Population.susceptibles
+      ~Population.total
+   
+   

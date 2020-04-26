@@ -1,0 +1,25 @@
+metawards.VariableSets
+======================
+
+.. currentmodule:: metawards
+
+.. autoclass:: VariableSets
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~VariableSets.__init__
+      ~VariableSets.append
+      ~VariableSets.read
+      ~VariableSets.repeat
+   
+   
+
+   
+   
+   

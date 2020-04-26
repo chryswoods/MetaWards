@@ -1,0 +1,6 @@
+metawards.iterators.advance\_imports
+====================================
+
+.. currentmodule:: metawards.iterators
+
+.. autofunction:: advance_imports

@@ -1,0 +1,6 @@
+metawards.utils.vaccinate\_same\_id
+===================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: vaccinate_same_id

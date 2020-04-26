@@ -1,0 +1,6 @@
+metawards.iterators.iterate\_default
+====================================
+
+.. currentmodule:: metawards.iterators
+
+.. autofunction:: iterate_default

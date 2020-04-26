@@ -1,0 +1,563 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>metawards._network &mdash; MetaWards Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../metawards.html">metawards</a> &raquo;</li>
+        
+      <li>metawards._network</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for metawards._network</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> <span class="k">as</span> <span class="n">_dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span> <span class="k">as</span> <span class="n">_List</span>
+
+<span class="kn">from</span> <span class="nn">._parameters</span> <span class="kn">import</span> <span class="n">Parameters</span>
+<span class="kn">from</span> <span class="nn">._nodes</span> <span class="kn">import</span> <span class="n">Nodes</span>
+<span class="kn">from</span> <span class="nn">._links</span> <span class="kn">import</span> <span class="n">Links</span>
+<span class="kn">from</span> <span class="nn">._population</span> <span class="kn">import</span> <span class="n">Population</span>
+<span class="kn">from</span> <span class="nn">._outputfiles</span> <span class="kn">import</span> <span class="n">OutputFiles</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Network&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Network"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network">[docs]</a><span class="nd">@_dataclass</span>
+<span class="k">class</span> <span class="nc">Network</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;This class represents a network of wards. The network comprises</span>
+<span class="sd">       nodes (representing wards), connected with links which represent</span>
+<span class="sd">       work (predictable) links. There are also additional links for</span>
+<span class="sd">       play (unpredictable/random) and weekend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: The list of nodes (wards) in the network</span>
+    <span class="n">nodes</span><span class="p">:</span> <span class="n">Nodes</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The links between nodes (work)</span>
+    <span class="n">to_links</span><span class="p">:</span> <span class="n">Links</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The links between nodes (play)</span>
+    <span class="n">play</span><span class="p">:</span> <span class="n">Links</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1">#: The links between nodes (weekend)</span>
+    <span class="n">weekend</span><span class="p">:</span> <span class="n">Links</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: The number of nodes in the network</span>
+    <span class="n">nnodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#: The number of links in the network</span>
+    <span class="n">nlinks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#: The number of play links in the network</span>
+    <span class="n">plinks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1">#: The maximum allowable number of nodes in the network</span>
+    <span class="n">max_nodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16384</span>
+    <span class="c1">#: The maximum allowable number of links in the network</span>
+    <span class="n">max_links</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4194304</span>
+
+    <span class="c1">#: To seed provides additional seeding information</span>
+    <span class="n">to_seed</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: The parameters used to generate this network</span>
+    <span class="n">params</span><span class="p">:</span> <span class="n">Parameters</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Network.build"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.build">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">params</span><span class="p">:</span> <span class="n">Parameters</span><span class="p">,</span>
+              <span class="n">calculate_distances</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+              <span class="n">build_function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">distance_function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">max_nodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16384</span><span class="p">,</span>
+              <span class="n">max_links</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4194304</span><span class="p">,</span>
+              <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="n">profile</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+              <span class="n">profiler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Builds and returns a new Network that is described by the</span>
+<span class="sd">           passed parameters. If &#39;calculate_distances&#39; is True, then</span>
+<span class="sd">           this will also read in the ward positions and add</span>
+<span class="sd">           the distances between the links.</span>
+
+<span class="sd">           Optionally you can supply your own function to build the network,</span>
+<span class="sd">           by supplying &#39;build_function&#39;. By default, this is</span>
+<span class="sd">           metawards.utils.build_wards_network.</span>
+
+<span class="sd">           Optionally you can supply your own function to read and</span>
+<span class="sd">           calculate the distances by supplying &#39;build_function&#39;.</span>
+<span class="sd">           By default this is metawards.add_wards_network_distance</span>
+
+<span class="sd">           The network is built in allocated memory, so you need to specify</span>
+<span class="sd">           the maximum possible number of nodes and links. The memory buffers</span>
+<span class="sd">           will be shrunk back after building.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">profiler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">Profiler</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">Profiler</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">profiler</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">NullProfiler</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">NullProfiler</span><span class="p">()</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;Network.build&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">build_function</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">build_wards_network</span>
+            <span class="n">build_function</span> <span class="o">=</span> <span class="n">build_wards_network</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;build_function&quot;</span><span class="p">)</span>
+        <span class="n">network</span> <span class="o">=</span> <span class="n">build_function</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                                 <span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
+                                 <span class="n">max_nodes</span><span class="o">=</span><span class="n">max_nodes</span><span class="p">,</span>
+                                 <span class="n">max_links</span><span class="o">=</span><span class="n">max_links</span><span class="p">,</span>
+                                 <span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="c1"># sanity-check that the network makes sense - there are specific</span>
+        <span class="c1"># requirements for the data layout</span>
+        <span class="n">network</span><span class="o">.</span><span class="n">assert_sane</span><span class="p">(</span><span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">calculate_distances</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;add_distances&quot;</span><span class="p">)</span>
+            <span class="n">network</span><span class="o">.</span><span class="n">add_distances</span><span class="p">(</span><span class="n">distance_function</span><span class="o">=</span><span class="n">distance_function</span><span class="p">,</span>
+                                  <span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">input_files</span><span class="o">.</span><span class="n">seed</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">read_done_file</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;read_done_file&quot;</span><span class="p">)</span>
+            <span class="n">to_seed</span> <span class="o">=</span> <span class="n">read_done_file</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">input_files</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+            <span class="n">nseeds</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_seed</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="n">to_seed</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of seeds equals </span><span class="si">{</span><span class="n">nseeds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">network</span><span class="o">.</span><span class="n">to_seed</span> <span class="o">=</span> <span class="n">to_seed</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="c1"># By default, we initialise the network ready for a run,</span>
+        <span class="c1"># namely make sure everything is reset and the population</span>
+        <span class="c1"># is at work</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reset everything...&quot;</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;reset_everything&quot;</span><span class="p">)</span>
+        <span class="n">network</span><span class="o">.</span><span class="n">reset_everything</span><span class="p">(</span><span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rescale play matrix...&quot;</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;rescale_play_matrix&quot;</span><span class="p">)</span>
+        <span class="n">network</span><span class="o">.</span><span class="n">rescale_play_matrix</span><span class="p">(</span><span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Move population from play to work...&quot;</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;move_from_play_to_work&quot;</span><span class="p">)</span>
+        <span class="n">network</span><span class="o">.</span><span class="n">move_from_play_to_work</span><span class="p">(</span><span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">is_null</span><span class="p">():</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">network</span></div>
+
+<div class="viewcode-block" id="Network.assert_sane"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.assert_sane">[docs]</a>    <span class="k">def</span> <span class="nf">assert_sane</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profiler</span><span class="p">:</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assert that this network is sane. This checks that the network</span>
+<span class="sd">           is laid out correctly in memory and that it doesn&#39;t have</span>
+<span class="sd">           anything unexpected. Checking here will prevent us from having</span>
+<span class="sd">           to check every time the network is accessed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">assert_sane_network</span>
+        <span class="k">if</span> <span class="n">profiler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.profiler</span> <span class="kn">import</span> <span class="n">NullProfiler</span>
+            <span class="n">profiler</span> <span class="o">=</span> <span class="n">NullProfiler</span><span class="p">()</span>
+
+        <span class="n">assert_sane_network</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">profiler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Network.add_distances"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.add_distances">[docs]</a>    <span class="k">def</span> <span class="nf">add_distances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance_function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                      <span class="n">profiler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read in the positions of all of the nodes (wards) and calculate</span>
+<span class="sd">           the distances of the links.</span>
+
+<span class="sd">           Optionally you can specify the function to use to</span>
+<span class="sd">           read the positions and calculate the distances.</span>
+<span class="sd">           By default this is mw.utils.add_wards_network_distance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">distance_function</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">add_wards_network_distance</span>
+            <span class="n">distance_function</span> <span class="o">=</span> <span class="n">add_wards_network_distance</span>
+
+        <span class="n">distance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">)</span>
+
+        <span class="c1"># now need to update the dynamic distance cutoff based on the</span>
+        <span class="c1"># maximum distance between nodes</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Get min/max distances...&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">_mindist</span><span class="p">,</span> <span class="n">maxdist</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_min_max_distances</span><span class="p">(</span><span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">dyn_dist_cutoff</span> <span class="o">=</span> <span class="n">maxdist</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Network.initialise_infections"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.initialise_infections">[docs]</a>    <span class="k">def</span> <span class="nf">initialise_infections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialise and return the space that will be used</span>
+<span class="sd">           to track infections</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">._infections</span> <span class="kn">import</span> <span class="n">Infections</span>
+        <span class="k">return</span> <span class="n">Infections</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Network.get_min_max_distances"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.get_min_max_distances">[docs]</a>    <span class="k">def</span> <span class="nf">get_min_max_distances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                              <span class="n">profiler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate and return the minimum and maximum distances</span>
+<span class="sd">           between nodes in the network</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_max_distances</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_min_max_distances</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_min_max_distances</span> <span class="o">=</span> <span class="n">get_min_max_distances</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                                                        <span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_max_distances</span></div>
+
+<div class="viewcode-block" id="Network.reset_everything"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.reset_everything">[docs]</a>    <span class="k">def</span> <span class="nf">reset_everything</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                         <span class="n">profiler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resets the network ready for a new run of the model&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">reset_everything</span>
+        <span class="n">reset_everything</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">profiler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Network.update"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Parameters</span><span class="p">,</span>
+               <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update this network with a new set of parameters.</span>
+<span class="sd">           This is used to update the parameters for the network</span>
+<span class="sd">           for a new run. The network will be reset</span>
+<span class="sd">           and ready for a new run.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">Profiler</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">Profiler</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">NullProfiler</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">NullProfiler</span><span class="p">()</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;Network.update&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;reset_everything&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_everything</span><span class="p">(</span><span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;rescale_play_matrix&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rescale_play_matrix</span><span class="p">(</span><span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;move_from_play_to_work&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move_from_play_to_work</span><span class="p">(</span><span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Network.rescale_play_matrix"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.rescale_play_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">rescale_play_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                            <span class="n">profiler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Rescale the play matrix&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">rescale_play_matrix</span>
+        <span class="n">rescale_play_matrix</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="n">profiler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Network.move_from_play_to_work"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.move_from_play_to_work">[docs]</a>    <span class="k">def</span> <span class="nf">move_from_play_to_work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                               <span class="n">profiler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move the population from play to work&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">move_population_from_play_to_work</span>
+        <span class="n">move_population_from_play_to_work</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span>
+                                          <span class="n">profiler</span><span class="o">=</span><span class="n">profiler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Network.run"><a class="viewcode-back" href="../../api/generated/metawards.Network.html#metawards.Network.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">population</span><span class="p">:</span> <span class="n">Population</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="p">:</span> <span class="n">OutputFiles</span><span class="p">,</span>
+            <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">nsteps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">profile</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">s</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">iterator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">extractor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">profiler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the model simulation for the passed population.</span>
+<span class="sd">           The random number seed is given in &#39;seed&#39;. If this</span>
+<span class="sd">           is None, then a random seed is used.</span>
+
+<span class="sd">           All output files are written to &#39;output_dir&#39;</span>
+
+<span class="sd">           The simulation will continue until the infection has</span>
+<span class="sd">           died out or until &#39;nsteps&#39; has passed (keep as &#39;None&#39;</span>
+<span class="sd">           to prevent exiting early).</span>
+
+<span class="sd">           s is used to select the &#39;to_seed&#39; entry to seed</span>
+<span class="sd">           the nodes</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ----------</span>
+<span class="sd">           population: Population</span>
+<span class="sd">             The initial population at the start of the model outbreak.</span>
+<span class="sd">             This is also used to set start date and day of the model</span>
+<span class="sd">             outbreak</span>
+<span class="sd">           output_dir: OutputFiles</span>
+<span class="sd">             The directory to write all of the output into</span>
+<span class="sd">           seed: int</span>
+<span class="sd">             The random number seed used for this model run. If this is</span>
+<span class="sd">             None then a very random random number seed will be used</span>
+<span class="sd">           nsteps: int</span>
+<span class="sd">             The maximum number of steps to run in the outbreak. If None</span>
+<span class="sd">             then run until the outbreak has finished</span>
+<span class="sd">           profile: bool</span>
+<span class="sd">             Whether or not to profile the model run and print out the</span>
+<span class="sd">             results</span>
+<span class="sd">           profiler: Profiler</span>
+<span class="sd">             The profiler to use - a new one is created if one isn&#39;t passed</span>
+<span class="sd">           s: int</span>
+<span class="sd">             Index of the seeding parameter to use</span>
+<span class="sd">           nthreads: int</span>
+<span class="sd">             Number of threads over which to parallelise this model run</span>
+<span class="sd">           iterator: function</span>
+<span class="sd">             Function that is called at each iteration to get the functions</span>
+<span class="sd">             that are used to advance the model</span>
+<span class="sd">           extractor: function</span>
+<span class="sd">             Function that is called at each iteration to get the functions</span>
+<span class="sd">             that are used to extract data for analysis or writing to files</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create the random number generator</span>
+        <span class="kn">from</span> <span class="nn">.utils._ran_binomial</span> <span class="kn">import</span> <span class="n">seed_ran_binomial</span><span class="p">,</span> <span class="n">ran_binomial</span>
+
+        <span class="n">rng</span> <span class="o">=</span> <span class="n">seed_ran_binomial</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+
+        <span class="c1"># Print the first five random numbers so that we can</span>
+        <span class="c1"># compare to other codes/runs, and be sure that we are</span>
+        <span class="c1"># generating the same random sequence</span>
+        <span class="n">randnums</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="n">randnums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ran_binomial</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First five random numbers equal </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">randnums</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">randnums</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">nthreads</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.utils._parallel</span> <span class="kn">import</span> <span class="n">get_available_num_threads</span>
+            <span class="n">nthreads</span> <span class="o">=</span> <span class="n">get_available_num_threads</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of threads used equals </span><span class="si">{</span><span class="n">nthreads</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="kn">from</span> <span class="nn">.utils._parallel</span> <span class="kn">import</span> <span class="n">create_thread_generators</span>
+        <span class="n">rngs</span> <span class="o">=</span> <span class="n">create_thread_generators</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">nthreads</span><span class="p">)</span>
+
+        <span class="c1"># Create space to hold the results of the simulation</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initialise infections...&quot;</span><span class="p">)</span>
+        <span class="n">infections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialise_infections</span><span class="p">()</span>
+
+        <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">run_model</span>
+        <span class="n">population</span> <span class="o">=</span> <span class="n">run_model</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">,</span>
+                               <span class="n">infections</span><span class="o">=</span><span class="n">infections</span><span class="p">,</span>
+                               <span class="n">rngs</span><span class="o">=</span><span class="n">rngs</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                               <span class="n">nsteps</span><span class="o">=</span><span class="n">nsteps</span><span class="p">,</span>
+                               <span class="n">profile</span><span class="o">=</span><span class="n">profile</span><span class="p">,</span> <span class="n">nthreads</span><span class="o">=</span><span class="n">nthreads</span><span class="p">,</span>
+                               <span class="n">profiler</span><span class="o">=</span><span class="n">profiler</span><span class="p">,</span>
+                               <span class="n">iterator</span><span class="o">=</span><span class="n">iterator</span><span class="p">,</span> <span class="n">extractor</span><span class="o">=</span><span class="n">extractor</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">population</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Apr 26, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

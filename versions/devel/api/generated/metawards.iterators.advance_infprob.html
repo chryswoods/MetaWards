@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>metawards.iterators.advance_infprob &mdash; MetaWards Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="metawards.iterators.advance_infprob_omp" href="metawards.iterators.advance_infprob_omp.html" />
+    <link rel="prev" title="metawards.iterators.advance_imports_omp" href="metawards.iterators.advance_imports_omp.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_app.html">MetaWards.app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards.html">MetaWards</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_MetaWards_iterators.html">MetaWards.iterators</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index_api_MetaWards_iterators.html">MetaWards.iterators API Detail</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index_api_MetaWards_iterators.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_analysis.html">MetaWards.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_utils.html">MetaWards.utils</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Documentation</a> &raquo;</li>
+        
+          <li><a href="../index_MetaWards_iterators.html">MetaWards.iterators</a> &raquo;</li>
+        
+          <li><a href="../index_api_MetaWards_iterators.html">MetaWards.iterators API Detail</a> &raquo;</li>
+        
+      <li>metawards.iterators.advance_infprob</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="metawards.iterators.advance_infprob_omp.html" class="btn btn-neutral float-right" title="metawards.iterators.advance_infprob_omp" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metawards.iterators.advance_imports_omp.html" class="btn btn-neutral float-left" title="metawards.iterators.advance_imports_omp" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="metawards-iterators-advance-infprob">
+<h1>metawards.iterators.advance_infprob<a class="headerlink" href="#metawards-iterators-advance-infprob" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="metawards.iterators.advance_infprob">
+<code class="descclassname">metawards.iterators.</code><code class="descname">advance_infprob</code><span class="sig-paren">(</span><em>nthreads: int</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#metawards.iterators.advance_infprob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Advance the calculation of the day and night infection probabilities
+for each ward. You need to call this function after you have
+changed them, and before you use them in, e.g. advance_fixed
+and advance_play. This is the parallel version of this function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>network</strong> (<a class="reference internal" href="metawards.Network.html#metawards.Network" title="metawards.Network"><em>Network</em></a>) – The network being modelled</li>
+<li><strong>nthreads</strong> (<em>int</em>) – The number of threads over which to parallelise the calculation</li>
+<li><strong>profiler</strong> (<a class="reference internal" href="metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><em>Profiler</em></a>) – The profiler used to profile this calculation</li>
+<li><strong>scale_rate</strong> (<em>float</em>) – Optional parameter to scale the calculated infection rates.
+This can very bluntly model the impact of broad measures
+to reduce the infection rate</li>
+<li><strong>kwargs</strong> – Extra arguments that may be used by other advancers, but which
+are not used by advance_infprob</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metawards.iterators.advance_infprob_omp.html" class="btn btn-neutral float-right" title="metawards.iterators.advance_infprob_omp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metawards.iterators.advance_imports_omp.html" class="btn btn-neutral float-left" title="metawards.iterators.advance_imports_omp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Apr 26, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

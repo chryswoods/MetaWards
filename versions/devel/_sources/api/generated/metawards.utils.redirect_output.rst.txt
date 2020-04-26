@@ -1,0 +1,6 @@
+metawards.utils.redirect\_output
+================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: redirect_output

@@ -1,0 +1,31 @@
+metawards.Infections
+====================
+
+.. currentmodule:: metawards
+
+.. autoclass:: Infections
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Infections.__init__
+      ~Infections.build
+      ~Infections.clear
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Infections.play
+      ~Infections.work
+   
+   

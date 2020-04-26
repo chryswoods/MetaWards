@@ -1,0 +1,6 @@
+metawards.utils.iterate
+=======================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: iterate

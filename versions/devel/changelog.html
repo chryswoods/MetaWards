@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Changelog &mdash; MetaWards Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Developer’s guide" href="development.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model_data.html">Model data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#april-24th-2020">0.9.0 - April 24th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#april-22nd-2020">0.8.5 - April 22nd 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#april-21st-2020">0.8.3 - April 21st 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">0.8.0 - April 21st 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#april-17th-2020">0.7.1 - April 17th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">0.7.0 - April 17th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#april-9th-2020">0.6.0 - April 9th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#april-8th-2020">0.5.0 - April 8th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#april-7th-2020">0.4.0 - April 7th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#april-5th-2020">0.3.1 - April 5th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">0.3.0 - April 5th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#march-31st-2020">0.2.0 - March 31st 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#march-29th-2020">0.1.0 - March 29th 2020</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#start-of-the-python-port-march-25th-2020">Start of the Python port - March 25th 2020</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Changelog</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+      
+        <a href="development.html" class="btn btn-neutral float-left" title="Developer’s guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="april-24th-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.8.4...0.9.0">0.9.0</a> - April 24th 2020<a class="headerlink" href="#april-24th-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Merged in latest changes from the C code. Now gives complete agreement,
+including via a custom iterator that repeats the lockdown model.</li>
+<li>Support x/y and lat/lon coordinates and distances. Now works properly
+with the 2011UK model data</li>
+<li>Added an example of a lockdown parameter set scan</li>
+</ul>
+</div>
+<div class="section" id="april-22nd-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.8.3...0.8.5">0.8.5</a> - April 22nd 2020<a class="headerlink" href="#april-22nd-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Small bugfixes to support the loading of the 2011UK model data</li>
+<li>Cleaned up the website and added the version combo box</li>
+</ul>
+</div>
+<div class="section" id="april-21st-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.8.0...0.8.3">0.8.3</a> - April 21st 2020<a class="headerlink" href="#april-21st-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fixing CI/CD so that I can build and deploy on a new tag (hopefully 0.8.2)</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.7.0...0.8.0">0.8.0</a> - April 21st 2020<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Automated github actions for building a versioned website plus automating
+building the packages.</li>
+<li>Switched default for UV parameter to 0.0, as this should not normally be 1.0</li>
+<li>Added custom user variables both for scanning and to act as inputs that
+may be used by custom advance and iterate functions. Detailed tutorial
+now shows how these can be used to model a lockdown.</li>
+<li>Improved speed of custom iterators</li>
+</ul>
+</div>
+<div class="section" id="april-17th-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.6.0...0.7.1">0.7.1</a> - April 17th 2020<a class="headerlink" href="#april-17th-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Small bugfixes to support all of the examples in part 3 of the tutorial</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.6.0...0.7.0">0.7.0</a> - April 17th 2020<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Lots of progress with the project website, including a detailed tutorial</li>
+<li>Support fully customisable disease models, and can adjust any disease
+parameter using a more flexible input file format</li>
+<li>Can record the date in a model run, plus set the starting day and date</li>
+<li>Broken up the iterate function into <a class="reference internal" href="api/index_api_MetaWards_iterators.html#module-metawards.iterators" title="metawards.iterators"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards.iterators</span></code></a>, and
+can now have the user create their own custom iterators. Tutorial on
+how to do this will appear soon.</li>
+<li>Broken up the extract_data function into <a class="reference internal" href="api/index_api_MetaWards_extractors.html#module-metawards.extractors" title="metawards.extractors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards.extractors</span></code></a>,
+and will soon enable a user to create their own. Tutorial on how
+to do this will appear soon.</li>
+<li>Added metawards-plot to create simple plots and animations. This is
+particularly useful when working through the tutorial.</li>
+<li>General code cleaning, documentation improvements and nice-to-haves
+that make the code easier to use.</li>
+</ul>
+</div>
+<div class="section" id="april-9th-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.5.0...0.6.0">0.6.0</a> - April 9th 2020<a class="headerlink" href="#april-9th-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Wrote an initial draft of the complete project website</li>
+<li>Fixed packaging problems that prevented installation of older packages
+on some systems</li>
+</ul>
+</div>
+<div class="section" id="april-8th-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.4.0...0.5.0">0.5.0</a> - April 8th 2020<a class="headerlink" href="#april-8th-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Support running multiple model runs in serial or in parallel</li>
+<li>Support aggregation and writing of model multiple model run outputs
+to the same directory, including to a single shared CSV data file.</li>
+<li>Support for parallel running via multiprocessing, mpi4py or scoop</li>
+</ul>
+</div>
+<div class="section" id="april-7th-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.3.1...0.4.0">0.4.0</a> - April 7th 2020<a class="headerlink" href="#april-7th-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Parallelisation of individual model runs using OpenMP</li>
+<li>Parallel code scales to large numbers of cores and can complete individual
+runs in 10-15 seconds.</li>
+</ul>
+</div>
+<div class="section" id="april-5th-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/0.3.0...0.3.1">0.3.1</a> - April 5th 2020<a class="headerlink" href="#april-5th-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Minor bug fixes in packaging and misplaced commits caused by move of
+repository</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/v0.2.0...0.3.0">0.3.0</a> - April 5th 2020<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Adding in a simple profiler to support optimisation of the code</li>
+<li>Replaced GSL random number generator with a more liberally licensed and
+easily bundled generator extracted from numpy.</li>
+<li>Switched code to the <a class="reference external" href="https://github.com/metawards">https://github.com/metawards</a> organisation</li>
+<li>Optimised more using cython and raw C for file reading</li>
+<li>Added automatic versioning of packages and files using versioneer</li>
+<li>Cleaned up the repository and added status badges</li>
+</ul>
+</div>
+<div class="section" id="march-31st-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/compare/v0.1.0...v0.2.0">0.2.0</a> - March 31st 2020<a class="headerlink" href="#march-31st-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Cythonizing the bottleneck code to bring the python code up to a comparable
+performance as the original C code.</li>
+<li>Added in packaging information and general repository and file cleaning.</li>
+</ul>
+</div>
+<div class="section" id="march-29th-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/releases/tag/v0.1.0">0.1.0</a> - March 29th 2020<a class="headerlink" href="#march-29th-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fully working Python port of the original C code that completely reproduces
+the results of the C code when given the same random number seed. However,
+it is <em>significantly</em> slower! Python port has promise, so worth exploring
+different options for speeding the code up.</li>
+</ul>
+</div>
+<div class="section" id="start-of-the-python-port-march-25th-2020">
+<h2><a class="reference external" href="https://github.com/metawards/MetaWards/commit/ef989ece450c40fe0ddb9f22e21693c90afb432e">Start of the Python port</a> - March 25th 2020<a class="headerlink" href="#start-of-the-python-port-march-25th-2020" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Imported code from <a class="reference external" href="https://github.com/ldanon/metawards">https://github.com/ldanon/metawards</a> and began thinking
+about what the code was and trying to understand it. Decided to write
+a port as I find that if I can translate something, then I can
+understand it.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="development.html" class="btn btn-neutral float-left" title="Developer’s guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Apr 26, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

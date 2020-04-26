@@ -1,0 +1,6 @@
+metawards.extractors.extractor\_needs\_setup
+============================================
+
+.. currentmodule:: metawards.extractors
+
+.. autofunction:: extractor_needs_setup

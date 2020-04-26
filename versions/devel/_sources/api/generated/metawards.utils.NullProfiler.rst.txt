@@ -1,0 +1,25 @@
+metawards.utils.NullProfiler
+============================
+
+.. currentmodule:: metawards.utils
+
+.. autoclass:: NullProfiler
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~NullProfiler.__init__
+      ~NullProfiler.is_null
+      ~NullProfiler.start
+      ~NullProfiler.stop
+   
+   
+
+   
+   
+   

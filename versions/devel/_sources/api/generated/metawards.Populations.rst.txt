@@ -1,0 +1,23 @@
+metawards.Populations
+=====================
+
+.. currentmodule:: metawards
+
+.. autoclass:: Populations
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Populations.__init__
+      ~Populations.append
+   
+   
+
+   
+   
+   

@@ -1,0 +1,6 @@
+metawards.iterators.iterate\_weekday
+====================================
+
+.. currentmodule:: metawards.iterators
+
+.. autofunction:: iterate_weekday

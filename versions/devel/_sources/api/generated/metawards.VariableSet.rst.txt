@@ -1,0 +1,32 @@
+metawards.VariableSet
+=====================
+
+.. currentmodule:: metawards
+
+.. autoclass:: VariableSet
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~VariableSet.__init__
+      ~VariableSet.adjust
+      ~VariableSet.adjustable_help
+      ~VariableSet.extract_values
+      ~VariableSet.fingerprint
+      ~VariableSet.make_compatible_with
+      ~VariableSet.read
+      ~VariableSet.repeat_index
+      ~VariableSet.variable_names
+      ~VariableSet.variable_values
+      ~VariableSet.variables
+   
+   
+
+   
+   
+   

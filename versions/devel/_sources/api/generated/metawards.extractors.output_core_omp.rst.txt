@@ -1,0 +1,6 @@
+metawards.extractors.output\_core\_omp
+======================================
+
+.. currentmodule:: metawards.extractors
+
+.. autofunction:: output_core_omp

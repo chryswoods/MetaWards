@@ -1,0 +1,6 @@
+metawards.iterators.iterator\_needs\_setup
+==========================================
+
+.. currentmodule:: metawards.iterators
+
+.. autofunction:: iterator_needs_setup

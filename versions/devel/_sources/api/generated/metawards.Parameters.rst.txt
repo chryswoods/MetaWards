@@ -1,0 +1,54 @@
+metawards.Parameters
+====================
+
+.. currentmodule:: metawards
+
+.. autoclass:: Parameters
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Parameters.__init__
+      ~Parameters.add_seeds
+      ~Parameters.get_repository
+      ~Parameters.load
+      ~Parameters.read_variables
+      ~Parameters.set_disease
+      ~Parameters.set_input_files
+      ~Parameters.set_variables
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Parameters.UV
+      ~Parameters.additional_seeds
+      ~Parameters.daily_imports
+      ~Parameters.daily_ward_vaccination_capacity
+      ~Parameters.data_dist_cutoff
+      ~Parameters.disease_params
+      ~Parameters.dyn_dist_cutoff
+      ~Parameters.dyn_play_at_home
+      ~Parameters.global_detection_thresh
+      ~Parameters.initial_inf
+      ~Parameters.input_files
+      ~Parameters.length_day
+      ~Parameters.local_vaccination_thresh
+      ~Parameters.neighbour_weight_threshold
+      ~Parameters.play_to_work
+      ~Parameters.plength_day
+      ~Parameters.static_play_at_home
+      ~Parameters.user_params
+      ~Parameters.uv_filename
+      ~Parameters.work_to_play
+   
+   

@@ -1,0 +1,6 @@
+metawards.utils.initialise\_infections
+======================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: initialise_infections

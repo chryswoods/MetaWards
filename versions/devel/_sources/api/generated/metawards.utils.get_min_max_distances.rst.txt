@@ -1,0 +1,6 @@
+metawards.utils.get\_min\_max\_distances
+========================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: get_min_max_distances

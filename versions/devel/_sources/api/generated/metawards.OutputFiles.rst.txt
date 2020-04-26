@@ -1,0 +1,33 @@
+metawards.OutputFiles
+=====================
+
+.. currentmodule:: metawards
+
+.. autoclass:: OutputFiles
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~OutputFiles.__init__
+      ~OutputFiles.auto_bzip
+      ~OutputFiles.close
+      ~OutputFiles.flush
+      ~OutputFiles.get_filename
+      ~OutputFiles.get_path
+      ~OutputFiles.is_closed
+      ~OutputFiles.is_open
+      ~OutputFiles.open
+      ~OutputFiles.open_subdir
+      ~OutputFiles.output_dir
+      ~OutputFiles.remove
+   
+   
+
+   
+   
+   

@@ -1,0 +1,6 @@
+metawards.iterators.setup\_seed\_wards
+======================================
+
+.. currentmodule:: metawards.iterators
+
+.. autofunction:: setup_seed_wards

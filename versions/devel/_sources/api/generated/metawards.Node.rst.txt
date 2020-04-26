@@ -1,0 +1,51 @@
+metawards.Node
+==============
+
+.. currentmodule:: metawards
+
+.. autoclass:: Node
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Node.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Node.b
+      ~Node.begin_p
+      ~Node.begin_to
+      ~Node.begin_we
+      ~Node.day_foi
+      ~Node.denominator_d
+      ~Node.denominator_n
+      ~Node.denominator_p
+      ~Node.denominator_pd
+      ~Node.end_p
+      ~Node.end_to
+      ~Node.end_we
+      ~Node.id
+      ~Node.label
+      ~Node.night_foi
+      ~Node.play_suscept
+      ~Node.save_play_suscept
+      ~Node.self_p
+      ~Node.self_w
+      ~Node.self_we
+      ~Node.vacid
+      ~Node.weekend_foi
+      ~Node.x
+      ~Node.y
+   
+   

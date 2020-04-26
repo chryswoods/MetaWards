@@ -1,0 +1,6 @@
+metawards.iterators.advance\_imports\_omp
+=========================================
+
+.. currentmodule:: metawards.iterators
+
+.. autofunction:: advance_imports_omp

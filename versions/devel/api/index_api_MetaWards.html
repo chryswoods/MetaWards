@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MetaWards API Detail &mdash; MetaWards Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="metawards.Disease" href="generated/metawards.Disease.html" />
+    <link rel="prev" title="MetaWards" href="index_MetaWards.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../model_data.html">Model data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_app.html">MetaWards.app</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_MetaWards.html">MetaWards</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MetaWards API Detail</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_iterators.html">MetaWards.iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_analysis.html">MetaWards.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_utils.html">MetaWards.utils</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Developer’s guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Documentation</a> &raquo;</li>
+        
+          <li><a href="index_MetaWards.html">MetaWards</a> &raquo;</li>
+        
+      <li>MetaWards API Detail</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="generated/metawards.Disease.html" class="btn btn-neutral float-right" title="metawards.Disease" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index_MetaWards.html" class="btn btn-neutral float-left" title="MetaWards" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-metawards">
+<span id="metawards-api-detail"></span><h1>MetaWards API Detail<a class="headerlink" href="#module-metawards" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.Disease.html#metawards.Disease" title="metawards.Disease"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Disease</span></code></a>(beta,&nbsp;progress,&nbsp;too_ill_to_move,&nbsp;…)</td>
+<td>This class holds the parameters about a single disease</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/metawards.Infections.html#metawards.Infections" title="metawards.Infections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Infections</span></code></a>()</td>
+<td>This class holds the arrays that record the infections as they are occuring during the outbreak</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.InputFiles.html#metawards.InputFiles" title="metawards.InputFiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputFiles</span></code></a>(work,&nbsp;play,&nbsp;identifier,&nbsp;…)</td>
+<td>This class holds all of the input files that must be loaded from METAWARDSDATA to construct the network of wards and links between them</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/metawards.Link.html#metawards.Link" title="metawards.Link"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Link</span></code></a>(ifrom,&nbsp;ito,&nbsp;weight,&nbsp;suscept,&nbsp;distance,&nbsp;A)</td>
+<td>This is a link between nodes in the network</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.Links.html#metawards.Links" title="metawards.Links"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Links</span></code></a></td>
+<td>This is a container class for Links.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/metawards.Network.html#metawards.Network" title="metawards.Network"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Network</span></code></a>(nodes,&nbsp;to_links,&nbsp;play,&nbsp;weekend,&nbsp;…)</td>
+<td>This class represents a network of wards.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.Node.html#metawards.Node" title="metawards.Node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Node</span></code></a>(label,&nbsp;begin_to,&nbsp;end_to,&nbsp;self_w,&nbsp;…)</td>
+<td>This class represents an electoral ward (node) in the network</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/metawards.Nodes.html#metawards.Nodes" title="metawards.Nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Nodes</span></code></a></td>
+<td>This is a container class for Nodes.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.OutputFiles.html#metawards.OutputFiles" title="metawards.OutputFiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OutputFiles</span></code></a>(output_dir,&nbsp;check_empty,&nbsp;force_empty)</td>
+<td>This is a class that manages all of the output files that are written to during a model outbreak.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/metawards.Parameters.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Parameters</span></code></a>(input_files,&nbsp;uv_filename,&nbsp;…)</td>
+<td>The full set of Parameters that are used to control the model outbreak over a Network.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.Population.html#metawards.Population" title="metawards.Population"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Population</span></code></a>(initial,&nbsp;susceptibles,&nbsp;latent,&nbsp;…)</td>
+<td>This class holds information about the progress of the disease through the population</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/metawards.Populations.html#metawards.Populations" title="metawards.Populations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Populations</span></code></a>(_trajectory)</td>
+<td>This class holds the trajectory of Population objects recorded for every step (day) of a model outbreak</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.VariableSet.html#metawards.VariableSet" title="metawards.VariableSet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VariableSet</span></code></a>(variables,&nbsp;float]&nbsp;=&nbsp;None,&nbsp;…)</td>
+<td>This class holds a single set of adjustable variables that are used to adjust the variables as part of a model run</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/metawards.VariableSets.html#metawards.VariableSets" title="metawards.VariableSets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VariableSets</span></code></a>()</td>
+<td>This class holds the collection of all VariableSet objects that contain the set of adjustable variables that are used to control a single run of the model</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.get_version_string" title="metawards.get_version_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_version_string</span></code></a>()</td>
+<td>Return a version string for metawards which can be printed into a file or written out to the screen</td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="metawards.get_version_string">
+<code class="descclassname">metawards.</code><code class="descname">get_version_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/metawards.html#get_version_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.get_version_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a version string for metawards which can be printed
+into a file or written out to the screen</p>
+</dd></dl>
+
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="generated/metawards.Disease.html" class="btn btn-neutral float-right" title="metawards.Disease" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index_MetaWards.html" class="btn btn-neutral float-left" title="MetaWards" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Apr 26, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

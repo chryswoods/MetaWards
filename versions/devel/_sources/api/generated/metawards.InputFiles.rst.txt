@@ -1,0 +1,43 @@
+metawards.InputFiles
+====================
+
+.. currentmodule:: metawards
+
+.. autoclass:: InputFiles
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~InputFiles.__init__
+      ~InputFiles.load
+      ~InputFiles.model_name
+      ~InputFiles.model_path
+      ~InputFiles.model_version
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~InputFiles.coordinates
+      ~InputFiles.identifier
+      ~InputFiles.identifier2
+      ~InputFiles.nodes_to_track
+      ~InputFiles.play
+      ~InputFiles.play_size
+      ~InputFiles.position
+      ~InputFiles.seed
+      ~InputFiles.uv
+      ~InputFiles.weekend
+      ~InputFiles.work
+      ~InputFiles.work_size
+   
+   

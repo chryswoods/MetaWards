@@ -1,0 +1,6 @@
+metawards.utils.extract
+=======================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: extract

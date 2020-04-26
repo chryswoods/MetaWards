@@ -1,0 +1,48 @@
+metawards.Network
+=================
+
+.. currentmodule:: metawards
+
+.. autoclass:: Network
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Network.__init__
+      ~Network.add_distances
+      ~Network.assert_sane
+      ~Network.build
+      ~Network.get_min_max_distances
+      ~Network.initialise_infections
+      ~Network.move_from_play_to_work
+      ~Network.rescale_play_matrix
+      ~Network.reset_everything
+      ~Network.run
+      ~Network.update
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Network.max_links
+      ~Network.max_nodes
+      ~Network.nlinks
+      ~Network.nnodes
+      ~Network.nodes
+      ~Network.params
+      ~Network.play
+      ~Network.plinks
+      ~Network.to_links
+      ~Network.to_seed
+      ~Network.weekend
+   
+   

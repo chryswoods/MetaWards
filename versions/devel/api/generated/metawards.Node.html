@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>metawards.Node &mdash; MetaWards Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="metawards.Nodes" href="metawards.Nodes.html" />
+    <link rel="prev" title="metawards.Network" href="metawards.Network.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_app.html">MetaWards.app</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_MetaWards.html">MetaWards</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index_api_MetaWards.html">MetaWards API Detail</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index_api_MetaWards.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index_api_MetaWards.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_iterators.html">MetaWards.iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_analysis.html">MetaWards.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_utils.html">MetaWards.utils</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Documentation</a> &raquo;</li>
+        
+          <li><a href="../index_MetaWards.html">MetaWards</a> &raquo;</li>
+        
+          <li><a href="../index_api_MetaWards.html">MetaWards API Detail</a> &raquo;</li>
+        
+      <li>metawards.Node</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="metawards.Nodes.html" class="btn btn-neutral float-right" title="metawards.Nodes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metawards.Network.html" class="btn btn-neutral float-left" title="metawards.Network" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="metawards-node">
+<h1>metawards.Node<a class="headerlink" href="#metawards-node" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="metawards.Node">
+<em class="property">class </em><code class="descclassname">metawards.</code><code class="descname">Node</code><span class="sig-paren">(</span><em>label: int = None</em>, <em>begin_to: int = None</em>, <em>end_to: int = None</em>, <em>self_w: int = None</em>, <em>begin_p: int = None</em>, <em>end_p: int = None</em>, <em>self_p: int = None</em>, <em>begin_we: int = None</em>, <em>end_we: int = None</em>, <em>self_we: int = None</em>, <em>day_foi: float = 0.0</em>, <em>night_foi: float = 0.0</em>, <em>weekend_foi: float = 0.0</em>, <em>play_suscept: float = 0.0</em>, <em>save_play_suscept: float = 0.0</em>, <em>denominator_n: float = 0.0</em>, <em>denominator_d: float = 0.0</em>, <em>denominator_p: float = 0.0</em>, <em>denominator_pd: float = 0.0</em>, <em>x: float = 0.0</em>, <em>y: float = 0.0</em>, <em>b: float = 0.0</em>, <em>id: str = None</em>, <em>vacid: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class represents an electoral ward (node) in the network</p>
+<dl class="method">
+<dt id="metawards.Node.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>label: int = None</em>, <em>begin_to: int = None</em>, <em>end_to: int = None</em>, <em>self_w: int = None</em>, <em>begin_p: int = None</em>, <em>end_p: int = None</em>, <em>self_p: int = None</em>, <em>begin_we: int = None</em>, <em>end_we: int = None</em>, <em>self_we: int = None</em>, <em>day_foi: float = 0.0</em>, <em>night_foi: float = 0.0</em>, <em>weekend_foi: float = 0.0</em>, <em>play_suscept: float = 0.0</em>, <em>save_play_suscept: float = 0.0</em>, <em>denominator_n: float = 0.0</em>, <em>denominator_d: float = 0.0</em>, <em>denominator_p: float = 0.0</em>, <em>denominator_pd: float = 0.0</em>, <em>x: float = 0.0</em>, <em>y: float = 0.0</em>, <em>b: float = 0.0</em>, <em>id: str = None</em>, <em>vacid: int = None</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.Node.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.Node.__init__" title="metawards.Node.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(label,&nbsp;begin_to,&nbsp;end_to,&nbsp;self_w,&nbsp;…)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">b</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.Node.begin_p" title="metawards.Node.begin_p"><code class="xref py py-obj docutils literal notranslate"><span class="pre">begin_p</span></code></a></td>
+<td>The index (int) of the first link for this node in the network play Links list (play)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.Node.begin_to" title="metawards.Node.begin_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">begin_to</span></code></a></td>
+<td>The index (int) of the first link for this node in the network Links list</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.Node.begin_we" title="metawards.Node.begin_we"><code class="xref py py-obj docutils literal notranslate"><span class="pre">begin_we</span></code></a></td>
+<td>The index (int) of the first link for this node in the network weekend Links list</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">day_foi</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">denominator_d</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">denominator_n</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">denominator_p</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">denominator_pd</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.Node.end_p" title="metawards.Node.end_p"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_p</span></code></a></td>
+<td>The number (int) of links for this node in the Links play list</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.Node.end_to" title="metawards.Node.end_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_to</span></code></a></td>
+<td>The number (int) of links for this node in the Links list</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">end_we</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.Node.id" title="metawards.Node.id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id</span></code></a></td>
+<td>the name of the ward, e.g.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.Node.label" title="metawards.Node.label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label</span></code></a></td>
+<td>The node’s label (int).</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">night_foi</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">play_suscept</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_play_suscept</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">self_p</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">self_w</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">self_we</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">vacid</span></code></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">weekend_foi</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.Node.x" title="metawards.Node.x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x</span></code></a></td>
+<td>x coordinate of the ward (location)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.Node.y" title="metawards.Node.y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">y</span></code></a></td>
+<td>y coordinate of the ward (location)</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="metawards.Node.begin_p">
+<code class="descname">begin_p</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Node.begin_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>The index (int) of the first link for this node in the network
+play Links list (play)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.Node.begin_to">
+<code class="descname">begin_to</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Node.begin_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>The index (int) of the first link for this node in the
+network Links list</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.Node.begin_we">
+<code class="descname">begin_we</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Node.begin_we" title="Permalink to this definition">¶</a></dt>
+<dd><p>The index (int) of the first link for this node in the network
+weekend Links list</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.Node.end_p">
+<code class="descname">end_p</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Node.end_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number (int) of links for this node in the Links play list</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.Node.end_to">
+<code class="descname">end_to</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Node.end_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number (int) of links for this node in the Links list</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.Node.id">
+<code class="descname">id</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Node.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the name of the ward, e.g. ‘Bristol’</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.Node.label">
+<code class="descname">label</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Node.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The node’s label (int). This is the index of the node, which must
+run from 1 up to len(nodes). A value of -1 implies a null node</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.Node.x">
+<code class="descname">x</code><em class="property"> = 0.0</em><a class="headerlink" href="#metawards.Node.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>x coordinate of the ward (location)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.Node.y">
+<code class="descname">y</code><em class="property"> = 0.0</em><a class="headerlink" href="#metawards.Node.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>y coordinate of the ward (location)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metawards.Nodes.html" class="btn btn-neutral float-right" title="metawards.Nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metawards.Network.html" class="btn btn-neutral float-left" title="metawards.Network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Apr 26, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

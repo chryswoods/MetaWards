@@ -1,0 +1,6 @@
+metawards.extractors.output\_dispersal
+======================================
+
+.. currentmodule:: metawards.extractors
+
+.. autofunction:: output_dispersal

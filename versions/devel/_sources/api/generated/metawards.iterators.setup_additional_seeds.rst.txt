@@ -1,0 +1,6 @@
+metawards.iterators.setup\_additional\_seeds
+============================================
+
+.. currentmodule:: metawards.iterators
+
+.. autofunction:: setup_additional_seeds

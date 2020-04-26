@@ -1,0 +1,6 @@
+metawards.utils.reset\_work\_matrix
+===================================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: reset_work_matrix

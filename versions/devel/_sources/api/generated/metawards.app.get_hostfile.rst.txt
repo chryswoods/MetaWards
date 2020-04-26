@@ -1,0 +1,6 @@
+metawards.app.get\_hostfile
+===========================
+
+.. currentmodule:: metawards.app
+
+.. autofunction:: get_hostfile

@@ -1,0 +1,6 @@
+metawards.extractors.extract\_default
+=====================================
+
+.. currentmodule:: metawards.extractors
+
+.. autofunction:: extract_default

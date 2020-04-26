@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.ba-throttle-debounce.min.js"></script>
+    <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="coverage_html.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(coverage.index_ready);
+    </script>
+</head>
+<body class="indexfile">
+<div id="header">
+    <div class="content">
+        <h1>Coverage report:
+            <span class="pc_cov">52.87%</span>
+        </h1>
+        <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
+        <form id="filter_container">
+            <input id="filter" type="text" value="" placeholder="filter..." />
+        </form>
+    </div>
+</div>
+<div class="help_panel">
+    <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
+    <p class="legend">Hot-keys on this page</p>
+    <div>
+    <p class="keyhelp">
+        <span class="key">n</span>
+        <span class="key">s</span>
+        <span class="key">m</span>
+        <span class="key">x</span>
+        <span class="key">b</span>
+        <span class="key">p</span>
+        <span class="key">c</span> &nbsp; change column sorting
+    </p>
+    </div>
+</div>
+<div id="index">
+    <table class="index">
+        <thead>
+            <tr class="tablehead" title="Click to sort">
+                <th class="name left headerSortDown shortkey_n">Module</th>
+                <th class="shortkey_s">statements</th>
+                <th class="shortkey_m">missing</th>
+                <th class="shortkey_x">excluded</th>
+                <th class="shortkey_b">branches</th>
+                <th class="shortkey_p">partial</th>
+                <th class="right shortkey_c">coverage</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>2933</td>
+                <td>1282</td>
+                <td>0</td>
+                <td>1026</td>
+                <td>160</td>
+                <td class="right" data-ratio="2093 3959">52.87%</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards___init___py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/__init__.py</a></td>
+                <td>66</td>
+                <td>37</td>
+                <td>0</td>
+                <td>8</td>
+                <td>1</td>
+                <td class="right" data-ratio="30 74">40.54%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__disease_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_disease.py</a></td>
+                <td>100</td>
+                <td>22</td>
+                <td>0</td>
+                <td>20</td>
+                <td>4</td>
+                <td class="right" data-ratio="92 120">76.67%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__infections_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_infections.py</a></td>
+                <td>17</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="19 19">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__inputfiles_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_inputfiles.py</a></td>
+                <td>83</td>
+                <td>16</td>
+                <td>0</td>
+                <td>18</td>
+                <td>3</td>
+                <td class="right" data-ratio="80 101">79.21%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__link_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_link.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="12 12">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__network_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_network.py</a></td>
+                <td>140</td>
+                <td>9</td>
+                <td>0</td>
+                <td>26</td>
+                <td>11</td>
+                <td class="right" data-ratio="146 166">87.95%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__node_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_node.py</a></td>
+                <td>28</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="30 30">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__outputfiles_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_outputfiles.py</a></td>
+                <td>190</td>
+                <td>55</td>
+                <td>0</td>
+                <td>72</td>
+                <td>19</td>
+                <td class="right" data-ratio="176 262">67.18%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__parameters_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_parameters.py</a></td>
+                <td>149</td>
+                <td>18</td>
+                <td>0</td>
+                <td>26</td>
+                <td>11</td>
+                <td class="right" data-ratio="146 175">83.43%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__population_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_population.py</a></td>
+                <td>48</td>
+                <td>5</td>
+                <td>0</td>
+                <td>16</td>
+                <td>5</td>
+                <td class="right" data-ratio="54 64">84.38%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__variableset_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_variableset.py</a></td>
+                <td>496</td>
+                <td>135</td>
+                <td>0</td>
+                <td>256</td>
+                <td>48</td>
+                <td class="right" data-ratio="529 752">70.35%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards__version_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/_version.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 4">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_analysis___init___py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/analysis/__init__.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_analysis__animate_plots_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/analysis/_animate_plots.py</a></td>
+                <td>70</td>
+                <td>66</td>
+                <td>0</td>
+                <td>36</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 106">3.77%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_analysis__summary_plot_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/analysis/_summary_plot.py</a></td>
+                <td>155</td>
+                <td>150</td>
+                <td>0</td>
+                <td>80</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 235">2.13%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_app___init___py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/app/__init__.py</a></td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_app_plot_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/app/plot.py</a></td>
+                <td>40</td>
+                <td>40</td>
+                <td>0</td>
+                <td>12</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 52">0.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_app_run_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/app/run.py</a></td>
+                <td>446</td>
+                <td>434</td>
+                <td>0</td>
+                <td>166</td>
+                <td>1</td>
+                <td class="right" data-ratio="13 612">2.12%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_extractors___init___py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/extractors/__init__.py</a></td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="7 7">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_extractors__extract_core_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/extractors/_extract_core.py</a></td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+                <td>6</td>
+                <td>2</td>
+                <td class="right" data-ratio="15 17">88.24%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_extractors__extract_default_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/extractors/_extract_default.py</a></td>
+                <td>19</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="19 21">90.48%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_extractors__output_basic_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/extractors/_output_basic.py</a></td>
+                <td>17</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="19 19">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_extractors__output_incidence_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/extractors/_output_incidence.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_extractors__output_prevalence_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/extractors/_output_prevalence.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators___init___py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/__init__.py</a></td>
+                <td>14</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="14 14">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators__advance_additional_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/_advance_additional.py</a></td>
+                <td>45</td>
+                <td>4</td>
+                <td>0</td>
+                <td>14</td>
+                <td>3</td>
+                <td class="right" data-ratio="52 59">88.14%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators__iterate_core_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/_iterate_core.py</a></td>
+                <td>19</td>
+                <td>0</td>
+                <td>0</td>
+                <td>10</td>
+                <td>4</td>
+                <td class="right" data-ratio="25 29">86.21%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators__iterate_custom_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/_iterate_custom.py</a></td>
+                <td>104</td>
+                <td>29</td>
+                <td>0</td>
+                <td>42</td>
+                <td>9</td>
+                <td class="right" data-ratio="104 146">71.23%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators__iterate_default_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/_iterate_default.py</a></td>
+                <td>14</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td class="right" data-ratio="16 18">88.89%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators__iterate_weekday_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/_iterate_weekday.py</a></td>
+                <td>12</td>
+                <td>4</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="9 14">64.29%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators__iterate_weekend_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/_iterate_weekend.py</a></td>
+                <td>10</td>
+                <td>8</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 12">16.67%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators__iterate_working_week_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/_iterate_working_week.py</a></td>
+                <td>14</td>
+                <td>9</td>
+                <td>0</td>
+                <td>4</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 18">27.78%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_iterators__setup_imports_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/iterators/_setup_imports.py</a></td>
+                <td>42</td>
+                <td>17</td>
+                <td>0</td>
+                <td>8</td>
+                <td>1</td>
+                <td class="right" data-ratio="28 50">56.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils___init___py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/__init__.py</a></td>
+                <td>26</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="26 26">100.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__extract_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_extract.py</a></td>
+                <td>17</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td class="right" data-ratio="19 21">90.48%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__initialise_infections_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_initialise_infections.py</a></td>
+                <td>23</td>
+                <td>2</td>
+                <td>0</td>
+                <td>8</td>
+                <td>2</td>
+                <td class="right" data-ratio="27 31">87.10%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__iterate_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_iterate.py</a></td>
+                <td>15</td>
+                <td>1</td>
+                <td>0</td>
+                <td>4</td>
+                <td>1</td>
+                <td class="right" data-ratio="17 19">89.47%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__iterate_weekend_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_iterate_weekend.py</a></td>
+                <td>7</td>
+                <td>7</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 7">0.00%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__parallel_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_parallel.py</a></td>
+                <td>58</td>
+                <td>23</td>
+                <td>0</td>
+                <td>34</td>
+                <td>10</td>
+                <td class="right" data-ratio="55 92">59.78%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__profiler_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_profiler.py</a></td>
+                <td>79</td>
+                <td>12</td>
+                <td>0</td>
+                <td>34</td>
+                <td>7</td>
+                <td class="right" data-ratio="92 113">81.42%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__read_done_file_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_read_done_file.py</a></td>
+                <td>11</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="9 11">81.82%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__run_model_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_run_model.py</a></td>
+                <td>84</td>
+                <td>10</td>
+                <td>0</td>
+                <td>34</td>
+                <td>11</td>
+                <td class="right" data-ratio="95 118">80.51%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__runner_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_runner.py</a></td>
+                <td>128</td>
+                <td>116</td>
+                <td>0</td>
+                <td>44</td>
+                <td>0</td>
+                <td class="right" data-ratio="12 172">6.98%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__string_to_ints_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_string_to_ints.py</a></td>
+                <td>33</td>
+                <td>4</td>
+                <td>0</td>
+                <td>20</td>
+                <td>4</td>
+                <td class="right" data-ratio="43 53">81.13%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__vaccination_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_vaccination.py</a></td>
+                <td>21</td>
+                <td>13</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 21">38.10%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="_opt_hostedtoolcache_Python_3_8_2_x64_lib_python3_8_site-packages_metawards_utils__worker_py.html">/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/metawards/utils/_worker.py</a></td>
+                <td>42</td>
+                <td>30</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="12 44">27.27%</td>
+            </tr>
+        </tbody>
+    </table>
+    <p id="no_rows">
+        No items found using the specified filter.
+    </p>
+</div>
+<div id="footer">
+    <div class="content">
+        <p>
+            <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.1</a>,
+            created at 2020-04-26 15:24
+        </p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+metawards.utils.Profiler
+========================
+
+.. currentmodule:: metawards.utils
+
+.. autoclass:: Profiler
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Profiler.__init__
+      ~Profiler.child_total
+      ~Profiler.is_null
+      ~Profiler.name
+      ~Profiler.start
+      ~Profiler.stop
+      ~Profiler.total
+   
+   
+
+   
+   
+   

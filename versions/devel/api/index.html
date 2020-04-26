@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Documentation &mdash; MetaWards Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MetaWards.app" href="index_MetaWards_app.html" />
+    <link rel="prev" title="Running on a cluster" href="../cluster_usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../model_data.html">Model data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/tutorial.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_app.html">MetaWards.app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards.html">MetaWards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_iterators.html">MetaWards.iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_analysis.html">MetaWards.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_utils.html">MetaWards.utils</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Developer’s guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="index_MetaWards_app.html" class="btn btn-neutral float-right" title="MetaWards.app" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cluster_usage.html" class="btn btn-neutral float-left" title="Running on a cluster" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p>The metawards program and associated Python module is composed
+of six main units;</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="index_MetaWards_app.html"><span class="doc">metawards</span></a> command line program, which is
+what most people would use to run metawards. This program comes with
+full help that is provided by typing <code class="docutils literal notranslate"><span class="pre">metawards</span> <span class="pre">--help</span></code>.</li>
+<li>The <a class="reference internal" href="index_MetaWards.html"><span class="doc">metawards</span></a> top-level Python module, which is
+what you should use if you want to write new Python programs that
+integrate metawards functionality. These could include plugging
+metawards as a model into a higher-level statictical
+analysis package.</li>
+<li>The <a class="reference internal" href="index_MetaWards_iterators.html"><span class="doc">metawards.iterators</span></a> which contains
+all of the package-supplied iterators that are used to advance the
+model infection from day to day. These are used to customise exactly
+how an infection progresses, and how control measures are applied.
+This is described in the <span class="xref std std-doc">tutorial</span>.</li>
+<li>The <a class="reference internal" href="index_MetaWards_extractors.html"><span class="doc">metawards.extractors</span></a> which contains
+all of the package-supplied extractors that are used to extract and
+output data gathered live during a model run and write them to files.
+These are used to customise exactly what information is gathered,
+how it is processed, and where it is written as the infection progresses.
+You can see how to use these to customise output in
+the <span class="xref std std-doc">tutorial</span>.</li>
+<li>The <a class="reference internal" href="index_MetaWards_analysis.html"><span class="doc">metawards.analysis</span></a> contains
+analysis functions that can be used to process the results of a
+<code class="docutils literal notranslate"><span class="pre">metawards</span></code> run to generate insights and useful graphics.</li>
+<li>The <a class="reference internal" href="index_MetaWards_utils.html"><span class="doc">metawards.utils</span></a> utility Python module
+which contains lots of functions that are used by metawards to build and
+perform model runs. These functions are internal to metawards and are
+not designed to be used outside of this program.</li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index_MetaWards_app.html">MetaWards.app</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index_api_MetaWards_app.html">MetaWards.app API Detail</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards_app.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.app.get_parallel_scheme.html">metawards.app.get_parallel_scheme</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.app.parse_args.html">metawards.app.parse_args</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.app.get_hostfile.html">metawards.app.get_hostfile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.app.get_cores_per_node.html">metawards.app.get_cores_per_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.app.get_threads_per_task.html">metawards.app.get_threads_per_task</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.app.scoop_supervisor.html">metawards.app.scoop_supervisor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.app.mpi_supervisor.html">metawards.app.mpi_supervisor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.app.cli.html">metawards.app.cli</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index_MetaWards.html">MetaWards</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index_api_MetaWards.html">MetaWards API Detail</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards.html#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Disease.html">metawards.Disease</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Infections.html">metawards.Infections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.InputFiles.html">metawards.InputFiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Link.html">metawards.Link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Links.html">metawards.Links</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Network.html">metawards.Network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Node.html">metawards.Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Nodes.html">metawards.Nodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.OutputFiles.html">metawards.OutputFiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Parameters.html">metawards.Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Population.html">metawards.Population</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.Populations.html">metawards.Populations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.VariableSet.html">metawards.VariableSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.VariableSets.html">metawards.VariableSets</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.get_version_string.html">metawards.get_version_string</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index_MetaWards_iterators.html">MetaWards.iterators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index_api_MetaWards_iterators.html">MetaWards.iterators API Detail</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards_iterators.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_additional.html">metawards.iterators.advance_additional</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_additional_omp.html">metawards.iterators.advance_additional_omp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_fixed.html">metawards.iterators.advance_fixed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_fixed_omp.html">metawards.iterators.advance_fixed_omp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_foi.html">metawards.iterators.advance_foi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_foi_omp.html">metawards.iterators.advance_foi_omp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_imports.html">metawards.iterators.advance_imports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_imports_omp.html">metawards.iterators.advance_imports_omp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_infprob.html">metawards.iterators.advance_infprob</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_infprob_omp.html">metawards.iterators.advance_infprob_omp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_play.html">metawards.iterators.advance_play</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_play_omp.html">metawards.iterators.advance_play_omp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_recovery.html">metawards.iterators.advance_recovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.advance_recovery_omp.html">metawards.iterators.advance_recovery_omp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.build_custom_iterator.html">metawards.iterators.build_custom_iterator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.iterate_custom.html">metawards.iterators.iterate_custom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.iterate_default.html">metawards.iterators.iterate_default</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.iterate_weekday.html">metawards.iterators.iterate_weekday</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.iterate_weekend.html">metawards.iterators.iterate_weekend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.iterate_working_week.html">metawards.iterators.iterate_working_week</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.iterator_needs_setup.html">metawards.iterators.iterator_needs_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.setup_additional_seeds.html">metawards.iterators.setup_additional_seeds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.setup_seed_all_wards.html">metawards.iterators.setup_seed_all_wards</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.setup_seed_specified_ward.html">metawards.iterators.setup_seed_specified_ward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.iterators.setup_seed_wards.html">metawards.iterators.setup_seed_wards</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index_MetaWards_extractors.html">MetaWards.extractors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index_api_MetaWards_extractors.html">MetaWards.extractors API Detail</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards_extractors.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.extract_core.html">metawards.extractors.extract_core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.extract_default.html">metawards.extractors.extract_default</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.extractor_needs_setup.html">metawards.extractors.extractor_needs_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.output_basic.html">metawards.extractors.output_basic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.output_core.html">metawards.extractors.output_core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.output_core_omp.html">metawards.extractors.output_core_omp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.output_core_serial.html">metawards.extractors.output_core_serial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.output_incidence.html">metawards.extractors.output_incidence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.output_dispersal.html">metawards.extractors.output_dispersal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.output_prevalence.html">metawards.extractors.output_prevalence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.extractors.setup_core.html">metawards.extractors.setup_core</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index_MetaWards_analysis.html">MetaWards.analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index_api_MetaWards_analysis.html">MetaWards.analysis API Detail</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards_analysis.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.analysis.animate_plots.html">metawards.analysis.animate_plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.analysis.create_average_plot.html">metawards.analysis.create_average_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.analysis.create_overview_plot.html">metawards.analysis.create_overview_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.analysis.import_animate_modules.html">metawards.analysis.import_animate_modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.analysis.import_graphics_modules.html">metawards.analysis.import_graphics_modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.analysis.save_summary_plots.html">metawards.analysis.save_summary_plots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index_MetaWards_utils.html">MetaWards.utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index_api_MetaWards_utils.html">MetaWards.utils API Detail</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards_utils.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.add_wards_network_distance.html">metawards.utils.add_wards_network_distance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.allocate_vaccination.html">metawards.utils.allocate_vaccination</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.assert_sane_network.html">metawards.utils.assert_sane_network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.build_play_matrix.html">metawards.utils.build_play_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.build_wards_network.html">metawards.utils.build_wards_network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.clear_all_infections.html">metawards.utils.clear_all_infections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.create_int_array.html">metawards.utils.create_int_array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.create_double_array.html">metawards.utils.create_double_array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.create_string_array.html">metawards.utils.create_string_array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.create_thread_generators.html">metawards.utils.create_thread_generators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.delete_ran_binomial.html">metawards.utils.delete_ran_binomial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.extract.html">metawards.utils.extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.fill_in_gaps.html">metawards.utils.fill_in_gaps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.get_available_num_threads.html">metawards.utils.get_available_num_threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.get_min_max_distances.html">metawards.utils.get_min_max_distances</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.get_number_of_processes.html">metawards.utils.get_number_of_processes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.how_many_vaccinated.html">metawards.utils.how_many_vaccinated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.initialise_infections.html">metawards.utils.initialise_infections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.initialise_play_infections.html">metawards.utils.initialise_play_infections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.iterate.html">metawards.utils.iterate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.move_population_from_work_to_play.html">metawards.utils.move_population_from_work_to_play</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.move_population_from_play_to_work.html">metawards.utils.move_population_from_play_to_work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.prepare_worker.html">metawards.utils.prepare_worker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.ran_binomial.html">metawards.utils.ran_binomial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.ran_int.html">metawards.utils.ran_int</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.ran_uniform.html">metawards.utils.ran_uniform</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.read_done_file.html">metawards.utils.read_done_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.recalculate_work_denominator_day.html">metawards.utils.recalculate_work_denominator_day</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.recalculate_play_denominator_day.html">metawards.utils.recalculate_play_denominator_day</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.redirect_output.html">metawards.utils.redirect_output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.rescale_play_matrix.html">metawards.utils.rescale_play_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.resize_array.html">metawards.utils.resize_array</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.reset_everything.html">metawards.utils.reset_everything</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.reset_play_matrix.html">metawards.utils.reset_play_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.reset_play_susceptibles.html">metawards.utils.reset_play_susceptibles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.reset_work_matrix.html">metawards.utils.reset_work_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.run_model.html">metawards.utils.run_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.run_models.html">metawards.utils.run_models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.run_worker.html">metawards.utils.run_worker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.seed_ran_binomial.html">metawards.utils.seed_ran_binomial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.string_to_ints.html">metawards.utils.string_to_ints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.vaccinate_same_id.html">metawards.utils.vaccinate_same_id</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards_utils.html#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.Profiler.html">metawards.utils.Profiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.NullProfiler.html">metawards.utils.NullProfiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/metawards.utils.Workspace.html">metawards.utils.Workspace</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="index_MetaWards_app.html" class="btn btn-neutral float-right" title="MetaWards.app" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cluster_usage.html" class="btn btn-neutral float-left" title="Running on a cluster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Apr 26, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

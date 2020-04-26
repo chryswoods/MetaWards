@@ -1,0 +1,6 @@
+metawards.analysis.create\_average\_plot
+========================================
+
+.. currentmodule:: metawards.analysis
+
+.. autofunction:: create_average_plot

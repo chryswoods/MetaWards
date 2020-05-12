@@ -4,12 +4,14 @@
 
 cimport cython
 from cython.parallel import parallel, prange
+from libc.stdint cimport uintptr_t
 
 from .._network import Network
 from .._population import Population
 from .._infections import Infections
 
 from ..utils._profiler import Profiler
+from ..utils._get_functions import call_function_on_network
 
 from ..utils._ran_binomial cimport _ran_binomial, \
                                    _get_binomial_ptr, binomial_rng
@@ -48,7 +50,7 @@ def advance_imports_omp(network: Network, population: Population,
     """
 
     wards = network.nodes
-    links = network.to_links
+    links = network.links
     params = network.params
 
     play_infections = infections.play
@@ -64,7 +66,7 @@ def advance_imports_omp(network: Network, population: Population,
     cdef double frac = float(params.daily_imports) / float(population.initial)
 
     # get the random number generator
-    cdef unsigned long [::1] rngs_view = rngs
+    cdef uintptr_t [::1] rngs_view = rngs
     cdef binomial_rng* rng   # pointer to parallel rng
 
     # create and initialise variables used in the loop
@@ -129,7 +131,7 @@ def advance_imports_serial(network: Network, population: Population,
     """
 
     wards = network.nodes
-    links = network.to_links
+    links = network.links
     params = network.params
 
     play_infections = infections.play
@@ -213,7 +215,7 @@ def advance_imports(nthreads: int, **kwargs):
          Extra arguments that may be used by other advancers, but which
          are not used by advance_play
     """
-    if nthreads == 1:
-        advance_imports_serial(**kwargs)
-    else:
-        advance_imports_omp(nthreads=nthreads, **kwargs)
+    call_function_on_network(nthreads=nthreads,
+                             func=advance_imports_serial,
+                             parallel=advance_imports_omp,
+                             **kwargs)

@@ -27,7 +27,7 @@ def reset_work_matrix(network: Network, nthreads=1):
        nthreads: int
          Number of threads to parallelise over
     """
-    links = network.to_links
+    links = network.links
 
     cdef int i = 0
     cdef double * links_suscept = get_double_array_ptr(links.suscept)
@@ -58,7 +58,7 @@ def reset_play_matrix(network: Network, nthreads: int=1):
     cdef double * links_suscept = get_double_array_ptr(links.suscept)
     cdef double * links_weight = get_double_array_ptr(links.weight)
 
-    cdef int nlinks_plus_one = network.plinks + 1
+    cdef int nlinks_plus_one = network.nplay + 1
     cdef int num_threads = nthreads
 
     with nogil, parallel(num_threads=num_threads):

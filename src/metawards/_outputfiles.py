@@ -303,7 +303,8 @@ class OutputFiles:
         """
         return self._output_dir
 
-    def open(self, filename: str, auto_bzip=None, mode="t"):
+    def open(self, filename: str, auto_bzip=None, mode="t",
+             headers=None, sep=" "):
         """Open the file called 'filename' in the output directory,
            returning a handle to that file. Note that this will
            open the file once, and will return the already-open
@@ -329,6 +330,16 @@ class OutputFiles:
            mode: str
              The mode of opening the file, e.g. 't' for text mode, and
              'b' for binary mode. The default is text mode
+           headers: list[str] or plain str
+             The headers to add to the top of the file, e.g. if it will
+             contain column data. This will be written to the first line
+             when the file is opened. If a list is passed, then this
+             will be written joined together using 'sep'. If a plain
+             string is passed then this will be written.
+             If nothing is passed then no headers will be written.
+           sep: str
+             The separator used for the headers (e.g. " " or "," are good
+             choices). By default things are space-separated
 
            Returns
            -------
@@ -371,12 +382,20 @@ class OutputFiles:
             FILE = bz2.open(f"{filename}{suffix}", f"w{mode}")
             self._open_files[filename] = FILE
             self._filenames[filename] = f"{filename}{suffix}"
-            return FILE
         else:
             FILE = open(filename, f"w{mode}")
             self._open_files[filename] = FILE
             self._filenames[filename] = filename
-            return FILE
+
+        if headers is not None:
+            if isinstance(headers, str):
+                FILE.write(headers)
+                FILE.write("\n")
+            else:
+                FILE.write(sep.join([str(x) for x in headers]))
+                FILE.write("\n")
+
+        return FILE
 
     def open_subdir(self, dirname):
         """Create and open a sub-directory in this OutputFiles

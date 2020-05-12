@@ -40,7 +40,7 @@ def rescale_play_matrix(network: Network, nthreads: int = 1,
     cdef double * links_weight = get_double_array_ptr(links.weight)
     cdef double * links_suscept = get_double_array_ptr(links.suscept)
 
-    cdef int nlinks_plus_one = network.plinks + 1
+    cdef int nlinks_plus_one = network.nplay + 1
     cdef int num_threads = nthreads
 
     if static_play_at_home > 0:

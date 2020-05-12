@@ -12,24 +12,6 @@ _default_disease_path = _os.path.join(_pathlib.Path.home(),
 _default_folder_name = "diseases"
 
 
-def _safe_eval_float(s):
-    """Convert 's' to a float. This supports normal floats,
-       but also simple maths expressions like 1/1.2
-    """
-    try:
-        return float(s)
-    except Exception:
-        pass
-
-    try:
-        # this is about as save as eval gets in python
-        return float(eval(s, {"__builtins__":None},{}))
-    except Exception:
-        pass
-
-    raise ValueError(f"Cannot interpret '{s}' as a float")
-
-
 @_dataclass
 class Disease:
     """This class holds the parameters about a single disease
@@ -92,10 +74,10 @@ class Disease:
 
     def __eq__(self, other):
         return self.beta == other.beta and \
-               self.progress == other.progress and \
-               self.too_ill_to_move == other.too_ill_to_move and \
-               self.contrib_foi == other.contrib_foi and \
-               self.start_symptom == other.start_symptom
+            self.progress == other.progress and \
+            self.too_ill_to_move == other.too_ill_to_move and \
+            self.contrib_foi == other.contrib_foi and \
+            self.start_symptom == other.start_symptom
 
     def __len__(self):
         if self.beta:
@@ -126,13 +108,15 @@ class Disease:
 
         self.start_symptom = int(self.start_symptom)
 
+        from .utils._safe_eval_float import safe_eval_float
+
         for i in range(0, n):
             try:
-                self.progress[i] = _safe_eval_float(self.progress[i])
-                self.too_ill_to_move[i] = _safe_eval_float(
-                                                self.too_ill_to_move[i])
-                self.beta[i] = _safe_eval_float(self.beta[i])
-                self.contrib_foi[i] = _safe_eval_float(self.contrib_foi[i])
+                self.progress[i] = safe_eval_float(self.progress[i])
+                self.too_ill_to_move[i] = safe_eval_float(
+                    self.too_ill_to_move[i])
+                self.beta[i] = safe_eval_float(self.beta[i])
+                self.contrib_foi[i] = safe_eval_float(self.contrib_foi[i])
             except Exception as e:
                 raise AssertionError(
                     f"Invalid disease parameter at index {i}: "
@@ -145,11 +129,11 @@ class Disease:
              filename: str = None):
         """Load the disease parameters for the specified disease.
            This will look for a file called f"{disease}.json"
-           in the directory f"{repository}/{disease}/{disease}.ncon"
+           in the directory f"{repository}/{folder}/{disease}.json"
 
            By default this will load the ncov (SARS-Cov-2)
            parameters from
-           $HOME/GitHub/model_data/2011Data/diseases/ncov.json
+           $HOME/GitHub/model_data/diseases/ncov.json
 
            Alternatively you can provide the full path to the
            json file via the "filename" argument
@@ -217,15 +201,15 @@ class Disease:
             raise FileNotFoundError(f"Could not find or read {json_file}: "
                                     f"{e.__class__} {e}")
 
-        disease = Disease(beta=data["beta"],
-                          progress=data["progress"],
-                          too_ill_to_move=data["too_ill_to_move"],
-                          contrib_foi=data["contrib_foi"],
-                          start_symptom=data["start_symptom"],
+        disease = Disease(beta=data.get("beta", []),
+                          progress=data.get("progress", []),
+                          too_ill_to_move=data.get("too_ill_to_move", []),
+                          contrib_foi=data.get("contrib_foi", []),
+                          start_symptom=data.get("start_symptom", 3),
                           _name=disease,
-                          _authors=data["author(s)"],
-                          _contacts=data["contact(s)"],
-                          _references=data["reference(s)"],
+                          _authors=data.get("author(s)", "unknown"),
+                          _contacts=data.get("contact(s)", "unknown"),
+                          _references=data.get("reference(s)", "none"),
                           _filename=json_file,
                           _repository=repository,
                           _repository_branch=repository_branch,

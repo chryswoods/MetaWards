@@ -71,8 +71,8 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
     # ncov build does not have WEEKEND defined, so not writing this code now
     params = network.params
     wards = network.nodes
-    links = network.to_links
-    plinks = network.play
+    links = network.links
+    play = network.play
 
     line = None
 
@@ -149,11 +149,11 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
     cdef int * links_ifrom = get_int_array_ptr(links.ifrom)
     cdef int * links_ito = get_int_array_ptr(links.ito)
 
-    cdef int * plinks_ifrom = get_int_array_ptr(plinks.ifrom)
-    cdef int * plinks_ito = get_int_array_ptr(plinks.ito)
+    cdef int * play_ifrom = get_int_array_ptr(play.ifrom)
+    cdef int * play_ito = get_int_array_ptr(play.ito)
 
     cdef double * links_distance = get_double_array_ptr(links.distance)
-    cdef double * plinks_distance = get_double_array_ptr(plinks.distance)
+    cdef double * play_distance = get_double_array_ptr(play.distance)
 
     cdef double x1 = 0.0
     cdef double x2 = 0.0
@@ -161,7 +161,7 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
     cdef double y2 = 0.0
 
     cdef int nlinks_plus_one = network.nlinks + 1
-    cdef int plinks_plus_one = network.plinks + 1
+    cdef int nplay_plus_one = network.nplay + 1
 
     cdef double too_large = 1000000 * scale_for_km
 
@@ -200,11 +200,11 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
 
     cdef double total_play_distance = 0.0
 
-    if network.plinks > 0:
+    if network.nplay > 0:
         with nogil, parallel(num_threads=1):
-            for i in prange(1, plinks_plus_one, schedule="static"):
-                ifrom = plinks_ifrom[i]
-                ito = plinks_ito[i]
+            for i in prange(1, nplay_plus_one, schedule="static"):
+                ifrom = play_ifrom[i]
+                ito = play_ito[i]
 
                 x1 = wards_x[ifrom]
                 y1 = wards_y[ifrom]
@@ -213,12 +213,12 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
                 y2 = wards_y[ito]
 
                 if (x1 == 0 and y1 == 0) or (x2 == 0 and y2 == 0):
-                    plinks_distance[i] = 0.0
+                    play_distance[i] = 0.0
                 else:
                     # skipping null points
                     distance = calc_distance(x1, y1, x2, y2)
 
-                    plinks_distance[i] = distance
+                    play_distance[i] = distance
                     total_play_distance += distance
 
                     if distance > too_large:

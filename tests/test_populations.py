@@ -61,3 +61,7 @@ def test_populations():
     traj2 = pickle.loads(s)
 
     assert traj == traj2
+
+
+if __name__ == "__main__":
+    test_populations()

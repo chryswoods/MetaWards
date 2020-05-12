@@ -7,19 +7,20 @@ from .._population import Population
 from .._outputfiles import OutputFiles
 from .._infections import Infections
 
-from ..utils._workspace import Workspace
+from .._workspace import Workspace
 
+from ..utils._get_functions import call_function_on_network
 from ..utils._get_array_ptr cimport get_int_array_ptr, get_double_array_ptr
 
 from math import sqrt
 
-__all__ = ["output_dispersal"]
+__all__ = ["output_dispersal", "output_dispersal_serial"]
 
 
-def output_dispersal(network: Network, population: Population,
-                     output_dir: OutputFiles,
-                     workspace: Workspace,
-                     **kwargs):
+def output_dispersal_serial(network: Network, population: Population,
+                            output_dir: OutputFiles,
+                            workspace: Workspace,
+                            **kwargs):
     """This will calculate and output the geographic dispersal
        of the outbreak
 
@@ -34,7 +35,7 @@ def output_dispersal(network: Network, population: Population,
        workspace: Workspace
          A workspace that can be used to extract data
        kwargs
-         Extra argumentst that are ignored by this function
+         Extra arguments that are ignored by this function
     """
 
     wards = network.nodes
@@ -82,9 +83,14 @@ def output_dispersal(network: Network, population: Population,
 
     # get the file handles - this will open the files if
     # they have not already been created
-    mean_xy_file = output_dir.open("MeanXY.dat")
-    var_xy_file = output_dir.open("VarXY.dat")
-    dispersal_file = output_dir.open("Dispersal.dat")
+    if network.name is not None:
+        name = "_" + network.name.replace(" ", "_")
+    else:
+        name = ""
+
+    mean_xy_file = output_dir.open(f"MeanXY{name}.dat")
+    var_xy_file = output_dir.open(f"VarXY{name}.dat")
+    dispersal_file = output_dir.open(f"Dispersal{name}.dat")
 
     timestep = population.day
 
@@ -101,6 +107,9 @@ def output_dispersal(network: Network, population: Population,
 
         if var_x + var_y > 0:
             dispersal = sqrt(var_x + var_y)
+        elif var_x + var_y > -0.1:
+            # numeric rounding error
+            dispersal = 0.0
         else:
             print(f"Negative var? {var_x+var_y}, {var_x} {var_y}")
             dispersal = 0.0
@@ -116,3 +125,26 @@ def output_dispersal(network: Network, population: Population,
     mean_xy_file.write("%d %f %f\n" % (timestep, mean_x, mean_y))
     var_xy_file.write("%d %f %f\n" % (timestep, var_x, var_y))
     dispersal_file.write("%d %f\n" % (timestep, dispersal))
+
+
+def output_dispersal(nthreads: int, **kwargs):
+    """This will calculate and output the geographic dispersal
+       of the outbreak
+
+       Parameters
+       ----------
+       network: Network
+         The network over which the outbreak is being modelled
+       population: Population
+         The population experiencing the outbreak
+       output_dir: OutputFiles
+         The directory in which to place all output files
+       workspace: Workspace
+         A workspace that can be used to extract data
+       kwargs
+         Extra arguments that are ignored by this function
+    """
+    call_function_on_network(nthreads=1,
+                             func=output_dispersal_serial,
+                             call_on_overall=True,
+                             **kwargs)

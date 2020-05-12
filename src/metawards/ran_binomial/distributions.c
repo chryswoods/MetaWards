@@ -18,7 +18,7 @@ int64_t ran_binomial(binomial_rng *rng, double p, int64_t n){
 
 binomial_rng * binomial_rng_alloc(void)
 {
-  return (binomial_rng*)malloc(sizeof(binomial_rng));
+  return (binomial_rng*)calloc(1, sizeof(binomial_rng));
 }
 
 void binomial_rng_free(binomial_rng *rng)
@@ -639,7 +639,9 @@ Step40:
   v = v * (u - p3) * lamr;
 
 Step50:
-  k = llabs(y - m);
+  k = y - m;
+  if (k < 0) k = -k;
+
   if ((k > 20) && (k < ((nrq) / 2.0 - 1)))
     goto Step52;
 

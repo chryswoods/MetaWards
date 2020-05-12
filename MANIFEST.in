@@ -2,3 +2,11 @@ include requirements*.txt
 include LICENSE.txt
 include versioneer.py
 include src/metawards/ran_binomial/*.h
+include src/metawards/utils/*.pyx
+include src/metawrads/utils/*.pxd
+include src/metawards/iterators/*.pyx
+include src/metawards/extractors/*.pyx
+include src/metawards/movers/*.pyx
+include src/metawards/mixers/*.pyx
+include src/metawards/disable_openmp/omp.h
+

@@ -1,12 +1,15 @@
 
 import os
+import pytest
 
 from metawards import Parameters, Network, Population, OutputFiles
+from metawards.utils import Profiler
 
 script_dir = os.path.dirname(__file__)
 ncovparams_csv = os.path.join(script_dir, "data", "ncovparams.csv")
 
 
+@pytest.mark.slow
 def test_iterator():
     """This test repeats main_RepeatsNcov.c and validates that the
        various stages report the same results as the original C code
@@ -51,12 +54,14 @@ def test_iterator():
     # the size of the starting population
     population = Population(initial=57104043)
 
+    profiler = Profiler()
+
     print("Building the network...")
-    network = Network.build(params=params, calculate_distances=True,
-                            profile=True)
+    network = Network.build(params=params,
+                            profiler=profiler)
 
     params = params.set_variables(variables[0])
-    network.update(params, profile=True)
+    network.update(params, profiler=profiler)
 
     # Here is a custom integrator function that just calls
     # iterate_weekday after 'print_hello'
@@ -77,7 +82,7 @@ def test_iterator():
     with OutputFiles(outdir, force_empty=True, prompt=prompt) as output_dir:
         trajectory = network.run(population=population, seed=seed,
                                  output_dir=output_dir,
-                                 s=-1, nsteps=29, profile=True,
+                                 nsteps=29, profiler=profiler,
                                  iterator=iterator,
                                  nthreads=1)
 
@@ -86,6 +91,8 @@ def test_iterator():
     print("End of the run")
 
     print(f"Model output: {trajectory}")
+
+    print(profiler)
 
     # The original C code has this expected population after 47 steps
     expected = Population(initial=57104043,

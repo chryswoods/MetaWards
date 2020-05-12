@@ -5,17 +5,17 @@ def parse_args():
     import sys
 
     parser = argparse.ArgumentParser(
-                    description="MetaWards simple plotting program - see "
-                                "https://github.com/metawards/metawards "
-                                "for more information",
-                    prog="metawards-plot")
+        description="MetaWards simple plotting program - see "
+        "https://github.com/metawards/metawards "
+        "for more information",
+        prog="metawards-plot")
 
     parser.add_argument('--version', action="store_true",
                         default=None,
                         help="Print the version information about "
                              "metawards-plot")
 
-    parser.add_argument("-i", "--input", type=str,
+    parser.add_argument("-i", "--input", type=str, nargs="*",
                         help="Full path to the 'results.csv.bz2' file "
                              "that you want to quickly plot.")
 
@@ -73,7 +73,7 @@ def cli():
     """
     args, parser = parse_args()
 
-    if args.input:
+    if args.input and len(args.input) > 0:
         from metawards.analysis import save_summary_plots
 
         align_axes = True
@@ -83,14 +83,15 @@ def cli():
         elif args.no_align_axes:
             align_axes = False
 
-        filenames = save_summary_plots(results=args.input,
-                                       output_dir=args.output,
-                                       format=args.format,
-                                       dpi=args.dpi,
-                                       align_axes=align_axes,
-                                       verbose=True)
+        for filename in args.input:
+            filenames = save_summary_plots(results=filename,
+                                           output_dir=args.output,
+                                           format=args.format,
+                                           dpi=args.dpi,
+                                           align_axes=align_axes,
+                                           verbose=True)
 
-        print(f"Written graphs to {', '.join(filenames)}")
+            print(f"Written graphs to {', '.join(filenames)}")
 
     elif args.animate is not None and len(args.animate) > 0:
         from metawards.analysis import animate_plots

@@ -37,11 +37,13 @@ def parse_args():
     import argparse
     import sys
 
+    metawards_url = "https://metawards.org"
+
     parser = argparse.ArgumentParser(
-                    description="MetaWards epidemic modelling - see "
-                                "https://github.com/metawards/metawards "
-                                "for more information",
-                    prog="metawards")
+        description=f"MetaWards epidemic modelling - see "
+        f"{metawards_url} "
+        f"for more information",
+        prog="metawards")
 
     parser.add_argument('--version', action="store_true",
                         default=None,
@@ -100,6 +102,13 @@ def parse_args():
                         help="Name of the input model data set for the "
                              "network (default is '2011Data')")
 
+    parser.add_argument('-D', '--demographics', type=str, default=None,
+                        help="Name of the demographics file that provides "
+                             "information about how a population is modelled "
+                             "as multiple demographics. If this is not "
+                             "supplied then the population is modelled "
+                             "as a single demographic")
+
     parser.add_argument('--start-date', type=str, default=None,
                         help="Date of the start of the model outbreak. "
                              "This accepts dates either is iso-format, "
@@ -146,16 +155,28 @@ def parse_args():
                              "custom integrators or custom extractors.")
 
     parser.add_argument('--iterator', type=str, default=None,
-                        help="Name of the iterator to use to advance the "
-                             "outbreak at each step (day). For a full "
-                             "explanation see the tutorial at "
-                             "https://metawards.github.io")
+                        help=f"Name of the iterator to use to advance the "
+                             f"outbreak at each step (day). For a full "
+                             f"explanation see the tutorial at "
+                             f"{metawards_url}")
 
     parser.add_argument("--extractor", type=str, default=None,
-                        help="Name of the extractor to use to extract "
-                             "information during a model run. For a full "
-                             "explanation see the tutorial at "
-                             "https://metawards.github.io")
+                        help=f"Name of the extractor to use to extract "
+                             f"information during a model run. For a full "
+                             f"explanation see the tutorial at "
+                             f"{metawards_url}")
+
+    parser.add_argument("--mixer", type=str, default=None,
+                        help=f"Name of the mixer to use to mix information "
+                             f"from multiple demographics together during "
+                             f"a model run. For a full explanation see "
+                             f"the tutorial at {metawards_url}")
+
+    parser.add_argument("--mover", type=str, default=None,
+                        help=f"Name of the mover to use to move the "
+                             f"population between demographics during "
+                             f"a model run. For a full explanation see "
+                             f"the tutorial at {metawards_url}")
 
     parser.add_argument('--UV', type=float, default=0.0,
                         help="Value for the UV parameter for the model "
@@ -378,7 +399,7 @@ def scoop_supervisor(hostfile, args):
 
     # Now write a new hostfile that round-robins the MPI tasks over
     # the nodes for 'tasks_per_node' runs
-    hostfile = os.path.join(outdir, "hostfile")
+    hostfile = f"_metawards_hostfile_{os.getpid()}"
     print(f"Writing hostfile to {hostfile}")
 
     with open(hostfile, "w") as FILE:
@@ -416,6 +437,10 @@ def scoop_supervisor(hostfile, args):
         print("ERROR: Something went wrong!")
         print(f"{e.__class__}: {e}")
         sys.exit(-1)
+
+    # clean up the hostfile afterwards... (we leave it if something
+    # went wrong as it may help debugging)
+    os.unlink(hostfile)
 
     print("Scoop processes completed successfully")
 
@@ -480,7 +505,7 @@ def mpi_supervisor(hostfile, args):
 
     # Now write a new hostfile that round-robins the MPI tasks over
     # the nodes for 'tasks_per_node' runs
-    hostfile = os.path.join(outdir, "hostfile")
+    hostfile = f"_metawards_hostfile_{os.getpid()}"
     print(f"Writing hostfile to {hostfile}")
 
     with open(hostfile, "w") as FILE:
@@ -535,6 +560,10 @@ def mpi_supervisor(hostfile, args):
         print("ERROR: Something went wrong!")
         print(f"{e.__class__}: {e}")
         sys.exit(-1)
+
+    # clean up the hostfile afterwards... (we leave it if something
+    # went wrong as it may help debugging)
+    os.unlink(hostfile)
 
     print("MPI processes completed successfully")
 
@@ -624,7 +653,8 @@ def cli():
     should_run = False
 
     for arg in [args.input, args.repeats, args.disease, args.additional,
-                args.model]:
+                args.model, args.iterator, args.extractor,
+                args.demographics, args.mixer, args.mover]:
         if arg is not None:
             should_run = True
             break
@@ -689,10 +719,10 @@ def cli():
     # working out the number of processes and threads...
     from metawards.utils import guess_num_threads_and_procs
     (nthreads, nprocs) = guess_num_threads_and_procs(
-                                            njobs=len(variables),
-                                            nthreads=args.nthreads,
-                                            nprocs=args.nprocs,
-                                            parallel_scheme=parallel_scheme)
+        njobs=len(variables),
+        nthreads=args.nthreads,
+        nprocs=args.nprocs,
+        parallel_scheme=parallel_scheme)
 
     print(f"\nNumber of threads to use for each model run is {nthreads}")
 
@@ -708,7 +738,15 @@ def cli():
         import random
         seed = random.randint(10000, 99999999)
 
-    print(f"\nUsing random number seed {seed}")
+    if seed == 0:
+        # this is a special mode that a developer can use to force
+        # all jobs to use the same random number seed (15324) that
+        # is used for comparing outputs. This should NEVER be used
+        # for production code
+        print("** WARNING: Using special mode to fix all random number")
+        print("** WARNING: seeds to 15324. DO NOT USE IN PRODUCTION!!!")
+    else:
+        print(f"\nUsing random number seed {seed}")
 
     # get the starting day and date
     start_day = args.start_day
@@ -732,9 +770,9 @@ def cli():
                 start_date = date.fromisoformat(args.start_date)
             except Exception as e:
                 raise ValueError(
-                        f"Cannot interpret a valid date from "
-                        f"'{args.start_date}'. Error is "
-                        f"{e.__class__} {e}")
+                    f"Cannot interpret a valid date from "
+                    f"'{args.start_date}'. Error is "
+                    f"{e.__class__} {e}")
 
     if start_date is None:
         from datetime import date
@@ -753,7 +791,7 @@ def cli():
     # now find the MetaWardsData repository as this will be needed
     # for the repeat command line too
     (repository, repository_version) = Parameters.get_repository(
-                                                        args.repository)
+        args.repository)
 
     print(f"\nUsing MetaWardsData at {repository}")
     print(f"This is cloned from {repository_version['repository']}")
@@ -815,12 +853,13 @@ def cli():
         raise e
 
     # should we profile the code? (default no as it prints a lot)
-    profile = False
+    profiler = None
 
     if args.no_profile:
-        profile = False
+        profiler = None
     elif args.profile:
-        profile = True
+        from metawards.utils import Profiler
+        profiler = Profiler()
 
     # load the disease and starting-point input files
     if args.disease:
@@ -862,10 +901,20 @@ def cli():
                             day=start_day)
 
     print("\nBuilding the network...")
-    network = Network.build(params=params, calculate_distances=True,
+    network = Network.build(params=params,
                             max_nodes=args.max_nodes,
                             max_links=args.max_links,
-                            profile=profile)
+                            profiler=profiler)
+
+    if args.demographics:
+        from metawards import Demographics
+        print("\nSpecialising the network into different demographics:")
+        demographics = Demographics.load(args.demographics)
+        print(demographics)
+
+        network = network.specialise(demographics,
+                                     profiler=profiler,
+                                     nthreads=nthreads)
 
     print("\nRun the model...")
     from metawards import OutputFiles
@@ -879,7 +928,8 @@ def cli():
     if args.force_overwrite_output:
         prompt = None
     else:
-        prompt = input
+        from metawards import input
+        def prompt(x): return input(x, default="y")
 
     auto_bzip = True
 
@@ -890,19 +940,23 @@ def cli():
 
     if args.iterator:
         iterator = args.iterator
-        # eventually I should get the filename and function from this,
-        # and then convert it into an absolute path to make this safe
-        # on a cluster. Then I should copy the file into the output to
-        # make sure that the calculation is reproducible. Will do this
-        # when I copy this work to extractor
     else:
         iterator = None
 
     if args.extractor:
         extractor = args.extractor
-        # see above ;-)
     else:
         extractor = None
+
+    if args.mixer:
+        mixer = args.mixer
+    else:
+        mixer = None
+
+    if args.mover:
+        mover = args.mover
+    else:
+        mover = None
 
     with OutputFiles(outdir, force_empty=args.force_overwrite_output,
                      auto_bzip=auto_bzip, prompt=prompt) as output_dir:
@@ -913,56 +967,14 @@ def cli():
                             output_dir=output_dir,
                             iterator=iterator,
                             extractor=extractor,
-                            profile=profile, parallel_scheme=parallel_scheme)
+                            mixer=mixer,
+                            mover=mover,
+                            profiler=profiler,
+                            parallel_scheme=parallel_scheme)
 
         if result is None or len(result) == 0:
             print("No output - end of run")
             return 0
-
-        # write the result to a csv file that can be easily read by R or
-        # pandas - this will be written compressed to save space
-        RESULTS = output_dir.open("results.csv", auto_bzip=auto_bzip)
-        print(f"\nWriting a summary of all results into the\n"
-              f"csv file {output_dir.get_filename('results.csv')}.\n"
-              f"You can use this to quickly look at statistics across\n"
-              f"all runs using e.g. R or pandas")
-
-        varnames = result[0][0].variable_names()
-
-        if varnames is None or len(varnames) == 0:
-            varnames = ""
-        else:
-            varnames = ",".join(varnames) + ","
-
-        has_date = result[0][1][0].date
-
-        if has_date:
-            datestring = "date,"
-        else:
-            datestring = ""
-
-        RESULTS.write(f"fingerprint,repeat,{varnames}"
-                      f"day,{datestring}S,E,I,R,IW,UV\n")
-        for varset, trajectory in result:
-            varvals = varset.variable_values()
-            if varvals is None or len(varvals) == 0:
-                varvals = ""
-            else:
-                varvals = ",".join(map(str, varvals)) + ","
-
-            start = f"{varset.fingerprint()}," \
-                    f"{varset.repeat_index()},{varvals}"
-
-            for i, pop in enumerate(trajectory):
-                if pop.date:
-                    d = pop.date.isoformat() + ","
-                else:
-                    d = ""
-
-                RESULTS.write(f"{start}{pop.day},{d}{pop.susceptibles},"
-                              f"{pop.latent},{pop.total},"
-                              f"{pop.recovereds},{pop.n_inf_wards},"
-                              f"{pop.scale_uv}\n")
 
     print("End of the run")
 
@@ -970,9 +982,6 @@ def cli():
 
 
 if __name__ == "__main__":
+    import multiprocessing
+    multiprocessing.freeze_support()  # needed to stop fork bombs
     cli()
-
-else:
-    # this is one of the worker processes - make sure that they
-    # have imported metawards
-    from metawards.utils import run_worker

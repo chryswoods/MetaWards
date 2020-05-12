@@ -1,0 +1,5 @@
+{
+  "demographics" : ["red", "blue"], 
+  "work_ratios"  : [ 0.0,   1.0  ], 
+  "play_ratios"  : [ 0.5,   0.5  ]
+}

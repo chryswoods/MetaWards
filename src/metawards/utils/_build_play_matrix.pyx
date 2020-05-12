@@ -203,7 +203,7 @@ def build_play_matrix(network: Network,
 
     print(f"Number of play links equals {nlinks}")
 
-    network.plinks = nlinks
+    network.nplay = nlinks
     network.play = links
 
     p.stop()

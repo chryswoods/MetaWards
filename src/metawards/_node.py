@@ -27,18 +27,14 @@ class Node:
 
     #: The number (int) of links for this node in the Links play list
     end_p: int = None
-    self_p: int = None
 
-    #: The index (int) of the first link for this node in the network
-    #: weekend Links list
-    begin_we: int = None
-    end_we: int = None
-    self_we: int = None
+    self_p: int = None
 
     day_foi: float = 0.0        # numerator only
     night_foi: float = 0.0      # numerator only
     weekend_foi: float = 0.0    # numerator only
 
+    #: The number of susceptible players in this ward
     play_suscept: float = 0.0
     save_play_suscept: float = 0.0
 
@@ -53,9 +49,3 @@ class Node:
 
     #: y coordinate of the ward (location)
     y: float = 0.0
-
-    b: float = 0.0
-
-    #: the name of the ward, e.g. 'Bristol'
-    id: str = None
-    vacid: int = None

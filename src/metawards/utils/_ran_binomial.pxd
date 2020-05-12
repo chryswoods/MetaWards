@@ -59,3 +59,7 @@ cdef inline int _ran_binomial(binomial_rng *rng, double p, int n) nogil:
 cdef inline double _ran_uniform(binomial_rng *rng) nogil:
     """Generate the next random-distributed uniform [0,1] random number"""
     return binomial_rng_uniform(rng)
+
+cdef inline int _ran_integer(binomial_rng *rng, int start, int stop) nogil:
+    """Generate a random integer from [start,stop)"""
+    return start + <int>((stop-start) * binomial_rng_uniform(rng))

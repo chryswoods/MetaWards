@@ -18,9 +18,13 @@ print(f"Build docs for branch {branch} version {version}")
 # we will only build docs for the master and devel branches
 # (as these are moved into special locations)
 
-if branch not in ["master", "devel", "feature_tutorial"]:
-    print(f"We don't build docs for branch {branch}")
-    sys.exit(0)
+if branch not in ["master", "devel"]:
+    if branch.find(version) != -1:
+        print(f"Building the docs for tag {version}")
+        is_tagged_release = True
+    else:
+        print(f"We don't build the docs for branch {branch}")
+        sys.exit(0)
 
 os.environ["METAWARDS_VERSION"] = version
 os.environ["METAWARDS_BRANCH"] = branch
@@ -50,8 +54,4 @@ run_command("pip install sphinx sphinx_issues sphinx_rtd_theme "
             "sphinxcontrib-programoutput")
 
 # make the documentation
-source_dir = os.getcwd()
-
-os.chdir("doc")
-run_command("make")
-os.chdir(source_dir)
+run_command("make doc")

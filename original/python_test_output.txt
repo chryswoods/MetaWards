@@ -14,7 +14,7 @@ WARNING: so you may not be able to recover the original
 WARNING: source code that was used to generate this run!
 
           -- Additional information --
-Visit https://metawards.github.io for more information
+Visit https://metawards.org for more information
   about metawards, its authors and its license
 
 Command used to run this job:
@@ -151,7 +151,7 @@ Total play distance equals 132407248.5969165
 Total distance equals 264828067.24154168
 Get min/max distances...
 maxdist 668.3577722971484 mindist 0.16782459146549497
-/Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat -- 
+/Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat --
 [12.0]
 Number of seeds equals 1
 Reset everything...

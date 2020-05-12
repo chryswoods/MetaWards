@@ -7,15 +7,20 @@ __all__ = ["Link"]
 @dataclass
 class Link:
     """This is a link between nodes in the network"""
-    ifrom: int = None        # integers (indexes) of origins and destinations
+
+    #: Index of the origin node (ward)
+    ifrom: int = None
+
+    #: Index of the destination node (ward)
     ito: int = None
 
-    weight: float = None     # weight of link, used to save the original
-                             # number of susceptibles in work matrix
+    #: Weight of the link, used to save the original number
+    #: of susceptibles in the work matrix
+    weight: float = None
 
-    suscept: float = None    # number of susceptibles in the case of the
-                             # work matrix. Used to save the weight of
-                             # the play matrix
+    #: Number of susceptibles in the case of the work matrix. Used
+    #: to save the weight of the play matrix
+    suscept: float = None
 
-    distance: float = None   # the distance between two wards
-    A: int = None            # Age index...
+    #: The distance between the two wards connected by this link
+    distance: float = None

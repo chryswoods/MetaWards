@@ -9,7 +9,7 @@ __all__ = ["get_min_max_distances"]
 def get_min_max_distances(network: Network, nthreads: int = 1,
                           profiler: Profiler = None):
     """Return the minimum and maximum distances recorded in the network"""
-    links = network.to_links
+    links = network.links
 
     cdef double mindist = -1.0
     cdef double maxdist = -1.0

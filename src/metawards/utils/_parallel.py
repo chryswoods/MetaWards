@@ -1,5 +1,6 @@
 
 from array import array
+from sys import platform
 
 __all__ = ["guess_num_threads_and_procs",
            "get_available_num_threads",
@@ -133,6 +134,10 @@ def create_thread_generators(rng, nthreads):
             rngs.append(seed_ran_binomial(seed))
 
     # need to return these as an array so that they are more easily
-    # accessible from the OpenMP loops - rng is a unsigned 64bit integer
+    # accessible from the OpenMP loops - rng is a unsigned 64-bit integer
     # as a uintptr_t - this best corresponds to unsigned long ("L")
-    return array("L", rngs)
+    if platform == "win32":
+        # Use unsigned long long ("Q") on Windows since it has a 32-bit long.
+        return array("Q", rngs)
+    else:
+        return array("L", rngs)

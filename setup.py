@@ -5,6 +5,14 @@
 import os
 import versioneer
 from setuptools import setup, Extension
+import distutils.sysconfig
+import distutils.ccompiler
+import multiprocessing
+from glob import glob
+import platform
+import tempfile
+import shutil
+import sys
 
 try:
     from Cython.Build import cythonize
@@ -12,157 +20,324 @@ try:
 except Exception:
     have_cython = False
 
-cflags = '-O3 -march=native -Wall -fopenmp'
+_system_input = input
 
-nbuilders = int(os.getenv("CYTHON_NBUILDERS", 2))
+# has the user asked for a build?
+is_build = False
 
-compiler_directives = {"language_level": 3, "embedsignature": True,
-                       "boundscheck": False, "cdivision": True,
-                       "initializedcheck": False, "cdivision_warnings": False,
-                       "wraparound": False, "binding": False,
-                       "nonecheck": False, "overflowcheck": False}
-
-if os.getenv("CYTHON_LINETRACE", 0):
-    print("Compiling with Cython line-tracing support - will be SLOW")
-    define_macros = [("CYTHON_TRACE", "1")]
-    compiler_directives["linetrace"] = True
-else:
-    define_macros = []
-
-random_sources = ["src/metawards/ran_binomial/mt19937.c",
-                  "src/metawards/ran_binomial/distributions.c"]
+for arg in sys.argv[1:]:
+    lower = arg.lower()
+    if arg in ["build", "bdist_wheel", "build_py"]:
+        is_build = True
+        break
 
 
-# https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
-def no_cythonize(extensions, **_ignore):
-    for extension in extensions:
-        sources = []
-        for sfile in extension.sources:
-            path, ext = os.path.splitext(sfile)
-            if ext in (".pyx", ".py"):
-                if extension.language == "c++":
-                    ext = ".cpp"
-                else:
-                    ext = ".c"
-                sfile = path + ext
-            sources.append(sfile)
-        extension.sources[:] = sources
-    return extensions
+def setup_package():
+    # First, set some flags regarding the distribution
+    IS_MAC = False
+    IS_LINUX = False
+    IS_WINDOWS = False
+    MACHINE = platform.machine()
 
-# Currently each file compiles to its own module. Ideally I'd like
-# them all to compile into a single module library, but this doesn't
-# work (get the error "ImportError: dynamic module does not define
-# init function" and the answers on stackoverflow didn't work.
-# If anyone can help please do :-)
+    openmp_flags = ["-fopenmp", "-openmp"]
+
+    if platform.system() == "Darwin":
+        IS_MAC = True
+        if is_build:
+            print(f"\nCompiling on a Mac ({MACHINE})")
+
+    elif platform.system() == "Windows":
+        IS_WINDOWS = True
+        openmp_flags.insert(0, "/openmp")   # MSVC flag
+        if is_build:
+            print(f"\nCompiling on Windows ({MACHINE})")
+
+    elif platform.system() == "Linux":
+        IS_LINUX = True
+        if is_build:
+            print(f"\nCompiling on Linux ({MACHINE})")
+
+    else:
+        if is_build:
+            print(f"Unrecognised platform {platform.system()}. Assuming Linux")
+        IS_LINUX = True
+
+    # Get the compiler that (I think) distutils will use
+    # - I will need this to add options etc.
+    compiler = distutils.ccompiler.new_compiler()
+    distutils.sysconfig.customize_compiler(compiler)
+
+    user_openmp_flag = os.getenv("OPENMP_FLAG", None)
+
+    if user_openmp_flag is not None:
+        openmp_flags.insert(user_openmp_flag, 0)
+
+    # override 'input' so that defaults can be used when this is run in batch
+    # or CI/CD
+    def input(prompt: str, default="y"):
+        """Wrapper for 'input' that returns 'default' if it detected
+        that this is being run from within a batch job or other
+        service that doesn't have access to a tty
+        """
+        import sys
+
+        try:
+            if sys.stdin.isatty():
+                return _system_input(prompt)
+            else:
+                print(f"Not connected to a console, so having to use "
+                      f"the default ({default})")
+                return default
+        except Exception as e:
+            print(f"Unable to get the input: {e.__class__} {e}")
+            print(f"Using the default ({default}) instead")
+            return default
+
+    # Check if compiler support openmp (and find the correct openmp flag)
+    def get_openmp_flag():
+        openmp_test = \
+            r"""
+            #include <omp.h>
+            #include <stdio.h>
+
+            int main()
+            {
+                int nthreads, thread_id;
+
+                #pragma omp parallel private(nthreads, thread_id)
+                {
+                    thread_id = omp_get_thread_num();
+                    nthreads = omp_get_num_threads();
+                    printf("I am thread %d of %d\n", thread_id, nthreads);
+                }
+
+                return 0;
+            }
+            """
+
+        tmpdir = tempfile.mkdtemp()
+        curdir = os.getcwd()
+        os.chdir(tmpdir)
+        filename = r'openmp_test.c'
+
+        with open(filename, 'w') as file:
+            file.write(openmp_test)
+            file.flush()
+
+        openmp_flag = None
+
+        if user_openmp_flag:
+            openmp_flags.insert(0, user_openmp_flag)
+
+        for flag in openmp_flags:
+            try:
+                # Compiler and then link using each openmp flag...
+                compiler.compile(sources=["openmp_test.c"],
+                                 extra_preargs=[flag])
+                openmp_flag = flag
+                break
+            except Exception as e:
+                print(f"Cannot compile: {e.__class__} {e}")
+                pass
+
+        # clean up
+        os.chdir(curdir)
+        shutil.rmtree(tmpdir)
+
+        return openmp_flag
+
+    if is_build:
+        openmp_flag = get_openmp_flag()
+    else:
+        openmp_flag = None
+
+    include_dirs = []
+
+    if is_build and (openmp_flag is None):
+        print(f"\nYour compiler {compiler.compiler_so[0]} does not support "
+              f"OpenMP with any of the known OpenMP flags {openmp_flags}. "
+              f"If you know which flag to use can you specify it using "
+              f"the environent variable OPENMP_FLAG. Otherwise, we will "
+              f"have to compile the serial version of the code.")
+
+        if IS_MAC:
+            print(f"\nThis is common on Mac, as the default compiler does not "
+                  f"support OpenMP. If you want to compile with OpenMP then "
+                  f"install llvm via homebrew, e.g. 'brew install llvm', see "
+                  f"https://embeddedartistry.com/blog/2017/02/24/installing-llvm-clang-on-osx/")
+
+            print(f"\nRemember then to choose that compiler by setting the "
+                  f"CC environment variable, or passing it on the 'make' line, "
+                  f"e.g. 'CC=/usr/local/opt/llvm/bin/clang make'")
+
+        result = input("\nDo you want compile without OpenMP? (y/n) ",
+                       default="y")
+
+        if result is None or result.strip().lower()[0] != "y":
+            sys.exit(-1)
+
+        include_dirs.append("src/metawards/disable_openmp")
+
+    cflags = "-O3"
+    lflags = []
+
+    if openmp_flag:
+        cflags = f"{cflags} {openmp_flag}"
+        lflags.append(openmp_flag)
+
+    nbuilders = int(os.getenv("CYTHON_NBUILDERS", 2))
+
+    if nbuilders < 1:
+        nbuilders = 1
+
+    if is_build:
+        print(f"Number of builders equals {nbuilders}\n")
+
+    compiler_directives = {"language_level": 3, "embedsignature": True,
+                           "boundscheck": False, "cdivision": True,
+                           "initializedcheck": False,
+                           "cdivision_warnings": False,
+                           "wraparound": False, "binding": False,
+                           "nonecheck": False, "overflowcheck": False}
+
+    if os.getenv("CYTHON_LINETRACE", 0):
+        if is_build:
+            print("Compiling with Cython line-tracing support - will be SLOW")
+        define_macros = [("CYTHON_TRACE", "1")]
+        compiler_directives["linetrace"] = True
+    else:
+        define_macros = []
+
+    # Thank you Priyaj for pointing out this little documented feature - finally
+    # I can build the random code into a library!
+    # https://www.edureka.co/community/21524/setuptools-shared-libary-cython-wrapper-linked-shared-libary
+    ext_lib_path = "src/metawards/ran_binomial"
+    sources = ["mt19937.c", "distributions.c"]
+
+    ext_libraries = [['metawards_random', {
+        'sources': [os.path.join(ext_lib_path, src)
+                    for src in sources],
+        'include_dirs': [],
+        'macros': [],
+    }]]
+
+    def no_cythonize(extensions, **_ignore):
+        # https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
+        for extension in extensions:
+            sources = []
+            for sfile in extension.sources:
+                path, ext = os.path.splitext(sfile)
+                if ext in (".pyx", ".py"):
+                    if extension.language == "c++":
+                        ext = ".cpp"
+                    else:
+                        ext = ".c"
+                    sfile = path + ext
+                sources.append(sfile)
+            extension.sources[:] = sources
+        return extensions
+
+    utils_pyx_files = glob("src/metawards/utils/*.pyx")
+    iterator_pyx_files = glob("src/metawards/iterators/*.pyx")
+    extractor_pyx_files = glob("src/metawards/extractors/*.pyx")
+    mixer_pyx_files = glob("src/metawards/mixers/*.pyx")
+    mover_pyx_files = glob("src/metawards/movers/*.pyx")
+
+    libraries = ["metawards_random"]
+
+    extensions = []
+
+    for pyx in utils_pyx_files:
+        _, name = os.path.split(pyx)
+        name = name[0:-4]
+        module = f"metawards.utils.{name}"
+
+        extensions.append(Extension(module, [pyx], define_macros=define_macros,
+                                    libraries=libraries,
+                                    extra_compile_args=lflags,
+                                    include_dirs=include_dirs))
+
+    for pyx in iterator_pyx_files:
+        _, name = os.path.split(pyx)
+        name = name[0:-4]
+        module = f"metawards.iterators.{name}"
+
+        extensions.append(Extension(module, [pyx], define_macros=define_macros,
+                                    libraries=libraries,
+                                    extra_compile_args=lflags,
+                                    include_dirs=include_dirs))
+
+    for pyx in extractor_pyx_files:
+        _, name = os.path.split(pyx)
+        name = name[0:-4]
+        module = f"metawards.extractors.{name}"
+
+        extensions.append(Extension(module, [pyx], define_macros=define_macros,
+                                    libraries=libraries,
+                                    extra_compile_args=lflags,
+                                    include_dirs=include_dirs))
+
+    for pyx in mixer_pyx_files:
+        _, name = os.path.split(pyx)
+        name = name[0:-4]
+        module = f"metawards.mixers.{name}"
+
+        extensions.append(Extension(module, [pyx], define_macros=define_macros,
+                                    libraries=libraries,
+                                    extra_compile_args=lflags,
+                                    include_dirs=include_dirs))
+
+    for pyx in mover_pyx_files:
+        _, name = os.path.split(pyx)
+        name = name[0:-4]
+        module = f"metawards.movers.{name}"
+
+        extensions.append(Extension(module, [pyx], define_macros=define_macros,
+                                    libraries=libraries,
+                                    extra_compile_args=lflags,
+                                    include_dirs=include_dirs))
+
+    CYTHONIZE = bool(int(os.getenv("CYTHONIZE", 0)))
+
+    if not have_cython:
+        CYTHONIZE = False
+
+    os.environ['CFLAGS'] = cflags
+
+    if CYTHONIZE:
+        extensions = cythonize(extensions,
+                               compiler_directives=compiler_directives,
+                               nthreads=nbuilders)
+    else:
+        extensions = no_cythonize(extensions)
+
+    with open("requirements.txt") as fp:
+        install_requires = fp.read().strip().split("\n")
+
+    with open("requirements-dev.txt") as fp:
+        dev_requires = fp.read().strip().split("\n")
+
+    setup(
+        version=versioneer.get_version(),
+        cmdclass=versioneer.get_cmdclass(),
+        ext_modules=extensions,
+        install_requires=install_requires,
+        libraries=ext_libraries,
+        extras_require={
+            "dev": dev_requires,
+            "docs": ["sphinx", "sphinx-rtd-theme"]
+        },
+        entry_points={
+            "console_scripts": [
+                "metawards = metawards.app.run:cli",
+                "metawards-plot = metawards.app.plot:cli"
+            ]
+        }
+    )
 
 
-extensions = [
-    Extension("metawards._nodes", ["src/metawards/_nodes.pyx"],
-              define_macros=define_macros),
-    Extension("metawards._links", ["src/metawards/_links.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._workspace",
-              ["src/metawards/utils/_workspace.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._clear_all_infections",
-              ["src/metawards/utils/_clear_all_infections.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._build_wards_network",
-              ["src/metawards/utils/_build_wards_network.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._add_wards_network_distance",
-              ["src/metawards/utils/_add_wards_network_distance.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._get_min_max_distances",
-              ["src/metawards/utils/_get_min_max_distances.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._reset_everything",
-              ["src/metawards/utils/_reset_everything.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._rescale_matrix",
-              ["src/metawards/utils/_rescale_matrix.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._recalculate_denominators",
-              ["src/metawards/utils/_recalculate_denominators.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._move_population",
-              ["src/metawards/utils/_move_population.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._fill_in_gaps",
-              ["src/metawards/utils/_fill_in_gaps.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._build_play_matrix",
-              ["src/metawards/utils/_build_play_matrix.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._array", ["src/metawards/utils/_array.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._ran_binomial",
-              ["src/metawards/utils/_ran_binomial.pyx"]+random_sources,
-              define_macros=define_macros),
-    Extension("metawards.utils._assert_sane_network",
-              ["src/metawards/utils/_assert_sane_network.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.utils._get_array_ptr",
-              ["src/metawards/utils/_get_array_ptr.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.iterators._advance_play",
-              ["src/metawards/iterators/_advance_play.pyx"]+random_sources,
-              define_macros=define_macros),
-    Extension("metawards.iterators._advance_fixed",
-              ["src/metawards/iterators/_advance_fixed.pyx"]+random_sources,
-              define_macros=define_macros),
-    Extension("metawards.iterators._advance_infprob",
-              ["src/metawards/iterators/_advance_infprob.pyx"]+random_sources,
-              define_macros=define_macros),
-    Extension("metawards.iterators._advance_recovery",
-              ["src/metawards/iterators/_advance_recovery.pyx"]+random_sources,
-              define_macros=define_macros),
-    Extension("metawards.iterators._advance_foi",
-              ["src/metawards/iterators/_advance_foi.pyx"]+random_sources,
-              define_macros=define_macros),
-    Extension("metawards.iterators._advance_imports",
-              ["src/metawards/iterators/_advance_imports.pyx"]+random_sources,
-              define_macros=define_macros),
-    Extension("metawards.extractors._output_core",
-              ["src/metawards/extractors/_output_core.pyx"],
-              define_macros=define_macros),
-    Extension("metawards.extractors._output_dispersal",
-              ["src/metawards/extractors/_output_dispersal.pyx"],
-              define_macros=define_macros),
-]
-
-CYTHONIZE = bool(int(os.getenv("CYTHONIZE", 0)))
-
-if not have_cython:
-    CYTHONIZE = False
-
-os.environ['CFLAGS'] = cflags
-
-if CYTHONIZE:
-    extensions = cythonize(extensions, compiler_directives=compiler_directives,
-                           nthreads=nbuilders)
-else:
-    extensions = no_cythonize(extensions)
-
-with open("requirements.txt") as fp:
-    install_requires = fp.read().strip().split("\n")
-
-with open("requirements-dev.txt") as fp:
-    dev_requires = fp.read().strip().split("\n")
-
-setup(
-    version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass(),
-    ext_modules=extensions,
-    install_requires=install_requires,
-    extras_require={
-        "dev": dev_requires,
-        "docs": ["sphinx", "sphinx-rtd-theme"]
-    },
-    entry_points={
-        "console_scripts": [
-           "metawards = metawards.app.run:cli",
-           "metawards-plot = metawards.app.plot:cli"
-        ]
-    }
-)
+if __name__ == "__main__":
+    # Freeze to support parallel compilation when using spawn instead of fork
+    # (thanks to pandas for showing how to do this in their setup.py)
+    multiprocessing.freeze_support()
+    setup_package()

@@ -1,5 +1,6 @@
 
 from dataclasses import dataclass as _dataclass
+from typing import Dict as _Dict
 import os as _os
 import pathlib as _pathlib
 
@@ -51,6 +52,10 @@ class InputFiles:
     position: str = None
     #: Coordinates-system used for the positions. Should be 'x/y' or 'lat/long'
     coordinates: str = None
+    #: File to look up metadata about the wards (e.g. their names)
+    lookup: str = None
+    #: Which columns in this file have the data
+    lookup_columns: _Dict[str, int] = None
     #: File from which to read the values to seed the wards
     seed: str = None
     #: File from which to read the list of nodes to track
@@ -100,6 +105,8 @@ class InputFiles:
                f"play_size = {self.play_size}\n" \
                f"position = {self.position}\n" \
                f"coordinates = {self.coordinates}\n" \
+               f"lookup = {self.lookup}\n" \
+               f"lookup_columns = {self.lookup_columns}\n" \
                f"seed = {self.seed}\n" \
                f"nodes_to_track = {self.nodes_to_track}\n\n"
 
@@ -113,7 +120,7 @@ class InputFiles:
                    and not attr.startswith("_")]
 
         for member in members:
-            if member == "coordinates":
+            if member in ["coordinates", "lookup_columns"]:
                 continue
 
             filename = getattr(self, member)
@@ -212,16 +219,18 @@ class InputFiles:
                            play_size=files.get("play_size", None),
                            position=files.get("position", None),
                            coordinates=files.get("coordinates", "x/y"),
+                           lookup=files.get("lookup", None),
+                           lookup_columns=files.get("lookup_columns", None),
                            seed=files.get("seed", None),
                            nodes_to_track=files.get("nodes_to_track", None),
                            uv=files.get("uv", None),
                            _filename=json_file,
                            _model_path=model_path,
-                           _model_name=files["name"],
-                           _model_version=files["version"],
-                           _references=files["reference(s)"],
-                           _authors=files["author(s)"],
-                           _contacts=files["contact(s)"],
+                           _model_name=files.get("name", model),
+                           _model_version=files.get("version", "unknown"),
+                           _references=files.get("reference(s)", "none"),
+                           _authors=files.get("author(s)", "unknown"),
+                           _contacts=files.get("contact(s)", "unknown"),
                            _repository=repository,
                            _repository_version=repository_version,
                            _repository_branch=repository_branch)

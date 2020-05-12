@@ -40,9 +40,12 @@ if not os.path.exists("./gh-pages"):
 # if this is the master branch, then copy the docs to both the root
 # directory of the website, and also to the 'versions/version' directory
 if is_tagged_release or (branch == "master"):
-    print(f"Copying main docs to gh-pages and gh-pages/versions/{version}")
+    print(f"Copying main docs to gh-pages")
     dir_util.copy_tree("doc/build/html/", "gh-pages/")
-    dir_util.copy_tree("doc/build/html/", f"gh-pages/versions/{version}/")
+
+    if is_tagged_release:
+        print(f"Copying main docs to gh-pages/versions/{version}")
+        dir_util.copy_tree("doc/build/html/", f"gh-pages/versions/{version}/")
 
 elif branch == "devel":
     dir_util.copy_tree("doc/build/html/", "gh-pages/versions/devel/")

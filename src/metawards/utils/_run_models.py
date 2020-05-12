@@ -1,8 +1,16 @@
 
+from typing import Union as _Union
+from typing import List as _List
+from typing import Tuple as _Tuple
+
 from .._network import Network
+from .._networks import Networks
 from .._population import Population
-from .._variableset import VariableSets
+from .._variableset import VariableSets, VariableSet
 from .._outputfiles import OutputFiles
+
+from ._profiler import Profiler
+from ._get_functions import get_functions, MetaFunction
 
 from contextlib import contextmanager as _contextmanager
 
@@ -26,12 +34,12 @@ def get_number_of_processes(parallel_scheme: str, nprocs: int = None):
             return nprocs
         elif parallel_scheme == "scoop":
             raise ValueError(
-                    f"You must specify the number of processes for "
-                    f"scoop to parallelise over")
+                f"You must specify the number of processes for "
+                f"scoop to parallelise over")
         else:
             raise ValueError(
-                    f"You must specify the number of processes to "
-                    f"use for parallel scheme '{parallel_scheme}'")
+                f"You must specify the number of processes to "
+                f"use for parallel scheme '{parallel_scheme}'")
 
     if parallel_scheme == "mpi4py":
         from mpi4py import MPI
@@ -74,19 +82,26 @@ def redirect_output(outdir):
         new_err.close()
 
 
-def run_models(network: Network, variables: VariableSets,
+def run_models(network: _Union[Network, Networks],
+               variables: VariableSets,
                population: Population,
                nprocs: int, nthreads: int, seed: int,
                nsteps: int, output_dir: OutputFiles,
-               iterator: str, extractor: str,
-               profile: bool, parallel_scheme: str):
+               iterator: MetaFunction = None,
+               extractor: MetaFunction = None,
+               mixer: MetaFunction = None,
+               mover: MetaFunction = None,
+               profiler: Profiler = None,
+               parallel_scheme: str = "multiprocessing",
+               debug_seeds=False) \
+        -> _List[_Tuple[VariableSet, Population]]:
     """Run all of the models on the passed Network that are described
        by the passed VariableSets
 
        Parameters
        ----------
-       network: Network
-         The network to model
+       network: Network or Networks
+         The network(s) to model
        variables: VariableSets
          The sets of VariableSet that represent all of the model
          runs to perform
@@ -110,32 +125,65 @@ def run_models(network: Network, variables: VariableSets,
          Iterator to load that will be used to iterate the outbreak
        extractor: str
          Extractor to load that will be used to extract information
-       profile: bool
-         Whether or not to profile the model run and print out live
-         timing (useful for performance debugging)
+       mixer: str
+         Mixer to load that will be used to mix demographic data
+       mover: str
+         Mover to load that will be used to move the population between
+         different demographics
+       profiler: Profiler
+         Profiler used to profile the model run
        parallel_scheme: str
          Which parallel scheme (multiprocessing, mpi4py or scoop) to use
          to run multiple model runs in parallel
-    """
+       debug_seeds: bool (False)
+         Set this parameter to force all runs to use the same seed
+         (seed) - this is used for debugging and should never be set
+         in production runs
 
-    # this variable is used to pick out some of the additional seeds?
-    s = -1
+       Returns
+       -------
+       results: List[ tuple(VariableSet, Population)]
+         The set of adjustable variables and final population at the
+         end of each run
+    """
 
     if len(variables) == 1:
         # no need to do anything complex - just a single run
         params = network.params.set_variables(variables[0])
 
-        network.update(params, profile=profile)
+        network.update(params, profiler=profiler)
 
         trajectory = network.run(population=population, seed=seed,
-                                 s=s, nsteps=nsteps,
+                                 nsteps=nsteps,
                                  output_dir=output_dir,
                                  iterator=iterator,
                                  extractor=extractor,
-                                 profile=profile,
+                                 mixer=mixer,
+                                 mover=mover,
+                                 profiler=profiler,
                                  nthreads=nthreads)
 
-        return [(variables[0], trajectory)]
+        results = [(variables[0], trajectory)]
+
+        # perform the final summary
+        from ._get_functions import get_summary_functions
+
+        if extractor is None:
+            from ..extractors._extract_default import extract_default
+            extractor = extract_default
+        else:
+            from ..extractors._extract_custom import build_custom_extractor
+            extractor = build_custom_extractor(extractor)
+
+        funcs = get_summary_functions(network=network, results=results,
+                                      output_dir=output_dir,
+                                      extractor=extractor,
+                                      nthreads=nthreads)
+
+        for func in funcs:
+            func(network=network, output_dir=output_dir, results=results)
+
+        return results
 
     # generate the random number seeds for all of the jobs
     # (for testing, we will use the same seed so that I can check
@@ -152,6 +200,14 @@ def run_models(network: Network, variables: VariableSets,
 
         for i in range(0, len(variables)):
             seeds.append(15324)
+
+    elif debug_seeds:
+        print("** WARNING: Using special model to make all jobs use the")
+        print(f"** WARNING: Same random number seed {seed}.")
+        print(f"** WARNING: DO NOT USE IN PRODUCTION!")
+
+        for i in range(0, len(variables)):
+            seeds.append(seed)
 
     else:
         from ._ran_binomial import seed_ran_binomial, ran_int
@@ -177,6 +233,8 @@ def run_models(network: Network, variables: VariableSets,
     if nprocs == 1:
         # no need to use a pool, as we will repeat this calculation
         # several times
+        save_network = network.copy()
+
         for i, variable in enumerate(variables):
             seed = seeds[i]
             outdir = outdirs[i]
@@ -195,14 +253,16 @@ def run_models(network: Network, variables: VariableSets,
                     # no need to do anything complex - just a single run
                     params = network.params.set_variables(variable)
 
-                    network.update(params, profile=profile)
+                    network.update(params, profiler=profiler)
 
                     output = network.run(population=population, seed=seed,
-                                         s=s, nsteps=nsteps,
+                                         nsteps=nsteps,
                                          output_dir=subdir,
                                          iterator=iterator,
                                          extractor=extractor,
-                                         profile=profile,
+                                         mixer=mixer,
+                                         mover=mover,
+                                         profiler=profiler,
                                          nthreads=nthreads)
 
                     outputs.append((variable, output))
@@ -211,6 +271,11 @@ def run_models(network: Network, variables: VariableSets,
                 print(variable)
                 print(output[-1])
             # end of OutputDirs context manager
+
+            if i != len(variables) - 1:
+                # still another run to perform, restore the network
+                # to the original state
+                network = save_network.copy()
         # end of loop over variable sets
     else:
         from ._worker import run_worker
@@ -218,8 +283,23 @@ def run_models(network: Network, variables: VariableSets,
         # create all of the parameters and options to run
         arguments = []
 
-        max_nodes = network.nnodes + 1
-        max_links = max(network.nlinks, network.plinks) + 1
+        if isinstance(network, Networks):
+            max_nodes = network.overall.nnodes + 1
+            max_links = max(network.overall.nlinks, network.overall.nplay) + 1
+        else:
+            max_nodes = network.nnodes + 1
+            max_links = max(network.nlinks, network.nplay) + 1
+
+        try:
+            demographics = network.demographics
+        except Exception:
+            demographics = None
+
+        # give the workers a clean copy of the profiler
+        if profiler is None:
+            worker_profiler = None
+        else:
+            worker_profiler = profiler.__class__()
 
         for i, variable in enumerate(variables):
             seed = seeds[i]
@@ -227,15 +307,17 @@ def run_models(network: Network, variables: VariableSets,
 
             arguments.append({
                 "params": network.params.set_variables(variable),
+                "demographics": demographics,
                 "options": {"seed": seed,
                             "output_dir": outdir,
                             "auto_bzip": output_dir.auto_bzip(),
                             "population": population,
-                            "s": s,
                             "nsteps": nsteps,
                             "iterator": iterator,
                             "extractor": extractor,
-                            "profile": profile,
+                            "mixer": mixer,
+                            "mover": mover,
+                            "profiler": worker_profiler,
                             "nthreads": nthreads,
                             "max_nodes": max_nodes,
                             "max_links": max_links}
@@ -283,5 +365,23 @@ def run_models(network: Network, variables: VariableSets,
         else:
             raise ValueError(f"Unrecognised parallelisation scheme "
                              f"{parallel_scheme}.")
+
+    # perform the final summary
+    from ._get_functions import get_summary_functions
+
+    if extractor is None:
+        from ..extractors._extract_default import extract_default
+        extractor = extract_default
+    else:
+        from ..extractors._extract_custom import build_custom_extractor
+        extractor = build_custom_extractor(extractor)
+
+    funcs = get_summary_functions(network=network, results=outputs,
+                                  output_dir=output_dir, extractor=extractor,
+                                  nthreads=nthreads)
+
+    for func in funcs:
+        func(network=network, output_dir=output_dir,
+             results=outputs, nthreads=nthreads)
 
     return outputs

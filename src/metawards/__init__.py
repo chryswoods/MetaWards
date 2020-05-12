@@ -7,12 +7,15 @@ Classes
 .. autosummary::
     :toctree: generated/
 
+    Demographic
+    Demographics
     Disease
     Infections
     InputFiles
     Link
     Links
     Network
+    Networks
     Node
     Nodes
     OutputFiles
@@ -21,6 +24,9 @@ Classes
     Populations
     VariableSet
     VariableSets
+    WardInfo
+    WardInfos
+    Workspace
 
 Functions
 =========
@@ -32,26 +38,46 @@ Functions
 
 """
 
+from . import analysis
+from . import app
+from . import movers
+from . import mixers
+from . import extractors
+from . import iterators
+from . import utils
+from ._version import get_versions
+from ._links import *
+from ._nodes import *
+from ._wardinfo import *
+from ._workspace import *
+from ._infections import *
+from ._variableset import *
+from ._outputfiles import *
+from ._networks import *
+from ._network import *
+from ._population import *
+from ._link import *
+from ._node import *
+from ._inputfiles import *
+from ._disease import *
+from ._demographics import *
+from ._demographic import *
+from ._parameters import *
+import sys as _sys
+
+if _sys.version_info < (3, 7):
+    print("MetaWards requires Python version 3.7 or above.")
+    print("Your python is version")
+    print(_sys.version)
+    _sys.exit(-1)
+
 __all__ = ["get_version_string"]
 
-from ._parameters import *
-from ._disease import *
-from ._inputfiles import *
-from ._node import *
-from ._link import *
-from ._population import *
-from ._network import *
-from ._outputfiles import *
-from ._variableset import *
-from ._infections import *
 
 # import the pyx cython-compiled modules
-from ._nodes import *
-from ._links import *
 
 __manual_version__ = "0.9.0"
 
-from ._version import get_versions
 _v = get_versions()
 __version__ = _v['version']
 
@@ -63,12 +89,6 @@ __repository__ = _v['repository']
 __revisionid__ = _v['full-revisionid']
 del _v
 del get_versions
-
-from . import utils
-from . import iterators
-from . import extractors
-from . import app
-from . import analysis
 
 
 def get_version_string():
@@ -121,9 +141,31 @@ def get_version_string():
 
     lines.append("")
     lines.append(center(f"-- Additional information --"))
-    lines.append(center(f"Visit https://metawards.github.io for more "
-                        f"information"))
+    lines.append(center(f"Visit https://metawards.org for more information"))
     lines.append(center(f"about metawards, its authors and its license"))
     lines.append("")
 
     return newline.join(lines)
+
+
+_system_input = input
+
+
+def input(prompt: str, default="y"):
+    """Wrapper for 'input' that returns 'default' if it detected
+       that this is being run from within a batch job or other
+       service that doesn't have access to a tty
+    """
+    import sys
+
+    try:
+        if sys.stdin.isatty():
+            return _system_input(prompt)
+        else:
+            print(f"Not connected to a console, so having to use the "
+                  f"default ({default})")
+            return default
+    except Exception as e:
+        print(f"Unable to get the input: {e.__class__} {e}")
+        print(f"Using the default ({default}) instead")
+        return default

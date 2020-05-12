@@ -10,13 +10,31 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.config.os }}
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     strategy:
       max-parallel: 4
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest]  #, macos-latest]
         python-version: [3.7, 3.8]
+        config:
+        - {
+            name: "Windows Latest MSVC",
+            os: windows-latest,
+            build_type: "Release", cc: "cl", cxx: "cl",
+            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          }
+        - {
+            name: "Ubuntu Latest GCC",
+            os: ubuntu-latest,
+            build_type: "Release", cc: "gcc", cxx: "g++"
+          }
+        - {
+            name: "macOS Latest clang",
+            os: macos-latest,
+            build_type: "Release", cc: "clang", cxx: "clang++",
+            METAWARDS_DISABLE_OPENMP: 1
+          }
     steps:
       - uses: actions/checkout@v2
         with:
@@ -32,46 +50,61 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements-dev.txt
       - name: Install MetaWards package
-        run: make -j 1
+        run: make -j 4
       - name: Clone MetaWards data
         run: git clone https://github.com/metawards/MetaWardsData
       - name: Run tests
-        run: METAWARDSDATA=./MetaWardsData make test
+        run: make test
+        env:
+          CYTHONIZE: 1
+          METAWARDSDATA: ./MetaWardsData
       - name: Install packaging requirements
         run: pip install --upgrade setuptools wheel
-      - name: Make bdist package
-        run: |
-          pip install --upgrade setuptools wheel
-          python setup.py bdist_wheel
-        if: contains(github.ref, 'refs/tags/') && github.event_name == 'push'
-      - name: Make sdist package
-        run: python setup.py sdist
-        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && contains(github.ref, 'refs/tags/') && github.event_name == 'push'
-      - name: Upload sdist/bdist package(s)
-        uses: actions/upload-artifact@v1
-        with:
-          name: dist
-          path: ./dist
-        if: contains(github.ref, 'refs/tags/') && github.event_name == 'push'
+        if: github.event_name == 'push'
       - name: Build Docs
-        run: python actions/build_docs.py
-        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && github.event_name == 'push'
+        run: |
+          make install
+          python actions/build_docs.py
+        if: matrix.python-version == 3.8 && matrix.config.os == 'ubuntu-latest' && github.event_name == 'push'
       - name: Checkout gh-pages branch
         uses: actions/checkout@v2
         with:
           ref: gh-pages
           path: gh-pages
-        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && github.event_name == 'push'
+        if: matrix.python-version == 3.8 && matrix.config.os == 'ubuntu-latest' && github.event_name == 'push'
       - name: Assemble Website
         run: |
           python actions/assemble_website.py
           python actions/deduplicate_website.py
           python actions/gitupdate_website.py
-        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && github.event_name == 'push'
+        if: matrix.python-version == 3.8 && matrix.config.os == 'ubuntu-latest' && github.event_name == 'push'
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           branch: 'gh-pages'
           directory: 'gh-pages'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        if: matrix.python-version == 3.8 && matrix.os == 'ubuntu-latest' && github.event_name == 'push'
+        if: matrix.python-version == 3.8 && matrix.config.os == 'ubuntu-latest' && github.event_name == 'push'
+      - name: Make bdist package
+        run: |
+          python setup.py bdist_wheel
+        env:
+          CYTHONIZE: 1
+        if: github.event_name == 'push' && (matrix.config.os == 'windows-latest' || matrix.config.os == 'macos-latest')
+      - name: Make manylinux package
+        # this is run by python 3.8, but it actually builds 3.7 and 3.8 bdists
+        run: |
+          python actions/build_manylinux.py
+        if: github.event_name == 'push' && matrix.python-version == 3.8 && matrix.config.os == 'ubuntu-latest'
+      - name: Make sdist package
+        # Give Python 3.7 the sdist, so that this has something to upload
+        run: python setup.py sdist
+        env:
+          CYTHONIZE: 1
+        if: github.event_name == 'push' && matrix.python-version == 3.7 && matrix.config.os == 'ubuntu-latest'
+      - name: Upload sdist/bdist package(s)
+        uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: ./dist
+        if: github.event_name == 'push'

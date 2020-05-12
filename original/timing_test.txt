@@ -1,0 +1,22 @@
+Original timing test versus C code
+
+Using the old ncov params, with ExtraSeedBrighton.dat, command line
+metawards 15324 Testing/ncovparams.csv 0 1.0
+
+C code result is 
+193 1
+S: 55909006    E: 0    I: 0    R: 173071    IW: 0   TOTAL POPULATION 56082077
+
+in 53.5 seconds.
+
+Purpose here is to make sure that we don't regress the speed of the python code
+
+28 April 2020
+time metawards --seed 15324 --input tests/data/ncovparams.csv -l 0 --nthreads 1 -a ExtraSeedsBrighton.dat -d tests/data/ncov.json --UV 1
+
+ 193 1
+S: 55909006    E: 0    I: 0    R: 173071    IW: 0   TOTAL POPULATION 56082077
+Infection died ... Ending on day 194
+
+45.1 seconds
+

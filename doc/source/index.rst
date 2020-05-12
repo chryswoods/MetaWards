@@ -92,6 +92,22 @@ Usage
    usage
    cluster_usage
 
+Getting help
+============
+
+.. toctree::
+   :maxdepth: 2
+
+   support
+
+Contributing
+============
+
+.. toctree::
+   :maxdepth: 2
+
+   contributing
+
 Documentation
 =============
 
@@ -113,6 +129,13 @@ Changelog
    :maxdepth: 2
 
    changelog
+
+Acknowledgements
+================
+.. toctree::
+   :maxdepth: 2
+
+   acknowledgements
 
 Indices and tables
 ==================

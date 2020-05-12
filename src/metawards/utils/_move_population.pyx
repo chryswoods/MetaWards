@@ -43,7 +43,7 @@ def move_population_from_play_to_work(network: Network,
     if params is None:
         return
 
-    links = network.to_links
+    links = network.links
     wards = network.nodes
     play = network.play
 
@@ -75,7 +75,7 @@ def move_population_from_play_to_work(network: Network,
     cdef double countrem = 0.0
     cdef double temp = 0.0
     cdef double p = 0.0
-    nlinks_plus_one = network.plinks + 1
+    nlinks_plus_one = network.nplay + 1
 
     if params.play_to_work > 0.0:
         with nogil:

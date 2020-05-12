@@ -34,6 +34,9 @@ class Population:
     #: The date in the outbreak of this record
     date: _date = None
 
+    #: The populations in each of the multi-demographic subnetworks
+    subpops = None
+
     @property
     def population(self) -> int:
         """The total population in all wards"""
@@ -43,6 +46,19 @@ class Population:
     def infecteds(self) -> int:
         """The number who are infected across all wards"""
         return self.total + self.latent
+
+    def specialise(self, network):
+        """Specialise this population for the passed Networks"""
+        subpops = []
+
+        from copy import deepcopy
+
+        self.subpops = None
+
+        for i in range(0, len(network.subnets)):
+            subpops.append(deepcopy(self))
+
+        self.subpops = subpops
 
     def __str__(self):
         s = f"DAY: {self.day} " \
@@ -58,6 +74,87 @@ class Population:
             return f"{self.date.isoformat()}: {s}"
         else:
             return s
+
+    def assert_sane(self):
+        """Assert that this population is sane, i.e. the totals within
+           this population and with the sub-populations all add up to
+           the correct values
+        """
+        errors = []
+
+        t = self.susceptibles + self.latent + self.total + self.recovereds
+
+        if t != self.population:
+            errors.append(f"Disagreement in total overall population: "
+                          f"{t} versus {self.population}")
+
+        if self.subpops is not None and len(self.subpops) > 0:
+            S = 0
+            E = 0
+            I = 0
+            R = 0
+            P = 0
+
+            for subpop in self.subpops:
+                S += subpop.susceptibles
+                E += subpop.latent
+                I += subpop.infecteds
+                R += subpop.recovereds
+                P += subpop.population
+
+            if S != self.susceptibles:
+                errors.append(f"Disagreement in S: {S} "
+                              f"versus {self.susceptibles}")
+
+            if E != self.latent:
+                errors.append(f"Disagreement in E: {E} "
+                              f"versus {self.latent}")
+
+            if I != self.infecteds:
+                errors.append(f"Disagreement in I: {I} "
+                              f"versus {self.infecteds}")
+
+            if R != self.recovereds:
+                errors.append(f"Disagreement in R: {R} "
+                              f"versus {self.recovereds}")
+
+            if P != self.population:
+                errors.append(f"Disagreement in Population: {P} "
+                              f"versus {self.population}")
+
+        if len(errors) > 0:
+            errors = "\nERROR: ".join(errors)
+            print(f"ERROR: {errors}")
+            raise AssertionError(f"Disagreement in population sums!")
+
+    def summary(self, demographics=None):
+        """Return a short summary string that is suitable to be printed
+           out during a model run
+
+           Returns
+           -------
+           summary: str
+             The short summary string
+        """
+        summary = f"S: {self.susceptibles}  E: {self.latent}  " \
+                  f"I: {self.total}  R: {self.recovereds}  " \
+                  f"IW: {self.n_inf_wards}  POPULATION: {self.population}"
+
+        if self.subpops is None or len(self.subpops) == 0:
+            return summary
+
+        subs = []
+        for i, subpop in enumerate(self.subpops):
+            if demographics is not None:
+                name = demographics.get_name(i)
+                subs.append(f"{name}  {subpop.summary()}")
+            else:
+                subs.append(f"{i}  {subpop.summary()}")
+
+        from .utils._align_strings import align_strings
+        subs = align_strings(subs, ":")
+
+        return f"{summary}\n  " + "\n  ".join(subs)
 
 
 @_dataclass
@@ -86,6 +183,15 @@ class Populations:
             return 0
         else:
             return len(self._trajectory)
+
+    def strip_demographics(self):
+        """Remove the demographics information from this trajectory. This
+           makes it much smaller and easier to transmit over a network
+        """
+        for value in self._trajectory:
+            value._subpops = None
+
+        return self
 
     def append(self, population: Population):
         """Append the next step in the trajectory.

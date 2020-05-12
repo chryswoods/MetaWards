@@ -21,3 +21,4 @@ through in order.
    index_part02
    index_part03
    index_part04
+   index_part05

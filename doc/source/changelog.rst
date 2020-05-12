@@ -2,6 +2,46 @@
 Changelog
 =========
 
+`0.11.1 <https://github.com/metawards/MetaWards/compare/0.11.0...0.11.1>`__ - May 10th 2020
+--------------------------------------------------------------------------------------------
+
+* Fixed CI/CD to produce working sdist and bdist packages
+
+`0.11.0 <https://github.com/metawards/MetaWards/compare/0.10.0...0.11.0>`__ - May 10th 2020
+--------------------------------------------------------------------------------------------
+
+* Code now fully works and has been tested on Windows :-)
+* Major update of the API to support a Networks of multiple Network objects
+* This has been used to support modelling multiple demographics
+* Added in movers and mixers to enable a user to customise how individuals
+  are moved between demographics and how the FOIs of demographics are
+  merged together (e.g. via an interaction matrix). This is demonstrated
+  in part 5 of the tutorial which shows how this can be used to model
+  shielding
+* Allow compilation using compilers that don't support OpenMP - now compiles
+  even on stock OS X.
+* Added more extractors and can now output files that are needed for graphics
+* Added a special random number seed to support debugging
+* Moved random number files to a separate library which is now properly
+  compiled and linked.
+* Updated CI to CI/CD and now build the OS X, Windows and ManyLinux wheels
+* Updated URLs to metawards.org
+* Allow multiple multi-node jobs to run from a single directory (they now
+  have their own hostfiles)
+* Updated metawards-plot to render multi-demographic trajectories and
+  to make better animations.
+* General bug fixes and speed-ups :-)
+
+`0.10.0 <https://github.com/metawards/MetaWards/compare/0.9.0...0.10.0>`__ - April 27th 2020
+--------------------------------------------------------------------------------------------
+
+* Created all of the extract framework to support customising the output
+  and analysis during a run.
+* Created a better Workspace class for holding accumulated data during extract
+* Completed most of the extractor tutorial
+* Added in WardInfo(s) to get metadata about wards, and to support searching
+  for wards via their name, code, authority and region
+
 `0.9.0 <https://github.com/metawards/MetaWards/compare/0.8.4...0.9.0>`__ - April 24th 2020
 ------------------------------------------------------------------------------------------
 

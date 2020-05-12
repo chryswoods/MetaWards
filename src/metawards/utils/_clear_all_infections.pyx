@@ -12,7 +12,7 @@ from ._get_array_ptr cimport get_int_array_ptr
 __all__ = ["clear_all_infections"]
 
 
-def clear_all_infections(infections: Infections,
+def clear_all_infections(infections, play_infections,
                          nthreads: int=1):
     """Clears all infections associated with a model run
 
@@ -25,9 +25,6 @@ def clear_all_infections(infections: Infections,
        nthreads: int
          Number of threads to use to clear the arrays
     """
-
-    play_infections = infections.play
-    infections = infections.work
 
     cdef int i = 0
     cdef int j = 0

@@ -4,14 +4,18 @@
 
 cimport cython
 
-from libc.stdlib cimport malloc, free
+from libc.stdlib cimport calloc, free
 cimport openmp
 
+from typing import Union as _Union
+
 from .._network import Network
+from .._networks import Networks
 from .._population import Population
 from .._infections import Infections
+from ..utils._profiler import Profiler
 
-from ..utils._workspace import Workspace
+from .._workspace import Workspace
 
 from ..utils._get_array_ptr cimport get_int_array_ptr, get_double_array_ptr
 
@@ -26,16 +30,16 @@ cdef struct _inf_buffer:
 
 
 cdef _inf_buffer* _allocate_inf_buffers(int nthreads,
-                                        int buffer_size=1024) nogil:
+                                        int buffer_size=4096) nogil:
     cdef int size = buffer_size
     cdef int n = nthreads
 
-    cdef _inf_buffer *buffers = <_inf_buffer *> malloc(n * sizeof(_inf_buffer))
+    cdef _inf_buffer *buffers = <_inf_buffer *> calloc(n, sizeof(_inf_buffer))
 
     for i in range(0, n):
         buffers[i].count = 0
-        buffers[i].index = <int *> malloc(size * sizeof(int))
-        buffers[i].infected = <int *> malloc(size * sizeof(int))
+        buffers[i].index = <int *> calloc(size, sizeof(int))
+        buffers[i].infected = <int *> calloc(size, sizeof(int))
 
     return buffers
 
@@ -71,7 +75,7 @@ cdef void _add_from_buffer(_inf_buffer *buffer, int *wards_infected) nogil:
 cdef inline void _add_to_buffer(_inf_buffer *buffer, int index, int value,
                                 int *wards_infected,
                                 openmp.omp_lock_t *lock,
-                                int buffer_size=1024) nogil:
+                                int buffer_size=4096) nogil:
     cdef int count = buffer[0].count
 
     buffer[0].index[count] = index
@@ -114,8 +118,8 @@ cdef _red_variables* _allocate_red_variables(int nthreads) nogil:
     """
     cdef int n = nthreads
 
-    cdef _red_variables *variables = <_red_variables *> malloc(
-                                                n * sizeof(_red_variables))
+    cdef _red_variables *variables = <_red_variables *> calloc(
+                                                n, sizeof(_red_variables))
 
 
     _reset_reduce_variables(variables, n)
@@ -150,12 +154,17 @@ cdef void _reduce_variables(_red_variables *variables, int nthreads) nogil:
 cdef int _buffer_nthreads = 0
 cdef _inf_buffer * _total_new_inf_ward_buffers = <_inf_buffer*>0
 cdef _inf_buffer * _total_inf_ward_buffers = <_inf_buffer*>0
+cdef _inf_buffer * _S_buffers = <_inf_buffer*>0
+cdef _inf_buffer * _E_buffers = <_inf_buffer*>0
+cdef _inf_buffer * _I_buffers = <_inf_buffer*>0
+cdef _inf_buffer * _R_buffers = <_inf_buffer*>0
+
 cdef _red_variables * _redvars = <_red_variables*>0
 
 _files = None
 
 
-def setup_core(network: Network, nthreads: int = 1, **kwargs):
+def setup_core(nthreads: int = 1, **kwargs):
     """This is the setup function that corresponds with
        :meth:`~metawards.extractors.output_core`.
     """
@@ -164,16 +173,25 @@ def setup_core(network: Network, nthreads: int = 1, **kwargs):
     if _buffer_nthreads != nthreads:
         global _total_new_inf_ward_buffers
         global _total_inf_ward_buffers
+        global _S_buffers, _E_buffers, _I_buffers, _R_buffers
         global _redvars
 
         if _buffer_nthreads != 0:
             _free_red_variables(_redvars)
             _free_inf_buffers(_total_new_inf_ward_buffers, nthreads)
             _free_inf_buffers(_total_inf_ward_buffers, nthreads)
+            _free_inf_buffers(_S_buffers, nthreads)
+            _free_inf_buffers(_E_buffers, nthreads)
+            _free_inf_buffers(_I_buffers, nthreads)
+            _free_inf_buffers(_R_buffers, nthreads)
 
         _redvars = _allocate_red_variables(nthreads)
         _total_new_inf_ward_buffers = _allocate_inf_buffers(nthreads)
         _total_inf_ward_buffers = _allocate_inf_buffers(nthreads)
+        _S_buffers = _allocate_inf_buffers(nthreads)
+        _E_buffers = _allocate_inf_buffers(nthreads)
+        _I_buffers = _allocate_inf_buffers(nthreads)
+        _R_buffers = _allocate_inf_buffers(nthreads)
         _buffer_nthreads = nthreads
 
 
@@ -204,7 +222,7 @@ def output_core_omp(network: Network, population: Population,
     """
     from cython.parallel import parallel, prange
 
-    links = network.to_links
+    links = network.links
     wards = network.nodes
 
     # set up main variables
@@ -225,8 +243,14 @@ def output_core_omp(network: Network, population: Population,
     cdef int * total_new_inf_ward = get_int_array_ptr(
                                                 workspace.total_new_inf_ward)
     cdef int * n_inf_wards = get_int_array_ptr(workspace.n_inf_wards)
+    cdef int * incidence = get_int_array_ptr(workspace.incidence)
 
-    # get pointers to arrays from links and plinks to read data
+    cdef int * S_in_wards = get_int_array_ptr(workspace.S_in_wards)
+    cdef int * E_in_wards = get_int_array_ptr(workspace.E_in_wards)
+    cdef int * I_in_wards = get_int_array_ptr(workspace.I_in_wards)
+    cdef int * R_in_wards = get_int_array_ptr(workspace.R_in_wards)
+
+    # get pointers to arrays from links and play to read data
     cdef int * links_ifrom = get_int_array_ptr(links.ifrom)
 
     cdef double * links_suscept = get_double_array_ptr(links.suscept)
@@ -251,6 +275,8 @@ def output_core_omp(network: Network, population: Population,
     cdef int thread_id = 0
     cdef int ifrom = 0
 
+    cdef int N_INF_CLASSES_MINUS_ONE = N_INF_CLASSES - 1
+
     # Finally some variables used to control parallelisation and
     # some reduction buffers
     cdef openmp.omp_lock_t lock
@@ -258,6 +284,10 @@ def output_core_omp(network: Network, population: Population,
 
     cdef _inf_buffer * total_new_inf_ward_buffer
     cdef _inf_buffer * total_inf_ward_buffer
+    cdef _inf_buffer * S_buffer
+    cdef _inf_buffer * E_buffer
+    cdef _inf_buffer * I_buffer
+    cdef _inf_buffer * R_buffer
     cdef _red_variables * redvar
 
     ###
@@ -294,6 +324,10 @@ def output_core_omp(network: Network, population: Population,
             total_inf_ward_buffer = &(_total_inf_ward_buffers[thread_id])
             total_new_inf_ward_buffer = \
                                 &(_total_new_inf_ward_buffers[thread_id])
+            S_buffer = &(_S_buffers[thread_id])
+            E_buffer = &(_E_buffers[thread_id])
+            I_buffer = &(_I_buffers[thread_id])
+            R_buffer = &(_R_buffers[thread_id])
             redvar = &(_redvars[thread_id])
 
             # loop over all links and accumulate infections associated
@@ -304,6 +338,8 @@ def output_core_omp(network: Network, population: Population,
                 if i == 0:
                     # susceptibles += links[j].suscept
                     redvar[0].susceptibles += <int>(links_suscept[j])
+                    _add_to_buffer(S_buffer, ifrom, <int>(links_suscept[j]),
+                                   &(S_in_wards[0]), &lock)
 
                     if infections_i[j] != 0:
                         # total_new_inf_ward[ifrom] += infections[i][j]
@@ -318,7 +354,17 @@ def output_core_omp(network: Network, population: Population,
                     _add_to_buffer(total_inf_ward_buffer,
                                    ifrom, infections_i[j],
                                    &(total_inf_ward[0]), &lock)
-           # end of loop over links
+
+                    if i == 0 or i == N_INF_CLASSES_MINUS_ONE:
+                        _add_to_buffer(R_buffer, ifrom, infections_i[j],
+                                       &(R_in_wards[0]), &lock)
+                    elif i == 1:
+                        _add_to_buffer(E_buffer, ifrom, infections_i[j],
+                                       &(E_in_wards[0]), &lock)
+                    else:
+                        _add_to_buffer(I_buffer, ifrom, infections_i[j],
+                                       &(I_in_wards[0]), &lock)
+            # end of loop over links
 
             # cannot reduce in parallel, so manual reduction
             openmp.omp_set_lock(&lock)
@@ -326,6 +372,10 @@ def output_core_omp(network: Network, population: Population,
                              &(total_new_inf_ward[0]))
             _add_from_buffer(total_inf_ward_buffer,
                              &(total_inf_ward[0]))
+            _add_from_buffer(S_buffer, &(S_in_wards[0]))
+            _add_from_buffer(E_buffer, &(E_in_wards[0]))
+            _add_from_buffer(I_buffer, &(I_in_wards[0]))
+            _add_from_buffer(R_buffer, &(R_in_wards[0]))
             openmp.omp_unset_lock(&lock)
 
             # loop over all wards (nodes) and accumulate infections
@@ -334,6 +384,7 @@ def output_core_omp(network: Network, population: Population,
                 if i == 0:
                     # susceptibles += wards[j].suscept
                     redvar[0].susceptibles += <int>(play_suscept[j])
+                    S_in_wards[j] += <int>(play_suscept[j])
 
                     if play_infections_i[j] > 0:
                         # total_new_inf_ward[j] += play_infections[i][j]
@@ -349,11 +400,25 @@ def output_core_omp(network: Network, population: Population,
                     # total_inf_ward[j] += play_infections[i][j]
                     total_inf_ward[j] += play_infections_i[j]
 
+                    if i == 0 or i == N_INF_CLASSES_MINUS_ONE:
+                        R_in_wards[j] += play_infections_i[j]
+                    elif i == 1:
+                        E_in_wards[j] += play_infections_i[j]
+                    else:
+                        I_in_wards[j] += play_infections_i[j]
+
                 if (i < N_INF_CLASSES-1) and total_inf_ward[j] > 0:
                     # n_inf_wards[i] += 1
                     redvar[0].n_inf_wards += 1
             # end of loop over nodes
         # end of parallel
+
+        with nogil:
+            if i == 2:
+                # save the sum of infections up to i <= 2. This
+                # is the incidence
+                for j in range(1, nnodes_plus_one):
+                    incidence[j] = total_inf_ward[j]
 
         # can now reduce across all threads (don't need to lock as each
         # thread maintained its own running total)
@@ -386,12 +451,22 @@ def output_core_omp(network: Network, population: Population,
     recovereds = inf_tot[0] + inf_tot[N_INF_CLASSES-1] + \
                  pinf_tot[0] + pinf_tot[N_INF_CLASSES-1]
 
-    print(f"S: {susceptibles}    ", end="")
-    print(f"E: {latent}    ", end="")
-    print(f"I: {total}    ", end="")
-    print(f"R: {recovereds}    ", end="")
-    print(f"IW: {n_inf_wards[0]}   ", end="")
-    print(f"TOTAL POPULATION {susceptibles+latent+total+recovereds}")
+    cdef int S = 0
+    cdef int E = 0
+    cdef int I = 0
+    cdef int R = 0
+
+    for j in range(1, nnodes_plus_one):
+        S += S_in_wards[j]
+        E += E_in_wards[j]
+        I += I_in_wards[j]
+        R += R_in_wards[j]
+
+    if S != susceptibles or E != latent or I != total or R != recovereds:
+        raise AssertionError(
+            f"Disagreement in accumulated totals - indicates a program bug! "
+            f"{S} vs {susceptibles}, {E} vs {latent}, {I} vs {total}, "
+            f"{R} vs {recovereds}")
 
     if population is not None:
         population.susceptibles = susceptibles
@@ -430,7 +505,7 @@ def output_core_serial(network: Network, population: Population,
        kwargs
          Extra argumentst that are ignored by this function
     """
-    links = network.to_links
+    links = network.links
     wards = network.nodes
 
     # set up main variables
@@ -449,7 +524,12 @@ def output_core_serial(network: Network, population: Population,
     cdef int * n_inf_wards = get_int_array_ptr(workspace.n_inf_wards)
     cdef int * incidence = get_int_array_ptr(workspace.incidence)
 
-    # get pointers to arrays from links and plinks to read data
+    cdef int * S_in_wards = get_int_array_ptr(workspace.S_in_wards)
+    cdef int * E_in_wards = get_int_array_ptr(workspace.E_in_wards)
+    cdef int * I_in_wards = get_int_array_ptr(workspace.I_in_wards)
+    cdef int * R_in_wards = get_int_array_ptr(workspace.R_in_wards)
+
+    # get pointers to arrays from links and play to read data
     cdef int * links_ifrom = get_int_array_ptr(links.ifrom)
 
     cdef double * links_suscept = get_double_array_ptr(links.suscept)
@@ -477,13 +557,17 @@ def output_core_serial(network: Network, population: Population,
     cdef int pinf_tot_i = 0
     cdef int susceptibles_i = 0
 
+    cdef int N_INF_CLASSES_MINUS_ONE = N_INF_CLASSES - 1
+
     ###
     ### Finally(!) we can now loop over the links and wards and
     ### accumulate the number of new infections in each disease class
     ###
 
     # reset the workspace so that we can accumulate new data for a new day
-    workspace.zero_all()
+    # (make sure not to zero the subspace networks else we lose all our
+    #  hard work!)
+    workspace.zero_all(zero_subspaces=False)
 
     # loop over each of the disease stages
     for i in range(0, N_INF_CLASSES):
@@ -515,6 +599,7 @@ def output_core_serial(network: Network, population: Population,
                 if i == 0:
                     # susceptibles += links[j].suscept
                     susceptibles_i += <int>(links_suscept[j])
+                    S_in_wards[ifrom] += <int>(links_suscept[j])
 
                     if infections_i[j] != 0:
                         # total_new_inf_ward[ifrom] += infections[i][j]
@@ -525,6 +610,14 @@ def output_core_serial(network: Network, population: Population,
                     inf_tot_i += infections_i[j]
                     # total_inf_ward[ifrom] += infections[i][j]
                     total_inf_ward[ifrom] += infections_i[j]
+
+                    if i == 0 or i == N_INF_CLASSES_MINUS_ONE:
+                        R_in_wards[ifrom] += infections_i[j]
+                    elif i == 1:
+                        E_in_wards[ifrom] += infections_i[j]
+                    else:
+                        I_in_wards[ifrom] += infections_i[j]
+
             # end of loop over links
 
             # loop over all wards (nodes) and accumulate infections
@@ -533,6 +626,8 @@ def output_core_serial(network: Network, population: Population,
                 if i == 0:
                     # susceptibles += wards[j].suscept
                     susceptibles_i += <int>(play_suscept[j])
+
+                    S_in_wards[j] += <int>(play_suscept[j])
 
                     if play_infections_i[j] > 0:
                         # total_new_inf_ward[j] += play_infections[i][j]
@@ -548,7 +643,14 @@ def output_core_serial(network: Network, population: Population,
                     # total_inf_ward[j] += play_infections[i][j]
                     total_inf_ward[j] += play_infections_i[j]
 
-                if (i < N_INF_CLASSES-1) and total_inf_ward[j] > 0:
+                    if i == 0 or i == N_INF_CLASSES_MINUS_ONE:
+                        R_in_wards[j] += play_infections_i[j]
+                    elif i == 1:
+                        E_in_wards[j] += play_infections_i[j]
+                    else:
+                        I_in_wards[j] += play_infections_i[j]
+
+                if (i < N_INF_CLASSES_MINUS_ONE) and total_inf_ward[j] > 0:
                     # n_inf_wards[i] += 1
                     n_inf_wards_i += 1
             # end of loop over nodes
@@ -588,12 +690,22 @@ def output_core_serial(network: Network, population: Population,
     recovereds = inf_tot[0] + inf_tot[N_INF_CLASSES-1] + \
                  pinf_tot[0] + pinf_tot[N_INF_CLASSES-1]
 
-    print(f"S: {susceptibles}    ", end="")
-    print(f"E: {latent}    ", end="")
-    print(f"I: {total}    ", end="")
-    print(f"R: {recovereds}    ", end="")
-    print(f"IW: {n_inf_wards[0]}   ", end="")
-    print(f"TOTAL POPULATION {susceptibles+latent+total+recovereds}")
+    cdef int S = 0
+    cdef int E = 0
+    cdef int I = 0
+    cdef int R = 0
+
+    for j in range(1, nnodes_plus_one):
+        S += S_in_wards[j]
+        E += E_in_wards[j]
+        I += I_in_wards[j]
+        R += R_in_wards[j]
+
+    if S != susceptibles or E != latent or I != total or R != recovereds:
+        raise AssertionError(
+            f"Disagreement in accumulated totals - indicates a program bug! "
+            f"{S} vs {susceptibles}, {E} vs {latent}, {I} vs {total}, "
+            f"{R} vs {recovereds}")
 
     if population is not None:
         population.susceptibles = susceptibles
@@ -607,7 +719,13 @@ def output_core_serial(network: Network, population: Population,
     return total + latent
 
 
-def output_core(nthreads: int, **kwargs):
+def output_core(network: _Union[Network, Networks],
+                population: Population,
+                workspace: Workspace,
+                infections: Infections,
+                nthreads: int,
+                profiler: Profiler,
+                **kwargs):
     """This is the core output function that must be called
        every iteration as it is responsible for accumulating
        the core data each day, which is used to report a summary
@@ -616,8 +734,8 @@ def output_core(nthreads: int, **kwargs):
 
        Parameters
        ----------
-       network: Network
-         The network over which the outbreak is being modelled
+       network: Network or Networks
+         The network(s) over which the outbreak is being modelled
        population: Population
          The population experiencing the outbreak
        workspace: Workspace
@@ -628,6 +746,8 @@ def output_core(nthreads: int, **kwargs):
          Space to hold the 'play' infections
        nthreads: int
          The number of threads to use to help extract the data
+       profiler: Profiler
+         Optional profiler to profile this output function
        kwargs
          Extra argumentst that are ignored by this function
     """
@@ -635,6 +755,56 @@ def output_core(nthreads: int, **kwargs):
     # serial version is much faster than parallel - only worth
     # parallelising when more than 4 cores
     if nthreads <= 4:
-        output_core_serial(**kwargs)
+        output_func = output_core_serial
     else:
-        output_core_omp(nthreads=nthreads, **kwargs)
+        kwargs["nthreads"] = nthreads
+        output_func = output_core_omp
+
+    if isinstance(network, Network):
+        output_func(network=network, population=population,
+                    workspace=workspace, infections=infections,
+                    profiler=profiler, **kwargs)
+        print(population.summary())
+
+    elif isinstance(network, Networks):
+        if profiler is None:
+            from ..utils._profiler import NullProfiler
+            profiler = NullProfiler()
+
+        p = profiler.start("multi-network")
+
+        if population.subpops is None:
+            population.specialise(network)
+
+        for i, subnet in enumerate(network.subnets):
+            p = p.start(f"output-{i}")
+            output_func(network=subnet,
+                        population=population.subpops[i],
+                        workspace=workspace.subspaces[i],
+                        infections=infections.subinfs[i],
+                        profiler=p,
+                        **kwargs)
+            p = p.stop()
+
+        # aggregate the infection information from across
+        # the different demographics
+        p = p.start("aggregate")
+        infections.aggregate(profiler=p, nthreads=nthreads)
+        network.aggregate(profiler=p, nthreads=nthreads)
+        p = p.stop()
+
+        p = p.start("overall_output")
+        output_func(network=network.overall,
+                    population=population,
+                    workspace=workspace,
+                    infections=infections,
+                    profiler=profiler,
+                    **kwargs)
+        p = p.stop()
+
+        print(population.summary(demographics=network.demographics))
+
+        # double-check that the sums all add up correctly
+        population.assert_sane()
+
+        p = p.stop()

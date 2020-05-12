@@ -27,7 +27,6 @@ Functions
     iterate_weekday
     iterate_weekend
     iterate_working_week
-    iterator_needs_setup
     setup_additional_seeds
     setup_seed_all_wards
     setup_seed_specified_ward
@@ -42,7 +41,6 @@ from ._advance_infprob import *
 from ._advance_play import *
 from ._advance_recovery import *
 
-from ._iterate_core import *
 from ._iterate_custom import *
 from ._iterate_default import *
 from ._iterate_weekday import *

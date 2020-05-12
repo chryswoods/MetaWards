@@ -20,15 +20,23 @@ contained in the
 
 The first step to customise this file is to copy it into our current
 directory and rename it to ``lurgy2.json``.
-Assuming you have set the ``$METAWARDSDATA`` environment
+Assuming you have set the ``METAWARDSDATA`` environment
 variable equal to the path to this directory, type;
 
 .. code-block:: bash
 
   cp $METAWARDSDATA/diseases/lurgy.json ./lurgy2.json
 
+on Linux or Mac OS X, or type;
+
+.. code-block:: bash
+
+  copy $Env:METAWARDSDATA\diseases\lurgy.json lurgy2.json
+
+on Windows.
+
 .. note::
-   The above command works on Linux and Mac (OS X). If you are following
+   The above command work on Linux, Mac (OS X) or Windows. If you are following
    this tutorial using a different operating system and know the correct
    copy command to use, then please send it to us by sending us a
    `pull request <https://github.com/metawards/MetaWards>`__

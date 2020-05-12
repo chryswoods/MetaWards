@@ -7,7 +7,7 @@ __all__ = ["fill_in_gaps"]
 def fill_in_gaps(network: Network, max_nodes: int):
     """Fills in gaps in the network"""
     nodes = network.nodes
-    links = network.to_links
+    links = network.links
 
     cdef int added = 0
     cdef int i = 0

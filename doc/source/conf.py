@@ -6,8 +6,25 @@
 # serve to show the default.
 from __future__ import print_function
 
-import metawards
+# Make sure that we create docs for the built version of metawards, not
+# the installed version
+import sys
+import glob
 import os
+
+script_dir = os.path.dirname(__file__)
+build_dir = os.path.abspath(os.path.join(script_dir, "..", "..", "build"))
+
+build_paths = glob.glob(f"{build_dir}/*/metawards")
+
+for path in build_paths:
+    dir, name = os.path.split(path)
+    sys.path.insert(0, dir)
+
+print(f"PYTHONPATH = {sys.path}")
+
+# Now import metawards, when we have a correct path
+import metawards
 
 # -- General configuration -----------------------------------------------
 # Add any Sphinx extension module names here, as strings. They can be extensions

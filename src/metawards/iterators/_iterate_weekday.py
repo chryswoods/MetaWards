@@ -2,7 +2,7 @@
 __all__ = ["iterate_weekday"]
 
 
-def iterate_weekday(nthreads: int = 1, **kwargs):
+def iterate_weekday(**kwargs):
     """This returns the default list of 'advance_XXX' functions that
        are called in sequence for each weekday iteration of the model run.
 
@@ -20,21 +20,8 @@ def iterate_weekday(nthreads: int = 1, **kwargs):
          The list of functions that ```iterate``` will call in sequence
     """
 
-    if nthreads is None or nthreads == 1:
-        from ._advance_infprob import advance_infprob_serial
-        from ._advance_fixed import advance_fixed_serial
-        from ._advance_play import advance_play_serial
+    from ._advance_infprob import advance_infprob
+    from ._advance_fixed import advance_fixed
+    from ._advance_play import advance_play
 
-        funcs = [advance_infprob_serial,
-                 advance_fixed_serial,
-                 advance_play_serial]
-    else:
-        from ._advance_infprob import advance_infprob_omp
-        from ._advance_fixed import advance_fixed_omp
-        from ._advance_play import advance_play_omp
-
-        funcs = [advance_infprob_omp,
-                 advance_fixed_omp,
-                 advance_play_omp]
-
-    return funcs
+    return [advance_infprob, advance_fixed, advance_play]

@@ -1,5 +1,8 @@
 
+from typing import Union as _Union
+
 from .._network import Network
+from .._networks import Networks
 from .._population import Population
 from .._infections import Infections
 
@@ -8,7 +11,7 @@ __all__ = ["setup_seed_specified_ward",
            "setup_seed_wards"]
 
 
-def setup_seed_specified_ward(network: Network,
+def setup_seed_specified_ward(network: _Union[Network, Networks],
                               infections: Infections,
                               **kwargs):
     """Setup function that sets up the Network by seeding the infection
@@ -17,15 +20,23 @@ def setup_seed_specified_ward(network: Network,
 
        Parameters
        ----------
-       network: Network
+       network: Network or Networks
          The network to be seeded
        infections: Infections
          Space to hold the 'work' infections
        kwargs
          Arguments that are not used by this setup function
     """
+    if isinstance(network, Networks):
+        # only seed the overall ward
+        raise NotImplementedError(
+            "Seeding a specific ward for a multi-demographic Network is "
+            "not yet supported. If you need this please raise an issue "
+            "at https://github.com/metawards/MetaWards/issues and we will "
+            "work as quickly as we can to implement it.")
+
     wards = network.nodes
-    links = network.to_links
+    links = network.links
     params = network.params
 
     play_infections = infections.play
@@ -41,18 +52,15 @@ def setup_seed_specified_ward(network: Network,
     while (links.ito[j] != seed) or (links.ifrom[j] != seed):
         j += 1
 
-    # print(f"j {j} link from {links.ifrom[j]} to {links.ito[j]}")
-
     if links.suscept[j] < params.initial_inf:
         wards.play_suscept[seed] -= params.initial_inf
-        # print(f"seed at play_infections[0][{seed}] += {params.initial_inf}")
         play_infections[0][seed] += params.initial_inf
 
     infections[0][j] = params.initial_inf
     links.suscept[j] -= params.initial_inf
 
 
-def setup_seed_all_wards(network: Network,
+def setup_seed_all_wards(network: _Union[Network, Networks],
                          population: Population,
                          infections: Infections,
                          **kwargs):
@@ -61,8 +69,21 @@ def setup_seed_all_wards(network: Network,
        of 'population', based on the number of daily imports held
        in params.daily_imports
     """
+    if isinstance(network, Networks):
+        if network.overall.params.daily_imports == 0:
+            return
+
+        raise NotImplementedError(
+            "Daily seeding of a multi-demographic network is not yet "
+            "supported. If you need this, please raise an issue on "
+            "https://github.com/metawards/MetaWards/issues and we will "
+            "work as quickly as we can to implement it.")
+
     wards = network.nodes
     params = network.params
+
+    if params.daily_imports == 0:
+        return
 
     play_infections = infections.play
     infections = infections.work

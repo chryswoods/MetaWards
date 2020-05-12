@@ -11,12 +11,15 @@ src/metawards/iterators/*.c
 src/metawards/iterators/*.so
 src/metawards/extractors/*.c
 src/metawards/extractors/*.so
+src/metawards/mixers/*.c
+src/metawards/mixers/*.so
+src/metawards/movers/*.c
+src/metawards/movers/*.so
 __pycache__
 /dist
 /src/metawards.egg-info
 /2011Data
 /.pytest_cache
-/.env
 /*.pyc
 /output
 /doc/build

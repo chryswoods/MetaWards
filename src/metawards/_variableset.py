@@ -197,7 +197,7 @@ _adjustable["work_to_play"] = _set_work_to_play
 _adjustable["local_vaccination_thesh"] = _set_local_vaccination_thresh
 _adjustable["global_detection_thresh"] = _set_global_detection_thresh
 _adjustable["daily_ward_vaccination_capacity"] = \
-                            _set_daily_ward_vaccination_capacity
+    _set_daily_ward_vaccination_capacity
 _adjustable["neighbour_weight_threshold"] = _set_neighbour_weight_threshold
 _adjustable["daily_imports"] = _set_daily_imports
 
@@ -246,6 +246,7 @@ class VariableSet:
        >>>       params.disease_params.beta[2])
        0.95 0.9
     """
+
     def __init__(self,
                  variables: _Dict[str, float] = None,
                  repeat_index: int = 1,
@@ -564,6 +565,48 @@ class VariableSet:
         return v
 
     @staticmethod
+    def _extract_values(fingerprint: str):
+        fingerprint = str(fingerprint)
+
+        # has this fingerprint been added onto the end of a filename
+        # using a hyphen or underscore? If so, then remove this
+        if fingerprint.find("-") != -1:
+            fingerprint = fingerprint.split("-")[-1]
+
+        if fingerprint.find("_") != -1:
+            fingerprint = fingerprint.split("_")[-1]
+
+        fingerprint.strip()
+
+        # does this have a repeat index - if so, this is the last
+        # value at the end after the 'x'
+        parts = fingerprint.split("x")
+
+        if len(parts) > 1:
+            repeat_index = int(parts[-1])
+            fingerprint = "x".join(parts[0:-1])
+        else:
+            repeat_index = None
+
+        # now get the values
+        values = []
+
+        if fingerprint != "REPEAT":
+            for part in fingerprint.split("v"):
+                try:
+                    if part == "T":
+                        values.append(True)
+                    elif part == "F":
+                        values.append(False)
+                    else:
+                        values.append(float(part.replace("i", ".")))
+                except Exception:
+                    # this is not part of the fingerprint
+                    pass
+
+        return (values, repeat_index)
+
+    @staticmethod
     def extract_values(fingerprint: str):
         """Return the original values from the passed fingerprint
            or filename. This assumes that the fingerprint
@@ -584,46 +627,60 @@ class VariableSet:
         """
         from pathlib import Path
 
+        path = fingerprint
+
         # if this is a filename then extract only the fingerprint
         fingerprint = Path(Path(fingerprint).name)
         for suffix in fingerprint.suffixes:
             fingerprint = str(fingerprint).replace(suffix, "")
 
-        # does this have a repeat index - if so, this is the last
-        # value at the end after the hyphen (negative numbers are ~)
-        parts = fingerprint.split("-")
+        values, repeat_idx = VariableSet._extract_values(fingerprint)
 
-        if len(parts) > 1:
-            repeat_index = int(parts[-1])
-            fingerprint = "-".join(parts[0:-1])
+        if len(values) > 0 or repeat_idx is not None:
+            return (values, repeat_idx)
+
+        import os
+
+        if path.find(os.path.sep) != -1:
+            fingerprint = os.path.sep.join(
+                path.split(os.path.sep)[0:-1])
+            return VariableSet.extract_values(fingerprint)
         else:
-            repeat_index = None
+            return (values, repeat_idx)
 
-        # now get the values
-        values = []
+    @staticmethod
+    def create_fingerprint(vals: _List[float], index: int = None,
+                           include_index: bool = False):
+        """Create the fingerprint for the passed values"""
+        f = None
 
-        for part in fingerprint.split("_"):
-            try:
-                if part.startswith("~"):
-                    scl = -1.0
-                    part = part[1:]
+        if vals is None or len(vals) == 0:
+            f = "REPEAT"
+        else:
+            for val in vals:
+                if isinstance(val, bool):
+                    if val:
+                        v = "T"
+                    else:
+                        v = "F"
                 else:
-                    scl = 1.0
+                    v = float(val)
 
-                if part.find(".") != -1:
-                    # this is already a floating point number
-                    value = float(part)
+                    if v.is_integer():
+                        v = int(val)
+                        v = f"{v}.0"
+
+                    v = str(v).replace(".", "i")
+
+                if f is None:
+                    f = v
                 else:
-                    # this is an integer, which represents 0.INT
-                    part = f"0.{part}"
-                    value = float(part)
+                    f += "v" + v
 
-                values.append(scl * value)
-            except Exception:
-                # this is not part of the fingerprint
-                pass
-
-        return (values, repeat_index)
+        if include_index:
+            return "%sx%03d" % (f, index)
+        else:
+            return f
 
     def fingerprint(self, include_index: bool = False):
         """Return a fingerprint for this VariableSet. This can be
@@ -642,32 +699,9 @@ class VariableSet:
            fingerprint: str
              The fingerprint for this VariableSet
         """
-        if self._vals is None or len(self._vals) == 0:
-            f = "NO_CHANGE"
-        else:
-            f = None
-            for val in self._vals:
-                v = str(val)
-                if v.startswith("-"):
-                    v = v[1:]
-                if v.startswith("0"):
-                    v = v[1:]
-                if v.startswith("."):
-                    v = v[1:]
-
-                if val < 0:
-                    # use `~` for negative numbers
-                    v = "~" + v
-
-                if f is None:
-                    f = v
-                else:
-                    f += "_" + v
-
-        if include_index:
-            return "%s-%03d" % (f, self._idx)
-        else:
-            return f
+        return VariableSet.create_fingerprint(vals=self._vals,
+                                              index=self._idx,
+                                              include_index=include_index)
 
     @staticmethod
     def read(filename: str):
@@ -871,6 +905,7 @@ class VariableSets:
        beta[2]=0.89)[repeat 1], (beta[2]=0.95, beta[3]=0.9)[repeat 2],
        (beta[1]=0.86, beta[2]=0.89)[repeat 2]}
     """
+
     def __init__(self):
         """Initialise an empty VariableSets object
 
@@ -1076,8 +1111,8 @@ class VariableSets:
                             vals.append(float(word))
                     except Exception:
                         raise ValueError(
-                               f"Corrupted input file. Expected {len(titles)} "
-                               f"numbers. Received {line}")
+                            f"Corrupted input file. Expected {len(titles)} "
+                            f"numbers. Received {line}")
 
                     variables.append(VariableSet(names=titles,
                                                  values=vals))
@@ -1094,5 +1129,5 @@ class VariableSets:
             return variables
         else:
             raise ValueError(
-                    f"Cannot read parameters from line {line_numbers} "
-                    f"as the number of lines in the file is {i+1}")
+                f"Cannot read parameters from line {line_numbers} "
+                f"as the number of lines in the file is {i+1}")

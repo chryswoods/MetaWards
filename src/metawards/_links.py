@@ -9,7 +9,8 @@ class Links:
        to store a list of Link objects as a "struct of arrays".
        This should improve speed of loading and access.
     """
-    def __init__(self, N: int=0):
+
+    def __init__(self, N: int = 0):
         """Create a container for up to "N" Links"""
         if N <= 0:
             self._is_null = True
@@ -28,8 +29,6 @@ class Links:
             self.suscept = create_double_array(N, 0.0)
             self.distance = create_double_array(N, 0.0)
 
-            self.A = create_int_array(N, -1)
-
     def is_null(self):
         return self._is_null
 
@@ -39,6 +38,27 @@ class Links:
             return 0
         else:
             return len(self.ifrom)
+
+    def population(self) -> int:
+        """Return the population of these links"""
+        if self.suscept is None:
+            return 0
+        else:
+            return sum(self.suscept)
+
+    def copy(self):
+        """Return a copy of these links, using a shallow copy for
+           things that stay the same (e.g. ifrom, ito, distance)
+           and a deep copy for things that are variable
+           (e.g. weight and suscept)
+        """
+        from copy import copy, deepcopy
+        links = copy(self)
+
+        links.weight = deepcopy(self.weight)
+        links.suscept = deepcopy(self.suscept)
+
+        return links
 
     def assert_not_null(self):
         """Assert that this collection of links is not null"""
@@ -72,7 +92,7 @@ class Links:
 
         return Link(ifrom=self.ifrom[i], ito=self.ito[i],
                     weight=self.weight[i], suscept=self.suscept[i],
-                    distance=self.distance[i], A=self.A[i])
+                    distance=self.distance[i])
 
     def __setitem__(self, i: int, value: Link):
         """Set the item as index 'i' equal to 'value'. This deep-copies
@@ -85,7 +105,6 @@ class Links:
         self.weight[i] = value.weight if value.weight is not None else 0.0
         self.suscept[i] = value.suscept if value.suscept is not None else 0.0
         self.distance[i] = value.distance if value.distance is not None else 0.0
-        self.A[i] = value.A if value.A is not None else -1
 
     def resize(self, N: int):
         """Resize this container to hold 'N' links. This will expand
@@ -114,4 +133,24 @@ class Links:
         self.weight = resize_array(self.weight, N, 0.0)
         self.suscept = resize_array(self.suscept, N, 0.0)
         self.distance = resize_array(self.distance, N, 0.0)
-        self.A = resize_array(self.A, N, -1)
+
+    def scale_susceptibles(self, ratio: any = None):
+        """Scale the number of susceptibles in these Links
+           by the passed scale ratio. This can be a value, e.g.
+           ratio = 2.0 will scale the total number of susceptibles
+           by 2.0. This can also be lists of values,
+           where ward[i] will be scaled by ratio[i]. They can also
+           be dictionaries, e.g. ward[i] scaled by ratio[i]
+
+           Parameters
+           ----------
+           ratio: None, float, list or dict
+             The amount by which to scale the total population of
+             susceptibles - evenly scales the work and play populations
+
+           Returns
+           -------
+           None
+        """
+        from .utils._scale_susceptibles import scale_link_susceptibles
+        scale_link_susceptibles(links=self, ratio=ratio)

@@ -3,6 +3,9 @@
 [![Build status](https://github.com/metawards/MetaWards/workflows/Build/badge.svg)](https://github.com/metawards/MetaWards/actions?query=workflow%3ABuild)
 [![PyPI version](https://badge.fury.io/py/metawards.svg)](https://pypi.python.org/pypi/metawards)
 
+For the most accurate and up to date information please
+[visit the project website](https://metawards.org).
+
 This is a Python port of the [MetaWards](https://github.com/ldanon/MetaWards)
 package originally written by Leon Danon. The port is kept in sync with
 the original C code, with checks in place to ensure that the two codes
@@ -28,7 +31,7 @@ The software supports running over a cluster using MPI
 simple networking (via [scoop](http://scoop.readthedocs.io)).
 
 Full instructions on how to use the program, plus example job submission
-scripts can be found on the [project website](https://metawards.github.io).
+scripts can be found on the [project website](https://metawards.org).
 
 ## Data
 
@@ -69,7 +72,7 @@ for running the tests.
 
 ## Installation
 
-[Full installation instructions are here](https://metawards.github.io/MetaWards/install.html).
+[Full installation instructions are here](https://metawards.org/install.html).
 
 As you are here, I guess you want to install the latest code from GitHub ;-)
 
@@ -79,10 +82,18 @@ To do that, type;
 git clone https://github.com/metawards/MetaWards
 cd MetaWards
 pip install -r requirements-dev.txt
+CYTHONIZE=1 python setup.py build
 CYTHONIZE=1 python setup.py install
 ```
 
-(assuming that `python` is version 3.7)
+Alternatively, you can also use the makefile, e.g.
+
+```
+make
+make install
+```
+
+(assuming that `python` is version 3.7 or above)
 
 You can run tests using pytest, e.g.
 
@@ -93,13 +104,12 @@ METAWARDSDATA="/path/to/MetaWardsData" pytest tests
 You can generate the docs using
 
 ```
-cd docs
-make
+make docs
 ```
 
 ## Running
 
-[Full usage instructions are here](https://metawards.github.io/MetaWards/usage.html)
+[Full usage instructions are here](https://metawards.org/usage.html)
 
 You can either load and use the Python classes directly, or you can
 run the `metawards` front-end command line program that is automatically installed.
@@ -132,13 +142,4 @@ This program supports parallel running of an ensemble of jobs using
 for single-node jobs, and [mpi4py](https://mpi4py.readthedocs.io/en/stable/)
 or [scoop](http://scoop.readthedocs.io) for multi-node cluster jobs.
 
-[Full instructions for running on a cluster are here](https://metawards.github.io/MetaWards/cluster_usage.html)
-
-### Next stages...
-
-The next stages of the program includes finishing up the custom extractor
-code, improving some of the analysis, providing more integrators,
-optimising the random number generator and finishing up the tutorial.
-
-In addition, we plan to integrate the software into the Bayesian / MCMC
-package [PyMC3](https://docs.pymc.io).
+[Full instructions for running on a cluster are here](https://metawards.org/cluster_usage.html)

@@ -43,7 +43,7 @@ being ``dirty``...
  WARNING: source code that was used to generate this run!
 
            -- Additional information --
- Visit https://metawards.github.io for more informaion
+  Visit https://metawards.org for more informaion
    about metawards, its authors and its license
 
 then this means that your ``metawards`` executable has been built using

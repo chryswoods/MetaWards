@@ -25,7 +25,7 @@ The FOIs for each demographic sub-network are calculated independently,
 based only on the infected individuals from that demographic. We can thus
 use the FOI calculation as a way of enabling different demographics to
 mix. We do this in ``metawards`` using custom functions, called
-:doc:`../api/index_MetaWards_mixers`. These choose different
+:doc:`../../api/index_MetaWards_mixers`. These choose different
 ``merge functions`` that are
 used to mix and merge calculations of FOIs across different demographics.
 
@@ -44,7 +44,7 @@ using;
 
 .. code-block:: bash
 
-  metawards -d lurgy2 -D demographics.json -a ExtraSeedsLondon.dat --mixer mix_evenly
+  metawards -d lurgy3 -D demographics.json -a ExtraSeedsLondon.dat --mixer mix_evenly
 
 You should now see that the outbreak spreads from the initial infection in
 the *red* demographic to the *blue workers*, who then spread it around

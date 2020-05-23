@@ -214,7 +214,7 @@ def output_core_omp(network: Network, population: Population,
        workspace: Workspace
          A workspace that can be used to extract data
        infections: Infections
-         Space to hold the nfections
+         All of the infections that have been recorded
        nthreads: int
          The number of threads to use to help extract the data
        kwargs
@@ -463,10 +463,14 @@ def output_core_omp(network: Network, population: Population,
         R += R_in_wards[j]
 
     if S != susceptibles or E != latent or I != total or R != recovereds:
-        raise AssertionError(
-            f"Disagreement in accumulated totals - indicates a program bug! "
-            f"{S} vs {susceptibles}, {E} vs {latent}, {I} vs {total}, "
-            f"{R} vs {recovereds}")
+        error = \
+            f"Disagreement in accumulated totals - indicates a program bug! " \
+            f"{S} vs {susceptibles}, {E} vs {latent}, {I} vs {total}, " \
+            f"{R} vs {recovereds}"
+
+        from ..utils._console import Console
+        Console.error(error)
+        raise AssertionError(error)
 
     if population is not None:
         population.susceptibles = susceptibles
@@ -498,8 +502,8 @@ def output_core_serial(network: Network, population: Population,
          The population experiencing the outbreak
        workspace: Workspace
          A workspace that can be used to extract data
-       infections : Infections
-         Space to hold the 'work' infections
+       infections: Infections
+         All of the infections that have been recorded
        nthreads: int
          The number of threads to use to help extract the data
        kwargs
@@ -702,21 +706,43 @@ def output_core_serial(network: Network, population: Population,
         R += R_in_wards[j]
 
     if S != susceptibles or E != latent or I != total or R != recovereds:
-        raise AssertionError(
-            f"Disagreement in accumulated totals - indicates a program bug! "
-            f"{S} vs {susceptibles}, {E} vs {latent}, {I} vs {total}, "
-            f"{R} vs {recovereds}")
+        error = \
+            f"Disagreement in accumulated totals - indicates a program bug! " \
+            f"{S} vs {susceptibles}, {E} vs {latent}, {I} vs {total}, " \
+            f"{R} vs {recovereds}"
+
+        from ..utils._console import Console
+        Console.error(error)
+        raise AssertionError(error)
 
     if population is not None:
         population.susceptibles = susceptibles
         population.total = total
         population.recovereds = recovereds
         population.latent = latent
-        # save the number of wards that have at least one latent
-        # infection
+
+        # save the number of wards that have at least one new
+        # infection (index 0 is new infections)
         population.n_inf_wards = n_inf_wards[0]
 
     return total + latent
+
+
+def _safe_run(func, **kwargs):
+    try:
+        func(**kwargs)
+    except AssertionError as e:
+        if func is output_core_omp:
+            # this may be a race condition - rerun in serial
+            from metawards.utils import Console
+            Console.print("Repeating this part of the calculation in serial "
+                          "to correct this problem")
+            kwargs["nthreads"] = 1
+            output_core_serial(**kwargs)
+            Console.print("Calculation successful, the bug has been mitigated")
+        else:
+            # the error was in serial, so big problem
+            raise e
 
 
 def output_core(network: _Union[Network, Networks],
@@ -734,20 +760,16 @@ def output_core(network: _Union[Network, Networks],
 
        Parameters
        ----------
-       network: Network or Networks
-         The network(s) over which the outbreak is being modelled
+       network: Network
+         The network over which the outbreak is being modelled
        population: Population
          The population experiencing the outbreak
        workspace: Workspace
          A workspace that can be used to extract data
-       infections
-         Space to hold the 'work' infections
-       play_infections
-         Space to hold the 'play' infections
+       infections: Infections
+         All of the infections that have been recorded
        nthreads: int
          The number of threads to use to help extract the data
-       profiler: Profiler
-         Optional profiler to profile this output function
        kwargs
          Extra argumentst that are ignored by this function
     """
@@ -760,11 +782,15 @@ def output_core(network: _Union[Network, Networks],
         kwargs["nthreads"] = nthreads
         output_func = output_core_omp
 
+    from ..utils._console import Console
+
     if isinstance(network, Network):
-        output_func(network=network, population=population,
-                    workspace=workspace, infections=infections,
-                    profiler=profiler, **kwargs)
-        print(population.summary())
+        _safe_run(func=output_func,
+                  network=network, population=population,
+                  workspace=workspace, infections=infections,
+                  profiler=profiler, **kwargs)
+
+        Console.print_population(population)
 
     elif isinstance(network, Networks):
         if profiler is None:
@@ -778,12 +804,13 @@ def output_core(network: _Union[Network, Networks],
 
         for i, subnet in enumerate(network.subnets):
             p = p.start(f"output-{i}")
-            output_func(network=subnet,
-                        population=population.subpops[i],
-                        workspace=workspace.subspaces[i],
-                        infections=infections.subinfs[i],
-                        profiler=p,
-                        **kwargs)
+            _safe_run(func=output_func,
+                      network=subnet,
+                      population=population.subpops[i],
+                      workspace=workspace.subspaces[i],
+                      infections=infections.subinfs[i],
+                      profiler=p,
+                      **kwargs)
             p = p.stop()
 
         # aggregate the infection information from across
@@ -794,15 +821,17 @@ def output_core(network: _Union[Network, Networks],
         p = p.stop()
 
         p = p.start("overall_output")
-        output_func(network=network.overall,
-                    population=population,
-                    workspace=workspace,
-                    infections=infections,
-                    profiler=profiler,
-                    **kwargs)
+        _safe_run(func=output_func,
+                  network=network.overall,
+                  population=population,
+                  workspace=workspace,
+                  infections=infections,
+                  profiler=profiler,
+                  **kwargs)
         p = p.stop()
 
-        print(population.summary(demographics=network.demographics))
+        Console.print_population(population=population,
+                                 demographics=network.demographics)
 
         # double-check that the sums all add up correctly
         population.assert_sane()

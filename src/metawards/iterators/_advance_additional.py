@@ -17,7 +17,7 @@ def _load_additional_seeds(filename: str):
     """Load additional seeds from the passed filename. This returns
        the added seeds
     """
-    print(f"Loading additional seeds from {filename}...")
+    lines = [f"Loading additional seeds from {filename}"]
 
     with open(filename, "r") as FILE:
         line = FILE.readline()
@@ -39,8 +39,11 @@ def _load_additional_seeds(filename: str):
                 seeds.append((int(words[0]), int(words[2]),
                               int(words[1]), None))
 
-            print(seeds[-1])
+            lines.append(str(seeds[-1]))
             line = FILE.readline()
+
+    from ..utils._console import Console
+    Console.info("\n".join(lines))
 
     return seeds
 
@@ -110,6 +113,8 @@ def advance_additional_serial(network: _Union[Network, Networks],
     # all additional seeds into this global '_additional_seeds' variable
     global _additional_seeds
 
+    from ..utils._console import Console
+
     p = profiler.start("additional_seeds")
     for seed in _additional_seeds:
         if seed[0] == population.day:
@@ -133,14 +138,16 @@ def advance_additional_serial(network: _Union[Network, Networks],
                 play_infections = infections.play
 
             if wards.play_suscept[ward] < num:
-                print(f"Not enough susceptibles in ward for seeding")
+                Console.warning(f"Not enough susceptibles in ward for seeding")
             else:
                 wards.play_suscept[ward] -= num
                 if demographic is not None:
-                    print(f"seeding demographic {demographic} "
-                          f"play_infections[0][{ward}] += {num}")
+                    Console.print(
+                        f"seeding demographic {demographic} "
+                        f"play_infections[0][{ward}] += {num}")
                 else:
-                    print(f"seeding play_infections[0][{ward}] += {num}")
+                    Console.print(
+                        f"seeding play_infections[0][{ward}] += {num}")
 
                 play_infections[0][ward] += num
     p.stop()

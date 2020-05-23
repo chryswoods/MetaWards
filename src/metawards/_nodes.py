@@ -157,7 +157,9 @@ class Nodes:
                         x=self.x[i],
                         y=self.y[i])
         except Exception as e:
-            print(f"Error at index {i}: size = {len(self)}: {e.__class__} {e}")
+            from .utils._console import Console
+            Console.error(f"Error at index {i}: "
+                          f"size = {len(self)}: {e.__class__} {e}")
             raise e
 
     def __setitem__(self, i: int, value: Node):

@@ -7,15 +7,13 @@ def read_done_file(filename: str):
        of seeded nodes
     """
     try:
-        print(f"{filename} -- ")
-
         nodes_seeded = []
 
         with open(filename, "r") as FILE:
             line = FILE.readline()
 
             # each line has a single number, which is the seed
-            nodes_seeded.append( float(line.strip()) )
+            nodes_seeded.append(float(line.strip()))
 
         return nodes_seeded
 

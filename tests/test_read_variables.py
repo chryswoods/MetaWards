@@ -8,6 +8,8 @@ script_dir = os.path.dirname(__file__)
 ncovparams_csv = os.path.join(script_dir, "data", "ncovparams.csv")
 testparams_csv = os.path.join(script_dir, "data", "testparams.csv")
 testparams2_csv = os.path.join(script_dir, "data", "testparams2.csv")
+testparams3_csv = os.path.join(script_dir, "data", "testparams3.csv")
+testparams4_csv = os.path.join(script_dir, "data", "testparams4.csv")
 
 l0 = {'beta[2]': 0.95, 'beta[3]': 0.95,
       'progress[1]': 0.19, 'progress[2]': 0.91, 'progress[3]': 0.91}
@@ -62,14 +64,26 @@ def test_variableset():
 
 
 @pytest.mark.parametrize('lines, expect',
-                         [(1, vars0),
-                          (2, vars1),
-                          ([1, 2], vars01),
-                          ([2, 1], vars01)])
+                         [(0, vars0),
+                          (1, vars1),
+                          ([0, 1], vars01),
+                          ([1, 0], vars01)])
 def test_read_variables(lines, expect):
     result = Parameters.read_variables(testparams2_csv, lines)
     print(f"{result} == {expect}?")
     assert result == expect
+
+
+@pytest.mark.parametrize('lines, expect, repeats',
+                         [(0, vars0, [2]),
+                          (1, vars1, [4]),
+                          ([0, 1], vars01, [2, 4]),
+                          ([1, 0], vars01, [2, 4])])
+def test_read_variables(lines, expect, repeats):
+    result = Parameters.read_variables(testparams4_csv, lines)
+    r = expect.repeat(repeats)
+    print(f"{result} ==\n{r}?")
+    assert result == r
 
 
 @pytest.mark.parametrize('lines, expect',
@@ -199,3 +213,58 @@ def test_set_custom():
     assert v["user.another[2]"] == 100.0
     assert v[".flag"] == 1.0
     assert v["beta[3]"] == 0.5
+
+
+@pytest.mark.slow
+def test_read_edgecase():
+    vertical2 = os.path.join(script_dir, "data", "vertical2.dat")
+    v = VariableSet.read(vertical2)
+
+    from datetime import date
+    d = date(year=2020, month=12, day=31)
+
+    print(v)
+    assert v[".animal"] == "cat"
+    assert v[".long"] == "This is a really long line"
+    assert v[".comma"] == "This is a long line with, a comma!"
+    assert v[".string"] == "2020-12-31"
+    assert v[".date"] == d
+    assert v[".date2"] == d
+    assert v[".date3"] == d
+    assert v[".int"] == 42
+    assert v[".float"] == 3.141
+    assert v[".bool"]
+    assert not v[".bool2"]
+
+    v = VariableSet.read(testparams3_csv)
+    print(v)
+
+    assert v["beta[0]"] == 0.5
+    assert v["beta[1]"] == 0.6
+    assert v["progress[0]"] == 0.6
+    assert v["progress[1]"] == 5
+    assert v[".date"] == d
+    assert v[".number"] == 2
+
+    try:
+        from dateparser import parse
+    except ImportError:
+        parse = None
+
+    if parse is not None:
+        print(v[".date2"])
+        d2 = parse("five days ago").date()
+        print(d2)
+        assert v[".date2"] == d2
+    else:
+        print("string")
+        assert v[".date2"] == "five days ago"
+
+
+if __name__ == "__main__":
+    test_variableset()
+    test_parameterset()
+    test_make_compatible()
+    test_set_variables()
+    test_set_custom()
+    test_read_edgecase()

@@ -357,7 +357,10 @@ def distribute_remainders(network: Network,
     if random_seed is None:
         random_seed = 4751828
 
-    print(f"Seeding generator used for demographics with seed {random_seed}")
+    from ._console import Console
+
+    Console.print(
+        f"Seeding generator used for demographics with seed {random_seed}")
     bin_rng = seed_ran_binomial(random_seed)
 
     cdef binomial_rng* rng = _get_binomial_ptr(bin_rng)
@@ -416,4 +419,5 @@ def distribute_remainders(network: Network,
                     sub_links_suscept[i] = values_array[j]
     p = p.stop()
 
-    print(f"Number of differences is {sum(diff_nodes)} + {sum(diff_links)}")
+    Console.print(
+        f"Number of differences is {sum(diff_nodes)} + {sum(diff_links)}")

@@ -31,7 +31,7 @@ def move_population_from_play_to_work(network: Network,
                                       profiler: Profiler = None):
     """And Vice Versa From Work to Play
        The relevant parameters are network.params.play_to_work and
-                                   network.params.work_to_play
+       network.params.work_to_play
 
        When both are 0, don't do anything;
        When play_to_work > 0 move work_to_play proportion from play to work.

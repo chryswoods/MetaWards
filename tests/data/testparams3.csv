@@ -1,0 +1,7 @@
+beta[0]== 0.5
+beta[1] = 0.6
+progress[0]: 0.6
+progress[1] == 5
+.date: 2020-12-31
+.date2= five days ago
+.number = (1 + 7) / 4

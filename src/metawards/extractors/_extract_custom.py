@@ -39,10 +39,11 @@ def build_custom_extractor(custom_function: _Union[str, MetaFunction],
           The wrapped extractor that is suitable for using in the extract
           function.
     """
-    print(custom_function)
+    from ..utils._console import Console
+    Console.print(custom_function)
 
     if isinstance(custom_function, str):
-        print(f"Importing a custom extractor from {custom_function}")
+        Console.print(f"Importing a custom extractor from {custom_function}")
 
         # we need to find the function
         import metawards.extractors
@@ -93,30 +94,43 @@ def build_custom_extractor(custom_function: _Union[str, MetaFunction],
 
         if module is None:
             # we cannot find the extractor
-            print(f"Cannot find the extractor '{custom_function}'."
-                  f"Please make sure this is spelled correctly and "
-                  f"any python modules/files needed are in the "
-                  f"PYTHONPATH or current directory")
+            Console.error(f"Cannot find the extractor '{custom_function}'."
+                          f"Please make sure this is spelled correctly and "
+                          f"any python modules/files needed are in the "
+                          f"PYTHONPATH or current directory")
             raise ImportError(f"Could not import the extractor "
                               f"'{custom_function}'")
 
         if func_name is None:
             # find the last function that starts with 'extract'
             import inspect
-            func = None
+            funcs = []
             for name, value in inspect.getmembers(module):
                 if name.startswith("extract"):
                     if hasattr(value, "__call__"):
-                        # this is a function
-                        func = value
+                        if value.__module__ == module.__name__:
+                            # this is a function defined in this module
+                            funcs.append(value)
+
+            if len(funcs) > 0:
+                func = funcs[0]
+
+                if len(funcs) > 1:
+                    Console.warning(
+                        f"Multiple possible matching functions: {funcs}. "
+                        f"Choosing {func}. Please use the module::function "
+                        f"syntax if this is the wrong choice.")
+            else:
+                func = None
 
             if func is not None:
                 return build_custom_extractor(func)
 
-            print(f"Could not find any function in the module "
-                  f"{custom_function} that has a name that starts "
-                  f"with 'extract'. Please manually specify the "
-                  f"name using the '{custom_function}::your_function syntax")
+            Console.error(
+                f"Could not find any function in the module "
+                f"{custom_function} that has a name that starts "
+                f"with 'extract'. Please manually specify the "
+                f"name using the '{custom_function}::your_function syntax")
 
             raise ImportError(f"Could not import the extractor "
                               f"{custom_function}")
@@ -125,21 +139,24 @@ def build_custom_extractor(custom_function: _Union[str, MetaFunction],
             if hasattr(module, func_name):
                 return build_custom_extractor(getattr(module, func_name))
 
-            print(f"Could not find the function {func_name} in the "
-                  f"module {func_module}. Check that the spelling "
-                  f"is correct and that the right version of the module "
-                  f"is being loaded.")
+            Console.error(
+                f"Could not find the function {func_name} in the "
+                f"module {func_module}. Check that the spelling "
+                f"is correct and that the right version of the module "
+                f"is being loaded.")
             raise ImportError(f"Could not import the extractor "
                               f"{custom_function}")
 
     if not hasattr(custom_function, "__call__"):
-        print(f"Cannot build an extractor for {custom_function} "
-              f"as it is missing a __call__ function, i.e. it is "
-              f"not a function.")
+        Console.error(
+            f"Cannot build an extractor for {custom_function} "
+            f"as it is missing a __call__ function, i.e. it is "
+            f"not a function.")
         raise ValueError(f"You can only build custom extractors for "
                          f"actual functions... {custom_function}")
 
-    print(f"Building a custom extractor for {custom_function}")
+    Console.print(f"Building a custom extractor for {custom_function}",
+                  style="magenta")
 
     return lambda **kwargs: extract_custom(custom_function=custom_function,
                                            **kwargs)

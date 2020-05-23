@@ -3,18 +3,22 @@ from dataclasses import dataclass as _dataclass
 from dataclasses import field as _field
 from typing import List as _List
 from typing import Dict as _Dict
+from typing import Union as _Union
 import os as _os
 import pathlib as _pathlib
 
 from ._demographic import Demographic
 from ._network import Network
 
-__all__ = ["Demographics"]
+__all__ = ["Demographics", "DemographicID", "DemographicIDs"]
 
 _default_demographics_path = _os.path.join(_pathlib.Path.home(),
                                            "GitHub", "MetaWardsData")
 
 _default_folder_name = "demographics"
+
+DemographicID = _Union[str, int]
+DemographicIDs = _List[DemographicID]
 
 
 def _get_value(value):
@@ -22,7 +26,7 @@ def _get_value(value):
        to allow the demographics.json file to store numbers is
        a variety of formats
     """
-    from metawards.utils import safe_eval_float
+    from metawards.utils import safe_eval_number
 
     if value is None:
         return 0.0
@@ -30,17 +34,17 @@ def _get_value(value):
     elif isinstance(value, list):
         lst = []
         for v in value:
-            lst.append(safe_eval_float(v))
+            lst.append(safe_eval_number(v))
         return lst
 
     elif isinstance(value, dict):
         d = []
         for k, v in value.items():
-            d[k] = safe_eval_float(v)
+            d[k] = safe_eval_number(v)
 
         return d
     else:
-        return safe_eval_float(value)
+        return safe_eval_number(value)
 
 
 @_dataclass(eq=False)
@@ -249,13 +253,13 @@ class Demographics:
                 data = json.load(FILE)
 
         except Exception as e:
-            print(f"Could not find the demographics file {json_file}")
-            print(f"Either it does not exist of was corrupted.")
-            print(f"Error was {e.__class__} {e}")
-            print(f"To download the disease data type the command:")
-            print(f"  git clone https://github.com/metawards/MetaWardsData")
-            print(f"and then re-run this function passing in the full")
-            print(f"path to where you downloaded this directory")
+            from .utils._console import Console
+            Console.error(f"""
+Could not find the demographics file {json_file}. "Either it does not exist
+or was corrupted. Error was {e.__class__} {e}. To download the disease data
+follow the instructions at
+[https://metawards.org/model_data](https://metawards.org/model_data).""")
+
             raise FileNotFoundError(f"Could not find or read {json_file}: "
                                     f"{e.__class__} {e}")
 

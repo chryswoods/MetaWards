@@ -8,6 +8,7 @@ from __future__ import print_function
 
 # Make sure that we create docs for the built version of metawards, not
 # the installed version
+import metawards
 import sys
 import glob
 import os
@@ -24,10 +25,10 @@ for path in build_paths:
 print(f"PYTHONPATH = {sys.path}")
 
 # Now import metawards, when we have a correct path
-import metawards
 
 # -- General configuration -----------------------------------------------
-# Add any Sphinx extension module names here, as strings. They can be extensions
+# Add any Sphinx extension module names here, as strings.
+# They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 
 extensions = [
@@ -50,7 +51,7 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 
 # The encoding of source files.
-#source_encoding = 'utf-8-sig'
+# source_encoding = 'utf-8-sig'
 
 # The master toctree document.
 master_doc = 'index'
@@ -94,9 +95,9 @@ language = 'en'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
-#today = ''
+# today = ''
 # Else, today_fmt is used as the format for a strftime call.
-#today_fmt = '%B %d, %Y'
+# today_fmt = '%B %d, %Y'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -188,7 +189,6 @@ html_use_smartypants = True
 #html_sidebars = {'**': ['sourcelink.html', 'globaltoc.html']}
 
 
-
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
 #html_additional_pages = {}
@@ -227,10 +227,10 @@ htmlhelp_basename = 'MetaWardsDoc'
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
-    #'papersize': 'letterpaper',
+    # 'papersize': 'letterpaper',
 
     # The font size ('10pt', '11pt' or '12pt').
-    #'pointsize': '10pt',
+    # 'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
     'preamble': r"\usepackage{amsmath,amssymb}",
@@ -303,7 +303,11 @@ texinfo_documents = [
 # -----------------------------------------------------------------------------
 
 autosummary_generate = True
-autodoc_default_flags = ['members', 'inherited-members']
+autodoc_default_options = {
+    'members': None,  # Include all members (methods).
+    'special-members': None,
+    'exclude-members': '__dict__,__weakref__'  # Exclude "standard" methods.
+}
 
 # spell checking
 spelling_lang = 'en_US'
@@ -344,27 +348,33 @@ def setup(app):
                 items = []
                 for name in dir(obj):
                     try:
-                        documenter = get_documenter(app, safe_getattr(obj, name), obj)
+                        documenter = get_documenter(
+                            app, safe_getattr(obj, name), obj)
                     except AttributeError:
                         continue
                     if documenter.objtype == typ:
                         items.append(name)
-                public = [x for x in items if x in include_public or not x.startswith('_')]
+                public = [
+                    x for x in items if x in include_public or not x.startswith('_')]
                 return public, items
 
             def run(self):
                 clazz = self.arguments[0]
                 try:
                     (module_name, class_name) = clazz.rsplit('.', 1)
-                    m = __import__(module_name, globals(), locals(), [class_name])
+                    m = __import__(module_name, globals(),
+                                   locals(), [class_name])
                     c = getattr(m, class_name)
                     if 'methods' in self.options:
-                        _, methods = self.get_members(c, 'method', ['__init__'])
+                        _, methods = self.get_members(
+                            c, 'method', ['__init__'])
 
-                        self.content = ["~%s.%s" % (clazz, method) for method in methods if not method.startswith('_')]
+                        self.content = ["~%s.%s" % (
+                            clazz, method) for method in methods if not method.startswith('_')]
                     if 'attributes' in self.options:
                         _, attribs = self.get_members(c, 'attribute')
-                        self.content = ["~%s.%s" % (clazz, attrib) for attrib in attribs if not attrib.startswith('_')]
+                        self.content = ["~%s.%s" % (
+                            clazz, attrib) for attrib in attribs if not attrib.startswith('_')]
                 finally:
                     return super(AutoAutoSummary, self).run()
 

@@ -12,8 +12,7 @@ The functions divide into two main types;
     * :meth:`~metawards.movers.move_custom`
 
 ``go_functions`` that perform the work of moving individuals between demographics
-    * :meth:`~metawards.movers.go_on_holiday`
-    * :meth:`~metawards.movers.go_back_home`
+    * :meth:`~metawards.movers.go_isolate`
 
 All of the above functions (and the many others in
 :mod:`metawards.movers`) are

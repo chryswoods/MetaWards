@@ -6,7 +6,7 @@ cimport cython
 from cython.parallel import parallel, prange
 cimport openmp
 
-from libc.math cimport sqrt, sin, cos, atan2, M_PI
+from libc.math cimport sqrt, sin, cos, atan2
 
 import math
 
@@ -20,6 +20,8 @@ __all__ = ["add_wards_network_distance"]
 
 cdef inline double deg_to_rad(double x) nogil:
     """Convert the passed angle in degrees to radians"""
+    # define this here as M_PI is not in every math.h (especially windows)
+    M_PI = 3.14159265358979323846
     return x * M_PI / 180
 
 
@@ -76,7 +78,9 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
 
     line = None
 
-    print("Reading in the positions...")
+    from ._console import Console
+
+    Console.print("Reading in the positions...")
 
     cdef int i1 = 0
     cdef double x = 0.0
@@ -111,8 +115,9 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
                 wards.y[i1] = y * scale_for_km
 
                 if (x == 0) and (y == 0):
-                    print(f"WARNING: Position of ward {i1} is 0,0. This "
-                          f"doesn't seem right")
+                    Console.warning(
+                        f"WARNING: Position of ward {i1} is 0,0. This "
+                        f"doesn't seem right")
 
                 line = FILE.readline()
     except Exception as e:
@@ -131,17 +136,19 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
         if (x == 0) and (y == 0):
             nmissing += 1
             if nmissing == 20:
-                print("Not printing any more missing positions as there "
+                Console.print(
+                      "Not printing any more missing positions as there "
                       "are too many. You should fix the positions file")
             elif nmissing < 20:
-                print(f"WARNING: Position of ward {i} does not appear to have "
-                      f"been set - position is ({x} {y}).")
+                Console.print(
+                    f"WARNING: Position of ward {i} does not appear to have "
+                    f"been set - position is ({x} {y}).")
 
     if nmissing > 0:
-        print(f"In total the number of wards with missing positions "
-              f"is {nmissing}")
+        Console.print(f"In total the number of wards with missing positions "
+                      f"is {nmissing}")
 
-    print("Calculating distances...")
+    Console.print("Calculating distances...")
 
     cdef double total_distance = 0
     cdef double distance, distance2
@@ -192,11 +199,12 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
 
                 if distance > too_large:
                     with gil:
-                        print(f"Large distance between wards {ifrom} "
+                        Console.print(
+                              f"Large distance between wards {ifrom} "
                               f"and {ito}: {distance} km? {x1},{y1}  "
                               f"{x2},{y2}")
 
-    print(f"Total links distance equals {total_distance}")
+    Console.print(f"Total links distance equals {total_distance}")
 
     cdef double total_play_distance = 0.0
 
@@ -223,11 +231,13 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
 
                     if distance > too_large:
                         with gil:
-                            print(f"Large distance between play wards {ifrom} "
+                            Console.print(
+                                  f"Large distance between play wards {ifrom} "
                                   f"and {ito}: {distance} km? {x1},{y1}  "
                                   f"{x2},{y2}")
 
-    print(f"Total play distance equals {total_play_distance}")
-    print(f"Total distance equals {total_distance+total_play_distance}")
+    Console.print(f"Total play distance equals {total_play_distance}")
+    Console.print(
+            f"Total distance equals {total_distance+total_play_distance}")
 
     return network

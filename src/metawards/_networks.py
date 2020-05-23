@@ -131,12 +131,14 @@ class Networks:
         total_pop = network.population
         sum_pop = 0
 
-        print(f"Specialising network - population = {total_pop}")
+        from .utils._console import Console
+
+        Console.print(f"Specialising network - population: {total_pop}")
 
         for i, subnet in enumerate(subnets):
             pop = subnet.population
             sum_pop += pop
-            print(f"  {demographics[i].name} - population = {pop}")
+            Console.print(f"  {demographics[i].name} - population: {pop}")
 
         if total_pop != sum_pop:
             raise AssertionError(
@@ -244,8 +246,9 @@ class Networks:
             # all jobs to use the same random number seed (15324) that
             # is used for comparing outputs. This should NEVER be used
             # for production code
-            print("** WARNING: Using special mode to fix all random number")
-            print("** WARNING: seeds to 15324. DO NOT USE IN PRODUCTION!!!")
+            from .utils._console import Console
+            Console.warning("Using special mode to fix all random number "
+                            "seeds to 15324. DO NOT USE IN PRODUCTION!!!")
             rng = seed_ran_binomial(seed=15324)
         else:
             rng = seed_ran_binomial(seed=seed)
@@ -257,20 +260,21 @@ class Networks:
         for i in range(0, 5):
             randnums.append(str(ran_binomial(rng, 0.5, 100)))
 
-        print(f"First five random numbers equal {', '.join(randnums)}")
+        from .utils._console import Console
+        Console.print(f"First five random numbers equal {', '.join(randnums)}")
         randnums = None
 
         if nthreads is None:
             from .utils._parallel import get_available_num_threads
             nthreads = get_available_num_threads()
 
-        print(f"Number of threads used equals {nthreads}")
+        Console.print(f"Number of threads used equals {nthreads}")
 
         from .utils._parallel import create_thread_generators
         rngs = create_thread_generators(rng, nthreads)
 
         # Create space to hold the results of the simulation
-        print("Initialise infections...")
+        Console.print("Initialise infections...")
         infections = self.initialise_infections()
 
         from .utils import run_model

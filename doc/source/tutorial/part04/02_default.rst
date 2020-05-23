@@ -4,7 +4,7 @@ Accumulating into a Workspace
 
 The default function that is always called by
 :meth:`~metawards.utils.extract` is
-:meth:`metawards.extractors.extract_core`.
+:meth:`metawards.extractors.output_core`.
 
 This core extractor performs the bulk of the work of accumulating all of
 the infection data into a single :class:`metawards.Workspace` object.
@@ -40,13 +40,15 @@ to read;
 
 .. code-block:: python
 
+    from metawards.utils import Console
+
     def output_population(population, output_dir, **kwargs):
-        print("Hello output_population")
+        Console.debug("Hello output_population")
 
         # create an output file called 'population.dat'
         popfile = output_dir.open("population.dat",
-                                headers=["day", "date", "S", "E",
-                                        "I", "R"])
+                                  headers=["day", "date", "S", "E",
+                                           "I", "R"])
 
         # write the population to this file
         popfile.write(f"{population.day} {population.date.isoformat()} "
@@ -55,7 +57,7 @@ to read;
 
 
     def extract_population(population, **kwargs):
-        print("hello extract_population")
+        Console.debug("hello extract_population")
 
         from metawards.extractors import output_incidence
 

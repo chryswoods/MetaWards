@@ -6,9 +6,21 @@ MetaWards
    :target: https://github.com/metawards/MetaWards/actions?query=workflow%3ABuild
    :alt: Build Status
 
-.. image:: https://camo.githubusercontent.com/8c2f819cc55ec237a4a942f0515750329d1e1e64/68747470733a2f2f62616467652e667572792e696f2f70792f6d65746177617264732e737667
+.. image:: https://badge.fury.io/py/metawards.svg
    :target: https://pypi.python.org/pypi/metawards
-   :alt: PyPi Package
+   :alt: PyPi version
+
+.. image:: https://img.shields.io/pypi/pyversions/metawards.svg
+   :target: https://pypi.org/project/metawards
+   :alt: PyPi project
+
+.. image:: https://pepy.tech/badge/metawards
+   :target: https://pepy.tech/project/metawards
+   :alt: Number of downloads
+
+.. image:: https://img.shields.io/github/commit-activity/m/metawards/metawards
+   :target: https://github.com/metawards/MetaWards
+   :alt: GitHub commit activity
 
 .. image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://www.gnu.org/licenses/gpl-3.0.html
@@ -59,6 +71,14 @@ been optimised and parallelised, with additional testing added to ensure
 that future development and scale-up of MetaWards can be robustly and
 efficiently conducted.
 
+Features
+========
+
+.. toctree::
+   :maxdepth: 2
+
+   features
+
 Installation
 ============
 
@@ -107,6 +127,11 @@ Contributing
    :maxdepth: 2
 
    contributing
+   devsupport
+   roadmap
+   packaging
+   development
+   snaglist
 
 Documentation
 =============
@@ -115,13 +140,6 @@ Documentation
    :maxdepth: 2
 
    api/index
-
-Development
-===========
-.. toctree::
-   :maxdepth: 2
-
-   development
 
 Changelog
 =========

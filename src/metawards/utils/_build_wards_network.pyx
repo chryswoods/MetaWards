@@ -149,8 +149,10 @@ def build_wards_network(params: Parameters,
     # the network is solely determined by the work and play files
     work_and_play = f"{params.input_files.work}:{params.input_files.play}"
 
+    from ._console import Console
+
     if work_and_play in _data_cache:
-        print("Using pre-loaded cached network...")
+        Console.print("Using pre-loaded cached network...")
         network = _data_cache[work_and_play].copy()
         network.params = params
         return network
@@ -165,7 +167,7 @@ def build_wards_network(params: Parameters,
 
     p = p.start("read_work_file")
     if workfile in _data_cache:
-        print("Using pre-loaded cached work matrix...")
+        Console.print("Using pre-loaded cached work matrix...")
         (nodes, links, nnodes, nlinks) = _data_cache[workfile]
         nodes = nodes.copy()
         links = links.copy()
@@ -177,9 +179,8 @@ def build_wards_network(params: Parameters,
                                              max_nodes=max_nodes,
                                              max_links=max_links)
         except MemoryError as e:
-            print(e)
-            print(f"Increasing max_nodes to {max_nodes*2} and "
-                  f"max_links to {max_links*2}")
+            Console.print(f"Increasing max_nodes to {max_nodes*2} and "
+                          f"max_links to {max_links*2}")
             return build_wards_network(params=params,
                                        profiler=profiler,
                                        nthreads=nthreads,
@@ -194,8 +195,8 @@ def build_wards_network(params: Parameters,
     network.nodes = nodes
     network.links = links
 
-    print(f"Number of nodes equals {nnodes}")
-    print(f"Number of links equals {nlinks}")
+    Console.print(f"Number of nodes equals {nnodes}")
+    Console.print(f"Number of links equals {nlinks}")
 
     # save the parameters used to build the network
     # within the network - this will save having to pass
@@ -209,7 +210,7 @@ def build_wards_network(params: Parameters,
     fill_in_gaps(network, max_nodes=max_nodes)
     p = p.stop()
 
-    print(f"Number of nodes after filling equals {network.nnodes}")
+    Console.print(f"Number of nodes after filling equals {network.nnodes}")
 
     from . import build_play_matrix
     p = p.start("build_play_matrix")
@@ -231,13 +232,14 @@ def build_wards_network(params: Parameters,
                 nodes_label[i] = i
 
     if nnull > 0:
-        print(f"Number of null nodes equals {nnull}")
+        Console.print(f"Number of null nodes equals {nnull}")
 
-    print(f"Number of nodes after build play equals {network.nnodes}")
+    Console.print(f"Number of nodes after build play equals {network.nnodes}")
 
-    print(f"Resize nodes to {network.nnodes + 1}")
-    print(f"Resize links to {network.nlinks + 1}")
-    print(f"Resize play links to {network.nplay + 1}")
+    Console.print(f"Resize nodes to {network.nnodes + 1}")
+    Console.print(f"Resize links to {network.nlinks + 1}")
+    Console.print(f"Resize play links to {network.nplay + 1}")
+
     p = p.start("resize_nodes_and_links")
     network.nodes.resize(network.nnodes + 1)     # remember 1-indexed
     network.links.resize(network.nlinks + 1)  # remember 1-indexed

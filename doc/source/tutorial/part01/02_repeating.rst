@@ -26,11 +26,11 @@ as it can to parallelise the jobs. On my computer, the output shows;
 
 ::
 
-  Performing 4 runs of each set of parameters
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Running the model ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Using random number seed: 87340504
+    Running 4 jobs using 4 process(es)
 
-  Number of threads to use for each model run is 1
-  Number of processes used to parallelise model runs is 4
-  Parallelisation will be achieved using multiprocessing
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ MULTIPROCESSING ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 I have four processor cores on my laptop, so I see the four repeats run
 in parallel using four processes, with each *model run* performed
@@ -47,30 +47,61 @@ be printed;
 
 ::
 
-  Running 4 jobs using 4 process(es)
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ MULTIPROCESSING ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 1 of 4                                                                  │
+    │  (NO_CHANGE)[repeat 1]                                                                 │
+    │  2021-01-13: DAY: 238 S: 11784852    E: 0    I: 0    R: 44297225    IW: 0   UV: 1.0    │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 2 of 4                                                                  │
+    │  (NO_CHANGE)[repeat 2]                                                                 │
+    │  2021-01-05: DAY: 230 S: 11770162    E: 0    I: 0    R: 44311915    IW: 1   UV: 1.0    │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 3 of 4                                                                  │
+    │  (NO_CHANGE)[repeat 3]                                                                 │
+    │  2021-02-05: DAY: 261 S: 11789449    E: 0    I: 0    R: 44292628    IW: 1   UV: 1.0    │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 4 of 4                                                                  │
+    │  (NO_CHANGE)[repeat 4]                                                                 │
+    │  2021-01-04: DAY: 229 S: 11779688    E: 0    I: 0    R: 44302389    IW: 0   UV: 1.0    │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Writing a summary of all results into the csv file                                    │
+    │  /Users/chris/GitHub/tutorial/test/output/results.csv.bz2. You can use this to         │
+    │  quickly look at statistics across all runs using e.g. R or pandas                     │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
 
-  Running jobs in parallel using a multiprocessing pool...
 
-  Completed job 1 of 4
-  (NO_CHANGE)[repeat 1]
-  2020-12-19: DAY: 243 S: 11776504    E: 0    I: 0    R: 44305573    IW: 1   TOTAL POPULATION 56082077
+.. note::
+   ``metawards`` prints a progress spinner to the screen while the jobs
+   are running, so show you that it hasn't crashed. You can switch off
+   the spinner using the ``--no-spinner`` option if it annoys you.
+   Similarly, ``metawards`` by default writes output to the screen using
+   a very colourful theme. You can change this to a more simple and
+   less-colourful theme by passing in the option ``--theme simple``.
 
-  Completed job 2 of 4
-  (NO_CHANGE)[repeat 2]
-  2020-12-16: DAY: 240 S: 11787147    E: 0    I: 0    R: 44294930    IW: 0   TOTAL POPULATION 56082077
-
-  Completed job 3 of 4
-  (NO_CHANGE)[repeat 3]
-  2020-11-25: DAY: 219 S: 11789948    E: 0    I: 0    R: 44292129    IW: 0   TOTAL POPULATION 56082077
-
-  Completed job 4 of 4
-  (NO_CHANGE)[repeat 4]
-  2020-12-04: DAY: 228 S: 11782418    E: 0    I: 0    R: 44299659    IW: 1   TOTAL POPULATION 56082077
-
-  Writing a summary of all results into the
-  csv file /Users/chris/GitHub/tutorial/output/results.csv.bz2.
-
-In this case, all four outbreaks completed within 219-243 days, while the
+In this case, all four outbreaks completed within 229-261 days, while the
 number of the population who progressed to the '**R**' state were all
 around 44.3 million.
 

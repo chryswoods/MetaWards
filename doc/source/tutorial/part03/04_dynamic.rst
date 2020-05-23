@@ -17,9 +17,10 @@ To do this, edit your ``lockdown.py`` script and copy in the following;
                                   advance_infprob, \
                                   advance_fixed, \
                                   advance_play
+  from metawards.utils import Console
 
   def advance_lockdown(**kwargs):
-      print("We are on lockdown")
+      Console.debug("We are on lockdown")
       advance_infprob(scale_rate=0.25, **kwargs)
       advance_play(**kwargs)
 
@@ -86,9 +87,10 @@ file to read;
                                   advance_infprob, \
                                   advance_fixed, \
                                   advance_play
+  from metawards.utils import Console
 
   def advance_lockdown(**kwargs):
-      print("We are on lockdown")
+      Console.debug("We are on lockdown")
       advance_infprob(scale_rate=0.25, **kwargs)
       advance_play(**kwargs)
 
@@ -128,86 +130,72 @@ of my run and the overview graph below).
 
 ::
 
-    S: 56057097    E: 213    I: 2189    R: 22578    IW: 197   TOTAL POPULATION 56081864
-    We are on lockdown
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 76 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    We are on lockdown                        lockdown.py:9
+    S: 56055907  E: 201  I: 2192  R: 23777  IW: 215  POPULATION: 56082077
+    Number of infections: 2393
 
-    76 2402
-    S: 56056905    E: 200    I: 2133    R: 22839    IW: 184   TOTAL POPULATION 56081877
-    We are on lockdown
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 77 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    We are on lockdown                        lockdown.py:9
+    S: 56055697  E: 223  I: 2144  R: 24013  IW: 202  POPULATION: 56082077
+    Number of infections: 2367
 
-    77 2333
-    S: 56056746    E: 192    I: 2101    R: 23038    IW: 157   TOTAL POPULATION 56081885
-    We are on lockdown
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 78 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    We are on lockdown                        lockdown.py:9
+    S: 56055515  E: 210  I: 2109  R: 24243  IW: 174  POPULATION: 56082077
+    Number of infections: 2319
 
-    78 2293
-    S: 56056568    E: 159    I: 2061    R: 23289    IW: 176   TOTAL POPULATION 56081918
-    We are on lockdown
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 79 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    [15:41:25]                        We are on lockdown                        lockdown.py:9
+    S: 56055304  E: 182  I: 2099  R: 24492  IW: 205  POPULATION: 56082077
+    Number of infections: 2281
 
-    79 2220
-    S: 56056399    E: 178    I: 1983    R: 23517    IW: 162   TOTAL POPULATION 56081899
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 80 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    We are on lockdown                        lockdown.py:9
+    S: 56055121  E: 211  I: 2055  R: 24690  IW: 175  POPULATION: 56082077
+    Number of infections: 2266
 
-    80 2161
-    S: 56055290    E: 169    I: 1904    R: 24714    IW: 942   TOTAL POPULATION 56081908
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 81 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    We are on lockdown                        lockdown.py:9
+    S: 56054939  E: 183  I: 2004  R: 24951  IW: 176  POPULATION: 56082077
+    Number of infections: 2187
 
-    81 2073
-    S: 56054625    E: 1109    I: 1853    R: 24490    IW: 596   TOTAL POPULATION 56080968
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 82 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    We are on lockdown                        lockdown.py:9
+    S: 56054770  E: 182  I: 1964  R: 25161  IW: 166  POPULATION: 56082077
+    Number of infections: 2146
 
-    82 2962
-    S: 56053957    E: 665    I: 2728    R: 24727    IW: 602   TOTAL POPULATION 56081412
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 83 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56053695  E: 169  I: 1923  R: 26290  IW: 916  POPULATION: 56082077
+    Number of infections: 2092
 
-    83 3393
-    S: 56052602    E: 668    I: 3162    R: 25645    IW: 1151   TOTAL POPULATION 56081409
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 84 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56052615  E: 1075  I: 1879  R: 26508  IW: 920  POPULATION: 56082077
+    Number of infections: 2954
 
-    84 3830
-    S: 56051035    E: 1355    I: 3601    R: 26086    IW: 1304   TOTAL POPULATION 56080722
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 85 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56051552  E: 1080  I: 2730  R: 26715  IW: 908  POPULATION: 56082077
+    Number of infections: 3810
 
-    85 4956
-    S: 56049197    E: 1567    I: 4689    R: 26624    IW: 1492   TOTAL POPULATION 56080510
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 86 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56050161  E: 1063  I: 3598  R: 27255  IW: 1187  POPULATION: 56082077
+    Number of infections: 4661
 
-    86 6256
-    S: 56046897    E: 1838    I: 5977    R: 27365    IW: 1811   TOTAL POPULATION 56080239
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 87 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56049050  E: 1391  I: 4452  R: 27184  IW: 966  POPULATION: 56082077
+    Number of infections: 5843
 
-    87 7815
-    S: 56044064    E: 2300    I: 7445    R: 28268    IW: 2140   TOTAL POPULATION 56079777
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 88 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56047600  E: 1111  I: 5589  R: 27777  IW: 1236  POPULATION: 56082077
+    Number of infections: 6700
 
-    88 9745
-    S: 56041777    E: 2833    I: 9318    R: 28149    IW: 1808   TOTAL POPULATION 56079244
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 89 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56044865  E: 1450  I: 6352  R: 29410  IW: 2072  POPULATION: 56082077
+    Number of infections: 7802
 
-    89 12151
-    S: 56039009    E: 2287    I: 11558    R: 29223    IW: 2106   TOTAL POPULATION 56079790
-
-    90 13845
-    S: 56033706    E: 2768    I: 13086    R: 32517    IW: 3391   TOTAL POPULATION 56079309
-
-    91 15854
-    S: 56027735    E: 5303    I: 14968    R: 34071    IW: 3622   TOTAL POPULATION 56076774
-
-    92 20271
-    S: 56020915    E: 5971    I: 19179    R: 36012    IW: 3947   TOTAL POPULATION 56076106
-
-    93 25150
-    S: 56012334    E: 6820    I: 23835    R: 39088    IW: 4518   TOTAL POPULATION 56075257
-
-    94 30655
-    S: 56001786    E: 8581    I: 29059    R: 42651    IW: 4947   TOTAL POPULATION 56073496
-
-    95 37640
-    S: 55994025    E: 10548    I: 35825    R: 41679    IW: 4377   TOTAL POPULATION 56071529
-
-    96 46373
-    S: 55984596    E: 7761    I: 44092    R: 45628    IW: 4847   TOTAL POPULATION 56074316
-
-    97 51853
-    S: 55965009    E: 9429    I: 49023    R: 58616    IW: 6443   TOTAL POPULATION 56072648
-
-    98 58452
-    S: 55943662    E: 19587    I: 55002    R: 63826    IW: 6618   TOTAL POPULATION 56062490
-
-    99 74589
-    S: 55919882    E: 21347    I: 70325    R: 70523    IW: 6883   TOTAL POPULATION 56060730
-
-    100 91672
-    S: 55889466    E: 23780    I: 86623    R: 82208    IW: 7276   TOTAL POPULATION 56058297
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 90 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56041834  E: 2735  I: 7386  R: 30122  IW: 2246  POPULATION: 56082077
+    Number of infections: 10121
 
 .. image:: ../../images/tutorial_3_4_4_overview.jpg
    :alt: Overview image of a automatically released lockdown
@@ -231,10 +219,14 @@ edit your ``lockdown.py`` to contain the following.
                                     advance_infprob, \
                                     advance_fixed, \
                                     advance_play
+    from metawards.utils import Console
 
     def advance_lockdown(population, **kwargs):
-        print(f"We are on lockdown ({population.lockdown_scale_rate})")
-        advance_infprob(scale_rate=population.lockdown_scale_rate,
+        Console.debug("We are in lockdown",
+                      variables=[population.lockdown_scale_rate])
+
+        advance_infprob(population=population,
+                        scale_rate=population.lockdown_scale_rate,
                         **kwargs)
         advance_play(population=population, **kwargs)
 
@@ -319,11 +311,16 @@ Copy the below into your ``lockdown.py`` file;
                                     advance_infprob, \
                                     advance_fixed, \
                                     advance_play
+    from metawards.utils import Console
+
 
     def advance_lockdown(population, **kwargs):
-        print(f"We are on lockdown ({population.lockdown_scale_rate})")
-        print(f"is_work_locked_down == {population.is_work_locked_down}")
-        advance_infprob(scale_rate=population.lockdown_scale_rate,
+        Console.debug("We are in lockdown",
+                      variables=[population.lockdown_scale_rate,
+                                 population.is_work_locked_down])
+
+        advance_infprob(population=population,
+                        scale_rate=population.lockdown_scale_rate,
                         **kwargs)
 
         advance_play(population=population, **kwargs)
@@ -331,40 +328,36 @@ Copy the below into your ``lockdown.py`` file;
         if not population.is_work_locked_down:
             advance_fixed(population=population, **kwargs)
 
+
     def iterate_lockdown(population, **kwargs):
         if not hasattr(population, "lockdown_state"):
             population.lockdown_state = "before"
             population.is_locked_down = False
+            population.lockdown_scale_rate = 0.25
+            population.is_work_locked_down = False
 
         if population.lockdown_state == "before":
             if population.total > 5000:
                 population.lockdown_state = "lockdown"
                 population.lockdown_started = population.day
                 population.is_locked_down = True
-                population.lockdown_scale_rate = 0.05
                 population.is_work_locked_down = True
 
         elif population.lockdown_state == "lockdown":
             if population.total < 2000:
                 population.lockdown_state = "relaxed_lockdown"
                 population.lockdown_ended = population.day
-                population.lockdown_scale_rate = 0.05
+                population.lockdown_scale_rate = 0.5
                 population.is_locked_down = True
                 population.is_work_locked_down = False
 
         elif population.lockdown_state == "relaxed_lockdown":
             population.is_work_locked_down = False
 
-            if population.total > 5000:
-                population.lockdown_state = "lockdown"
-                population.lockdown_started = population.day
-                population.is_locked_down = True
-                population.lockdown_scale_rate = 0.05
-                population.is_work_locked_down = True
-            elif population.total < 1000:
-                population.lockdown_scale_rate = 0.1
+            if population.total < 1000:
+                population.lockdown_scale_rate = 0.75
             else:
-                population.lockdown_scale_rate = 0.05
+                population.lockdown_scale_rate = 0.5
 
         if population.is_locked_down:
             return [advance_lockdown]

@@ -47,6 +47,22 @@ class Population:
         """The number who are infected across all wards"""
         return self.total + self.latent
 
+    def increment_day(self, ndays: int = 1) -> None:
+        """Advance the day count by 'ndays' (default 1)"""
+        self.day += ndays
+
+        if self.subpops is not None:
+            for pop in self.subpops:
+                pop.day += ndays
+
+        if self.date:
+            from datetime import timedelta
+            self.date += timedelta(days=1)
+
+            if self.subpops is not None:
+                for pop in self.subpops:
+                    pop.date = self.date
+
     def specialise(self, network):
         """Specialise this population for the passed Networks"""
         subpops = []
@@ -124,7 +140,8 @@ class Population:
 
         if len(errors) > 0:
             errors = "\nERROR: ".join(errors)
-            print(f"ERROR: {errors}")
+            from .utils._console import Console
+            Console.error(errors)
             raise AssertionError(f"Disagreement in population sums!")
 
     def summary(self, demographics=None):

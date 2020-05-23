@@ -10,6 +10,21 @@ It is important to repeat each *model run* several times in order to
 reduce random error and interpret the change in the population trajectory
 in response to changes in disease parameters.
 
+This is supported using the ``--repeats`` command line argument. You
+can use this to specify the number of times you want to repeat each
+*model run*, e.g. ``--repeats 8`` would repeat each **model run**
+eight times.
+
+.. note::
+   You can pass multiple values to ``--repeats`` if you want different
+   adjustable variable sets to be repeated different numbers of times.
+   Equally, you can add a ``repeats`` column to the ``lurgyparams.csv``
+   file that gives the number of times each line should be repeated.
+   If you use both options, then the repeats are multipled, e.g. if
+   ``repeats`` is ``2`` in the model file, and ``--repeats 3`` is passed
+   as a command-line argument, then the adjustable variables on that
+   line of the model file will be repeated 2 x 3 == 6 times.
+
 To this end, ``metawards`` natively supports running across multiple
 compute nodes of a
 `slurm <https://slurm.schedmd.com>`__ or

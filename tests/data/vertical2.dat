@@ -1,0 +1,12 @@
+.long = This is a really long line
+.comma = "This is a long line with, a comma!"
+.string = s'2020-12-31'
+.animal: cat
+.date = 2020-12-31
+.date2 = d"2020-12-31"
+.date3 = d'2020-12-31'
+.int = i"42"
+.float = f"3.141"
+.bool = true
+.bool2 = false
+

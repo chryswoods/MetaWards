@@ -18,8 +18,10 @@ below;
 
 .. code-block:: python
 
+  from metawards.utils import Console
+
   def extract_hello(**kwargs):
-      print("Hello extract_hello")
+      Console.print("Hello extract_hello")
 
       return []
 
@@ -34,32 +36,36 @@ You should see output something similar to this;
 
 ::
 
-    Loaded iterator from hello.py
-    <function extract_hello at 0x10fe935f0>
-    Building a custom extractor for <function extract_hello at 0x10fe935f0>
-    Setup by seeding all wards
-    Hello extract_hello
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+    Importing a custom extractor from hello
+    Loaded hello from hello.py
+    <function extract_hello at 0x1068599e0>
+    Building a custom extractor for <function extract_hello at 0x1068599e0>
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
 
-    0 0
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Hello extract_hello
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
 
-    1 0
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Hello extract_hello
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
 
-    2 0
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Hello extract_hello
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
 
-    3 0
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 3 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Hello extract_hello
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
 
-    4 0
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 4 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     Hello extract_hello
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
     Infection died ... Ending on day 5
 
 extract_XXX and output_XXX
@@ -79,8 +85,10 @@ the below;
 
 .. code-block:: python
 
+    from metawards.utils import Console
+
     def output_population(population, output_dir, **kwargs):
-        print("Hello output_population")
+        Console.debug("Hello output_population")
 
         # create an output file called 'population.dat'
         popfile = output_dir.open("population.dat")
@@ -91,7 +99,7 @@ the below;
                       f"{population.total} {population.recovereds}\n")
 
     def extract_population(**kwargs):
-        print("hello extract_population")
+        Console.debug("hello extract_population")
 
         return [output_population]
 
@@ -141,8 +149,10 @@ to read;
 
 .. code-block:: python
 
+    from metawards.utils import Console
+
     def output_population(population, output_dir, **kwargs):
-        print("Hello output_population")
+        Console.debug("Hello output_population")
 
         # create an output file called 'population.dat'
         popfile = output_dir.open("population.dat",
@@ -155,7 +165,7 @@ to read;
                       f"{population.total} {population.recovereds}\n")
 
     def extract_population(**kwargs):
-        print("hello extract_population")
+        Console.debug("hello extract_population")
 
         return [output_population]
 
@@ -188,8 +198,10 @@ file on even days, change ``population.py`` to read;
 
 .. code-block:: python
 
+    from metawards.utils import Console
+
     def output_population(population, output_dir, **kwargs):
-        print("Hello output_population")
+        Console.debug("Hello output_population")
 
         # create an output file called 'population.dat'
         popfile = output_dir.open("population.dat",
@@ -203,7 +215,7 @@ file on even days, change ``population.py`` to read;
 
 
     def extract_population(population, **kwargs):
-        print("hello extract_population")
+        Console.debug("hello extract_population")
 
         if population.day % 2 == 0:
             return [output_population]
@@ -221,5 +233,152 @@ Run ``metawards`` using this extractor and you should see that the
 
 .. note::
    You are also able to only print out on other conditions, e.g.
-   when the **model run** reaches a certain date, or when the
+   when the *model run* reaches a certain date, or when the
    infected population grows above a certain size.
+
+Exiting early
+-------------
+
+Sometimes you may want to exit a *model run* early if a condition
+is reached. The best way to do this is to raise a Python
+`StopIteration <https://docs.python.org/3/library/exceptions.html>`__
+exception. This will signal to ``metawards`` that the *model run* should
+stop at the end of the current iteration (other functions that are
+part of that iteration can still complete, and any output written
+for that iteration will still be recorded).
+
+For example, you could use this output function to stop the *model run*
+once the number of infections reaches 2000. Copy the below into
+``extract_stop.py``;
+
+.. code-block:: python
+
+    from metawards.extractors import extract_default
+
+    def output_stop(population, **kwargs):
+        if population.infecteds > 2000:
+            raise StopIteration
+
+
+    def extract_stop(**kwargs):
+        output_funcs = extract_default(**kwargs)
+
+        output_funcs.append(output_stop)
+
+        return output_funcs
+
+This extractor uses all of the functions of
+:meth:`~metawards.extractors.extract_default`, plus a new custom
+output function called ``output_stop``. This compares the number
+of infections (:data:`population.infecteds <metawards.Population.infecteds>`),
+and if this is more than 2000, then it raises a Python
+`StopIteration <https://docs.python.org/3/library/exceptions.html>`__.
+
+Run ``metawards`` using;
+
+.. code-block:: bash
+
+    metawards -d lurgy3 -a ExtraSeedsLondon.dat --extractor extract_stop
+
+You should see that the *model run* is stopped once the number of infections
+is greater than 2000, e.g.
+
+::
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 29 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56078417  E: 566  I: 1275  R: 1819  IW: 501  POPULATION: 56082077
+    Number of infections: 1841
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 30 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56077705  E: 650  I: 1555  R: 2167  IW: 543  POPULATION: 56082077
+    <function output_stop at 0x105412e60> has indicated that the model run should stop early. Will finish the
+    run at the end of this iteration
+    Number of infections: 2205
+    Exiting model run early due to function request
+    Infection died ... Ending on day 31
+
+You can use this to stop a *model run* for any reason you want, e.g.
+a calculated condition has been reached, the model is unstable or
+uses parameters that are uninteresting. Another option is to use this to
+stop ``metawards`` from running for more than a specified amount of time.
+
+To do this, create an extractor called ``extract_stop_time.py`` and
+copy in;
+
+.. code-block:: python
+
+    from metawards.extractors import extract_default
+    from metawards.utils import Console
+
+    from datetime import datetime
+
+
+    def output_stop_time(network, **kwargs):
+        if not hasattr(network.params, "_start_model_time"):
+            network.params._start_model_time = datetime.now()
+            return
+
+        runtime = datetime.now() - network.params._start_model_time
+
+        Console.print(f"Runtime is {runtime.total_seconds()} seconds")
+
+        if runtime.total_seconds() > 5:
+            Console.warning(f"Runtime exceeded 5 seconds!")
+            raise StopIteration
+
+
+    def extract_stop_time(**kwargs):
+        output_funcs = extract_default(**kwargs)
+
+        output_funcs.append(output_stop_time)
+
+        return output_funcs
+
+
+This uses the Python
+`datetime <https://docs.python.org/3/library/datetime.html>`__ module to
+calculate the time since ``output_stop_time`` was first called.
+
+.. note::
+
+    We've recorded this start time by adding an attribute to ``network.params``
+    called ``_start_model_time``. Adding attributes like this to the
+    ``network.params`` object is a good way to store parameters between
+    model runs, or to initialise values at the start of a model run.
+    Any parameters are guaranteed to be cleared between runs, and
+    the threading model means that anything you read/write is thread
+    safe and will not interfere with other runs.
+
+Run this extractor using;
+
+.. code-block:: bash
+
+    metawards -d lurgy3 -a ExtraSeedsLondon.dat --extractor extract_stop_time
+
+You should see that the run ends after five seconds, e.g.;
+
+::
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 38 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56064800  E: 2313  I: 5934  R: 9030  IW: 1784  POPULATION: 56082077
+    Runtime is 4.538544 seconds
+    Number of infections: 8247
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 39 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56061567  E: 2816  I: 7023  R: 10671  IW: 2026  POPULATION: 56082077
+    Runtime is 4.831688 seconds
+    Number of infections: 9839
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 40 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 56057698  E: 3233  I: 8359  R: 12787  IW: 2306  POPULATION: 56082077
+    Runtime is 5.156103 seconds
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ WARNING ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Runtime exceeded 5 seconds!
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    <function output_stop_time at 0x10aa3ec20> has indicated that the model run should stop early. Will
+    finish the run at the end of this iteration
+    Number of infections: 11592
+    Exiting model run early due to function request
+    Infection died ... Ending on day 41

@@ -128,9 +128,12 @@ def create_thread_generators(rng, nthreads):
     else:
         from ._ran_binomial import seed_ran_binomial, ran_int
 
+        from ._console import Console
+
         for i in range(0, nthreads):
             seed = ran_int(rng)
-            print(f"Random seed for thread {i} equals {seed}")
+            Console.print(f"Random seed for thread {i} equals **{seed}**",
+                          markdown=True)
             rngs.append(seed_ran_binomial(seed))
 
     # need to return these as an array so that they are more easily

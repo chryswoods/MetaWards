@@ -13,6 +13,7 @@ In this second part of the tutorial you will:
 * Learn how to run ``metawards`` on a HPC cluster
 * Learn how to examine a hypothesis and conduct a large model run on a
   cluster to gather evidence.
+* Learn how to change the underlying geographic model data
 
 .. toctree::
    :maxdepth: 2
@@ -22,3 +23,4 @@ In this second part of the tutorial you will:
    part02/03_analysis
    part02/04_cluster
    part02/05_refining
+   part02/06_model_data

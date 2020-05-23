@@ -25,7 +25,8 @@ def seed_ran_binomial(seed: int = None):
         import random
         seed = random.randint(10000, 99999999)
 
-    print(f"Using random number seed: {seed}")
+    from ._console import Console
+    Console.print(f"Using random number seed: **{seed}**", markdown=True)
     rng = _construct_binomial_rng()
     _seed_ran_binomial(rng, seed)
 

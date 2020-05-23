@@ -24,27 +24,41 @@ should help in reproducing output. It is written to the top of all
 metawards outputs.
 
 If you see output like this, with ``WARNING`` lines about the version
-being ``dirty``...
+not having been committed to git...
 
 ::
 
-    *****************************************
-    metawards version 0.3.0+58.g6e1f4c4.dirty
-    *****************************************
-
-             -- Source information --
- repository: https://github.com/metawards/MetaWards
-                  branch: devel
- revision: 6e1f4c45092ec345ee3673709d780ebe71ca0309
-     last modified: 2020-04-09T17:57:18+0100
-
- WARNING: This version has not been committed to git,
- WARNING: so you may not be able to recover the original
- WARNING: source code that was used to generate this run!
-
-           -- Additional information --
-  Visit https://metawards.org for more informaion
-   about metawards, its authors and its license
+    ┌──────────────────────────────────────────────────────────────────────┐
+    │                                                                      │
+    │                                                                      │
+    │             MetaWards version 0.12.0+17.gd839bca1.dirty              │
+    │                                                                      │
+    │                                                                      │
+    │                        https://metawards.org                         │
+    │                                                                      │
+    │                          Source information                          │
+    │                                                                      │
+    │   • repository: https://github.com/metawards/MetaWards               │
+    │   • branch: feature-mover-tutorial                                   │
+    │   • revision: d839bca1e32e8c8b1814d7f72667e84ead1a59d7               │
+    │   • last modified: 2020-05-20T13:01:14+0100                          │
+    │                                                                      │
+    │  WARNING: This version has not been committed to git, so you may     │
+    │  not be able to recover the original source code that was used to    │
+    │  generate this run!                                                  │
+    │                                                                      │
+    │                      MetaWardsData information                       │
+    │                                                                      │
+    │   • version: 0.5.0                                                   │
+    │   • repository: https://github.com/metawards/MetaWardsData           │
+    │   • branch: master                                                   │
+    │                                                                      │
+    │                        Additional information                        │
+    │                                                                      │
+    │  Visit https://metawards.org for more information about metawards,   │
+    │  its authors and its license                                         │
+    │                                                                      │
+    └──────────────────────────────────────────────────────────────────────┘
 
 then this means that your ``metawards`` executable has been built using
 source code that has not been committed to git, and is therefore not
@@ -215,11 +229,16 @@ A model run moves individuals between different states according to
 whether they become infected, and then progress through the outbreak.
 The codes mean;
 
-* `S` : number who are susceptible to infection (and not infected)
-* `E` : number who are infected but not yet infectious (latent)
-* `I` : number who are infected, infectious and symptomatic
-* `IW` : number of wards that have at least one infected individual
-* `R` : number who are recovered from the infection and thus immune
+* **S**: The number of the population who are *susceptible* to infection
+* **E**: The number of the population who are *latent*, meaning they are
+  infected, but not yet infectious.
+* **I**: The number of the population who are *infected*, meaning they
+  have symptoms and are infectious
+* **R**: The number of the population who are removed from being susceptible,
+  either because they have been newly infected that day, or because they
+  have recovered from the infection and are no longer susceptible to infection
+* **IW**: The number of electoral wards that contain at least one
+  individual who was newly infected that day.
 
 As well as being printed to the screen, this data is also written
 to the CSV file ``output/results.csv.bz2`` for easy reading and analysis

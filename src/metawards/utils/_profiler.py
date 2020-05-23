@@ -6,6 +6,7 @@ __all__ = ["Profiler", "NullProfiler"]
 
 class NullProfiler:
     """This is a null profiler that does nothing"""
+
     def __init__(self, name: str = None, parent=None):
         pass
 
@@ -27,6 +28,7 @@ class Profiler:
        instrumenting of the code. It is used for sub-function
        profiling.
     """
+
     def __init__(self, name: str = None, parent=None):
         self._name = name
         self._parent = parent
@@ -136,11 +138,14 @@ class Profiler:
         end = time.time_ns()
 
         if self._start is None:
-            print(f"WARNING: You cannot stop profiler {self._name} as "
-                  f"it has not been started!")
+            from ._console import Console
+            Console.warning(f"You cannot stop profiler {self._name} as "
+                            f"it has not been started!")
         elif self._end is not None:
-            print(f"WARNING: You cannot stop profiler {self._name} as "
-                  f"it has already been stopped!")
+            from ._console import Console
+            Console.warning(
+                f"WARNING: You cannot stop profiler {self._name} as "
+                f"it has already been stopped!")
         else:
             self._end = end
 

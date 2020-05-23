@@ -13,10 +13,13 @@ def output_final_report(output_dir: OutputFiles,
 
     RESULTS = output_dir.open("results.csv")
 
-    print(f"\nWriting a summary of all results into the\n"
-          f"csv file {output_dir.get_filename('results.csv')}.\n"
-          f"You can use this to quickly look at statistics across\n"
-          f"all runs using e.g. R or pandas")
+    from ..utils._console import Console
+
+    Console.panel(f"""
+Writing a summary of all results into the csv file
+**{output_dir.get_filename('results.csv')}**. You can use this to quickly
+look at statistics across all runs using e.g. R or pandas""",
+                  markdown=True, style="alternate")
 
     varnames = results[0][0].variable_names()
 

@@ -1,4 +1,6 @@
 
+from metawards.utils import Console
+
 def iterate_lockdown(network, population, **kwargs):
     from metawards.iterators import iterate_default
 
@@ -48,6 +50,7 @@ def iterate_lockdown(network, population, **kwargs):
 
         population.scale_uv = scl
         params.dyn_dist_cutoff = cut
-        print(f"\nLOCKDOWN {stage+1}: scale_uv = {scl}, cutoff = {cut} km")
+
+        Console.debug("LOCKDOWN", variables=[stage, scl, cut])
 
     return advance_funcs

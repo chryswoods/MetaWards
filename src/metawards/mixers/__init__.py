@@ -7,6 +7,8 @@ Functions
 .. autosummary::
     :toctree: generated/
 
+    InteractionMatrix
+
     merge_evenly
 
     mix_custom
@@ -15,6 +17,8 @@ Functions
     mix_none
 
 """
+
+from ._interaction_matrix import *
 
 from ._merge_evenly import *
 from ._merge_using_matrix import *

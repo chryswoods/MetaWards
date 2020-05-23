@@ -29,7 +29,8 @@ def import_graphics_modules(verbose=False):
         print("You must have pandas and matplotlib installed to run "
               "metawards-plot")
         print("Install using either `pip install pandas` if you are using")
-        print("pip, or 'conda install pandas' if you are using conda.")
+        print("pip, or 'conda install pandas' if you are using conda, ")
+        print("or by running 'metawards-install --optional")
         raise ImportError("Cannot produce the plot as pandas and matplotlib "
                           "are not installed.")
 
@@ -86,6 +87,14 @@ def create_overview_plot(df, output_dir: str = None,
         # no fingerprints
         fingerprints = [None]
         repeat = "demographic"
+
+    try:
+        import PIL        # noqa - disable unused warning
+    except ImportError:
+        if format == "jpg":
+            print(
+                "WARNING: Missing 'pillow' package, defaulting to PNG format.")
+            format = "png"
 
     figs = {}
 
@@ -237,6 +246,14 @@ def create_average_plot(df, output_dir: str = None, format: str = "jpg",
          or the filename if output_dir was supplied, or a dictionary
          of multiple filenames indexed by fingerprint
     """
+    try:
+        import PIL        # noqa - disable unused warning
+    except ImportError:
+        if format == "jpg":
+            print(
+                "WARNING: Missing 'pillow' package, defaulting to PNG format.")
+            format = "png"
+
     fingerprints = df["fingerprint"].unique()
 
     figs = {}
@@ -357,6 +374,14 @@ def create_demographics_plot(df, output_dir: str = None,
          The matplotlib figure containing the demographics plot, or
          the filename if output_dir was supplied
     """
+    try:
+        import PIL        # noqa - disable unused warning
+    except ImportError:
+        if format == "jpg":
+            print(
+                "WARNING: Missing 'pillow' package, defaulting to PNG format.")
+            format = "png"
+
     _, plt = import_graphics_modules()
 
     columns = ["E", "I", "IW", "R"]
@@ -436,6 +461,14 @@ def save_summary_plots(results: str, output_dir: str = None,
        filenames: List(str)
          Full file paths of all of the files written by this function
     """
+    try:
+        import PIL        # noqa - disable unused warning
+    except ImportError:
+        if format == "jpg":
+            print(
+                "WARNING: Missing 'pillow' package, defaulting to PNG format.")
+            format = "png"
+
     pd, _ = import_graphics_modules(verbose=verbose)
     import os
 

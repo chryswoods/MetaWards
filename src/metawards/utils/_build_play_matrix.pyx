@@ -64,9 +64,11 @@ def build_play_matrix(network: Network,
     cdef char* fname
     cdef FILE* cfile
 
+    from ._console import Console
+
     # need to use C file reading as too slow in python
     if params.input_files.play is None:
-        print("No play links file to read")
+        Console.print("No play links file to read")
     else:
         p = p.start("read_play_file")
         filename = params.input_files.play.encode("UTF-8")
@@ -131,7 +133,7 @@ def build_play_matrix(network: Network,
     p = p.stop()
 
     if renormalise:
-        print("Identical work and play links, so renormalising...")
+        Console.print("Identical work and play links, so renormalising...")
 
     p = p.start("renormalise_loop")
     for j in range(1, nlinks+1):   # careful 1-indexed
@@ -153,7 +155,7 @@ def build_play_matrix(network: Network,
     cdef int max_node_id = network.nnodes
 
     if params.input_files.play_size is None:
-        print("No play_size file to read")
+        Console.print("No play_size file to read")
     else:
         # need to use C file reading as too slow in python
         p = p.start("read_play_size_file")
@@ -191,7 +193,8 @@ def build_play_matrix(network: Network,
                               f"nodes than are pre-allocated ({max_nodes}). "
                               f"Increase this and try again.")
 
-        print(f"Adding missing nodes from {old_nnodes+1} to {max_node_id}")
+        Console.print(
+            f"Adding missing nodes from {old_nnodes+1} to {max_node_id}")
 
         network.nnodes = max_node_id
 
@@ -201,7 +204,7 @@ def build_play_matrix(network: Network,
         p = p.stop()
     # end of if play_size file
 
-    print(f"Number of play links equals {nlinks}")
+    Console.print(f"Number of play links equals {nlinks}")
 
     network.nplay = nlinks
     network.play = links

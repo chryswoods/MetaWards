@@ -95,50 +95,167 @@ to complete.
   these jobs, ``metawards`` runs well in parallel
   :doc:`across a slurm or PBS cluster <../../cluster_usage>`.
 
-Once the jobs are complete (which took 14 minutes on my laptop), you
+Once the jobs are complete (which took 15 minutes on my laptop), you
 should have output that looks similar to this;
 
 ::
 
-  Running 9 jobs using 4 process(es)
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ MULTIPROCESSING ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 1 of 9                                                                  │
+    │  (beta[2]=0.3, too_ill_to_move[2]=0)[repeat 1]                                         │
+    │  2020-12-15: DAY: 209 S: 7978312    E: 0    I: 0    R: 48103765    IW: 1   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 2 of 9                                                                  │
+    │  (beta[2]=0.4, too_ill_to_move[2]=0)[repeat 1]                                         │
+    │  2020-11-28: DAY: 192 S: 7046459    E: 0    I: 0    R: 49035618    IW: 0   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 3 of 9                                                                  │
+    │  (beta[2]=0.5, too_ill_to_move[2]=0)[repeat 1]                                         │
+    │  2020-11-17: DAY: 181 S: 6221586    E: 0    I: 0    R: 49860491    IW: 1   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 4 of 9                                                                  │
+    │  (beta[2]=0.3, too_ill_to_move[2]=0.25)[repeat 1]                                      │
+    │  2020-12-13: DAY: 207 S: 8010218    E: 0    I: 0    R: 48071859    IW: 0   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 5 of 9                                                                  │
+    │  (beta[2]=0.4, too_ill_to_move[2]=0.25)[repeat 1]                                      │
+    │  2020-12-02: DAY: 196 S: 7071208    E: 0    I: 0    R: 49010869    IW: 1   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 6 of 9                                                                  │
+    │  (beta[2]=0.5, too_ill_to_move[2]=0.25)[repeat 1]                                      │
+    │  2020-12-01: DAY: 195 S: 6260263    E: 0    I: 0    R: 49821814    IW: 0   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 7 of 9                                                                  │
+    │  (beta[2]=0.3, too_ill_to_move[2]=0.5)[repeat 1]                                       │
+    │  2021-01-01: DAY: 226 S: 8031161    E: 0    I: 0    R: 48050916    IW: 0   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 8 of 9                                                                  │
+    │  (beta[2]=0.4, too_ill_to_move[2]=0.5)[repeat 1]                                       │
+    │  2020-11-27: DAY: 191 S: 7103861    E: 0    I: 0    R: 48978216    IW: 0   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 9 of 9                                                                  │
+    │  (beta[2]=0.5, too_ill_to_move[2]=0.5)[repeat 1]                                       │
+    │  2020-11-16: DAY: 180 S: 6293958    E: 0    I: 0    R: 49788119    IW: 0   UV: 1.0     │
+    │  TOTAL POPULATION 56082077                                                             │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Writing a summary of all results into the csv file                                    │
+    │  /Users/chris/GitHub/tutorial/test/output/results.csv.bz2. You can use this to         │
+    │  quickly look at statistics across all runs using e.g. R or pandas                     │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
 
-  Running jobs in parallel using a multiprocessing pool...
 
-  Completed job 1 of 9
-  (beta[2]=0.3, too_ill_to_move[2]=0.0)[repeat 1]
-  2020-11-10: DAY: 204 S: 7976329    E: 0    I: 0    R: 48105748    IW: 0   TOTAL POPULATION 56082077
+Output directories
+------------------
 
-  Completed job 2 of 9
-  (beta[2]=0.4, too_ill_to_move[2]=0.0)[repeat 1]
-  2020-10-29: DAY: 192 S: 7039360    E: 0    I: 0    R: 49042717    IW: 0   TOTAL POPULATION 56082077
+The output files for each repeat are placed into subdirectories of the
+main output directory. By default, these subdirectories are named
+according to the fingerprint of the adjustable variables used for each
+run, e.g. listing the contents of the output directory using;
 
-  Completed job 3 of 9
-  (beta[2]=0.5, too_ill_to_move[2]=0.0)[repeat 1]
-  2020-10-12: DAY: 175 S: 6224108    E: 0    I: 0    R: 49857969    IW: 0   TOTAL POPULATION 56082077
+.. code-block:: bash
 
-  Completed job 4 of 9
-  (beta[2]=0.3, too_ill_to_move[2]=0.25)[repeat 1]
-  2020-11-11: DAY: 205 S: 8005734    E: 0    I: 0    R: 48076343    IW: 0   TOTAL POPULATION 56082077
+   $ ls output
+   0i3v0i0x001     0i3v0i5x001     0i4v0i25x001    0i5v0i0x001     0i5v0i5x001     console.log.bz2
+   0i3v0i25x001    0i4v0i0x001     0i4v0i5x001     0i5v0i25x001    config.yaml     results.csv.bz2
 
-  Completed job 5 of 9
-  (beta[2]=0.4, too_ill_to_move[2]=0.25)[repeat 1]
-  2020-11-16: DAY: 210 S: 7073043    E: 0    I: 0    R: 49009034    IW: 0   TOTAL POPULATION 56082077
+The fingerprint is a unique key used for each run, e.g.
+``0i3v0i0x001`` refers to the run using values ``0.3 0.0``, and the
+first repeat. The ``i`` represents a decimal point, ``v`` is used to
+separate values, and ``x001`` means the first repeat.
 
-  Completed job 6 of 9
-  (beta[2]=0.5, too_ill_to_move[2]=0.25)[repeat 1]
-  2020-10-20: DAY: 183 S: 6260111    E: 0    I: 0    R: 49821966    IW: 1   TOTAL POPULATION 56082077
+Similarly, ``0i4v0i25x001`` refers to the first repeat of the values
+``0.4 0.25``.
 
-  Completed job 7 of 9
-  (beta[2]=0.3, too_ill_to_move[2]=0.5)[repeat 1]
-  2020-11-21: DAY: 215 S: 8045175    E: 0    I: 0    R: 48036902    IW: 0   TOTAL POPULATION 56082077
+Sometimes you may want to specify the names of the output directories
+yourself. You can do this by adding a ``output`` column to your scan file,
+e.g.
 
-  Completed job 8 of 9
-  (beta[2]=0.4, too_ill_to_move[2]=0.5)[repeat 1]
-  2020-11-06: DAY: 200 S: 7106554    E: 0    I: 0    R: 48975523    IW: 1   TOTAL POPULATION 56082077
+::
 
-  Completed job 9 of 9
-  (beta[2]=0.5, too_ill_to_move[2]=0.5)[repeat 1]
-  2020-10-13: DAY: 176 S: 6304109    E: 0    I: 0    R: 49777968    IW: 0   TOTAL POPULATION 56082077
+  beta[2]  too_ill_to_move[2]      output
+    0.3         0.00           beta_0i3_ill_0i00
+    0.4         0.00           beta_0i4_ill_0i00
+    0.5         0.00           beta_0i5_ill_0i00
+    0.3         0.25           beta_0i3_ill_0i25
+    0.4         0.25           beta_0i4_ill_0i25
+    0.5         0.25           beta_0i5_ill_0i25
+    0.3         0.50           beta_0i3_ill_0i50
+    0.4         0.50           beta_0i4_ill_0i50
+    0.5         0.50           beta_0i5_ill_0i50
 
-  Writing a summary of all results into the
-  csv file /Users/chris/GitHub/tutorial/output/results.csv.bz2.
+Running ``metawards`` with this file would place output in the following
+directories;
+
+.. code-block:: bash
+
+   $ ls output
+   beta_0i3_ill_0i00 beta_0i4_ill_0i00 beta_0i5_ill_0i00 config.yaml
+   beta_0i3_ill_0i25 beta_0i4_ill_0i25 beta_0i5_ill_0i25 console.log.bz2
+   beta_0i3_ill_0i50 beta_0i4_ill_0i50 beta_0i5_ill_0i50 results.csv.bz2
+
+If you run multiple repeats of these jobs, e.g. using the ``--repeats``
+keyword via;
+
+.. code-block:: bash
+
+   metawards -d lurgy2 -a ExtraSeedsLondon.dat --input lurgyparams.csv --repeats 2
+
+then the repeat number will be automatically added to the directory names,
+e.g.
+
+.. code-block:: bash
+
+   $ ls output
+   beta_0i3_ill_0i00     beta_0i4_ill_0i00     beta_0i5_ill_0i00     config.yaml
+   beta_0i3_ill_0i00x002 beta_0i4_ill_0i00x002 beta_0i5_ill_0i00x002 console.log.bz2
+   beta_0i3_ill_0i25     beta_0i4_ill_0i25     beta_0i5_ill_0i25     results.csv.bz2
+   beta_0i3_ill_0i25x002 beta_0i4_ill_0i25x002 beta_0i5_ill_0i25x002
+   beta_0i3_ill_0i50     beta_0i4_ill_0i50     beta_0i5_ill_0i50
+   beta_0i3_ill_0i50x002 beta_0i4_ill_0i50x002 beta_0i5_ill_0i50x002

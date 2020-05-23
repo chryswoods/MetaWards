@@ -31,52 +31,52 @@ def run_model(network: _Union[Network, Networks],
               mover: _Union[str, MetaFunction] = None) -> Populations:
     """Actually run the model... Real work happens here. The model
        will run until completion or until 'nsteps' have been
-       completed (whichever happens first)
+       completed, whichever happens first.
 
-        Parameters
-        ----------
-        network: Network or Networks
+       Parameters
+       ----------
+       network: Network or Networks
             The network(s) on which to run the model
-        infections: Infections
+       infections: Infections
             The space used to record the infections
-        rngs: list
+       rngs: list
             The list of random number generators to use, one per thread
-        population: Population
+       population: Population
             The initial population at the start of the model outbreak.
             This is also used to set the date and day of the start of
             the model outbreak
-        seed: int
+       seed: int
             The random number seed used for this model run. If this is
             None then a very random random number seed will be used
-        output_dir: OutputFiles
+       output_dir: OutputFiles
             The directory to write all of the output into
-        nsteps: int
+       nsteps: int
             The maximum number of steps to run in the outbreak. If None
             then run until the outbreak has finished
-        profiler: Profiler
+       profiler: Profiler
             The profiler to use to profile - a new one is created if
             one isn't passed
-        nthreads: int
+       nthreads: int
             Number of threads over which to parallelise this model run
-        iterator: MetaFunction or string
+       iterator: MetaFunction or string
             Function that will be used to dynamically get the functions
             that will be used at each iteration to advance the
             model. Any additional files or parameters needed by these
             functions should be included in the `network.params` object.
-        extractor: MetaFunction or string
+       extractor: MetaFunction or string
             Function that will be used to dynamically get the functions
             that will be used at each iteration to extract data from
             the model run
-        mixer: MetaFunction or string
+       mixer: MetaFunction or string
             Function that will mix data from multiple demographics
             so that this is shared during a model run
-        mover: MetaFunction or string
+       mover: MetaFunction or string
             Function that can move the population between different
             demographics
 
-        Returns
-        -------
-        trajectory: Populations
+       Returns
+       -------
+       trajectory: Populations
             The trajectory of the population for every day of the model run
     """
     if iterator is None:
@@ -161,6 +161,8 @@ def run_model(network: _Union[Network, Networks],
     p = p.start("run_model_loop")
     iteration_count = 0
 
+    from ._console import Console
+
     # keep looping until the outbreak is over or until we have completed
     # at least 5 loop iterations
     while (infecteds != 0) or (iteration_count < 5):
@@ -168,6 +170,8 @@ def run_model(network: _Union[Network, Networks],
         p2 = profiler.__class__()
 
         p2 = p2.start(f"timing for day {population.day}")
+
+        Console.rule(f"Day {population.day}", style="iteration")
 
         start_population = population.population
 
@@ -180,15 +184,26 @@ def run_model(network: _Union[Network, Networks],
             mixer=mixer, mover=mover,
             nthreads=nthreads, profiler=p)
 
+        should_finish_early = False
+
         for func in funcs:
             p2 = p2.start(str(func))
-            func(network=network, population=population,
-                 infections=infections, output_dir=output_dir,
-                 workspace=workspace, rngs=rngs, nthreads=nthreads,
-                 profiler=p2)
-            p2 = p2.stop()
+            try:
+                func(network=network, population=population,
+                     infections=infections, output_dir=output_dir,
+                     workspace=workspace, rngs=rngs, nthreads=nthreads,
+                     profiler=p2)
+            except StopIteration:
+                # this function has signalled that the simulation
+                # should now stop - we record this request but will
+                # still let the other functions complete this
+                # iteration
+                Console.print(f"{func} has indicated that the model run "
+                              f"should stop early. Will finish the run "
+                              f"at the end of this iteration")
+                should_finish_early = True
 
-        print(f"\n {population.day} {infecteds}\n")
+            p2 = p2.stop()
 
         if population.population != start_population:
             # something went wrong as the population should be conserved
@@ -202,26 +217,29 @@ def run_model(network: _Union[Network, Networks],
 
         infecteds = population.infecteds
 
+        Console.print(f"Number of infections: {infecteds}")
+
         iteration_count += 1
-        population.day += 1
-
-        if population.date:
-            from datetime import timedelta
-            population.date += timedelta(days=1)
-
-        if nsteps is not None:
-            if iteration_count >= nsteps:
-                trajectory.append(population)
-                print(f"Exiting model run early at nsteps = {nsteps}")
-                break
+        population.increment_day()
 
         p2 = p2.stop()
 
         if not p2.is_null():
-            print(f"\n{p2}\n")
+            Console.print_profiler(p2)
 
         # save the population trajectory
         trajectory.append(population)
+
+        if should_finish_early:
+            Console.print(f"Exiting model run early due to function request")
+            break
+
+        elif nsteps is not None:
+            if iteration_count >= nsteps:
+                Console.print(
+                    f"Exiting model run early as number of steps ({nsteps}) "
+                    f"reached.")
+                break
 
     # end of while loop
     p = p.stop()
@@ -253,9 +271,10 @@ def run_model(network: _Union[Network, Networks],
     p.stop()
 
     if not p.is_null():
-        print(f"\nOVERALL MODEL TIMING\n{p}")
+        Console.rule("Overall model timing")
+        Console.print_profiler(p)
 
-    print(f"Infection died ... Ending on day {population.day}")
+    Console.print(f"Infection died ... Ending on day {population.day}")
 
     # only send back the overall statistics
     return trajectory.strip_demographics()

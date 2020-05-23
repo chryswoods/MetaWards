@@ -56,16 +56,15 @@ new functionality. Please bear in mind the following;
   to make sure that your ideas can be included in the most compatible
   way in the code.
 
+We've :doc:`added features <devsupport>` to ``metawards`` that we hope
+will make it easier to develop new code. This includes tools to make
+simplify profiling and "printf" debugging, and full pytest integration.
+Please feel free to
+`raise an issue <https://github.com/metawards/MetaWards/issues>`__ if there
+is something else you think would help make development easier.
+
 Finally, we have a :doc:`very detailed developer guide <development>` that
 we hope will help you get up to speed with development. We strive to
 be a helpful, friendly and welcoming community, so if you have any
 questions or anything is not clear then please get in touch with
 us by `raising an issue <https://github.com/metawards/MetaWards/issues>`__.
-
-Snaglist
---------
-
-.. toctree::
-   :maxdepth: 2
-
-   snaglist

@@ -28,8 +28,8 @@ def import_animate_modules():
         from PIL import Image, ImageDraw, ImageFont
     except ImportError:
         print("Could not import Python Pillow to create animated plot.")
-        print("Please install using 'pip install Pillow>=6.2.1'")
-        print("(or by running metawards-install --optional)")
+        print("Please install using 'pip install Pillow>=6.2.1',")
+        print("or by running 'metawards-install --optional'")
 
     return (Image, ImageDraw, ImageFont)
 

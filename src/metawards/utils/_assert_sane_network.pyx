@@ -24,11 +24,14 @@ def assert_sane_network(network: Network, profiler: Profiler):
 
     filename = params.input_files.work_size
 
+    from ._console import Console
+
     if filename is None:
-        print(f"Skipping network validation as work_size is null")
+        Console.warning(f"Skipping network validation as work_size is null")
 
     elif not os.path.exists(filename):
-        print(f"Skipping network validation as {filename} is unreadable")
+        Console.warning(
+                f"Skipping network validation as {filename} is unreadable")
 
     cdef char* fname
     cdef FILE* cfile
@@ -60,21 +63,22 @@ def assert_sane_network(network: Network, profiler: Profiler):
         fscanf(cfile, "%d %lf\n", &node_id, &weight)
 
         if node_id < 0 or node_id > nnodes:
-            print(f"Corrupt index in work_size file: {node_id}")
+            Console.print(f"Corrupt index in work_size file: {node_id}")
             nfailed += 1
             continue
 
         node_weight = nodes_denominator_n[node_id]
 
         if weight != node_weight:
-            print(f"Incorrect weight for node {node_id}. Should be "
-                  f"{weight}, but is instead {node_weight}.")
+            Console.print(f"Incorrect weight for node {node_id}. Should be "
+                          f"{weight}, but is instead {node_weight}.")
             nfailed += 1
 
         if nodes_denominator_p[node_id] != nodes_play_suscept[node_id]:
-            print(f"Disagreement in play_suscept for node {node_id}, "
-                  f"{nodes_denominator_p[node_id]} versus "
-                  f"{nodes_play_suscept[node_id]}")
+            Console.print(
+                f"Disagreement in play_suscept for node {node_id}, "
+                f"{nodes_denominator_p[node_id]} versus "
+                f"{nodes_play_suscept[node_id]}")
             nfailed += 1
 
     if nfailed > 0:

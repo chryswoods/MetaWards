@@ -8,9 +8,9 @@ The functions divide into two main types,
 the most important of which are described below;
 
 ``extract_functions`` which determine which functions will be called to output data
-    * :meth:`~metawards.extractors.extract_core`
-    * :meth:`~metawards.extractors.extract_custom`
     * :meth:`~metawards.extractors.extract_default`
+    * :meth:`~metawards.extractors.extract_custom`
+    * :meth:`~metawards.extractors.extract_large`
     * :meth:`~metawards.extractors.extract_small`
     * :meth:`~metawards.extractors.extract_none`
 

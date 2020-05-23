@@ -183,9 +183,10 @@ def advance_imports_serial(network: Network, population: Population,
     p = p.stop()
 
     if params.daily_imports != total:
-        print(f"Day: {population.day} Imports: "
-              f"expected {params.daily_imports} "
-              f"actual {total}")
+        from ..utils._console import Console
+        Console.error(f"Day: {population.day} Imports: "
+                      f"expected {params.daily_imports} "
+                      f"actual {total}")
 
         raise AssertionError(f"Incorrect number of daily imports on day "
                              f"{population.day}. {params.daily_imports} vs "

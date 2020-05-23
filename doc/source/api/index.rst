@@ -55,14 +55,20 @@ of six main units;
   perform model runs. These functions are internal to metawards and are
   not designed to be used outside of this program.
 
+* The :doc:`metawards.themes <index_MetaWards_themes>` module contains
+  the themes that are used to style the console output and spinners
+  used by MetaWards. Choose the theme using the ``--theme`` option,
+  e.g. ``--theme default`` or ``--theme simple``.
+
 .. toctree::
    :maxdepth: 1
 
-  index_MetaWards_app
-  index_MetaWards
-  index_MetaWards_iterators
-  index_MetaWards_extractors
-  index_MetaWards_mixers
-  index_MetaWards_movers
-  index_MetaWards_analysis
-  index_MetaWards_utils
+   index_MetaWards_app
+   index_MetaWards
+   index_MetaWards_iterators
+   index_MetaWards_extractors
+   index_MetaWards_mixers
+   index_MetaWards_movers
+   index_MetaWards_analysis
+   index_MetaWards_utils
+   index_MetaWards_themes

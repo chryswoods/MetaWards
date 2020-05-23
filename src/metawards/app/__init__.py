@@ -17,3 +17,6 @@ Functions
     cli
 
 """
+
+from .run import *
+from .plot import *

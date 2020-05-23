@@ -140,49 +140,61 @@ and the metadata printed to the screen, e.g.
 
 ::
 
-  Using disease
-  Disease lurgy2
-  loaded from lurgy2.json
-  version: None
-  author(s): Christopher Woods
-  contact(s): christopher.woods@bristol.ac.uk
-  references(s): Completely ficticious disease - no references
-  repository: /Users/chris/GitHub/MetaWardsData
-  repository_branch: None
-  repository_version: None
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Disease ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  beta = [0.0, 0.0, 0.5, 0.5, 0.5, 0.0]
-  progress = [1.0, 1.0, 1.0, 0.5, 0.5, 0.0]
-  too_ill_to_move = [0.0, 0.0, 0.0, 0.5, 0.8, 1.0]
-  contrib_foi = [1.0, 1.0, 1.0, 1.0, 1.0, 0.0]
+    • Disease: lurgy2
+    • loaded from: lurgy2.json
+    • repository: /Users/chris/GitHub/MetaWardsData
+    • repository_branch: None
+    • repository_version: None
+    • beta: [0.0, 0.0, 0.5, 0.5, 0.5, 0.0]
+    • progress: [1.0, 1.0, 1.0, 0.5, 0.5, 0.0]
+    • too_ill_to_move: [0.0, 0.0, 0.0, 0.5, 0.8, 1.0]
+    • contrib_foi: [1.0, 1.0, 1.0, 1.0, 1.0, 0.0]
+    • start_symptom: 3
 
 Again, this helps someone reproduce this output in the future.
 
 This model run may take longer, as, intuitively, you would expect that
 the changes we have made mean that more individuals are likely to be
 infected. Indeed, for the run I performed, copied below,
-the outbreak lasted for 175 days, involving over 49m people.
+the outbreak lasted for 196 days, involving nearly 50m individuals.
 
 ::
 
-  170 8
-  S: 6229809    E: 0    I: 6    R: 49852262    IW: 0   TOTAL POPULATION 56082077
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 189 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 6225870  E: 1  I: 3  R: 49856203  IW: 0  POPULATION: 56082077
+    Number of infections: 4
 
-  171 6
-  S: 6229809    E: 0    I: 3    R: 49852265    IW: 0   TOTAL POPULATION 56082077
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 190 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+    Number of infections: 2
 
-  172 3
-  S: 6229809    E: 0    I: 2    R: 49852266    IW: 0   TOTAL POPULATION 56082077
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 191 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+    Number of infections: 2
 
-  173 2
-  S: 6229809    E: 0    I: 2    R: 49852266    IW: 0   TOTAL POPULATION 56082077
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 192 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+    Number of infections: 2
 
-  174 2
-  S: 6229809    E: 0    I: 1    R: 49852267    IW: 0   TOTAL POPULATION 56082077
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 193 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+    Number of infections: 2
 
-  175 1
-  S: 6229809    E: 0    I: 0    R: 49852268    IW: 0   TOTAL POPULATION 56082077
-  Infection died ... Ending on day 176
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 194 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+    Number of infections: 2
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 195 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 6225870  E: 0  I: 1  R: 49856206  IW: 0  POPULATION: 56082077
+    Number of infections: 1
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 196 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    S: 6225870  E: 0  I: 0  R: 49856207  IW: 0  POPULATION: 56082077
+    Number of infections: 0
+    Infection died ... Ending on day 197
+
 
 An overview plot of the outbreak, created using
 

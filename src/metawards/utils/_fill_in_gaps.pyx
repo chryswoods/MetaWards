@@ -18,6 +18,8 @@ def fill_in_gaps(network: Network, max_nodes: int):
     cdef int nnodes = network.nnodes
     cdef int MAX_NODES = max_nodes
 
+    from ._console import Console
+
     for i in range(1, network.nlinks+1):  # careful of 1-indexing
         link_to = links_ito[i]
         if link_to >= MAX_NODES:
@@ -27,7 +29,8 @@ def fill_in_gaps(network: Network, max_nodes: int):
                               f"again.")
 
         if nodes_label[link_to] != link_to:
-            print(f"ADDING LINK {i} {link_to} {network.nnodes}")
+            Console.print(f"ADDING LINK {i} {link_to} {network.nnodes}",
+                          style="warning")
             nodes_label[link_to] = link_to
 
             if link_to > nnodes:
@@ -35,6 +38,6 @@ def fill_in_gaps(network: Network, max_nodes: int):
                 nnodes = link_to
 
 
-    print(f"Number of added nodes equals {added}")
+    Console.print(f"Number of added nodes equals {added}", style="info")
 
     network.nnodes = nnodes

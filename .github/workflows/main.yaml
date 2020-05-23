@@ -48,7 +48,9 @@ jobs:
       - name: Print branch information
         run: echo ${{github.ref}}
       - name: Install Python dependencies
-        run: pip install -r requirements-dev.txt
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
       - name: Install MetaWards package
         run: make -j 4
       - name: Clone MetaWards data
@@ -77,6 +79,8 @@ jobs:
           python actions/assemble_website.py
           python actions/deduplicate_website.py
           python actions/gitupdate_website.py
+        env:
+          METAWARDSDATA: ./MetaWardsData
         if: matrix.python-version == 3.8 && matrix.config.os == 'ubuntu-latest' && github.event_name == 'push'
       - name: Push changes
         uses: ad-m/github-push-action@master

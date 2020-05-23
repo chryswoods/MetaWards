@@ -10,11 +10,13 @@ below text;
 
 .. code-block:: python
 
+  from metawards.utils import Console
+
   def advance_function(**kwargs):
-      print("Hello advance_function")
+      Console.debug("Hello advance_function")
 
   def iterate_advance(**kwargs):
-      print("Hello iterate_advance")
+      Console.debug("Hello iterate_advance")
       return [advance_function]
 
 This defines two functions. One is the advance function we will use.
@@ -27,16 +29,17 @@ Use this iterator via the ``metawards`` command;
 
 .. code-block:: bash
 
-  metawards -d lurgy3 --additional ExtraSeedsLondon.dat --iterator advance
+  metawards -d lurgy3 --additional ExtraSeedsLondon.dat --iterator advance --debug
 
 You should see that your "Hellos" from these functions are printed.
 
 ::
 
-   1 0
-  S: 56082072    E: 5    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082072
-  Hello iterate_advance
-  Hello advance_function
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    [15:35:18]                       Hello iterate_advance                       advance.py:9
+                                    Hello advance_function                       advance.py:5
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
 
 Creating advance_lockdown
 -------------------------
@@ -54,9 +57,10 @@ To do this, create a new python file called ``lockdown.py``, and copy in;
                                   advance_infprob, \
                                   advance_fixed, \
                                   advance_play
+  from metawards.utils import Console
 
   def advance_lockdown(**kwargs):
-      print("We are on lockdown")
+      Console.debug("We are on lockdown")
       advance_infprob(**kwargs)
       advance_play(**kwargs)
 
@@ -108,8 +112,10 @@ To set ``scale_rate``, edit your ``lockdown.py`` file to contain;
                                   advance_fixed, \
                                   advance_play
 
+  from metawards.utils import Console
+
   def advance_lockdown(**kwargs):
-      print("We are on lockdown")
+      Console.debug("We are on lockdown")
       advance_infprob(scale_rate=0.25, **kwargs)
       advance_play(**kwargs)
 

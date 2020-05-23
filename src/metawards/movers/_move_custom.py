@@ -38,8 +38,10 @@ def build_custom_mover(custom_function: _Union[str, MetaFunction],
           The wrapped mover that is suitable for using in the move
           function.
     """
+    from ..utils._console import Console
+
     if isinstance(custom_function, str):
-        print(f"Importing a custom mover from {custom_function}")
+        Console.print(f"Importing a custom mover from {custom_function}")
 
         # we need to find the function
         import metawards.movers
@@ -90,29 +92,44 @@ def build_custom_mover(custom_function: _Union[str, MetaFunction],
 
         if module is None:
             # we cannot find the extractor
-            print(f"Cannot find the mover '{custom_function}'."
-                  f"Please make sure this is spelled correctly and "
-                  f"any python modules/files needed are in the "
-                  f"PYTHONPATH or current directory")
+            Console.error(
+                f"Cannot find the mover '{custom_function}'."
+                f"Please make sure this is spelled correctly and "
+                f"any python modules/files needed are in the "
+                f"PYTHONPATH or current directory")
             raise ImportError(f"Could not import the mover "
                               f"'{custom_function}'")
 
         if func_name is None:
             # find the last function that starts with 'move'
             import inspect
+            funcs = []
             for name, value in inspect.getmembers(module):
                 if name.startswith("move"):
                     if hasattr(value, "__call__"):
-                        # this is a function
-                        func = value
+                        if value.__module__ == module.__name__:
+                            # this is a function defined in this module
+                            funcs.append(value)
+
+            if len(funcs) > 0:
+                func = funcs[0]
+
+                if len(funcs) > 1:
+                    Console.warning(
+                        f"Multiple possible matching functions: {funcs}. "
+                        f"Choosing {func}. Please use the module::function "
+                        f"syntax if this is the wrong choice.")
+            else:
+                func = None
 
             if func is not None:
                 return build_custom_mover(func)
 
-            print(f"Could not find any function in the module "
-                  f"{custom_function} that has a name that starts "
-                  f"with 'move'. Please manually specify the "
-                  f"name using the '{custom_function}::your_function syntax")
+            Console.error(
+                f"Could not find any function in the module "
+                f"{custom_function} that has a name that starts "
+                f"with 'move'. Please manually specify the "
+                f"name using the '{custom_function}::your_function syntax")
 
             raise ImportError(f"Could not import the mover "
                               f"{custom_function}")
@@ -121,21 +138,24 @@ def build_custom_mover(custom_function: _Union[str, MetaFunction],
             if hasattr(module, func_name):
                 return build_custom_mover(getattr(module, func_name))
 
-            print(f"Could not find the function {func_name} in the "
-                  f"module {func_module}. Check that the spelling "
-                  f"is correct and that the right version of the module "
-                  f"is being loaded.")
+            Console.error(
+                f"Could not find the function {func_name} in the "
+                f"module {func_module}. Check that the spelling "
+                f"is correct and that the right version of the module "
+                f"is being loaded.")
             raise ImportError(f"Could not import the mover "
                               f"{custom_function}")
 
     if not hasattr(custom_function, "__call__"):
-        print(f"Cannot build a mover for {custom_function} "
-              f"as it is missing a __call__ function, i.e. it is "
-              f"not a function.")
+        Console.error(
+            f"Cannot build a mover for {custom_function} "
+            f"as it is missing a __call__ function, i.e. it is "
+            f"not a function.")
         raise ValueError(f"You can only build custom movers for "
                          f"actual functions... {custom_function}")
 
-    print(f"Building a custom mover for {custom_function}")
+    Console.print(f"Building a custom mover for {custom_function}",
+                  style="magenta")
 
     return lambda **kwargs: move_custom(custom_function=custom_function,
                                         **kwargs)
@@ -172,7 +192,7 @@ def move_custom(custom_function: MetaFunction,
         from ._move_default import move_default
         return move_default(**kwargs)
 
-    elif stage == "analyse" or accepts_stage(custom_function):
+    elif stage == "setup" or accepts_stage(custom_function):
         # most custom functions operate at the 'setup' stage,
         # so movers that don't specify a stage are assumed to
         # only operate here (every other stage is 'move_default')

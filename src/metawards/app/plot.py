@@ -1,19 +1,25 @@
 
 def parse_args():
     """Parse all of the command line arguments"""
-    import argparse
+    import configargparse
     import sys
 
-    parser = argparse.ArgumentParser(
+    configargparse.init_argument_parser(
+        name="main",
         description="MetaWards simple plotting program - see "
-        "https://github.com/metawards/metawards "
-        "for more information",
+        "https://metawards.org for more information.",
         prog="metawards-plot")
+
+    parser = configargparse.get_argument_parser("main")
 
     parser.add_argument('--version', action="store_true",
                         default=None,
                         help="Print the version information about "
                              "metawards-plot")
+
+    parser.add_argument('-c', '--config', is_config_file=True,
+                        help="Config file that can be used to set some "
+                             "or all of these command line options.")
 
     parser.add_argument("-i", "--input", type=str, nargs="*",
                         help="Full path to the 'results.csv.bz2' file "

@@ -23,16 +23,28 @@ code.
 
 .. code-block:: python
 
-  def iterate_weekend(**kwargs):
-      print("Hello iterate_weekend")
+    from metawards.utils import Console
 
-      return []
+    def iterate_weekend(**kwargs):
+        Console.print("Hello iterate_weekend")
+
+        return []
 
 This is a simple function called ``iterate_weekend``. It takes an
 unspecified number of
 `keyword arguments (**kwargs) <https://book.pythontips.com/en/latest/args_and_kwargs.html>`__
 (more about these later). It returns an empty list (``[]``). All it does
 is print ``Hello iterate_weekend`` to the screen.
+
+.. note::
+   Notice that you *must* print using the
+   :meth:`Console.print <metawards.utils.Console.print>` function of
+   :meth:`~metawards.utils.Console`. This ensures that all printing
+   goes to the right place and stays sane when multiple processes
+   and threads all try to print at the same time. It also ensures
+   that everything that is printed to the screen also gets printed
+   to a file for safekeeping (``output/console.log.bz2``). It is
+   very important that information is not lost when running a job.
 
 You can run this function by starting ``ipython`` in this directory
 and typing;
@@ -55,62 +67,52 @@ You should see a very different outbreak to what you have before, e.g.
 
 ::
 
-  (1, 255, 5)
-  S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
 
-   0 0
-  S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
-  seeding play_infections[0][255] += 5
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    seeding play_infections[0][255] += 5
+    S: 56082072  E: 5  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 5
 
-   1 0
-  S: 56082072    E: 5    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082072
-  Hello iterate_weekend
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    S: 56082072  E: 4  I: 1  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 5
 
-   2 5
-  S: 56082072    E: 0    I: 5    R: 0    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 3 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    S: 56082072  E: 2  I: 3  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 5
 
-   3 5
-  S: 56082072    E: 0    I: 5    R: 0    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 4 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    S: 56082072  E: 2  I: 2  R: 1  IW: 0  POPULATION: 56082077
+    Number of infections: 4
 
-   4 5
-  S: 56082072    E: 0    I: 5    R: 0    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 5 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    S: 56082072  E: 1  I: 2  R: 2  IW: 0  POPULATION: 56082077
+    Number of infections: 3
 
-   5 5
-  S: 56082072    E: 0    I: 5    R: 0    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 6 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    S: 56082072  E: 0  I: 2  R: 3  IW: 0  POPULATION: 56082077
+    Number of infections: 2
 
-   6 5
-  S: 56082072    E: 0    I: 5    R: 0    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 7 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    S: 56082072  E: 0  I: 1  R: 4  IW: 0  POPULATION: 56082077
+    Number of infections: 1
 
-   7 5
-  S: 56082072    E: 0    I: 5    R: 0    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
-
-   8 5
-  S: 56082072    E: 0    I: 4    R: 1    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
-
-   9 4
-  S : 56082072    E: 0    I: 2    R: 3    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
-
-   10 2
-  S: 56082072    E: 0    I: 2    R: 3    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
-
-   11 2
-  S: 56082072    E: 0    I: 1    R: 4    IW: 0   TOTAL POPULATION 56082077
-  Hello iterate_weekend
-
-   12 1
-  S: 56082072    E: 0    I: 0    R: 5    IW: 0   TOTAL POPULATION 56082077
-  Infection died ... Ending on day 13
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 8 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Hello iterate_weekend
+    S: 56082072  E: 0  I: 0  R: 5  IW: 0  POPULATION: 56082077
+    Number of infections: 0
+    Infection died ... Ending on day 9
 
 What happened here? Well, just as you imported ``weekend`` into ``ipython``
 and called the ``iterate_weekend`` function, so too has ``metawards``.
@@ -126,14 +128,16 @@ to read;
 
 .. code-block:: python
 
+  from metawards.utils import Console
+
   def another_function(**kwargs):
-      print("Hello another_function")
+      Console.print("Hello another_function")
 
       return []
 
 
   def iterate_weekend(**kwargs):
-      print("Hello iterate_weekend")
+      Console.print("Hello iterate_weekend")
 
       return []
 
@@ -148,6 +152,83 @@ command below;
 
 You should see ``Hello another_function`` is now printed for
 every iteration.
+
+.. warning::
+   Sometimes you may see ``metawards`` exit with a warning that it can't
+   find your iterator function. This is likely because there is a typo
+   or syntax error in your iterator. ``metawards`` does its best to
+   detect these and report them to you, so check above the error in the
+   output to see if there is anything helpful. If not, then run your
+   iterator in python to see if you get any errors, e.g. if your iterator
+   is in a file called ``iterator.py`` then type ``python iterator.py``.
+   If there is an error, then that will be printed to the screen.
+
+Printing debug output
+---------------------
+
+In general, you should only print things to the screen if they will be useful
+for the user of the program. Sometimes when developing you want to print
+some debugging output that can verify that everything is working. To do this,
+using :meth:`Console.debug <metawards.utils.Console.debug>`. For example,
+change your iterator to;
+
+.. code-block:: python
+
+    from metawards.utils import Console
+
+    def iterate_weekend(**kwargs):
+        Console.debug("Hello iterate_weekend")
+
+        return []
+
+Now, you will only see this print output if the ``--debug`` option is passed
+to ``metawards``, e.g.
+
+.. code-block:: bash
+
+    metawards -d lurgy2 --iterator weekend --debug
+
+::
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    [15:23:08]                       Hello iterate_weekend                       weekend.py:5
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
+
+Note that the time of the debug string, and the line and file of the debug
+statement are included. You can also easily print the values of variables
+using the ``variables`` keyword argument to
+:meth:`~metawards.utils.Console.debug`, e.g.
+
+.. code-block:: python
+
+    from metawards.utils import Console
+
+    def iterate_weekend(**kwargs):
+        a = 42
+        b = "This is a string"
+
+        Console.debug("Hello iterate_weekend", variables=[a, b])
+
+        return []
+
+.. code-block:: bash
+
+    metawards -d lurgy2 --iterator weekend --debug
+
+::
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    [15:25:38]                       Hello iterate_weekend                       weekend.py:8
+
+     Name │ Value
+    ══════╪══════════════════
+        a │ 42
+        b │ This is a string
+
+More information about debug strings, debugging levels, and how you can leave
+these debug strings in production code is
+:doc:`available here <../../devsupport>`.
 
 Advancing the outbreak
 ----------------------
@@ -168,9 +249,10 @@ You can write an advance function by editing ``weekend.py`` to contain;
 .. code-block:: python
 
   from metawards.iterators import advance_infprob, advance_play
+  from metawards.utils import Console
 
   def iterate_weekend(**kwargs):
-      print("Hello iterate_weekend")
+      Console.debug("Hello iterate_weekend")
 
       return [advance_infprob, advance_play]
 
@@ -219,20 +301,21 @@ it the code below;
   from metawards.iterators import advance_infprob, \
                                   advance_fixed, \
                                   advance_play
+  from metawards.utils import Console
 
 
   def iterate_week(population, **kwargs):
       date = population.date
 
-      print(f"Creating functions for {date}")
+      Console.debug(f"Creating functions for {date}")
 
       if date.weekday() < 5:
-          print("This is a weekday")
+          Console.debug("This is a weekday")
           return [advance_infprob,
                   advance_fixed,
                   advance_play]
       else:
-          print("This is a weekend")
+          Console.debug("This is a weekend")
           return [advance_infprob,
                   advance_play]
 

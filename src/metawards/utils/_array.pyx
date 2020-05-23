@@ -24,7 +24,8 @@ def resize_array(a, size: int, default: any = None):
        if this will grow the array
     """
     if size == 0:
-        print("RESIZE TO ZERO")
+        from ._console import Console
+        Console.warning("RESIZE TO ZERO")
         return a[0:0]
     elif size == len(a):
         return a

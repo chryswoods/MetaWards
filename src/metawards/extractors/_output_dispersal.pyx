@@ -111,7 +111,8 @@ def output_dispersal_serial(network: Network, population: Population,
             # numeric rounding error
             dispersal = 0.0
         else:
-            print(f"Negative var? {var_x+var_y}, {var_x} {var_y}")
+            from ..utils._console import Console
+            Console.warning(f"Negative var? {var_x+var_y}, {var_x} {var_y}")
             dispersal = 0.0
     else:
         mean_x = 0.0

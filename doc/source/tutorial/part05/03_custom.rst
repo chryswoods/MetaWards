@@ -110,7 +110,7 @@ using;
 
 .. code-block:: bash
 
-   metawards -d lurgy2 -D demographics.json -a ExtraSeedsLondon.dat --mixer shield
+   metawards -d lurgy3 -D demographics.json -a ExtraSeedsLondon.dat --mixer shield
 
 You should see that, while the infection moves through most of the *blue*
 demographic, it is relatively contained within the *red* demographic.
@@ -211,7 +211,7 @@ You can run these jobs using this command;
 
 .. code-block:: bash
 
-   metawards -d lurgy2 -D demographics.json -a ExtraSeedsLondonBlue.dat --mixer shield --user-variables shield.inp -i scan.dat
+   metawards -d lurgy3 -D demographics.json -a ExtraSeedsLondonBlue.dat --mixer shield --user-variables shield.inp -i scan.dat
 
 or, alternatively if you have a cluster you could use a job script such
 as this to run multiple repeats (always a good idea for a stochastic
@@ -230,7 +230,7 @@ simulation).
     # change into the directory from which this job was submitted
     cd $PBS_O_WORKDIR
 
-    metawards -u shield.inp -i scan.dat -d lurgy2 \
+    metawards -u shield.inp -i scan.dat -d lurgy3 \
               -D demographics.json -a ExtraSeedsLondonBlue.dat \
               --mixer shield \
               --repeats 8 --nthreads 16 --force-overwrite-output
@@ -248,7 +248,7 @@ if you are using PBS, or
     # Assume you have metawards in $HOME/envs/metawards
     source $HOME/metawards/bin/activate
 
-    metawards -u shield.inp -i scan.dat -d lurgy2 \
+    metawards -u shield.inp -i scan.dat -d lurgy3 \
               -D demographics.json -a ExtraSeedsLondonBlue.dat \
               --mixer shield \
               --repeats 8 --nthreads 16 --force-overwrite-output

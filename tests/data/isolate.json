@@ -1,0 +1,5 @@
+{
+  "demographics" : ["home", "isolate", "released"], 
+  "work_ratios"  : [ 1.0,      0.0,       0.0    ], 
+  "play_ratios"  : [ 1.0,      0.0,       0.0    ]
+}

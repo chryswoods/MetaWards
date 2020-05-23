@@ -45,7 +45,9 @@ def setup_seed_specified_ward(network: _Union[Network, Networks],
     seed_index = int(params.ward_seed_index)
     seed = network.to_seed[seed_index]
 
-    print(f"Setup by seeding the ward at index {seed}")
+    from ._console import Console
+
+    Console.print(f"Setup by seeding the ward at index {seed}")
 
     j = 0
 
@@ -88,7 +90,8 @@ def setup_seed_all_wards(network: _Union[Network, Networks],
     play_infections = infections.play
     infections = infections.work
 
-    print(f"Setup by seeding all wards")
+    from ._console import Console
+    Console.print(f"Setup by seeding all wards")
 
     frac = float(params.daily_imports) / float(population.initial)
 

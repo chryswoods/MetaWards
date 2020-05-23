@@ -69,8 +69,8 @@ def get_functions(stage: str,
                 in each ward in each demographic
        * "infect": Called to advance the outbreak by calculating
                    the number of new infections
-       * "analyse": Called at the end of the day to merge and analyse
-                    the data and extrac the results
+       * "analyse": Called at the end of the day to analyse
+                    the data and extract the results
        * "finalise": Called at the end of the model run to finalise
                      any outputs or produce overall summary files
        * "summary": Called at the end of lots of model runs, to write
@@ -327,10 +327,10 @@ def call_function_on_network(network: _Union[Network, Networks],
                  population=subpop, workspace=subwork,
                  **kwargs)
 
-            if call_on_overall:
-                func(network=network.overall, infections=infections,
-                     population=population, workspace=workspace,
-                     **kwargs)
+        if call_on_overall:
+            func(network=network.overall, infections=infections,
+                 population=population, workspace=workspace,
+                 **kwargs)
     else:
         func(network=network, infections=infections,
              population=population, workspace=workspace,

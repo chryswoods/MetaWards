@@ -48,11 +48,11 @@ or you may have to `install pip <https://pip.pypa.io/en/stable/installing/>`__.
 If you have trouble installing pip then we recommend that you download
 and install `anaconda <https://anaconda.org>`__, which has pip included)
 
-To install a specific version, e.g. 0.6.0, type
+To install a specific version, e.g. 1.0.0, type
 
 .. code-block:: bash
 
-    pip install metawards==0.10.0
+    pip install metawards==1.0.0
 
 This will install a binary version of metawards if it is avaiable for your
 operating system / processor / version of python. If not, then

@@ -10,14 +10,11 @@ from .._variableset import VariableSets, VariableSet
 from .._outputfiles import OutputFiles
 
 from ._profiler import Profiler
-from ._get_functions import get_functions, MetaFunction
-
-from contextlib import contextmanager as _contextmanager
+from ._get_functions import MetaFunction
 
 import os as _os
-import sys as _sys
 
-__all__ = ["get_number_of_processes", "run_models", "redirect_output"]
+__all__ = ["get_number_of_processes", "run_models"]
 
 
 def get_number_of_processes(parallel_scheme: str, nprocs: int = None):
@@ -57,29 +54,6 @@ def get_number_of_processes(parallel_scheme: str, nprocs: int = None):
     else:
         raise ValueError(
             f"Unrecognised parallelisation scheme {parallel_scheme}")
-
-
-@_contextmanager
-def redirect_output(outdir):
-    """Nice way to redirect stdout and stderr - thanks to
-       Emil Stenström in
-       https://stackoverflow.com/questions/6735917/redirecting-stdout-to-nothing-in-python
-    """
-    new_out = open(_os.path.join(outdir, "output.txt"), "w")
-    old_out = _sys.stdout
-    _sys.stdout = new_out
-
-    new_err = open(_os.path.join(outdir, "output.err"), "w")
-    old_err = _sys.stderr
-    _sys.stderr = new_err
-
-    try:
-        yield new_out
-    finally:
-        _sys.stdout = old_out
-        _sys.stderr = old_err
-        new_out.close()
-        new_err.close()
 
 
 def run_models(network: _Union[Network, Networks],
@@ -190,21 +164,23 @@ def run_models(network: _Union[Network, Networks],
     #  that they are all working)
     seeds = []
 
+    from ._console import Console
+
     if seed == 0:
         # this is a special mode that a developer can use to force
         # all jobs to use the same random number seed (15324) that
         # is used for comparing outputs. This should NEVER be used
         # for production code
-        print("** WARNING: Using special mode to fix all random number")
-        print("** WARNING: seeds to 15324. DO NOT USE IN PRODUCTION!!!")
+        Console.warning("Using special mode to fix all random number "
+                        "seeds to 15324. DO NOT USE IN PRODUCTION!!!")
 
         for i in range(0, len(variables)):
             seeds.append(15324)
 
     elif debug_seeds:
-        print("** WARNING: Using special model to make all jobs use the")
-        print(f"** WARNING: Same random number seed {seed}.")
-        print(f"** WARNING: DO NOT USE IN PRODUCTION!")
+        Console.warning(f"Using special model to make all jobs use the "
+                        f"Same random number seed {seed}. "
+                        f"DO NOT USE IN PRODUCTION!")
 
         for i in range(0, len(variables)):
             seeds.append(seed)
@@ -222,13 +198,23 @@ def run_models(network: _Union[Network, Networks],
     outdirs = []
 
     for v in variables:
-        f = v.fingerprint(include_index=True)
+        f = v.output_dir()
         d = _os.path.join(output_dir.get_path(), f)
+
+        i = 1
+        base = d
+
+        while d in outdirs:
+            i += 1
+            d = base + "x%03d" % i
+
         outdirs.append(d)
 
     outputs = []
 
-    print(f"\nRunning {len(variables)} jobs using {nprocs} process(es)")
+    Console.print(
+        f"Running **{len(variables)}** jobs using **{nprocs}** process(es)",
+        markdown=True)
 
     if nprocs == 1:
         # no need to use a pool, as we will repeat this calculation
@@ -240,36 +226,56 @@ def run_models(network: _Union[Network, Networks],
             outdir = outdirs[i]
 
             with output_dir.open_subdir(outdir) as subdir:
-                print(f"\nRunning parameter set {i+1} of {len(variables)} "
-                      f"using seed {seed}")
-                print(f"All output written to {subdir.get_path()}")
+                Console.print(
+                    f"Running parameter set {i+1} of {len(variables)} "
+                    f"using seed {seed}")
+                Console.print(f"All output written to {subdir.get_path()}")
 
-                with redirect_output(subdir.get_path()):
-                    print(f"Running variable set {i+1}")
-                    print(f"Variables: {variable}")
-                    print(f"Random seed: {seed}")
-                    print(f"nthreads: {nthreads}")
+                with Console.redirect_output(subdir.get_path(),
+                                             auto_bzip=output_dir.auto_bzip()):
+                    Console.print(f"Running variable set {i+1}")
+                    Console.print(f"Variables: {variable}")
+                    Console.print(f"Random seed: {seed}")
+                    Console.print(f"nthreads: {nthreads}")
 
                     # no need to do anything complex - just a single run
                     params = network.params.set_variables(variable)
 
                     network.update(params, profiler=profiler)
 
-                    output = network.run(population=population, seed=seed,
-                                         nsteps=nsteps,
-                                         output_dir=subdir,
-                                         iterator=iterator,
-                                         extractor=extractor,
-                                         mixer=mixer,
-                                         mover=mover,
-                                         profiler=profiler,
-                                         nthreads=nthreads)
+                    with Console.spinner("Computing model run") as spinner:
+                        try:
+                            output = network.run(population=population,
+                                                 seed=seed,
+                                                 nsteps=nsteps,
+                                                 output_dir=subdir,
+                                                 iterator=iterator,
+                                                 extractor=extractor,
+                                                 mixer=mixer,
+                                                 mover=mover,
+                                                 profiler=profiler,
+                                                 nthreads=nthreads)
+                            spinner.success()
+                        except Exception as e:
+                            spinner.failure()
+                            error = f"FAILED: {e.__class__} {e}"
+                            Console.error(error)
+                            output = None
 
-                    outputs.append((variable, output))
+                    if output is not None:
+                        outputs.append((variable, output))
+                    else:
+                        outputs.append((variable, []))
 
-                print(f"Completed job {i+1} of {len(variables)}")
-                print(variable)
-                print(output[-1])
+                if output is not None:
+                    Console.panel(f"Completed job {i+1} of {len(variables)}\n"
+                                  f"{variable}\n"
+                                  f"{output[-1]}",
+                                  style="alternate")
+                else:
+                    Console.error(f"Job {i+1} of {len(variables)}\n"
+                                  f"{variable}\n"
+                                  f"{error}")
             # end of OutputDirs context manager
 
             if i != len(variables) - 1:
@@ -325,43 +331,124 @@ def run_models(network: _Union[Network, Networks],
 
         if parallel_scheme == "multiprocessing":
             # run jobs using a multiprocessing pool
-            print("\nRunning jobs in parallel using a multiprocessing pool...")
+            Console.rule("MULTIPROCESSING")
             from multiprocessing import Pool
+
+            results = []
+
             with Pool(processes=nprocs) as pool:
-                results = pool.map(run_worker, arguments)
+                for argument in arguments:
+                    results.append(pool.apply_async(run_worker, (argument,)))
 
                 for i, result in enumerate(results):
-                    print(f"\nCompleted job {i+1} of {len(variables)}")
-                    print(variables[i])
-                    print(result[-1])
-                    outputs.append((variables[i], result))
+                    with Console.spinner(
+                            "Computing model run") as spinner:
+                        try:
+                            result.wait()
+                            output = result.get()
+                            spinner.success()
+                        except Exception as e:
+                            spinner.failure()
+                            error = f"FAILED: {e.__class__} {e}"
+                            Console.error(error)
+                            output = None
+
+                        if output is not None:
+                            Console.panel(
+                                f"Completed job {i+1} of {len(variables)}\n"
+                                f"{variables[i]}\n"
+                                f"{output[-1]}",
+                                style="alternate")
+
+                            outputs.append((variables[i], output))
+                        else:
+                            Console.error(f"Job {i+1} of {len(variables)}\n"
+                                          f"{variable}\n"
+                                          f"{error}")
+                            outputs.append((variables[i], []))
 
         elif parallel_scheme == "mpi4py":
             # run jobs using a mpi4py pool
-            print("\nRunning jobs in parallel using a mpi4py pool...")
+            Console.rule("MPI")
+            Console.print("Running jobs in parallel using a mpi4py pool")
             from mpi4py import futures
             with futures.MPIPoolExecutor(max_workers=nprocs) as pool:
                 results = pool.map(run_worker, arguments)
 
-                for i, result in enumerate(results):
-                    print(f"\nCompleted job {i+1} of {len(variables)}")
-                    print(variables[i])
-                    print(result[-1])
-                    outputs.append((variables[i], result))
+                for i in range(0, len(variables)):
+                    with Console.spinner("Computing model run") as spinner:
+                        try:
+                            output = next(results)
+                            spinner.success()
+                        except Exception as e:
+                            spinner.failure()
+                            error = f"FAILED: {e.__class__} {e}"
+                            Console.error(error)
+                            output = None
+
+                        if output is not None:
+                            Console.panel(
+                                f"Completed job {i+1} of {len(variables)}\n"
+                                f"{variables[i]}\n"
+                                f"{output[-1]}",
+                                style="alternate")
+
+                            outputs.append((variables[i], output))
+                        else:
+                            Console.error(f"Job {i+1} of {len(variables)}\n"
+                                          f"{variable}\n"
+                                          f"{error}")
+                            outputs.append((variables[i], []))
 
         elif parallel_scheme == "scoop":
             # run jobs using a scoop pool
-            print("\nRunning jobs in parallel using a scoop pool...")
+            Console.rule("SCOOP")
+            Console.print("Running jobs in parallel using a scoop pool")
             from scoop import futures
 
-            results = futures.map(run_worker, arguments)
+            results = []
 
-            for i, result in enumerate(results):
-                print(f"\nCompleted job {i+1} of {len(variables)}")
-                print(variables[i])
-                print(result[-1])
-                outputs.append((variables[i], result))
+            for argument in arguments:
+                try:
+                    results.append(futures.submit(run_worker, argument))
+                except Exception as e:
+                    Console.error(
+                        f"Error submitting calculation: {e.__class__} {e}\n"
+                        f"Trying to submit again...")
 
+                    # try again
+                    try:
+                        results.append(futures.submit(run_worker, argument))
+                    except Exception as e:
+                        Console.error(
+                            f"No - another error: {e.__class__} {e}\n"
+                            f"Skipping this job")
+                        results.append(None)
+
+            for i in range(0, len(results)):
+                with Console.spinner("Computing model run") as spinner:
+                    try:
+                        output = results[i].result()
+                        spinner.success()
+                    except Exception as e:
+                        spinner.failure()
+                        error = f"FAILED: {e.__class__} {e}"
+                        Console.error(error)
+                        output = None
+
+                    if output is not None:
+                        Console.panel(
+                            f"Completed job {i+1} of {len(variables)}\n"
+                            f"{variables[i]}\n"
+                            f"{output[-1]}",
+                            style="alternate")
+
+                        outputs.append((variables[i], output))
+                    else:
+                        Console.error(f"Job {i+1} of {len(variables)}\n"
+                                      f"{variable}\n"
+                                      f"{error}")
+                        outputs.append((variables[i], []))
         else:
             raise ValueError(f"Unrecognised parallelisation scheme "
                              f"{parallel_scheme}.")
@@ -381,7 +468,10 @@ def run_models(network: _Union[Network, Networks],
                                   nthreads=nthreads)
 
     for func in funcs:
-        func(network=network, output_dir=output_dir,
-             results=outputs, nthreads=nthreads)
+        try:
+            func(network=network, output_dir=output_dir,
+                 results=outputs, nthreads=nthreads)
+        except Exception as e:
+            Console.error(f"Error calling {func}: {e.__class__} {e}")
 
     return outputs

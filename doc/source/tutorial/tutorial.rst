@@ -22,3 +22,4 @@ through in order.
    index_part03
    index_part04
    index_part05
+   index_part06

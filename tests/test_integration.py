@@ -3,7 +3,7 @@ import os
 import pytest
 
 from metawards import Parameters, Network, Population, OutputFiles
-from metawards.utils import Profiler
+from metawards.utils import Profiler, Console
 
 script_dir = os.path.dirname(__file__)
 ncovparams_csv = os.path.join(script_dir, "data", "ncovparams.csv")
@@ -74,9 +74,10 @@ def test_integration_ncov(prompt=None):
 
     print("End of the run")
 
-    print(profiler)
+    Console.print_profiler(profiler)
 
-    print(f"Model output: {trajectory}")
+    Console.rule("Model output")
+    Console.print_population(trajectory[-1])
 
     # The original C code has this expected population after 47 steps
     expected = Population(initial=57104043,
@@ -87,7 +88,8 @@ def test_integration_ncov(prompt=None):
                           n_inf_wards=56,
                           day=30)
 
-    print(f"Expect output: {expected}")
+    Console.rule("Expected output")
+    Console.print_population(expected)
 
     assert trajectory[-1] == expected
 
@@ -157,9 +159,10 @@ def test_integration_pox(prompt=None):
 
     print("End of the run")
 
-    print(profiler)
+    Console.print_profiler(profiler)
 
-    print(f"Model output: {trajectory}")
+    Console.rule("Model output")
+    Console.print_population(trajectory[-1])
 
     # The original C code has this expected population after 47 steps
     expected = Population(initial=57104043,
@@ -170,7 +173,8 @@ def test_integration_pox(prompt=None):
                           n_inf_wards=209,
                           day=31)
 
-    print(f"Expect output: {expected}")
+    Console.rule("Expected output")
+    Console.print_population(expected)
 
     assert trajectory[-1] == expected
 

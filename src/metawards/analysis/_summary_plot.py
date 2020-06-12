@@ -321,8 +321,8 @@ def create_average_plot(df, output_dir: str = None, format: str = "jpg",
         return figs
 
 
-def get_color(name):
-    """Return a good color for the passed name"""
+def get_color(name=None, idx=None):
+    """Return a good color for the passed name or passed index (idx)"""
     name = str(name).strip().lower()
 
     if name == "overall":
@@ -333,10 +333,15 @@ def get_color(name):
         return name
 
     else:
-        # return a random colour
-        import random
-        rgb = (random.random(), random.random(), random.random())
-        return rgb
+        names = ["red", "blue", "green", "orange", "pink", "gray"]
+
+        if idx is None or idx < 0 or idx >= len(names):
+            # return a random colour
+            import random
+            rgb = (random.random(), random.random(), random.random())
+            return rgb
+        else:
+            return names[int(idx)]
 
 
 def create_demographics_plot(df, output_dir: str = None,
@@ -394,8 +399,8 @@ def create_demographics_plot(df, output_dir: str = None,
     demographics = df.pivot(index="date", columns="demographic",
                             values="day").columns
 
-    for demographic in demographics:
-        colors.append(get_color(demographic))
+    for i, demographic in enumerate(demographics):
+        colors.append(get_color(demographic, i))
 
     i = 0
     j = 0

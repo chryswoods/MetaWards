@@ -164,7 +164,6 @@ def build_wards_network(params: Parameters,
 
     workfile = params.input_files.work
 
-
     p = p.start("read_work_file")
     if workfile in _data_cache:
         Console.print("Using pre-loaded cached work matrix...")

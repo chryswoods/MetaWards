@@ -84,13 +84,12 @@ def test_too_small(prompt=None):
 
     print(f"Model output: {trajectory}")
 
-    # The original C code has this expected population after 47 steps
     expected = Population(initial=57104043,
-                          susceptibles=56081540,
-                          latent=220,
-                          total=70,
-                          recovereds=247,
-                          n_inf_wards=56,
+                          susceptibles=56081438,
+                          latent=244,
+                          total=81,
+                          recovereds=314,
+                          n_inf_wards=76,
                           day=30)
 
     print(f"Expect output: {expected}")

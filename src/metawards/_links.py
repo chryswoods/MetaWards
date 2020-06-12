@@ -42,10 +42,10 @@ class Links:
 
     def population(self) -> int:
         """Return the population of these links"""
-        if self.suscept is None:
+        if self.weight is None:
             return 0
         else:
-            return sum(self.suscept)
+            return sum(self.weight)
 
     def copy(self):
         """Return a copy of these links, using a shallow copy for

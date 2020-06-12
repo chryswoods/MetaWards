@@ -8,6 +8,7 @@ Functions
     :toctree: generated/
 
     go_isolate
+    go_stage
     go_to
 
     move_custom
@@ -16,6 +17,7 @@ Functions
 """
 
 from ._go_isolate import *
+from ._go_stage import *
 from ._go_to import *
 
 from ._move_custom import *

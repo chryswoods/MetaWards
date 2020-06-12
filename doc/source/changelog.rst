@@ -2,6 +2,48 @@
 Changelog
 =========
 
+`1.1.0 <https://github.com/metawards/MetaWards/compare/1.0.0...1.1.0>`__ - June 11th 2020
+------------------------------------------------------------------------------------------
+
+* Different demographics can now follow different disease pathways. This
+  supports modelling of super-spreaders and hospitals, as described
+  in :doc:`part 7 of the tutorial <tutorial/index_part07>`.
+* Variables in demographic sub-networks can be scanned independently from
+  the overal network or other sub-networks. This means you can, e.g.
+  enact lock-downs in specific demographics, or scan disease parameters
+  for different demographics.
+* Added a :meth:`~metawards.movers.go_stage` function that moves individuals
+  from and to specific disease stages in different demographics. This is
+  used to support conditional branching, e.g. 20% of I2 infecteds go to
+  hospital.
+* Added "--star-as-E", "--star-as-R" and "--disable-star" command line
+  arguments to control how the "*" state is counted in the summary outputs.
+  This enables it to be counted as an extra "E" state, which makes the
+  output more meaningful and more easily interpretable.
+* Clarified the meaning the "day 0" and "day 1". Now "day 0" is before
+  the model run starts (i.e. setup). The first iteration of the model
+  run is "day 1". This is a change from previous versions, which called
+  the first half of the first iteration "day 0" and the second half "day 1".
+  Since seeding happens in the first half, this means that we now seed one
+  day earlier than previous versions, so outbreaks are now one day ahead.
+* Fixed a major bug in calculation of the demographic sub-networks
+  denominators. These have not been used in production yet. If you
+  are going to use demographic sub-networks then please make sure
+  you use this version (1.1.0) or above.
+* Added database support to :class:`~metawards.OutputFiles`, so that you
+  can now write data to SQLite3 databases. This is described in a new
+  part of :doc:`tutorial chapter 4 <tutorial/part04/04_rates>`.
+* Added in extra output to :class:`~metawards.Workspace` so that you can
+  get the populations of all disease stages for all demographics. This
+  is demonstrated in a rate calculation, also in the
+  :doc:`new tutorial chapter 4 <tutorial/part04/04_rates>`.
+* Fixed a directory permissions bug that appeared sometimes on windows.
+* Fixed an existing bug from the C code whereby user-set values of
+  contrib_foi are ignored. This had no impact as these values are always 1.0.
+* Fixed a bug in distribute_remainders that meant that individuals could
+  sometimes still be added to a demographic even if the desired percentage
+  was zero.
+
 `1.0.0 <https://github.com/metawards/MetaWards/compare/0.12.0...1.0.0>`__ - May 23rd 2020
 -----------------------------------------------------------------------------------------
 

@@ -43,7 +43,6 @@ def aggregate_infections(infections: Infections, profiler: Profiler,
     cdef int i = 0
     cdef int j = 0
     cdef int idx = 0
-    cdef int N_INF_CLASSES = infections.N_INF_CLASSES
     cdef int nnodes_plus_one = infections.nnodes + 1
     cdef int nlinks_plus_one = infections.nlinks + 1
     cdef int nsublinks_plus_one = 0
@@ -57,7 +56,7 @@ def aggregate_infections(infections: Infections, profiler: Profiler,
 
     # zero the overal infections
     p = p.start("zero")
-    for i in range(0, N_INF_CLASSES):
+    for i in range(0, infections.N_INF_CLASSES):
         infections_i = get_int_array_ptr(infections.work[i])
         play_infections_i = get_int_array_ptr(infections.play[i])
 
@@ -72,9 +71,11 @@ def aggregate_infections(infections: Infections, profiler: Profiler,
     # aggregate from the sub-infections
     for ii, subinf in enumerate(infections.subinfs):
         p = p.start(f"aggregate_{ii}")
-        for i in range(0, N_INF_CLASSES):
-            infections_i = get_int_array_ptr(infections.work[i])
-            play_infections_i = get_int_array_ptr(infections.play[i])
+        mapping = subinf.get_stage_mapping()
+
+        for i in range(0, len(mapping)):
+            infections_i = get_int_array_ptr(infections.work[mapping[i]])
+            play_infections_i = get_int_array_ptr(infections.play[mapping[i]])
             sub_infections_i = get_int_array_ptr(subinf.work[i])
             sub_play_infections_i = get_int_array_ptr(subinf.play[i])
 

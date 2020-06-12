@@ -8,24 +8,6 @@ scenarios. This roadmap is subject to change, and is given here to
 give insight into what the developers are thinking, and where
 they intend the code to go.
 
-Different demographics using different parameters
--------------------------------------------------
-
-This is planned for MetaWards 1.1. Currently each demographic uses the
-same disease parameters, though there is no technical reason why this
-has to be the case. We'd like to have different disease parameters for
-different demographics, also with different numbers of disease stages.
-This will enable modelling of;
-
-* different disease progress and effect on different societal demographics,
-  e.g. modelling a disease that effects different genders or ages
-  disproportionaly
-
-* different numbers and tags for disease stages for different demographics,
-  so that individuals can be conditionally moved along different
-  pathways. This would enable subsets of the population to be modelled
-  as going to hospital, with different path ways within hospital modelled.
-
 Different demographics using different networks
 -----------------------------------------------
 

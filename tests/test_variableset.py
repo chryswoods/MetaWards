@@ -69,8 +69,13 @@ def test_variableset():
 
 
 def test_variables_with_repeats():
+    from metawards.utils import Profiler
+    p = Profiler()
+    p = p.start("read")
     variables = VariableSets.read(params_with_repeats_csv)
+    p = p.stop()
 
+    p = p.start("loop")
     for variable in variables:
         assert variable.output_dir() != variable.fingerprint(
             include_index=True)
@@ -82,6 +87,8 @@ def test_variables_with_repeats():
         print(variable.output_dir(), o)
 
         assert variable.output_dir() == o
+    p = p.stop()
+    print(p)
 
 
 def test_variables_compliance():

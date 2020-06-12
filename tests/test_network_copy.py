@@ -16,8 +16,6 @@ def test_network_copy(prompt=None, nthreads=1):
     # user input parameters
     import random
     seed = random.randint(100000, 1000000)
-    inputfile = ncovparams_csv
-    line_num = 0
     UV = 0.0
 
     # load all of the parameters

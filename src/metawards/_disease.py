@@ -31,15 +31,22 @@ class Disease:
     """
     #: Beta parameter for each stage of the disease
     beta: _List[float] = None
+
     #: Progress parameter for each stage of the disease
     progress: _List[float] = None
+
     #: TooIllToMove parameter for each stage of the disease
     too_ill_to_move: _List[float] = None
+
     #: Contribution to the Force of Infection (FOI) parameter for each
     #: stage of the disease
     contrib_foi: _List[float] = None
+
     #: Index of the first symptomatic stage
     start_symptom: int = None
+
+    #: Mapping label, e.g. "*", "E", "I" or "R"
+    mapping: _List[str] = None
 
     _name: str = None
     _version: str = None
@@ -58,12 +65,18 @@ class Disease:
 * repository: {self._repository}
 * repository_branch: {self._repository_branch}
 * repository_version: {self._repository_version}
+* mapping: {self.mapping}
 * beta: {self.beta}
 * progress: {self.progress}
 * too_ill_to_move: {self.too_ill_to_move}
 * contrib_foi: {self.contrib_foi}
 * start_symptom: {self.start_symptom}
 """
+
+    def __repr__(self):
+        return f"Disease(beta={self.beta}, progress={self.progress}, " \
+               f"too_ill_to_move={self.too_ill_to_move}, contrib_foi=" \
+               f"{self.contrib_foi})"
 
     def __eq__(self, other):
         return self.beta == other.beta and \
@@ -94,8 +107,13 @@ class Disease:
             raise AssertionError(f"Data read for disease {self._name} "
                                  f"is corrupted! {e.__class__}: {e}")
 
+        if n < 4:
+            raise AssertionError(
+                f"There must be at least 4 disease stages ('*', 'E', 'I', "
+                f"'R') - the number of stages here is {n}")
+
         if self.start_symptom is None or self.start_symptom < 0 or \
-           self.start_symptom >= n:
+                self.start_symptom >= n:
             raise AssertionError(f"start_symptom {self.start_symptom} is "
                                  f"invalid for a disease with {n} stages")
 
@@ -163,10 +181,88 @@ class Disease:
             raise AssertionError("Invalid disease parameters!\n" +
                                  "\n".join(errors))
 
+        if self.mapping is None:
+            # default mapping is first stage is '*', second stage is 'E',
+            # last stage is 'R' and remaining stages are 'I'
+            self.mapping = ["I"] * self.N_INF_CLASSES()
+            self.mapping[0] = "*"
+            self.mapping[1] = "E"
+            self.mapping[-1] = "R"
+
+        elif len(self.mapping) != self.N_INF_CLASSES():
+            raise AssertionError(
+                f"Invalid number of mapping stages. Should be "
+                f"{self.N_INF_CLASSES()} but got {len(self.mapping)}.")
+
+        else:
+            for v in self.mapping:
+                if v not in ["*", "E", "I", "R"]:
+                    raise AssertionError(
+                        f"Invalid mapping value '{v}'. Valid values "
+                        f"are only '*', 'E', 'I' or 'R'")
+
+            # must start with '*' and 'E' and end with 'R'
+            if self.mapping[0] != '*' or self.mapping[1] != 'E' or \
+                    self.mapping[-1] != 'R':
+                raise AssertionError(
+                    f"The mapping must start with '*', 'E' and end "
+                    f"with 'R'. You cannot have '{self.mapping}'")
+
+            # must have at least 1 I stage
+            if "I" not in self.mapping:
+                raise AssertionError(
+                    f"The mapping must contain at least one 'I' stage. "
+                    f"You cannot have '{self.mapping}'")
+
+    def get_mapping_to(self, other):
+        """Return the mapping from stage index i of this disease to
+           stage index j other the passed other disease. This returns
+           'None' if there is no need to map because the stages
+           are the same.
+
+           The mapping will map the states according to their label,
+           matching the ith labelled X state in this disease to the
+           ith labelled X state in other (or to the highest labelled
+           X state if we have more of these states than other).
+
+           Thus, is we have;
+
+           self =  ["*", "E", "I", "I", "R"]
+           other = ["*", "E", "I", "I", "I", "R"]
+
+           then
+
+           self.get_mapping_to(other) = [0, 1, 2, 3, 5]
+           other.get_mapping_to(self) = [0, 1, 2, 3, 3, 4]
+        """
+        if self.mapping == other.mapping:
+            # no need to map,
+            return None
+
+        mapping = []
+
+        stages = {"*": [],
+                  "E": [],
+                  "I": [],
+                  "R": []}
+
+        for i, stage in enumerate(other.mapping):
+            stages[stage].append(i)
+
+        for stage in self.mapping:
+            s = stages[stage]
+
+            if len(s) == 1:
+                mapping.append(s[0])
+            else:
+                mapping.append(s.pop(0))
+
+        return mapping
+
     @staticmethod
-    def load(disease: str = "ncov",
+    def load(disease: str = None,
              repository: str = None,
-             folder: str = _default_folder_name,
+             folder: str = None,
              filename: str = None):
         """Load the disease parameters for the specified disease.
            This will look for a file called f"{disease}.json"
@@ -202,16 +298,31 @@ class Disease:
         repository_version = None
         repository_branch = None
 
+        import os
+
         if filename is None:
-            import os
-            if os.path.exists(disease):
-                filename = disease
-            elif os.path.exists(f"{disease}.json"):
-                filename = f"{disease}.json"
+            if disease is None:
+                disease = "ncov"
+
+            if folder is not None:
+                d = os.path.join(folder, disease)
+                if os.path.exists(d):
+                    filename = disease
+                elif os.path.exists(f"{d}.json"):
+                    filename = f"{d}.json"
+
+            if filename is None:
+                if os.path.exists(disease):
+                    filename = disease
+                elif os.path.exists(f"{disease}.json"):
+                    filename = f"{disease}.json"
 
         if filename is None:
             from ._parameters import get_repository
             repository, v = get_repository(repository)
+
+            if folder is None:
+                folder = _default_folder_name
 
             filename = os.path.join(repository, folder,
                                     f"{disease}.json")
@@ -220,7 +331,7 @@ class Disease:
             repository_version = v["version"]
             repository_branch = v["branch"]
 
-        json_file = filename
+        json_file = os.path.abspath(filename)
 
         try:
             with open(json_file, "r") as FILE:
@@ -242,7 +353,8 @@ set the model data.""")
                           too_ill_to_move=data.get("too_ill_to_move", []),
                           contrib_foi=data.get("contrib_foi", []),
                           start_symptom=data.get("start_symptom", 3),
-                          _name=disease,
+                          mapping=data.get("mapping", None),
+                          _name=data.get("name", disease),
                           _authors=data.get("author(s)", "unknown"),
                           _contacts=data.get("contact(s)", "unknown"),
                           _references=data.get("reference(s)", "none"),

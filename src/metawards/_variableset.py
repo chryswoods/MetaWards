@@ -472,7 +472,7 @@ class VariableSet:
             return
 
         # look for 'variable[index]'
-        m = re.search(r"([\.\w]+)\[(\d+)\]", name)
+        m = re.search(r"([\s:\.\w]+)\[(\d+)\]", name)
 
         if m:
             varname = m.group(1)
@@ -482,6 +482,21 @@ class VariableSet:
             varname = name
             index = None
             value = value
+
+        if varname.find(":") != -1:
+            # this sets the variable in a demographic
+            parts = varname.split(":")
+
+            if len(parts) != 2:
+                raise KeyError(
+                    f"It is not possible to adjust the variable {name} to "
+                    f"equal {value} as it is not in the format "
+                    f"variable=value or demographic:variable=value")
+
+            demographic = parts[0]
+            varname = parts[1]
+        else:
+            demographic = None
 
         if not (varname.startswith("user.") or varname.startswith(".") or
                 varname in _adjustable):
@@ -499,7 +514,11 @@ class VariableSet:
         if name.startswith("user."):
             name = name[4:]
 
-        self._varnames.append(varname)
+        if demographic is None:
+            self._varnames.append(varname)
+        else:
+            self._varnames.append((demographic, varname))
+
         self._varidxs.append(index)
         self._names.append(name)
         self._vals.append(value)
@@ -856,22 +875,99 @@ class VariableSet:
             return
 
         try:
+            # loop over all adjustable variables, and adjust global
+            # (all demographic) variables first
+            specialised = params.specialised_demographics()
+
             for varname, varidx, value in zip(self._varnames, self._varidxs,
                                               self._vals):
+                if isinstance(varname, tuple):
+                    continue
+
                 if varname.startswith("user.") or varname.startswith("."):
                     _adjustable["user"](params=params,
                                         name=varname,
                                         index=varidx,
                                         value=value)
+                    for s in specialised:
+                        _adjustable["user"](params=params[s],
+                                            name=varname,
+                                            index=varidx,
+                                            value=value)
+
                 elif varname in _adjustable:
                     _adjustable[varname](params=params,
+                                         name=varname,
+                                         index=varidx,
+                                         value=value)
+                    for s in specialised:
+                        _adjustable[varname](params=params[s],
+                                             name=varname,
+                                             index=varidx,
+                                             value=value)
+                else:
+                    raise KeyError(
+                        f"Cannot set unrecognised parameter {varname} "
+                        f"to {value}")
+
+            # now loop over and adjust the demographic-specific values
+            # (except for 'overall', which must be done last)
+            need_overall = False
+
+            for varname, varidx, value in zip(self._varnames, self._varidxs,
+                                              self._vals):
+                if isinstance(varname, tuple):
+                    demographic, varname = varname
+                else:
+                    continue
+
+                if demographic == "overall":
+                    need_overall = True
+                    continue
+
+                if varname.startswith("user.") or varname.startswith("."):
+                    _adjustable["user"](params=params[demographic],
+                                        name=varname,
+                                        index=varidx,
+                                        value=value)
+                elif varname in _adjustable:
+                    _adjustable[varname](params=params[demographic],
                                          name=varname,
                                          index=varidx,
                                          value=value)
                 else:
                     raise KeyError(
                         f"Cannot set unrecognised parameter {varname} "
-                        f"to {value}")
+                        f"to {value} in demographic {demographic}")
+
+            # finally(!) loop over and adjust the overall values
+            if need_overall:
+                for varname, varidx, value in zip(self._varnames,
+                                                  self._varidxs,
+                                                  self._vals):
+                    if isinstance(varname, tuple):
+                        demographic, varname = varname
+                    else:
+                        continue
+
+                    if demographic != "overall":
+                        continue
+
+                    if varname.startswith("user.") or varname.startswith("."):
+                        _adjustable["user"](params=params[demographic],
+                                            name=varname,
+                                            index=varidx,
+                                            value=value)
+                    elif varname in _adjustable:
+                        _adjustable[varname](params=params[demographic],
+                                             name=varname,
+                                             index=varidx,
+                                             value=value)
+                    else:
+                        raise KeyError(
+                            f"Cannot set unrecognised parameter {varname} "
+                            f"to {value} in demographic {demographic}")
+
         except Exception as e:
             raise ValueError(
                 f"Unable to set parameters from {self}. Error "

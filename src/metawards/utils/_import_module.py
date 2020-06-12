@@ -28,12 +28,10 @@ def import_module(module):
         m = None
     except ImportError:
         # this is ok and expected if the module is in a python file
-        # that will be loaded below
+        # that will be loaded below
         m = None
     except Exception:
-        Console.error(
-            f"\nError when importing {module}\n"
-            f"{e.__class__.__name__}:{e}\n")
+        # something else went wrong
         m = None
 
     if m is None:

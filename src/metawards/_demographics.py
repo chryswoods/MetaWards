@@ -117,7 +117,7 @@ class Demographics:
     def __getitem__(self, item):
         if isinstance(item, str):
             # Lookup by name
-            return self.demographics[self._names[item]]
+            return self.demographics[self.get_index(item)]
         else:
             # Lookup by index
             return self.demographics[item]
@@ -181,7 +181,9 @@ class Demographics:
 
         # haven't found the item
         raise KeyError(f"There is no demographic is this set that "
-                       f"matches {item}.")
+                       f"matches {item}. Available names are "
+                       f"{self._names}. Available indexes are "
+                       f"0 -> {len(self._names)}")
 
     @staticmethod
     def load(name: str = None,
@@ -263,18 +265,30 @@ follow the instructions at
             raise FileNotFoundError(f"Could not find or read {json_file}: "
                                     f"{e.__class__} {e}")
 
+        json_dir = os.path.split(os.path.abspath(json_file))[0]
+
         demographics = data.get("demographics", [])
         work_ratios = data.get("work_ratios", [])
         play_ratios = data.get("play_ratios", [])
         random_seed = data.get("random_seed", None)
+        diseases = data.get("diseases", None)
+
+        if diseases is None:
+            diseases = len(demographics) * [None]
+        else:
+            from ._disease import Disease
+            diseases = [Disease.load(x, folder=json_dir) if x is not None
+                        else None for x in diseases]
 
         if (len(demographics) != len(work_ratios) or
-                len(demographics) != len(play_ratios)):
+                len(demographics) != len(play_ratios) or
+                len(demographics) != len(diseases)):
             raise ValueError(
                 f"The number of work_ratios ({len(work_ratios)}) must "
                 f"equal to number of play_ratios "
                 f"({len(play_ratios)}) which must equal the number "
-                f"of demographics ({len(demographics)})")
+                f"of diseases ({len(diseases)}) which must equal "
+                f"the number of demographics ({len(demographics)})")
 
         demos = Demographics(random_seed=random_seed,
                              _name=name,
@@ -289,7 +303,8 @@ follow the instructions at
         for i in range(0, len(demographics)):
             demographic = Demographic(name=demographics[i],
                                       work_ratio=_get_value(work_ratios[i]),
-                                      play_ratio=_get_value(play_ratios[i]))
+                                      play_ratio=_get_value(play_ratios[i]),
+                                      disease=diseases[i])
             demos.add(demographic)
 
         return demos

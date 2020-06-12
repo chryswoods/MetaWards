@@ -28,6 +28,9 @@ class Workspace:
     #: Number of wards with at least one individual in this disease stage
     n_inf_wards: _List[int] = None
 
+    #: Size of population in each disease stage in each ward
+    ward_inf_tot: _List[_List[int]] = None
+
     #: Total number of infections in each ward over the last day
     #: This is also equal to the prevalence
     total_inf_ward: _List[int] = None
@@ -36,7 +39,7 @@ class Workspace:
     total_new_inf_ward: _List[int] = None
 
     #: The incidence of the infection (sum of infections up to
-    #: disease_class == 2)
+    #: disease_class == I_start)
     incidence: _List[int] = None
 
     #: The size of the S population in each ward
@@ -87,6 +90,11 @@ class Workspace:
             workspace.I_in_wards = create_int_array(size, 0)
             workspace.R_in_wards = create_int_array(size, 0)
 
+            workspace.ward_inf_tot = []
+
+            for i in range(0, n_inf_classes):
+                workspace.ward_inf_tot.append(create_int_array(size, 0))
+
         elif isinstance(network, Networks):
             workspace = Workspace.build(network.overall)
 
@@ -104,19 +112,8 @@ class Workspace:
            By default we zero the subspace networks
            (change this by setting zero_subspaces to False)
         """
-        for i in range(0, self.n_inf_classes):
-            self.inf_tot[i] = 0
-            self.pinf_tot[i] = 0
-            self.n_inf_wards[i] = 0
-
-        for i in range(0, self.nnodes+1):
-            self.total_inf_ward[i] = 0
-            self.total_new_inf_ward[i] = 0
-            self.incidence[i] = 0
-            self.S_in_wards[i] = 0
-            self.E_in_wards[i] = 0
-            self.I_in_wards[i] = 0
-            self.R_in_wards[i] = 0
+        from .utils._zero_workspace import zero_workspace
+        zero_workspace(self)
 
         if zero_subspaces and self.subspaces is not None:
             for subspace in self.subspaces:

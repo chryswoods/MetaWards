@@ -47,6 +47,15 @@ class Population:
         """The number who are infected across all wards"""
         return self.total + self.latent
 
+    def has_equal_SEIR(self, other):
+        """Return whether or not the SEIR values for this population
+           equal 'other'
+        """
+        return self.susceptibles == other.susceptibles and \
+            self.latent == other.latent and \
+            self.total == other.total and \
+            self.recovereds == other.recovereds
+
     def increment_day(self, ndays: int = 1) -> None:
         """Advance the day count by 'ndays' (default 1)"""
         self.day += ndays

@@ -3,6 +3,7 @@ from dataclasses import dataclass as _dataclass
 
 from ._variableset import VariableSet
 from ._network import Network
+from ._disease import Disease
 
 __all__ = ["Demographic"]
 
@@ -38,6 +39,11 @@ class Demographic:
     #: If this is None then this demographic will have the same
     #: parameters as the whole population
     adjustment: VariableSet = None
+
+    #: The Disease that should be used for this demographic. Is this
+    #: is None, then the global Disease is used. Otherwise
+    #: this demographic will follow this Disease
+    disease: Disease = None
 
     def specialise(self, network: Network, profiler=None,
                    nthreads: int = 1):
@@ -76,10 +82,23 @@ class Demographic:
         subnet.scale_susceptibles(work_ratio=self.work_ratio,
                                   play_ratio=self.play_ratio)
 
-        # Now specialise the parameters for this network
+        if self.name in network.params.specialised_demographics():
+            subnet.params = network.params[self.name].copy()
+        else:
+            subnet.params = network.params.copy()
+
+        # Does this demographic have a custom disease pathway?
+        if self.disease is not None:
+            subnet.params.disease_params = self.disease
+
+        # Do we need to specialise the parameters for this demographic?
         if self.adjustment is not None:
-            subnet.params = network.params.set_variables(self.adjustment)
+            subnet.params = subnet.params.set_variables(self.adjustment)
 
         subnet.name = self.name
+
+        subnet.reset_everything(nthreads=nthreads, profiler=profiler)
+        subnet.rescale_play_matrix(nthreads=nthreads, profiler=profiler)
+        subnet.move_from_play_to_work(nthreads=nthreads, profiler=profiler)
 
         return subnet

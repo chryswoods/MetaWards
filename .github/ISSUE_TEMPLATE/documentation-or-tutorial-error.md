@@ -22,7 +22,7 @@ If applicable, add screenshots to help explain your problem.
 **Environment (if applicable, please complete the following information):**
  - OS: [e.g. Windows 10, Ubuntu 16.04, OS X Catalina)
  - Python: [e.g. 3.7. 3.8, anaconda]
- - Version [e.g. metawards 1.0.0]
+ - Version: [e.g. metawards 1.0.0]
 
 **Additional context**
 Add any other context about the problem here.

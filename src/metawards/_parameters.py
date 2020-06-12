@@ -174,6 +174,11 @@ class Parameters:
     #: proportion of daily imports
     daily_imports: float = 0.0
 
+    #: how to treat the * state (stage 0). This should be a string
+    #: describing the method. Currently "R", "E" and "disable" are
+    #: supported
+    stage_0: str = "R"
+
     #: Seasonality parameter
     UV: float = 0.0
 
@@ -190,6 +195,10 @@ class Parameters:
     _repository_version: str = None
     _repository_branch: str = None
     _repository_dir: str = None
+
+    #: The parameters for demographic sub-networks. If this is None then
+    #: the parameters are the same as the overall parameters
+    _subparams = None
 
     def __str__(self):
         return f"""
@@ -213,6 +222,7 @@ class Parameters:
 * neighbour_weight_threshold: {self.neighbour_weight_threshold}
 * daily_imports: {self.daily_imports}
 * UV: {self.UV}
+* stage_0: {self.stage_0}
 * additional_seeds: {self.additional_seeds}"""
 
     @staticmethod
@@ -333,10 +343,48 @@ set the model data.""")
             _repository_version=repository_version
         )
 
-        from .utils._console import Console
-        Console.print(par, markdown=True)
-
         return par
+
+    def __getitem__(self, demographic: str):
+        """Return the parameters that should be used for the demographic
+           subnetwork called 'demographic'. If these have not been set
+           specifically then the parameters for the overall network
+           are used
+        """
+        if demographic == "overall":
+            return self
+
+        if self._subparams is None:
+            self._subparams = {}
+
+        if demographic not in self._subparams:
+            from copy import deepcopy
+            self._subparams[demographic] = deepcopy(self)
+            self._subparams[demographic]._subparams = {}
+
+        return self._subparams[demographic]
+
+    def copy(self, include_subparams: bool = False):
+        """Return a safe copy of these parameters, which does not
+           include any subnetwork parameters if 'include_subparams' is False
+        """
+        from copy import deepcopy
+        params = deepcopy(self)
+
+        if not include_subparams:
+            params._subparams = None
+
+        return params
+
+    def specialised_demographics(self) -> _List[str]:
+        """Return the names of demographics that have specialised
+           parameters that are different to those of the overall
+           network
+        """
+        if self._subparams is None:
+            return []
+        else:
+            return list(self._subparams.keys())
 
     def add_seeds(self, filename: str):
         """Add an 'additional seeds' file that can be used to

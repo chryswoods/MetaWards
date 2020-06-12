@@ -130,6 +130,30 @@ def _expand(path):
     return os.path.expanduser(os.path.expandvars(path))
 
 
+def _bz2compress(filename, bz2filename):
+    """bz2 compress 'filename' to write 'bz2filename'"""
+    if filename == bz2filename:
+        raise IOError(f"Cannot be equal {filename} vs {bz2filename}")
+
+    import bz2 as _bz2
+
+    compressor = _bz2.BZ2Compressor()
+    BLOCK_SIZE = 2048
+
+    with open(bz2filename, "wb") as BZ2FILE:
+        with open(filename, "rb") as FILE:
+            while True:
+                block = FILE.read(BLOCK_SIZE)
+
+                if not block:
+                    remaining = compressor.flush()
+                    BZ2FILE.write(remaining)
+                    return
+
+                compressed = compressor.compress(block)
+                BZ2FILE.write(compressed)
+
+
 class OutputFiles:
     """This is a class that manages all of the output files that
        are written to during a model outbreak. This object is used
@@ -208,6 +232,7 @@ class OutputFiles:
         self._is_open = False
         self._open_files = {}
         self._filenames = {}
+        self._is_database = {}
 
         self._open_dir()
 
@@ -232,6 +257,8 @@ class OutputFiles:
 
         outdir = _expand(self._output_dir)
 
+        mask = None
+
         if os.path.exists(outdir):
             outdir = os.path.abspath(outdir)
 
@@ -244,9 +271,25 @@ class OutputFiles:
 
                     # remake the directory after it has been removed
                     try:
-                        os.makedirs(outdir)
+                        import sys
+
+                        # Make sure write bit is set on Windows.
+                        if sys.platform == "win32":
+                            # Safely preserve the permissions of the
+                            # current process
+                            import stat
+                            mask = os.umask(0)
+                            os.makedirs(outdir, stat.S_IWRITE)
+                            os.umask(mask)
+                            mask = None
+                        else:
+                            os.makedirs(outdir)
                     except FileExistsError:
                         pass
+                    finally:
+                        if mask is not None:
+                            os.umask(mask)
+                            mask = None
 
             if not os.path.isdir(outdir):
                 from .utils._console import Console
@@ -255,13 +298,29 @@ class OutputFiles:
                 raise FileExistsError(f"{outdir} is an existing file!")
 
         try:
-            os.makedirs(outdir)
+            import sys
+
+            # Make sure write bit is set on Windows.
+            if sys.platform == "win32":
+                # Safely preserve the permissions of the current process
+                import stat
+                mask = os.umask(0)
+                os.makedirs(outdir, stat.S_IWRITE)
+                os.umask(mask)
+                mask = None
+            else:
+                os.makedirs(outdir)
+
         except FileExistsError as e:
             # this is no problem, as we have already validated
             # that the directory already existing is ok
             if not os.path.isdir(outdir):
                 # but it is a problem if it is not a directory...
                 raise e
+        finally:
+            if mask is not None:
+                os.umask(mask)
+                mask = None
 
         self._output_dir = str(_Path(outdir).absolute().resolve())
 
@@ -276,7 +335,18 @@ class OutputFiles:
 
         for filename, handle in self._open_files.items():
             try:
-                handle.close()
+                if self._is_database.get(filename, False):
+                    handle.commit()
+                    handle.close()
+
+                    if self._filenames[filename].endswith("bz2"):
+                        # we need to manually compress this file
+                        _bz2compress(filename, self._filenames[filename])
+                        import os as _os
+                        _os.remove(filename)
+                else:
+                    handle.close()
+
             except Exception as e:
                 errors.append(f"Could not close {filename}: "
                               f"{e.__class__} {e}")
@@ -284,6 +354,11 @@ class OutputFiles:
         self._is_open = False
         self._open_files = {}
         self._filenames = {}
+        self._is_database = {}
+
+    def is_database(self, filename):
+        """Return whether or not 'filename' is an open database"""
+        return self._is_database.get(filename, False)
 
     @staticmethod
     def remove(path, prompt=input):
@@ -313,6 +388,90 @@ class OutputFiles:
         """
         return self._output_dir
 
+    def open_db(self, filename: str, auto_bzip=None, initialise=None):
+        """Open up a SQLite3 database connection to a file called
+           'filename' in the output directory, returning the
+           SQLite3 connection to the database. Note that this will
+           open the database one, and will return the already-made
+           connection on all subsequence calls.
+
+           Parameters
+           ----------
+           filename: str
+             The name of the file containing the database to open.
+             This must be relative to the output directory, and within
+             that directory. It is an error to try to open a database
+             that is not contained in this directory.
+           auto_bzip: bool
+             Whether or not to automatically compress the file
+             using bzip2 when it is closed. The filename will
+             automatically have '.bz2' appended so that this
+             is clear. If 'None' is passed (the default) then
+             the value of 'auto_bzip' that was passed to the
+             constructor of this OutputFiles will be used. Note that
+             this flag is ignored if the database is already open
+          initialise: function
+             A function that is called to initialise the database the
+             first time that it is opened. The function is called
+             with the argument "CONN" (representing the sqlite3 database
+             connection). Use this to create the tables that you need
+        """
+        import os
+
+        self._open_dir()
+
+        outdir = self._output_dir
+        p = _Path(_expand(filename))
+
+        if not p.is_absolute():
+            p = _Path(os.path.join(outdir, filename))
+
+        filename = str(p.absolute().resolve())
+
+        prefix = os.path.commonprefix([outdir, filename])
+        if prefix != outdir:
+            raise ValueError(f"You cannot try to open {filename} as "
+                             f"this is not in the output directory "
+                             f"{outdir} - common prefix is {prefix}")
+
+        if filename in self._open_files:
+            if self._is_database.get(filename, False):
+                return self._open_files[filename]
+            else:
+                raise IOError(f"{filename} is a file, not a database!")
+
+        if auto_bzip is None:
+            auto_bzip = self._auto_bzip
+
+        auto_bzip = _get_bool(auto_bzip)
+
+        if auto_bzip is None:
+            auto_bzip = self._auto_bzip
+
+        auto_bzip = _get_bool(auto_bzip)
+
+        import sqlite3 as _sqlite3
+
+        CONN = _sqlite3.connect(filename)
+
+        if initialise is not None:
+            initialise(CONN)
+
+        self._open_files[filename] = CONN
+        self._is_database[filename] = True
+
+        if auto_bzip:
+            if not filename.endswith(".bz2"):
+                suffix = ".bz2"
+            else:
+                suffix = ""
+
+            self._filenames[filename] = f"{filename}{suffix}"
+        else:
+            self._filenames[filename] = filename
+
+        return CONN
+
     def open(self, filename: str, auto_bzip=None, mode="t",
              headers=None, sep=" "):
         """Open the file called 'filename' in the output directory,
@@ -340,12 +499,13 @@ class OutputFiles:
            mode: str
              The mode of opening the file, e.g. 't' for text mode, and
              'b' for binary mode. The default is text mode
-           headers: list[str] or plain str
+           headers: list[str] or plain str or function
              The headers to add to the top of the file, e.g. if it will
              contain column data. This will be written to the first line
              when the file is opened. If a list is passed, then this
              will be written joined together using 'sep'. If a plain
-             string is passed then this will be written.
+             string is passed then this will be written. If this is a function
+             then this function will be called with "FILE" as the argument.
              If nothing is passed then no headers will be written.
            sep: str
              The separator used for the headers (e.g. " " or "," are good
@@ -375,7 +535,10 @@ class OutputFiles:
                              f"{outdir} - common prefix is {prefix}")
 
         if filename in self._open_files:
-            return self._open_files[filename]
+            if self._is_database.get(filename, False):
+                raise IOError(f"{filename} is a database, not a file!")
+            else:
+                return self._open_files[filename]
 
         if auto_bzip is None:
             auto_bzip = self._auto_bzip
@@ -421,6 +584,8 @@ class OutputFiles:
             if isinstance(headers, str):
                 FILE.write(headers)
                 FILE.write("\n")
+            elif hasattr(headers, "__call__"):
+                headers(FILE)
             else:
                 FILE.write(sep.join([str(x) for x in headers]))
                 FILE.write("\n")

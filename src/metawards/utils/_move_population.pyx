@@ -100,7 +100,18 @@ def move_population_from_play_to_work(network: Network,
                 wards_play_suscept[ifrom] -= to_move
                 links_suscept[i] += to_move
 
-    recalculate_work_denominator_day(network=network, nthreads=nthreads,
-                                     profiler=profiler)
-    recalculate_play_denominator_day(network=network, nthreads=nthreads,
-                                     profiler=profiler)
+    sum1 = recalculate_work_denominator_day(network=network, nthreads=nthreads,
+                                            profiler=profiler)
+    sum2 = recalculate_play_denominator_day(network=network, nthreads=nthreads,
+                                            profiler=profiler)
+
+    # the sum of these 2 should equal the population of the network
+    if int(sum1 + sum2) != network.population:
+        from ._console import Console
+        Console.error(f"The rescaled population {int(sum1+sum2)} does not "
+                      f"equal the expected population {network.population}")
+
+        raise AssertionError(f"Disagreement in population size!")
+
+    network.work_population = int(sum1)
+    network.play_population = int(sum2)

@@ -44,10 +44,19 @@ class Networks:
     @property
     def params(self) -> int:
         """The overall parameters that are then specialised for the
-           different demographics
+           different demographics. Note that this returns a copy,
+           so changing this will not change any parameters in the
+           networks
         """
         if self.overall is not None:
-            return self.overall.params
+            # return the parameters for all of the demographics
+            params = self.overall.params.copy()
+
+            params._subparams = {}
+            for subnet in self.subnets:
+                params._subparams[subnet.name] = subnet.params
+
+            return params
         else:
             return None
 
@@ -124,8 +133,17 @@ class Networks:
         p = p.start("distribute_remainders")
         from .utils._scale_susceptibles import distribute_remainders
         distribute_remainders(network=network, subnets=subnets,
+                              demographics=demographics,
                               profiler=p, nthreads=nthreads,
                               random_seed=demographics.random_seed)
+
+        # we have changed the population, so need to recalculate the
+        # denominators again...
+        for subnet in subnets:
+            subnet.reset_everything(nthreads=nthreads, profiler=p)
+            subnet.rescale_play_matrix(nthreads=nthreads, profiler=p)
+            subnet.move_from_play_to_work(nthreads=nthreads, profiler=p)
+
         p = p.stop()
 
         total_pop = network.population
@@ -133,12 +151,25 @@ class Networks:
 
         from .utils._console import Console
 
-        Console.print(f"Specialising network - population: {total_pop}")
+        Console.print(f"Specialising network - population: {total_pop}, "
+                      f"workers: {network.work_population}, "
+                      f"players: {network.play_population}")
 
         for i, subnet in enumerate(subnets):
             pop = subnet.population
             sum_pop += pop
-            Console.print(f"  {demographics[i].name} - population: {pop}")
+
+            Console.print(f"  {demographics[i].name} - population: {pop}, "
+                          f"workers: {subnet.work_population}, "
+                          f"players: {subnet.play_population}")
+
+            if subnet.work_population + subnet.play_population != pop:
+                Console.error(
+                    f"Disagreement in subnet population. Should be "
+                    f"{pop} but is instead "
+                    f"{subnet.work_population+subnet.play_population}.")
+
+                raise AssertionError("Disagreement in subnet population.")
 
         if total_pop != sum_pop:
             raise AssertionError(
@@ -351,10 +382,14 @@ class Networks:
             #         WHERE THEY SHOULD BE AT THE START OF THE RUN
 
             p = p.start(f"{demographic.name}.update")
-            if demographic.adjustment:
-                subnet_params = params.set_variables(demographic.adjustment)
+            if demographic.name in params.specialised_demographics():
+                subnet_params = params[demographic.name]
             else:
                 subnet_params = params
+
+            if demographic.adjustment:
+                subnet_params = subnet_params.set_variables(
+                    demographic.adjustment)
 
             self.subnets[i].update(subnet_params, profiler=p)
             p = p.stop()

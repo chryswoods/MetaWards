@@ -43,7 +43,7 @@ def _load_additional_seeds(filename: str):
             line = FILE.readline()
 
     from ..utils._console import Console
-    Console.info("\n".join(lines))
+    Console.print("\n".join(lines))
 
     return seeds
 

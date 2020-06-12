@@ -143,6 +143,10 @@ def run_model(network: _Union[Network, Networks],
                                      mixer=mixer, mover=mover,
                                      nthreads=nthreads, profiler=p)
 
+    # setup takes place on "day 0"
+    from ._console import Console
+    Console.rule(f"Day {population.day}", style="iteration")
+
     for func in funcs:
         p = p.start(str(func))
         func(network=network, population=population,
@@ -161,13 +165,16 @@ def run_model(network: _Union[Network, Networks],
     p = p.start("run_model_loop")
     iteration_count = 0
 
-    from ._console import Console
-
     # keep looping until the outbreak is over or until we have completed
     # at least 5 loop iterations
     while (infecteds != 0) or (iteration_count < 5):
         # construct a new profiler of the same type as 'profiler'
         p2 = profiler.__class__()
+
+        # increment the day at the beginning, before anything happens.
+        # This way, the statistics for "day 1" are everything that
+        # happened since the end of day 0 and the end of day 1
+        population.increment_day()
 
         p2 = p2.start(f"timing for day {population.day}")
 
@@ -220,7 +227,6 @@ def run_model(network: _Union[Network, Networks],
         Console.print(f"Number of infections: {infecteds}")
 
         iteration_count += 1
-        population.increment_day()
 
         p2 = p2.stop()
 

@@ -15,6 +15,7 @@ from .._demographics import DemographicID, DemographicIDs
 from ..utils._ran_binomial cimport _ran_binomial, \
                                    _get_binomial_ptr, binomial_rng
 
+from ..utils._array import create_int_array
 from ..utils._get_array_ptr cimport get_int_array_ptr, get_double_array_ptr
 
 __all__ = ["go_isolate", "go_isolate_serial", "go_isolate_parallel"]
@@ -26,6 +27,7 @@ def go_isolate_parallel(go_from: _Union[DemographicID, DemographicIDs],
                         infections: Infections,
                         nthreads: int,
                         rngs,
+                        profiler,
                         self_isolate_stage: _Union[_List[int], int] = 2,
                         fraction: _Union[_List[float], float] = 1.0,
                         **kwargs) -> None:
@@ -120,6 +122,14 @@ def go_isolate_parallel(go_from: _Union[DemographicID, DemographicIDs],
     cdef int * to_work_infections_i
     cdef int * to_play_infections_i
 
+    cdef double * links_weight
+    cdef double * nodes_save_play_suscept
+
+    cdef double * to_links_weight = get_double_array_ptr(
+                                            to_subnet.links.weight)
+    cdef double * to_nodes_save_play_suscept = get_double_array_ptr(
+                                            to_subnet.nodes.save_play_suscept)
+
     cdef int nsubnets = len(subnets)
 
     # get the random number generator
@@ -129,6 +139,9 @@ def go_isolate_parallel(go_from: _Union[DemographicID, DemographicIDs],
     cdef int thread_id
 
     cdef int num_threads = nthreads
+
+    updated = create_int_array(nthreads, 0)
+    cdef int * have_updated = get_int_array_ptr(updated)
 
     cdef int ii = 0
     cdef int i = 0
@@ -142,6 +155,10 @@ def go_isolate_parallel(go_from: _Union[DemographicID, DemographicIDs],
         nnodes_plus_one = subinf.nnodes + 1
         nlinks_plus_one = subinf.nlinks + 1
 
+        links_weight = get_double_array_ptr(subnet.links.weight)
+        nodes_save_play_suscept = get_double_array_ptr(
+                                        subnet.nodes.save_play_suscept)
+
         for i, fraction in zip(stages, fractions):
             fraction_i = fraction
 
@@ -152,23 +169,35 @@ def go_isolate_parallel(go_from: _Union[DemographicID, DemographicIDs],
             to_play_infections_i = get_int_array_ptr(to_subinf.play[i])
 
             with nogil, parallel(num_threads=num_threads):
+                thread_id = cython.parallel.threadid()
+
                 if fraction_i == 1.0:
                     for j in prange(1, nlinks_plus_one, schedule="static"):
                         if work_infections_i[j] > 0:
-
+                            have_updated[thread_id] = 1
                             to_work_infections_i[j] = \
                                                 to_work_infections_i[j] + \
                                                 work_infections_i[j]
+                            to_links_weight[j] = to_links_weight[j] + \
+                                                work_infections_i[j]
+                            links_weight[j] = links_weight[j] - \
+                                            work_infections_i[j]
                             work_infections_i[j] = 0
 
                     for j in prange(1, nnodes_plus_one, schedule="static"):
                         if play_infections_i[j] > 0:
+                            have_updated[thread_id] = 1
                             to_play_infections_i[j] = \
                                                 to_play_infections_i[j] + \
                                                 play_infections_i[j]
+                            to_nodes_save_play_suscept[j] = \
+                                            to_nodes_save_play_suscept[j] + \
+                                            play_infections_i[j]
+                            nodes_save_play_suscept[j] = \
+                                            nodes_save_play_suscept[j] - \
+                                            play_infections_i[j]
                             play_infections_i[j] = 0
                 else:
-                    thread_id = cython.parallel.threadid()
                     rng = _get_binomial_ptr(rngs_view[thread_id])
 
                     for j in prange(1, nlinks_plus_one, schedule="static"):
@@ -176,24 +205,42 @@ def go_isolate_parallel(go_from: _Union[DemographicID, DemographicIDs],
                                                 <int>(work_infections_i[j]))
 
                         if to_move > 0:
+                            have_updated[thread_id] = 1
                             to_work_infections_i[j] = \
                                                 to_work_infections_i[j] + \
                                                 to_move
                             work_infections_i[j] = \
                                                 work_infections_i[j] - \
                                                 to_move
+                            to_links_weight[j] = to_links_weight[j] + to_move
+                            links_weight[j] = links_weight[j] - to_move
 
                     for j in prange(1, nnodes_plus_one, schedule="static"):
                         to_move = _ran_binomial(rng, fraction_i,
                                                 <int>(play_infections_i[j]))
 
                         if to_move > 0:
+                            have_updated[thread_id] = 1
                             to_play_infections_i[j] = \
                                                 to_play_infections_i[j] + \
                                                 to_move
                             play_infections_i[j] = \
                                                 play_infections_i[j] - \
                                                 to_move
+                            to_nodes_save_play_suscept[j] = \
+                                            to_nodes_save_play_suscept[j] + \
+                                            to_move
+                            nodes_save_play_suscept[j] = \
+                                            nodes_save_play_suscept[j] - \
+                                            to_move
+
+    if sum(updated) > 0:
+        # we need to recalculate the denominators for the subnets that
+        # are involved in this move
+        for ii in go_from:
+            subnet.recalculate_denominators(profiler=profiler)
+
+        to_subnet.recalculate_denominators(profiler=profiler)
 
 
 def go_isolate_serial(go_from: _Union[DemographicID, DemographicIDs],
@@ -201,6 +248,7 @@ def go_isolate_serial(go_from: _Union[DemographicID, DemographicIDs],
                       network: Networks,
                       infections: Infections,
                       rngs,
+                      profiler,
                       self_isolate_stage: _Union[_List[int], int] = 2,
                       fraction: _Union[_List[float], float] = 1.0,
                       **kwargs) -> None:
@@ -295,7 +343,17 @@ def go_isolate_serial(go_from: _Union[DemographicID, DemographicIDs],
     cdef int * to_work_infections_i
     cdef int * to_play_infections_i
 
+    cdef double * links_weight
+    cdef double * nodes_save_play_suscept
+
+    cdef double * to_links_weight = get_double_array_ptr(
+                                            to_subnet.links.weight)
+    cdef double * to_nodes_save_play_suscept = get_double_array_ptr(
+                                            to_subnet.nodes.save_play_suscept)
+
     cdef int nsubnets = len(subnets)
+
+    cdef int have_updated = 0
 
     cdef int ii = 0
     cdef int i = 0
@@ -312,6 +370,10 @@ def go_isolate_serial(go_from: _Union[DemographicID, DemographicIDs],
         nnodes_plus_one = subinf.nnodes + 1
         nlinks_plus_one = subinf.nlinks + 1
 
+        links_weight = get_double_array_ptr(subnet.links.weight)
+        nodes_save_play_suscept = get_double_array_ptr(
+                                        subnet.nodes.save_play_suscept)
+
         for i, fraction in zip(stages, fractions):
             fraction_i = fraction
 
@@ -324,33 +386,63 @@ def go_isolate_serial(go_from: _Union[DemographicID, DemographicIDs],
             if fraction_i == 1.0:
                 for j in range(1, nlinks_plus_one):
                     if work_infections_i[j] > 0:
+                        have_updated = 1
                         to_work_infections_i[j] = to_work_infections_i[j] + \
                                                   work_infections_i[j]
+                        to_links_weight[j] = to_links_weight[j] + \
+                                             work_infections_i[j]
+                        links_weight[j] = links_weight[j] - \
+                                          work_infections_i[j]
                         work_infections_i[j] = 0
 
                 for j in range(1, nnodes_plus_one):
                     if play_infections_i[j] > 0:
+                        have_updated = 1
                         to_play_infections_i[j] = to_play_infections_i[j] + \
                                                   play_infections_i[j]
+                        to_nodes_save_play_suscept[j] = \
+                                        to_nodes_save_play_suscept[j] + \
+                                        play_infections_i[j]
+                        nodes_save_play_suscept[j] = \
+                                        nodes_save_play_suscept[j] - \
+                                        play_infections_i[j]
                         play_infections_i[j] = 0
             else:
                 for j in range(1, nlinks_plus_one):
                     to_move = _ran_binomial(rng, fraction_i,
                                             <int>(work_infections_i[j]))
                     if to_move > 0:
+                        have_updated = 1
                         to_work_infections_i[j] = to_work_infections_i[j] + \
                                                   to_move
                         work_infections_i[j] = work_infections_i[j] - \
                                                to_move
+                        to_links_weight[j] = to_links_weight[j] + to_move
+                        links_weight[j] = links_weight[j] - to_move
 
                 for j in range(1, nnodes_plus_one):
                     to_move = _ran_binomial(rng, fraction_i,
                                             <int>(play_infections_i[j]))
                     if to_move > 0:
+                        have_updated = 1
                         to_play_infections_i[j] = to_play_infections_i[j] + \
                                                   to_move
                         play_infections_i[j] = play_infections_i[j] - \
                                                to_move
+                        to_nodes_save_play_suscept[j] = \
+                                            to_nodes_save_play_suscept[j] + \
+                                            to_move
+                        nodes_save_play_suscept[j] = \
+                                            nodes_save_play_suscept[j] - \
+                                            to_move
+
+    if have_updated > 0:
+        # we need to recalculate the denominators for the subnets that
+        # are involved in this move
+        for ii in go_from:
+            subnet.recalculate_denominators(profiler=profiler)
+
+        to_subnet.recalculate_denominators(profiler=profiler)
 
 
 def go_isolate(nthreads: int = 1, **kwargs) -> None:

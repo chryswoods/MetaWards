@@ -79,13 +79,13 @@ def test_integration_ncov(prompt=None):
     Console.rule("Model output")
     Console.print_population(trajectory[-1])
 
-    # The original C code has this expected population after 47 steps
+    # The original C code has this expected population after 30 steps
     expected = Population(initial=57104043,
-                          susceptibles=56081540,
-                          latent=220,
-                          total=70,
-                          recovereds=247,
-                          n_inf_wards=56,
+                          susceptibles=56081438,
+                          latent=244,
+                          total=81,
+                          recovereds=314,
+                          n_inf_wards=76,
                           day=30)
 
     Console.rule("Expected output")
@@ -166,11 +166,11 @@ def test_integration_pox(prompt=None):
 
     # The original C code has this expected population after 47 steps
     expected = Population(initial=57104043,
-                          susceptibles=56081128,
-                          latent=253,
-                          total=275,
-                          recovereds=421,
-                          n_inf_wards=209,
+                          susceptibles=56080960,
+                          latent=317,
+                          total=320,
+                          recovereds=480,
+                          n_inf_wards=229,
                           day=31)
 
     Console.rule("Expected output")

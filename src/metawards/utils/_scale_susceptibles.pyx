@@ -10,10 +10,11 @@ from libc.stdint cimport uintptr_t
 from .._nodes import Nodes
 from .._links import Links
 from .._network import Network
+from .._demographics import Demographics
 from ._profiler import Profiler
 
 from ._get_array_ptr cimport get_double_array_ptr, get_int_array_ptr
-from ._array import create_double_array
+from ._array import create_double_array, create_int_array
 
 from ._ran_binomial cimport _ran_binomial, _ran_integer, \
                             _get_binomial_ptr, binomial_rng
@@ -203,7 +204,8 @@ def scale_link_susceptibles(links: Links, ratio: any):
 
 
 cdef double redistribute(double target, double *values,
-                         int nvalues, binomial_rng *rng) nogil:
+                         int nvalues, binomial_rng *rng,
+                         int *allow_extras) nogil:
     """This will add or subtract numbers from 'values' until their sum
        equals 'target'
     """
@@ -217,19 +219,22 @@ cdef double redistribute(double target, double *values,
     if diff > 0:
         while diff > 0:
             i = _ran_integer(rng, 0, nvalues)
-            values[i] += 1
-            diff -= 1
+            if allow_extras[i]:
+                values[i] += 1
+                diff -= 1
     elif diff < 0:
         while diff < 0:
             i = _ran_integer(rng, 0, nvalues)
-            values[i] -= 1
-            diff += 1
+            if allow_extras[i]:
+                values[i] -= 1
+                diff += 1
 
     return diff
 
 
 def distribute_remainders(network: Network,
                           subnets: _List[Network],
+                          demographics: Demographics,
                           random_seed: int = None,
                           nthreads: int = 1,
                           profiler: Profiler=None) -> None:
@@ -365,6 +370,16 @@ def distribute_remainders(network: Network,
 
     cdef binomial_rng* rng = _get_binomial_ptr(bin_rng)
 
+    allow_workers = create_int_array(len(demographics))
+    allow_players = create_int_array(len(demographics))
+
+    cdef int * allow_workers_ptr = get_int_array_ptr(allow_workers)
+    cdef int * allow_players_ptr = get_int_array_ptr(allow_players)
+
+    for i, demographic in enumerate(demographics):
+        allow_workers[i] = int(demographic.work_ratio != 0)
+        allow_players[i] = int(demographic.play_ratio != 0)
+
     p = p.start("distribute_nodes")
     with nogil:
         for i in range(1, nnodes_plus_one):
@@ -379,7 +394,8 @@ def distribute_remainders(network: Network,
                     values_array[j] = sub_nodes_save_play_suscept[i]
 
                 diff_nodes_array[i] = redistribute(target, values_array,
-                                                   nsubnets, rng)
+                                                   nsubnets, rng,
+                                                   allow_players_ptr)
 
                 for j in range(0, nsubnets):
                     with gil:
@@ -406,7 +422,8 @@ def distribute_remainders(network: Network,
                     values_array[j] = sub_links_weight[i]
 
                 diff_links_array[i] = redistribute(target, values_array,
-                                                   nsubnets, rng)
+                                                   nsubnets, rng,
+                                                   allow_workers_ptr)
 
                 for j in range(0, nsubnets):
                     with gil:

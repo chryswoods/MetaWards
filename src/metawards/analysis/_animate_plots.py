@@ -113,9 +113,19 @@ def animate_plots(plots: _List[str], output: str,
 
         plots.sort()
 
+        legends = {}
+
+        for plot in plots:
+            legends[plot] = plot
+
     elif ordering == "custom":
         if verbose:
             print("Using the user-supplied order...")
+
+        legends = {}
+
+        for plot in plots:
+            legends[plot] = plot
 
     else:
         print(f"Could not recognise ordering scheme {ordering}")

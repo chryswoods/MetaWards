@@ -4,6 +4,7 @@ from typing import Union as _Union
 
 from ._network import Network
 from ._networks import Networks
+from ._disease import Disease
 
 __all__ = ["Infections"]
 
@@ -30,6 +31,12 @@ class Infections:
     #: both this subnetwork has the same work matrix as the overall
     #: network
     _work_index = None
+
+    #: The mapping from disease state 'i' in this network to
+    #: disease stage 'j' in the overall network. This is used if
+    #: the disease states in this subnetwork are different to the
+    #: overall network
+    _stage_mapping = None
 
     @property
     def N_INF_CLASSES(self) -> int:
@@ -64,7 +71,8 @@ class Infections:
             return 0
 
     @staticmethod
-    def build(network: _Union[Network, Networks] = None):
+    def build(network: _Union[Network, Networks] = None,
+              overall: Network = None):
         """Construct and return the Infections object that will track
            infections during a model run on the passed Network (or Networks)
 
@@ -72,6 +80,8 @@ class Infections:
            ----------
            network: Network or Networks
              The network or networks that will be run
+           overall: Network
+             The overall network to which this subnet belongs
 
            Returns
            -------
@@ -89,6 +99,10 @@ class Infections:
             inf._ifrom = network.links.ifrom
             inf._ito = network.links.ito
 
+            if overall is not None:
+                inf._set_stage_mapping(network.params.disease_params,
+                                       overall.params.disease_params)
+
             return inf
 
         elif isinstance(network, Networks):
@@ -97,11 +111,42 @@ class Infections:
             subinfs = []
 
             for subnet in network.subnets:
-                subinfs.append(Infections.build(subnet))
+                subinf = Infections.build(subnet, overall=network)
+                subinfs.append(subinf)
 
             inf.subinfs = subinfs
 
             return inf
+
+    def _set_stage_mapping(self, disease_params: Disease,
+                           overall_params: Disease):
+        """Get the mapping from the disease stages for this sub-network
+           (from disease_params) to the disease stages for the
+           overall network (in overall_params)
+        """
+        if disease_params == overall_params:
+            self._stage_mapping = None
+            return
+        else:
+            self._stage_mapping = disease_params.get_mapping_to(overall_params)
+
+    def has_different_stage_mapping(self):
+        """Return whether or not the sub-network disease stages
+           are different to that of the overall network, and must
+           thus be mapped
+        """
+        return self._stage_mapping is not None
+
+    def get_stage_mapping(self):
+        """Return the mapping from disease stages in this sub-network
+           to disease stages in the overall network. This returns a list
+           where mapping[i] gives the index of stage i in the subnetwork
+           to stage j in the overall network
+        """
+        if self.has_different_stage_mapping():
+            return self._stage_mapping
+        else:
+            return range(0, self.N_INF_CLASSES)
 
     def has_different_work_matrix(self):
         """Return whether or not the sub-network work matrix

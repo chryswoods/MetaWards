@@ -59,6 +59,7 @@ Functions
     seed_ran_binomial
     string_to_ints
     vaccinate_same_id
+    zero_workspace
 
 Classes
 =======
@@ -102,3 +103,4 @@ from ._scale_susceptibles import *
 from ._assert_sane_network import *
 from ._vaccination import *
 from ._clear_all_infections import *
+from ._zero_workspace import *

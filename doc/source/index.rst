@@ -101,7 +101,7 @@ Tutorial
 .. toctree::
    :maxdepth: 2
 
-   tutorial/tutorial
+   tutorial/index
 
 Usage
 =====

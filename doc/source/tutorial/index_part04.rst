@@ -19,3 +19,4 @@ In this fourth part of the tutorial you will:
    part04/01_extractors
    part04/02_default
    part04/03_regional
+   part04/04_rates

@@ -69,9 +69,10 @@ medRxiv 2020.02.12.20022566; doi: [10.1101/2020.02.12.20022566](https://doi.org/
 
 ## Dependencies
 
-The code requires Python 3.7 or above, and requires no other dependencies
-to install. For development you will need [cython](https://cython.org)
-to build the code, plus [pytest](https://docs.pytest.org/en/latest/)
+The code requires Python 3.7 or above.
+For development you will need [cython](https://cython.org) and a
+working C compiler to build the code,
+plus [pytest](https://docs.pytest.org/en/latest/)
 for running the tests.
 
 ## Installation

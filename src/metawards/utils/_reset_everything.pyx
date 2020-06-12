@@ -116,17 +116,3 @@ def reset_everything(network: Network, profiler: Profiler, nthreads: int = 1):
     p = p.start("reset_susceptibles")
     reset_play_susceptibles(network=network, nthreads=nthreads)
     p = p.stop()
-
-    p = p.start("reset_params")
-    params = network.params
-    if params:
-        N_INF_CLASSES = params.disease_params.N_INF_CLASSES()
-
-        params.disease_params.contrib_foi = N_INF_CLASSES * [0]
-
-        for i in range(0, N_INF_CLASSES-1):   # why -1?
-            params.disease_params.contrib_foi[i] = 1
-
-        network.params = params
-
-    p = p.stop()

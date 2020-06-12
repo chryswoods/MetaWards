@@ -83,11 +83,11 @@ def test_iterate_lockdown(prompt=None):
 
     # The original C code has this expected population after 47 steps
     expected = Population(initial=57104043,
-                          susceptibles=56081835,
-                          latent=11,
-                          total=10,
-                          recovereds=221,
-                          n_inf_wards=3,
+                          susceptibles=56081834,
+                          latent=13,
+                          total=8,
+                          recovereds=222,
+                          n_inf_wards=1,
                           day=41,
                           scale_uv=0.2 / 2.8)
 

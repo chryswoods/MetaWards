@@ -2,6 +2,7 @@
 from dataclasses import dataclass as _dataclass
 from typing import List as _List
 from typing import Union as _Union
+from typing import Dict as _Dict
 
 from ._network import Network
 from ._networks import Networks
@@ -54,6 +55,10 @@ class Workspace:
     #: The size of the R population in each ward
     R_in_wards: _List[int] = None
 
+    #: The sizes of the X populations in each ward - this is
+    #: for named disease stages that don't fit into S, E, I or R
+    X_in_wards: _Dict[str, _List[int]] = None
+
     #: The sub-workspaces used for the subnets of a
     #: multi-demographic Networks (list[Workspace])
     subspaces = None
@@ -68,9 +73,10 @@ class Workspace:
         workspace = Workspace()
 
         if isinstance(network, Network):
-            n_inf_classes = params.disease_params.N_INF_CLASSES()
+            disease = params.disease_params
+            n_inf_classes = disease.N_INF_CLASSES()
 
-            workspace.n_inf_classes = params.disease_params.N_INF_CLASSES()
+            workspace.n_inf_classes = n_inf_classes
             workspace.nnodes = network.nnodes
 
             size = workspace.nnodes + 1  # 1-indexed
@@ -86,9 +92,24 @@ class Workspace:
             workspace.incidence = create_int_array(size, 0)
 
             workspace.S_in_wards = create_int_array(size, 0)
-            workspace.E_in_wards = create_int_array(size, 0)
-            workspace.I_in_wards = create_int_array(size, 0)
-            workspace.R_in_wards = create_int_array(size, 0)
+
+            if "E" in disease.mapping:
+                workspace.E_in_wards = create_int_array(size, 0)
+
+            if "I" in disease.mapping:
+                workspace.I_in_wards = create_int_array(size, 0)
+
+            if "R" in disease.mapping:
+                workspace.R_in_wards = create_int_array(size, 0)
+
+            for mapping in disease.mapping:
+                if mapping not in ["*", "E", "I", "R"]:
+                    if workspace.X_in_wards is None:
+                        workspace.X_in_wards = {}
+
+                    if mapping not in workspace.X_in_wards:
+                        workspace.X_in_wards[mapping] = create_int_array(
+                            size, 0)
 
             workspace.ward_inf_tot = []
 

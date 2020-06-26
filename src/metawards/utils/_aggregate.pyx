@@ -111,7 +111,7 @@ def aggregate_infections(infections: Infections, profiler: Profiler,
 
 def aggregate_networks(network: Networks, profiler: Profiler,
                        nthreads: int = 1) -> None:
-    """Aggregate all of the infection data from the demographic
+    """Aggregate all of the Susceptibles data from the demographic
        sub-networks into an overall total set of data
        that is stored in the overall network
 

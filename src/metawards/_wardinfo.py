@@ -172,7 +172,9 @@ class WardInfos:
            Parameters
            ----------
            name: str or regexp
-             Name or code of the ward to search
+             Name or code of the ward to search. You can also include
+             the authority adn region by separating usign "/", e.g.
+             "Clifton/Bristol".
            authority: str or regexp
              Name or code of the authority to search
            region: str or regexp
@@ -191,16 +193,26 @@ class WardInfos:
         wards = None
 
         if name is not None:
-            wards = self._find_ward(name, match=match,
-                                    include_alternates=include_alternates)
+            parts = name.split("/")
+
+            if len(parts) == 1:
+                wards = self._find_ward(name, match=match,
+                                        include_alternates=include_alternates)
+            else:
+                wards = self._find_ward(name=parts[0].strip(), match=match,
+                                        include_alternates=include_alternates)
+                authority = parts[1].strip()
+
+                if len(parts) > 2:
+                    region = "/".join(parts[2:]).strip()
 
             if len(wards) == 0:
                 return wards
 
         if authority is not None:
             authorities = self._find_authority(
-                                        authority,
-                                        match=match_authority_and_region)
+                authority,
+                match=match_authority_and_region)
 
             if len(authorities) == 0:
                 return authorities

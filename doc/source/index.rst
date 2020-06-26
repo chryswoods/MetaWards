@@ -103,6 +103,14 @@ Tutorial
 
    tutorial/index
 
+Files
+=====
+
+.. toctree::
+   :maxdepth: 2
+
+   fileformats/index
+
 Usage
 =====
 

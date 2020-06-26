@@ -11,7 +11,6 @@ Functions
     add_lookup
     add_wards_network_distance
     aggregate_networks
-    align_strings
     allocate_vaccination
     assert_sane_network
     build_play_matrix
@@ -81,7 +80,6 @@ from ._run_models import *
 from ._worker import *
 from ._import_module import *
 from ._get_functions import *
-from ._align_strings import *
 from ._safe_eval import *
 from ._console import *
 

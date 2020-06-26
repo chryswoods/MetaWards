@@ -94,7 +94,7 @@ def build_custom_extractor(custom_function: _Union[str, MetaFunction],
 
         if module is None:
             # we cannot find the extractor
-            Console.error(f"Cannot find the extractor '{custom_function}'."
+            Console.error(f"Cannot find the extractor '{custom_function}'. "
                           f"Please make sure this is spelled correctly and "
                           f"any python modules/files needed are in the "
                           f"PYTHONPATH or current directory")

@@ -24,9 +24,7 @@ def iterate_default(stage: str, **kwargs) -> _List[MetaFunction]:
 
     if stage == "initialise":
         from ._setup_imports import setup_seed_wards
-        from ._advance_additional import setup_additional_seeds
-
-        return [setup_seed_wards, setup_additional_seeds]
+        return [setup_seed_wards]
 
     elif stage == "setup":
         from ._advance_additional import advance_additional

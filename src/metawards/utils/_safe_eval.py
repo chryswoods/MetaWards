@@ -26,7 +26,9 @@ def safe_eval_number(s: _Union[float, int, str]) -> float:
 
     try:
         # this is about as save as eval gets in python
-        x = eval(s, {"__builtins__": None}, {})
+        # (and we allow math so that "sqrt(3)" and "2 * pi" will work)
+        import math
+        x = eval(s, {"__builtins__": math}, {})
 
         v = float(x)
         if v.is_integer():

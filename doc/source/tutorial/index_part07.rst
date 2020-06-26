@@ -9,6 +9,8 @@ In this seventh part of the tutorial you will;
   and progress for different groups
 * See how this can be combined with move functions to model conditional
   pathways, e.g. if individuals are sent to hospital
+* See how you can name the different stages of the disease, e.g. to
+  support collecting statistics such as the number of hospital patients
 
 .. toctree::
    :maxdepth: 2
@@ -17,3 +19,5 @@ In this seventh part of the tutorial you will;
    part07/02_scanning
    part07/03_conditional
    part07/04_icu
+   part07/05_named_stages
+   part07/06_hospital

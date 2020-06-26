@@ -90,19 +90,24 @@ def run_worker(arguments):
     with OutputFiles(outdir, check_empty=False, force_empty=False,
                      prompt=None, auto_bzip=auto_bzip) as output_dir:
         with Console.redirect_output(outdir=outdir, auto_bzip=auto_bzip):
-            # first, build and prepare the Network(s). This is built once
-            # from the parameters and demographics by loading files from
-            # the filesystem, as sending this over the physical network
-            # would be too expensive. Subsequent calls to this function
-            # after the Network(s) has been built will call
-            # network.update(params, demographics)
-            network = prepare_worker(params=params, demographics=demographics,
-                                     options=options)
+            try:
+                # first, build and prepare the Network(s). This is built once
+                # from the parameters and demographics by loading files from
+                # the filesystem, as sending this over the physical network
+                # would be too expensive. Subsequent calls to this function
+                # after the Network(s) has been built will call
+                # network.update(params, demographics)
+                network = prepare_worker(params=params,
+                                         demographics=demographics,
+                                         options=options)
 
-            # if the user wanted to remove this directory then they would
-            # have done so in the main process - no need to check again
-            options["output_dir"] = output_dir
+                # if the user wanted to remove this directory then they would
+                # have done so in the main process - no need to check again
+                options["output_dir"] = output_dir
 
-            output = network.run(**options)
+                output = network.run(**options)
 
-            return output
+                return output
+            except Exception:
+                Console.print_exception()
+                raise

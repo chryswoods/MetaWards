@@ -9,7 +9,7 @@ import glob
 import sys
 import os
 
-script_dir = script_dir = os.path.dirname(__file__)
+script_dir = os.path.dirname(__file__)
 build_dir = os.path.join(script_dir, "..", "build")
 
 build_paths = glob.glob(f"{build_dir}/*/metawards")
@@ -45,7 +45,7 @@ def pytest_collection_modifyitems(config, items):
     elif config.getoption("--runslow"):
         # --runslow given in cli: skip veryslow tests
         skip_veryslow = pytest.mark.skip(
-                                reason="need --runveryslow option to run")
+            reason="need --runveryslow option to run")
 
         for item in items:
             if "veryslow" in item.keywords:
@@ -54,7 +54,7 @@ def pytest_collection_modifyitems(config, items):
         # skip slow and veryslow tests
         skip_slow = pytest.mark.skip(reason="need --runslow option to run")
         skip_veryslow = pytest.mark.skip(
-                                reason="need --runveryslow option to run")
+            reason="need --runveryslow option to run")
 
         for item in items:
             if "veryslow" in item.keywords:

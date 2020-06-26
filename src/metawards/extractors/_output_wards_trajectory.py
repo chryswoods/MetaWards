@@ -38,27 +38,39 @@ def output_wards_trajectory_serial(network: Network,
     else:
         name = "_" + network.name.replace(" ", "_")
 
-    S_file = output_dir.open(f"wards_trajectory{name}_S.dat")
-    E_file = output_dir.open(f"wards_trajectory{name}_E.dat")
-    I_file = output_dir.open(f"wards_trajectory{name}_I.dat")
-    R_file = output_dir.open(f"wards_trajectory{name}_R.dat")
-
     day = str(population.day) + " "
 
-    S_file.write(day)
-    E_file.write(day)
-    I_file.write(day)
-    R_file.write(day)
+    if workspace.S_in_wards is not None:
+        S_file = output_dir.open(f"wards_trajectory{name}_S.dat")
+        S_file.write(day)
+        S_file.write(" ".join([str(x) for x in workspace.S_in_wards[1:]]))
+        S_file.write("\n")
 
-    S_file.write(" ".join([str(x) for x in workspace.S_in_wards]))
-    E_file.write(" ".join([str(x) for x in workspace.E_in_wards]))
-    I_file.write(" ".join([str(x) for x in workspace.I_in_wards]))
-    R_file.write(" ".join([str(x) for x in workspace.R_in_wards]))
+    if workspace.E_in_wards is not None:
+        E_file = output_dir.open(f"wards_trajectory{name}_E.dat")
+        E_file.write(day)
+        E_file.write(" ".join([str(x) for x in workspace.E_in_wards[1:]]))
+        E_file.write("\n")
 
-    S_file.write("\n")
-    E_file.write("\n")
-    I_file.write("\n")
-    R_file.write("\n")
+    if workspace.I_in_wards is not None:
+        I_file = output_dir.open(f"wards_trajectory{name}_I.dat")
+        I_file.write(day)
+        I_file.write(" ".join([str(x) for x in workspace.I_in_wards[1:]]))
+        I_file.write("\n")
+
+    if workspace.R_in_wards is not None:
+        R_file = output_dir.open(f"wards_trajectory{name}_R.dat")
+        R_file.write(day)
+        R_file.write(" ".join([str(x) for x in workspace.R_in_wards[1:]]))
+        R_file.write("\n")
+
+    if workspace.X_in_wards is not None:
+        for key, value in workspace.X_in_wards.items():
+            X_file = output_dir.open(
+                f"wards_trajectory{name}_{key.replace(' ','-')}.dat")
+            X_file.write(day)
+            X_file.write(" ".join([str(x) for x in value[1:]]))
+            X_file.write("\n")
 
 
 def output_wards_trajectory(nthreads: int = 1, **kwargs):

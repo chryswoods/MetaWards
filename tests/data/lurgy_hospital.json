@@ -1,0 +1,12 @@
+{ "name"             : "The Lurgy",
+  "version"          : "June 2nd 2020",
+  "author(s)"        : "Christopher Woods",
+  "contact(s)"       : "christopher.woods@bristol.ac.uk",
+  "reference(s)"     : "Completely ficticious disease - no references",
+  "stage"            : ["H1", "H2", "ICU", "R"],
+  "beta"             : [0.2,  0.1,   0.1,  0.0],
+  "progress"         : [0.2,  0.5,   0.2,  0.0],
+  "too_ill_to_move"  : [1.0,  1.0,   1.0,  1.0],
+  "contrib_foi"      : [1.0,  1.0,   1.0,  1.0],
+  "start_symptom"    : 1
+}

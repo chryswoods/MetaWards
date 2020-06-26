@@ -160,7 +160,6 @@ class Parameters:
     static_play_at_home: float = 0.0
     dyn_play_at_home: float = 0.0
 
-    data_dist_cutoff: float = 10000000.0
     dyn_dist_cutoff: float = 10000000.0
 
     play_to_work: float = 0.0
@@ -212,7 +211,6 @@ class Parameters:
 * initial_inf: {self.initial_inf}
 * static_play_at_home: {self.static_play_at_home}
 * dyn_play_at_home: {self.dyn_play_at_home}
-* data_dist_cutoff: {self.data_dist_cutoff}
 * dyn_dist_cutoff: {self.dyn_dist_cutoff}
 * play_to_work: {self.play_to_work}
 * work_to_play: {self.work_to_play}
@@ -317,7 +315,6 @@ set the model data.""")
             initial_inf=data.get("initial_inf", 0),
             static_play_at_home=data.get("static_play_at_home", 0.0),
             dyn_play_at_home=data.get("dyn_play_at_home", 0.0),
-            data_dist_cutoff=data.get("data_dist_cutoff", 10000000.0),
             dyn_dist_cutoff=data.get("dyn_dist_cutoff", 10000000.0),
             play_to_work=data.get("play_to_work", 0.0),
             work_to_play=data.get("work_to_play", 0.0),
@@ -407,10 +404,6 @@ set the model data.""")
 
             if os.path.exists(f):
                 filename = f
-            else:
-                raise FileExistsError(
-                    f"Unable to find extra seeds file {filename} in "
-                    f"the current directory or in {f}")
 
         self.additional_seeds.append(filename)
 

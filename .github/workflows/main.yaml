@@ -53,6 +53,9 @@ jobs:
           pip install -r requirements-dev.txt
       - name: Install MetaWards package
         run: make -j 4
+        continue-on-error: true
+      - name: Double-check install
+        run: make
       - name: Clone MetaWards data
         run: git clone https://github.com/metawards/MetaWardsData
       - name: Run tests

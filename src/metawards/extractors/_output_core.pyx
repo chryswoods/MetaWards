@@ -155,9 +155,7 @@ cdef int _buffer_nthreads = 0
 cdef _inf_buffer * _total_new_inf_ward_buffers = <_inf_buffer*>0
 cdef _inf_buffer * _total_inf_ward_buffers = <_inf_buffer*>0
 cdef _inf_buffer * _S_buffers = <_inf_buffer*>0
-cdef _inf_buffer * _E_buffers = <_inf_buffer*>0
-cdef _inf_buffer * _I_buffers = <_inf_buffer*>0
-cdef _inf_buffer * _R_buffers = <_inf_buffer*>0
+cdef _inf_buffer * _X_buffers = <_inf_buffer*>0
 cdef _inf_buffer * _ward_inf_tot_buffers = <_inf_buffer*>0
 
 cdef _red_variables * _redvars = <_red_variables*>0
@@ -174,7 +172,7 @@ def setup_core(nthreads: int = 1, **kwargs):
     if _buffer_nthreads != nthreads:
         global _total_new_inf_ward_buffers
         global _total_inf_ward_buffers
-        global _S_buffers, _E_buffers, _I_buffers, _R_buffers
+        global _S_buffers, _X_buffers
         global _ward_inf_tot_buffers
         global _redvars
 
@@ -183,18 +181,14 @@ def setup_core(nthreads: int = 1, **kwargs):
             _free_inf_buffers(_total_new_inf_ward_buffers, nthreads)
             _free_inf_buffers(_total_inf_ward_buffers, nthreads)
             _free_inf_buffers(_S_buffers, nthreads)
-            _free_inf_buffers(_E_buffers, nthreads)
-            _free_inf_buffers(_I_buffers, nthreads)
-            _free_inf_buffers(_R_buffers, nthreads)
+            _free_inf_buffers(_X_buffers, nthreads)
             _free_inf_buffers(_ward_inf_tot_buffers, nthreads)
 
         _redvars = _allocate_red_variables(nthreads)
         _total_new_inf_ward_buffers = _allocate_inf_buffers(nthreads)
         _total_inf_ward_buffers = _allocate_inf_buffers(nthreads)
         _S_buffers = _allocate_inf_buffers(nthreads)
-        _E_buffers = _allocate_inf_buffers(nthreads)
-        _I_buffers = _allocate_inf_buffers(nthreads)
-        _R_buffers = _allocate_inf_buffers(nthreads)
+        _X_buffers = _allocate_inf_buffers(nthreads)
         _ward_inf_tot_buffers = _allocate_inf_buffers(nthreads)
         _buffer_nthreads = nthreads
 
@@ -228,6 +222,7 @@ def output_core_omp(network: Network, population: Population,
 
     links = network.links
     wards = network.nodes
+    disease = network.params.disease_params
 
     # set up main variables
     play_infections = infections.play
@@ -236,10 +231,11 @@ def output_core_omp(network: Network, population: Population,
 
     cdef int N_INF_CLASSES = len(infections)
     assert len(infections) == len(play_infections)
+    assert N_INF_CLASSES == disease.N_INF_CLASSES()
 
     global _total_inf_ward_buffers
     global _total_new_inf_ward_buffers
-    global _S_buffers, _E_buffers, _I_buffers, _R_buffers
+    global _S_buffers, _X_buffers
     global _ward_inf_tot_buffers
     global _redvars
 
@@ -252,12 +248,9 @@ def output_core_omp(network: Network, population: Population,
     cdef int * n_inf_wards = get_int_array_ptr(workspace.n_inf_wards)
     cdef int * incidence = get_int_array_ptr(workspace.incidence)
 
-    cdef int * S_in_wards = get_int_array_ptr(workspace.S_in_wards)
-    cdef int * E_in_wards = get_int_array_ptr(workspace.E_in_wards)
-    cdef int * I_in_wards = get_int_array_ptr(workspace.I_in_wards)
-    cdef int * R_in_wards = get_int_array_ptr(workspace.R_in_wards)
-
     cdef int * ward_inf_tot_i
+    cdef int * X_in_wards
+    cdef int * S_in_wards = get_int_array_ptr(workspace.S_in_wards)
 
     # get pointers to arrays from links and play to read data
     cdef int * links_ifrom = get_int_array_ptr(links.ifrom)
@@ -279,10 +272,17 @@ def output_core_omp(network: Network, population: Population,
 
     cdef int i = 0
     cdef int j = 0
+    cdef int ifrom = 0
+    cdef int I_start = 0
 
     cdef int num_threads = nthreads
     cdef int thread_id = 0
-    cdef int ifrom = 0
+
+    cdef int n_inf_wards_i = 0
+    cdef int total_new_i = 0
+    cdef int inf_tot_i = 0
+    cdef int pinf_tot_i = 0
+    cdef int susceptibles_i = 0
 
     cdef int N_INF_CLASSES_MINUS_ONE = N_INF_CLASSES - 1
 
@@ -294,44 +294,9 @@ def output_core_omp(network: Network, population: Population,
     cdef _inf_buffer * total_new_inf_ward_buffer
     cdef _inf_buffer * total_inf_ward_buffer
     cdef _inf_buffer * S_buffer
-    cdef _inf_buffer * E_buffer
-    cdef _inf_buffer * I_buffer
-    cdef _inf_buffer * R_buffer
+    cdef _inf_buffer * X_buffer
     cdef _inf_buffer * ward_inf_tot_buffer
     cdef _red_variables * redvar
-
-    # what to do with the * stage?
-    stage_0 = network.params.stage_0
-
-    cdef int R_as_star = 0
-    cdef int R_stage = N_INF_CLASSES_MINUS_ONE
-    cdef int E_as_star = 0
-    cdef int E_stage = 1
-    cdef int I_start = 2
-
-    if stage_0 == "E":
-        R_stage = N_INF_CLASSES_MINUS_ONE
-        R_as_star = R_stage
-        E_as_star = 0
-        E_stage = 1
-        I_start = 2
-    elif stage_0 == "R":
-        R_stage = N_INF_CLASSES_MINUS_ONE
-        R_as_star = 0
-        E_stage = 1
-        E_as_star = E_stage
-        I_start = 2
-    elif stage_0 == "disable":
-        R_stage = N_INF_CLASSES_MINUS_ONE
-        R_as_star = R_stage
-        E_stage = 0
-        E_as_star = E_stage
-        I_start = 1
-    else:
-        from ..utils._console import Console
-        Console.error(f"Unrecognised stage_0 {stage_0}. Only 'E', 'R' or "
-                      f"'disabled' are supported")
-        raise ValueError(f"Unrecognised stage_0 {stage_0}")
 
     ###
     ### Finally(!) we can now loop over the links and wards and
@@ -351,6 +316,14 @@ def output_core_omp(network: Network, population: Population,
 
         # similarly zero the number of infections per ward and
         # number of new infections per ward
+        n_inf_wards_i = 0
+        total_new_i = 0
+        inf_tot_i = 0
+        pinf_tot_i = 0
+        susceptibles_i = 0
+
+        # similarly zero the number of infections per ward and
+        # number of new infections per ward
         _reset_reduce_variables(_redvars, num_threads)
         _reset_inf_buffer(_total_inf_ward_buffers, num_threads)
         _reset_inf_buffer(_total_new_inf_ward_buffers, num_threads)
@@ -362,6 +335,31 @@ def output_core_omp(network: Network, population: Population,
         play_infections_i = get_int_array_ptr(play_infections[i])
         ward_inf_tot_i = get_int_array_ptr(ward_inf_tot[i])
 
+        # now get the "summary" stage into which this stage is mapped
+        mapping = disease.mapping[i]
+
+        I_start = disease.start_symptom
+
+        if mapping == "E":
+            X_in_wards = get_int_array_ptr(workspace.E_in_wards)
+        elif mapping == "I":
+            X_in_wards = get_int_array_ptr(workspace.I_in_wards)
+        elif mapping == "R":
+            X_in_wards = get_int_array_ptr(workspace.R_in_wards)
+        elif mapping == "*":
+            if network.params.stage_0 == "R":
+                X_in_wards = get_int_array_ptr(workspace.R_in_wards)
+            elif network.params.stage_0 == "E":
+                X_in_wards = get_int_array_ptr(workspace.E_in_wards)
+            elif network.params.stage_0 == "disable":
+                raise AssertionError(
+                    f"Have a '*' state, despite this being disabled!")
+            else:
+                raise ValueError(
+                    f"Unrecognised '*' directive '{network.params.stage_0}'")
+        else:
+            X_in_wards = get_int_array_ptr(workspace.X_in_wards[mapping])
+
         with nogil, parallel(num_threads=num_threads):
             # get the space for this thread to accumulate data.
             # All of this data will be reduced in critical sections
@@ -370,9 +368,7 @@ def output_core_omp(network: Network, population: Population,
             total_new_inf_ward_buffer = \
                                 &(_total_new_inf_ward_buffers[thread_id])
             S_buffer = &(_S_buffers[thread_id])
-            E_buffer = &(_E_buffers[thread_id])
-            I_buffer = &(_I_buffers[thread_id])
-            R_buffer = &(_R_buffers[thread_id])
+            X_buffer = &(_X_buffers[thread_id])
             ward_inf_tot_buffer = &(_ward_inf_tot_buffers[thread_id])
             redvar = &(_redvars[thread_id])
 
@@ -405,15 +401,9 @@ def output_core_omp(network: Network, population: Population,
                                    ifrom, infections_i[j],
                                    &(ward_inf_tot_i[0]), &lock)
 
-                    if i == R_stage or i == R_as_star:
-                        _add_to_buffer(R_buffer, ifrom, infections_i[j],
-                                       &(R_in_wards[0]), &lock)
-                    elif i == E_stage or i == E_as_star:
-                        _add_to_buffer(E_buffer, ifrom, infections_i[j],
-                                       &(E_in_wards[0]), &lock)
-                    else:
-                        _add_to_buffer(I_buffer, ifrom, infections_i[j],
-                                       &(I_in_wards[0]), &lock)
+                    _add_to_buffer(X_buffer, ifrom, infections_i[j],
+                                   &(X_in_wards[0]), &lock)
+
             # end of loop over links
 
             # cannot reduce in parallel, so manual reduction
@@ -423,9 +413,7 @@ def output_core_omp(network: Network, population: Population,
             _add_from_buffer(total_inf_ward_buffer,
                              &(total_inf_ward[0]))
             _add_from_buffer(S_buffer, &(S_in_wards[0]))
-            _add_from_buffer(E_buffer, &(E_in_wards[0]))
-            _add_from_buffer(I_buffer, &(I_in_wards[0]))
-            _add_from_buffer(R_buffer, &(R_in_wards[0]))
+            _add_from_buffer(X_buffer, &(X_in_wards[0]))
             _add_from_buffer(ward_inf_tot_buffer, &(ward_inf_tot_i[0]))
             openmp.omp_unset_lock(&lock)
 
@@ -451,15 +439,9 @@ def output_core_omp(network: Network, population: Population,
                     # total_inf_ward[j] += play_infections[i][j]
                     total_inf_ward[j] += play_infections_i[j]
                     ward_inf_tot_i[j] += play_infections_i[j]
+                    X_in_wards[j] += play_infections_i[j]
 
-                    if i == R_stage or i == R_as_star:
-                        R_in_wards[j] += play_infections_i[j]
-                    elif i == E_stage or i == E_as_star:
-                        E_in_wards[j] += play_infections_i[j]
-                    else:
-                        I_in_wards[j] += play_infections_i[j]
-
-                if (i < N_INF_CLASSES-1) and total_inf_ward[j] > 0:
+                if ward_inf_tot_i[j] > 0:
                     # n_inf_wards[i] += 1
                     redvar[0].n_inf_wards += 1
             # end of loop over nodes
@@ -488,34 +470,59 @@ def output_core_omp(network: Network, population: Population,
         _reset_reduce_variables(_redvars, num_threads)
     # end of loop over i
 
-    # latent is the sum of work and play infections for E stages
-    latent = inf_tot[E_stage] + pinf_tot[E_stage]
-
-    if E_as_star != E_stage:
-        latent += inf_tot[E_as_star] + pinf_tot[E_as_star]
-
-    # total infections are sum of work and play for all intermediate
-    # stages
+    latent = 0
     total = 0
-    for i in range(I_start, N_INF_CLASSES-1):
-        total += inf_tot[i] + pinf_tot[i]
+    recovereds = 0
+    totals = None
 
-    # recovered is the sum of work and play for the R stages
-    recovereds = inf_tot[R_stage] + pinf_tot[R_stage]
+    for i, mapping in enumerate(disease.mapping):
+        if mapping == "E":
+            latent += inf_tot[i] + pinf_tot[i]
+        elif mapping == "I":
+            total += inf_tot[i] + pinf_tot[i]
+        elif mapping == "R":
+            recovereds += inf_tot[i] + pinf_tot[i]
+        elif mapping == "*":
+            if network.params.stage_0 == "R":
+                recovereds += inf_tot[i] + pinf_tot[i]
+            elif network.params.stage_0 == "E":
+                latent += inf_tot[i] + pinf_tot[i]
+            elif network.params.stage_0 == "disable":
+                raise AssertionError(
+                    f"Have a '*' state, despite this being disabled!")
+            else:
+                raise ValueError(
+                    f"Unrecognised '*' directive '{network.params.stage_0}'")
+        else:
+            if totals is None:
+                totals = {}
 
-    if R_as_star != R_stage:
-        recovereds += inf_tot[R_as_star] + pinf_tot[R_as_star]
+            if mapping not in totals:
+                totals[mapping] = 0
+
+            totals[mapping] += inf_tot[i] + pinf_tot[i]
 
     cdef int S = 0
     cdef int E = 0
     cdef int I = 0
     cdef int R = 0
 
+    cdef int * E_in_wards = get_int_array_ptr(workspace.E_in_wards)
+    cdef int * I_in_wards = get_int_array_ptr(workspace.I_in_wards)
+    cdef int * R_in_wards = get_int_array_ptr(workspace.R_in_wards)
+
     for j in range(1, nnodes_plus_one):
-        S += S_in_wards[j]
-        E += E_in_wards[j]
-        I += I_in_wards[j]
-        R += R_in_wards[j]
+        if S_in_wards:
+            S += S_in_wards[j]
+
+        if E_in_wards:
+            E += E_in_wards[j]
+
+        if I_in_wards:
+            I += I_in_wards[j]
+
+        if R_in_wards:
+            R += R_in_wards[j]
 
     if S != susceptibles or E != latent or I != total or R != recovereds:
         error = \
@@ -529,14 +536,32 @@ def output_core_omp(network: Network, population: Population,
 
     if population is not None:
         population.susceptibles = susceptibles
-        population.total = total
-        population.recovereds = recovereds
-        population.latent = latent
-        # save the number of wards that have at least one latent
-        # infection
+
+        if "I" in disease.mapping:
+            population.total = total
+        else:
+            population.total = None
+
+        if "R" in disease.mapping:
+            population.recovereds = recovereds
+        else:
+            population.recovereds = None
+
+        if "E" in disease.mapping:
+            population.latent = latent
+        else:
+            population.latent = None
+
+        population.totals = totals
+
+        # save the number of wards that have at least one new
+        # infection (index 0 is new infections)
         population.n_inf_wards = n_inf_wards[0]
 
-    return total + latent
+    if totals is None:
+        return total + latent
+    else:
+        return total + latent + sum(totals.values())
 
 
 def output_core_serial(network: Network, population: Population,
@@ -566,6 +591,7 @@ def output_core_serial(network: Network, population: Population,
     """
     links = network.links
     wards = network.nodes
+    disease = network.params.disease_params
 
     # set up main variables
     play_infections = infections.play
@@ -574,6 +600,7 @@ def output_core_serial(network: Network, population: Population,
 
     cdef int N_INF_CLASSES = len(infections)
     assert len(infections) == len(play_infections)
+    assert N_INF_CLASSES == disease.N_INF_CLASSES()
 
     # get pointers to arrays in workspace to write data
     cdef int * inf_tot = get_int_array_ptr(workspace.inf_tot)
@@ -585,11 +612,8 @@ def output_core_serial(network: Network, population: Population,
     cdef int * incidence = get_int_array_ptr(workspace.incidence)
 
     cdef int * ward_inf_tot_i
-
+    cdef int * X_in_wards
     cdef int * S_in_wards = get_int_array_ptr(workspace.S_in_wards)
-    cdef int * E_in_wards = get_int_array_ptr(workspace.E_in_wards)
-    cdef int * I_in_wards = get_int_array_ptr(workspace.I_in_wards)
-    cdef int * R_in_wards = get_int_array_ptr(workspace.R_in_wards)
 
     # get pointers to arrays from links and play to read data
     cdef int * links_ifrom = get_int_array_ptr(links.ifrom)
@@ -612,6 +636,7 @@ def output_core_serial(network: Network, population: Population,
     cdef int i = 0
     cdef int j = 0
     cdef int ifrom = 0
+    cdef int I_start = 0
 
     cdef int n_inf_wards_i = 0
     cdef int total_new_i = 0
@@ -620,39 +645,6 @@ def output_core_serial(network: Network, population: Population,
     cdef int susceptibles_i = 0
 
     cdef int N_INF_CLASSES_MINUS_ONE = N_INF_CLASSES - 1
-
-    # what to do with the * stage?
-    stage_0 = network.params.stage_0
-
-    cdef int R_as_star = 0
-    cdef int R_stage = N_INF_CLASSES_MINUS_ONE
-    cdef int E_as_star = 0
-    cdef int E_stage = 1
-    cdef int I_start = 2
-
-    if stage_0 == "E":
-        R_stage = N_INF_CLASSES_MINUS_ONE
-        R_as_star = R_stage
-        E_as_star = 0
-        E_stage = 1
-        I_start = 2
-    elif stage_0 == "R":
-        R_stage = N_INF_CLASSES_MINUS_ONE
-        R_as_star = 0
-        E_stage = 1
-        E_as_star = E_stage
-        I_start = 2
-    elif stage_0 == "disable":
-        R_stage = N_INF_CLASSES_MINUS_ONE
-        R_as_star = R_stage
-        E_stage = 0
-        E_as_star = E_stage
-        I_start = 1
-    else:
-        from ..utils._console import Console
-        Console.error(f"Unrecognised stage_0 {stage_0}. Only 'E', 'R' or "
-                      f"'disabled' are supported")
-        raise ValueError(f"Unrecognised stage_0 {stage_0}")
 
     ###
     ### Finally(!) we can now loop over the links and wards and
@@ -686,6 +678,31 @@ def output_core_serial(network: Network, population: Population,
         play_infections_i = get_int_array_ptr(play_infections[i])
         ward_inf_tot_i = get_int_array_ptr(ward_inf_tot[i])
 
+        # now get the "summary" stage into which this stage is mapped
+        mapping = disease.mapping[i]
+
+        I_start = disease.start_symptom
+
+        if mapping == "E":
+            X_in_wards = get_int_array_ptr(workspace.E_in_wards)
+        elif mapping == "I":
+            X_in_wards = get_int_array_ptr(workspace.I_in_wards)
+        elif mapping == "R":
+            X_in_wards = get_int_array_ptr(workspace.R_in_wards)
+        elif mapping == "*":
+            if network.params.stage_0 == "R":
+                X_in_wards = get_int_array_ptr(workspace.R_in_wards)
+            elif network.params.stage_0 == "E":
+                X_in_wards = get_int_array_ptr(workspace.E_in_wards)
+            elif network.params.stage_0 == "disable":
+                raise AssertionError(
+                    f"Have a '*' state, despite this being disabled!")
+            else:
+                raise ValueError(
+                    f"Unrecognised '*' directive '{network.params.stage_0}'")
+        else:
+            X_in_wards = get_int_array_ptr(workspace.X_in_wards[mapping])
+
         with nogil:
             # loop over all links and accumulate infections associated
             # with this link
@@ -703,13 +720,7 @@ def output_core_serial(network: Network, population: Population,
                     inf_tot_i += infections_i[j]
                     total_inf_ward[ifrom] += infections_i[j]
                     ward_inf_tot_i[ifrom] += infections_i[j]
-
-                    if i == R_stage or i == R_as_star:
-                        R_in_wards[ifrom] += infections_i[j]
-                    elif i == E_stage or i == E_as_star:
-                        E_in_wards[ifrom] += infections_i[j]
-                    else:
-                        I_in_wards[ifrom] += infections_i[j]
+                    X_in_wards[ifrom] += infections_i[j]
 
             # end of loop over links
 
@@ -731,15 +742,9 @@ def output_core_serial(network: Network, population: Population,
                     pinf_tot_i += play_infections_i[j]
                     total_inf_ward[j] += play_infections_i[j]
                     ward_inf_tot_i[j] += play_infections_i[j]
+                    X_in_wards[j] += play_infections_i[j]
 
-                    if i == R_stage or i == R_as_star:
-                        R_in_wards[j] += play_infections_i[j]
-                    elif i == E_stage or i == E_as_star:
-                        E_in_wards[j] += play_infections_i[j]
-                    else:
-                        I_in_wards[j] += play_infections_i[j]
-
-                if (i < N_INF_CLASSES_MINUS_ONE) and total_inf_ward[j] > 0:
+                if ward_inf_tot_i[j] > 0:
                     # n_inf_wards[i] += 1
                     n_inf_wards_i += 1
             # end of loop over nodes
@@ -764,34 +769,59 @@ def output_core_serial(network: Network, population: Population,
         susceptibles += susceptibles_i
     # end of loop over i
 
-    # latent is the sum of work and play infections for stage 1
-    latent = inf_tot[E_stage] + pinf_tot[E_stage]
-
-    if E_as_star != E_stage:
-        latent += inf_tot[E_as_star] + pinf_tot[E_as_star]
-
-    # total infections are sum of work and play for all intermediate
-    # stages
+    latent = 0
     total = 0
-    for i in range(I_start, N_INF_CLASSES-1):
-        total += inf_tot[i] + pinf_tot[i]
+    recovereds = 0
+    totals = None
 
-    # recovered is the sum of work and play for the R stages
-    recovereds = inf_tot[R_stage] + pinf_tot[R_stage]
+    for i, mapping in enumerate(disease.mapping):
+        if mapping == "E":
+            latent += inf_tot[i] + pinf_tot[i]
+        elif mapping == "I":
+            total += inf_tot[i] + pinf_tot[i]
+        elif mapping == "R":
+            recovereds += inf_tot[i] + pinf_tot[i]
+        elif mapping == "*":
+            if network.params.stage_0 == "R":
+                recovereds += inf_tot[i] + pinf_tot[i]
+            elif network.params.stage_0 == "E":
+                latent += inf_tot[i] + pinf_tot[i]
+            elif network.params.stage_0 == "disable":
+                raise AssertionError(
+                    f"Have a '*' state, despite this being disabled!")
+            else:
+                raise ValueError(
+                    f"Unrecognised '*' directive '{network.params.stage_0}'")
+        else:
+            if totals is None:
+                totals = {}
 
-    if R_as_star != R_stage:
-        recovereds += inf_tot[R_as_star] + pinf_tot[R_as_star]
+            if mapping not in totals:
+                totals[mapping] = 0
+
+            totals[mapping] += inf_tot[i] + pinf_tot[i]
 
     cdef int S = 0
     cdef int E = 0
     cdef int I = 0
     cdef int R = 0
 
+    cdef int * E_in_wards = get_int_array_ptr(workspace.E_in_wards)
+    cdef int * I_in_wards = get_int_array_ptr(workspace.I_in_wards)
+    cdef int * R_in_wards = get_int_array_ptr(workspace.R_in_wards)
+
     for j in range(1, nnodes_plus_one):
-        S += S_in_wards[j]
-        E += E_in_wards[j]
-        I += I_in_wards[j]
-        R += R_in_wards[j]
+        if S_in_wards:
+            S += S_in_wards[j]
+
+        if E_in_wards:
+            E += E_in_wards[j]
+
+        if I_in_wards:
+            I += I_in_wards[j]
+
+        if R_in_wards:
+            R += R_in_wards[j]
 
     if S != susceptibles or E != latent or I != total or R != recovereds:
         error = \
@@ -805,15 +835,32 @@ def output_core_serial(network: Network, population: Population,
 
     if population is not None:
         population.susceptibles = susceptibles
-        population.total = total
-        population.recovereds = recovereds
-        population.latent = latent
+
+        if "I" in disease.mapping:
+            population.total = total
+        else:
+            population.total = None
+
+        if "R" in disease.mapping:
+            population.recovereds = recovereds
+        else:
+            population.recovereds = None
+
+        if "E" in disease.mapping:
+            population.latent = latent
+        else:
+            population.latent = None
+
+        population.totals = totals
 
         # save the number of wards that have at least one new
         # infection (index 0 is new infections)
         population.n_inf_wards = n_inf_wards[0]
 
-    return total + latent
+    if totals is None:
+        return total + latent
+    else:
+        return total + latent + sum(totals.values())
 
 
 def _safe_run(func, **kwargs):

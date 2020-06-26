@@ -37,7 +37,19 @@ def accepts_stage(func: MetaFunction) -> bool:
          Whether or not the function accepts the "stage" argument
     """
     import inspect
-    return "stage" in inspect.signature(func).parameters
+
+    try:
+        return "stage" in inspect.signature(func).parameters
+    except Exception as e:
+        from ._console import Console
+        Console.error(f"Could not find the signature for {func}. The error "
+                      f"is {e.__class__}: {e}. This is likely because this "
+                      f"is an in-built function compiled using cython. To "
+                      f"fix this, make sure that the pyx file containing "
+                      f"your cython starts with '# cython: binding=True`. "
+                      f"This will switch on support in cython for adding "
+                      f"signatures to compiled functions.")
+        raise e
 
 
 def get_functions(stage: str,

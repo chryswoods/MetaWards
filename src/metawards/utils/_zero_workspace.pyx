@@ -49,7 +49,22 @@ def zero_workspace(workspace):
             total_inf_ward[j] = 0
             total_new_inf_ward[j] = 0
             incidence[j] = 0
-            S_in_wards[j] = 0
-            E_in_wards[j] = 0
-            I_in_wards[j] = 0
-            R_in_wards[j] = 0
+
+            if S_in_wards:
+                S_in_wards[j] = 0
+
+            if E_in_wards:
+                E_in_wards[j] = 0
+
+            if I_in_wards:
+                I_in_wards[j] = 0
+
+            if R_in_wards:
+                R_in_wards[j] = 0
+
+    if workspace.X_in_wards is not None:
+        for value in workspace.X_in_wards.values():
+            X_in_wards = get_int_array_ptr(value)
+            with nogil:
+                for j in range(0, NNODES_PLUS_ONE):
+                    X_in_wards[j] = 0

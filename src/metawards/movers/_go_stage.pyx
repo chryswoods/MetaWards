@@ -15,16 +15,21 @@ from .._demographics import DemographicID, DemographicIDs
 from ..utils._ran_binomial cimport _ran_binomial, \
                                    _get_binomial_ptr, binomial_rng
 
+from ..utils._console import Console
+
 from ..utils._array import create_int_array
 from ..utils._get_array_ptr cimport get_int_array_ptr, get_double_array_ptr
 
 __all__ = ["go_stage", "go_stage_serial", "go_stage_parallel"]
 
+StageID = _Union[str, int]
+StageIDs = _List[StageID]
+
 
 def go_stage_parallel(go_from: _Union[DemographicID, DemographicIDs],
                       go_to: DemographicID,
-                      from_stage: _Union[int, _List[int]],
-                      to_stage: int,
+                      from_stage: _Union[StageID, StageIDs],
+                      to_stage: StageID,
                       network: Networks,
                       infections: Infections,
                       nthreads: int,
@@ -47,11 +52,11 @@ def go_stage_parallel(go_from: _Union[DemographicID, DemographicIDs],
        to: DemographicID
          ID (name or index) of the isolation demographic to send infected
          individuals to
-       from_stage: int or list[int]
+       from_stage: StageID or StageIDs
          The stage to move from (or list of stages if there are multiple
-         from demographics)
-       to_stage: int
-         The stage to move to
+         from demographics - this is either a stage name or stage index
+       to_stage: StageID
+         The stage to move to (name or index)
        network: Networks
          The networks to be modelled. This must contain all of the
          demographics that are needed for this go function
@@ -79,16 +84,26 @@ def go_stage_parallel(go_from: _Union[DemographicID, DemographicIDs],
             raise ValueError(f"The 'go_to' {go_to} must be a single value!")
         go_to = go_to[0]
 
-    subnets = network.subnets
-    demographics = network.demographics
-    subinfs = infections.subinfs
+    if isinstance(network, Networks):
+        subnets = network.subnets
+        demographics = network.demographics
+        subinfs = infections.subinfs
 
-    go_from = [demographics.get_index(x) for x in go_from]
+        go_from = [demographics.get_index(x) for x in go_from]
 
-    go_to = demographics.get_index(go_to)
+        go_to = demographics.get_index(go_to)
 
-    to_subnet = subnets[go_to]
-    to_subinf = subinfs[go_to]
+        to_subnet = subnets[go_to]
+        to_subinf = subinfs[go_to]
+    else:
+        if go_from != [0] or go_to != 0:
+            raise AssertionError(
+                "You cannot change demographics with a single Network")
+
+        subnets = [network]
+        subinfs = [infections]
+        to_subnet = network
+        to_subinf = infections
 
     fraction = float(fraction)
 
@@ -96,27 +111,15 @@ def go_stage_parallel(go_from: _Union[DemographicID, DemographicIDs],
         raise ValueError(
             f"The move fraction {fraction} should all be 0 to 1")
 
-    to_stage = int(to_stage)
+    to_stage = to_subnet.params.disease_params.get_index(to_stage)
 
-    if to_stage < 0:
-        to_stage = to_subinf.N_INF_CLASSES + to_stage
-
-    if to_stage < 0 or to_stage >= to_subinf.N_INF_CLASSES:
+    if len(go_from) != len(from_stage):
         raise ValueError(
-            f"The to_stage '{to_stage}' is invalid for a disease "
-            f"with {to_subinf.N_INF_CLASSES} stages.")
+                f"Different number of from_stage {len(from_stage)} and "
+                f"go_from {len(go_from)}")
 
-    from_stage = [int(x) for x in from_stage]
-
-    for _i, g in enumerate(go_from):
-        if from_stage[_i] < 0:
-            from_stage[_i] = subinfs[g].N_INF_CLASSES + from_stage[_i]
-
-        if from_stage[_i] < 0 or from_stage[_i] >= subinfs[g].N_INF_CLASSES:
-            raise ValueError(
-                f"The from_stage '{from_stage[_i]}' for demographic {g} "
-                f"is invalid for a disease with {subinfs[g].N_INF_CLASSES} "
-                f"stages.")
+    from_stage = [subnets[go_from[i]].params.disease_params.get_index(x)
+                  for i, x in enumerate(from_stage)]
 
     cdef int nnodes_plus_one = 0
     cdef int nlinks_plus_one = 0
@@ -174,6 +177,9 @@ def go_stage_parallel(go_from: _Union[DemographicID, DemographicIDs],
 
         to_work_infections = get_int_array_ptr(to_subinf.work[stage_to])
         to_play_infections = get_int_array_ptr(to_subinf.play[stage_to])
+
+        Console.debug(f"Move from {subnet.name}:{stage_from} to "
+                      f"{to_subnet.name}:{stage_to} with fraction {frac}")
 
         with nogil, parallel(num_threads=num_threads):
             thread_id = cython.parallel.threadid()

@@ -218,13 +218,13 @@ cdef double redistribute(double target, double *values,
 
     if diff > 0:
         while diff > 0:
-            i = _ran_integer(rng, 0, nvalues)
+            i = _ran_integer(rng, 0, nvalues-1)
             if allow_extras[i]:
                 values[i] += 1
                 diff -= 1
     elif diff < 0:
         while diff < 0:
-            i = _ran_integer(rng, 0, nvalues)
+            i = _ran_integer(rng, 0, nvalues-1)
             if allow_extras[i]:
                 values[i] -= 1
                 diff += 1
@@ -381,59 +381,53 @@ def distribute_remainders(network: Network,
         allow_players[i] = int(demographic.play_ratio != 0)
 
     p = p.start("distribute_nodes")
-    with nogil:
-        for i in range(1, nnodes_plus_one):
-            if diff_nodes_array[i] != 0.0:
-                target = nodes_save_play_suscept[i]
+    for i in range(1, nnodes_plus_one):
+        if diff_nodes_array[i] != 0.0:
+            target = nodes_save_play_suscept[i]
 
-                for j in range(0, nsubnets):
-                    with gil:
-                        sub_nodes_save_play_suscept = get_double_array_ptr(
-                                            subnets[j].nodes.save_play_suscept)
+            for j in range(0, nsubnets):
+                sub_nodes_save_play_suscept = get_double_array_ptr(
+                                    subnets[j].nodes.save_play_suscept)
 
-                    values_array[j] = sub_nodes_save_play_suscept[i]
+                values_array[j] = sub_nodes_save_play_suscept[i]
 
-                diff_nodes_array[i] = redistribute(target, values_array,
-                                                   nsubnets, rng,
-                                                   allow_players_ptr)
+            diff_nodes_array[i] = redistribute(target, values_array,
+                                                nsubnets, rng,
+                                                allow_players_ptr)
 
-                for j in range(0, nsubnets):
-                    with gil:
-                        sub_nodes_save_play_suscept = get_double_array_ptr(
-                                            subnets[j].nodes.save_play_suscept)
-                        sub_nodes_play_suscept = get_double_array_ptr(
-                                            subnets[j].nodes.play_suscept)
+            for j in range(0, nsubnets):
+                sub_nodes_save_play_suscept = get_double_array_ptr(
+                                    subnets[j].nodes.save_play_suscept)
+                sub_nodes_play_suscept = get_double_array_ptr(
+                                    subnets[j].nodes.play_suscept)
 
-                    sub_nodes_save_play_suscept[i] = values_array[j]
-                    sub_nodes_play_suscept[i] = values_array[j]
+                sub_nodes_save_play_suscept[i] = values_array[j]
+                sub_nodes_play_suscept[i] = values_array[j]
     p = p.stop()
 
     p = p.start("distribute_links")
-    with nogil:
-        for i in range(1, nlinks_plus_one):
-            if diff_links_array[i] != 0.0:
-                target = links_weight[i]
+    for i in range(1, nlinks_plus_one):
+        if diff_links_array[i] != 0.0:
+            target = links_weight[i]
 
-                for j in range(0, nsubnets):
-                    with gil:
-                        sub_links_weight = get_double_array_ptr(
-                                                    subnets[j].links.weight)
+            for j in range(0, nsubnets):
+                sub_links_weight = get_double_array_ptr(
+                                            subnets[j].links.weight)
 
-                    values_array[j] = sub_links_weight[i]
+                values_array[j] = sub_links_weight[i]
 
-                diff_links_array[i] = redistribute(target, values_array,
-                                                   nsubnets, rng,
-                                                   allow_workers_ptr)
+            diff_links_array[i] = redistribute(target, values_array,
+                                                nsubnets, rng,
+                                                allow_workers_ptr)
 
-                for j in range(0, nsubnets):
-                    with gil:
-                        sub_links_weight = get_double_array_ptr(
-                                                    subnets[j].links.weight)
-                        sub_links_suscept = get_double_array_ptr(
-                                                    subnets[j].links.suscept)
+            for j in range(0, nsubnets):
+                sub_links_weight = get_double_array_ptr(
+                                            subnets[j].links.weight)
+                sub_links_suscept = get_double_array_ptr(
+                                            subnets[j].links.suscept)
 
-                    sub_links_weight[i] = values_array[j]
-                    sub_links_suscept[i] = values_array[j]
+                sub_links_weight[i] = values_array[j]
+                sub_links_suscept[i] = values_array[j]
     p = p.stop()
 
     Console.print(

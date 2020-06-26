@@ -258,8 +258,8 @@ def run_models(network: _Union[Network, Networks],
                             spinner.success()
                         except Exception as e:
                             spinner.failure()
+                            Console.print_exception()
                             error = f"FAILED: {e.__class__} {e}"
-                            Console.error(error)
                             output = None
 
                     if output is not None:

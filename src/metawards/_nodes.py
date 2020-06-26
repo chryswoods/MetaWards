@@ -106,11 +106,23 @@ class Nodes:
         if i < 0:
             i = n + i
 
-        if i < 0 or i >= n:
+        if i <= 0 or i >= n:
             raise IndexError(f"Invalid node index {i}. Number of nodes "
                              f"in this container equals {n}")
 
         return i
+
+    def get_index(self, i):
+        """Return the mapped index for the ith node. This will raise an
+           IndexError if this is an invalid index. If not, it will map
+           a negative index into a canonical positive index
+        """
+        self.assert_valid_index(i)
+
+        if i < 0:
+            return len(self) + i
+        else:
+            return i
 
     def population(self) -> int:
         """Return the total population of the nodes

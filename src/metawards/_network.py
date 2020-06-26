@@ -1,6 +1,7 @@
 
 from dataclasses import dataclass as _dataclass
 from typing import List as _List
+from typing import Union as _Union
 
 from ._parameters import Parameters
 from ._nodes import Nodes
@@ -258,6 +259,52 @@ class Network:
             lookup_function = add_lookup
 
         lookup_function(self, nthreads=nthreads)
+
+    def get_node_index(self, index: _Union[str, int]):
+        """Return the index of the node in this network that matches
+           'index'. This could be an integer, in which case this
+           will directly look up the index of the node in the
+           Nodes, or else it could be a string, in which case
+           the WardInfo will be used to identify the node and
+           look up the index from there.
+        """
+        try:
+            index = int(index)
+        except Exception:
+            pass
+
+        if isinstance(index, int):
+            return self.nodes.get_index(index)
+        else:
+            matches = self.info.find(index)
+
+            if len(matches) == 0:
+                from .utils._console import Console
+                Console.error(f"Cannot find a ward that matches {index}")
+                raise KeyError(f"Cannot find a ward that matches {index}")
+            elif len(matches) > 1:
+                # do we have a perfect single match?
+                name = index.split("/")[0].strip()
+
+                for match in matches:
+                    if self.info[match].name == name:
+                        # perfect match
+                        return match
+
+                from .utils._console import Console
+                err = [f"Too many wards match {index}"]
+
+                for match in matches:
+                    err.append(f"* {self.info[match]}")
+
+                err.append("Please narrow down your search to match one.")
+
+                Console.error("\n".join(err), markdown=True)
+
+                raise KeyError(
+                    f"Cannot find a single ward that matches {index}")
+            else:
+                return matches[0]
 
     def initialise_infections(self, nthreads: int = 1):
         """Initialise and return the space that will be used
@@ -564,6 +611,7 @@ class Network:
                                nsteps=nsteps,
                                nthreads=nthreads,
                                profiler=profiler,
-                               iterator=iterator, extractor=extractor)
+                               iterator=iterator, extractor=extractor,
+                               mover=mover, mixer=mixer)
 
         return population

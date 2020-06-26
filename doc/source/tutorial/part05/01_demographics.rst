@@ -79,7 +79,7 @@ that should belong to each demographic. For example, here 50% of the
 .. note::
   You can specify the work and play ratios using either numbers between
   0.0 and 1.0, or you can pass in strings that are interpreted using
-  :func:`metawards.utils.safe_eval_number`, e.g. "50%", "1/4" or
+  :func:`metawards.Interpret.number`, e.g. "50%", "1/4" or
   "(10+15)%". The only requirement is that the sum of ratios must
   equal 1.0 (or 100%), as every individual must be assigned to one
   of the demographics.

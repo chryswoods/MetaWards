@@ -1,6 +1,7 @@
 
 from dataclasses import dataclass as _dataclass
 from typing import List as _List
+from typing import Dict as _Dict
 from copy import deepcopy as _deepcopy
 from datetime import date as _date
 
@@ -14,23 +15,34 @@ class Population:
     """
     #: The initial population loaded into the model
     initial: int = 0
+
     #: The number of members who could be infected
     susceptibles: int = 0
+
     #: The number of latent infections
     latent: int = 0
+
     #: The total number of infections
     total: int = 0
+
+    #: The totao number of infections in other states
+    totals: _Dict[str, int] = None
+
     #: The total number who are removed from the outbreak,
     #: either because they have recovered, or are otherwise
     #: no longer able to be infected
     recovereds: int = 0
+
     #: The number infected in all wards
     n_inf_wards: int = 0
+
     #: The scale_uv parameter that can be used to affect the
     #: foi calculation. A value of 1.0 means do nothing
     scale_uv: float = 1.0
+
     #: The day in the outbreak of this record (e.g. day 0, day 10 etc.)
     day: int = 0
+
     #: The date in the outbreak of this record
     date: _date = None
 
@@ -40,12 +52,25 @@ class Population:
     @property
     def population(self) -> int:
         """The total population in all wards"""
-        return self.susceptibles + self.latent + self.total + self.recovereds
+        pop: int = 0
+
+        for val in [self.susceptibles, self.latent,
+                    self.total, self.recovereds]:
+            if val is not None:
+                pop += val
+
+        if self.totals is not None:
+            for val in self.totals.values():
+                pop += val
+
+        return pop
 
     @property
     def infecteds(self) -> int:
         """The number who are infected across all wards"""
-        return self.total + self.latent
+        return self.population - \
+            int(self.susceptibles or 0) - \
+            int(self.recovereds or 0)
 
     def has_equal_SEIR(self, other):
         """Return whether or not the SEIR values for this population
@@ -54,7 +79,8 @@ class Population:
         return self.susceptibles == other.susceptibles and \
             self.latent == other.latent and \
             self.total == other.total and \
-            self.recovereds == other.recovereds
+            self.recovereds == other.recovereds and \
+            self.totals == other.totals
 
     def increment_day(self, ndays: int = 1) -> None:
         """Advance the day count by 'ndays' (default 1)"""
@@ -86,14 +112,33 @@ class Population:
         self.subpops = subpops
 
     def __str__(self):
-        s = f"DAY: {self.day} " \
-            f"S: {self.susceptibles}    " \
-            f"E: {self.latent}    " \
-            f"I: {self.total}    " \
-            f"R: {self.recovereds}    " \
-            f"IW: {self.n_inf_wards}   " \
-            f"UV: {self.scale_uv}   " \
-            f"TOTAL POPULATION {self.population}"
+        parts = []
+
+        parts.append(f"DAY: {self.day}")
+        parts.append(f"S: {self.susceptibles}")
+
+        if self.latent is not None:
+            parts.append(f"E: {self.latent}")
+
+        if self.total is not None:
+            parts.append(f"I: {self.total}")
+
+        if self.totals is not None:
+            for key, value in self.totals.items():
+                parts.append(f"{key}: {value}")
+
+        if self.recovereds is not None:
+            parts.append(f"R: {self.recovereds}")
+
+        if self.n_inf_wards is not None:
+            parts.append(f"IW: {self.n_inf_wards}")
+
+        if self.scale_uv is not None:
+            parts.append(f"UV: {self.scale_uv}")
+
+        parts.append(f"TOTAL POPULATION {self.population}")
+
+        s = "  ".join(parts)
 
         if self.date:
             return f"{self.date.isoformat()}: {s}"
@@ -107,7 +152,11 @@ class Population:
         """
         errors = []
 
-        t = self.susceptibles + self.latent + self.total + self.recovereds
+        t = 0
+
+        for val in [self.susceptibles, self.infecteds, self.recovereds]:
+            if val is not None:
+                t += val
 
         if t != self.population:
             errors.append(f"Disagreement in total overall population: "
@@ -121,29 +170,29 @@ class Population:
             P = 0
 
             for subpop in self.subpops:
-                S += subpop.susceptibles
-                E += subpop.latent
-                I += subpop.infecteds
-                R += subpop.recovereds
-                P += subpop.population
+                S += int(subpop.susceptibles or 0)
+                E += int(subpop.latent or 0)
+                I += int(subpop.total or 0)
+                R += int(subpop.recovereds or 0)
+                P += int(subpop.population or 0)
 
-            if S != self.susceptibles:
+            if S != int(self.susceptibles or 0):
                 errors.append(f"Disagreement in S: {S} "
                               f"versus {self.susceptibles}")
 
-            if E != self.latent:
+            if E != int(self.latent or 0):
                 errors.append(f"Disagreement in E: {E} "
                               f"versus {self.latent}")
 
-            if I != self.infecteds:
+            if I != int(self.total or 0):
                 errors.append(f"Disagreement in I: {I} "
-                              f"versus {self.infecteds}")
+                              f"versus {self.total}")
 
-            if R != self.recovereds:
+            if R != int(self.recovereds or 0):
                 errors.append(f"Disagreement in R: {R} "
                               f"versus {self.recovereds}")
 
-            if P != self.population:
+            if P != int(self.population or 0):
                 errors.append(f"Disagreement in Population: {P} "
                               f"versus {self.population}")
 
@@ -152,6 +201,32 @@ class Population:
             from .utils._console import Console
             Console.error(errors)
             raise AssertionError(f"Disagreement in population sums!")
+
+    def headers(self):
+        """Return a list of the headers that should be used to report
+           data from this population. This returns a list of headers,
+           e.g. ["S", "E", "I", "R"]
+        """
+        headers = []
+
+        if self.susceptibles is not None:
+            headers.append("S")
+
+        if self.latent is not None:
+            headers.append(f"E")
+
+        if self.total is not None:
+            headers.append(f"I")
+
+        if self.totals is not None:
+            # use items as need to be same order as items below
+            for key, _ in self.totals.items():
+                headers.append(key)
+
+        if self.recovereds is not None:
+            headers.append("R")
+
+        return headers
 
     def summary(self, demographics=None):
         """Return a short summary string that is suitable to be printed
@@ -162,25 +237,100 @@ class Population:
            summary: str
              The short summary string
         """
-        summary = f"S: {self.susceptibles}  E: {self.latent}  " \
-                  f"I: {self.total}  R: {self.recovereds}  " \
-                  f"IW: {self.n_inf_wards}  POPULATION: {self.population}"
+        parts = []
+
+        parts.append(f"S: {self.susceptibles}")
+
+        if self.latent is not None:
+            parts.append(f"E: {self.latent}")
+
+        if self.total is not None:
+            parts.append(f"I: {self.total}")
+
+        if self.totals is not None:
+            for key, value in self.totals.items():
+                parts.append(f"{key}: {value}")
+
+        if self.recovereds is not None:
+            parts.append(f"R: {self.recovereds}")
+
+        if self.n_inf_wards is not None:
+            parts.append(f"IW: {self.n_inf_wards}")
+
+        parts.append(f"POPULATION: {self.population}")
+
+        summary = "  ".join(parts)
 
         if self.subpops is None or len(self.subpops) == 0:
             return summary
 
-        subs = []
+        from .utils._console import Table
+
+        table = Table(show_edge=True, show_footer=True)
+
+        table.add_column("", footer="total")
+        table.add_column("S", footer=self.susceptibles)
+        columns = {}
+        count = 0
+        columns[""] = count
+        count += 1
+
+        columns["S"] = count
+        count += 1
+
+        if self.latent is not None:
+            table.add_column("E", footer=self.latent)
+            columns["E"] = count
+            count += 1
+
+        if self.total is not None:
+            table.add_column("I", footer=self.total)
+            columns["I"] = count
+            count += 1
+
+        if self.totals is not None:
+            for key, value in self.totals.items():
+                table.add_column(key, footer=value)
+                columns[key] = count
+                count += 1
+
+        if self.recovereds is not None:
+            table.add_column("R", footer=self.recovereds)
+            columns["R"] = count
+            count += 1
+
+        if self.n_inf_wards is not None:
+            table.add_column("IW", footer=self.n_inf_wards)
+            columns["IW"] = count
+            count += 1
+
+        table.add_column("POPULATION", footer=self.population)
+        columns["POPULATION"] = count
+        count += 1
+
         for i, subpop in enumerate(self.subpops):
+            row = [None] * count
             if demographics is not None:
                 name = demographics.get_name(i)
-                subs.append(f"{name}  {subpop.summary()}")
+                row[0] = name
             else:
-                subs.append(f"{i}  {subpop.summary()}")
+                row[0] = str(i)
 
-        from .utils._align_strings import align_strings
-        subs = align_strings(subs, ":")
+            row[columns["S"]] = subpop.susceptibles
+            row[columns["E"]] = subpop.latent
+            row[columns["R"]] = subpop.recovereds
+            row[columns["I"]] = subpop.total
+            row[columns["IW"]] = subpop.n_inf_wards
 
-        return f"{summary}\n  " + "\n  ".join(subs)
+            if subpop.totals is not None:
+                for key, value in subpop.totals.items():
+                    row[columns[key]] = value
+
+            row[-1] = subpop.population
+
+            table.add_row(row)
+
+        return summary + "\n" + table.to_string()
 
 
 @_dataclass

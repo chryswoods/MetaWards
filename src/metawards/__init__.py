@@ -12,6 +12,7 @@ Classes
     Disease
     Infections
     InputFiles
+    Interpret
     Link
     Links
     Network
@@ -48,6 +49,7 @@ from . import utils
 from ._version import get_versions
 from ._links import *
 from ._nodes import *
+from ._interpret import *
 from ._wardinfo import *
 from ._workspace import *
 from ._infections import *

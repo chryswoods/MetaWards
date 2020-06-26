@@ -280,7 +280,7 @@ def run_model(network: _Union[Network, Networks],
         Console.rule("Overall model timing")
         Console.print_profiler(p)
 
-    Console.print(f"Infection died ... Ending on day {population.day}")
+    Console.print(f"Ending on day {population.day}")
 
     # only send back the overall statistics
     return trajectory.strip_demographics()

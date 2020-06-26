@@ -11,7 +11,7 @@ they intend the code to go.
 Different demographics using different networks
 -----------------------------------------------
 
-This is planned for MetaWards 1.2.
+This is planned for MetaWards 1.3.
 Currently each demographic is using the same network topology. There is
 no technical reason why this should be the case, and a small amount of
 work is needed to enable different demographics to use different
@@ -30,7 +30,7 @@ This will enable modelling of;
 Different nodes using different parameters
 ------------------------------------------
 
-This is planned for MetaWards 1.3. Currently disease and control parameters
+This is planned for MetaWards 1.4. Currently disease and control parameters
 affect all wards equally. Custom iterators can be written now that change
 those parameters on a ward-by-ward or regional basis, but this is clumsy.
 We would like to implement per-ward, and per-demographic/per-ward disease,

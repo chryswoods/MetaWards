@@ -6,7 +6,7 @@ from typing import IO as _IO
 from contextlib import contextmanager as _contextmanager
 
 
-__all__ = ["Console"]
+__all__ = ["Console", "Table"]
 
 
 # Global rich.Console()
@@ -33,6 +33,42 @@ class _NullSpinner:
 
     def failure(self):
         pass
+
+
+class Table:
+    """This a rich.table, with an additional "to_string()" function"""
+
+    def __init__(self, title=None, show_footer=False, show_edge=True):
+        from rich.table import Table as _Table
+        self._table = _Table(title=title, show_edge=show_edge,
+                             show_footer=show_footer)
+
+    def add_column(self, header, justify="center", style=None, no_wrap=False,
+                   footer=None):
+        """Add a column called 'header', with specified justification,
+           style and wrapping
+        """
+        if footer is not None:
+            footer = str(footer)
+
+        self._table.add_column(header=header, style=style, justify=justify,
+                               no_wrap=no_wrap, footer=footer)
+
+    def add_row(self, row):
+        """Add the passed row of data to the table"""
+        row = [str(x) if x is not None else None for x in row]
+        self._table.add_row(*row)
+
+    def to_string(self):
+        """Return this table rendered to a string"""
+        from rich.console import Console as _Console
+        console = _Console()
+        output = ""
+
+        for s in console.render(self._table):
+            output += s.text
+
+        return output
 
 
 class Console:
@@ -118,17 +154,13 @@ class Console:
         from rich.console import Console as _Console
 
         outfile = os.path.join(outdir, "output.txt")
-        errfile = os.path.join(outdir, "output.err")
 
         if auto_bzip:
             outfile += ".bz2"
-            errfile += ".bz2"
 
             OUTFILE = bz2.open(outfile, "wt", encoding="utf-8")
-            ERRFILE = bz2.open(errfile, "wt", encoding="utf-8")
         else:
             OUTFILE = open(outfile, "wt", encoding="utf-8")
-            ERRFILE = open(errfile, "wt", encoding="utf-8")
 
         console = Console._get_console()
 
@@ -145,17 +177,11 @@ class Console:
         global _console
         _console = new_out
 
-        new_err = ERRFILE
-        old_err = sys.stderr
-        sys.stderr = new_err
-
         try:
             yield new_out
         finally:
             _console = old_out
-            sys.stderr = old_err
             OUTFILE.close()
-            ERRFILE.close()
 
     @staticmethod
     def debugging_enabled(level: int = None):
@@ -348,6 +374,12 @@ class Console:
     @staticmethod
     def print_profiler(profiler, *args, **kwargs):
         Console.print(str(profiler))
+
+    @staticmethod
+    def print_exception():
+        """Print the current-handled exception"""
+        console = Console._get_console()
+        console.print_exception()
 
     @staticmethod
     def set_use_spinner(use_spinner: bool = True):

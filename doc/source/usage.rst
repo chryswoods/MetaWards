@@ -92,33 +92,44 @@ Understanding the options
 The most used and thus most important options are given first. These
 are;
 
-* ``--input`` : Specify the input file adjustable parameters that will be
+* ``--disease / -d`` : Specify the name of the disease file to load.
+  These files are described in `Model data <model_data.html>`__.
+  If the file exists in your path then that will be used. Otherwise the
+  file will be
+  searched for from the ``MetaWardsData/diseases`` directory. Note that
+  you don't need to specify the file type, as this is assumed to be
+  ``.json``.
+
+* ``--input / -i`` : Specify the input file adjustable parameters that will be
   explored for the model run. You must supply an input file to be
   able to run a model. This file is described below.
 
-* ``--line`` : Specify the line number (or line numbers) of adjustable
+* ``--line / -l`` : Specify the line number (or line numbers) of adjustable
   parameter sets from the input file. Line numbers are counted from 0, and
   multiple line numbers can be given, e.g. ``--line 3, 5, 7-10`` will
   read from lines 3, 5, 7, 8, 9, and 10 (remembering that the first line
   of the file is line 0). If multiple lines are read, then multiple model
   runs will be performed.
 
-* ``--repeats`` : specify the number of times model runs for each
+* ``--repeats / -r`` : specify the number of times model runs for each
   adjustable parameter set should be repeated. MetaWards model runs
   are stochastic, based on random numbers. The results for multiple
   runs must thus be processed to derive meaning.
 
-* ``--additional`` : specify the file (or files) containing additional
+* ``--additional / -a`` : specify the file (or files) containing additional
   seeds. These files are described in `Model data <model_data.html>`__.
   You can specify as many or few files as you wish. If the file exists
   in your path then that will be used. Otherwise the file will be
   searched for from the ``MetaWardsData/extra_seeds`` directory.
+  Note that you can write the additional seeds directly, rather
+  than using a file. To see how, take a look at
+  :doc:`this section of the tutorial <tutorial/part08/01_networks>`.
 
-* ``--output`` : specify the location to place all output files. By default
+* ``--output / -o`` : specify the location to place all output files. By default
   this will be in a new directory called ``output``. A description of the
   output files is below.
 
-* ``--seed`` : specify the random number seed to use for a run. By default
+* ``--seed / -s`` : specify the random number seed to use for a run. By default
   a truly random seed will be used. This will be printed into the output,
   so that you can use it together with this option to reproduce a run.
   The same version of ``metawards`` will reproduce the same output when
@@ -128,7 +139,7 @@ are;
 * ``--start-date`` : specify the date of *day zero* of the model outbreak.
   If this isn't specified then this defaults to the current date. This
   recognises any date that is understood by
-  `dateparser <https://dateparser.readthedocs.io/en/latest/#usage>`__,
+  :func:`metawards.Interpret.date`,
   which includes dates like *today*, *tomorrow*, *Monday*, *Jan 2020* etc.
   The start date is used to trigger events based on day of week or
   date within a model outbreak (e.g. is the day a weekend)
@@ -159,26 +170,20 @@ using;
 
 .. code-block:: bash
 
-    metawards --input params.csv --line 0
+    metawards -d ncov -a "1  5  1"
 
 This python port of ``metawards`` was written to reproduce the output
 of the original C code. This original code is bundled with this
-port and is in the ``original`` directory. You can reproduce the output
-of this code using the command;
-
-.. code-block:: bash
-
-    metawards --input tests/data/ncovparams.csv --line 0 --seed 15324 --nthreads 1 --additional ExtraSeedsBrighton.dat
-
-The output from this command can be compared to that from the original
-C program in ``original/expected_test_output.txt``. Comparing against this
-original output is also the purpose of the unit test
-``tests/test_integration.py``.
+port and is in the ``original`` directory. There are several integration
+tests included in the unit testing suite that validate that the
+Python code still reproduces the results generated using the C code.
 
 Understanding the input
 =======================
 
-The input file for ``metawards`` is a simple set of lines containing
+The input file for ``metawards`` is a
+:doc:`design file <fileformats/design>` that can be as
+simple as a set of lines containing
 five comma-separated or space-separated values per line, e.g.
 
 ::
@@ -208,9 +213,10 @@ a title line, e.g.
 specifies that you want to adjust the ``beta[2]``, ``progress[2]`` and
 ``progress[3]`` parameters to the specified values.
 
-The full list of parameters you can adjust are listed below;
-
-.. program-output:: python get_variableset_help.py
+This file can adjust a lot more, include user-specified parameters,
+and control the numbers of repeats and output directories. Please
+see the :doc:`full file format description <fileformats/design>`
+for more information.
 
 Understanding the output
 ========================
@@ -262,6 +268,13 @@ For example, this output could be read into a pandas dataframe using
 
 We run a good online workshop on
 `how to use pandas for data analysis <https://milliams.com/courses/data_analysis_python/index.html>`__.
+
+.. note::
+
+  The ``E``, ``I`` and ``R`` stages are just the defaults, and ``metawards``
+  does support custom disease stages which may not have ``E``, ``I`` or ``R``.
+  To learn more, take a look at the
+  :doc:`tutorial on custom named stages <tutorial/part07/05_named_stages>`.
 
 metawards-plot
 --------------

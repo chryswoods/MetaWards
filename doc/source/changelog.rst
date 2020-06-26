@@ -2,8 +2,44 @@
 Changelog
 =========
 
+`1.2.0 <https://github.com/metawards/MetaWards/compare/1.1.0...1.2.0>`__ - June 26th 2020
+-----------------------------------------------------------------------------------------
+
+* Added the ability to use custom-named disease stages. You can now run any
+  type of model, and are not limited to ``S``, ``E``, ``I`` and ``R``.
+  Learn more in the :doc:`tutorial here <tutorial/part07/05_named_stages>`.
+* Improved formatting out information output to the user regarding different
+  disease stages. This includes better console output and also more
+  informative output data files. Again, this is all detailed in the
+  above tutorial.
+* Updated all output files to support the summary data for custom
+  named disease stages. Now you can collect the data you want directly
+  without needing to build a custom extractor - just say which mapping
+  stage you want. Again, this is described in the above tutorial.
+* Added really flexible support for reading in different formats of
+  additional seeds. See the :doc:`tutorial here <tutorial/part08/01_networks>`
+  and the new :doc:`fileformats documentation <fileformats/index>`.
+  This includes being able to read extra seeds from the command line,
+  rather than needing to always write a file.
+* Added in the ability to seed infections by date as well as day. Also
+  seeding wards by name as well as index (e.g. ``Clifton/Bristol``).
+* Added in :class:`metawards.Interpret` to consolidate all of the code
+  used to interpret strings into data types. This increases the power
+  and flexibility of the data parsers, and adds in new features such
+  as reading in random data, or adding math functions to the
+  expression support, e.g. ``pi * sqrt(3.5)`` now works.
+* Added cython support for plugins. If your plugin ends with ``.pyx`` and
+  you have cython installed, then it will be compiled at run time.
+  This should enable you to write plugin that are both powerful and fast.
+* Fixed a deadlock on Linux when using multiprocessing and OpenMP together
+* Removed the unused ``.err`` file.
+* Removed ``TotalInfections.dat.bz2`` file (and similar) as these were
+  difficult to work with and not well understood. Replaced with
+  ``total_infections.csv.bz2`` (and similar) files, which have more
+  information and are easier to work with (e.g. have column names).
+
 `1.1.0 <https://github.com/metawards/MetaWards/compare/1.0.0...1.1.0>`__ - June 11th 2020
-------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 
 * Different demographics can now follow different disease pathways. This
   supports modelling of super-spreaders and hospitals, as described

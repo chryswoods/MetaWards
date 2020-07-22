@@ -23,7 +23,7 @@ Performing a model run
     * :meth:`~metawards.utils.iterate_weekend`
 
 Extracting data from each iteration
-    * :meth:`~metawards.utils.extract_data`
+    * :meth:`~metawards.utils.extract`
 
 Performing multiple model runs in parallel
     * :meth:`~metawards.utils.run_models`

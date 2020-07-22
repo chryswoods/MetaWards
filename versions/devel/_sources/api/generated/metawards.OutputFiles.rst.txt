@@ -20,8 +20,10 @@ metawards.OutputFiles
       ~OutputFiles.get_filename
       ~OutputFiles.get_path
       ~OutputFiles.is_closed
+      ~OutputFiles.is_database
       ~OutputFiles.is_open
       ~OutputFiles.open
+      ~OutputFiles.open_db
       ~OutputFiles.open_subdir
       ~OutputFiles.output_dir
       ~OutputFiles.remove

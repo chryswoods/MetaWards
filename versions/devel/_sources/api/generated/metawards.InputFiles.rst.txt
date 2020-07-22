@@ -30,12 +30,18 @@ metawards.InputFiles
       ~InputFiles.coordinates
       ~InputFiles.identifier
       ~InputFiles.identifier2
+      ~InputFiles.is_model_dir
+      ~InputFiles.is_single
+      ~InputFiles.is_wards_data
+      ~InputFiles.lookup
+      ~InputFiles.lookup_columns
       ~InputFiles.nodes_to_track
       ~InputFiles.play
       ~InputFiles.play_size
       ~InputFiles.position
       ~InputFiles.seed
       ~InputFiles.uv
+      ~InputFiles.wards_data
       ~InputFiles.weekend
       ~InputFiles.work
       ~InputFiles.work_size

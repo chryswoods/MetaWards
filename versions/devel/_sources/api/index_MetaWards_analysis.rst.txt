@@ -10,7 +10,7 @@ installed in able to use the `MetaWards.analysis` functions.
 These functions are designed to either be called from within a
 `Jupyter notebook <https://jupyter.org>`__, or are used by some of
 the ``metawards`` command line tools to create quick outputs. An
-example of such a tool is :doc:`metawards-plot <metawards-plot>`.
+example of such a tool is :doc:`metawards-plot <../metawards_plot_help>`.
 
 Core functions include;
 

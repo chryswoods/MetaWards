@@ -1,0 +1,6 @@
+metawards.movers.go\_stage
+==========================
+
+.. currentmodule:: metawards.movers
+
+.. autofunction:: go_stage

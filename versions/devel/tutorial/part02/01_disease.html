@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Adjustable Variables" href="02_adjustable.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,13 +89,19 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index_part01.html">Part 1 - Modelling outbreaks</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index_part02.html">Part 2 - Refining the model</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Refining the disease model</a><ul>
@@ -105,30 +113,50 @@
 <li class="toctree-l3"><a class="reference internal" href="03_analysis.html">Analysing the output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="04_cluster.html">Running on a cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_refining.html">Refining the model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_model_data.html">Model data</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part03.html">Part 3 - Customising the outbreak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -167,9 +195,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../tutorial.html">Tutorial</a> &raquo;</li>
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
           <li><a href="../index_part02.html">Part 2 - Refining the model</a> &raquo;</li>
         
@@ -210,19 +238,24 @@ possibly poor model of the lurgy. Our next step is to customise the
 <div class="section" id="understanding-the-disease-file">
 <h2>Understanding the disease file<a class="headerlink" href="#understanding-the-disease-file" title="Permalink to this headline">¶</a></h2>
 <p>The model of the lurgy is based on the
-<a class="reference external" href="https://github.com/metawards/MetaWardsData/blob/master/diseases/lurgy.json">disease file</a>
+<a class="reference external" href="https://github.com/metawards/MetaWardsData/blob/main/diseases/lurgy.json">disease file</a>
 contained in the
 <a class="reference external" href="https://github.com/metawards/MetaWardsData">MetaWardsData</a> repository.</p>
 <p>The first step to customise this file is to copy it into our current
 directory and rename it to <code class="docutils literal notranslate"><span class="pre">lurgy2.json</span></code>.
-Assuming you have set the <code class="docutils literal notranslate"><span class="pre">$METAWARDSDATA</span></code> environment
+Assuming you have set the <code class="docutils literal notranslate"><span class="pre">METAWARDSDATA</span></code> environment
 variable equal to the path to this directory, type;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp <span class="nv">$METAWARDSDATA</span>/diseases/lurgy.json ./lurgy2.json
 </pre></div>
 </div>
+<p>on Linux or Mac OS X, or type;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>copy <span class="nv">$Env</span>:METAWARDSDATA<span class="se">\d</span>iseases<span class="se">\l</span>urgy.json lurgy2.json
+</pre></div>
+</div>
+<p>on Windows.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The above command works on Linux and Mac (OS X). If you are following
+<p class="last">The above command work on Linux, Mac (OS X) or Windows. If you are following
 this tutorial using a different operating system and know the correct
 copy command to use, then please send it to us by sending us a
 <a class="reference external" href="https://github.com/metawards/MetaWards">pull request</a>
@@ -311,46 +344,57 @@ your file, with or without the <code class="docutils literal notranslate"><span 
 <p>This will run the <code class="docutils literal notranslate"><span class="pre">metawards</span></code> <em>model run</em> for your new version of the
 lurgy. Notice that near the top of the output you have your parameters
 and the metadata printed to the screen, e.g.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Using</span> <span class="n">disease</span>
-<span class="n">Disease</span> <span class="n">lurgy2</span>
-<span class="n">loaded</span> <span class="kn">from</span> <span class="nn">lurgy2.json</span>
-<span class="n">version</span><span class="p">:</span> <span class="kc">None</span>
-<span class="n">author</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="n">Christopher</span> <span class="n">Woods</span>
-<span class="n">contact</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="n">christopher</span><span class="o">.</span><span class="n">woods</span><span class="nd">@bristol</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">uk</span>
-<span class="n">references</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="n">Completely</span> <span class="n">ficticious</span> <span class="n">disease</span> <span class="o">-</span> <span class="n">no</span> <span class="n">references</span>
-<span class="n">repository</span><span class="p">:</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">chris</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">MetaWardsData</span>
-<span class="n">repository_branch</span><span class="p">:</span> <span class="kc">None</span>
-<span class="n">repository_version</span><span class="p">:</span> <span class="kc">None</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Disease ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-<span class="n">beta</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
-<span class="n">progress</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
-<span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
-<span class="n">contrib_foi</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+• Disease: lurgy2
+• loaded from: lurgy2.json
+• repository: /Users/chris/GitHub/MetaWardsData
+• repository_branch: None
+• repository_version: None
+• beta: [0.0, 0.0, 0.5, 0.5, 0.5, 0.0]
+• progress: [1.0, 1.0, 1.0, 0.5, 0.5, 0.0]
+• too_ill_to_move: [0.0, 0.0, 0.0, 0.5, 0.8, 1.0]
+• contrib_foi: [1.0, 1.0, 1.0, 1.0, 1.0, 0.0]
+• start_symptom: 3
 </pre></div>
 </div>
 <p>Again, this helps someone reproduce this output in the future.</p>
 <p>This model run may take longer, as, intuitively, you would expect that
 the changes we have made mean that more individuals are likely to be
 infected. Indeed, for the run I performed, copied below,
-the outbreak lasted for 175 days, involving over 49m people.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">170</span> <span class="mi">8</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">6229809</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">6</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49852262</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
+the outbreak lasted for 196 days, involving nearly 50m individuals.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 189 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 6225870  E: 1  I: 3  R: 49856203  IW: 0  POPULATION: 56082077
+Number of infections: 4
 
-<span class="mi">171</span> <span class="mi">6</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">6229809</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">3</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49852265</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 190 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+Number of infections: 2
 
-<span class="mi">172</span> <span class="mi">3</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">6229809</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49852266</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 191 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+Number of infections: 2
 
-<span class="mi">173</span> <span class="mi">2</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">6229809</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49852266</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 192 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+Number of infections: 2
 
-<span class="mi">174</span> <span class="mi">2</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">6229809</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">1</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49852267</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 193 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+Number of infections: 2
 
-<span class="mi">175</span> <span class="mi">1</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">6229809</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49852268</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Infection</span> <span class="n">died</span> <span class="o">...</span> <span class="n">Ending</span> <span class="n">on</span> <span class="n">day</span> <span class="mi">176</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 194 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 6225870  E: 0  I: 2  R: 49856205  IW: 0  POPULATION: 56082077
+Number of infections: 2
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 195 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 6225870  E: 0  I: 1  R: 49856206  IW: 0  POPULATION: 56082077
+Number of infections: 1
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 196 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 6225870  E: 0  I: 0  R: 49856207  IW: 0  POPULATION: 56082077
+Number of infections: 0
+Infection died ... Ending on day 197
 </pre></div>
 </div>
 <p>An overview plot of the outbreak, created using</p>
@@ -384,7 +428,7 @@ model of the lurgy.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -399,7 +443,6 @@ model of the lurgy.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

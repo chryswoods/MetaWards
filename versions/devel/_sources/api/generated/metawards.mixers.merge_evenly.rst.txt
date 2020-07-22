@@ -1,0 +1,6 @@
+metawards.mixers.merge\_evenly
+==============================
+
+.. currentmodule:: metawards.mixers
+
+.. autofunction:: merge_evenly

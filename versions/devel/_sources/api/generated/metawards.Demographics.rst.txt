@@ -1,0 +1,42 @@
+metawards.Demographics
+======================
+
+.. currentmodule:: metawards
+
+.. autoclass:: Demographics
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Demographics.__init__
+      ~Demographics.add
+      ~Demographics.build
+      ~Demographics.copy
+      ~Demographics.from_data
+      ~Demographics.from_json
+      ~Demographics.get_index
+      ~Demographics.get_name
+      ~Demographics.is_multi_network
+      ~Demographics.load
+      ~Demographics.specialise
+      ~Demographics.to_data
+      ~Demographics.to_json
+      ~Demographics.uses_named_network
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Demographics.interaction_matrix
+      ~Demographics.random_seed
+   
+   

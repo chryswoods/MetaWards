@@ -1,0 +1,43 @@
+metawards.utils.Console
+=======================
+
+.. currentmodule:: metawards.utils
+
+.. autoclass:: Console
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Console.center
+      ~Console.command
+      ~Console.debug
+      ~Console.debugging_enabled
+      ~Console.error
+      ~Console.info
+      ~Console.panel
+      ~Console.print
+      ~Console.print_exception
+      ~Console.print_population
+      ~Console.print_profiler
+      ~Console.progress
+      ~Console.redirect_output
+      ~Console.rule
+      ~Console.save
+      ~Console.set_debugging_enabled
+      ~Console.set_theme
+      ~Console.set_use_progress
+      ~Console.set_use_spinner
+      ~Console.spinner
+      ~Console.supports_emojis
+      ~Console.warning
+   
+   
+
+   
+   
+   

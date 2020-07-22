@@ -1,0 +1,6 @@
+metawards.run
+=============
+
+.. currentmodule:: metawards
+
+.. autofunction:: run

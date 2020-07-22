@@ -23,7 +23,6 @@ metawards.Link
 
    .. autosummary::
    
-      ~Link.A
       ~Link.distance
       ~Link.ifrom
       ~Link.ito

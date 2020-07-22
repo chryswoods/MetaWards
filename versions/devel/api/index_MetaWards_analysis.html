@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -32,15 +38,10 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MetaWards.analysis API Detail" href="index_api_MetaWards_analysis.html" />
-    <link rel="prev" title="metawards.extractors.setup_core" href="generated/metawards.extractors.setup_core.html" /> 
+    <link rel="prev" title="metawards.movers.move_default" href="generated/metawards.movers.move_default.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,17 +89,37 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../snaglist.html">Snag list</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
@@ -105,24 +127,28 @@
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards.html">MetaWards</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_iterators.html">MetaWards.iterators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_movers.html">MetaWards.movers</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">MetaWards.analysis</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards_analysis.html">MetaWards.analysis API Detail</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_utils.html">MetaWards.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_themes.html">MetaWards.themes</a></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -161,7 +187,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="index.html">Documentation</a> &raquo;</li>
         
@@ -182,7 +208,7 @@
         <a href="index_api_MetaWards_analysis.html" class="btn btn-neutral float-right" title="MetaWards.analysis API Detail" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="generated/metawards.extractors.setup_core.html" class="btn btn-neutral float-left" title="metawards.extractors.setup_core" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="generated/metawards.movers.move_default.html" class="btn btn-neutral float-left" title="metawards.movers.move_default" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -200,7 +226,7 @@ installed in able to use the <em class="xref py py-obj">MetaWards.analysis</em> 
 <p>These functions are designed to either be called from within a
 <a class="reference external" href="https://jupyter.org">Jupyter notebook</a>, or are used by some of
 the <code class="docutils literal notranslate"><span class="pre">metawards</span></code> command line tools to create quick outputs. An
-example of such a tool is <span class="xref std std-doc">metawards-plot</span>.</p>
+example of such a tool is <a class="reference internal" href="../metawards_plot_help.html"><span class="doc">metawards-plot</span></a>.</p>
 <p>Core functions include;</p>
 <ul class="simple">
 <li><dl class="first docutils">
@@ -250,7 +276,7 @@ Use this to get and view figures in, e.g. a Jupyter notebook</dd>
         <a href="index_api_MetaWards_analysis.html" class="btn btn-neutral float-right" title="MetaWards.analysis API Detail" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="generated/metawards.extractors.setup_core.html" class="btn btn-neutral float-left" title="metawards.extractors.setup_core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="generated/metawards.movers.move_default.html" class="btn btn-neutral float-left" title="metawards.movers.move_default" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -260,7 +286,7 @@ Use this to get and view figures in, e.g. a Jupyter notebook</dd>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -275,7 +301,6 @@ Use this to get and view figures in, e.g. a Jupyter notebook</dd>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Analysing the output" href="03_analysis.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,47 +89,74 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index_part01.html">Part 1 - Modelling outbreaks</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index_part02.html">Part 2 - Refining the model</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="01_disease.html">Refining the disease model</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Adjustable Variables</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#choosing-what-to-adjust">Choosing what to adjust</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-directories">Output directories</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="03_analysis.html">Analysing the output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="04_cluster.html">Running on a cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_refining.html">Refining the model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_model_data.html">Model data</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part03.html">Part 3 - Customising the outbreak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -166,9 +195,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../tutorial.html">Tutorial</a> &raquo;</li>
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
           <li><a href="../index_part02.html">Part 2 - Refining the model</a> &raquo;</li>
         
@@ -285,50 +314,154 @@ each run over 16 cores then this needs 1152 cores. Fortunately, for
 these jobs, <code class="docutils literal notranslate"><span class="pre">metawards</span></code> runs well in parallel
 <a class="reference internal" href="../../cluster_usage.html"><span class="doc">across a slurm or PBS cluster</span></a>.</p>
 </div>
-<p>Once the jobs are complete (which took 14 minutes on my laptop), you
+<p>Once the jobs are complete (which took 15 minutes on my laptop), you
 should have output that looks similar to this;</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="mi">9</span> <span class="n">jobs</span> <span class="n">using</span> <span class="mi">4</span> <span class="n">process</span><span class="p">(</span><span class="n">es</span><span class="p">)</span>
-
-<span class="n">Running</span> <span class="n">jobs</span> <span class="ow">in</span> <span class="n">parallel</span> <span class="n">using</span> <span class="n">a</span> <span class="n">multiprocessing</span> <span class="n">pool</span><span class="o">...</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">1</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">204</span> <span class="n">S</span><span class="p">:</span> <span class="mi">7976329</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">48105748</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">2</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">29</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">192</span> <span class="n">S</span><span class="p">:</span> <span class="mi">7039360</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49042717</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">3</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">12</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">175</span> <span class="n">S</span><span class="p">:</span> <span class="mi">6224108</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49857969</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">4</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">11</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">205</span> <span class="n">S</span><span class="p">:</span> <span class="mi">8005734</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">48076343</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">5</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">16</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">210</span> <span class="n">S</span><span class="p">:</span> <span class="mi">7073043</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49009034</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">6</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">20</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">183</span> <span class="n">S</span><span class="p">:</span> <span class="mi">6260111</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49821966</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">1</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">7</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">215</span> <span class="n">S</span><span class="p">:</span> <span class="mi">8045175</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">48036902</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">8</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">06</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">200</span> <span class="n">S</span><span class="p">:</span> <span class="mi">7106554</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">48975523</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">1</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Completed</span> <span class="n">job</span> <span class="mi">9</span> <span class="n">of</span> <span class="mi">9</span>
-<span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)[</span><span class="n">repeat</span> <span class="mi">1</span><span class="p">]</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">13</span><span class="p">:</span> <span class="n">DAY</span><span class="p">:</span> <span class="mi">176</span> <span class="n">S</span><span class="p">:</span> <span class="mi">6304109</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">49777968</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-
-<span class="n">Writing</span> <span class="n">a</span> <span class="n">summary</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">results</span> <span class="n">into</span> <span class="n">the</span>
-<span class="n">csv</span> <span class="n">file</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">chris</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">tutorial</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">results</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">bz2</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ MULTIPROCESSING ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 1 of 9                                                                  │
+│  (beta[2]=0.3, too_ill_to_move[2]=0)[repeat 1]                                         │
+│  2020-12-15: DAY: 209 S: 7978312    E: 0    I: 0    R: 48103765    IW: 1   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 2 of 9                                                                  │
+│  (beta[2]=0.4, too_ill_to_move[2]=0)[repeat 1]                                         │
+│  2020-11-28: DAY: 192 S: 7046459    E: 0    I: 0    R: 49035618    IW: 0   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 3 of 9                                                                  │
+│  (beta[2]=0.5, too_ill_to_move[2]=0)[repeat 1]                                         │
+│  2020-11-17: DAY: 181 S: 6221586    E: 0    I: 0    R: 49860491    IW: 1   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 4 of 9                                                                  │
+│  (beta[2]=0.3, too_ill_to_move[2]=0.25)[repeat 1]                                      │
+│  2020-12-13: DAY: 207 S: 8010218    E: 0    I: 0    R: 48071859    IW: 0   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 5 of 9                                                                  │
+│  (beta[2]=0.4, too_ill_to_move[2]=0.25)[repeat 1]                                      │
+│  2020-12-02: DAY: 196 S: 7071208    E: 0    I: 0    R: 49010869    IW: 1   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 6 of 9                                                                  │
+│  (beta[2]=0.5, too_ill_to_move[2]=0.25)[repeat 1]                                      │
+│  2020-12-01: DAY: 195 S: 6260263    E: 0    I: 0    R: 49821814    IW: 0   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 7 of 9                                                                  │
+│  (beta[2]=0.3, too_ill_to_move[2]=0.5)[repeat 1]                                       │
+│  2021-01-01: DAY: 226 S: 8031161    E: 0    I: 0    R: 48050916    IW: 0   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 8 of 9                                                                  │
+│  (beta[2]=0.4, too_ill_to_move[2]=0.5)[repeat 1]                                       │
+│  2020-11-27: DAY: 191 S: 7103861    E: 0    I: 0    R: 48978216    IW: 0   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+Computing model run ✔
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Completed job 9 of 9                                                                  │
+│  (beta[2]=0.5, too_ill_to_move[2]=0.5)[repeat 1]                                       │
+│  2020-11-16: DAY: 180 S: 6293958    E: 0    I: 0    R: 49788119    IW: 0   UV: 1.0     │
+│  TOTAL POPULATION 56082077                                                             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                        │
+│  Writing a summary of all results into the csv file                                    │
+│  /Users/chris/GitHub/tutorial/test/output/results.csv.bz2. You can use this to         │
+│  quickly look at statistics across all runs using e.g. R or pandas                     │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-directories">
+<h2>Output directories<a class="headerlink" href="#output-directories" title="Permalink to this headline">¶</a></h2>
+<p>The output files for each repeat are placed into subdirectories of the
+main output directory. By default, these subdirectories are named
+according to the fingerprint of the adjustable variables used for each
+run, e.g. listing the contents of the output directory using;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls output
+0i3v0i0x001     0i3v0i5x001     0i4v0i25x001    0i5v0i0x001     0i5v0i5x001     console.log.bz2
+0i3v0i25x001    0i4v0i0x001     0i4v0i5x001     0i5v0i25x001    config.yaml     results.csv.bz2
+</pre></div>
+</div>
+<p>The fingerprint is a unique key used for each run, e.g.
+<code class="docutils literal notranslate"><span class="pre">0i3v0i0x001</span></code> refers to the run using values <code class="docutils literal notranslate"><span class="pre">0.3</span> <span class="pre">0.0</span></code>, and the
+first repeat. The <code class="docutils literal notranslate"><span class="pre">i</span></code> represents a decimal point, <code class="docutils literal notranslate"><span class="pre">v</span></code> is used to
+separate values, and <code class="docutils literal notranslate"><span class="pre">x001</span></code> means the first repeat.</p>
+<p>Similarly, <code class="docutils literal notranslate"><span class="pre">0i4v0i25x001</span></code> refers to the first repeat of the values
+<code class="docutils literal notranslate"><span class="pre">0.4</span> <span class="pre">0.25</span></code>.</p>
+<p>Sometimes you may want to specify the names of the output directories
+yourself. You can do this by adding a <code class="docutils literal notranslate"><span class="pre">output</span></code> column to your scan file,
+e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="n">too_ill_to_move</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>      <span class="n">output</span>
+  <span class="mf">0.3</span>         <span class="mf">0.00</span>           <span class="n">beta_0i3_ill_0i00</span>
+  <span class="mf">0.4</span>         <span class="mf">0.00</span>           <span class="n">beta_0i4_ill_0i00</span>
+  <span class="mf">0.5</span>         <span class="mf">0.00</span>           <span class="n">beta_0i5_ill_0i00</span>
+  <span class="mf">0.3</span>         <span class="mf">0.25</span>           <span class="n">beta_0i3_ill_0i25</span>
+  <span class="mf">0.4</span>         <span class="mf">0.25</span>           <span class="n">beta_0i4_ill_0i25</span>
+  <span class="mf">0.5</span>         <span class="mf">0.25</span>           <span class="n">beta_0i5_ill_0i25</span>
+  <span class="mf">0.3</span>         <span class="mf">0.50</span>           <span class="n">beta_0i3_ill_0i50</span>
+  <span class="mf">0.4</span>         <span class="mf">0.50</span>           <span class="n">beta_0i4_ill_0i50</span>
+  <span class="mf">0.5</span>         <span class="mf">0.50</span>           <span class="n">beta_0i5_ill_0i50</span>
+</pre></div>
+</div>
+<p>Running <code class="docutils literal notranslate"><span class="pre">metawards</span></code> with this file would place output in the following
+directories;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls output
+beta_0i3_ill_0i00 beta_0i4_ill_0i00 beta_0i5_ill_0i00 config.yaml
+beta_0i3_ill_0i25 beta_0i4_ill_0i25 beta_0i5_ill_0i25 console.log.bz2
+beta_0i3_ill_0i50 beta_0i4_ill_0i50 beta_0i5_ill_0i50 results.csv.bz2
+</pre></div>
+</div>
+<p>If you run multiple repeats of these jobs, e.g. using the <code class="docutils literal notranslate"><span class="pre">--repeats</span></code>
+keyword via;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d lurgy2 -a ExtraSeedsLondon.dat --input lurgyparams.csv --repeats <span class="m">2</span>
+</pre></div>
+</div>
+<p>then the repeat number will be automatically added to the directory names,
+e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls output
+beta_0i3_ill_0i00     beta_0i4_ill_0i00     beta_0i5_ill_0i00     config.yaml
+beta_0i3_ill_0i00x002 beta_0i4_ill_0i00x002 beta_0i5_ill_0i00x002 console.log.bz2
+beta_0i3_ill_0i25     beta_0i4_ill_0i25     beta_0i5_ill_0i25     results.csv.bz2
+beta_0i3_ill_0i25x002 beta_0i4_ill_0i25x002 beta_0i5_ill_0i25x002
+beta_0i3_ill_0i50     beta_0i4_ill_0i50     beta_0i5_ill_0i50
+beta_0i3_ill_0i50x002 beta_0i4_ill_0i50x002 beta_0i5_ill_0i50x002
 </pre></div>
 </div>
 </div>
@@ -355,7 +488,7 @@ should have output that looks similar to this;</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -370,7 +503,6 @@ should have output that looks similar to this;</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

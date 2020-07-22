@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="metawards.utils.run_models" href="metawards.utils.run_models.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,17 +89,37 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
@@ -105,6 +127,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards.html">MetaWards</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_iterators.html">MetaWards.iterators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_movers.html">MetaWards.movers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_analysis.html">MetaWards.analysis</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index_MetaWards_utils.html">MetaWards.utils</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../index_api_MetaWards_utils.html">MetaWards.utils API Detail</a><ul class="current">
@@ -114,19 +138,21 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_themes.html">MetaWards.themes</a></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -165,7 +191,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Documentation</a> &raquo;</li>
         
@@ -203,55 +229,51 @@
 <h1>metawards.utils.run_model<a class="headerlink" href="#metawards-utils-run-model" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="metawards.utils.run_model">
-<code class="descclassname">metawards.utils.</code><code class="descname">run_model</code><span class="sig-paren">(</span><em>network: metawards._network.Network</em>, <em>infections: metawards._infections.Infections</em>, <em>rngs</em>, <em>s: int</em>, <em>output_dir: metawards._outputfiles.OutputFiles</em>, <em>population: metawards._population.Population = Population(initial=57104043</em>, <em>susceptibles=0</em>, <em>latent=0</em>, <em>total=0</em>, <em>recovereds=0</em>, <em>n_inf_wards=0</em>, <em>scale_uv=1.0</em>, <em>day=0</em>, <em>date=None)</em>, <em>nsteps: int = None</em>, <em>profile: bool = True</em>, <em>profiler: metawards.utils._profiler.Profiler = None</em>, <em>nthreads: int = None</em>, <em>iterator=None</em>, <em>extractor=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_run_model.html#run_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.run_model" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">metawards.utils.</code><code class="descname">run_model</code><span class="sig-paren">(</span><em>network: Union[metawards._network.Network, metawards._networks.Networks], infections: metawards._infections.Infections, rngs, output_dir: metawards._outputfiles.OutputFiles, population: metawards._population.Population = Population(initial=57104043, susceptibles=0, latent=0, total=0, totals=None, recovereds=0, n_inf_wards=0, scale_uv=1.0, day=0, date=None), nsteps: int = None, profiler: metawards.utils._profiler.Profiler = None, nthreads: int = None, iterator: Union[str, Callable[[...], None]] = None, extractor: Union[str, Callable[[...], None]] = None, mixer: Union[str, Callable[[...], None]] = None, mover: Union[str, Callable[[...], None]] = None</em><span class="sig-paren">)</span> &#x2192; metawards._population.Populations<a class="reference internal" href="../../_modules/metawards/utils/_run_model.html#run_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.run_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Actually run the model… Real work happens here. The model
 will run until completion or until ‘nsteps’ have been
-completed (whichever happens first)</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>network: Network</dt>
-<dd>The network on which to run the model</dd>
-<dt>infections: Infections</dt>
-<dd>The space used to record the infections</dd>
-<dt>rngs: list</dt>
-<dd>The list of random number generators to use, one per thread</dd>
-<dt>population: Population</dt>
-<dd>The initial population at the start of the model outbreak.
+completed, whichever happens first.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a><em> or </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Networks" title="metawards.Networks"><em>Networks</em></a>) – The network(s) on which to run the model</li>
+<li><strong>infections</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Infections" title="metawards.Infections"><em>Infections</em></a>) – The space used to record the infections</li>
+<li><strong>rngs</strong> (<em>list</em>) – The list of random number generators to use, one per thread</li>
+<li><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The initial population at the start of the model outbreak.
 This is also used to set the date and day of the start of
-the model outbreak</dd>
-<dt>seed: int</dt>
-<dd>The random number seed used for this model run. If this is
-None then a very random random number seed will be used</dd>
-<dt>output_dir: OutputFiles</dt>
-<dd>The directory to write all of the output into</dd>
-<dt>nsteps: int</dt>
-<dd>The maximum number of steps to run in the outbreak. If None
-then run until the outbreak has finished</dd>
-<dt>profile: bool</dt>
-<dd>Whether or not to profile the model run and print out the
-results</dd>
-<dt>profiler: Profiler</dt>
-<dd>The profiler to use to profile - a new one is created if
-one isn’t passed</dd>
-<dt>s: int</dt>
-<dd>Index of the seeding parameter to use</dd>
-<dt>nthreads: int</dt>
-<dd>Number of threads over which to parallelise this model run</dd>
-<dt>iterator: function</dt>
-<dd>Function that will be used to dynamically get the functions
+the model outbreak</li>
+<li><strong>seed</strong> (<em>int</em>) – The random number seed used for this model run. If this is
+None then a very random random number seed will be used</li>
+<li><strong>output_dir</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><em>OutputFiles</em></a>) – The directory to write all of the output into</li>
+<li><strong>nsteps</strong> (<em>int</em>) – The maximum number of steps to run in the outbreak. If None
+then run until the outbreak has finished</li>
+<li><strong>profiler</strong> (<a class="reference internal" href="metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><em>Profiler</em></a>) – The profiler to use to profile - a new one is created if
+one isn’t passed</li>
+<li><strong>nthreads</strong> (<em>int</em>) – Number of threads over which to parallelise this model run</li>
+<li><strong>iterator</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will be used to dynamically get the functions
 that will be used at each iteration to advance the
 model. Any additional files or parameters needed by these
-functions should be included in the <em class="xref py py-obj">network.params</em> object.</dd>
-<dt>extractor: function</dt>
-<dd>Function that will be used to dynamically get the functions
+functions should be included in the <em class="xref py py-obj">network.params</em> object.</li>
+<li><strong>extractor</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will be used to dynamically get the functions
 that will be used at each iteration to extract data from
-the model run</dd>
-</dl>
-<dl class="docutils">
-<dt>trajectory: Populations</dt>
-<dd>The trajectory of the population for every day of the model run</dd>
-</dl>
-</div></blockquote>
+the model run</li>
+<li><strong>mixer</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will mix data from multiple demographics
+so that this is shared during a model run</li>
+<li><strong>mover</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that can move the population between different
+demographics</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>trajectory</strong> – The trajectory of the population for every day of the model run</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="../index_api_MetaWards.html#metawards.Populations" title="metawards.Populations">Populations</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -277,7 +299,7 @@ the model run</dd>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -292,7 +314,6 @@ the model run</dd>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

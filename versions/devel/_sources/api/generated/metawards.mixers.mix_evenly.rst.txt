@@ -1,0 +1,6 @@
+metawards.mixers.mix\_evenly
+============================
+
+.. currentmodule:: metawards.mixers
+
+.. autofunction:: mix_evenly

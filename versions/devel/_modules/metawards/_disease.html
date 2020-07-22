@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -85,31 +87,52 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -148,7 +171,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
@@ -170,39 +193,38 @@
            <div itemprop="articleBody">
             
   <h1>Source code for metawards._disease</h1><div class="highlight"><pre>
-<span></span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> <span class="k">as</span> <span class="n">_dataclass</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span> <span class="k">as</span> <span class="n">_List</span>
-<span class="kn">import</span> <span class="nn">pathlib</span> <span class="k">as</span> <span class="nn">_pathlib</span>
-<span class="kn">import</span> <span class="nn">os</span> <span class="k">as</span> <span class="nn">_os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span> <span class="k">as</span> <span class="n">_Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span> <span class="k">as</span> <span class="n">_Union</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Disease&quot;</span><span class="p">]</span>
-
-<span class="n">_default_disease_path</span> <span class="o">=</span> <span class="n">_os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">(),</span>
-                                      <span class="s2">&quot;GitHub&quot;</span><span class="p">,</span> <span class="s2">&quot;MetaWardsData&quot;</span><span class="p">)</span>
 
 <span class="n">_default_folder_name</span> <span class="o">=</span> <span class="s2">&quot;diseases&quot;</span>
 
 
-<span class="k">def</span> <span class="nf">_safe_eval_float</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert &#39;s&#39; to a float. This supports normal floats,</span>
-<span class="sd">       but also simple maths expressions like 1/1.2</span>
+<span class="k">def</span> <span class="nf">_infer_mapping</span><span class="p">(</span><span class="n">stages</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the computed mapping names for each stage. This is the</span>
+<span class="sd">       letter part of the name, e.g. A1 maps to A, I3 maps to I etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+    <span class="kn">import</span> <span class="nn">re</span> <span class="k">as</span> <span class="nn">_re</span>
 
-    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># this is about as save as eval gets in python</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;__builtins__&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">},{}))</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot interpret &#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&#39; as a float&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">stages</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">_re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(.*[^\d^\b^\s])[\b\s]*([\d]*)&quot;</span><span class="p">,</span> <span class="n">stage</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid stage name </span><span class="si">{</span><span class="n">stage</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">mapping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">mapping</span>
 
 
-<div class="viewcode-block" id="Disease"><a class="viewcode-back" href="../../api/generated/metawards.Disease.html#metawards.Disease">[docs]</a><span class="nd">@_dataclass</span>
+<div class="viewcode-block" id="Disease"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease">[docs]</a><span class="nd">@_dataclass</span>
 <span class="k">class</span> <span class="nc">Disease</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;This class holds the parameters about a single disease</span>
 
@@ -217,26 +239,38 @@
 <span class="sd">       &gt;&gt;&gt; print(disease)</span>
 <span class="sd">       Disease ncov</span>
 <span class="sd">       repository: https://github.com/metawards/MetaWardsData</span>
-<span class="sd">       repository_branch: master</span>
+<span class="sd">       repository_branch: main</span>
 <span class="sd">       repository_version: 0.2.0</span>
 <span class="sd">       beta = [0.0, 0.0, 0.95, 0.95, 0.0]</span>
 <span class="sd">       progress = [1.0, 0.1923, 0.909091, 0.909091, 0.0]</span>
 <span class="sd">       too_ill_to_move = [0.0, 0.0, 0.0, 0.0, 0.0]</span>
 <span class="sd">       contrib_foi = [1.0, 1.0, 1.0, 1.0, 0.0]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: Name of the disease</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: Name of the stage, e.g. &quot;H1&quot;, &quot;I2&quot;, &quot;E1&quot; etc.</span>
+    <span class="n">stage</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: Mapping label, e.g. &quot;*&quot;, &quot;E&quot;, &quot;I&quot; or &quot;R&quot;</span>
+    <span class="n">mapping</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1">#: Beta parameter for each stage of the disease</span>
     <span class="n">beta</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1">#: Progress parameter for each stage of the disease</span>
     <span class="n">progress</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1">#: TooIllToMove parameter for each stage of the disease</span>
     <span class="n">too_ill_to_move</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1">#: Contribution to the Force of Infection (FOI) parameter for each</span>
     <span class="c1">#: stage of the disease</span>
     <span class="n">contrib_foi</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1">#: Index of the first symptomatic stage</span>
     <span class="n">start_symptom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="n">_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">_authors</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">_contacts</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
@@ -246,28 +280,56 @@
     <span class="n">_repository_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">_repository_branch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Disease </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;loaded from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;version: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_version</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;author(s): </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_authors</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;contact(s): </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_contacts</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;references(s): </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_references</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;repository: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_repository</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;repository_branch: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_repository_branch</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;repository_version: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_repository_version</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;beta = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;progress = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;too_ill_to_move = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;contrib_foi = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;start_symptom = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+<div class="viewcode-block" id="Disease.__str__"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.__str__">[docs]</a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Disease::null&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">beta</span> <span class="ow">and</span> \
-               <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">progress</span> <span class="ow">and</span> \
-               <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="ow">and</span> \
-               <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="ow">and</span> \
-               <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">start_symptom</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* Disease: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* loaded from: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repository</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* repository: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_repository</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repository_branch</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* repository_branch: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_repository_branch</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repository_version</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* repository_version: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_repository_version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* stage: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* mapping: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* beta: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* progress: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* too_ill_to_move: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">!=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">!=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]:</span>
+                <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* contrib_foi: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* start_symptom: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Disease.__repr__"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Disease(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, stage=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="si">}</span><span class="s2">, &quot;</span> \
+               <span class="sa">f</span><span class="s2">&quot;beta=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="si">}</span><span class="s2">, &quot;</span> \
+               <span class="sa">f</span><span class="s2">&quot;progress=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="si">}</span><span class="s2">, &quot;</span> \
+               <span class="sa">f</span><span class="s2">&quot;too_ill_to_move=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="si">}</span><span class="s2">, contrib_foi=&quot;</span> \
+               <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+<div class="viewcode-block" id="Disease.__eq__"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.__eq__">[docs]</a>    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">stage</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">mapping</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">beta</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">progress</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">start_symptom</span></div>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">:</span>
@@ -275,7 +337,110 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="Disease.N_INF_CLASSES"><a class="viewcode-back" href="../../api/generated/metawards.Disease.html#metawards.Disease.N_INF_CLASSES">[docs]</a>    <span class="k">def</span> <span class="nf">N_INF_CLASSES</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Disease.__getitem__"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.__getitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">_Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Return the values of parameters of the stage as specified</span>
+<span class="sd">           index</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid index </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">. Size = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                <span class="s2">&quot;mapping&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                <span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                <span class="s2">&quot;contrib_foi&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                <span class="s2">&quot;is_start_symptom&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="Disease.__setitem__"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.__setitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                    <span class="n">value</span><span class="p">:</span> <span class="n">_Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">_Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Set the value of parameters at this index. The keys in the</span>
+<span class="sd">           dictionary (and their values) match the arguments to the</span>
+<span class="sd">           &quot;insert&quot; or &quot;add&quot; functions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid index </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">. Size = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mapping&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mapping</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mapping</span> <span class="o">=</span> <span class="n">_infer_mapping</span><span class="p">([</span><span class="n">name</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;beta&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mapping</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;I&quot;</span><span class="p">:</span>
+                <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.5</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">progress</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;progress&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">progress</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mapping</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;R&quot;</span><span class="p">:</span>
+                <span class="n">progress</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">progress</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">too_ill_to_move</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">contrib_foi</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;contrib_foi&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">contrib_foi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">contrib_foi</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="n">is_start_symptom</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_start_symptom&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
+
+        <span class="n">beta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">beta</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">beta</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid value of beta </span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s2">. Should be 0 &lt;= beta &lt;= 1&quot;</span><span class="p">)</span>
+
+        <span class="n">progress</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">progress</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">progress</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">progress</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid value of progress </span><span class="si">{</span><span class="n">progress</span><span class="si">}</span><span class="s2">. Should be &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;0 &lt;= progress &lt;= 1&quot;</span><span class="p">)</span>
+
+        <span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">too_ill_to_move</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">too_ill_to_move</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">too_ill_to_move</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid value of too_ill_to_move </span><span class="si">{</span><span class="n">too_ill_to_move</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Should be 0 &lt;= too_ill_to_move &lt;= 1&quot;</span><span class="p">)</span>
+
+        <span class="n">contrib_foi</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">contrib_foi</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">contrib_foi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid value of contrib_foi </span><span class="si">{</span><span class="n">contrib_foi</span><span class="si">}</span><span class="s2">. Should &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;be 0 &lt;= contrib_foi&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">beta</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">progress</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">too_ill_to_move</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">contrib_foi</span>
+
+        <span class="k">if</span> <span class="n">is_start_symptom</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">is_start_symptom</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mapping</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;I&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Disease.N_INF_CLASSES"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.N_INF_CLASSES">[docs]</a>    <span class="k">def</span> <span class="nf">N_INF_CLASSES</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the number of stages of the disease&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span></div>
 
@@ -288,40 +453,372 @@
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data read for disease </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data read for disease </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> &quot;</span>
                                  <span class="sa">f</span><span class="s2">&quot;is corrupted! </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> \
-           <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;There must be at least 4 disease stages (&#39;*&#39;, &#39;E&#39;, &#39;I&#39;, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;&#39;R&#39;) - the number of stages here is </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># we haven&#39;t set any parameters. This is likely an &quot;overall&quot;</span>
+            <span class="c1"># disease file, where just names are needed. Populate wuth</span>
+            <span class="c1"># default parameters</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;start_symptom </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span><span class="si">}</span><span class="s2"> is &quot;</span>
-                                 <span class="sa">f</span><span class="s2">&quot;invalid for a disease with </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> stages&quot;</span><span class="p">)</span>
+                                 <span class="sa">f</span><span class="s2">&quot;invalid for a disease with </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> stages. &quot;</span>
+                                 <span class="sa">f</span><span class="s2">&quot;It should be between 1 and </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span><span class="p">)</span>
 
+        <span class="kn">from</span> <span class="nn">._interpret</span> <span class="kn">import</span> <span class="n">Interpret</span>
+
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_safe_eval_float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_safe_eval_float</span><span class="p">(</span>
-                                                <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_safe_eval_float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_safe_eval_float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Interpret</span><span class="o">.</span><span class="n">number</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Interpret</span><span class="o">.</span><span class="n">number</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Interpret</span><span class="o">.</span><span class="n">number</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Interpret</span><span class="o">.</span><span class="n">number</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;Invalid disease parameter at index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Disease.load"><a class="viewcode-back" href="../../api/generated/metawards.Disease.html#metawards.Disease.load">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">disease</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ncov&quot;</span><span class="p">,</span>
+        <span class="c1"># for the model to work the different stages have set meanings</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># - stage 0 is newly infected that day, so progress must be 1</span>
+            <span class="c1">#   and beta must be 0 (not infective)</span>
+            <span class="c1"># This is not an error - the pox and flu2 diseases have this.</span>
+            <span class="c1"># I don&#39;t think I understand correctly though if that is right,</span>
+            <span class="c1"># as this means that individuals will stay longer in the</span>
+            <span class="c1"># post-infect but pre-latent stage and be recorded as &quot;recovered&quot;?</span>
+            <span class="c1"># if self.progress[0] != 1.0:</span>
+            <span class="c1">#    errors.append(</span>
+            <span class="c1">#        f&quot;The progress[0] value must be 1.0 as individuals are &quot;</span>
+            <span class="c1">#        f&quot;only newly infected for one day, and so must progress &quot;</span>
+            <span class="c1">#        f&quot;immediately to the &#39;latent&#39; stage.&quot;)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The beta[0] value must be 0.0 as newly infected &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;individuals should not be infective and cannot &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;infect others.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># - stage 1 is &#39;latent&#39;, meaning that beta must be 0</span>
+            <span class="c1"># (not infective)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The beta[1] value must be 0.0 as &#39;latent&#39; individuals &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;are not infectious and should not be able to infect &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;others.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># - stage -1 is &#39;recovered&#39;, meaning that beta must not be 0</span>
+            <span class="c1">#   and progress is 0, as once recovered, always recovered</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The beta[-1] value must be 0.0 as &#39;recovered&#39; &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;are not infectious and should not be able to infect &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;others.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The progress[-1] value must be 0.0 as &#39;recovered&#39; &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;individuals have no further disease stage to progress &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;to. We hope that once recovered, always recovered.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">.utils._console</span> <span class="kn">import</span> <span class="n">Console</span>
+                <span class="n">Console</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;Invalid disease parameters!</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+
+            <span class="c1"># set the default names - these are &#39;*&#39;, &quot;E&quot;, &quot;I?&quot;, &quot;R&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;I&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;I</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Number of named stages (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span><span class="si">}</span><span class="s2">) does not &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;equal the number of stages (</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># default mapping is first stage is &#39;*&#39;, second stage is &#39;E&#39;,</span>
+                <span class="c1"># last stage is &#39;R&#39; and remaining stages are &#39;I&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;R&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># the mapping is the character part of the stage name, e.g.</span>
+                <span class="c1"># &quot;H1&quot; maps to &quot;H&quot;, &quot;ICU2&quot; maps to ICU etc.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="n">_infer_mapping</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid number of mapping stages. Should be &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">()</span><span class="si">}</span><span class="s2"> but got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mapping</span> <span class="o">=</span> <span class="n">_infer_mapping</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="n">valid</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">mapping</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">])</span>
+
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Invalid mapping value &#39;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&#39;. Valid values &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;are only </span><span class="si">{</span><span class="n">valid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Disease.insert"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">too_ill_to_move</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrib_foi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">is_start_symptom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Insert a new stage into the disease. This will insert a new stage</span>
+<span class="sd">           into the list of stages at index &#39;index&#39;</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ----------</span>
+<span class="sd">           index: str</span>
+<span class="sd">             The index at which to insert the new stage</span>
+<span class="sd">           name: str</span>
+<span class="sd">             The name of the stage, e.g. &quot;E&quot;, &quot;I&quot;, &quot;R&quot; etc.</span>
+<span class="sd">           mapping: str</span>
+<span class="sd">             Which main stage this stage should map to (if this is a</span>
+<span class="sd">             sub-stage). This will be derived automatically if not set.</span>
+<span class="sd">           beta: float</span>
+<span class="sd">             The beta (infectivity) parameter. This should be between</span>
+<span class="sd">             0.0 amd 1.0. If not set, then this will be set automatically.</span>
+<span class="sd">           progress: float</span>
+<span class="sd">             The fraction of individuals at this stage who will move to</span>
+<span class="sd">             the next stage. This should be between 0.0 amd 1.0. If this</span>
+<span class="sd">             is not set, then this will be set automatically.</span>
+<span class="sd">           too_ill_to_move: float</span>
+<span class="sd">             The proportion of workers at this stage who do not travel</span>
+<span class="sd">             to work. This should be between 0.0 and 1.0. If this is not</span>
+<span class="sd">             set, then this will be set automatically.</span>
+<span class="sd">           contrib_foi: float</span>
+<span class="sd">             The contribution of individuals in this stage to the</span>
+<span class="sd">             force-of-infection (foi) of the wards they visit. This</span>
+<span class="sd">             should normally be 1.0 and will be set automatically</span>
+<span class="sd">             if not set.</span>
+<span class="sd">           is_start_symptom: bool</span>
+<span class="sd">             Whether this is the start symptom of the disease. This</span>
+<span class="sd">             normally doesn&#39;t need to be set as this will be worked</span>
+<span class="sd">             out automatically by the code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;unnamed&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                                 <span class="s2">&quot;mapping&quot;</span><span class="p">:</span> <span class="n">mapping</span><span class="p">,</span>
+                                 <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="n">beta</span><span class="p">,</span>
+                                 <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="n">progress</span><span class="p">,</span>
+                                 <span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">:</span> <span class="n">too_ill_to_move</span><span class="p">,</span>
+                                 <span class="s2">&quot;contrib_foi&quot;</span><span class="p">:</span> <span class="n">contrib_foi</span><span class="p">,</span>
+                                 <span class="s2">&quot;is_start_symptom&quot;</span><span class="p">:</span> <span class="n">is_start_symptom</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="Disease.add"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">too_ill_to_move</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrib_foi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">is_start_symptom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add a new stage to the disease. This will append a new stage</span>
+<span class="sd">           onto the list of stages.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ----------</span>
+<span class="sd">           name: str</span>
+<span class="sd">             The name of the stage, e.g. &quot;E&quot;, &quot;I&quot;, &quot;R&quot; etc.</span>
+<span class="sd">           mapping: str</span>
+<span class="sd">             Which main stage this stage should map to (if this is a</span>
+<span class="sd">             sub-stage). This will be derived automatically if not set.</span>
+<span class="sd">           beta: float</span>
+<span class="sd">             The beta (infectivity) parameter. This should be between</span>
+<span class="sd">             0.0 amd 1.0. If not set, then this will be set automatically.</span>
+<span class="sd">           progress: float</span>
+<span class="sd">             The fraction of individuals at this stage who will move to</span>
+<span class="sd">             the next stage. This should be between 0.0 amd 1.0. If this</span>
+<span class="sd">             is not set, then this will be set automatically.</span>
+<span class="sd">           too_ill_to_move: float</span>
+<span class="sd">             The proportion of workers at this stage who do not travel</span>
+<span class="sd">             to work. This should be between 0.0 and 1.0. If this is not</span>
+<span class="sd">             set, then this will be set automatically.</span>
+<span class="sd">           contrib_foi: float</span>
+<span class="sd">             The contribution of individuals in this stage to the</span>
+<span class="sd">             force-of-infection (foi) of the wards they visit. This</span>
+<span class="sd">             should normally be 1.0 and will be set automatically</span>
+<span class="sd">             if not set.</span>
+<span class="sd">           is_start_symptom: bool</span>
+<span class="sd">             Whether this is the start symptom of the disease. This</span>
+<span class="sd">             normally doesn&#39;t need to be set as this will be worked</span>
+<span class="sd">             out automatically by the code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="n">mapping</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+                    <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="o">=</span><span class="n">too_ill_to_move</span><span class="p">,</span>
+                    <span class="n">contrib_foi</span><span class="o">=</span><span class="n">contrib_foi</span><span class="p">,</span>
+                    <span class="n">is_start_symptom</span><span class="o">=</span><span class="n">is_start_symptom</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Disease.get_index"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.get_index">[docs]</a>    <span class="k">def</span> <span class="nf">get_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the index of disease stage &#39;idx&#39; in this disease&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="c1"># lookup by name</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">i</span>
+
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;There is no disease stage called </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">. Available &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;stages are </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">()</span> <span class="o">+</span> <span class="n">idx</span>
+
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;There is no diseaes stage at index </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">. The number &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;of stages is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">idx</span></div>
+
+<div class="viewcode-block" id="Disease.get_mapping_to"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.get_mapping_to">[docs]</a>    <span class="k">def</span> <span class="nf">get_mapping_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the mapping from stage index i of this disease to</span>
+<span class="sd">           stage index j other the passed other disease. This returns</span>
+<span class="sd">           &#39;None&#39; if there is no need to map because the stages</span>
+<span class="sd">           are the same.</span>
+
+<span class="sd">           The mapping will map the states according to their label,</span>
+<span class="sd">           matching the ith labelled X state in this disease to the</span>
+<span class="sd">           ith labelled X state in other (or to the highest labelled</span>
+<span class="sd">           X state if we have more of these states than other).</span>
+
+<span class="sd">           Thus, is we have;</span>
+
+<span class="sd">           self =  [&quot;*&quot;, &quot;E&quot;, &quot;I&quot;, &quot;I&quot;, &quot;R&quot;]</span>
+<span class="sd">           other = [&quot;*&quot;, &quot;E&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;R&quot;]</span>
+
+<span class="sd">           then</span>
+
+<span class="sd">           self.get_mapping_to(other) = [0, 1, 2, 3, 5]</span>
+<span class="sd">           other.get_mapping_to(self) = [0, 1, 2, 3, 3, 4]</span>
+
+<span class="sd">           If we can&#39;t map a state, then we will try to map to &quot;I&quot;.</span>
+<span class="sd">           If we still can&#39;t map, then this is an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">mapping</span><span class="p">:</span>
+            <span class="c1"># no need to map,</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">mapping</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">stages</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                  <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                  <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                  <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">stage</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">mapping</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">stages</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">stages</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">stages</span><span class="p">[</span><span class="n">stage</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">stages</span><span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># we are mapped to an invalid state</span>
+                <span class="n">mapping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">mapping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">mapping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+            <span class="c1"># we are missing a state</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;It is not possible to map from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="si">}</span><span class="s2"> to &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">other</span><span class="o">.</span><span class="n">mapping</span><span class="si">}</span><span class="s2">, as the stages marked &#39;-1&#39; cannot be &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;safely mapped: </span><span class="si">{</span><span class="n">mapping</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">mapping</span></div>
+
+<div class="viewcode-block" id="Disease.load"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.load">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">disease</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">repository</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-             <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">_default_folder_name</span><span class="p">,</span>
+             <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the disease parameters for the specified disease.</span>
 <span class="sd">           This will look for a file called f&quot;{disease}.json&quot;</span>
-<span class="sd">           in the directory f&quot;{repository}/{disease}/{disease}.ncon&quot;</span>
+<span class="sd">           in the directory f&quot;{repository}/{folder}/{disease}.json&quot;</span>
 
 <span class="sd">           By default this will load the ncov (SARS-Cov-2)</span>
 <span class="sd">           parameters from</span>
-<span class="sd">           $HOME/GitHub/model_data/2011Data/diseases/ncov.json</span>
+<span class="sd">           $HOME/GitHub/model_data/diseases/ncov.json</span>
 
 <span class="sd">           Alternatively you can provide the full path to the</span>
 <span class="sd">           json file via the &quot;filename&quot; argument</span>
@@ -349,29 +846,57 @@
         <span class="n">repository_version</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">repository_branch</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">import</span> <span class="nn">os</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">disease</span><span class="p">):</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">disease</span>
-            <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disease</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">):</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disease</span><span class="si">}</span><span class="s2">.json&quot;</span>
+        <span class="kn">import</span> <span class="nn">os</span>
+
+        <span class="n">is_local_file</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">repository</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">repository</span> <span class="o">=</span> <span class="n">_os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;METAWARDSDATA&quot;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">repository</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">repository</span> <span class="o">=</span> <span class="n">_default_disease_path</span>
+            <span class="k">if</span> <span class="n">disease</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">disease</span> <span class="o">=</span> <span class="s2">&quot;ncov&quot;</span>
 
-            <span class="n">filename</span> <span class="o">=</span> <span class="n">_os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repository</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span>
-                                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disease</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">folder</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">disease</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="n">disease</span>
+                    <span class="n">is_local_file</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">):</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">.json&quot;</span>
+                    <span class="n">is_local_file</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">.json.bz2&quot;</span><span class="p">):</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">.json.bz2&quot;</span>
+                    <span class="n">is_local_file</span> <span class="o">=</span> <span class="kc">True</span>
 
-            <span class="kn">from</span> <span class="nn">._parameters</span> <span class="kn">import</span> <span class="n">get_repository_version</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="n">get_repository_version</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">disease</span><span class="p">):</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="n">disease</span>
+                    <span class="n">is_local_file</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disease</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">):</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disease</span><span class="si">}</span><span class="s2">.json&quot;</span>
+                    <span class="n">is_local_file</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disease</span><span class="si">}</span><span class="s2">.json.bz2&quot;</span><span class="p">):</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disease</span><span class="si">}</span><span class="s2">.json.bz2&quot;</span>
+                    <span class="n">is_local_file</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">._parameters</span> <span class="kn">import</span> <span class="n">get_repository</span>
+            <span class="n">repository</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">get_repository</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">folder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">folder</span> <span class="o">=</span> <span class="n">_default_folder_name</span>
+
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repository</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span>
+                                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">disease</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+
             <span class="n">repository</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;repository&quot;</span><span class="p">]</span>
             <span class="n">repository_version</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
             <span class="n">repository_branch</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;branch&quot;</span><span class="p">]</span>
 
-        <span class="n">json_file</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="k">if</span> <span class="n">is_local_file</span><span class="p">:</span>
+            <span class="n">disease</span> <span class="o">=</span> <span class="n">Disease</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">disease</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="n">filename</span>
+            <span class="k">return</span> <span class="n">disease</span>
+
+        <span class="n">json_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">FILE</span><span class="p">:</span>
@@ -379,33 +904,191 @@
                 <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find the disease file </span><span class="si">{</span><span class="n">json_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Either it does not exist of was corrupted.&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error was </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;To download the disease data type the command:&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  git clone https://github.com/metawards/MetaWardsData&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;and then re-run this function passing in the full&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;path to where you downloaded this directory&quot;</span><span class="p">)</span>
+            <span class="kn">from</span> <span class="nn">.utils._console</span> <span class="kn">import</span> <span class="n">Console</span>
+            <span class="n">Console</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Could not find the disease file </span><span class="si">{</span><span class="n">json_file</span><span class="si">}</span><span class="s2">. Either it does not exist of was</span>
+<span class="s2">corrupted. Error was </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. Please see</span>
+<span class="s2">https://metawards.org/model_data for instructions on how to download and</span>
+<span class="s2">set the model data.&quot;&quot;&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find or read </span><span class="si">{</span><span class="n">json_file</span><span class="si">}</span><span class="s2">: &quot;</span>
                                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="n">disease</span> <span class="o">=</span> <span class="n">Disease</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">],</span>
-                          <span class="n">progress</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;progress&quot;</span><span class="p">],</span>
-                          <span class="n">too_ill_to_move</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">],</span>
-                          <span class="n">contrib_foi</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;contrib_foi&quot;</span><span class="p">],</span>
-                          <span class="n">start_symptom</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;start_symptom&quot;</span><span class="p">],</span>
-                          <span class="n">_name</span><span class="o">=</span><span class="n">disease</span><span class="p">,</span>
-                          <span class="n">_authors</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;author(s)&quot;</span><span class="p">],</span>
-                          <span class="n">_contacts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;contact(s)&quot;</span><span class="p">],</span>
-                          <span class="n">_references</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;reference(s)&quot;</span><span class="p">],</span>
-                          <span class="n">_filename</span><span class="o">=</span><span class="n">json_file</span><span class="p">,</span>
-                          <span class="n">_repository</span><span class="o">=</span><span class="n">repository</span><span class="p">,</span>
-                          <span class="n">_repository_branch</span><span class="o">=</span><span class="n">repository_branch</span><span class="p">,</span>
-                          <span class="n">_repository_version</span><span class="o">=</span><span class="n">repository_version</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">disease</span>
+
+        <span class="n">disease</span> <span class="o">=</span> <span class="n">Disease</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">disease</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="n">json_file</span><span class="p">,</span>
+        <span class="n">disease</span><span class="o">.</span><span class="n">_repository</span> <span class="o">=</span> <span class="n">repository</span><span class="p">,</span>
+        <span class="n">disease</span><span class="o">.</span><span class="n">_repository_branch</span> <span class="o">=</span> <span class="n">repository_branch</span><span class="p">,</span>
+        <span class="n">disease</span><span class="o">.</span><span class="n">_repository_version</span> <span class="o">=</span> <span class="n">repository_version</span>
+
+        <span class="k">return</span> <span class="n">disease</span></div>
+
+<div class="viewcode-block" id="Disease.from_data"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.from_data">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Disease</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a new Disease constructed from the passed data</span>
+<span class="sd">           dictionary (e.g. deserialised from json)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;beta&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
+
+        <span class="n">progress</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;progress&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+        <span class="n">contrib_foi</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;contrib_foi&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+
+        <span class="n">start_symptom</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start_symptom&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">disease</span> <span class="o">=</span> <span class="n">Disease</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+                          <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span>
+                          <span class="n">too_ill_to_move</span><span class="o">=</span><span class="n">too_ill_to_move</span><span class="p">,</span>
+                          <span class="n">contrib_foi</span><span class="o">=</span><span class="n">contrib_foi</span><span class="p">,</span>
+                          <span class="n">start_symptom</span><span class="o">=</span><span class="n">start_symptom</span><span class="p">,</span>
+                          <span class="n">mapping</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mapping&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                          <span class="n">stage</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stage&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                          <span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;unnamed&quot;</span><span class="p">),</span>
+                          <span class="n">_authors</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;author(s)&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                          <span class="n">_contacts</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;contact(s)&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                          <span class="n">_references</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reference(s)&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 
         <span class="n">disease</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">disease</span></div></div>
+        <span class="k">return</span> <span class="n">disease</span></div>
+
+<div class="viewcode-block" id="Disease.to_data"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.to_data">[docs]</a>    <span class="k">def</span> <span class="nf">to_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return a data dictionary version of this disease, suitable</span>
+<span class="sd">           for serialising to, e.g., json</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;stage&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mapping&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;progress&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;contrib_foi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;start_symptom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;author(s)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_authors</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_contacts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;contact(s)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_contacts</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_references</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;reference(s)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_references</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="Disease.from_json"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.from_json">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Disease</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the Disease constructed from the passed json. This will</span>
+<span class="sd">           either load from a passed json string, or from json loaded</span>
+<span class="sd">           from the passed file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">os</span>
+        <span class="kn">import</span> <span class="nn">json</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">bz2</span>
+                <span class="k">with</span> <span class="n">bz2</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">FILE</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">FILE</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">FILE</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.utils._console</span> <span class="kn">import</span> <span class="n">Console</span>
+            <span class="n">Console</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to load a Disease from &#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&#39;. Check that &quot;</span>
+                          <span class="sa">f</span><span class="s2">&quot;this is valid JSON or that the file exists.&quot;</span><span class="p">)</span>
+
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot load Disease from &#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Disease</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Disease.to_json"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">indent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">auto_bzip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Serialise the Disease to JSON. This will write to a file</span>
+<span class="sd">           if filename is set, otherwise it will return a JSON string.</span>
+
+<span class="sd">           Parameters</span>
+<span class="sd">           ----------</span>
+<span class="sd">           filename: str</span>
+<span class="sd">             The name of the file to write the JSON to. The absolute</span>
+<span class="sd">             path to the written file will be returned. If filename is None</span>
+<span class="sd">             then this will serialise to a JSON string which will be</span>
+<span class="sd">             returned.</span>
+<span class="sd">           indent: int</span>
+<span class="sd">             The number of spaces of indent to use when writing the json</span>
+<span class="sd">           auto_bzip: bool</span>
+<span class="sd">             Whether or not to automatically bzip2 the written json file</span>
+
+<span class="sd">           Returns</span>
+<span class="sd">           -------</span>
+<span class="sd">           str</span>
+<span class="sd">             Returns either the absolute path to the written file, or</span>
+<span class="sd">             the json-serialised string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">json</span>
+
+        <span class="k">if</span> <span class="n">indent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">indent</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">indent</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="n">indent</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">absolute</span><span class="p">())</span>
+
+            <span class="k">if</span> <span class="n">auto_bzip</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.bz2&quot;</span><span class="p">):</span>
+                    <span class="n">filename</span> <span class="o">+=</span> <span class="s2">&quot;.bz2&quot;</span>
+
+                <span class="kn">import</span> <span class="nn">bz2</span>
+                <span class="k">with</span> <span class="n">bz2</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">FILE</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span> <span class="n">FILE</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="n">indent</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="kn">import</span> <span class="nn">os</span>
+                        <span class="n">FILE</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                        <span class="k">raise</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">FILE</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_data</span><span class="p">(),</span> <span class="n">FILE</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="n">indent</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="kn">import</span> <span class="nn">os</span>
+                        <span class="n">FILE</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                        <span class="k">raise</span>
+
+            <span class="k">return</span> <span class="n">filename</span></div></div>
 </pre></div>
 
            </div>
@@ -419,7 +1102,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -434,7 +1117,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

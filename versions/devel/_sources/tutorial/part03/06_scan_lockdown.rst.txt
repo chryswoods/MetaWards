@@ -34,6 +34,7 @@ copy in the below;
 
     from metawards.iterators import advance_infprob, advance_fixed, \
                                     advance_play, iterate_working_week
+    from metawards.utils import Console
 
     def get_lockdown_state(population):
         if not hasattr(population, "lockdown_state"):
@@ -42,29 +43,29 @@ copy in the below;
 
         if population.total > 5000:
             if population.lockdown_state == -1:
-                print(f"Lockdown started on {population.date}")
+                Console.print(f"Lockdown started on {population.date}")
                 population.lockdown_state = 0
                 population.is_locked_down = True
 
             elif population.lockdown_state > 0:
-                print(f"Restarting lockdown on {population.date}")
+                Console.print(f"Restarting lockdown on {population.date}")
                 population.lockdown_state = 0
                 population.is_locked_down = True
 
         elif population.total > 3000:
             if population.lockdown_state == 2:
-                print(f"Re-entering relaxed (yellow) on {population.date}")
+                Console.print(f"Re-entering relaxed (yellow) on {population.date}")
                 population.lockdown_state = 1
 
         elif population.total < 2000:
             if population.lockdown_state == 0:
-                print(f"Entering relaxed (yellow) on {population.date}")
+                Console.print(f"Entering relaxed (yellow) on {population.date}")
                 population.lockdown_state = 1
 
-        elif population.total < 1000:
-            if population.lockdown_state == 1:
-                print(f"Entering relaxed (green) on {population.date}")
-                population.lockdown_state = 2
+            elif population.total < 1000:
+                if population.lockdown_state == 1:
+                    Console.print(f"Entering relaxed (green) on {population.date}")
+                    population.lockdown_state = 2
 
         return population.lockdown_state
 
@@ -73,7 +74,7 @@ copy in the below;
         state = get_lockdown_state(population)
         scale_rate = params.user_params["scale_rate"][state]
         can_work = params.user_params["can_work"][state]
-        print(f"Lockdown {state}: scale_rate = {scale_rate}, can_work = {can_work}")
+        Console.debug("State", variables=[scale_rate, can_work])
 
         advance_infprob(scale_rate=scale_rate,
                         network=network, population=population,
@@ -90,10 +91,10 @@ copy in the below;
         state = get_lockdown_state(population)
 
         if population.is_locked_down:
-            print("Locked down")
+            Console.debug("Locked down")
             return [advance_lockdown]
         else:
-            print("Normal working week day")
+            Console.debug("Normal working week day")
             return iterate_working_week(network=network,
                                         population=population,
                                         **kwargs)
@@ -123,53 +124,69 @@ Run ``metawards`` using the below commands and see what you get;
 
 .. code-block:: bash
 
-   metawards -d lurgy3 -a ExtraSeedsLondon.dat  -u lockdown.inp --iterator lockdown
+   metawards -d lurgy3 -a ExtraSeedsLondon.dat  -u lockdown.inp --iterator lockdown --debug
    metawards-plot -i output/results.csv.bz2
 
 I see;
 
 ::
 
-    33 4880
-    S: 56074296    E: 842    I: 4625    R: 2314    IW: 827   TOTAL POPULATION 56081235
-    Normal working week day
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 36 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                Normal working week day                     lockdown.py:63
+    S: 56070689  E: 1663  I: 5889  R: 3836  IW: 1352  POPULATION: 56082077
+    Number of infections: 7552
 
-    34 5467
-    S: 56072094    E: 1071    I: 5163    R: 3749    IW: 1408   TOTAL POPULATION 56081006
-    Lockdown started on 2020-05-26
-    Locked down
-    Lockdown 0: scale_rate = 0.05, can_work = 0.0
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 37 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Lockdown started on 2020-06-26
+                                        Locked down                           lockdown.py:60
+                                            State                              lockdown.py:43
 
-    35 6234
-    S: 56072011    E: 2202    I: 5873    R: 1991    IW: 82   TOTAL POPULATION 56079875
-    Locked down
-    Lockdown 0: scale_rate = 0.05, can_work = 0.0
+            Name │ Value
+     ════════════╪═══════
+      scale_rate │ 0.05
+        can_work │ False
 
+    S: 56070608  E: 2118  I: 7192  R: 2159  IW: 80  POPULATION: 56082077
+    Number of infections: 9310
     ...
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 51 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Entering relaxed (yellow) on 2020-07-10
+                                        Locked down                           lockdown.py:60
+                                            State                              lockdown.py:43
 
-    46 2700
-    S: 56071140    E: 44    I: 2221    R: 8672    IW: 38   TOTAL POPULATION 56082033
-    Locked down
-    Lockdown 0: scale_rate = 0.05, can_work = 0.0
+            Name │ Value
+     ════════════╪═══════
+      scale_rate │ 0.1
+        can_work │ False
 
-    47 2265
-    S: 56071101    E: 41    I: 1889    R: 9046    IW: 38   TOTAL POPULATION 56082036
-    Entering relaxed (yellow) on 2020-06-08
-    Locked down
-    Lockdown 1: scale_rate = 0.1, can_work = 0.0
-
-    48 1930
-    S: 56071042    E: 39    I: 1601    R: 9395    IW: 58   TOTAL POPULATION 56082038
-    Locked down
-    Lockdown 1: scale_rate = 0.1, can_work = 0.0
-
+    S: 56069562  E: 36  I: 1518  R: 10961  IW: 55  POPULATION: 56082077
+    Number of infections: 1554
     ...
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 55 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Entering relaxed (green) on 2020-07-14
+                                        Locked down                           lockdown.py:60
+                                            State                              lockdown.py:43
 
-    52 1121
-    S: 56070864    E: 36    I: 933    R: 10244    IW: 38   TOTAL POPULATION 56082041
-    Entering relaxed (green) on 2020-06-13
-    Locked down
-    Lockdown 2: scale_rate = 0.1, can_work = 1.0
+            Name │ Value
+     ════════════╪═══════
+      scale_rate │ 0.1
+        can_work │ True
+
+    S: 56069369  E: 46  I: 852  R: 11810  IW: 59  POPULATION: 56082077
+    Number of infections: 898
+    ...
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 187 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                        Locked down                           lockdown.py:60
+                                            State                              lockdown.py:43
+
+            Name │ Value
+     ════════════╪═══════
+      scale_rate │ 0.1
+        can_work │ True
+
+    S: 56068649  E: 0  I: 0  R: 13428  IW: 0  POPULATION: 56082077
+    Number of infections: 0
+    Infection died ... Ending on day 188
 
 with the overview graph as here;
 
@@ -280,7 +297,15 @@ You could, for example, reduce the
 variable as lockdown starts. Or you could directly adjust
 :data:`network.params.disease_params.beta[0] <metawards.Disease.beta>`.
 
-You can also add these parameters to your scan of adjustable parameters.
+A good example of an
+`alternative lockdown model is here <https://github.com/metawards/MetaWards/tree/devel/examples/lockdown>`__.
+This is provided as an example in the MetaWards GitHub repository, and
+enacts lockdown by directly changing the ``scale_uv`` infection parameter.
+This has the effect of reducing the contribution from each infected
+individual to the overall *force of infection* of each ward.
+
+There are many parameters to adjust. You can also add these
+to your scan to investigate their impact.
 The full list of built-in adjustable parameters is below;
 
 .. program-output:: python get_variableset_help.py

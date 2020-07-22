@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Part 4 - Customising the output" href="../index_part04.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,13 +89,19 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index_part01.html">Part 1 - Modelling outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part02.html">Part 2 - Refining the model</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index_part03.html">Part 3 - Customising the outbreak</a><ul class="current">
@@ -110,26 +118,45 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -168,9 +195,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../tutorial.html">Tutorial</a> &raquo;</li>
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
           <li><a href="../index_part03.html">Part 3 - Customising the outbreak</a> &raquo;</li>
         
@@ -227,6 +254,7 @@ and work allowed).</p>
 copy in the below;</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards.iterators</span> <span class="kn">import</span> <span class="n">advance_infprob</span><span class="p">,</span> <span class="n">advance_fixed</span><span class="p">,</span> \
                                 <span class="n">advance_play</span><span class="p">,</span> <span class="n">iterate_working_week</span>
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
 
 <span class="k">def</span> <span class="nf">get_lockdown_state</span><span class="p">(</span><span class="n">population</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="s2">&quot;lockdown_state&quot;</span><span class="p">):</span>
@@ -235,29 +263,29 @@ copy in the below;</p>
 
     <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lockdown started on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">Console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lockdown started on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">population</span><span class="o">.</span><span class="n">is_locked_down</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">elif</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Restarting lockdown on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">Console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Restarting lockdown on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">population</span><span class="o">.</span><span class="n">is_locked_down</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">elif</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&gt;</span> <span class="mi">3000</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Re-entering relaxed (yellow) on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">Console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Re-entering relaxed (yellow) on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">elif</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entering relaxed (yellow) on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">Console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entering relaxed (yellow) on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="mi">1</span>
 
-    <span class="k">elif</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entering relaxed (green) on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">Console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entering relaxed (green) on </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="mi">2</span>
 
     <span class="k">return</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span>
 
@@ -266,7 +294,7 @@ copy in the below;</p>
     <span class="n">state</span> <span class="o">=</span> <span class="n">get_lockdown_state</span><span class="p">(</span><span class="n">population</span><span class="p">)</span>
     <span class="n">scale_rate</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">user_params</span><span class="p">[</span><span class="s2">&quot;scale_rate&quot;</span><span class="p">][</span><span class="n">state</span><span class="p">]</span>
     <span class="n">can_work</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">user_params</span><span class="p">[</span><span class="s2">&quot;can_work&quot;</span><span class="p">][</span><span class="n">state</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lockdown </span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="s2">: scale_rate = </span><span class="si">{</span><span class="n">scale_rate</span><span class="si">}</span><span class="s2">, can_work = </span><span class="si">{</span><span class="n">can_work</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;State&quot;</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">scale_rate</span><span class="p">,</span> <span class="n">can_work</span><span class="p">])</span>
 
     <span class="n">advance_infprob</span><span class="p">(</span><span class="n">scale_rate</span><span class="o">=</span><span class="n">scale_rate</span><span class="p">,</span>
                     <span class="n">network</span><span class="o">=</span><span class="n">network</span><span class="p">,</span> <span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">,</span>
@@ -283,10 +311,10 @@ copy in the below;</p>
     <span class="n">state</span> <span class="o">=</span> <span class="n">get_lockdown_state</span><span class="p">(</span><span class="n">population</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">is_locked_down</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Locked down&quot;</span><span class="p">)</span>
+        <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Locked down&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">advance_lockdown</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normal working week day&quot;</span><span class="p">)</span>
+        <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Normal working week day&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">iterate_working_week</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">network</span><span class="p">,</span>
                                     <span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">,</span>
                                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -303,58 +331,74 @@ meaning no lockdown, <code class="docutils literal notranslate"><span class="pre
 it returns the <code class="docutils literal notranslate"><span class="pre">advance_lockdown</span></code> function that we’ve defined.</p>
 <p>This <code class="docutils literal notranslate"><span class="pre">advance_lockdown</span></code> function obtains the <code class="docutils literal notranslate"><span class="pre">scale_rate</span></code> and
 <code class="docutils literal notranslate"><span class="pre">can_work</span></code> custom user parameters from the
-<a class="reference internal" href="../../api/generated/metawards.Parameters.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a> objects in the model
-<a class="reference internal" href="../../api/generated/metawards.Network.html#metawards.Network" title="metawards.Network"><code class="xref py py-class docutils literal notranslate"><span class="pre">Network</span></code></a>.</p>
+<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a> objects in the model
+<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Network" title="metawards.Network"><code class="xref py py-class docutils literal notranslate"><span class="pre">Network</span></code></a>.</p>
 <p>It calls <a class="reference internal" href="../../api/generated/metawards.iterators.advance_infprob.html#metawards.iterators.advance_infprob" title="metawards.iterators.advance_infprob"><code class="xref py py-meth docutils literal notranslate"><span class="pre">advance_infprob()</span></code></a> with
 the set <code class="docutils literal notranslate"><span class="pre">scale_rate</span></code> scaling factor, before calling
 <a class="reference internal" href="../../api/generated/metawards.iterators.advance_play.html#metawards.iterators.advance_play" title="metawards.iterators.advance_play"><code class="xref py py-meth docutils literal notranslate"><span class="pre">advance_play()</span></code></a>, and then, if
 <code class="docutils literal notranslate"><span class="pre">can_work</span></code> is “True”, <a class="reference internal" href="../../api/generated/metawards.iterators.advance_fixed.html#metawards.iterators.advance_fixed" title="metawards.iterators.advance_fixed"><code class="xref py py-meth docutils literal notranslate"><span class="pre">advance_fixed()</span></code></a>.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">metawards</span></code> using the below commands and see what you get;</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d lurgy3 -a ExtraSeedsLondon.dat  -u lockdown.inp --iterator lockdown
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d lurgy3 -a ExtraSeedsLondon.dat  -u lockdown.inp --iterator lockdown --debug
 metawards-plot -i output/results.csv.bz2
 </pre></div>
 </div>
 <p>I see;</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">33</span> <span class="mi">4880</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56074296</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">842</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">4625</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">2314</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">827</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081235</span>
-<span class="n">Normal</span> <span class="n">working</span> <span class="n">week</span> <span class="n">day</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 36 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                            Normal working week day                     lockdown.py:63
+S: 56070689  E: 1663  I: 5889  R: 3836  IW: 1352  POPULATION: 56082077
+Number of infections: 7552
 
-<span class="mi">34</span> <span class="mi">5467</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56072094</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">1071</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5163</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">3749</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">1408</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081006</span>
-<span class="n">Lockdown</span> <span class="n">started</span> <span class="n">on</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">26</span>
-<span class="n">Locked</span> <span class="n">down</span>
-<span class="n">Lockdown</span> <span class="mi">0</span><span class="p">:</span> <span class="n">scale_rate</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">can_work</span> <span class="o">=</span> <span class="mf">0.0</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 37 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Lockdown started on 2020-06-26
+                                    Locked down                           lockdown.py:60
+                                        State                              lockdown.py:43
 
-<span class="mi">35</span> <span class="mi">6234</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56072011</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">2202</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5873</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">1991</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">82</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56079875</span>
-<span class="n">Locked</span> <span class="n">down</span>
-<span class="n">Lockdown</span> <span class="mi">0</span><span class="p">:</span> <span class="n">scale_rate</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">can_work</span> <span class="o">=</span> <span class="mf">0.0</span>
+        Name │ Value
+ ════════════╪═══════
+  scale_rate │ 0.05
+    can_work │ False
 
-<span class="o">...</span>
+S: 56070608  E: 2118  I: 7192  R: 2159  IW: 80  POPULATION: 56082077
+Number of infections: 9310
+...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 51 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Entering relaxed (yellow) on 2020-07-10
+                                    Locked down                           lockdown.py:60
+                                        State                              lockdown.py:43
 
-<span class="mi">46</span> <span class="mi">2700</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56071140</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">44</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2221</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">8672</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">38</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082033</span>
-<span class="n">Locked</span> <span class="n">down</span>
-<span class="n">Lockdown</span> <span class="mi">0</span><span class="p">:</span> <span class="n">scale_rate</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">can_work</span> <span class="o">=</span> <span class="mf">0.0</span>
+        Name │ Value
+ ════════════╪═══════
+  scale_rate │ 0.1
+    can_work │ False
 
-<span class="mi">47</span> <span class="mi">2265</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56071101</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">41</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">1889</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">9046</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">38</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082036</span>
-<span class="n">Entering</span> <span class="n">relaxed</span> <span class="p">(</span><span class="n">yellow</span><span class="p">)</span> <span class="n">on</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">08</span>
-<span class="n">Locked</span> <span class="n">down</span>
-<span class="n">Lockdown</span> <span class="mi">1</span><span class="p">:</span> <span class="n">scale_rate</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">can_work</span> <span class="o">=</span> <span class="mf">0.0</span>
+S: 56069562  E: 36  I: 1518  R: 10961  IW: 55  POPULATION: 56082077
+Number of infections: 1554
+...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 55 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Entering relaxed (green) on 2020-07-14
+                                    Locked down                           lockdown.py:60
+                                        State                              lockdown.py:43
 
-<span class="mi">48</span> <span class="mi">1930</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56071042</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">39</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">1601</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">9395</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">58</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082038</span>
-<span class="n">Locked</span> <span class="n">down</span>
-<span class="n">Lockdown</span> <span class="mi">1</span><span class="p">:</span> <span class="n">scale_rate</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">can_work</span> <span class="o">=</span> <span class="mf">0.0</span>
+        Name │ Value
+ ════════════╪═══════
+  scale_rate │ 0.1
+    can_work │ True
 
-<span class="o">...</span>
+S: 56069369  E: 46  I: 852  R: 11810  IW: 59  POPULATION: 56082077
+Number of infections: 898
+...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 187 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    Locked down                           lockdown.py:60
+                                        State                              lockdown.py:43
 
-<span class="mi">52</span> <span class="mi">1121</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56070864</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">36</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">933</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">10244</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">38</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082041</span>
-<span class="n">Entering</span> <span class="n">relaxed</span> <span class="p">(</span><span class="n">green</span><span class="p">)</span> <span class="n">on</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">13</span>
-<span class="n">Locked</span> <span class="n">down</span>
-<span class="n">Lockdown</span> <span class="mi">2</span><span class="p">:</span> <span class="n">scale_rate</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">can_work</span> <span class="o">=</span> <span class="mf">1.0</span>
+        Name │ Value
+ ════════════╪═══════
+  scale_rate │ 0.1
+    can_work │ True
+
+S: 56068649  E: 0  I: 0  R: 13428  IW: 0  POPULATION: 56082077
+Number of infections: 0
+Infection died ... Ending on day 188
 </pre></div>
 </div>
 <p>with the overview graph as here;</p>
@@ -445,13 +489,20 @@ be modelled using custom parameters and custom iterators.</p>
 <p>You can of course go further, e.g. by using your custom <code class="docutils literal notranslate"><span class="pre">advance</span> <span class="pre">function</span></code>
 to change actual parameters of the model or of the disease. Feel
 free to change any of the parameters in
-<a class="reference internal" href="../../api/generated/metawards.Parameters.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">network.params</span></code></a> or
-<a class="reference internal" href="../../api/generated/metawards.Disease.html#metawards.Disease" title="metawards.Disease"><code class="xref py py-class docutils literal notranslate"><span class="pre">network.params.disease_params</span></code></a> directly.
+<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">network.params</span></code></a> or
+<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Disease" title="metawards.Disease"><code class="xref py py-class docutils literal notranslate"><span class="pre">network.params.disease_params</span></code></a> directly.
 You could, for example, reduce the
-<a class="reference internal" href="../../api/generated/metawards.Parameters.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-data docutils literal notranslate"><span class="pre">network.params.dyn_dist_cutoff</span></code></a>
+<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-data docutils literal notranslate"><span class="pre">network.params.dyn_dist_cutoff</span></code></a>
 variable as lockdown starts. Or you could directly adjust
-<a class="reference internal" href="../../api/generated/metawards.Disease.html#metawards.Disease.beta" title="metawards.Disease.beta"><code class="xref py py-data docutils literal notranslate"><span class="pre">network.params.disease_params.beta[0]</span></code></a>.</p>
-<p>You can also add these parameters to your scan of adjustable parameters.
+<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Disease.beta" title="metawards.Disease.beta"><code class="xref py py-data docutils literal notranslate"><span class="pre">network.params.disease_params.beta[0]</span></code></a>.</p>
+<p>A good example of an
+<a class="reference external" href="https://github.com/metawards/MetaWards/tree/devel/examples/lockdown">alternative lockdown model is here</a>.
+This is provided as an example in the MetaWards GitHub repository, and
+enacts lockdown by directly changing the <code class="docutils literal notranslate"><span class="pre">scale_uv</span></code> infection parameter.
+This has the effect of reducing the contribution from each infected
+individual to the overall <em>force of infection</em> of each ward.</p>
+<p>There are many parameters to adjust. You can also add these
+to your scan to investigate their impact.
 The full list of built-in adjustable parameters is below;</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UV:
   Adjust the Parameters.UV parameter
@@ -468,9 +519,6 @@ daily_imports:
 daily_ward_vaccination_capacity:
   Adjust the Parameters.daily_ward_vaccination_capacity
   parameter
-
-data_dist_cutoff:
-  Adjust the Parameters.data_dist_cutoff parameter
 
 dyn_dist_cutoff:
   Adjust the Parameters.dyn_dist_cutoff parameter
@@ -541,7 +589,7 @@ work_to_play:
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -556,7 +604,6 @@ work_to_play:
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

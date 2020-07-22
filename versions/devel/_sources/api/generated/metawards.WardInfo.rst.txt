@@ -1,0 +1,37 @@
+metawards.WardInfo
+==================
+
+.. currentmodule:: metawards
+
+.. autoclass:: WardInfo
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~WardInfo.__init__
+      ~WardInfo.from_data
+      ~WardInfo.is_null
+      ~WardInfo.summary
+      ~WardInfo.to_data
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~WardInfo.authority
+      ~WardInfo.authority_code
+      ~WardInfo.code
+      ~WardInfo.name
+      ~WardInfo.region
+      ~WardInfo.region_code
+   
+   

@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,15 +38,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Command line options" href="metawards_help.html" />
-    <link rel="prev" title="Custom extractors" href="tutorial/part04/01_extractors.html" /> 
+    <link rel="prev" title="User input files" href="fileformats/userinput.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,13 +89,22 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
@@ -116,18 +127,30 @@
 <li class="toctree-l1"><a class="reference internal" href="cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -166,7 +189,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Usage</li>
     
@@ -185,7 +208,7 @@
         <a href="metawards_help.html" class="btn btn-neutral float-right" title="Command line options" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tutorial/part04/01_extractors.html" class="btn btn-neutral float-left" title="Custom extractors" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="fileformats/userinput.html" class="btn btn-neutral float-left" title="User input files" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -207,43 +230,75 @@ type;</p>
 </div>
 <p>This prints out the version of <code class="docutils literal notranslate"><span class="pre">metawards</span></code>, which should look something
 like this;</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>     *************************************
-     metawards version 0.3.0b+231.g99d1b6e
-     *************************************
-
-            -- Source information --
-repository: https://github.com/chryswoods/MetaWards
-                 branch: devel
-revision: 99d1b6e43f35e29954ecfeb7b03dcfdfb677bebc
-    last modified: 2020-04-26T16:22:20+0100
-
-          -- Additional information --
-Visit https://metawards.github.io for more information
-  about metawards, its authors and its license
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌──────────────────────────────────────────────────────────────────────┐
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║             MetaWards version 0.3.0b+646.gd74b998              ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║                     https://metawards.org                      ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║                       Source information                       ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│   • repository: https://github.com/chryswoods/MetaWards              │
+│   • branch: devel                                                    │
+│   • revision: d74b99899d107fff3bb600f97b46fb67946b1cf9               │
+│   • last modified: 2020-07-22T20:01:22+0100                          │
+│                                                                      │
+│  WARNING: MetaWardsData cannot be found! Please see                  │
+│  https://metawards.org/model_data for instructions on how to         │
+│  download and install this necessary data.                           │
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║                     Additional information                     ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│  Visit https://metawards.org for more information about metawards,   │
+│  its authors and its license                                         │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
 </pre></div>
 </div>
 <p>This version information gives you the provenance of this executable which
 should help in reproducing output. It is written to the top of all
 metawards outputs.</p>
 <p>If you see output like this, with <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> lines about the version
-being <code class="docutils literal notranslate"><span class="pre">dirty</span></code>…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   *****************************************
-   metawards version 0.3.0+58.g6e1f4c4.dirty
-   *****************************************
-
-            -- Source information --
-repository: https://github.com/metawards/MetaWards
-                 branch: devel
-revision: 6e1f4c45092ec345ee3673709d780ebe71ca0309
-    last modified: 2020-04-09T17:57:18+0100
-
-WARNING: This version has not been committed to git,
-WARNING: so you may not be able to recover the original
-WARNING: source code that was used to generate this run!
-
-          -- Additional information --
-Visit https://metawards.github.io for more informaion
-  about metawards, its authors and its license
+not having been committed to git…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌──────────────────────────────────────────────────────────────────────┐
+│                                                                      │
+│                                                                      │
+│             MetaWards version 0.12.0+17.gd839bca1.dirty              │
+│                                                                      │
+│                                                                      │
+│                        https://metawards.org                         │
+│                                                                      │
+│                          Source information                          │
+│                                                                      │
+│   • repository: https://github.com/metawards/MetaWards               │
+│   • branch: feature-mover-tutorial                                   │
+│   • revision: d839bca1e32e8c8b1814d7f72667e84ead1a59d7               │
+│   • last modified: 2020-05-20T13:01:14+0100                          │
+│                                                                      │
+│  WARNING: This version has not been committed to git, so you may     │
+│  not be able to recover the original source code that was used to    │
+│  generate this run!                                                  │
+│                                                                      │
+│                      MetaWardsData information                       │
+│                                                                      │
+│   • version: 0.5.0                                                   │
+│   • repository: https://github.com/metawards/MetaWardsData           │
+│   • branch: main                                                   │
+│                                                                      │
+│                        Additional information                        │
+│                                                                      │
+│  Visit https://metawards.org for more information about metawards,   │
+│  its authors and its license                                         │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
 </pre></div>
 </div>
 <p>then this means that your <code class="docutils literal notranslate"><span class="pre">metawards</span></code> executable has been built using
@@ -271,28 +326,38 @@ typing;</p>
 The most used and thus most important options are given first. These
 are;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">--input</span></code> : Specify the input file adjustable parameters that will be
+<li><code class="docutils literal notranslate"><span class="pre">--disease</span> <span class="pre">/</span> <span class="pre">-d</span></code> : Specify the name of the disease file to load.
+These files are described in <a class="reference external" href="model_data.html">Model data</a>.
+If the file exists in your path then that will be used. Otherwise the
+file will be
+searched for from the <code class="docutils literal notranslate"><span class="pre">MetaWardsData/diseases</span></code> directory. Note that
+you don’t need to specify the file type, as this is assumed to be
+<code class="docutils literal notranslate"><span class="pre">.json</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--input</span> <span class="pre">/</span> <span class="pre">-i</span></code> : Specify the input file adjustable parameters that will be
 explored for the model run. You must supply an input file to be
 able to run a model. This file is described below.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--line</span></code> : Specify the line number (or line numbers) of adjustable
+<li><code class="docutils literal notranslate"><span class="pre">--line</span> <span class="pre">/</span> <span class="pre">-l</span></code> : Specify the line number (or line numbers) of adjustable
 parameter sets from the input file. Line numbers are counted from 0, and
 multiple line numbers can be given, e.g. <code class="docutils literal notranslate"><span class="pre">--line</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">7-10</span></code> will
 read from lines 3, 5, 7, 8, 9, and 10 (remembering that the first line
 of the file is line 0). If multiple lines are read, then multiple model
 runs will be performed.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--repeats</span></code> : specify the number of times model runs for each
+<li><code class="docutils literal notranslate"><span class="pre">--repeats</span> <span class="pre">/</span> <span class="pre">-r</span></code> : specify the number of times model runs for each
 adjustable parameter set should be repeated. MetaWards model runs
 are stochastic, based on random numbers. The results for multiple
 runs must thus be processed to derive meaning.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--additional</span></code> : specify the file (or files) containing additional
+<li><code class="docutils literal notranslate"><span class="pre">--additional</span> <span class="pre">/</span> <span class="pre">-a</span></code> : specify the file (or files) containing additional
 seeds. These files are described in <a class="reference external" href="model_data.html">Model data</a>.
 You can specify as many or few files as you wish. If the file exists
 in your path then that will be used. Otherwise the file will be
-searched for from the <code class="docutils literal notranslate"><span class="pre">MetaWardsData/extra_seeds</span></code> directory.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--output</span></code> : specify the location to place all output files. By default
+searched for from the <code class="docutils literal notranslate"><span class="pre">MetaWardsData/extra_seeds</span></code> directory.
+Note that you can write the additional seeds directly, rather
+than using a file. To see how, take a look at
+<a class="reference internal" href="tutorial/part08/01_networks.html"><span class="doc">this section of the tutorial</span></a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">/</span> <span class="pre">-o</span></code> : specify the location to place all output files. By default
 this will be in a new directory called <code class="docutils literal notranslate"><span class="pre">output</span></code>. A description of the
 output files is below.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--seed</span></code> : specify the random number seed to use for a run. By default
+<li><code class="docutils literal notranslate"><span class="pre">--seed</span> <span class="pre">/</span> <span class="pre">-s</span></code> : specify the random number seed to use for a run. By default
 a truly random seed will be used. This will be printed into the output,
 so that you can use it together with this option to reproduce a run.
 The same version of <code class="docutils literal notranslate"><span class="pre">metawards</span></code> will reproduce the same output when
@@ -301,7 +366,7 @@ same number of threads.</li>
 <li><code class="docutils literal notranslate"><span class="pre">--start-date</span></code> : specify the date of <em>day zero</em> of the model outbreak.
 If this isn’t specified then this defaults to the current date. This
 recognises any date that is understood by
-<a class="reference external" href="https://dateparser.readthedocs.io/en/latest/#usage">dateparser</a>,
+<a class="reference internal" href="api/index_api_MetaWards.html#metawards.Interpret.date" title="metawards.Interpret.date"><code class="xref py py-func docutils literal notranslate"><span class="pre">metawards.Interpret.date()</span></code></a>,
 which includes dates like <em>today</em>, <em>tomorrow</em>, <em>Monday</em>, <em>Jan 2020</em> etc.
 The start date is used to trigger events based on day of week or
 date within a model outbreak (e.g. is the day a weekend)</li>
@@ -326,24 +391,20 @@ Note that this option is set automatically for you if you are
 </ul>
 <p>Using these options, a typical <code class="docutils literal notranslate"><span class="pre">metawards</span></code> run can be performed
 using;</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards --input params.csv --line <span class="m">0</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d ncov -a <span class="s2">&quot;1  5  1&quot;</span>
 </pre></div>
 </div>
 <p>This python port of <code class="docutils literal notranslate"><span class="pre">metawards</span></code> was written to reproduce the output
 of the original C code. This original code is bundled with this
-port and is in the <code class="docutils literal notranslate"><span class="pre">original</span></code> directory. You can reproduce the output
-of this code using the command;</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards --input tests/data/ncovparams.csv --line <span class="m">0</span> --seed <span class="m">15324</span> --nthreads <span class="m">1</span> --additional ExtraSeedsBrighton.dat
-</pre></div>
-</div>
-<p>The output from this command can be compared to that from the original
-C program in <code class="docutils literal notranslate"><span class="pre">original/expected_test_output.txt</span></code>. Comparing against this
-original output is also the purpose of the unit test
-<code class="docutils literal notranslate"><span class="pre">tests/test_integration.py</span></code>.</p>
+port and is in the <code class="docutils literal notranslate"><span class="pre">original</span></code> directory. There are several integration
+tests included in the unit testing suite that validate that the
+Python code still reproduces the results generated using the C code.</p>
 </div>
 <div class="section" id="understanding-the-input">
 <h2>Understanding the input<a class="headerlink" href="#understanding-the-input" title="Permalink to this headline">¶</a></h2>
-<p>The input file for <code class="docutils literal notranslate"><span class="pre">metawards</span></code> is a simple set of lines containing
+<p>The input file for <code class="docutils literal notranslate"><span class="pre">metawards</span></code> is a
+<a class="reference internal" href="fileformats/design.html"><span class="doc">design file</span></a> that can be as
+simple as a set of lines containing
 five comma-separated or space-separated values per line, e.g.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.95</span><span class="p">,</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">0.19</span><span class="p">,</span><span class="mf">0.91</span><span class="p">,</span><span class="mf">0.91</span>
 <span class="mf">0.90</span><span class="p">,</span><span class="mf">0.93</span><span class="p">,</span><span class="mf">0.18</span><span class="p">,</span><span class="mf">0.92</span><span class="p">,</span><span class="mf">0.90</span>
@@ -365,71 +426,10 @@ a title line, e.g.</p>
 </div>
 <p>specifies that you want to adjust the <code class="docutils literal notranslate"><span class="pre">beta[2]</span></code>, <code class="docutils literal notranslate"><span class="pre">progress[2]</span></code> and
 <code class="docutils literal notranslate"><span class="pre">progress[3]</span></code> parameters to the specified values.</p>
-<p>The full list of parameters you can adjust are listed below;</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UV:
-  Adjust the Parameters.UV parameter
-
-beta:
-  Adjust the Disease.beta parameter
-
-contrib_foi:
-  Adjust the Disease.contrib_foi parameter
-
-daily_imports:
-  Adjust the Parameters.daily_imports parameter
-
-daily_ward_vaccination_capacity:
-  Adjust the Parameters.daily_ward_vaccination_capacity
-  parameter
-
-data_dist_cutoff:
-  Adjust the Parameters.data_dist_cutoff parameter
-
-dyn_dist_cutoff:
-  Adjust the Parameters.dyn_dist_cutoff parameter
-
-dyn_play_at_home:
-  Adjust the Parameters.dyn_play_at_home parameter
-
-global_detection_thresh:
-  Adjust the Parameters.global_detection_thresh parameter
-
-initial_inf:
-  Adjust the Parameters.initial_inf parameter
-
-length_day:
-  Adjust the Parameters.length_day parameter
-
-local_vaccination_thesh:
-  Adjust the Parameters.local_vaccination_thresh parameter
-
-neighbour_weight_threshold:
-  Adjust the Parameters.neighbour_weight_threshold parameter
-
-play_to_work:
-  Adjust the Parameters.play_to_work parameter
-
-plength_day:
-  Adjust the Parameters.plength_day parameter
-
-progress:
-  Adjust the Disease.progress parameter
-
-static_play_at_home:
-  Adjust the Parameters.static_play_at_home parameter
-
-too_ill_to_move:
-  Adjust the Disease.too_ill_to_move parameter
-
-user:
-  Adjust a custom user-supplied parameter, held in
-  Parameters.user_params[name]. Set a user parameter
-  called &#39;name&#39; via &#39;user.name&#39; or &#39;.name&#39;.
-
-work_to_play:
-  Adjust the Parameters.work_to_play parameter
-</pre></div>
-</div>
+<p>This file can adjust a lot more, include user-specified parameters,
+and control the numbers of repeats and output directories. Please
+see the <a class="reference internal" href="fileformats/design.html"><span class="doc">full file format description</span></a>
+for more information.</p>
 </div>
 <div class="section" id="understanding-the-output">
 <h2>Understanding the output<a class="headerlink" href="#understanding-the-output" title="Permalink to this headline">¶</a></h2>
@@ -445,11 +445,16 @@ to the screen, e.g.</p>
 whether they become infected, and then progress through the outbreak.
 The codes mean;</p>
 <ul class="simple">
-<li><em class="xref py py-obj">S</em> : number who are susceptible to infection (and not infected)</li>
-<li><em class="xref py py-obj">E</em> : number who are infected but not yet infectious (latent)</li>
-<li><em class="xref py py-obj">I</em> : number who are infected, infectious and symptomatic</li>
-<li><em class="xref py py-obj">IW</em> : number of wards that have at least one infected individual</li>
-<li><em class="xref py py-obj">R</em> : number who are recovered from the infection and thus immune</li>
+<li><strong>S</strong>: The number of the population who are <em>susceptible</em> to infection</li>
+<li><strong>E</strong>: The number of the population who are <em>latent</em>, meaning they are
+infected, but not yet infectious.</li>
+<li><strong>I</strong>: The number of the population who are <em>infected</em>, meaning they
+have symptoms and are infectious</li>
+<li><strong>R</strong>: The number of the population who are removed from being susceptible,
+either because they have been newly infected that day, or because they
+have recovered from the infection and are no longer susceptible to infection</li>
+<li><strong>IW</strong>: The number of electoral wards that contain at least one
+individual who was newly infected that day.</li>
 </ul>
 <p>As well as being printed to the screen, this data is also written
 to the CSV file <code class="docutils literal notranslate"><span class="pre">output/results.csv.bz2</span></code> for easy reading and analysis
@@ -469,6 +474,13 @@ file for easy combined analysis.</p>
 </div>
 <p>We run a good online workshop on
 <a class="reference external" href="https://milliams.com/courses/data_analysis_python/index.html">how to use pandas for data analysis</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">I</span></code> and <code class="docutils literal notranslate"><span class="pre">R</span></code> stages are just the defaults, and <code class="docutils literal notranslate"><span class="pre">metawards</span></code>
+does support custom disease stages which may not have <code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">I</span></code> or <code class="docutils literal notranslate"><span class="pre">R</span></code>.
+To learn more, take a look at the
+<a class="reference internal" href="tutorial/part07/05_named_stages.html"><span class="doc">tutorial on custom named stages</span></a>.</p>
+</div>
 <div class="section" id="metawards-plot">
 <h3>metawards-plot<a class="headerlink" href="#metawards-plot" title="Permalink to this headline">¶</a></h3>
 <p>For quick and simple plots, <code class="docutils literal notranslate"><span class="pre">metawards</span></code> comes with the command-line
@@ -496,7 +508,7 @@ The full help is <a class="reference internal" href="metawards_plot_help.html"><
         <a href="metawards_help.html" class="btn btn-neutral float-right" title="Command line options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tutorial/part04/01_extractors.html" class="btn btn-neutral float-left" title="Custom extractors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="fileformats/userinput.html" class="btn btn-neutral float-left" title="User input files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -506,7 +518,7 @@ The full help is <a class="reference internal" href="metawards_plot_help.html"><
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -521,7 +533,6 @@ The full help is <a class="reference internal" href="metawards_plot_help.html"><
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

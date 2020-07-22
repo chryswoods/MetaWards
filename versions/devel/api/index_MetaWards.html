@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MetaWards API Detail" href="index_api_MetaWards.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,17 +89,37 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../snaglist.html">Snag list</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
@@ -108,21 +130,25 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_iterators.html">MetaWards.iterators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_movers.html">MetaWards.movers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_analysis.html">MetaWards.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_utils.html">MetaWards.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_themes.html">MetaWards.themes</a></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -161,7 +187,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="index.html">Documentation</a> &raquo;</li>
         
@@ -197,61 +223,61 @@
 build and run MetaWards models.</p>
 <p>The package centers around a few core objects:</p>
 <dl class="docutils">
-<dt><a class="reference internal" href="generated/metawards.Nodes.html#metawards.Nodes" title="metawards.Nodes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nodes</span></code></a> / <a class="reference internal" href="generated/metawards.Node.html#metawards.Node" title="metawards.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></dt>
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.Nodes" title="metawards.Nodes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nodes</span></code></a> / <a class="reference internal" href="index_api_MetaWards.html#metawards.Node" title="metawards.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a></dt>
 <dd>These represent the individual electoral wards in
 which progress of the disease is tracked.</dd>
-<dt><a class="reference internal" href="generated/metawards.Links.html#metawards.Links" title="metawards.Links"><code class="xref py py-class docutils literal notranslate"><span class="pre">Links</span></code></a> / <a class="reference internal" href="generated/metawards.Link.html#metawards.Link" title="metawards.Link"><code class="xref py py-class docutils literal notranslate"><span class="pre">Link</span></code></a></dt>
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.Links" title="metawards.Links"><code class="xref py py-class docutils literal notranslate"><span class="pre">Links</span></code></a> / <a class="reference internal" href="index_api_MetaWards.html#metawards.Link" title="metawards.Link"><code class="xref py py-class docutils literal notranslate"><span class="pre">Link</span></code></a></dt>
 <dd>These represent the connections between electoral wards,
 including how people commute between wards for work. These
 therefore provide the routes via which the disease
 can spread.</dd>
-<dt><a class="reference internal" href="generated/metawards.Parameters.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></dt>
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></dt>
 <dd>This is the holder of all model parameters that can describe,
 e.g. the proportion of day versus night, cutoff distance
 for transmission between wards etc.
 Example parameter sets are held in the
 <a class="reference external" href="https://github.com/metawards/MetaWardsData">MetaWardsData</a>
 repository.</dd>
-<dt><a class="reference internal" href="generated/metawards.Disease.html#metawards.Disease" title="metawards.Disease"><code class="xref py py-class docutils literal notranslate"><span class="pre">Disease</span></code></a></dt>
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.Disease" title="metawards.Disease"><code class="xref py py-class docutils literal notranslate"><span class="pre">Disease</span></code></a></dt>
 <dd>This is the holder of disease parameters, used to change the model
 to represent different types of disease outbreaks. Different
 disease models are held in the
 <a class="reference external" href="https://github.com/metawards/MetaWardsData">MetaWardsData</a>
 repository.</dd>
-<dt><a class="reference internal" href="generated/metawards.InputFiles.html#metawards.InputFiles" title="metawards.InputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputFiles</span></code></a></dt>
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.InputFiles" title="metawards.InputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputFiles</span></code></a></dt>
 <dd>This holds information about all of the input files that are
 used to build the network of wards and links. All of the
 input data is held in the
 <a class="reference external" href="https://github.com/metawards/MetaWardsData">MetaWardsData</a>
 repository.</dd>
-<dt><a class="reference internal" href="generated/metawards.Network.html#metawards.Network" title="metawards.Network"><code class="xref py py-class docutils literal notranslate"><span class="pre">Network</span></code></a></dt>
-<dd>This is the complete network of <a class="reference internal" href="generated/metawards.Nodes.html#metawards.Nodes" title="metawards.Nodes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nodes</span></code></a> and
-<a class="reference internal" href="generated/metawards.Links.html#metawards.Links" title="metawards.Links"><code class="xref py py-class docutils literal notranslate"><span class="pre">Links</span></code></a> built using
-the data loaded from the <a class="reference internal" href="generated/metawards.InputFiles.html#metawards.InputFiles" title="metawards.InputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputFiles</span></code></a>,
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.Network" title="metawards.Network"><code class="xref py py-class docutils literal notranslate"><span class="pre">Network</span></code></a></dt>
+<dd>This is the complete network of <a class="reference internal" href="index_api_MetaWards.html#metawards.Nodes" title="metawards.Nodes"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nodes</span></code></a> and
+<a class="reference internal" href="index_api_MetaWards.html#metawards.Links" title="metawards.Links"><code class="xref py py-class docutils literal notranslate"><span class="pre">Links</span></code></a> built using
+the data loaded from the <a class="reference internal" href="index_api_MetaWards.html#metawards.InputFiles" title="metawards.InputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputFiles</span></code></a>,
 set up to model the
 disease whose parameters are in a
-<a class="reference internal" href="generated/metawards.Disease.html#metawards.Disease" title="metawards.Disease"><code class="xref py py-class docutils literal notranslate"><span class="pre">Disease</span></code></a>, using model run
-parameters held in a <a class="reference internal" href="generated/metawards.Parameters.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a> object.
+<a class="reference internal" href="index_api_MetaWards.html#metawards.Disease" title="metawards.Disease"><code class="xref py py-class docutils literal notranslate"><span class="pre">Disease</span></code></a>, using model run
+parameters held in a <a class="reference internal" href="index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a> object.
 A Network is self-contained, containing everything needed for a model run.
-The <a class="reference internal" href="generated/metawards.Network.html#metawards.Network.run" title="metawards.Network.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> function runs the model.</dd>
-<dt><a class="reference internal" href="generated/metawards.VariableSet.html#metawards.VariableSet" title="metawards.VariableSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableSet</span></code></a> / <a class="reference internal" href="generated/metawards.VariableSets.html#metawards.VariableSets" title="metawards.VariableSets"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableSets</span></code></a></dt>
+The <a class="reference internal" href="index_api_MetaWards.html#metawards.Network.run" title="metawards.Network.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> function runs the model.</dd>
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.VariableSet" title="metawards.VariableSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableSet</span></code></a> / <a class="reference internal" href="index_api_MetaWards.html#metawards.VariableSets" title="metawards.VariableSets"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableSets</span></code></a></dt>
 <dd>The model contains adjustable variables,
 which must be adjusted so that the model can match observed
-real-life data. A <a class="reference internal" href="generated/metawards.VariableSet.html#metawards.VariableSet" title="metawards.VariableSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableSet</span></code></a> contains a set
+real-life data. A <a class="reference internal" href="index_api_MetaWards.html#metawards.VariableSet" title="metawards.VariableSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableSet</span></code></a> contains a set
 of variables to
-be adjusted, while <a class="reference internal" href="generated/metawards.VariableSets.html#metawards.VariableSets" title="metawards.VariableSets"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableSets</span></code></a> is a collection of such
+be adjusted, while <a class="reference internal" href="index_api_MetaWards.html#metawards.VariableSets" title="metawards.VariableSets"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariableSets</span></code></a> is a collection of such
 changes that should be explored over multiple model runs.</dd>
-<dt><a class="reference internal" href="generated/metawards.Population.html#metawards.Population" title="metawards.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">Population</span></code></a> / <a class="reference internal" href="generated/metawards.Populations.html#metawards.Populations" title="metawards.Populations"><code class="xref py py-class docutils literal notranslate"><span class="pre">Populations</span></code></a></dt>
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.Population" title="metawards.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">Population</span></code></a> / <a class="reference internal" href="index_api_MetaWards.html#metawards.Populations" title="metawards.Populations"><code class="xref py py-class docutils literal notranslate"><span class="pre">Populations</span></code></a></dt>
 <dd>A model run will result in a trajectory of
 changes in populations of people who have progressed along
 different stages of the disease (e.g. from being
 <em>susceptible to infection</em> (S), to being
 <em>removed from the outbreak</em> (R) - either because they
 have recovered or have sadly perished). A
-<a class="reference internal" href="generated/metawards.Population.html#metawards.Population" title="metawards.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">Population</span></code></a> holds
+<a class="reference internal" href="index_api_MetaWards.html#metawards.Population" title="metawards.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">Population</span></code></a> holds
 the numbers in each state for a single day in the outbreak,
-while <a class="reference internal" href="generated/metawards.Populations.html#metawards.Populations" title="metawards.Populations"><code class="xref py py-class docutils literal notranslate"><span class="pre">Populations</span></code></a> holds the full trajectory.</dd>
-<dt><a class="reference internal" href="generated/metawards.OutputFiles.html#metawards.OutputFiles" title="metawards.OutputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">OutputFiles</span></code></a></dt>
+while <a class="reference internal" href="index_api_MetaWards.html#metawards.Populations" title="metawards.Populations"><code class="xref py py-class docutils literal notranslate"><span class="pre">Populations</span></code></a> holds the full trajectory.</dd>
+<dt><a class="reference internal" href="index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">OutputFiles</span></code></a></dt>
 <dd>Manages all of the output files that are produced by the program.
 This can be told to auto-compress (bzip2) all files as they
 are being written.</dd>
@@ -286,7 +312,7 @@ described <a class="reference internal" href="index_api_MetaWards.html"><span cl
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -301,7 +327,6 @@ described <a class="reference internal" href="index_api_MetaWards.html"><span cl
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

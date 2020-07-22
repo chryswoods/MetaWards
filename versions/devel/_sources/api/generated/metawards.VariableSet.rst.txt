@@ -16,9 +16,12 @@ metawards.VariableSet
       ~VariableSet.__init__
       ~VariableSet.adjust
       ~VariableSet.adjustable_help
+      ~VariableSet.create_fingerprint
       ~VariableSet.extract_values
       ~VariableSet.fingerprint
+      ~VariableSet.is_empty
       ~VariableSet.make_compatible_with
+      ~VariableSet.output_dir
       ~VariableSet.read
       ~VariableSet.repeat_index
       ~VariableSet.variable_names

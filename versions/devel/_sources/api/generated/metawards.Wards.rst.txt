@@ -1,0 +1,42 @@
+metawards.Wards
+===============
+
+.. currentmodule:: metawards
+
+.. autoclass:: Wards
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Wards.__init__
+      ~Wards.add
+      ~Wards.assert_sane
+      ~Wards.contains
+      ~Wards.from_data
+      ~Wards.from_json
+      ~Wards.get
+      ~Wards.getinfo
+      ~Wards.harmonise
+      ~Wards.index
+      ~Wards.insert
+      ~Wards.is_resolved
+      ~Wards.num_play_links
+      ~Wards.num_players
+      ~Wards.num_work_links
+      ~Wards.num_workers
+      ~Wards.population
+      ~Wards.scale
+      ~Wards.to_data
+      ~Wards.to_json
+      ~Wards.unresolved_wards
+   
+   
+
+   
+   
+   

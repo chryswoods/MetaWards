@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Command line options" href="metawards_plot_help.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,13 +89,22 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="usage.html">Usage</a><ul class="current">
@@ -110,18 +121,30 @@
 <li class="toctree-l1"><a class="reference internal" href="cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -160,7 +183,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="usage.html">Usage</a> &raquo;</li>
         
@@ -193,28 +216,42 @@
   <div class="section" id="command-line-options">
 <h1>Command line options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h1>
 <p>The full set of command line options for metawards is below;</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: metawards [-h] [--version] [-i INPUT] [-l [LINE [LINE ...]]]
-                 [-r REPEATS] [-s SEED] [-a [ADDITIONAL [ADDITIONAL ...]]]
-                 [-o OUTPUT] [-d DISEASE] [-m MODEL] [--start-date START_DATE]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: metawards [-h] [--version] [-c CONFIG] [-i INPUT]
+                 [-l [LINE [LINE ...]]] [-r [REPEATS [REPEATS ...]]] [-s SEED]
+                 [-a [ADDITIONAL [ADDITIONAL ...]]] [-o OUTPUT] [-d DISEASE]
+                 [-m MODEL] [-D DEMOGRAPHICS] [--start-date START_DATE]
                  [--start-day START_DAY] [-p PARAMETERS] [-R REPOSITORY]
                  [-P POPULATION] [-n NSTEPS] [-u USER_VARIABLES]
-                 [--iterator ITERATOR] [--extractor EXTRACTOR] [--UV UV]
-                 [--nthreads NTHREADS] [--nprocs NPROCS] [--hostfile HOSTFILE]
+                 [--iterator ITERATOR] [--extractor EXTRACTOR] [--mixer MIXER]
+                 [--mover MOVER] [--star-is-E] [--star-is-R] [--disable-star]
+                 [--UV UV] [--theme THEME] [--no-spinner] [--no-progress]
+                 [--debug] [--debug-level DEBUG_LEVEL]
+                 [--outdir-scheme OUTDIR_SCHEME] [--nthreads NTHREADS]
+                 [--nprocs NPROCS] [--hostfile HOSTFILE]
                  [--cores-per-node CORES_PER_NODE] [--auto-bzip]
                  [--no-auto-bzip] [--force-overwrite-output]
                  [--max-nodes MAX_NODES] [--max-links MAX_LINKS] [--profile]
                  [--no-profile] [--mpi] [--scoop]
 
-MetaWards epidemic modelling - see https://github.com/metawards/metawards for
-more information
+MetaWards epidemic modelling - see https://metawards.org for more information.
+Args that start with &#39;--&#39; (eg. --version) can also be set in a config file
+(specified via -c). Config file syntax allows: key=value, flag=true,
+stuff=[a,b,c] (for details, see syntax at https://goo.gl/R74nmi). If an arg is
+specified in more than one place, then commandline values override environment
+variables which override config file values which override defaults.
 
 optional arguments:
   -h, --help            show this help message and exit
   --version             Print the version information about metawards
+                        (default: None)
+  -c CONFIG, --config CONFIG
+                        Config file that can be used to set some or all of
+                        these command line options. (default: None)
   -i INPUT, --input INPUT
                         Input file for the simulation that specifies the
                         adjustable parameters to change for each run of the
                         model. You must supply some input to run a model!
+                        (default: None)
   -l [LINE [LINE ...]], --line [LINE [LINE ...]]
                         Line number (or line numbers) containing the values of
                         adjustable parameters to run for this run (or runs) of
@@ -225,34 +262,46 @@ optional arguments:
                         12,13,14&#39; etc. Note that the line numbers are
                         0-indexed, e.g. the first line of the file is line 0.
                         Ranges are inclusive, so 3-5 is the same as 3 4 5
-  -r REPEATS, --repeats REPEATS
+                        (default: None)
+  -r [REPEATS [REPEATS ...]], --repeats [REPEATS [REPEATS ...]]
                         The number of repeat runs of the model to perform for
                         each value of the adjustable parameters. By default
                         only a single run will be performed for each set of
-                        adjustable parameters
+                        adjustable parameters. This complements the &#39;repeat&#39;
+                        column in the input file (in which case the repeats
+                        are multipled). Also, multiple repeat values can be
+                        given, in which case each value corresponds to a
+                        different line in the input file (default: None)
   -s SEED, --seed SEED  Random number seed for this run (default is to use a
-                        random seed)
+                        random seed) (default: None)
   -a [ADDITIONAL [ADDITIONAL ...]], --additional [ADDITIONAL [ADDITIONAL ...]]
                         File (or files) containing additional seed of outbreak
                         for the model. These are used to seed additional
                         infections on specific days at different locations
-                        during a model run
+                        during a model run (default: None)
   -o OUTPUT, --output OUTPUT
                         Path to the directory in which to place all output
                         files (default &#39;output&#39;). This directory will be
                         subdivided if multiple adjustable parameter sets or
-                        repeats are used.
+                        repeats are used. (default: None)
   -d DISEASE, --disease DISEASE
                         Name of the disease to model (default is &#39;ncov&#39;)
+                        (default: None)
   -m MODEL, --model MODEL
                         Name of the input model data set for the network
-                        (default is &#39;2011Data&#39;)
+                        (default is &#39;2011Data&#39;) (default: None)
+  -D DEMOGRAPHICS, --demographics DEMOGRAPHICS
+                        Name of the demographics file that provides
+                        information about how a population is modelled as
+                        multiple demographics. If this is not supplied then
+                        the population is modelled as a single demographic
+                        (default: None)
   --start-date START_DATE
                         Date of the start of the model outbreak. This accepts
                         dates either is iso-format, or fuzzy dates such as
                         &#39;monday&#39;, &#39;tomorrow&#39; etc. This is used to work out
                         which days are weekends, or to make it easier to
-                        specify time-based events.
+                        specify time-based events. (default: None)
   --start-day START_DAY
                         The start day of the model outbreak. By default the
                         model outbreak starts on day zero (0), with each step
@@ -261,73 +310,118 @@ optional arguments:
                         want to more quickly reach time based events. Note
                         that the passed &#39;--start-date&#39; is always day 0, so day
                         10 has a date which is 10 days after start-date
+                        (default: None)
   -p PARAMETERS, --parameters PARAMETERS
                         Name of the input parameter set used to control the
-                        simulation (default &#39;march29&#39;)
+                        simulation (default &#39;march29&#39;) (default: None)
   -R REPOSITORY, --repository REPOSITORY
                         Path to the MetaWardsData repository. If unspecified
                         this defaults to the value in the environment variable
                         METAWARDSDATA or, if that isn&#39;t specified, to
-                        $HOME/GitHub/MetaWardsData
+                        $HOME/GitHub/MetaWardsData [env var: METAWARDSDATA]
+                        (default: None)
   -P POPULATION, --population POPULATION
-                        Initial population (default 57104043)
+                        Initial population (default 1000) (default: None)
   -n NSTEPS, --nsteps NSTEPS
                         Maximum number of steps (days) to run for the
                         simulation. Each step represents one day in the
                         outbreak (default is to run for a maximum of two years
-                        - 730 days)
+                        - 730 days) (default: None)
   -u USER_VARIABLES, --user-variables USER_VARIABLES
                         Name of the file containing user-defined custom
                         variables. These provide extra information that can be
                         read by the custom integrators or custom extractors.
+                        (default: None)
   --iterator ITERATOR   Name of the iterator to use to advance the outbreak at
                         each step (day). For a full explanation see the
-                        tutorial at https://metawards.github.io
+                        tutorial at https://metawards.org (default: None)
   --extractor EXTRACTOR
                         Name of the extractor to use to extract information
                         during a model run. For a full explanation see the
-                        tutorial at https://metawards.github.io
+                        tutorial at https://metawards.org (default: None)
+  --mixer MIXER         Name of the mixer to use to mix information from
+                        multiple demographics together during a model run. For
+                        a full explanation see the tutorial at
+                        https://metawards.org (default: None)
+  --mover MOVER         Name of the mover to use to move the population
+                        between demographics during a model run. For a full
+                        explanation see the tutorial at https://metawards.org
+                        (default: None)
+  --star-is-E           Set the state 0 (* state) as an extra latent state, as
+                        opposed to an extra R state (default: None)
+  --star-is-R           Set the state 0 (* state) as an extra R state (the
+                        default). Individuals in this state are calculated as
+                        &#39;R&#39;, even though they will progress on the next day to
+                        the E state (default: None)
+  --disable-star        Disable the * state. Now state 0 is the first and only
+                        latent state. There is no star state. (default: None)
   --UV UV               Value for the UV parameter for the model (default is
-                        0.0)
+                        0.0) (default: None)
+  --theme THEME         The theme to use to color the output. Use &#39;--theme
+                        simple&#39; if you prefer a simple and colorless output.
+                        (default: None)
+  --no-spinner          Disable the spinner that spins when little output is
+                        being printed to the screen. (default: None)
+  --no-progress         Disable the progress bars that show progress.
+                        (default: None)
+  --debug               Enable debugging output. This is useful for MetaWards
+                        developers or if you are writing your own iterators,
+                        extractors etc. (default: None)
+  --debug-level DEBUG_LEVEL
+                        Limit debug output to the specified level. (default:
+                        None)
+  --outdir-scheme OUTDIR_SCHEME
+                        Set the naming scheme for output directory names for
+                        multiple model runs. Options are either &#39;fingerprint&#39;
+                        to use the model fingerprint, &#39;sequential&#39; for
+                        sequential numbering, or &#39;uid&#39; to generate a unique
+                        ID. (default: None)
   --nthreads NTHREADS   Number of threads over which parallelise an individual
                         model run. The total number of cores used by metawards
-                        will be nprocesses x nthreads
+                        will be nprocesses x nthreads [env var:
+                        OMP_NUM_THREADS] (default: None)
   --nprocs NPROCS       The number of processes over which to parallelise the
                         different model runs for different adjustable
                         parameter sets and repeats. By default this will
                         automatically work out the number of processes based
                         on the way metawards is launched. Use this option if
                         you want to specify the number of processes manually.
+                        (default: None)
   --hostfile HOSTFILE   The hostfile containing the names of the compute nodes
                         over which to run a parallel job. If this is not set,
                         the program will attempt to automatically get this
                         information from the cluster queueing system. Use this
-                        if the auto-detection fails
+                        if the auto-detection fails (default: None)
   --cores-per-node CORES_PER_NODE
                         Set the number of processor cores available on each of
                         the compute nodes in the cluster that will be used to
                         run the models (if a cluster is used). If this is not
                         set then the program will attempt to get this
                         information from the cluster queueing system. Use this
-                        option if the auto-detection fails.
+                        option if the auto-detection fails. (default: None)
   --auto-bzip           Automatically bz2 compress all output files as they
-                        are written.
+                        are written. (default: None)
   --no-auto-bzip        Do not automatically bz2 compress all output files as
-                        they are written.
+                        they are written. (default: None)
   --force-overwrite-output
                         Whether or not to force overwriting of any existing
                         output. Using this option will tell metawards that it
                         is safe to delete the contents of the output directory
                         specified in by &#39;--output&#39; if it already exists.
                         Dangerous as this can remove existing output files
+                        (default: False)
   --max-nodes MAX_NODES
-                        Maximum number of nodes that can be read
+                        Maximum number of nodes that can be read (default:
+                        None)
   --max-links MAX_LINKS
-                        Maximum number of links that can be read
-  --profile             Enable profiling of the code
-  --no-profile          Disable profiling of the code
-  --mpi                 Force use of MPI to parallelise across runs
+                        Maximum number of links that can be read (default:
+                        None)
+  --profile             Enable profiling of the code (default: None)
+  --no-profile          Disable profiling of the code (default: None)
+  --mpi                 Force use of MPI to parallelise across runs (default:
+                        None)
   --scoop               Force use of scoop to parallelise across runs
+                        (default: None)
 </pre></div>
 </div>
 </div>
@@ -353,7 +447,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -368,7 +462,6 @@ optional arguments:
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

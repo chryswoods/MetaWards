@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Running on a cluster" href="04_cluster.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,13 +89,19 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index_part01.html">Part 1 - Modelling outbreaks</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index_part02.html">Part 2 - Refining the model</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="01_disease.html">Refining the disease model</a></li>
@@ -106,30 +114,50 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="04_cluster.html">Running on a cluster</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_refining.html">Refining the model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_model_data.html">Model data</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part03.html">Part 3 - Customising the outbreak</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -168,9 +196,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../tutorial.html">Tutorial</a> &raquo;</li>
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
           <li><a href="../index_part02.html">Part 2 - Refining the model</a> &raquo;</li>
         
@@ -209,20 +237,20 @@ ipython or Jupyter notebooks with pandas, we can load up the file;</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;output/results.csv.bz2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="go">     fingerprint  repeat  beta[2]  too_ill_to_move[2]  day  ...         S  E  I         R  IW</span>
-<span class="go">0            3_0       1      0.3                 0.0    0  ...  56082077  0  0         0   0</span>
-<span class="go">1            3_0       1      0.3                 0.0    1  ...  56082077  0  0         0   0</span>
-<span class="go">2            3_0       1      0.3                 0.0    2  ...  56082072  5  0         0   0</span>
-<span class="go">3            3_0       1      0.3                 0.0    3  ...  56082072  0  5         0   0</span>
-<span class="go">4            3_0       1      0.3                 0.0    4  ...  56082071  0  5         1   1</span>
-<span class="gp">... </span>         <span class="o">...</span>     <span class="o">...</span>      <span class="o">...</span>                 <span class="o">...</span>  <span class="o">...</span>  <span class="o">...</span>       <span class="o">...</span> <span class="o">..</span> <span class="o">..</span>       <span class="o">...</span>  <span class="o">..</span>
-<span class="go">1764         5_5       1      0.5                 0.5  172  ...   6304109  0  5  49777963   0</span>
-<span class="go">1765         5_5       1      0.5                 0.5  173  ...   6304109  0  4  49777964   0</span>
-<span class="go">1766         5_5       1      0.5                 0.5  174  ...   6304109  0  3  49777965   0</span>
-<span class="go">1767         5_5       1      0.5                 0.5  175  ...   6304109  0  1  49777967   0</span>
-<span class="go">1768         5_5       1      0.5                 0.5  176  ...   6304109  0  0  49777968   0</span>
+<span class="go">             fingerprint  repeat  beta[2]  too_ill_to_move[2]  day        date         S  E  I         R  IW   UV</span>
+<span class="go">     0        0i3v0i0       1      0.3                 0.0    0  2020-05-12  56082077  0  0         0   0  1.0</span>
+<span class="go">     1        0i3v0i0       1      0.3                 0.0    1  2020-05-13  56082077  0  0         0   0  1.0</span>
+<span class="go">     2        0i3v0i0       1      0.3                 0.0    2  2020-05-14  56082072  5  0         0   0  1.0</span>
+<span class="go">     3        0i3v0i0       1      0.3                 0.0    3  2020-05-15  56082072  0  5         0   0  1.0</span>
+<span class="go">     4        0i3v0i0       1      0.3                 0.0    4  2020-05-16  56082066  0  5         6   5  1.0</span>
+<span class="go">     ...          ...     ...      ...                 ...  ...         ...       ... .. ..       ...  ..  ...</span>
+<span class="go">     1769     0i5v0i5       1      0.5                 0.5  169  2020-10-28   6302422  1  0  49779654   0  1.0</span>
+<span class="go">     1770     0i5v0i5       1      0.5                 0.5  170  2020-10-29   6302422  0  1  49779654   0  1.0</span>
+<span class="go">     1771     0i5v0i5       1      0.5                 0.5  171  2020-10-30   6302422  0  1  49779654   0  1.0</span>
+<span class="go">     1772     0i5v0i5       1      0.5                 0.5  172  2020-10-31   6302422  0  1  49779654   0  1.0</span>
+<span class="go">     1773     0i5v0i5       1      0.5                 0.5  173  2020-11-01   6302422  0  0  49779655   0  1.0</span>
 
-<span class="go">[1769 rows x 11 columns]</span>
+<span class="go">     [1774 rows x 12 columns]</span>
 </pre></div>
 </div>
 <p>This is very similar to before, except now we have extra columns giving
@@ -232,10 +260,9 @@ the values of the variables that are being adjusted (columns
 pair of adjustable variables.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The fingerprint is constructed by removing the leading <code class="docutils literal notranslate"><span class="pre">0.</span></code> from
-the value of the adjustable variable, and the joining the values
-together using underscores. Thus <code class="docutils literal notranslate"><span class="pre">0.3</span>&#160; <span class="pre">0.0</span></code> becomes <code class="docutils literal notranslate"><span class="pre">3_0</span></code>,
-while <code class="docutils literal notranslate"><span class="pre">0.5</span> <span class="pre">0.5</span></code> becomes <code class="docutils literal notranslate"><span class="pre">5_5</span></code>.</p>
+<p class="last">In the fingerprint the <code class="docutils literal notranslate"><span class="pre">i</span></code> character represents a decimal point
+and <code class="docutils literal notranslate"><span class="pre">v</span></code> separates variables. For example <code class="docutils literal notranslate"><span class="pre">0.3</span>&#160; <span class="pre">0.0</span></code> becomes
+<code class="docutils literal notranslate"><span class="pre">0i3v0i0</span></code>, while <code class="docutils literal notranslate"><span class="pre">0.5</span> <span class="pre">0.5</span></code> becomes <code class="docutils literal notranslate"><span class="pre">0i5v0i5</span></code>.</p>
 </div>
 <div class="section" id="finding-peaks">
 <h2>Finding peaks<a class="headerlink" href="#finding-peaks" title="Permalink to this headline">¶</a></h2>
@@ -243,17 +270,17 @@ while <code class="docutils literal notranslate"><span class="pre">0.5</span> <s
 together. Then the <code class="docutils literal notranslate"><span class="pre">.max</span></code> function can be used to show the maximum
 values of selected columns from each group, e.g.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;fingerprint&quot;</span><span class="p">)[[</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;IW&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="go">              day        E         I    IW         R</span>
-<span class="go"> fingerprint</span>
-<span class="go"> 3_0          204  1767303   8665472  8588  48105748</span>
-<span class="go"> 3_25         205  1908160   9296754  8588  48076343</span>
-<span class="go"> 3_5          215  1844377   9024418  8588  48036902</span>
-<span class="go"> 4_0          192  1947245   9532789  8588  49042717</span>
-<span class="go"> 4_25         210  1965166   9614400  8588  49009034</span>
-<span class="go"> 4_5          200  2095342  10179621  8588  48975523</span>
-<span class="go"> 5_0          175  2207896  10714530  8588  49857969</span>
-<span class="go"> 5_25         183  2120481  10326984  8588  49821966</span>
-<span class="go"> 5_5          176  2117730  10330952  8588  49777968</span>
+<span class="go">                              day        E         I    IW         R</span>
+<span class="go">      fingerprint</span>
+<span class="go">      0i3v0i0      223  1867602   9124999  8588  48107545</span>
+<span class="go">      0i3v0i25     213  1806030   8849753  8588  48080295</span>
+<span class="go">      0i3v0i5      203  1925482   9373635  8588  48050991</span>
+<span class="go">      0i4v0i0      191  1926941   9441320  8588  49044169</span>
+<span class="go">      0i4v0i25     209  2013614   9815751  8588  49007451</span>
+<span class="go">      0i4v0i5      196  2049927   9994566  8588  48979256</span>
+<span class="go">      0i5v0i0      177  2108287  10278260  8588  49861436</span>
+<span class="go">      0i5v0i25     180  2093600  10215078  8588  49814876</span>
+<span class="go">      0i5v0i5      173  2070325  10128212  8588  49779655</span>
 </pre></div>
 </div>
 <p>From this, we can see that higher peaks occured for higher values
@@ -297,9 +324,15 @@ use;</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You can only animate image files (e.g. jpg, png). You can’t animate
+<p class="last">You can only animate image files (e.g. jpeg, png). You can’t animate
 pdfs (yet - although
-<a class="reference external" href="https://github.com/metawards/MetaWards/pulls">pull requests welcome</a>)</p>
+<a class="reference external" href="https://github.com/metawards/MetaWards/pulls">pull requests welcome</a>).
+Also, animation relies on you installing
+<a class="reference external" href="https://pillow.readthedocs.io/en/stable/">Pillow</a> to create the gifs
+and (optional but recommended)
+<a class="reference external" href="https://www.lcdf.org/gifsicle/">gifsicle</a> and
+<a class="reference external" href="https://pypi.org/project/pygifsicle/">pygifsicle</a> to optimise the gifs
+(this reduces their size by 5-10 times)</p>
 </div>
 <p>Here is the animation.</p>
 <img alt="Animated overview graphs from the parameter sweep" src="../../_images/tutorial_2_3.gif" />
@@ -334,7 +367,7 @@ uses pandas and matplotlib to render multi-fingerprint graphs.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -349,7 +382,6 @@ uses pandas and matplotlib to render multi-fingerprint graphs.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Responding to changing conditions" href="04_dynamic.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,13 +89,19 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index_part01.html">Part 1 - Modelling outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part02.html">Part 2 - Refining the model</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index_part03.html">Part 3 - Customising the outbreak</a><ul class="current">
@@ -110,26 +118,45 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -168,9 +195,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../tutorial.html">Tutorial</a> &raquo;</li>
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
           <li><a href="../index_part03.html">Part 3 - Customising the outbreak</a> &raquo;</li>
         
@@ -206,11 +233,13 @@
 You can also create your own custom advance functions.</p>
 <p>Create a new python file called <code class="docutils literal notranslate"><span class="pre">advance.py</span></code> and copy in the
 below text;</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">advance_function</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello advance_function&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
+
+<span class="k">def</span> <span class="nf">advance_function</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Hello advance_function&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">iterate_advance</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello iterate_advance&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Hello iterate_advance&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">advance_function</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -219,14 +248,15 @@ This takes <code class="docutils literal notranslate"><span class="pre">**kwargs
 <p>The <code class="docutils literal notranslate"><span class="pre">iterate_advance</span></code> function is our iterator, which returns
 a list of just our <code class="docutils literal notranslate"><span class="pre">advance_function</span></code> to run.</p>
 <p>Use this iterator via the <code class="docutils literal notranslate"><span class="pre">metawards</span></code> command;</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d lurgy3 --additional ExtraSeedsLondon.dat --iterator advance
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d lurgy3 --additional ExtraSeedsLondon.dat --iterator advance --debug
 </pre></div>
 </div>
 <p>You should see that your “Hellos” from these functions are printed.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="mi">1</span> <span class="mi">0</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082072</span>
-<span class="n">Hello</span> <span class="n">iterate_advance</span>
-<span class="n">Hello</span> <span class="n">advance_function</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[15:35:18]                       Hello iterate_advance                       advance.py:9
+                                Hello advance_function                       advance.py:5
+S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+Number of infections: 0
 </pre></div>
 </div>
 <div class="section" id="creating-advance-lockdown">
@@ -240,9 +270,10 @@ is triggered, and then advances using only the play function afterwards.</p>
                                 <span class="n">advance_infprob</span><span class="p">,</span> \
                                 <span class="n">advance_fixed</span><span class="p">,</span> \
                                 <span class="n">advance_play</span>
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
 
 <span class="k">def</span> <span class="nf">advance_lockdown</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We are on lockdown&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;We are on lockdown&quot;</span><span class="p">)</span>
     <span class="n">advance_infprob</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">advance_play</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -287,8 +318,10 @@ achieve.</p>
                                 <span class="n">advance_fixed</span><span class="p">,</span> \
                                 <span class="n">advance_play</span>
 
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
+
 <span class="k">def</span> <span class="nf">advance_lockdown</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We are on lockdown&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;We are on lockdown&quot;</span><span class="p">)</span>
     <span class="n">advance_infprob</span><span class="p">(</span><span class="n">scale_rate</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">advance_play</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -335,7 +368,7 @@ my overview graph looks like this;</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -350,7 +383,6 @@ my overview graph looks like this;</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

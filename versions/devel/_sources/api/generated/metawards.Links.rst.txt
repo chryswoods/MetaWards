@@ -9,17 +9,21 @@ metawards.Links
    .. automethod:: __init__
 
    
-   
-
-   
-   
-   .. rubric:: Attributes
+   .. rubric:: Methods
 
    .. autosummary::
    
+      ~Links.__init__
       ~Links.assert_not_null
       ~Links.assert_valid_index
+      ~Links.copy
       ~Links.is_null
+      ~Links.population
       ~Links.resize
+      ~Links.scale_susceptibles
+   
+   
+
+   
    
    

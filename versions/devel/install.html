@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,15 +38,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Model data" href="model_data.html" />
-    <link rel="prev" title="MetaWards" href="index.html" /> 
+    <link rel="prev" title="Features" href="features.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -86,7 +88,10 @@
               
             
             
-              <ul class="current">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+</ul>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pip-install">pip install</a></li>
@@ -99,25 +104,43 @@
 <li class="toctree-l1"><a class="reference internal" href="model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -156,7 +179,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Installation instructions</li>
     
@@ -175,7 +198,7 @@
         <a href="model_data.html" class="btn btn-neutral float-right" title="Model data" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="MetaWards" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="features.html" class="btn btn-neutral float-left" title="Features" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -188,6 +211,10 @@
 <h1>Installation instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>MetaWards is compiled and
+<a class="reference external" href="https://github.com/metawards/MetaWards/actions">tested on Windows, Linux and OS X</a>,
+but should be able to compile and install on any operating system
+with a working Python &gt;= 3.7 and a C compiler.</p>
 <p>To install MetaWards, you first need to install Python &gt;= 3.7. To check
 if you have Python 3.7 installed type;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -V
@@ -217,14 +244,15 @@ MetaWards is using
 or you may have to <a class="reference external" href="https://pip.pypa.io/en/stable/installing/">install pip</a>.
 If you have trouble installing pip then we recommend that you download
 and install <a class="reference external" href="https://anaconda.org">anaconda</a>, which has pip included)</p>
-<p>To install a specific version, e.g. 0.6.0, type</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">metawards</span><span class="o">==</span><span class="m">0</span>.6.0
+<p>To install a specific version, e.g. 1.0.0, type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">metawards</span><span class="o">==</span><span class="m">1</span>.0.0
 </pre></div>
 </div>
 <p>This will install a binary version of metawards if it is avaiable for your
 operating system / processor / version of python. If not, then
-metawards will be compiled into C using <a class="reference external" href="https://cython.org">cython</a>,
-and then compiled into an executable using your system C compiler
+the metawards pyx code that was compiled into C using
+<a class="reference external" href="https://cython.org">cython</a>,
+will be compiled into an executable using your system C compiler
 (e.g. <a class="reference external" href="https://gcc.gnu.org">gcc</a> or <a class="reference external" href="https://clang.llvm.org">clang</a>).
 You can control which C compiler to use by setting the <code class="docutils literal notranslate"><span class="pre">CC</span></code> environment
 variable, e.g.</p>
@@ -235,8 +263,10 @@ variable, e.g.</p>
 <a class="reference external" href="https://www.openmp.org">OpenMP</a> for parallelisation,
 and it has no external dependencies, so
 it should compile without issue. Note that the system C compiler on
-OS X (Mac) does not support OpenMP. In this case you will need to install
-and use a different compiler, e.g. installing clang via
+OS X (Mac) does not support OpenMP. In this case you the code will
+compile with OpenMP disabled. If you want to use all of the cores
+of your computer than you will need to install
+a different compiler, e.g. installing clang via
 <a class="reference external" href="https://brew.sh">homebrew</a>. If you have any problems then please
 <a class="reference external" href="https://github.com/metawards/MetaWards/issues">post an issue on GitHub</a>.</p>
 </div>
@@ -275,8 +305,10 @@ variable, e.g.</p>
 <a class="reference external" href="https://www.openmp.org">OpenMP</a> for parallelisation,
 and it has no external dependencies, so
 it should compile without issue. Note that the system C compiler on
-OS X (Mac) does not support OpenMP. In this case you will need to install
-and use a different compiler, e.g. installing clang via
+OS X (Mac) does not support OpenMP. In this case you the code will
+compile with OpenMP disabled. If you want to use all of the cores
+of your computer than you will need to install
+a different compiler, e.g. installing clang via
 <a class="reference external" href="https://brew.sh">homebrew</a>. If you have any problems then please
 <a class="reference external" href="https://github.com/metawards/MetaWards/issues">post an issue on GitHub</a>.</p>
 </div>
@@ -286,15 +318,19 @@ and use a different compiler, e.g. installing clang via
 there;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/metawards/MetaWards
 <span class="nb">cd</span> MetaWards
+pip install -r requirements-dev.txt
 </pre></div>
 </div>
 <p>From this point you can compile as if you have downloaded from source.
-As a developer you may want to install the developer tools to enable
-you to run the tests and create the website. To do this type;</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-dev.txt
-
-pytest tests
-<span class="nb">cd</span> doc<span class="p">;</span> make html
+As a developer you may want to run the tests and create the website.
+To do this type;</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest tests
+make doc
+</pre></div>
+</div>
+<p>There are shortcuts for running the quick or slow tests, e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make <span class="nb">test</span>
+make quicktest
 </pre></div>
 </div>
 <p>Note that the tests assume that you have already downloaded the
@@ -314,7 +350,7 @@ and configured this as <a class="reference external" href="model_data.html">desc
         <a href="model_data.html" class="btn btn-neutral float-right" title="Model data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="MetaWards" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="features.html" class="btn btn-neutral float-left" title="Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -324,7 +360,7 @@ and configured this as <a class="reference external" href="model_data.html">desc
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -339,7 +375,6 @@ and configured this as <a class="reference external" href="model_data.html">desc
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>metawards.WardInfos &mdash; MetaWards Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="metawards.Wards" href="metawards.Wards.html" />
+    <link rel="prev" title="metawards.WardInfo" href="metawards.WardInfo.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_app.html">MetaWards.app</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_MetaWards.html">MetaWards</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index_api_MetaWards.html">MetaWards API Detail</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index_api_MetaWards.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index_api_MetaWards.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_iterators.html">MetaWards.iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_movers.html">MetaWards.movers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_analysis.html">MetaWards.analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_utils.html">MetaWards.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_themes.html">MetaWards.themes</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Documentation</a> &raquo;</li>
+        
+          <li><a href="../index_MetaWards.html">MetaWards</a> &raquo;</li>
+        
+          <li><a href="../index_api_MetaWards.html">MetaWards API Detail</a> &raquo;</li>
+        
+      <li>metawards.WardInfos</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="metawards.Wards.html" class="btn btn-neutral float-right" title="metawards.Wards" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metawards.WardInfo.html" class="btn btn-neutral float-left" title="metawards.WardInfo" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="metawards-wardinfos">
+<h1>metawards.WardInfos<a class="headerlink" href="#metawards-wardinfos" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="metawards.WardInfos">
+<em class="property">class </em><code class="descclassname">metawards.</code><code class="descname">WardInfos</code><span class="sig-paren">(</span><em>wards: List[metawards._wardinfo.WardInfo] = &lt;factory&gt;</em>, <em>_index: Dict[metawards._wardinfo.WardInfo</em>, <em>int] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple class that holds a list of WardInfo objects, and provides
+useful search functions over that list. This prevents me from
+cluttering up the interface of Network</p>
+<dl class="method">
+<dt id="metawards.WardInfos.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>wards: List[metawards._wardinfo.WardInfo] = &lt;factory&gt;</em>, <em>_index: Dict[metawards._wardinfo.WardInfo</em>, <em>int] = None</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.WardInfos.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.WardInfos.__init__" title="metawards.WardInfos.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(wards,&nbsp;_index,&nbsp;int]&nbsp;=&nbsp;None)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.contains" title="metawards.WardInfos.contains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contains</span></code></a>(info)</td>
+<td>Return whether or not this contains the passed WardInfo</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.find" title="metawards.WardInfos.find"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find</span></code></a>(name,&nbsp;authority,&nbsp;region,&nbsp;match,&nbsp;…)</td>
+<td>Generic search function that will search using any or all of the terms provided.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.index" title="metawards.WardInfos.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code></a>(info)</td>
+<td>Return the index of the passed ‘info’ object if it is in this list.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.reindex" title="metawards.WardInfos.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reindex</span></code></a>()</td>
+<td>Rebuild the WardInfo index.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="metawards.WardInfos.__contains__">
+<code class="descname">__contains__</code><span class="sig-paren">(</span><em>info: metawards._wardinfo.WardInfo</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.__contains__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether or not this contains the passed WardInfo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.WardInfos.__setitem__">
+<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>i: int</em>, <em>info: metawards._wardinfo.WardInfo</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the ith WardInfo equal to ‘info’.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.WardInfos.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>info: metawards._wardinfo.WardInfo</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether or not this contains the passed WardInfo</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.WardInfos.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>name: str = None</em>, <em>authority: str = None</em>, <em>region: str = None</em>, <em>match: bool = False</em>, <em>match_authority_and_region: bool = False</em>, <em>include_alternates: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic search function that will search using any or all
+of the terms provided. This returns a list of indicies
+of wards that match the search</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the ward to search. You can also include
+the authority adn region by separating usign “/”, e.g.
+“Clifton/Bristol”.</li>
+<li><strong>authority</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the authority to search</li>
+<li><strong>region</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the region to search</li>
+<li><strong>match</strong> (<em>bool</em><em>(</em><em>False</em><em>)</em>) – Use a regular expression match for the ward rather than a
+search. This forces the match to be at the start of the string</li>
+<li><strong>match_authority_and_region</strong> (<em>bool</em><em>(</em><em>False</em><em>)</em>) – Use a regular expression match for the authority and region
+rather than a search. This forces the match to be at the start
+of the string</li>
+<li><strong>include_alternates</strong> (<em>bool</em><em>(</em><em>True</em><em>)</em>) – Whether or not to include alternative names and codes when
+searching for the ward</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.WardInfos.index">
+<code class="descname">index</code><span class="sig-paren">(</span><em>info: metawards._wardinfo.WardInfo</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the index of the passed ‘info’ object if it is in this
+list. If not, then a ValueError exception is raised. Note that
+only the first matching WardInfo will be returned</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.WardInfos.reindex">
+<code class="descname">reindex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.reindex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.reindex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rebuild the WardInfo index. You must call this function after
+you have modified the list of WardInfo objects, as otherwise
+this will fall out of date. Note that this will be automatically
+called the first time you use the “contains” or “index” functions</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.WardInfos.wards">
+<code class="descname">wards</code><em class="property"> = None</em><a class="headerlink" href="#metawards.WardInfos.wards" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of WardInfo objects, one for each ward in order</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metawards.Wards.html" class="btn btn-neutral float-right" title="metawards.Wards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metawards.WardInfo.html" class="btn btn-neutral float-left" title="metawards.WardInfo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Jul 22, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

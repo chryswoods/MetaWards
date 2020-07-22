@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="metawards.iterators.iterate_weekday" href="metawards.iterators.iterate_weekday.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,17 +89,37 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
@@ -111,21 +133,25 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_movers.html">MetaWards.movers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_analysis.html">MetaWards.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_utils.html">MetaWards.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_themes.html">MetaWards.themes</a></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -164,7 +190,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Documentation</a> &raquo;</li>
         
@@ -202,7 +228,7 @@
 <h1>metawards.iterators.iterate_default<a class="headerlink" href="#metawards-iterators-iterate-default" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="metawards.iterators.iterate_default">
-<code class="descclassname">metawards.iterators.</code><code class="descname">iterate_default</code><span class="sig-paren">(</span><em>setup=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/iterators/_iterate_default.html#iterate_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.iterators.iterate_default" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">metawards.iterators.</code><code class="descname">iterate_default</code><span class="sig-paren">(</span><em>stage: str</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; List[Callable[[...], None]]<a class="reference internal" href="../../_modules/metawards/iterators/_iterate_default.html#iterate_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.iterators.iterate_default" title="Permalink to this definition">¶</a></dt>
 <dd><p>This returns the default list of ‘advance_XXX’ functions that
 are called in sequence for each iteration of the model run.
 This is the default iterator. It models every day as though
@@ -211,15 +237,11 @@ it is a working day.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>setup</strong> (<em>bool</em>) – Whether or not to return the functions used to setup the
-space and input for the advance_XXX functions returned by
-this iterator. This is called once at the start of a run
-to return the functions that must be called to setup the
-model</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stage</strong> (<em>str</em>) – Which stage of the day is to be modelled</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>funcs</strong> – The list of functions that <code class="docutils literal notranslate"><span class="pre">`iterate`</span></code> will call in sequence</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>funcs</strong> – The list of functions that will be called in sequence</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List[function]</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List[MetaFunction]</td>
 </tr>
 </tbody>
 </table>
@@ -248,7 +270,7 @@ model</td>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -263,7 +285,6 @@ model</td>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

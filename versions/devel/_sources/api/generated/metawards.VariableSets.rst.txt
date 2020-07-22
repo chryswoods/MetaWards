@@ -17,6 +17,8 @@ metawards.VariableSets
       ~VariableSets.append
       ~VariableSets.read
       ~VariableSets.repeat
+      ~VariableSets.set_outdir_from_number
+      ~VariableSets.set_outdir_from_uid
    
    
 

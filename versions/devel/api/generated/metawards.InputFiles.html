@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,14 +38,9 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="metawards.Link" href="metawards.Link.html" />
+    <link rel="next" title="metawards.Interpret" href="metawards.Interpret.html" />
     <link rel="prev" title="metawards.Infections" href="metawards.Infections.html" /> 
 </head>
 
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,17 +89,37 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
@@ -112,21 +134,25 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_iterators.html">MetaWards.iterators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_movers.html">MetaWards.movers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_analysis.html">MetaWards.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_utils.html">MetaWards.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_themes.html">MetaWards.themes</a></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -165,7 +191,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Documentation</a> &raquo;</li>
         
@@ -187,7 +213,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="metawards.Link.html" class="btn btn-neutral float-right" title="metawards.Link" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metawards.Interpret.html" class="btn btn-neutral float-right" title="metawards.Interpret" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metawards.Infections.html" class="btn btn-neutral float-left" title="metawards.Infections" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -203,7 +229,7 @@
 <h1>metawards.InputFiles<a class="headerlink" href="#metawards-inputfiles" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="metawards.InputFiles">
-<em class="property">class </em><code class="descclassname">metawards.</code><code class="descname">InputFiles</code><span class="sig-paren">(</span><em>work: str = None</em>, <em>play: str = None</em>, <em>identifier: str = None</em>, <em>identifier2: str = None</em>, <em>weekend: str = None</em>, <em>work_size: str = None</em>, <em>play_size: str = None</em>, <em>position: str = None</em>, <em>coordinates: str = None</em>, <em>seed: str = None</em>, <em>nodes_to_track: str = None</em>, <em>uv: str = None</em>, <em>_filename: str = None</em>, <em>_model_name: str = None</em>, <em>_model_path: str = None</em>, <em>_model_version: str = None</em>, <em>_authors: str = None</em>, <em>_contacts: str = None</em>, <em>_references: str = None</em>, <em>_repository: str = None</em>, <em>_repository_version: str = None</em>, <em>_repository_branch: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_inputfiles.html#InputFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.InputFiles" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">metawards.</code><code class="descname">InputFiles</code><span class="sig-paren">(</span><em>work: str = None</em>, <em>play: str = None</em>, <em>identifier: str = None</em>, <em>identifier2: str = None</em>, <em>weekend: str = None</em>, <em>work_size: str = None</em>, <em>play_size: str = None</em>, <em>position: str = None</em>, <em>coordinates: str = None</em>, <em>lookup: str = None</em>, <em>lookup_columns: Dict[str</em>, <em>int] = None</em>, <em>seed: str = None</em>, <em>nodes_to_track: str = None</em>, <em>uv: str = None</em>, <em>is_single: bool = False</em>, <em>wards_data: str = None</em>, <em>_filename: str = None</em>, <em>_model_name: str = None</em>, <em>_model_path: str = None</em>, <em>_model_version: str = None</em>, <em>_authors: str = None</em>, <em>_contacts: str = None</em>, <em>_references: str = None</em>, <em>_repository: str = None</em>, <em>_repository_version: str = None</em>, <em>_repository_branch: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_inputfiles.html#InputFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.InputFiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class holds all of the input files that must be loaded
 from METAWARDSDATA to construct the network of wards
 and links between them</p>
@@ -213,14 +239,14 @@ and links between them</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">infiles</span><span class="p">)</span>
 <span class="go">Model 2011Data version March 29 2020</span>
 <span class="go">repository: https://github.com/metawards/MetaWardsData</span>
-<span class="go">repository_branch: master</span>
+<span class="go">repository_branch: main</span>
 <span class="go">repository_version: 0.2.0</span>
 <span class="go">etc.</span>
 </pre></div>
 </div>
 <dl class="method">
 <dt id="metawards.InputFiles.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>work: str = None</em>, <em>play: str = None</em>, <em>identifier: str = None</em>, <em>identifier2: str = None</em>, <em>weekend: str = None</em>, <em>work_size: str = None</em>, <em>play_size: str = None</em>, <em>position: str = None</em>, <em>coordinates: str = None</em>, <em>seed: str = None</em>, <em>nodes_to_track: str = None</em>, <em>uv: str = None</em>, <em>_filename: str = None</em>, <em>_model_name: str = None</em>, <em>_model_path: str = None</em>, <em>_model_version: str = None</em>, <em>_authors: str = None</em>, <em>_contacts: str = None</em>, <em>_references: str = None</em>, <em>_repository: str = None</em>, <em>_repository_version: str = None</em>, <em>_repository_branch: str = None</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.InputFiles.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>work: str = None</em>, <em>play: str = None</em>, <em>identifier: str = None</em>, <em>identifier2: str = None</em>, <em>weekend: str = None</em>, <em>work_size: str = None</em>, <em>play_size: str = None</em>, <em>position: str = None</em>, <em>coordinates: str = None</em>, <em>lookup: str = None</em>, <em>lookup_columns: Dict[str</em>, <em>int] = None</em>, <em>seed: str = None</em>, <em>nodes_to_track: str = None</em>, <em>uv: str = None</em>, <em>is_single: bool = False</em>, <em>wards_data: str = None</em>, <em>_filename: str = None</em>, <em>_model_name: str = None</em>, <em>_model_path: str = None</em>, <em>_model_version: str = None</em>, <em>_authors: str = None</em>, <em>_contacts: str = None</em>, <em>_references: str = None</em>, <em>_repository: str = None</em>, <em>_repository_version: str = None</em>, <em>_repository_branch: str = None</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.InputFiles.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -233,16 +259,16 @@ and links between them</p>
 <tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.__init__" title="metawards.InputFiles.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(work,&nbsp;play,&nbsp;identifier,&nbsp;…)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.InputFiles.load" title="metawards.InputFiles.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(model,&nbsp;repository,&nbsp;folder,&nbsp;description,&nbsp;…)</td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.load" title="metawards.InputFiles.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(model,&nbsp;repository,&nbsp;folder,&nbsp;description,&nbsp;…)</td>
 <td>Load the parameters associated with the passed model.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.model_name" title="metawards.InputFiles.model_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_name</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.model_name" title="metawards.InputFiles.model_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_name</span></code></a>()</td>
 <td>Return the name of this model</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.InputFiles.model_path" title="metawards.InputFiles.model_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_path</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.model_path" title="metawards.InputFiles.model_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_path</span></code></a>()</td>
 <td>Return the path to the directory containing this model</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.model_version" title="metawards.InputFiles.model_version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_version</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.model_version" title="metawards.InputFiles.model_version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_version</span></code></a>()</td>
 <td>Return the version of the data in this model</td>
 </tr>
 </tbody>
@@ -254,44 +280,80 @@ and links between them</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.coordinates" title="metawards.InputFiles.coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coordinates</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.coordinates" title="metawards.InputFiles.coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coordinates</span></code></a></td>
 <td>Coordinates-system used for the positions.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.InputFiles.identifier" title="metawards.InputFiles.identifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identifier</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.identifier" title="metawards.InputFiles.identifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identifier</span></code></a></td>
 <td>File from which to read all of the ward names</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.identifier2" title="metawards.InputFiles.identifier2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identifier2</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.identifier2" title="metawards.InputFiles.identifier2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identifier2</span></code></a></td>
 <td>File from which to read all of the secondary ward IDs, (Communities, Counties, Districts, UA’s etc)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.InputFiles.nodes_to_track" title="metawards.InputFiles.nodes_to_track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_to_track</span></code></a></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_model_dir</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.is_single" title="metawards.InputFiles.is_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_single</span></code></a></td>
+<td>Whether or not this is the special “single” ward model</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_wards_data</span></code></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.lookup" title="metawards.InputFiles.lookup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lookup</span></code></a></td>
+<td>File to look up metadata about the wards (e.g.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.lookup_columns" title="metawards.InputFiles.lookup_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lookup_columns</span></code></a></td>
+<td>Which columns in this file have the data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.nodes_to_track" title="metawards.InputFiles.nodes_to_track"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodes_to_track</span></code></a></td>
 <td>File from which to read the list of nodes to track</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.play" title="metawards.InputFiles.play"><code class="xref py py-obj docutils literal notranslate"><span class="pre">play</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.play" title="metawards.InputFiles.play"><code class="xref py py-obj docutils literal notranslate"><span class="pre">play</span></code></a></td>
 <td>File from which to read the play matrix of links</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.InputFiles.play_size" title="metawards.InputFiles.play_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">play_size</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.play_size" title="metawards.InputFiles.play_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">play_size</span></code></a></td>
 <td>File from which to read the size of the population in the play file</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.position" title="metawards.InputFiles.position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">position</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.position" title="metawards.InputFiles.position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">position</span></code></a></td>
 <td>File from which to read the positions (locations) of the wards (the centre of the bounding boxes)</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.InputFiles.seed" title="metawards.InputFiles.seed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seed</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.seed" title="metawards.InputFiles.seed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seed</span></code></a></td>
 <td>File from which to read the values to seed the wards</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.uv" title="metawards.InputFiles.uv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uv</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.uv" title="metawards.InputFiles.uv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uv</span></code></a></td>
 <td>UV file</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.InputFiles.weekend" title="metawards.InputFiles.weekend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weekend</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.wards_data" title="metawards.InputFiles.wards_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wards_data</span></code></a></td>
+<td>The json file containing the wards data if this is a ward_json</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.weekend" title="metawards.InputFiles.weekend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weekend</span></code></a></td>
 <td>File from which to read the weekend matrix of links</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.InputFiles.work" title="metawards.InputFiles.work"><code class="xref py py-obj docutils literal notranslate"><span class="pre">work</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.work" title="metawards.InputFiles.work"><code class="xref py py-obj docutils literal notranslate"><span class="pre">work</span></code></a></td>
 <td>File from which to read the work matrix of links</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.InputFiles.work_size" title="metawards.InputFiles.work_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">work_size</span></code></a></td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles.work_size" title="metawards.InputFiles.work_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">work_size</span></code></a></td>
 <td>File from which to read the size of the population in the work file</td>
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="metawards.InputFiles.__hash__">
+<code class="descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_inputfiles.html#InputFiles.__hash__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.InputFiles.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return hash(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.InputFiles.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_inputfiles.html#InputFiles.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.InputFiles.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.InputFiles.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_inputfiles.html#InputFiles.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.InputFiles.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="metawards.InputFiles.coordinates">
 <code class="descname">coordinates</code><em class="property"> = None</em><a class="headerlink" href="#metawards.InputFiles.coordinates" title="Permalink to this definition">¶</a></dt>
@@ -311,9 +373,15 @@ and links between them</p>
 ward IDs, (Communities, Counties, Districts, UA’s etc)</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="metawards.InputFiles.is_single">
+<code class="descname">is_single</code><em class="property"> = False</em><a class="headerlink" href="#metawards.InputFiles.is_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not this is the special “single” ward model</p>
+</dd></dl>
+
 <dl class="staticmethod">
 <dt id="metawards.InputFiles.load">
-<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><em>model: str = '2011Data'</em>, <em>repository: str = '/home/runner/GitHub/MetaWardsData'</em>, <em>folder: str = 'model_data'</em>, <em>description: str = 'description.json'</em>, <em>filename: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_inputfiles.html#InputFiles.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.InputFiles.load" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><em>model: str = '2011Data'</em>, <em>repository: str = None</em>, <em>folder: str = None</em>, <em>description: str = 'description.json'</em>, <em>filename: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_inputfiles.html#InputFiles.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.InputFiles.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load the parameters associated with the passed model.
 This will look for the parameters specified in
 the json file called f”{repository}/{folder}/{model}/{description}”</p>
@@ -343,11 +411,23 @@ repository</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>input_files</strong> – The constructed and validated set of input files</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#metawards.InputFiles" title="metawards.InputFiles">InputFiles</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="../index_api_MetaWards.html#metawards.InputFiles" title="metawards.InputFiles">InputFiles</a></p>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.InputFiles.lookup">
+<code class="descname">lookup</code><em class="property"> = None</em><a class="headerlink" href="#metawards.InputFiles.lookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>File to look up metadata about the wards (e.g. their names)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="metawards.InputFiles.lookup_columns">
+<code class="descname">lookup_columns</code><em class="property"> = None</em><a class="headerlink" href="#metawards.InputFiles.lookup_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Which columns in this file have the data</p>
 </dd></dl>
 
 <dl class="method">
@@ -406,6 +486,12 @@ repository</li>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="metawards.InputFiles.wards_data">
+<code class="descname">wards_data</code><em class="property"> = None</em><a class="headerlink" href="#metawards.InputFiles.wards_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The json file containing the wards data if this is a ward_json</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="metawards.InputFiles.weekend">
 <code class="descname">weekend</code><em class="property"> = None</em><a class="headerlink" href="#metawards.InputFiles.weekend" title="Permalink to this definition">¶</a></dt>
 <dd><p>File from which to read the weekend matrix of links</p>
@@ -435,7 +521,7 @@ repository</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="metawards.Link.html" class="btn btn-neutral float-right" title="metawards.Link" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metawards.Interpret.html" class="btn btn-neutral float-right" title="metawards.Interpret" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metawards.Infections.html" class="btn btn-neutral float-left" title="metawards.Infections" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -448,7 +534,7 @@ repository</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -463,7 +549,6 @@ repository</li>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

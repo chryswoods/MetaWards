@@ -1,0 +1,39 @@
+metawards.themes.Simple
+=======================
+
+.. currentmodule:: metawards.themes
+
+.. autoclass:: Simple
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Simple.__init__
+      ~Simple.error
+      ~Simple.error_text
+      ~Simple.get_frames
+      ~Simple.highlighter
+      ~Simple.info
+      ~Simple.info_text
+      ~Simple.padding_style
+      ~Simple.panel
+      ~Simple.panel_box
+      ~Simple.rule
+      ~Simple.should_highlight
+      ~Simple.should_markup
+      ~Simple.spinner_failure
+      ~Simple.spinner_success
+      ~Simple.text
+      ~Simple.warning
+      ~Simple.warning_text
+   
+   
+
+   
+   
+   

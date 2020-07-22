@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Custom variables" href="05_scanning.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,13 +89,19 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index_part01.html">Part 1 - Modelling outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part02.html">Part 2 - Refining the model</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index_part03.html">Part 3 - Customising the outbreak</a><ul class="current">
@@ -111,26 +119,45 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -169,9 +196,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../tutorial.html">Tutorial</a> &raquo;</li>
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
           <li><a href="../index_part03.html">Part 3 - Customising the outbreak</a> &raquo;</li>
         
@@ -213,9 +240,10 @@ number of individuals who are detected as infected in the model.</p>
                                 <span class="n">advance_infprob</span><span class="p">,</span> \
                                 <span class="n">advance_fixed</span><span class="p">,</span> \
                                 <span class="n">advance_play</span>
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
 
 <span class="k">def</span> <span class="nf">advance_lockdown</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We are on lockdown&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;We are on lockdown&quot;</span><span class="p">)</span>
     <span class="n">advance_infprob</span><span class="p">(</span><span class="n">scale_rate</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">advance_play</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -271,9 +299,10 @@ file to read;</p>
                                 <span class="n">advance_infprob</span><span class="p">,</span> \
                                 <span class="n">advance_fixed</span><span class="p">,</span> \
                                 <span class="n">advance_play</span>
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
 
 <span class="k">def</span> <span class="nf">advance_lockdown</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We are on lockdown&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;We are on lockdown&quot;</span><span class="p">)</span>
     <span class="n">advance_infprob</span><span class="p">(</span><span class="n">scale_rate</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">advance_play</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -310,86 +339,72 @@ is unsurprising, as there was still a lot of infected individuals
 remaining once lockdown ended, and a large population that was
 still susceptible to infection (as you can see from the print
 of my run and the overview graph below).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="p">:</span> <span class="mi">56057097</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">213</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2189</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">22578</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">197</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081864</span>
-<span class="n">We</span> <span class="n">are</span> <span class="n">on</span> <span class="n">lockdown</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 76 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                We are on lockdown                        lockdown.py:9
+S: 56055907  E: 201  I: 2192  R: 23777  IW: 215  POPULATION: 56082077
+Number of infections: 2393
 
-<span class="mi">76</span> <span class="mi">2402</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56056905</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">200</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2133</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">22839</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">184</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081877</span>
-<span class="n">We</span> <span class="n">are</span> <span class="n">on</span> <span class="n">lockdown</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 77 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                We are on lockdown                        lockdown.py:9
+S: 56055697  E: 223  I: 2144  R: 24013  IW: 202  POPULATION: 56082077
+Number of infections: 2367
 
-<span class="mi">77</span> <span class="mi">2333</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56056746</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">192</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2101</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">23038</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">157</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081885</span>
-<span class="n">We</span> <span class="n">are</span> <span class="n">on</span> <span class="n">lockdown</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 78 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                We are on lockdown                        lockdown.py:9
+S: 56055515  E: 210  I: 2109  R: 24243  IW: 174  POPULATION: 56082077
+Number of infections: 2319
 
-<span class="mi">78</span> <span class="mi">2293</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56056568</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">159</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2061</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">23289</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">176</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081918</span>
-<span class="n">We</span> <span class="n">are</span> <span class="n">on</span> <span class="n">lockdown</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 79 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[15:41:25]                        We are on lockdown                        lockdown.py:9
+S: 56055304  E: 182  I: 2099  R: 24492  IW: 205  POPULATION: 56082077
+Number of infections: 2281
 
-<span class="mi">79</span> <span class="mi">2220</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56056399</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">178</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">1983</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">23517</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">162</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081899</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 80 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                We are on lockdown                        lockdown.py:9
+S: 56055121  E: 211  I: 2055  R: 24690  IW: 175  POPULATION: 56082077
+Number of infections: 2266
 
-<span class="mi">80</span> <span class="mi">2161</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56055290</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">169</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">1904</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">24714</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">942</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081908</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 81 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                We are on lockdown                        lockdown.py:9
+S: 56054939  E: 183  I: 2004  R: 24951  IW: 176  POPULATION: 56082077
+Number of infections: 2187
 
-<span class="mi">81</span> <span class="mi">2073</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56054625</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">1109</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">1853</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">24490</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">596</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56080968</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 82 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                We are on lockdown                        lockdown.py:9
+S: 56054770  E: 182  I: 1964  R: 25161  IW: 166  POPULATION: 56082077
+Number of infections: 2146
 
-<span class="mi">82</span> <span class="mi">2962</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56053957</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">665</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2728</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">24727</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">602</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081412</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 83 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 56053695  E: 169  I: 1923  R: 26290  IW: 916  POPULATION: 56082077
+Number of infections: 2092
 
-<span class="mi">83</span> <span class="mi">3393</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56052602</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">668</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">3162</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">25645</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">1151</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56081409</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 84 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 56052615  E: 1075  I: 1879  R: 26508  IW: 920  POPULATION: 56082077
+Number of infections: 2954
 
-<span class="mi">84</span> <span class="mi">3830</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56051035</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">1355</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">3601</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">26086</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">1304</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56080722</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 85 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 56051552  E: 1080  I: 2730  R: 26715  IW: 908  POPULATION: 56082077
+Number of infections: 3810
 
-<span class="mi">85</span> <span class="mi">4956</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56049197</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">1567</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">4689</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">26624</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">1492</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56080510</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 86 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 56050161  E: 1063  I: 3598  R: 27255  IW: 1187  POPULATION: 56082077
+Number of infections: 4661
 
-<span class="mi">86</span> <span class="mi">6256</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56046897</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">1838</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5977</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">27365</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">1811</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56080239</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 87 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 56049050  E: 1391  I: 4452  R: 27184  IW: 966  POPULATION: 56082077
+Number of infections: 5843
 
-<span class="mi">87</span> <span class="mi">7815</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56044064</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">2300</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">7445</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">28268</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">2140</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56079777</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 88 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 56047600  E: 1111  I: 5589  R: 27777  IW: 1236  POPULATION: 56082077
+Number of infections: 6700
 
-<span class="mi">88</span> <span class="mi">9745</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56041777</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">2833</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">9318</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">28149</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">1808</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56079244</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 89 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 56044865  E: 1450  I: 6352  R: 29410  IW: 2072  POPULATION: 56082077
+Number of infections: 7802
 
-<span class="mi">89</span> <span class="mi">12151</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56039009</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">2287</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">11558</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">29223</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">2106</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56079790</span>
-
-<span class="mi">90</span> <span class="mi">13845</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56033706</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">2768</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">13086</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">32517</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">3391</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56079309</span>
-
-<span class="mi">91</span> <span class="mi">15854</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56027735</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">5303</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">14968</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">34071</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">3622</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56076774</span>
-
-<span class="mi">92</span> <span class="mi">20271</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56020915</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">5971</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">19179</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">36012</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">3947</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56076106</span>
-
-<span class="mi">93</span> <span class="mi">25150</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56012334</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">6820</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">23835</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">39088</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">4518</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56075257</span>
-
-<span class="mi">94</span> <span class="mi">30655</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56001786</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">8581</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">29059</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">42651</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">4947</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56073496</span>
-
-<span class="mi">95</span> <span class="mi">37640</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">55994025</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">10548</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">35825</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">41679</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">4377</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56071529</span>
-
-<span class="mi">96</span> <span class="mi">46373</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">55984596</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">7761</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">44092</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">45628</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">4847</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56074316</span>
-
-<span class="mi">97</span> <span class="mi">51853</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">55965009</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">9429</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">49023</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">58616</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">6443</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56072648</span>
-
-<span class="mi">98</span> <span class="mi">58452</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">55943662</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">19587</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">55002</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">63826</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">6618</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56062490</span>
-
-<span class="mi">99</span> <span class="mi">74589</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">55919882</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">21347</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">70325</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">70523</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">6883</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56060730</span>
-
-<span class="mi">100</span> <span class="mi">91672</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">55889466</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">23780</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">86623</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">82208</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">7276</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56058297</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 90 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+S: 56041834  E: 2735  I: 7386  R: 30122  IW: 2246  POPULATION: 56082077
+Number of infections: 10121
 </pre></div>
 </div>
 <img alt="Overview image of a automatically released lockdown" src="../../_images/tutorial_3_4_4_overview.jpg" />
@@ -407,10 +422,14 @@ edit your <code class="docutils literal notranslate"><span class="pre">lockdown.
                                 <span class="n">advance_infprob</span><span class="p">,</span> \
                                 <span class="n">advance_fixed</span><span class="p">,</span> \
                                 <span class="n">advance_play</span>
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
 
 <span class="k">def</span> <span class="nf">advance_lockdown</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We are on lockdown (</span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-    <span class="n">advance_infprob</span><span class="p">(</span><span class="n">scale_rate</span><span class="o">=</span><span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span><span class="p">,</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;We are in lockdown&quot;</span><span class="p">,</span>
+                  <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span><span class="p">])</span>
+
+    <span class="n">advance_infprob</span><span class="p">(</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">,</span>
+                    <span class="n">scale_rate</span><span class="o">=</span><span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">advance_play</span><span class="p">(</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -488,11 +507,16 @@ Copy the below into your <code class="docutils literal notranslate"><span class=
                                 <span class="n">advance_infprob</span><span class="p">,</span> \
                                 <span class="n">advance_fixed</span><span class="p">,</span> \
                                 <span class="n">advance_play</span>
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
+
 
 <span class="k">def</span> <span class="nf">advance_lockdown</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We are on lockdown (</span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;is_work_locked_down == </span><span class="si">{</span><span class="n">population</span><span class="o">.</span><span class="n">is_work_locked_down</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">advance_infprob</span><span class="p">(</span><span class="n">scale_rate</span><span class="o">=</span><span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span><span class="p">,</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;We are in lockdown&quot;</span><span class="p">,</span>
+                  <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span><span class="p">,</span>
+                             <span class="n">population</span><span class="o">.</span><span class="n">is_work_locked_down</span><span class="p">])</span>
+
+    <span class="n">advance_infprob</span><span class="p">(</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">,</span>
+                    <span class="n">scale_rate</span><span class="o">=</span><span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span><span class="p">,</span>
                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="n">advance_play</span><span class="p">(</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -500,40 +524,36 @@ Copy the below into your <code class="docutils literal notranslate"><span class=
     <span class="k">if</span> <span class="ow">not</span> <span class="n">population</span><span class="o">.</span><span class="n">is_work_locked_down</span><span class="p">:</span>
         <span class="n">advance_fixed</span><span class="p">(</span><span class="n">population</span><span class="o">=</span><span class="n">population</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
+
 <span class="k">def</span> <span class="nf">iterate_lockdown</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="s2">&quot;lockdown_state&quot;</span><span class="p">):</span>
         <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="s2">&quot;before&quot;</span>
         <span class="n">population</span><span class="o">.</span><span class="n">is_locked_down</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
+        <span class="n">population</span><span class="o">.</span><span class="n">is_work_locked_down</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">==</span> <span class="s2">&quot;before&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">:</span>
             <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="s2">&quot;lockdown&quot;</span>
             <span class="n">population</span><span class="o">.</span><span class="n">lockdown_started</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">day</span>
             <span class="n">population</span><span class="o">.</span><span class="n">is_locked_down</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.05</span>
             <span class="n">population</span><span class="o">.</span><span class="n">is_work_locked_down</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">elif</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">==</span> <span class="s2">&quot;lockdown&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">:</span>
             <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="s2">&quot;relaxed_lockdown&quot;</span>
             <span class="n">population</span><span class="o">.</span><span class="n">lockdown_ended</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">day</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.05</span>
+            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.5</span>
             <span class="n">population</span><span class="o">.</span><span class="n">is_locked_down</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">population</span><span class="o">.</span><span class="n">is_work_locked_down</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">elif</span> <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">==</span> <span class="s2">&quot;relaxed_lockdown&quot;</span><span class="p">:</span>
         <span class="n">population</span><span class="o">.</span><span class="n">is_work_locked_down</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">:</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_state</span> <span class="o">=</span> <span class="s2">&quot;lockdown&quot;</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_started</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">day</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">is_locked_down</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.05</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">is_work_locked_down</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">total</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.75</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.05</span>
+            <span class="n">population</span><span class="o">.</span><span class="n">lockdown_scale_rate</span> <span class="o">=</span> <span class="mf">0.5</span>
 
     <span class="k">if</span> <span class="n">population</span><span class="o">.</span><span class="n">is_locked_down</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">advance_lockdown</span><span class="p">]</span>
@@ -576,7 +596,7 @@ a graph similar to below?</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -591,7 +611,6 @@ a graph similar to below?</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

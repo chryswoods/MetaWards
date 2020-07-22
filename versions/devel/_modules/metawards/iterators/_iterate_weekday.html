@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -85,31 +87,52 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -148,7 +171,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -174,7 +197,7 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;iterate_weekday&quot;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="iterate_weekday"><a class="viewcode-back" href="../../../api/generated/metawards.iterators.iterate_weekday.html#metawards.iterators.iterate_weekday">[docs]</a><span class="k">def</span> <span class="nf">iterate_weekday</span><span class="p">(</span><span class="n">nthreads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="iterate_weekday"><a class="viewcode-back" href="../../../api/generated/metawards.iterators.iterate_weekday.html#metawards.iterators.iterate_weekday">[docs]</a><span class="k">def</span> <span class="nf">iterate_weekday</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This returns the default list of &#39;advance_XXX&#39; functions that</span>
 <span class="sd">       are called in sequence for each weekday iteration of the model run.</span>
 
@@ -192,24 +215,11 @@
 <span class="sd">         The list of functions that ```iterate``` will call in sequence</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">nthreads</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">nthreads</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">._advance_infprob</span> <span class="kn">import</span> <span class="n">advance_infprob_serial</span>
-        <span class="kn">from</span> <span class="nn">._advance_fixed</span> <span class="kn">import</span> <span class="n">advance_fixed_serial</span>
-        <span class="kn">from</span> <span class="nn">._advance_play</span> <span class="kn">import</span> <span class="n">advance_play_serial</span>
+    <span class="kn">from</span> <span class="nn">._advance_infprob</span> <span class="kn">import</span> <span class="n">advance_infprob</span>
+    <span class="kn">from</span> <span class="nn">._advance_fixed</span> <span class="kn">import</span> <span class="n">advance_fixed</span>
+    <span class="kn">from</span> <span class="nn">._advance_play</span> <span class="kn">import</span> <span class="n">advance_play</span>
 
-        <span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">advance_infprob_serial</span><span class="p">,</span>
-                 <span class="n">advance_fixed_serial</span><span class="p">,</span>
-                 <span class="n">advance_play_serial</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">._advance_infprob</span> <span class="kn">import</span> <span class="n">advance_infprob_omp</span>
-        <span class="kn">from</span> <span class="nn">._advance_fixed</span> <span class="kn">import</span> <span class="n">advance_fixed_omp</span>
-        <span class="kn">from</span> <span class="nn">._advance_play</span> <span class="kn">import</span> <span class="n">advance_play_omp</span>
-
-        <span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">advance_infprob_omp</span><span class="p">,</span>
-                 <span class="n">advance_fixed_omp</span><span class="p">,</span>
-                 <span class="n">advance_play_omp</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">funcs</span></div>
+    <span class="k">return</span> <span class="p">[</span><span class="n">advance_infprob</span><span class="p">,</span> <span class="n">advance_fixed</span><span class="p">,</span> <span class="n">advance_play</span><span class="p">]</span></div>
 </pre></div>
 
            </div>
@@ -223,7 +233,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -238,7 +248,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

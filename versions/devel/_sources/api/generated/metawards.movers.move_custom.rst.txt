@@ -1,0 +1,6 @@
+metawards.movers.move\_custom
+=============================
+
+.. currentmodule:: metawards.movers
+
+.. autofunction:: move_custom

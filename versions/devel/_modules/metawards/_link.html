@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -85,31 +87,52 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -148,7 +171,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
@@ -176,21 +199,26 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Link&quot;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="Link"><a class="viewcode-back" href="../../api/generated/metawards.Link.html#metawards.Link">[docs]</a><span class="nd">@dataclass</span>
+<div class="viewcode-block" id="Link"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Link">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Link</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;This is a link between nodes in the network&quot;&quot;&quot;</span>
-    <span class="n">ifrom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>        <span class="c1"># integers (indexes) of origins and destinations</span>
+
+    <span class="c1">#: Index of the origin node (ward)</span>
+    <span class="n">ifrom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: Index of the destination node (ward)</span>
     <span class="n">ito</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>     <span class="c1"># weight of link, used to save the original</span>
-                             <span class="c1"># number of susceptibles in work matrix</span>
+    <span class="c1">#: Weight of the link, used to save the original number</span>
+    <span class="c1">#: of susceptibles in the work matrix</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="n">suscept</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>    <span class="c1"># number of susceptibles in the case of the</span>
-                             <span class="c1"># work matrix. Used to save the weight of</span>
-                             <span class="c1"># the play matrix</span>
+    <span class="c1">#: Number of susceptibles in the case of the work matrix. Used</span>
+    <span class="c1">#: to save the weight of the play matrix</span>
+    <span class="n">suscept</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>   <span class="c1"># the distance between two wards</span>
-    <span class="n">A</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>            <span class="c1"># Age index...</span></div>
+    <span class="c1">#: The distance between the two wards connected by this link</span>
+    <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span></div>
 </pre></div>
 
            </div>
@@ -204,7 +232,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -219,7 +247,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

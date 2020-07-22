@@ -1,0 +1,67 @@
+metawards.Ward
+==============
+
+.. currentmodule:: metawards
+
+.. autoclass:: Ward
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Ward.__init__
+      ~Ward.add_player_weight
+      ~Ward.add_workers
+      ~Ward.assert_sane
+      ~Ward.authority
+      ~Ward.auto_assign_players
+      ~Ward.code
+      ~Ward.depopulate
+      ~Ward.dereference
+      ~Ward.from_data
+      ~Ward.from_json
+      ~Ward.get_player_lists
+      ~Ward.get_players
+      ~Ward.get_worker_lists
+      ~Ward.get_workers
+      ~Ward.id
+      ~Ward.info
+      ~Ward.is_null
+      ~Ward.is_resolved
+      ~Ward.merge
+      ~Ward.name
+      ~Ward.num_play_links
+      ~Ward.num_players
+      ~Ward.num_work_links
+      ~Ward.num_workers
+      ~Ward.play_connections
+      ~Ward.population
+      ~Ward.position
+      ~Ward.region
+      ~Ward.resolve
+      ~Ward.scale
+      ~Ward.set_authority
+      ~Ward.set_auto_assign_players
+      ~Ward.set_code
+      ~Ward.set_id
+      ~Ward.set_info
+      ~Ward.set_name
+      ~Ward.set_num_players
+      ~Ward.set_num_workers
+      ~Ward.set_position
+      ~Ward.set_region
+      ~Ward.subtract_player_weight
+      ~Ward.subtract_workers
+      ~Ward.to_data
+      ~Ward.to_json
+      ~Ward.work_connections
+   
+   
+
+   
+   
+   

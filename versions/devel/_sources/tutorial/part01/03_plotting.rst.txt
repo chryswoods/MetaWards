@@ -14,6 +14,17 @@ To run this, type;
 
    metawards-plot --input output/results.csv.bz2
 
+.. note::
+   ``metawards-plot`` uses `pandas <https://pandas.pydata.org>`__ and
+   `matplotlib <https://matplotlib.org>`__ for plotting. If you don't have
+   these on your computer then you will see an error message giving
+   instructions on how to install the packages. Note that the default
+   format of the output is jpeg. You can change the format using the
+   ``--format`` option, e.g. ``--format png`` or ``--format pdf``.
+   You may need to install
+   `Pillow <https://pillow.readthedocs.io/en/stable/>`__
+   to support output in some file formats.
+
 Understanding the graphs
 ------------------------
 

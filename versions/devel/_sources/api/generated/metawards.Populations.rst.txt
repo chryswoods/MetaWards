@@ -15,6 +15,7 @@ metawards.Populations
    
       ~Populations.__init__
       ~Populations.append
+      ~Populations.strip_demographics
    
    
 

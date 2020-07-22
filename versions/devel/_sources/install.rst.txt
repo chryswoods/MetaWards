@@ -5,6 +5,11 @@ Installation instructions
 Dependencies
 ============
 
+MetaWards is compiled and
+`tested on Windows, Linux and OS X <https://github.com/metawards/MetaWards/actions>`__,
+but should be able to compile and install on any operating system
+with a working Python >= 3.7 and a C compiler.
+
 To install MetaWards, you first need to install Python >= 3.7. To check
 if you have Python 3.7 installed type;
 
@@ -43,16 +48,17 @@ or you may have to `install pip <https://pip.pypa.io/en/stable/installing/>`__.
 If you have trouble installing pip then we recommend that you download
 and install `anaconda <https://anaconda.org>`__, which has pip included)
 
-To install a specific version, e.g. 0.6.0, type
+To install a specific version, e.g. 1.0.0, type
 
 .. code-block:: bash
 
-    pip install metawards==0.6.0
+    pip install metawards==1.0.0
 
 This will install a binary version of metawards if it is avaiable for your
 operating system / processor / version of python. If not, then
-metawards will be compiled into C using `cython <https://cython.org>`__,
-and then compiled into an executable using your system C compiler
+the metawards pyx code that was compiled into C using
+`cython <https://cython.org>`__,
+will be compiled into an executable using your system C compiler
 (e.g. `gcc <https://gcc.gnu.org>`__ or `clang <https://clang.llvm.org>`__).
 You can control which C compiler to use by setting the ``CC`` environment
 variable, e.g.
@@ -65,8 +71,10 @@ MetaWards is written in standard C, using
 `OpenMP <https://www.openmp.org>`__ for parallelisation,
 and it has no external dependencies, so
 it should compile without issue. Note that the system C compiler on
-OS X (Mac) does not support OpenMP. In this case you will need to install
-and use a different compiler, e.g. installing clang via
+OS X (Mac) does not support OpenMP. In this case you the code will
+compile with OpenMP disabled. If you want to use all of the cores
+of your computer than you will need to install
+a different compiler, e.g. installing clang via
 `homebrew <https://brew.sh>`__. If you have any problems then please
 `post an issue on GitHub <https://github.com/metawards/MetaWards/issues>`__.
 
@@ -117,8 +125,10 @@ MetaWards is written in standard C, using
 `OpenMP <https://www.openmp.org>`__ for parallelisation,
 and it has no external dependencies, so
 it should compile without issue. Note that the system C compiler on
-OS X (Mac) does not support OpenMP. In this case you will need to install
-and use a different compiler, e.g. installing clang via
+OS X (Mac) does not support OpenMP. In this case you the code will
+compile with OpenMP disabled. If you want to use all of the cores
+of your computer than you will need to install
+a different compiler, e.g. installing clang via
 `homebrew <https://brew.sh>`__. If you have any problems then please
 `post an issue on GitHub <https://github.com/metawards/MetaWards/issues>`__.
 
@@ -132,17 +142,23 @@ there;
 
     git clone https://github.com/metawards/MetaWards
     cd MetaWards
+    pip install -r requirements-dev.txt
 
 From this point you can compile as if you have downloaded from source.
-As a developer you may want to install the developer tools to enable
-you to run the tests and create the website. To do this type;
+As a developer you may want to run the tests and create the website.
+To do this type;
 
 .. code-block:: bash
 
-    pip install -r requirements-dev.txt
-
     pytest tests
-    cd doc; make html
+    make doc
+
+There are shortcuts for running the quick or slow tests, e.g.
+
+.. code-block:: bash
+
+   make test
+   make quicktest
 
 Note that the tests assume that you have already downloaded the
 model data from `MetaWardsData <https://github.com/metawards/MetaWardsData>`__

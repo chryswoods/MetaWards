@@ -1,0 +1,6 @@
+metawards.utils.add\_lookup
+===========================
+
+.. currentmodule:: metawards.utils
+
+.. autofunction:: add_lookup

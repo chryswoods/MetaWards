@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MetaWards.extractors API Detail" href="index_api_MetaWards_extractors.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,17 +89,37 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../snaglist.html">Snag list</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
@@ -108,21 +130,25 @@
 <li class="toctree-l3"><a class="reference internal" href="index_api_MetaWards_extractors.html">MetaWards.extractors API Detail</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_movers.html">MetaWards.movers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_analysis.html">MetaWards.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_MetaWards_utils.html">MetaWards.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_MetaWards_themes.html">MetaWards.themes</a></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -161,7 +187,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="index.html">Documentation</a> &raquo;</li>
         
@@ -195,22 +221,25 @@
 <h1>MetaWards.extractors<a class="headerlink" href="#metawards-extractors" title="Permalink to this headline">¶</a></h1>
 <p>These are the extractor functions that are used during a model run
 to extract data from the outbreak to process and write live to files.
-The functions divide into three main types,
+The functions divide into two main types,
 the most important of which are described below;</p>
 <dl class="docutils">
-<dt>The functions that decide which output functions will be called</dt>
+<dt><code class="docutils literal notranslate"><span class="pre">extract_functions</span></code> which determine which functions will be called to output data</dt>
 <dd><ul class="first last simple">
 <li><a class="reference internal" href="generated/metawards.extractors.extract_default.html#metawards.extractors.extract_default" title="metawards.extractors.extract_default"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_default()</span></code></a></li>
+<li><a class="reference internal" href="generated/metawards.extractors.extract_custom.html#metawards.extractors.extract_custom" title="metawards.extractors.extract_custom"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_custom()</span></code></a></li>
+<li><a class="reference internal" href="generated/metawards.extractors.extract_large.html#metawards.extractors.extract_large" title="metawards.extractors.extract_large"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_large()</span></code></a></li>
+<li><a class="reference internal" href="generated/metawards.extractors.extract_small.html#metawards.extractors.extract_small" title="metawards.extractors.extract_small"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_small()</span></code></a></li>
+<li><a class="reference internal" href="generated/metawards.extractors.extract_none.html#metawards.extractors.extract_none" title="metawards.extractors.extract_none"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_none()</span></code></a></li>
 </ul>
 </dd>
-<dt>Functions that extract and output information from the outbreak</dt>
+<dt><code class="docutils literal notranslate"><span class="pre">output_functions</span></code> which perform the actual work of outputting data</dt>
 <dd><ul class="first last simple">
-<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_default()</span></code></li>
-</ul>
-</dd>
-<dt>Functions that set up the different <em class="xref py py-obj">output_XXX</em> functions</dt>
-<dd><ul class="first last simple">
-<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">setup_output_default()</span></code></li>
+<li><a class="reference internal" href="generated/metawards.extractors.output_basic.html#metawards.extractors.output_basic" title="metawards.extractors.output_basic"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_basic()</span></code></a></li>
+<li><a class="reference internal" href="generated/metawards.extractors.output_core.html#metawards.extractors.output_core" title="metawards.extractors.output_core"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_core()</span></code></a></li>
+<li><a class="reference internal" href="generated/metawards.extractors.output_dispersal.html#metawards.extractors.output_dispersal" title="metawards.extractors.output_dispersal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_dispersal()</span></code></a></li>
+<li><a class="reference internal" href="generated/metawards.extractors.output_incidence.html#metawards.extractors.output_incidence" title="metawards.extractors.output_incidence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_incidence()</span></code></a></li>
+<li><a class="reference internal" href="generated/metawards.extractors.output_prevalence.html#metawards.extractors.output_prevalence" title="metawards.extractors.output_prevalence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_prevalence()</span></code></a></li>
 </ul>
 </dd>
 </dl>
@@ -244,7 +273,7 @@ described <a class="reference internal" href="index_api_MetaWards_extractors.htm
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -259,7 +288,6 @@ described <a class="reference internal" href="index_api_MetaWards_extractors.htm
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

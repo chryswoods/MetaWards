@@ -1,0 +1,44 @@
+metawards.Workspace
+===================
+
+.. currentmodule:: metawards
+
+.. autoclass:: Workspace
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Workspace.__init__
+      ~Workspace.build
+      ~Workspace.zero_all
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Workspace.E_in_wards
+      ~Workspace.I_in_wards
+      ~Workspace.R_in_wards
+      ~Workspace.S_in_wards
+      ~Workspace.X_in_wards
+      ~Workspace.incidence
+      ~Workspace.inf_tot
+      ~Workspace.n_inf_classes
+      ~Workspace.n_inf_wards
+      ~Workspace.nnodes
+      ~Workspace.pinf_tot
+      ~Workspace.subspaces
+      ~Workspace.total_inf_ward
+      ~Workspace.total_new_inf_ward
+      ~Workspace.ward_inf_tot
+   
+   

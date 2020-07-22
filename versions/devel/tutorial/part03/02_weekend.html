@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,11 +38,6 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Custom advance functions" href="03_lockdown.html" />
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,19 +89,26 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorial</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index_part01.html">Part 1 - Modelling outbreaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part02.html">Part 2 - Refining the model</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index_part03.html">Part 3 - Customising the outbreak</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="01_iterators.html">How a day is modelled</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Where is the weekend?</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#creating-the-weekend">Creating the weekend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#printing-debug-output">Printing debug output</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#advancing-the-outbreak">Advancing the outbreak</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#changing-iterators-with-time">Changing iterators with time</a></li>
 </ul>
@@ -111,26 +120,45 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -169,9 +197,9 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../tutorial.html">Tutorial</a> &raquo;</li>
+          <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
           <li><a href="../index_part03.html">Part 3 - Customising the outbreak</a> &raquo;</li>
         
@@ -218,8 +246,10 @@ for each model day.</p>
 <code class="docutils literal notranslate"><span class="pre">lurgy3.json</span></code> disease parameters. Change into this directory and
 create a new file called <code class="docutils literal notranslate"><span class="pre">weekend.py</span></code>, and copy into it the below
 code.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">iterate_weekend</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello iterate_weekend&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
+
+<span class="k">def</span> <span class="nf">iterate_weekend</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;Hello iterate_weekend&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">[]</span>
 </pre></div>
@@ -229,6 +259,17 @@ unspecified number of
 <a class="reference external" href="https://book.pythontips.com/en/latest/args_and_kwargs.html">keyword arguments (**kwargs)</a>
 (more about these later). It returns an empty list (<code class="docutils literal notranslate"><span class="pre">[]</span></code>). All it does
 is print <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">iterate_weekend</span></code> to the screen.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Notice that you <em>must</em> print using the
+<a class="reference internal" href="../../api/generated/metawards.utils.Console.html#metawards.utils.Console.print" title="metawards.utils.Console.print"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Console.print</span></code></a> function of
+<a class="reference internal" href="../../api/generated/metawards.utils.Console.html#metawards.utils.Console" title="metawards.utils.Console"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Console()</span></code></a>. This ensures that all printing
+goes to the right place and stays sane when multiple processes
+and threads all try to print at the same time. It also ensures
+that everything that is printed to the screen also gets printed
+to a file for safekeeping (<code class="docutils literal notranslate"><span class="pre">output/console.log.bz2</span></code>). It is
+very important that information is not lost when running a job.</p>
+</div>
 <p>You can run this function by starting <code class="docutils literal notranslate"><span class="pre">ipython</span></code> in this directory
 and typing;</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>In [1]: import weekend
@@ -243,62 +284,52 @@ using the <code class="docutils literal notranslate"><span class="pre">--iterato
 </pre></div>
 </div>
 <p>You should see a very different outbreak to what you have before, e.g.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082077</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+Number of infections: 0
 
- <span class="mi">0</span> <span class="mi">0</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082077</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
-<span class="n">seeding</span> <span class="n">play_infections</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">255</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">5</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+seeding play_infections[0][255] += 5
+S: 56082072  E: 5  I: 0  R: 0  IW: 0  POPULATION: 56082077
+Number of infections: 5
 
- <span class="mi">1</span> <span class="mi">0</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082072</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+S: 56082072  E: 4  I: 1  R: 0  IW: 0  POPULATION: 56082077
+Number of infections: 5
 
- <span class="mi">2</span> <span class="mi">5</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 3 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+S: 56082072  E: 2  I: 3  R: 0  IW: 0  POPULATION: 56082077
+Number of infections: 5
 
- <span class="mi">3</span> <span class="mi">5</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 4 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+S: 56082072  E: 2  I: 2  R: 1  IW: 0  POPULATION: 56082077
+Number of infections: 4
 
- <span class="mi">4</span> <span class="mi">5</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 5 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+S: 56082072  E: 1  I: 2  R: 2  IW: 0  POPULATION: 56082077
+Number of infections: 3
 
- <span class="mi">5</span> <span class="mi">5</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 6 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+S: 56082072  E: 0  I: 2  R: 3  IW: 0  POPULATION: 56082077
+Number of infections: 2
 
- <span class="mi">6</span> <span class="mi">5</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 7 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+S: 56082072  E: 0  I: 1  R: 4  IW: 0  POPULATION: 56082077
+Number of infections: 1
 
- <span class="mi">7</span> <span class="mi">5</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
-
- <span class="mi">8</span> <span class="mi">5</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">4</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">1</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
-
- <span class="mi">9</span> <span class="mi">4</span>
-<span class="n">S</span> <span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">3</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
-
- <span class="mi">10</span> <span class="mi">2</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">2</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">3</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
-
- <span class="mi">11</span> <span class="mi">2</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">1</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">4</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Hello</span> <span class="n">iterate_weekend</span>
-
- <span class="mi">12</span> <span class="mi">1</span>
-<span class="n">S</span><span class="p">:</span> <span class="mi">56082072</span>    <span class="n">E</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">I</span><span class="p">:</span> <span class="mi">0</span>    <span class="n">R</span><span class="p">:</span> <span class="mi">5</span>    <span class="n">IW</span><span class="p">:</span> <span class="mi">0</span>   <span class="n">TOTAL</span> <span class="n">POPULATION</span> <span class="mi">56082077</span>
-<span class="n">Infection</span> <span class="n">died</span> <span class="o">...</span> <span class="n">Ending</span> <span class="n">on</span> <span class="n">day</span> <span class="mi">13</span>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 8 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Hello iterate_weekend
+S: 56082072  E: 0  I: 0  R: 5  IW: 0  POPULATION: 56082077
+Number of infections: 0
+Infection died ... Ending on day 9
 </pre></div>
 </div>
 <p>What happened here? Well, just as you imported <code class="docutils literal notranslate"><span class="pre">weekend</span></code> into <code class="docutils literal notranslate"><span class="pre">ipython</span></code>
@@ -310,14 +341,16 @@ module whose name started with <code class="docutils literal notranslate"><span 
 <strong>model run</strong>.</p>
 <p>You can name your function whatever you want, e.g. edit <code class="docutils literal notranslate"><span class="pre">weekend.py</span></code>
 to read;</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">another_function</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello another_function&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
+
+<span class="k">def</span> <span class="nf">another_function</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;Hello another_function&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">[]</span>
 
 
 <span class="k">def</span> <span class="nf">iterate_weekend</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello iterate_weekend&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;Hello iterate_weekend&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">[]</span>
 </pre></div>
@@ -331,6 +364,74 @@ command below;</p>
 </div>
 <p>You should see <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">another_function</span></code> is now printed for
 every iteration.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Sometimes you may see <code class="docutils literal notranslate"><span class="pre">metawards</span></code> exit with a warning that it can’t
+find your iterator function. This is likely because there is a typo
+or syntax error in your iterator. <code class="docutils literal notranslate"><span class="pre">metawards</span></code> does its best to
+detect these and report them to you, so check above the error in the
+output to see if there is anything helpful. If not, then run your
+iterator in python to see if you get any errors, e.g. if your iterator
+is in a file called <code class="docutils literal notranslate"><span class="pre">iterator.py</span></code> then type <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">iterator.py</span></code>.
+If there is an error, then that will be printed to the screen.</p>
+</div>
+</div>
+<div class="section" id="printing-debug-output">
+<h2>Printing debug output<a class="headerlink" href="#printing-debug-output" title="Permalink to this headline">¶</a></h2>
+<p>In general, you should only print things to the screen if they will be useful
+for the user of the program. Sometimes when developing you want to print
+some debugging output that can verify that everything is working. To do this,
+using <a class="reference internal" href="../../api/generated/metawards.utils.Console.html#metawards.utils.Console.debug" title="metawards.utils.Console.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Console.debug</span></code></a>. For example,
+change your iterator to;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
+
+<span class="k">def</span> <span class="nf">iterate_weekend</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Hello iterate_weekend&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>Now, you will only see this print output if the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> option is passed
+to <code class="docutils literal notranslate"><span class="pre">metawards</span></code>, e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d lurgy2 --iterator weekend --debug
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[15:23:08]                       Hello iterate_weekend                       weekend.py:5
+S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+Number of infections: 0
+</pre></div>
+</div>
+<p>Note that the time of the debug string, and the line and file of the debug
+statement are included. You can also easily print the values of variables
+using the <code class="docutils literal notranslate"><span class="pre">variables</span></code> keyword argument to
+<a class="reference internal" href="../../api/generated/metawards.utils.Console.html#metawards.utils.Console.debug" title="metawards.utils.Console.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">debug()</span></code></a>, e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
+
+<span class="k">def</span> <span class="nf">iterate_weekend</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">42</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;This is a string&quot;</span>
+
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Hello iterate_weekend&quot;</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d lurgy2 --iterator weekend --debug
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[15:25:38]                       Hello iterate_weekend                       weekend.py:8
+
+ Name │ Value
+══════╪══════════════════
+    a │ 42
+    b │ This is a string
+</pre></div>
+</div>
+<p>More information about debug strings, debugging levels, and how you can leave
+these debug strings in production code is
+<a class="reference internal" href="../../devsupport.html"><span class="doc">available here</span></a>.</p>
 </div>
 <div class="section" id="advancing-the-outbreak">
 <h2>Advancing the outbreak<a class="headerlink" href="#advancing-the-outbreak" title="Permalink to this headline">¶</a></h2>
@@ -345,9 +446,10 @@ the iterator function is to return the functions that are needed to
 advance an outbreak (so-called <code class="docutils literal notranslate"><span class="pre">advance</span> <span class="pre">functions</span></code>).</p>
 <p>You can write an advance function by editing <code class="docutils literal notranslate"><span class="pre">weekend.py</span></code> to contain;</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards.iterators</span> <span class="kn">import</span> <span class="n">advance_infprob</span><span class="p">,</span> <span class="n">advance_play</span>
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
 
 <span class="k">def</span> <span class="nf">iterate_weekend</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello iterate_weekend&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Hello iterate_weekend&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">advance_infprob</span><span class="p">,</span> <span class="n">advance_play</span><span class="p">]</span>
 </pre></div>
@@ -385,20 +487,21 @@ it the code below;</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards.iterators</span> <span class="kn">import</span> <span class="n">advance_infprob</span><span class="p">,</span> \
                                 <span class="n">advance_fixed</span><span class="p">,</span> \
                                 <span class="n">advance_play</span>
+<span class="kn">from</span> <span class="nn">metawards.utils</span> <span class="kn">import</span> <span class="n">Console</span>
 
 
 <span class="k">def</span> <span class="nf">iterate_week</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">date</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">date</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating functions for </span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating functions for </span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">date</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is a weekday&quot;</span><span class="p">)</span>
+        <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;This is a weekday&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">advance_infprob</span><span class="p">,</span>
                 <span class="n">advance_fixed</span><span class="p">,</span>
                 <span class="n">advance_play</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is a weekend&quot;</span><span class="p">)</span>
+        <span class="n">Console</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;This is a weekend&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">advance_infprob</span><span class="p">,</span>
                 <span class="n">advance_play</span><span class="p">]</span>
 </pre></div>
@@ -409,7 +512,7 @@ the <code class="docutils literal notranslate"><span class="pre">population</spa
 arguments, most of which are ignored by the <code class="docutils literal notranslate"><span class="pre">**kwarg</span></code> variables.</p>
 <p>When you need an argument you name it in the function. In this case,
 we need the <code class="docutils literal notranslate"><span class="pre">population</span></code> argument. This is a
-<a class="reference internal" href="../../api/generated/metawards.Population.html#metawards.Population" title="metawards.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">Population</span></code></a> object, which contains the distribution
+<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Population" title="metawards.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">Population</span></code></a> object, which contains the distribution
 of the population across the different <strong>S</strong>, <strong>E</strong>, <strong>I</strong> states,
 plus the current date of the outbreak (
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">Population.date</span></code>).</p>
@@ -470,7 +573,7 @@ command line option.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -485,7 +588,6 @@ command line option.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

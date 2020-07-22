@@ -1,0 +1,6 @@
+metawards.input
+===============
+
+.. currentmodule:: metawards
+
+.. autofunction:: input

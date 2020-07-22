@@ -15,7 +15,15 @@ metawards.Disease
    
       ~Disease.N_INF_CLASSES
       ~Disease.__init__
+      ~Disease.add
+      ~Disease.from_data
+      ~Disease.from_json
+      ~Disease.get_index
+      ~Disease.get_mapping_to
+      ~Disease.insert
       ~Disease.load
+      ~Disease.to_data
+      ~Disease.to_json
    
    
 
@@ -27,7 +35,10 @@ metawards.Disease
    
       ~Disease.beta
       ~Disease.contrib_foi
+      ~Disease.mapping
+      ~Disease.name
       ~Disease.progress
+      ~Disease.stage
       ~Disease.start_symptom
       ~Disease.too_ill_to_move
    

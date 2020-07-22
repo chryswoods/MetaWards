@@ -1,0 +1,42 @@
+metawards.themes.SpringFlowers
+==============================
+
+.. currentmodule:: metawards.themes
+
+.. autoclass:: SpringFlowers
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SpringFlowers.__init__
+      ~SpringFlowers.error
+      ~SpringFlowers.get_frames
+      ~SpringFlowers.highlighter
+      ~SpringFlowers.info
+      ~SpringFlowers.padding_style
+      ~SpringFlowers.panel
+      ~SpringFlowers.panel_box
+      ~SpringFlowers.rule
+      ~SpringFlowers.should_highlight
+      ~SpringFlowers.should_markup
+      ~SpringFlowers.spinner_failure
+      ~SpringFlowers.spinner_success
+      ~SpringFlowers.text
+      ~SpringFlowers.warning
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SpringFlowers.panel_color_count
+   
+   

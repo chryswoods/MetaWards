@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>metawards.utils.Console &mdash; MetaWards Documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/custom.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="metawards.utils.create_int_array" href="metawards.utils.create_int_array.html" />
+    <link rel="prev" title="metawards.utils.clear_all_infections" href="metawards.utils.clear_all_infections.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  <div id="version_box"></div>
+</div>
+
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_app.html">MetaWards.app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards.html">MetaWards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_iterators.html">MetaWards.iterators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_movers.html">MetaWards.movers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_analysis.html">MetaWards.analysis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index_MetaWards_utils.html">MetaWards.utils</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index_api_MetaWards_utils.html">MetaWards.utils API Detail</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index_api_MetaWards_utils.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index_api_MetaWards_utils.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_themes.html">MetaWards.themes</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MetaWards</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Documentation</a> &raquo;</li>
+        
+          <li><a href="../index_MetaWards_utils.html">MetaWards.utils</a> &raquo;</li>
+        
+          <li><a href="../index_api_MetaWards_utils.html">MetaWards.utils API Detail</a> &raquo;</li>
+        
+      <li>metawards.utils.Console</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="metawards.utils.create_int_array.html" class="btn btn-neutral float-right" title="metawards.utils.create_int_array" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metawards.utils.clear_all_infections.html" class="btn btn-neutral float-left" title="metawards.utils.clear_all_infections" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="metawards-utils-console">
+<h1>metawards.utils.Console<a class="headerlink" href="#metawards-utils-console" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="metawards.utils.Console">
+<em class="property">class </em><code class="descclassname">metawards.utils.</code><code class="descname">Console</code><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a singleton class that provides access to printing
+and logging functions to the console. This uses ‘rich’
+for rich console printing</p>
+<dl class="method">
+<dt id="metawards.utils.Console.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#metawards.utils.Console.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">center</span></code>(text,&nbsp;*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">command</span></code>(text,&nbsp;*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.utils.Console.debug" title="metawards.utils.Console.debug"><code class="xref py py-obj docutils literal notranslate"><span class="pre">debug</span></code></a>(text,&nbsp;variables,&nbsp;level,&nbsp;markdown,&nbsp;**kwargs)</td>
+<td>Print a debug string to the console.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.utils.Console.debugging_enabled" title="metawards.utils.Console.debugging_enabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">debugging_enabled</span></code></a>(level)</td>
+<td>Return whether debug output is enabled (optionally for the specified level) - if not, then anything sent to ‘debug’ (for that level) is not printed</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.utils.Console.error" title="metawards.utils.Console.error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">error</span></code></a>(text,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Print an error to the console</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.utils.Console.info" title="metawards.utils.Console.info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">info</span></code></a>(text,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Print an info section to the console</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.utils.Console.panel" title="metawards.utils.Console.panel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">panel</span></code></a>(text,&nbsp;markdown[,&nbsp;width,&nbsp;expand])</td>
+<td>Print within a panel to the console</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.utils.Console.print" title="metawards.utils.Console.print"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print</span></code></a>(text,&nbsp;markdown,&nbsp;style,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Print to the console</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.utils.Console.print_exception" title="metawards.utils.Console.print_exception"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_exception</span></code></a>()</td>
+<td>Print the current-handled exception</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_population</span></code>(population[,&nbsp;demographics])</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_profiler</span></code>(profiler,&nbsp;*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">progress</span></code>(visible,&nbsp;show_limit)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.utils.Console.redirect_output" title="metawards.utils.Console.redirect_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">redirect_output</span></code></a>(outdir,&nbsp;auto_bzip)</td>
+<td>Redirect all output and error to the directory ‘outdir’</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.utils.Console.rule" title="metawards.utils.Console.rule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rule</span></code></a>(title[,&nbsp;style])</td>
+<td>Write a rule across the screen with optional title</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.utils.Console.save" title="metawards.utils.Console.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(file,&nbsp;IO])</td>
+<td>Save the accumulated printing to the console to ‘file’.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.utils.Console.set_debugging_enabled" title="metawards.utils.Console.set_debugging_enabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_debugging_enabled</span></code></a>(enabled[,&nbsp;level])</td>
+<td>Switch on or off debugging output</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.utils.Console.set_theme" title="metawards.utils.Console.set_theme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_theme</span></code></a>(theme)</td>
+<td>Set the theme used for the console - this should be one of the themes in metawards.themes</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_use_progress</span></code>(use_progress)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_use_spinner</span></code>(use_spinner)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">spinner</span></code>(text)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#metawards.utils.Console.supports_emojis" title="metawards.utils.Console.supports_emojis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">supports_emojis</span></code></a>()</td>
+<td>Return whether or not you can print emojis to this console</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#metawards.utils.Console.warning" title="metawards.utils.Console.warning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">warning</span></code></a>(text,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Print a warning to the console</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.debug">
+<em class="property">static </em><code class="descname">debug</code><span class="sig-paren">(</span><em>text: str</em>, <em>variables: List[any] = None</em>, <em>level: int = None</em>, <em>markdown: bool = False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.debug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a debug string to the console. This will only be
+printed if debugging is enabled. You can also print the
+values of variables by passing them as a list to
+‘variables’</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.debugging_enabled">
+<em class="property">static </em><code class="descname">debugging_enabled</code><span class="sig-paren">(</span><em>level: int = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.debugging_enabled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.debugging_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether debug output is enabled (optionally for
+the specified level) - if not, then
+anything sent to ‘debug’ (for that level) is not printed</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.error">
+<em class="property">static </em><code class="descname">error</code><span class="sig-paren">(</span><em>text: str</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print an error to the console</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.info">
+<em class="property">static </em><code class="descname">info</code><span class="sig-paren">(</span><em>text: str</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print an info section to the console</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.panel">
+<em class="property">static </em><code class="descname">panel</code><span class="sig-paren">(</span><em>text: str</em>, <em>markdown: bool = False</em>, <em>width=None</em>, <em>padding: bool = True</em>, <em>style: str = None</em>, <em>expand=True</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.panel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.panel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print within a panel to the console</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.print">
+<em class="property">static </em><code class="descname">print</code><span class="sig-paren">(</span><em>text: str</em>, <em>markdown: bool = False</em>, <em>style: str = None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print to the console</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.print_exception">
+<em class="property">static </em><code class="descname">print_exception</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.print_exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.print_exception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the current-handled exception</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.redirect_output">
+<em class="property">static </em><code class="descname">redirect_output</code><span class="sig-paren">(</span><em>outdir: str</em>, <em>auto_bzip: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.redirect_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.redirect_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Redirect all output and error to the directory ‘outdir’</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.rule">
+<em class="property">static </em><code class="descname">rule</code><span class="sig-paren">(</span><em>title: str = None</em>, <em>style=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.rule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a rule across the screen with optional title</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.save">
+<em class="property">static </em><code class="descname">save</code><span class="sig-paren">(</span><em>file: Union[str, IO]</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the accumulated printing to the console to ‘file’.
+This can be a file or a filehandle. The buffer is
+cleared after saving</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.set_debugging_enabled">
+<em class="property">static </em><code class="descname">set_debugging_enabled</code><span class="sig-paren">(</span><em>enabled</em>, <em>level=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.set_debugging_enabled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.set_debugging_enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switch on or off debugging output</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.set_theme">
+<em class="property">static </em><code class="descname">set_theme</code><span class="sig-paren">(</span><em>theme</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.set_theme"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.set_theme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the theme used for the console - this should be
+one of the themes in metawards.themes</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.supports_emojis">
+<em class="property">static </em><code class="descname">supports_emojis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.supports_emojis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.supports_emojis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether or not you can print emojis to this console</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="metawards.utils.Console.warning">
+<em class="property">static </em><code class="descname">warning</code><span class="sig-paren">(</span><em>text: str</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_console.html#Console.warning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.Console.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a warning to the console</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metawards.utils.create_int_array.html" class="btn btn-neutral float-right" title="metawards.utils.create_int_array" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metawards.utils.clear_all_infections.html" class="btn btn-neutral float-left" title="metawards.utils.clear_all_infections" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      <span class="lastupdated">
+        Last updated on Jul 22, 2020.
+      </span>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

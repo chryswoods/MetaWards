@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,14 +38,9 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Documentation" href="api/index.html" />
+    <link rel="next" title="Help and support" href="support.html" />
     <link rel="prev" title="Command line options" href="metawards_plot_help.html" /> 
 </head>
 
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,13 +89,22 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
@@ -104,18 +115,30 @@
 </li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snaglist.html">Snag list</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">Documentation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -154,7 +177,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Running on a cluster</li>
     
@@ -170,7 +193,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="api/index.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="support.html" class="btn btn-neutral float-right" title="Help and support" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metawards_plot_help.html" class="btn btn-neutral float-left" title="Command line options" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -285,7 +308,7 @@ you name this script <code class="docutils literal notranslate"><span class="pre
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api/index.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="support.html" class="btn btn-neutral float-right" title="Help and support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metawards_plot_help.html" class="btn btn-neutral float-left" title="Command line options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -298,7 +321,7 @@ you name this script <code class="docutils literal notranslate"><span class="pre
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -313,7 +336,6 @@ you name this script <code class="docutils literal notranslate"><span class="pre
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

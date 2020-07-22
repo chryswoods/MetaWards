@@ -49,7 +49,9 @@ In the output you should see a line that reads;
 
 ::
 
-  Adjusting variables to (.scale[0]=0.2, .flag[0]=0.0, .scale[1]=0.5, .flag[1]=1.0, .scale[2]=0.7, .flag[2]=1.0)[repeat 1]
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Custom parameters and seeds ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Adjusting variables to (.scale[0]=0.2, .flag[0]=False, .scale[1]=0.5, .flag[1]=True,
+    .scale[2]=0.7, .flag[2]=True)[repeat 1]
 
 .. note::
   See how "user.variable" has been abbreviated to ".variable" in this output
@@ -69,6 +71,8 @@ you want. For example, ``network.params.user_params["scale[0]"] returns
 
 .. code-block:: python
 
+    from metawards.utils import Console
+
     def get_state(population):
         if population.day < 2:
             return 0
@@ -81,19 +85,19 @@ you want. For example, ``network.params.user_params["scale[0]"] returns
         params = network.params
         state = get_state(population)
         scale = params.user_params["scale"][state]
-        print(f"Hello advance_lockdown - scale = {scale}")
+        Console.debug("Hello advance_lockdown", variables=[scale])
 
     def advance_relaxed(network, population, **kwargs):
         params = network.params
         state = get_state(population)
         scale = params.user_params["scale"][state]
-        print(f"Hello advance_relaxed - scale = {scale}")
+        Console.debug("Hello advance_relaxed", variables=[scale])
 
     def iterate_custom(network, population, **kwargs):
         params = network.params
         state = get_state(population)
         flag = params.user_params["flag"][state]
-        print(f"Hello iterate_custom - state = {state}, flag = {flag}")
+        Console.debug("Hello iterate_custom", variables=[scale, flag])
 
         if flag:
             return [advance_lockdown]
@@ -122,39 +126,98 @@ Use this iterator by running ``metawards`` via;
 
 .. code-block:: bash
 
-   metawards -d lurgy3 -u custom.inp --iterator custom
+   metawards -d lurgy3 -u custom.inp --iterator custom --debug
 
 You should now see printed to the screen something very similar to the below;
 
 ::
 
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-    Hello iterate_custom - state = 0, flag = 0.0
-    Hello advance_relaxed - scale = 0.2
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 0 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    [15:56:50]                       Hello iterate_custom                        custom.py:31
 
-    0 0
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-    Hello iterate_custom - state = 0, flag = 0.0
-    Hello advance_relaxed - scale = 0.2
+      Name │ Value
+    ═══════╪═══════
+     state │ 0
+      flag │ False
 
-    1 0
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-    Hello iterate_custom - state = 1, flag = 1.0
-    Hello advance_lockdown - scale = 0.5
+                                    Hello advance_relaxed                       custom.py:24
 
-    2 0
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-    Hello iterate_custom - state = 1, flag = 1.0
-    Hello advance_lockdown - scale = 0.5
+      Name │ Value
+    ═══════╪═══════
+     scale │ 0.2
 
-    3 0
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-    Hello iterate_custom - state = 2, flag = 1.0
-    Hello advance_lockdown - scale = 0.7
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
 
-    4 0
-    S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    Hello iterate_custom                        custom.py:31
+
+      Name │ Value
+    ═══════╪═══════
+     state │ 0
+      flag │ False
+
+                                    Hello advance_relaxed                       custom.py:24
+
+      Name │ Value
+    ═══════╪═══════
+     scale │ 0.2
+
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    Hello iterate_custom                        custom.py:31
+
+      Name │ Value
+    ═══════╪═══════
+     state │ 1
+      flag │ True
+
+                                    Hello advance_lockdown                       custom.py:17
+
+      Name │ Value
+    ═══════╪═══════
+     scale │ 0.5
+
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 3 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    Hello iterate_custom                        custom.py:31
+
+      Name │ Value
+    ═══════╪═══════
+     state │ 1
+      flag │ True
+
+                                    Hello advance_lockdown                       custom.py:17
+
+      Name │ Value
+    ═══════╪═══════
+     scale │ 0.5
+
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
+
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Day 4 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                    Hello iterate_custom                        custom.py:31
+
+      Name │ Value
+    ═══════╪═══════
+     state │ 2
+      flag │ True
+
+    [15:56:51]                      Hello advance_lockdown                       custom.py:17
+
+      Name │ Value
+    ═══════╪═══════
+     scale │ 0.7
+
+    S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+    Number of infections: 0
     Infection died ... Ending on day 5
+
 
 Hopefully the change between state, functions called and values of the
 scale factor printed makes sense and follows what you expected.
@@ -194,34 +257,68 @@ You should get output that is very similar to this;
 
 ::
 
-    Completed job 1 of 6
-    (.scale[0]=0.1, .flag[0]=0.0)[repeat 1]
-    2020-04-26: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-
-    Completed job 2 of 6
-    (.scale[0]=0.2, .flag[0]=0.0)[repeat 1]
-    2020-04-26: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-
-    Completed job 3 of 6
-    (.scale[0]=0.3, .flag[0]=0.0)[repeat 1]
-    2020-04-26: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-
-    Completed job 4 of 6
-    (.scale[0]=0.1, .flag[0]=1.0)[repeat 1]
-    2020-04-26: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-
-    Completed job 5 of 6
-    (.scale[0]=0.2, .flag[0]=1.0)[repeat 1]
-    2020-04-26: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-
-    Completed job 6 of 6
-    (.scale[0]=0.3, .flag[0]=1.0)[repeat 1]
-    2020-04-26: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-
-.. note::
-   Note that "True" and "False" are converted to "1.0" and "0.0". This
-   is because all custom variables are stored internally in ``metawards``
-   as floating point numbers.
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ MULTIPROCESSING ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 1 of 6                                                                  │
+    │  (.scale[0]=0.1, .flag[0]=False)[repeat 1]                                             │
+    │  2020-05-25: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   UV: 1.0   TOTAL     │
+    │  POPULATION 56082077                                                                   │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 2 of 6                                                                  │
+    │  (.scale[0]=0.2, .flag[0]=False)[repeat 1]                                             │
+    │  2020-05-25: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   UV: 1.0   TOTAL     │
+    │  POPULATION 56082077                                                                   │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 3 of 6                                                                  │
+    │  (.scale[0]=0.3, .flag[0]=False)[repeat 1]                                             │
+    │  2020-05-25: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   UV: 1.0   TOTAL     │
+    │  POPULATION 56082077                                                                   │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 4 of 6                                                                  │
+    │  (.scale[0]=0.1, .flag[0]=True)[repeat 1]                                              │
+    │  2020-05-25: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   UV: 1.0   TOTAL     │
+    │  POPULATION 56082077                                                                   │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 5 of 6                                                                  │
+    │  (.scale[0]=0.2, .flag[0]=True)[repeat 1]                                              │
+    │  2020-05-25: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   UV: 1.0   TOTAL     │
+    │  POPULATION 56082077                                                                   │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    Computing model run ✔
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Completed job 6 of 6                                                                  │
+    │  (.scale[0]=0.3, .flag[0]=True)[repeat 1]                                              │
+    │  2020-05-25: DAY: 5 S: 56082077    E: 0    I: 0    R: 0    IW: 0   UV: 1.0   TOTAL     │
+    │  POPULATION 56082077                                                                   │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
+    ┌────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                                                                        │
+    │  Writing a summary of all results into the csv file                                    │
+    │  /Users/chris/GitHub/tutorial/weekend/output/results.csv.bz2. You can use this to      │
+    │  quickly look at statistics across all runs using e.g. R or pandas                     │
+    │                                                                                        │
+    └────────────────────────────────────────────────────────────────────────────────────────┘
 
 A quick look in the ``output/results.csv.bz2`` file, e.g. using pandas,
 shows that the fingerprint and columns for custom variables are
@@ -232,40 +329,40 @@ constructed identially to in-built variables, e.g.
     >>> import pandas as pd
     >>> df = pd.read_csv("output/results.csv.bz2")
     >>> print(df)
-       fingerprint  repeat  .scale[0]  .flag[0]  day        date         S  E  I  R  IW
-    0          1_0       1        0.1       0.0    0  2020-04-21  56082077  0  0  0   0
-    1          1_0       1        0.1       0.0    1  2020-04-22  56082077  0  0  0   0
-    2          1_0       1        0.1       0.0    2  2020-04-23  56082077  0  0  0   0
-    3          1_0       1        0.1       0.0    3  2020-04-24  56082077  0  0  0   0
-    4          1_0       1        0.1       0.0    4  2020-04-25  56082077  0  0  0   0
-    5          1_0       1        0.1       0.0    5  2020-04-26  56082077  0  0  0   0
-    6          2_0       1        0.2       0.0    0  2020-04-21  56082077  0  0  0   0
-    7          2_0       1        0.2       0.0    1  2020-04-22  56082077  0  0  0   0
-    8          2_0       1        0.2       0.0    2  2020-04-23  56082077  0  0  0   0
-    9          2_0       1        0.2       0.0    3  2020-04-24  56082077  0  0  0   0
-    10         2_0       1        0.2       0.0    4  2020-04-25  56082077  0  0  0   0
-    11         2_0       1        0.2       0.0    5  2020-04-26  56082077  0  0  0   0
-    12         3_0       1        0.3       0.0    0  2020-04-21  56082077  0  0  0   0
-    13         3_0       1        0.3       0.0    1  2020-04-22  56082077  0  0  0   0
-    14         3_0       1        0.3       0.0    2  2020-04-23  56082077  0  0  0   0
-    15         3_0       1        0.3       0.0    3  2020-04-24  56082077  0  0  0   0
-    16         3_0       1        0.3       0.0    4  2020-04-25  56082077  0  0  0   0
-    17         3_0       1        0.3       0.0    5  2020-04-26  56082077  0  0  0   0
-    18       1_1.0       1        0.1       1.0    0  2020-04-21  56082077  0  0  0   0
-    19       1_1.0       1        0.1       1.0    1  2020-04-22  56082077  0  0  0   0
-    20       1_1.0       1        0.1       1.0    2  2020-04-23  56082077  0  0  0   0
-    21       1_1.0       1        0.1       1.0    3  2020-04-24  56082077  0  0  0   0
-    22       1_1.0       1        0.1       1.0    4  2020-04-25  56082077  0  0  0   0
-    23       1_1.0       1        0.1       1.0    5  2020-04-26  56082077  0  0  0   0
-    24       2_1.0       1        0.2       1.0    0  2020-04-21  56082077  0  0  0   0
-    25       2_1.0       1        0.2       1.0    1  2020-04-22  56082077  0  0  0   0
-    26       2_1.0       1        0.2       1.0    2  2020-04-23  56082077  0  0  0   0
-    27       2_1.0       1        0.2       1.0    3  2020-04-24  56082077  0  0  0   0
-    28       2_1.0       1        0.2       1.0    4  2020-04-25  56082077  0  0  0   0
-    29       2_1.0       1        0.2       1.0    5  2020-04-26  56082077  0  0  0   0
-    30       3_1.0       1        0.3       1.0    0  2020-04-21  56082077  0  0  0   0
-    31       3_1.0       1        0.3       1.0    1  2020-04-22  56082077  0  0  0   0
-    32       3_1.0       1        0.3       1.0    2  2020-04-23  56082077  0  0  0   0
-    33       3_1.0       1        0.3       1.0    3  2020-04-24  56082077  0  0  0   0
-    34       3_1.0       1        0.3       1.0    4  2020-04-25  56082077  0  0  0   0
-    35       3_1.0       1        0.3       1.0    5  2020-04-26  56082077  0  0  0   0
+        ingerprint  repeat  .scale[0]  .flag[0]  day        date         S  E  I  R  IW   UV
+    0        0i1vF       1        0.1     False    0  2020-05-20  56082077  0  0  0   0  1.0
+    1        0i1vF       1        0.1     False    1  2020-05-21  56082077  0  0  0   0  1.0
+    2        0i1vF       1        0.1     False    2  2020-05-22  56082077  0  0  0   0  1.0
+    3        0i1vF       1        0.1     False    3  2020-05-23  56082077  0  0  0   0  1.0
+    4        0i1vF       1        0.1     False    4  2020-05-24  56082077  0  0  0   0  1.0
+    5        0i1vF       1        0.1     False    5  2020-05-25  56082077  0  0  0   0  1.0
+    6        0i2vF       1        0.2     False    0  2020-05-20  56082077  0  0  0   0  1.0
+    7        0i2vF       1        0.2     False    1  2020-05-21  56082077  0  0  0   0  1.0
+    8        0i2vF       1        0.2     False    2  2020-05-22  56082077  0  0  0   0  1.0
+    9        0i2vF       1        0.2     False    3  2020-05-23  56082077  0  0  0   0  1.0
+    10       0i2vF       1        0.2     False    4  2020-05-24  56082077  0  0  0   0  1.0
+    11       0i2vF       1        0.2     False    5  2020-05-25  56082077  0  0  0   0  1.0
+    12       0i3vF       1        0.3     False    0  2020-05-20  56082077  0  0  0   0  1.0
+    13       0i3vF       1        0.3     False    1  2020-05-21  56082077  0  0  0   0  1.0
+    14       0i3vF       1        0.3     False    2  2020-05-22  56082077  0  0  0   0  1.0
+    15       0i3vF       1        0.3     False    3  2020-05-23  56082077  0  0  0   0  1.0
+    16       0i3vF       1        0.3     False    4  2020-05-24  56082077  0  0  0   0  1.0
+    17       0i3vF       1        0.3     False    5  2020-05-25  56082077  0  0  0   0  1.0
+    18       0i1vT       1        0.1      True    0  2020-05-20  56082077  0  0  0   0  1.0
+    19       0i1vT       1        0.1      True    1  2020-05-21  56082077  0  0  0   0  1.0
+    20       0i1vT       1        0.1      True    2  2020-05-22  56082077  0  0  0   0  1.0
+    21       0i1vT       1        0.1      True    3  2020-05-23  56082077  0  0  0   0  1.0
+    22       0i1vT       1        0.1      True    4  2020-05-24  56082077  0  0  0   0  1.0
+    23       0i1vT       1        0.1      True    5  2020-05-25  56082077  0  0  0   0  1.0
+    24       0i2vT       1        0.2      True    0  2020-05-20  56082077  0  0  0   0  1.0
+    25       0i2vT       1        0.2      True    1  2020-05-21  56082077  0  0  0   0  1.0
+    26       0i2vT       1        0.2      True    2  2020-05-22  56082077  0  0  0   0  1.0
+    27       0i2vT       1        0.2      True    3  2020-05-23  56082077  0  0  0   0  1.0
+    28       0i2vT       1        0.2      True    4  2020-05-24  56082077  0  0  0   0  1.0
+    29       0i2vT       1        0.2      True    5  2020-05-25  56082077  0  0  0   0  1.0
+    30       0i3vT       1        0.3      True    0  2020-05-20  56082077  0  0  0   0  1.0
+    31       0i3vT       1        0.3      True    1  2020-05-21  56082077  0  0  0   0  1.0
+    32       0i3vT       1        0.3      True    2  2020-05-22  56082077  0  0  0   0  1.0
+    33       0i3vT       1        0.3      True    3  2020-05-23  56082077  0  0  0   0  1.0
+    34       0i3vT       1        0.3      True    4  2020-05-24  56082077  0  0  0   0  1.0
+    35       0i3vT       1        0.3      True    5  2020-05-25  56082077  0  0  0   0  1.0

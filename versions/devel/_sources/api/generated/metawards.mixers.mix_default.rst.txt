@@ -1,0 +1,6 @@
+metawards.mixers.mix\_default
+=============================
+
+.. currentmodule:: metawards.mixers
+
+.. autofunction:: mix_default

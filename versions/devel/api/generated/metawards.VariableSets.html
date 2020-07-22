@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,11 @@
   
 
   
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
@@ -19,7 +23,9 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,14 +38,9 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="metawards.get_version_string" href="metawards.get_version_string.html" />
+    <link rel="next" title="metawards.Ward" href="metawards.Ward.html" />
     <link rel="prev" title="metawards.VariableSet" href="metawards.VariableSet.html" /> 
 </head>
 
@@ -79,6 +80,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -87,17 +89,37 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../model_data.html">Model data</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index.html">Quick Start Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../fileformats/index.html">Input files and formats</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cluster_usage.html">Running on a cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../support.html">Help and support</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devsupport.html">Developer Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packaging.html">Packaging releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../snaglist.html">Snag list</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
@@ -112,21 +134,25 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_iterators.html">MetaWards.iterators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_extractors.html">MetaWards.extractors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_mixers.html">MetaWards.mixers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_movers.html">MetaWards.movers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_analysis.html">MetaWards.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_utils.html">MetaWards.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_MetaWards_themes.html">MetaWards.themes</a></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../development.html">Developer’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acknowledgements.html">Acknowledgements</a></li>
 </ul>
 
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -165,7 +191,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Documentation</a> &raquo;</li>
         
@@ -187,7 +213,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="metawards.get_version_string.html" class="btn btn-neutral float-right" title="metawards.get_version_string" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metawards.Ward.html" class="btn btn-neutral float-right" title="metawards.Ward" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metawards.VariableSet.html" class="btn btn-neutral float-left" title="metawards.VariableSet" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -246,20 +272,68 @@ to control a single run of the model</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.VariableSets.__init__" title="metawards.VariableSets.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets.__init__" title="metawards.VariableSets.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</td>
 <td>Initialise an empty VariableSets object</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.VariableSets.append" title="metawards.VariableSets.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(variables)</td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets.append" title="metawards.VariableSets.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(variables)</td>
 <td>Append the passed set of variables to the set that will be used to run a model.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.VariableSets.read" title="metawards.VariableSets.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a>(filename,&nbsp;line_numbers)</td>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets.read" title="metawards.VariableSets.read"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read</span></code></a>(filename,&nbsp;line_numbers)</td>
 <td>Read and return collection of VariableSet objects from the specified line number(s) of the specified file</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#metawards.VariableSets.repeat" title="metawards.VariableSets.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repeat</span></code></a>(nrepeats)</td>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets.repeat" title="metawards.VariableSets.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repeat</span></code></a>(nrepeats,&nbsp;int])</td>
 <td>Return a copy of this VariableSet in which all of the unique VaribleSet objects have been repeated ‘nrepeats’ times</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets.set_outdir_from_number" title="metawards.VariableSets.set_outdir_from_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outdir_from_number</span></code></a>()</td>
+<td>This function resets the names of all of the output directories for each run so that they are numbered sequentially from one</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets.set_outdir_from_uid" title="metawards.VariableSets.set_outdir_from_uid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outdir_from_uid</span></code></a>()</td>
+<td>This function resets the names of all of the output directories for each run so that they all have a globally unique UID</td>
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="metawards.VariableSets.__eq__">
+<code class="descname">__eq__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.__eq__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.__eq__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self==value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.VariableSets.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>i: int</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the VariableSet at the specified index</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.__init__"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Initialise an empty VariableSets object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>None</strong> – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.VariableSets.__repr__">
+<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return repr(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.VariableSets.__str__">
+<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return str(self).</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="metawards.VariableSets.append">
 <code class="descname">append</code><span class="sig-paren">(</span><em>variables: metawards._variableset.VariableSet</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.append" title="Permalink to this definition">¶</a></dt>
@@ -271,7 +345,7 @@ must adjust the same variables</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>variables</strong> (<a class="reference internal" href="metawards.VariableSet.html#metawards.VariableSet" title="metawards.VariableSet"><em>VariableSet</em></a>) – The VariableSet to append to this list. If you pass a
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>variables</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSet" title="metawards.VariableSet"><em>VariableSet</em></a>) – The VariableSet to append to this list. If you pass a
 dict of {str: float} values, then this will automatically
 be converted into a VariableSet. Note that all VariableSet
 objects in a VariableSets must adjust the same variables</td>
@@ -305,7 +379,7 @@ then all lines are read and used</li>
 in the order they were read from the file</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#metawards.VariableSets" title="metawards.VariableSets">VariableSets</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets" title="metawards.VariableSets">VariableSets</a></p>
 </td>
 </tr>
 </tbody>
@@ -314,7 +388,7 @@ in the order they were read from the file</p>
 
 <dl class="method">
 <dt id="metawards.VariableSets.repeat">
-<code class="descname">repeat</code><span class="sig-paren">(</span><em>nrepeats: int</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.repeat" title="Permalink to this definition">¶</a></dt>
+<code class="descname">repeat</code><span class="sig-paren">(</span><em>nrepeats: Union[List[int], int]</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.repeat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a copy of this VariableSet in which all of the
 unique VaribleSet objects have been repeated ‘nrepeats’
 times</p>
@@ -322,16 +396,31 @@ times</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nrepeats</strong> (<em>int</em>) – The number of repeats of the VariableSet objects to
-perform</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nrepeats</strong> (<em>int</em><em> or </em><em>list</em><em>[</em><em>int</em><em>]</em>) – The number of repeats of the VariableSet objects to
+perform. If this is a list, then nrepeats[i] will be
+the number of times to repeat variables[i]</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>repeats</strong> – A new VariableSets object containing ‘nrepeats’ copies
 of the VariableSet objects from this set</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#metawards.VariableSets" title="metawards.VariableSets">VariableSets</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets" title="metawards.VariableSets">VariableSets</a></td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.VariableSets.set_outdir_from_number">
+<code class="descname">set_outdir_from_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.set_outdir_from_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.set_outdir_from_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function resets the names of all of the output directories
+for each run so that they are numbered sequentially from one</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="metawards.VariableSets.set_outdir_from_uid">
+<code class="descname">set_outdir_from_uid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_variableset.html#VariableSets.set_outdir_from_uid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.VariableSets.set_outdir_from_uid" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function resets the names of all of the output directories
+for each run so that they all have a globally unique UID</p>
 </dd></dl>
 
 </dd></dl>
@@ -346,7 +435,7 @@ of the VariableSet objects from this set</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="metawards.get_version_string.html" class="btn btn-neutral float-right" title="metawards.get_version_string" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metawards.Ward.html" class="btn btn-neutral float-right" title="metawards.Ward" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metawards.VariableSet.html" class="btn btn-neutral float-left" title="metawards.VariableSet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -359,7 +448,7 @@ of the VariableSet objects from this set</td>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Apr 26, 2020.
+        Last updated on Jul 22, 2020.
       </span>
 
     </p>
@@ -374,7 +463,6 @@ of the VariableSet objects from this set</td>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

@@ -1,0 +1,40 @@
+metawards.Networks
+==================
+
+.. currentmodule:: metawards
+
+.. autoclass:: Networks
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Networks.__init__
+      ~Networks.aggregate
+      ~Networks.assert_sane
+      ~Networks.build
+      ~Networks.copy
+      ~Networks.initialise_infections
+      ~Networks.move_from_play_to_work
+      ~Networks.rescale_play_matrix
+      ~Networks.reset_everything
+      ~Networks.run
+      ~Networks.update
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Networks.demographics
+      ~Networks.overall
+      ~Networks.params
+   
+   

@@ -98,7 +98,7 @@ def parse_args():
                              "specific days at different locations "
                              "during a model run")
 
-    parser.add_argument('-o', '--output', type=str, default="output",
+    parser.add_argument('-o', '--output', type=str, default=None,
                         help="Path to the directory in which to place all "
                              "output files (default 'output'). This "
                              "directory will be subdivided if multiple "
@@ -128,7 +128,7 @@ def parse_args():
                              "are weekends, or to make it easier to specify "
                              "time-based events.")
 
-    parser.add_argument('--start-day', type=int, default=0,
+    parser.add_argument('--start-day', type=int, default=None,
                         help="The start day of the model outbreak. By "
                              "default the model outbreak starts on day "
                              "zero (0), with each step of the model "
@@ -139,7 +139,7 @@ def parse_args():
                              "'--start-date' is always day 0, so day 10 "
                              "has a date which is 10 days after start-date")
 
-    parser.add_argument('-p', '--parameters', type=str, default="march29",
+    parser.add_argument('-p', '--parameters', type=str, default=None,
                         help="Name of the input parameter set used to "
                              "control the simulation (default 'march29')")
 
@@ -151,10 +151,10 @@ def parse_args():
                              "$HOME/GitHub/MetaWardsData",
                              env_var="METAWARDSDATA")
 
-    parser.add_argument('-P', '--population', type=int, default=57104043,
-                        help="Initial population (default 57104043)")
+    parser.add_argument('-P', '--population', type=int, default=None,
+                        help="Initial population (default 1000)")
 
-    parser.add_argument('-n', '--nsteps', type=int, default=730,
+    parser.add_argument('-n', '--nsteps', type=int, default=None,
                         help="Maximum number of steps (days) to run for the "
                              "simulation. Each step represents one day in the "
                              "outbreak (default is to run for a maximum "
@@ -205,7 +205,7 @@ def parse_args():
                         help=f"Disable the * state. Now state 0 is the first "
                              f"and only latent state. There is no star state.")
 
-    parser.add_argument('--UV', type=float, default=0.0,
+    parser.add_argument('--UV', type=float, default=None,
                         help="Value for the UV parameter for the model "
                              "(default is 0.0)")
 
@@ -218,6 +218,9 @@ def parse_args():
                         help=f"Disable the spinner that spins when little "
                              f"output is being printed to the screen.")
 
+    parser.add_argument('--no-progress', action="store_true", default=None,
+                        help=f"Disable the progress bars that show progress.")
+
     parser.add_argument("--debug", action="store_true", default=None,
                         help=f"Enable debugging output. This is useful "
                              f"for MetaWards developers or if you are "
@@ -225,6 +228,13 @@ def parse_args():
 
     parser.add_argument("--debug-level", type=int, default=None,
                         help="Limit debug output to the specified level.")
+
+    parser.add_argument("--outdir-scheme", type=str, default=None,
+                        help="Set the naming scheme for output directory "
+                             "names for multiple model runs. Options are "
+                             "either 'fingerprint' to use the model "
+                             "fingerprint, 'sequential' for sequential "
+                             "numbering, or 'uid' to generate a unique ID.")
 
     parser.add_argument('--nthreads', type=int, default=None,
                         help="Number of threads over which parallelise an "
@@ -281,10 +291,10 @@ def parse_args():
                              "exists. Dangerous as this can remove "
                              "existing output files")
 
-    parser.add_argument('--max-nodes', type=int, default=16384,
+    parser.add_argument('--max-nodes', type=int, default=None,
                         help="Maximum number of nodes that can be read")
 
-    parser.add_argument('--max-links', type=int, default=4194304,
+    parser.add_argument('--max-links', type=int, default=None,
                         help="Maximum number of links that can be read")
 
     parser.add_argument('--profile', action="store_true",
@@ -313,6 +323,10 @@ def parse_args():
     if args.no_spinner:
         from ..utils._console import Console
         Console.set_use_spinner(False)
+
+    if args.no_progress:
+        from ..utils._console import Console
+        Console.set_use_progress(False)
 
     if args.debug:
         from ..utils._console import Console
@@ -401,7 +415,6 @@ def scoop_supervisor(hostfile, args):
        form the scoop call to run a scoop version of the program
     """
     import os
-    import stat
     import sys
     from metawards.utils import Console
 
@@ -510,7 +523,6 @@ def mpi_supervisor(hostfile, args):
        form the mpiexec call to run an MPI version of the program
     """
     import os
-    import stat
     import sys
     from metawards.utils import Console
 
@@ -821,6 +833,32 @@ def cli():
 
     variables = variables.repeat(nrepeats)
 
+    if args.outdir_scheme is None:
+        outdir_scheme = "fingerprint"
+    else:
+        outdir_scheme = args.outdir_scheme.lower().strip()
+
+    if outdir_scheme == "fingerprint":
+        Console.print(
+            "* Naming output subdirectories using a run's fingerprint",
+            markdown=True
+        )
+    elif outdir_scheme == "sequential":
+        Console.print(
+            "* Naming output subdirectories using a sequential scheme",
+            markdown=True
+        )
+        variables.set_outdir_from_number()
+    elif outdir_scheme == "uid":
+        Console.print(
+            "* Nameing output subdirectories using a unique ID",
+            markdown=True
+        )
+        variables.set_outdir_from_uid()
+    else:
+        Console.error(f"Unrecognised outdir naming scheme '{outdir_scheme}'")
+        raise ValueError(f"Unrecognised scheme '{outdir_scheme}'")
+
     # working out the number of processes and threads...
     from metawards.utils import guess_num_threads_and_procs
     (nthreads, nprocs) = guess_num_threads_and_procs(
@@ -854,11 +892,12 @@ def cli():
         # for production code
         Console.warning("Using special mode to fix all random number"
                         "seeds to 15324. DO NOT USE IN PRODUCTION!!!")
-    else:
-        Console.print(f"* Using random number seed {seed}", markdown=True)
 
     # get the starting day and date
-    start_day = args.start_day
+    if args.start_day is None:
+        start_day = 0
+    else:
+        start_day = int(args.start_day)
 
     if start_day < 0:
         raise ValueError(f"You cannot use a start day {start_day} that is "
@@ -956,16 +995,19 @@ def cli():
     Console.command("metawards -c config.yaml")
 
     # load all of the parameters
-    try:
-        params = Parameters.load(parameters=args.parameters)
-    except Exception as e:
-        Console.warning(
-            f"Unable to load parameter files. Make sure that you have "
-            f"cloned the MetaWardsData repository and have set the "
-            f"environment variable METAWARDSDATA to point to the "
-            f"local directory containing the repository, e.g. the "
-            f"default is $HOME/GitHub/MetaWardsData")
-        raise e
+    if args.parameters is None:
+        params = Parameters.default()
+    else:
+        try:
+            params = Parameters.load(parameters=args.parameters)
+        except Exception as e:
+            Console.warning(
+                f"Unable to load parameter files. Make sure that you have "
+                f"cloned the MetaWardsData repository and have set the "
+                f"environment variable METAWARDSDATA to point to the "
+                f"local directory containing the repository, e.g. the "
+                f"default is $HOME/GitHub/MetaWardsData")
+            raise e
 
     # should we profile the code? (default no as it prints a lot)
     profiler = None
@@ -977,39 +1019,29 @@ def cli():
         profiler = Profiler()
 
     # load the disease and starting-point input files
-    Console.rule("Disease")
     if args.disease:
         params.set_disease(args.disease)
     else:
         params.set_disease("ncov")
 
-    # Commenting out for 1.2 release - will work out how to re-enable
-    # this in 1.3
-    #Console.rule("Adjustable parameters to scan")
-    #Console.print("\n".join([f"* {x}" for x in variables]), markdown=True)
-
-    Console.rule("Model data")
     if args.model:
         params.set_input_files(args.model)
     else:
         params.set_input_files("2011Data")
 
+    Console.rule("Parameters")
+
     # load the user-defined custom parameters
-    Console.rule("Custom parameters and seeds")
     if args.user_variables:
+        Console.rule("Custom parameters and seeds")
         custom = VariableSet.read(args.user_variables)
         Console.print(f"Adjusting variables to {custom}")
         custom.adjust(params)
-    else:
-        Console.print("Not adjusting any parameters...")
 
     # read the additional seeds
-    if args.additional is None or len(args.additional) == 0:
-        Console.print("Not using any additional seeds...")
-    else:
-        for additional in args.additional:
-            Console.print(f"Loading additional seeds from {additional}")
-            params.add_seeds(additional)
+    for additional in [] if args.additional is None else args.additional:
+        Console.print(f"Loading additional seeds from {additional}")
+        params.add_seeds(additional)
 
     # what to do with the 0 state?
     stage_0 = "R"
@@ -1028,7 +1060,10 @@ def cli():
     params.stage_0 = stage_0
 
     # extra parameters that are set
-    params.UV = args.UV
+    if args.UV is None:
+        params.UV = 0.0
+    else:
+        params.UV = float(args.UV)
 
     # set these extra parameters to 0
     params.static_play_at_home = 0
@@ -1036,40 +1071,61 @@ def cli():
     params.work_to_play = 0
     params.daily_imports = 0.0
 
-    Console.rule("Parameters")
     Console.print(params, markdown=True)
 
     # the size of the starting population
-    population = Population(initial=args.population,
+    if args.population is None:
+        population = 1000
+    else:
+        population = int(args.population)
+
+    population = Population(initial=population,
                             date=start_day_date,
                             day=start_day)
 
-    Console.rule("Building the network")
-    network = Network.build(params=params,
-                            population=population,
-                            max_nodes=args.max_nodes,
-                            max_links=args.max_links,
-                            profiler=profiler,
-                            nthreads=nthreads)
+    if args.max_nodes is None:
+        max_nodes = 16384
+    else:
+        max_nodes = int(args.max_nodes)
+
+    if args.max_links is None:
+        max_links = 4194304
+    else:
+        max_links = int(args.max_links)
 
     if args.demographics:
         from metawards import Demographics
-        Console.rule("Specialising into demographics")
+        Console.rule("Building the demographic networks")
         demographics = Demographics.load(args.demographics)
         Console.print(demographics)
-
-        network = network.specialise(demographics,
+        network = demographics.build(params=params,
+                                     population=population,
+                                     max_nodes=max_nodes,
+                                     max_links=max_links,
                                      profiler=profiler,
                                      nthreads=nthreads)
+    else:
+        Console.rule("Model")
+        Console.print(params.input_files, markdown=True)
 
-    Console.rule("Preparing to run")
+        Console.rule("Disease")
+        Console.print(params.disease_params, markdown=True)
+
+        Console.rule("Building the network")
+        network = Network.build(params=params,
+                                population=population,
+                                max_nodes=max_nodes,
+                                max_links=max_links,
+                                profiler=profiler,
+                                nthreads=nthreads)
+
     from metawards import OutputFiles
     from metawards.utils import run_models
 
-    outdir = args.output
-
-    if outdir is None:
+    if args.output is None:
         outdir = "output"
+    else:
+        outdir = args.output
 
     if args.force_overwrite_output:
         prompt = None
@@ -1104,11 +1160,18 @@ def cli():
     else:
         mover = None
 
+    if args.nsteps is None:
+        nsteps = 730
+    else:
+        nsteps = int(args.nsteps)
+
+    Console.rule("Preparing the output directory")
+
     with OutputFiles(outdir, force_empty=args.force_overwrite_output,
                      auto_bzip=auto_bzip, prompt=prompt) as output_dir:
         # write the config file for this job to output/config.yaml
-        Console.rule("Running the model")
         CONSOLE = output_dir.open("console.log")
+        Console.rule("Preparing to run")
         Console.save(CONSOLE)
 
         lines = []
@@ -1147,7 +1210,7 @@ def cli():
         result = run_models(network=network, variables=variables,
                             population=population, nprocs=nprocs,
                             nthreads=nthreads, seed=seed,
-                            nsteps=args.nsteps,
+                            nsteps=nsteps,
                             output_dir=output_dir,
                             iterator=iterator,
                             extractor=extractor,

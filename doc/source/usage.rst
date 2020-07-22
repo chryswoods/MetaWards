@@ -51,7 +51,7 @@ not having been committed to git...
     │                                                                      │
     │   • version: 0.5.0                                                   │
     │   • repository: https://github.com/metawards/MetaWardsData           │
-    │   • branch: master                                                   │
+    │   • branch: main                                                   │
     │                                                                      │
     │                        Additional information                        │
     │                                                                      │

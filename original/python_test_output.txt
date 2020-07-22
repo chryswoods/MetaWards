@@ -33,7 +33,7 @@ Day zero is Friday April 24 2020
 
 Using MetaWardsData at /Users/chris/GitHub/MetaWardsData
 This is cloned from https://github.com/metawards/MetaWardsData
-branch master, version 0.3.0-3-gac8965c
+branch main, version 0.3.0-3-gac8965c
 
 ******************************************
 *** To repeat this job use the command ***
@@ -49,7 +49,7 @@ author(s): Leon Danon
 contact(s): l.danon@bristol.ac.uk
 references(s): ...
 repository: https://github.com/metawards/MetaWardsData
-repository_branch: master
+repository_branch: main
 repository_version: 0.3.0-3-gac8965c
 
 length_day = 0.7
@@ -78,7 +78,7 @@ author(s): Leon Danon
 contact(s): l.danon@bristol.ac.uk
 references(s): references...
 repository: https://github.com/metawards/MetaWardsData
-repository_branch: master
+repository_branch: main
 repository_version: 0.3.0-3-gac8965c
 
 beta = [0.0, 0.0, 0.8695652173913044, 0.8695652173913044, 0.0]
@@ -96,7 +96,7 @@ author(s): Leon Danon
 contact(s): l.danon@bristol.ac.uk
 references(s): ...
 repository: https://github.com/metawards/MetaWardsData
-repository_branch: master
+repository_branch: main
 repository_version: 0.3.0-3-gac8965c
 
 work = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/EW1.dat

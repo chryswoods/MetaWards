@@ -162,7 +162,7 @@ def advance_foi_omp(network: Network, population: Population,
     infections = infections.work
 
     if uv > 0:
-        uvscale *= (1.0-uv/2.0 + uv*cos(2.0*pi*ts/365.0)/2.0)
+        uvscale *= (1.0 - uv/2.0 + uv*cos(2.0*pi*ts/365.0)/2.0)
 
     cdef double * wards_day_foi = get_double_array_ptr(wards.day_foi)
     cdef double * wards_night_foi = get_double_array_ptr(wards.night_foi)

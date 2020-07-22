@@ -330,8 +330,11 @@ def setup_package():
         entry_points={
             "console_scripts": [
                 "metawards = metawards.app.run:cli",
-                "metawards-plot = metawards.app.plot:cli",
-                "metawards-install = metawards.app.install:cli"
+                "metawards-plot = metawards.scripts.plot:cli",
+                "metawards-install = metawards.scripts.install:cli",
+                "metawards-python = metawards.scripts.pyexe:cli",
+                "metawards-jupyter = metawards.scripts.jupexe:cli",
+                "metawards-reticulate = metawards.scripts.retexe:cli"
             ]
         },
         data_files=[("share/metawards/requirements",

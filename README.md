@@ -1,92 +1,66 @@
 # MetaWards
 
-[![Build status](https://github.com/metawards/MetaWards/workflows/Build/badge.svg)](https://github.com/metawards/MetaWards/actions?query=workflow%3ABuild)
-[![PyPI version](https://badge.fury.io/py/metawards.svg)](https://pypi.python.org/pypi/metawards)
-[![PyPI](https://img.shields.io/pypi/pyversions/metawards.svg)](https://pypi.org/project/metawards/)
-[![Downloads](https://pepy.tech/badge/metawards)](https://pepy.tech/project/metawards)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/metawards/metawards)](https://github.com/metawards/MetaWards)
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![Build status](https://github.com/metawards/MetaWards/workflows/Build/badge.svg)](https://github.com/metawards/MetaWards/actions?query=workflow%3ABuild) [![PyPI version](https://badge.fury.io/py/metawards.svg)](https://pypi.python.org/pypi/metawards) [![PyPI](https://img.shields.io/pypi/pyversions/metawards.svg)](https://pypi.org/project/metawards/) [![Downloads](https://pepy.tech/badge/metawards)](https://pepy.tech/project/metawards) [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
-For the most accurate and up to date information please
-[visit the project website](https://metawards.org).
+* For the most accurate and up to date information please [visit the project website](https://metawards.org).
+* For an overview of features please [visit the features page](https://metawards.org/features).
 
-This is a Python port of the [MetaWards](https://github.com/ldanon/MetaWards)
-package originally written by Leon Danon. The port is kept in sync with
-the original C code, with checks in place to ensure that the two codes
-give identical results. This improves the robustness of both codes, as
-it minimises the footprint to bugs that can evade both C and Python.
+## Scientific Background
 
-The aim of this port is to make it easier for others to contribute to the
-program, to improve robustness by adding in unit and integration test,
-and to also open up scope for further optimisation and parallelisation.
+MetaWards implements a stochastic metapopulation model of disease transmission. It can scale from modelling local transmission up to full national- or international-scale metapopulation models.
 
-The package makes heavy use of [cython](https://cython.org) which is used
-with [OpenMP](https://openmp.org) to compile bottleneck parts of the
-code to parallelised C. This enables this Python port
-to run at approximately the same speed as the original C program on one core,
-and to run several times faster across multiple cores.
+Please follow the [quick start guide](https://metawards.org/quickstart) to see how to quickly get up and running using MetaWards to model your own custom disease or metapopulation model.
 
-The program compiles on any system that has a working C compiler that
-supports OpenMP, and a working Python >= 3.7. This include X86-64 and
-ARM64 servers.
+It is was originally developed to support modelling of disease transmission in Great Britain. The complete model description and the original C code are described here;
 
-The software supports running over a cluster using MPI
-(via [mpi4py](https://mpi4py.readthedocs.io/en/stable/)) or via
-simple networking (via [scoop](http://scoop.readthedocs.io)).
+*  *"The role of routine versus random movements on the spread of disease in Great Britain"*, Leon Danon, Thomas House, Matt J. Keeling, Epidemics, December 2009, 1 (4), 250-258; DOI:[10.1016/j.epidem.2009.11.002](https://doi.org/10.1016/j.epidem.2009.11.002)
 
-Full instructions on how to use the program, plus example job submission
-scripts can be found on the [project website](https://metawards.org).
+*  *"Individual identity and movement networks for disease metapopulations"*, Matt J. Keeling, Leon Danon, Matthew C. Vernon, Thomas A. House Proceedings of the National Academy of Sciences, May 2010, 107 (19) 8866-8870; DOI:[10.1073/pnas.1000416107](https://doi.org/10.1073/pnas.1000416107)
 
-## Data
+In this model, the population is divided into electoral wards. Disease transmission between wards occurs via the daily movement of individuals. For each ward, individuals contribute to the *force of infection* (FOI) in their *home* ward during the night, and their *work* ward during the day.
 
-The data and input parameters needed to use this package are stored in
-the [MetaWardsData](https://github.com/metawards/MetaWardsData)
-repository. Please make sure that you clone this repository to your
-computer and supply the full path to that repository to the program
-when it runs. There are three ways to do this;
+This model was recently adapted to model CoVID-19 transmission in England and Wales, with result of the original C code published (pre-print) here;
 
-1. Set the `METAWARDSDATA` environment variable to point to this directory,
-   e.g. `export METAWARDSDATA=$HOME/GitHub/MetaWards`
+* *"A spatial model of CoVID-19 transmission in England and Wales: early spread and peak timing"*, Leon Danon, Ellen Brooks-Pollock, Mick Bailey, Matt J Keeling, medRxiv 2020 02.12.20022566; DOI:[10.1101/2020.02.12.20022566](https://doi.org/10.1101/2020.02.12.20022566)
 
-2. Pass the `repository` variable to the input data classes
-   [Disease](https://github.com/metawards/MetaWards/blob/devel/src/metawards/_disease.py), [InputFiles](https://github.com/metawards/MetaWards/blob/devel/src/metawards/_inputfiles.py) and [Parameters](https://github.com/metawards/MetaWards/blob/devel/src/metawards/_parameters.py)
+This Python code is a port which can identically reproduce the outputs from the original C code as used in that work. This Python code has been optimised and parallelised, with additional testing added to ensure that development and scale-up of MetaWards has been robustly and efficiently conducted.
 
-3. Or simply make sure you clone into the directory `$HOME/GitHub/MetaWardsData`
-   as this is the default path.
+## Program Info
 
-## References
+The package makes heavy use of [cython](https://cython.org) which is used with [OpenMP](https://openmp.org) to compile bottleneck parts of the code to parallelised C. This enables this Python port to run at approximately the same speed as the original C program on one core, and to run several times faster across multiple cores.
 
-These are the references behind the
-[original C code](https://github.com/ldanon/MetaWards) are;
+The program compiles on any system that has a working C compiler that supports OpenMP, and a working Python >= 3.7. This include X86-64 and ARM64 servers.
 
-- _"Individual identity and movement networks for disease metapopulations"_
-Matt J. Keeling, Leon Danon, Matthew C. Vernon, Thomas A. House
-Proceedings of the National Academy of Sciences May 2010, 107 (19) 8866-8870; DOI: [10.1073/pnas.1000416107](https://doi.org/10.1073/pnas.1000416107)
+The software supports running over a cluster using MPI (via [mpi4py](https://mpi4py.readthedocs.io/en/stable/)) or via simple networking (via [scoop](http://scoop.readthedocs.io)).
 
-- _"A spatial model of CoVID-19 transmission in England and Wales: early spread and peak timing"_
-Leon Danon, Ellen Brooks-Pollock, Mick Bailey, Matt J Keeling
-medRxiv 2020.02.12.20022566; doi: [10.1101/2020.02.12.20022566](https://doi.org/10.1101/2020.02.12.20022566)
-
-## Dependencies
-
-The code requires Python 3.7 or above.
-For development you will need [cython](https://cython.org) and a
-working C compiler to build the code,
-plus [pytest](https://docs.pytest.org/en/latest/)
-for running the tests.
+Full instructions on how to use the program, plus example job submission scripts can be found on the [project website](https://metawards.org).
 
 ## Installation
 
 [Full installation instructions are here](https://metawards.org/install.html).
 
-As you are here, I guess you want to install the latest code from GitHub ;-)
+Binary packages are uploaded to [pypi](https://pypi.python.org/pypi/metawards) for Windows, OS X and Linux (manylinux). The easiest way to install is to type in the console:
 
-To do that, type;
+```
+pip install metawards
+```
+
+(this assumes that you have pip installed and are using Python 3.7 or above - if this doesn't work please follow the [full installation instructions](https://metawards.org/install.html)).
+
+But, as you are here, I guess you want to install the latest code from GitHub ;-)
+
+To do that, first clone and install the requirements;
 
 ```
 git clone https://github.com/metawards/MetaWards
 cd MetaWards
+pip install -r requirements.txt
 pip install -r requirements-dev.txt
+```
+
+Next, you can make using the standard Python setup.py script route.
+
+```
 CYTHONIZE=1 python setup.py build
 CYTHONIZE=1 python setup.py install
 ```
@@ -106,45 +80,40 @@ You can run tests using pytest, e.g.
 METAWARDSDATA="/path/to/MetaWardsData" pytest tests
 ```
 
+or you can type
+
+```
+make test
+```
+
 You can generate the docs using
 
 ```
-make docs
+make doc
 ```
 
 ## Running
 
-[Full usage instructions are here](https://metawards.org/usage.html)
+* [A quick start guide is here](https://metawards.org/quickstart)
+* [A complete tutorial is here](https://metawards.org/tutorial)
+* [Full usage instructions are here](https://metawards.org/usage.html)
 
-You can either load and use the Python classes directly, or you can
-run the `metawards` front-end command line program that is automatically installed.
+You can either load and use the Python classes directly, or you can run the `metawards` front-end command line program that is automatically installed.
 
 ```
 metawards --help
 ```
 
-will print out all of the help for the program. For example;
-
-```
-metawards --input tests/data/ncovparams.csv --seed 15324 --nsteps 30 --nthreads 1
-```
-
-This will duplicate the run of the MetaWards C program that is bundled
-in this repository that was run using;
-
-```
-./original/metawards 15324 tests/data/ncovparams.csv 0 1.0
-```
-
-The original C code, command line and expected output are in the
-[original](https://github.com/metawards/MetaWards/tree/devel/original)
-directory that is bundled in this repo.
+will print out all of the help for the program.
 
 ### Running an ensemble
 
-This program supports parallel running of an ensemble of jobs using
-[multiprocessing](https://docs.python.org/3.7/library/multiprocessing.html)
-for single-node jobs, and [mpi4py](https://mpi4py.readthedocs.io/en/stable/)
-or [scoop](http://scoop.readthedocs.io) for multi-node cluster jobs.
+This program supports parallel running of an ensemble of jobs using [multiprocessing](https://docs.python.org/3.7/library/multiprocessing.html) for single-node jobs, and [mpi4py](https://mpi4py.readthedocs.io/en/stable/) or [scoop](http://scoop.readthedocs.io) for multi-node cluster jobs.
+
+Note that mpi4py and scoop are not installed by default, so you will need to install them before you run on a cluster (e.g. `pip install mpi4py` or `pip install scoop`).
 
 [Full instructions for running on a cluster are here](https://metawards.org/cluster_usage.html)
+
+## History
+
+This is a Python port of the [MetaWards](https://github.com/ldanon/MetaWards) package originally written by Leon Danon. This port has been performed with Leon's support by the [Bristol Research Software Engineering Group](https://www.bristol.ac.uk/acrc/research-software-engineering).

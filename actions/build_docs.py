@@ -15,10 +15,10 @@ if version.find("untagged") != -1:
 
 print(f"Build docs for branch {branch} version {version}")
 
-# we will only build docs for the master and devel branches
+# we will only build docs for the main and devel branches
 # (as these are moved into special locations)
 
-if branch not in ["master", "devel"]:
+if branch not in ["main", "devel"]:
     if branch.find(version) != -1:
         print(f"Building the docs for tag {version}")
         is_tagged_release = True

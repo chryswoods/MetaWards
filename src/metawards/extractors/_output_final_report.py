@@ -50,7 +50,7 @@ look at statistics across all runs using e.g. R or pandas""",
         return val if val is not None else 0
 
     RESULTS.write(f"fingerprint,repeat,{varnames}"
-                  f"day,{datestring}S,E,I,{extra_str}R,IW,UV\n")
+                  f"day,{datestring}S,E,I,{extra_str}R,IW,SCALE_UV\n")
     for varset, trajectory in results:
         varvals = varset.variable_values()
         if varvals is None or len(varvals) == 0:

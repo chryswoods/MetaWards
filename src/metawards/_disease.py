@@ -1,6 +1,9 @@
+from __future__ import annotations
 
 from dataclasses import dataclass as _dataclass
 from typing import List as _List
+from typing import Dict as _Dict
+from typing import Union as _Union
 
 __all__ = ["Disease"]
 
@@ -41,13 +44,22 @@ class Disease:
        >>> print(disease)
        Disease ncov
        repository: https://github.com/metawards/MetaWardsData
-       repository_branch: master
+       repository_branch: main
        repository_version: 0.2.0
        beta = [0.0, 0.0, 0.95, 0.95, 0.0]
        progress = [1.0, 0.1923, 0.909091, 0.909091, 0.0]
        too_ill_to_move = [0.0, 0.0, 0.0, 0.0, 0.0]
        contrib_foi = [1.0, 1.0, 1.0, 1.0, 0.0]
     """
+    #: Name of the disease
+    name: str = None
+
+    #: Name of the stage, e.g. "H1", "I2", "E1" etc.
+    stage: _List[str] = None
+
+    #: Mapping label, e.g. "*", "E", "I" or "R"
+    mapping: _List[str] = None
+
     #: Beta parameter for each stage of the disease
     beta: _List[float] = None
 
@@ -64,13 +76,6 @@ class Disease:
     #: Index of the first symptomatic stage
     start_symptom: int = None
 
-    #: Mapping label, e.g. "*", "E", "I" or "R"
-    mapping: _List[str] = None
-
-    #: Name of the stage, e.g. "H1", "I2", "E1" etc.
-    stage: _List[str] = None
-
-    _name: str = None
     _version: str = None
     _authors: str = None
     _contacts: str = None
@@ -81,23 +86,42 @@ class Disease:
     _repository_branch: str = None
 
     def __str__(self):
-        return f"""
-* Disease: {self._name}
-* loaded from: {self._filename}
-* repository: {self._repository}
-* repository_branch: {self._repository_branch}
-* repository_version: {self._repository_version}
-* stage: {self.stage}
-* mapping: {self.mapping}
-* beta: {self.beta}
-* progress: {self.progress}
-* too_ill_to_move: {self.too_ill_to_move}
-* contrib_foi: {self.contrib_foi}
-* start_symptom: {self.start_symptom}
-"""
+        if self.beta is None:
+            return "Disease::null"
+
+        parts = []
+
+        parts.append(f"* Disease: {self.name}")
+
+        if self._filename is not None:
+            parts.append(f"* loaded from: {self._filename}")
+
+        if self._repository is not None:
+            parts.append(f"* repository: {self._repository}")
+
+        if self._repository_branch is not None:
+            parts.append(f"* repository_branch: {self._repository_branch}")
+
+        if self._repository_version is not None:
+            parts.append(f"* repository_version: {self._repository_version}")
+
+        parts.append(f"* stage: {self.stage}")
+        parts.append(f"* mapping: {self.mapping}")
+        parts.append(f"* beta: {self.beta}")
+        parts.append(f"* progress: {self.progress}")
+        parts.append(f"* too_ill_to_move: {self.too_ill_to_move}")
+
+        if self.contrib_foi != [1.0] * len(self.beta):
+            if self.contrib_foi != [1.0] * (len(self.beta) - 1) + [0.0]:
+                parts.append(f"* contrib_foi: {self.contrib_foi}")
+
+        parts.append(f"* start_symptom: {self.start_symptom}")
+
+        return "\n".join(parts)
 
     def __repr__(self):
-        return f"Disease(stage={self.stage}, beta={self.beta}, " \
+        return f"Disease(name={self.name}, stage={self.stage}, " \
+               f"beta={self.beta}, " \
                f"progress={self.progress}, " \
                f"too_ill_to_move={self.too_ill_to_move}, contrib_foi=" \
                f"{self.contrib_foi})"
@@ -118,6 +142,109 @@ class Disease:
         else:
             return 0
 
+    def __getitem__(self, index: int) -> _Dict[str, _Union[str, float, bool]]:
+        """Return the values of parameters of the stage as specified
+           index
+        """
+        index = int(index)
+
+        if abs(index) >= len(self):
+            raise IndexError(f"Invalid index {index}. Size = {len(self)}")
+
+        return {"name": self.stage[index],
+                "mapping": self.mapping[index],
+                "beta": self.beta[index],
+                "progress": self.progress[index],
+                "too_ill_to_move": self.too_ill_to_move[index],
+                "contrib_foi": self.contrib_foi[index],
+                "is_start_symptom": (index+1) == self.start_symptom}
+
+    def __setitem__(self, index: int,
+                    value: _Dict[str, _Union[str, float, bool]]) -> None:
+        """Set the value of parameters at this index. The keys in the
+           dictionary (and their values) match the arguments to the
+           "insert" or "add" functions
+        """
+        if abs(index) >= len(self):
+            raise IndexError(f"Invalid index {index}. Size = {len(self)}")
+
+        name = value.get("name", "*")
+        mapping = value.get("mapping", None)
+
+        if mapping is None:
+            mapping = _infer_mapping([name])[0]
+
+        beta = value.get("beta", None)
+
+        if beta is None:
+            if mapping.upper() == "I":
+                beta = 0.5
+            else:
+                beta = 0.0
+
+        progress = value.get("progress", None)
+
+        if progress is None:
+            if mapping.upper() == "R":
+                progress = 0.0
+            else:
+                progress = 1.0
+
+        too_ill_to_move = value.get("too_ill_to_move", None)
+
+        if too_ill_to_move is None:
+            too_ill_to_move = 0.0
+
+        contrib_foi = value.get("contrib_foi", None)
+
+        if contrib_foi is None:
+            contrib_foi = 1.0
+
+        is_start_symptom = value.get("is_start_symptom", None)
+
+        name = str(name)
+        mapping = str(mapping)
+
+        beta = float(beta)
+
+        if beta < 0 or beta > 1:
+            raise ValueError(
+                f"Invalid value of beta {beta}. Should be 0 <= beta <= 1")
+
+        progress = float(progress)
+
+        if progress < 0 or progress > 1:
+            raise ValueError(
+                f"Invalid value of progress {progress}. Should be "
+                f"0 <= progress <= 1")
+
+        too_ill_to_move = float(too_ill_to_move)
+
+        if too_ill_to_move < 0 or too_ill_to_move > 1:
+            raise ValueError(
+                f"Invalid value of too_ill_to_move {too_ill_to_move}. "
+                f"Should be 0 <= too_ill_to_move <= 1")
+
+        contrib_foi = float(contrib_foi)
+
+        if contrib_foi < 0:
+            raise ValueError(
+                f"Invalid value of contrib_foi {contrib_foi}. Should "
+                f"be 0 <= contrib_foi")
+
+        self.stage[index] = name
+        self.mapping[index] = mapping
+        self.beta[index] = beta
+        self.progress[index] = progress
+        self.too_ill_to_move[index] = too_ill_to_move
+        self.contrib_foi[index] = contrib_foi
+
+        if is_start_symptom:
+            self.start_symptom = index + 1
+        elif is_start_symptom is None and self.start_symptom is None:
+            if mapping.upper() == "I":
+                self.start_symptom = index + 1
+
     def N_INF_CLASSES(self):
         """Return the number of stages of the disease"""
         return len(self.beta)
@@ -131,7 +258,7 @@ class Disease:
             assert len(self.too_ill_to_move) == n
             assert len(self.contrib_foi) == n
         except Exception as e:
-            raise AssertionError(f"Data read for disease {self._name} "
+            raise AssertionError(f"Data read for disease {self.name} "
                                  f"is corrupted! {e.__class__}: {e}")
 
         if self.stage is None and n < 4:
@@ -281,6 +408,122 @@ class Disease:
                         f"Invalid mapping value '{v}'. Valid values "
                         f"are only {valid}")
 
+    def insert(self, index: int, name: str, mapping: str = None,
+               beta: float = None, progress: float = None,
+               too_ill_to_move: float = None, contrib_foi: float = None,
+               is_start_symptom: bool = None) -> None:
+        """Insert a new stage into the disease. This will insert a new stage
+           into the list of stages at index 'index'
+
+           Parameters
+           ----------
+           index: str
+             The index at which to insert the new stage
+           name: str
+             The name of the stage, e.g. "E", "I", "R" etc.
+           mapping: str
+             Which main stage this stage should map to (if this is a
+             sub-stage). This will be derived automatically if not set.
+           beta: float
+             The beta (infectivity) parameter. This should be between
+             0.0 amd 1.0. If not set, then this will be set automatically.
+           progress: float
+             The fraction of individuals at this stage who will move to
+             the next stage. This should be between 0.0 amd 1.0. If this
+             is not set, then this will be set automatically.
+           too_ill_to_move: float
+             The proportion of workers at this stage who do not travel
+             to work. This should be between 0.0 and 1.0. If this is not
+             set, then this will be set automatically.
+           contrib_foi: float
+             The contribution of individuals in this stage to the
+             force-of-infection (foi) of the wards they visit. This
+             should normally be 1.0 and will be set automatically
+             if not set.
+           is_start_symptom: bool
+             Whether this is the start symptom of the disease. This
+             normally doesn't need to be set as this will be worked
+             out automatically by the code.
+        """
+        index = int(index)
+
+        if self.beta is None:
+            if self.name is None:
+                self.name = "unnamed"
+
+            self.stage = []
+            self.mapping = []
+            self.beta = []
+            self.progress = []
+            self.too_ill_to_move = []
+            self.contrib_foi = []
+
+        if len(self.beta) <= abs(index):
+            while len(self.beta) <= abs(index):
+                self.stage.append("*")
+                self.mapping.append("*")
+                self.beta.append(0.0)
+                self.progress.append(1.0)
+                self.too_ill_to_move.append(0.0)
+                self.contrib_foi.append(1.0)
+        else:
+            self.stage.insert(index, "*")
+            self.mapping.insert(index, "*")
+            self.beta.insert(index, 0.0)
+            self.progress.insert(index, 1.0)
+            self.too_ill_to_move.insert(index, 0.0)
+            self.contrib_foi.insert(index, 1.0)
+
+        self.__setitem__(index, {"name": name,
+                                 "mapping": mapping,
+                                 "beta": beta,
+                                 "progress": progress,
+                                 "too_ill_to_move": too_ill_to_move,
+                                 "contrib_foi": contrib_foi,
+                                 "is_start_symptom": is_start_symptom})
+
+    def add(self, name: str, mapping: str = None,
+            beta: float = None, progress: float = None,
+            too_ill_to_move: float = None, contrib_foi: float = None,
+            is_start_symptom: bool = None) -> None:
+        """Add a new stage to the disease. This will append a new stage
+           onto the list of stages.
+
+           Parameters
+           ----------
+           name: str
+             The name of the stage, e.g. "E", "I", "R" etc.
+           mapping: str
+             Which main stage this stage should map to (if this is a
+             sub-stage). This will be derived automatically if not set.
+           beta: float
+             The beta (infectivity) parameter. This should be between
+             0.0 amd 1.0. If not set, then this will be set automatically.
+           progress: float
+             The fraction of individuals at this stage who will move to
+             the next stage. This should be between 0.0 amd 1.0. If this
+             is not set, then this will be set automatically.
+           too_ill_to_move: float
+             The proportion of workers at this stage who do not travel
+             to work. This should be between 0.0 and 1.0. If this is not
+             set, then this will be set automatically.
+           contrib_foi: float
+             The contribution of individuals in this stage to the
+             force-of-infection (foi) of the wards they visit. This
+             should normally be 1.0 and will be set automatically
+             if not set.
+           is_start_symptom: bool
+             Whether this is the start symptom of the disease. This
+             normally doesn't need to be set as this will be worked
+             out automatically by the code.
+        """
+        idx = 0 if self.beta is None else len(self.beta)
+
+        self.insert(idx, name=name, mapping=mapping, beta=beta,
+                    progress=progress, too_ill_to_move=too_ill_to_move,
+                    contrib_foi=contrib_foi,
+                    is_start_symptom=is_start_symptom)
+
     def get_index(self, idx):
         """Return the index of disease stage 'idx' in this disease"""
         if isinstance(idx, str):
@@ -410,6 +653,8 @@ class Disease:
 
         import os
 
+        is_local_file = False
+
         if filename is None:
             if disease is None:
                 disease = "ncov"
@@ -418,14 +663,24 @@ class Disease:
                 d = os.path.join(folder, disease)
                 if os.path.exists(d):
                     filename = disease
+                    is_local_file = True
                 elif os.path.exists(f"{d}.json"):
                     filename = f"{d}.json"
+                    is_local_file = True
+                elif os.path.exists(f"{d}.json.bz2"):
+                    filename = f"{d}.json.bz2"
+                    is_local_file = True
 
             if filename is None:
                 if os.path.exists(disease):
                     filename = disease
+                    is_local_file = True
                 elif os.path.exists(f"{disease}.json"):
                     filename = f"{disease}.json"
+                    is_local_file = True
+                elif os.path.exists(f"{disease}.json.bz2"):
+                    filename = f"{disease}.json.bz2"
+                    is_local_file = True
 
         if filename is None:
             from ._parameters import get_repository
@@ -440,6 +695,11 @@ class Disease:
             repository = v["repository"]
             repository_version = v["version"]
             repository_branch = v["branch"]
+
+        if is_local_file:
+            disease = Disease.from_json(filename)
+            disease._filename = filename
+            return disease
 
         json_file = os.path.abspath(filename)
 
@@ -458,22 +718,179 @@ set the model data.""")
             raise FileNotFoundError(f"Could not find or read {json_file}: "
                                     f"{e.__class__} {e}")
 
-        disease = Disease(beta=data.get("beta", []),
-                          progress=data.get("progress", []),
-                          too_ill_to_move=data.get("too_ill_to_move", []),
-                          contrib_foi=data.get("contrib_foi", []),
-                          start_symptom=data.get("start_symptom", 3),
+        data["name"] = disease
+
+        disease = Disease.from_data(data)
+        disease._filename = json_file,
+        disease._repository = repository,
+        disease._repository_branch = repository_branch,
+        disease._repository_version = repository_version
+
+        return disease
+
+    @staticmethod
+    def from_data(data) -> Disease:
+        """Return a new Disease constructed from the passed data
+           dictionary (e.g. deserialised from json)
+        """
+        beta = data.get("beta", [])
+        default = [1.0] * len(beta)
+
+        progress = data.get("progress", [])
+        too_ill_to_move = data.get("too_ill_to_move", default)
+        contrib_foi = data.get("contrib_foi", default)
+
+        start_symptom = data.get("start_symptom", None)
+
+        disease = Disease(beta=beta,
+                          progress=progress,
+                          too_ill_to_move=too_ill_to_move,
+                          contrib_foi=contrib_foi,
+                          start_symptom=start_symptom,
                           mapping=data.get("mapping", None),
                           stage=data.get("stage", None),
-                          _name=data.get("name", disease),
-                          _authors=data.get("author(s)", "unknown"),
-                          _contacts=data.get("contact(s)", "unknown"),
-                          _references=data.get("reference(s)", "none"),
-                          _filename=json_file,
-                          _repository=repository,
-                          _repository_branch=repository_branch,
-                          _repository_version=repository_version)
+                          name=data.get("name", "unnamed"),
+                          _authors=data.get("author(s)", None),
+                          _contacts=data.get("contact(s)", None),
+                          _references=data.get("reference(s)", None))
 
         disease._validate()
 
         return disease
+
+    def to_data(self) -> _Dict[str, any]:
+        """Return a data dictionary version of this disease, suitable
+           for serialising to, e.g., json
+        """
+        self._validate()
+
+        data = {}
+
+        if self.name is not None:
+            data["name"] = str(self.name)
+
+        if self.stage is not None:
+            data["stage"] = [str(x) for x in self.stage]
+
+        if self.mapping is not None:
+            data["mapping"] = [str(x) for x in self.mapping]
+
+        if self.beta is not None:
+            data["beta"] = [float(x) for x in self.beta]
+
+        if self.progress is not None:
+            data["progress"] = [float(x) for x in self.progress]
+
+        if self.too_ill_to_move is not None:
+            data["too_ill_to_move"] = [float(x) for x in self.too_ill_to_move]
+
+        if self.contrib_foi is not None:
+            data["contrib_foi"] = [float(x) for x in self.contrib_foi]
+
+        if self.start_symptom is not None:
+            data["start_symptom"] = int(self.start_symptom)
+
+        if self._authors is not None:
+            data["author(s)"] = str(self._authors)
+
+        if self._contacts is not None:
+            data["contact(s)"] = str(self._contacts)
+
+        if self._references is not None:
+            data["reference(s)"] = str(self._references)
+
+        return data
+
+    @staticmethod
+    def from_json(s: str) -> Disease:
+        """Return the Disease constructed from the passed json. This will
+           either load from a passed json string, or from json loaded
+           from the passed file
+        """
+        import os
+        import json
+
+        if os.path.exists(s):
+            try:
+                import bz2
+                with bz2.open(s, "rt") as FILE:
+                    data = json.load(FILE)
+            except Exception:
+                data = None
+
+            if data is None:
+                with open(s, "rt") as FILE:
+                    data = json.load(FILE)
+        else:
+            try:
+                data = json.loads(s)
+            except Exception:
+                data = None
+
+        if data is None:
+            from .utils._console import Console
+            Console.error(f"Unable to load a Disease from '{s}'. Check that "
+                          f"this is valid JSON or that the file exists.")
+
+            raise IOError(f"Cannot load Disease from '{s}'")
+
+        return Disease.from_data(data)
+
+    def to_json(self, filename: str = None, indent: int = None,
+                auto_bzip: bool = True) -> str:
+        """Serialise the Disease to JSON. This will write to a file
+           if filename is set, otherwise it will return a JSON string.
+
+           Parameters
+           ----------
+           filename: str
+             The name of the file to write the JSON to. The absolute
+             path to the written file will be returned. If filename is None
+             then this will serialise to a JSON string which will be
+             returned.
+           indent: int
+             The number of spaces of indent to use when writing the json
+           auto_bzip: bool
+             Whether or not to automatically bzip2 the written json file
+
+           Returns
+           -------
+           str
+             Returns either the absolute path to the written file, or
+             the json-serialised string
+        """
+        import json
+
+        if indent is not None:
+            indent = int(indent)
+
+        if filename is None:
+            return json.dumps(self.to_data(), indent=indent)
+        else:
+            from pathlib import Path
+            filename = str(Path(filename).expanduser().resolve().absolute())
+
+            if auto_bzip:
+                if not filename.endswith(".bz2"):
+                    filename += ".bz2"
+
+                import bz2
+                with bz2.open(filename, "wt") as FILE:
+                    try:
+                        json.dump(self.to_data(), FILE, indent=indent)
+                    except Exception:
+                        import os
+                        FILE.close()
+                        os.unlink(filename)
+                        raise
+            else:
+                with open(filename, "w") as FILE:
+                    try:
+                        json.dump(self.to_data(), FILE, indent=indent)
+                    except Exception:
+                        import os
+                        FILE.close()
+                        os.unlink(filename)
+                        raise
+
+            return filename

@@ -18,13 +18,21 @@ MetaWards
    :target: https://pepy.tech/project/metawards
    :alt: Number of downloads
 
-.. image:: https://img.shields.io/github/commit-activity/m/metawards/metawards
-   :target: https://github.com/metawards/MetaWards
-   :alt: GitHub commit activity
-
 .. image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://www.gnu.org/licenses/gpl-3.0.html
    :alt: License
+
+Please take a look at the :doc:`features <features>` to see what
+MetaWards can do. Follow the :doc:`quick start guide <quickstart/index>` to
+see how to quickly get up and running using MetaWards to model your own custom
+disease or metapopulation model.
+
+Scientific Background
+=====================
+
+MetaWards implements a stochastic metapopulation model of disease
+transmission. It can scale from modelling local transmission up to
+full national- or international-scale metapopulation models.
 
 This is a Python port of the
 `MetaWards <https://github.com/ldanon/MetaWards>`__ package originally written
@@ -32,11 +40,8 @@ by Leon Danon. This port has been performed with Leon's support by the
 `Bristol Research Software Engineering Group
 <https://www.bristol.ac.uk/acrc/research-software-engineering/>`__.
 
-Scientific Background
-=====================
-
-MetaWards implements a national-scale stochastic metapopulation model of disease
-transmission in Great Britain. The complete model description and the
+It is was originally developed to support modelling of disease transmission
+in Great Britain. The complete model description and the
 original C code are described here;
 
 *  *"The role of routine versus random movements on the spread of disease
@@ -68,7 +73,7 @@ published (pre-print) here;
 This Python code is a port which can identically reproduce the outputs
 from the original C code as used in that work. This Python code has
 been optimised and parallelised, with additional testing added to ensure
-that future development and scale-up of MetaWards can be robustly and
+that development and scale-up of MetaWards has been robustly and
 efficiently conducted.
 
 Features
@@ -94,6 +99,14 @@ Model Data
    :maxdepth: 2
 
    model_data
+
+Quick Start Guide
+=================
+
+.. toctree::
+   :maxdepth: 2
+
+   quickstart/index
 
 Tutorial
 ========

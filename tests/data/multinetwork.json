@@ -1,0 +1,13 @@
+{
+    "demographics": ["main", "teachers1", "students1",
+        "teachers2", "students2"
+    ],
+    "networks": ["main.json.bz2",
+        "teachers.json.bz2",
+        "students.json.bz2",
+        "teachers.json.bz2",
+        "students.json.bz2"
+    ],
+    "work_ratios": [1.0, 0.7, 0.7, 0.3, 0.3],
+    "play_ratios": [1.0, 0.7, 0.7, 0.3, 0.3]
+}

@@ -15,11 +15,11 @@ if version.find("untagged") != -1:
 
 print(f"Build docs for branch {branch} version {version}")
 
-# we will only build docs for the master and devel branches
+# we will only build docs for the main and devel branches
 # (as these are moved into special locations)
 is_tagged_release = False
 
-if branch not in ["master", "devel"]:
+if branch not in ["main", "devel"]:
     if branch.find(version) != -1:
         print(f"Building the docs for tag {version}")
         is_tagged_release = True
@@ -37,9 +37,9 @@ if not os.path.exists("./gh-pages"):
     print("You have not checked out the gh-pages branch correctly!")
     sys.exit(-1)
 
-# if this is the master branch, then copy the docs to both the root
+# if this is the main branch, then copy the docs to both the root
 # directory of the website, and also to the 'versions/version' directory
-if is_tagged_release or (branch == "master"):
+if is_tagged_release or (branch == "main"):
     print(f"Copying main docs to gh-pages")
     dir_util.copy_tree("doc/build/html/", "gh-pages/")
 

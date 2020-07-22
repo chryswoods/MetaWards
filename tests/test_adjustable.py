@@ -37,6 +37,10 @@ def test_adjustable():
     print(params.disease_params)
     print(params.user_params)
 
+    assert variables in params.adjustments
+
+    print(params.adjustments)
+
     assert params.user_params["something"][5] == 0.5
     assert params.user_params["something"][2] == 0.3
     assert params.user_params["another"][1] == 0.8

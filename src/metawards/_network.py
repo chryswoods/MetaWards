@@ -4,6 +4,7 @@ from typing import List as _List
 from typing import Union as _Union
 
 from ._parameters import Parameters
+from ._disease import Disease
 from ._nodes import Nodes
 from ._links import Links
 from ._population import Population
@@ -100,28 +101,19 @@ class Network:
             f"Creating a single ward Network with a population "
             f"of {int(pop)}")
 
-        network = Network()
-        network.nnodes = 1
-        network.nlinks = 0
-        network.nplay = 0
+        from ._wards import Wards
+        from ._ward import Ward
 
-        # Everything is 1-indexed, so need to create space for the
-        # null 0-index objects...
-        network.params = params
-        network.play = Links(1)
-        network.links = Links(1)
+        ward = Ward(name="single")
+        ward.set_num_players(pop)
 
-        nodes = Nodes(2)
-        from ._node import Node
-        # 1-indexed node
-        nodes[1] = Node(label=1, play_suscept=pop,
-                        save_play_suscept=pop)
+        wards = Wards()
+        wards.add(ward)
 
-        network.nodes = nodes
+        assert wards.population() == pop
 
-        network.reset_everything(profiler=profiler)
-        network.rescale_play_matrix(profiler=profiler)
-        network.move_from_play_to_work(profiler=profiler)
+        network = Network.from_wards(wards, params=params)
+        network.params.input_files = params.input_files
 
         return network
 
@@ -145,7 +137,17 @@ class Network:
 
         p = profiler.start("Network.build")
 
-        if params.input_files.is_single:
+        if params.input_files.is_wards_data:
+            from ._wards import Wards
+            wards = Wards.from_json(params.input_files.wards_data)
+            network = Network.from_wards(wards, params=params,
+                                         profiler=p, nthreads=nthreads)
+            network.params.input_files = params.input_files
+
+            p.stop()
+            return network
+
+        elif params.input_files.is_single:
             if population is None:
                 population = Population(initial=1000)
 
@@ -174,10 +176,6 @@ class Network:
         add_wards_network_distance(network, nthreads=nthreads)
 
         from .utils._console import Console
-        Console.print("Get min/max distances...")
-        (_mindist, maxdist) = network.get_min_max_distances(nthreads=nthreads)
-
-        network.params.dyn_dist_cutoff = maxdist + 1
         p = p.stop()
 
         # add metadata about the wards
@@ -359,7 +357,7 @@ class Network:
         from .utils import reset_everything
         reset_everything(network=self, nthreads=nthreads, profiler=profiler)
 
-    def update(self, params: Parameters, demographics=None,
+    def update(self, params: Parameters, demographics=None, population=None,
                nthreads: int = 1, profiler=None):
         """Update this network with a new set of parameters
            (and optionally demographics).
@@ -405,9 +403,18 @@ class Network:
         p = p.stop()
 
         if demographics:
-            network = demographics.specialise(network=self,
-                                              profiler=profiler,
-                                              nthreads=nthreads)
+            from .utils._worker import must_rebuild_network
+
+            if must_rebuild_network(network=self, params=self.params,
+                                    demographics=demographics):
+                network = demographics.build(params=self.params,
+                                             population=population,
+                                             nthreads=nthreads,
+                                             profiler=p)
+            else:
+                network = demographics.specialise(network=self,
+                                                  profiler=p,
+                                                  nthreads=nthreads)
         else:
             network = self
 
@@ -506,11 +513,28 @@ class Network:
         if work_ratio is not None:
             self.links.scale_susceptibles(work_ratio)
 
-        # if play_ratio is not None:
-        #    self.play.scale_susceptibles(play_ratio)
-
         self.nodes.scale_susceptibles(work_ratio=work_ratio,
                                       play_ratio=play_ratio)
+
+    def to_wards(self, profiler=None, nthreads: int = 1):
+        """Return the ward-level data in this network converted to
+           a Wards object. This supports editing and save/restore
+           to JSON
+        """
+        from .utils._network_wards import save_to_wards
+        return save_to_wards(self, profiler=profiler, nthreads=nthreads)
+
+    @staticmethod
+    def from_wards(wards, params: Parameters = None,
+                   disease: Disease = None,
+                   profiler=None,
+                   nthreads: int = 1):
+        """Construct a Network from the passed Wards object (e.g. after
+           editing, or restoring from JSON
+        """
+        from .utils._network_wards import load_from_wards
+        return load_from_wards(wards, params=params, disease=disease,
+                               profiler=profiler, nthreads=nthreads)
 
     def run(self, population: Population,
             output_dir: OutputFiles,
@@ -574,7 +598,8 @@ class Network:
             from .utils._console import Console
             Console.warning("Using special mode to fix all random number "
                             "seeds to 15324. DO NOT USE IN PRODUCTION!!!")
-            rng = seed_ran_binomial(seed=15324)
+            seed = 15324
+            rng = seed_ran_binomial(seed=seed)
         else:
             rng = seed_ran_binomial(seed=seed)
 
@@ -587,21 +612,28 @@ class Network:
 
         from .utils._console import Console
 
-        Console.print(f"First five random numbers equal {', '.join(randnums)}")
+        Console.print(
+            f"* Using random number seed {seed}\n"
+            f"* First five random numbers equal **{'**, **'.join(randnums)}**",
+            markdown=True)
         randnums = None
 
         if nthreads is None:
             from .utils._parallel import get_available_num_threads
             nthreads = get_available_num_threads()
 
-        Console.print(f"Number of threads used equals {nthreads}")
-
         from .utils._parallel import create_thread_generators
         rngs = create_thread_generators(rng, nthreads)
 
         # Create space to hold the results of the simulation
-        Console.print("Initialise infections...")
         infections = self.initialise_infections()
+
+        if nthreads == 1:
+            s = ""
+        else:
+            s = "s"
+
+        Console.rule(f"Running the model using {nthreads} thread{s}")
 
         from .utils import run_model
         population = run_model(network=self,

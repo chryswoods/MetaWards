@@ -3,8 +3,6 @@ from typing import List as _List
 from typing import Dict as _Dict
 from typing import Union as _Union
 
-from ._disease import Disease
-
 __all__ = ["VariableSets", "VariableSet"]
 
 
@@ -352,6 +350,7 @@ class VariableSet:
         self._varnames = None
         self._varidxs = None
         self._idx = None
+        self._nrepeats = None
         self._output = None
 
         if variables is not None:
@@ -372,6 +371,7 @@ class VariableSet:
                 self._add(name, value)
 
         self._idx = repeat_index
+        self._nrepeats = max(1, repeat_index)
 
     def __str__(self):
         """Return a printable representation of the variables to
@@ -424,6 +424,10 @@ class VariableSet:
             return 0
         else:
             return len(self._vals)
+
+    def is_empty(self):
+        """Return whether or not there is nothing to change"""
+        return len(self) == 0
 
     def __getitem__(self, key):
         if self._vals is None:
@@ -830,7 +834,10 @@ class VariableSet:
         if self._output is None:
             return self.fingerprint(include_index=True)
         else:
-            return self._output
+            if self._nrepeats is None or self._nrepeats < 2:
+                return self._output
+            else:
+                return "%sx%03d" % (self._output, self._idx)
 
     @staticmethod
     def read(filename: str):
@@ -986,6 +993,13 @@ class VariableSet:
                             f"Cannot set unrecognised parameter {varname} "
                             f"to {value} in demographic {demographic}")
 
+            # save this adjustment to the record in the parameters
+            # object
+            if params.adjustments is None:
+                params.adjustments = []
+
+            params.adjustments.append(self)
+
         except Exception as e:
             raise ValueError(
                 f"Unable to set parameters from {self}. Error "
@@ -1132,6 +1146,7 @@ class VariableSets:
                 for v in self._vars:
                     v2 = deepcopy(v)
                     v2._idx = i
+                    v2._nrepeats = nrepeats
                     repeats.append(v2)
         else:
             if len(nrepeats) != len(self._vars):
@@ -1148,6 +1163,7 @@ class VariableSets:
                     if n <= nrepeats[i]:
                         v2 = deepcopy(v)
                         v2._idx = n
+                        v2._nrepeats = nrepeats[i]
                         repeats.append(v2)
                         added = True
 
@@ -1197,12 +1213,16 @@ class VariableSets:
         try:
             dialect = csv.Sniffer().sniff(csvlines[0], delimiters=[" ", ","])
         except Exception:
-            from .utils._console import Console
-            Console.warning(
-                f"Could not identify what sort of separator to use to "
-                f"read {filename}, so will assume commas. If this is wrong, "
-                f"then could you add commas to separate the "
-                f"fields?")
+            words = csvlines[0].strip().split(" ")
+
+            if len(words) > 1:
+                from .utils._console import Console
+                Console.warning(
+                    f"Could not identify what sort of separator to use to "
+                    f"read {filename}, so will assume commas. If this is "
+                    f"wrong, then could you add commas to separate the "
+                    f"fields?")
+
             dialect = csv.excel  #  default comma-separated file
 
         for line in csv.reader(csvlines, dialect=dialect,
@@ -1326,3 +1346,27 @@ class VariableSets:
             raise ValueError(
                 f"Cannot read parameters from line {line_numbers} "
                 f"as the number of lines in the file is {i+1}")
+
+    def set_outdir_from_number(self):
+        """This function resets the names of all of the output directories
+           for each run so that they are numbered sequentially from one
+        """
+        max_i = len(self._vars) + 1
+        nchars = len(str(max_i))
+
+        fmt = f"%0{nchars}d"
+
+        for i, variable in enumerate(self._vars):
+            variable._output = fmt % (i+1)
+            variable._idx = 1
+            variable._nrepeats = 1
+
+    def set_outdir_from_uid(self):
+        """This function resets the names of all of the output directories
+           for each run so that they all have a globally unique UID
+        """
+        from uuid import uuid4
+        for variable in self._vars:
+            variable._output = str(uuid4())
+            variable._idx = 1
+            variable._nrepeats = 1

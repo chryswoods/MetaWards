@@ -2,8 +2,6 @@
 #cython: linetrace=False
 # MUST ALWAYS DISABLE AS WAY TOO SLOW FOR ITERATE
 
-from libc.stdio cimport FILE, fopen, fscanf, fclose, feof
-
 from .._network import Network
 from .._links import Links
 from ._profiler import Profiler, NullProfiler
@@ -40,6 +38,10 @@ def build_play_matrix(network: Network,
     cdef int to_id = 0
     cdef double weight = 0.0
 
+    cdef int linenum = 0
+    cdef int nlines = 0
+    cdef int update_freq = 0
+
     cdef int * nodes_label = get_int_array_ptr(nodes.label)
     cdef int * nodes_begin_p = get_int_array_ptr(nodes.begin_p)
     cdef int * nodes_end_p = get_int_array_ptr(nodes.end_p)
@@ -55,14 +57,8 @@ def build_play_matrix(network: Network,
     cdef double * nodes_play_suscept = get_double_array_ptr(
                                                     nodes.play_suscept)
 
-    cdef int error_from = -1
-    cdef int error_to = -1
-
     cdef int MAX_LINKS = max_links
     cdef int MAX_NODES = max_nodes
-
-    cdef char* fname
-    cdef FILE* cfile
 
     from ._console import Console
 
@@ -71,20 +67,41 @@ def build_play_matrix(network: Network,
         Console.print("No play links file to read")
     else:
         p = p.start("read_play_file")
-        filename = params.input_files.play.encode("UTF-8")
-        fname = filename
-        cfile = fopen(fname, "r")
 
-        if cfile == NULL:
-            raise FileNotFoundError(f"No such file or directory: {filename}")
+        filename = params.input_files.play
+
+        Console.print(f"Reading {filename} into memory...")
+        lines = open(filename, "r").readlines()
+
+        # try to read the lines using the csv module - should be space or
+        # comma-separated lines
+        import csv
+        dialect = csv.Sniffer().sniff(lines[0], delimiters=[" ", ","])
+
+        nlines = len(lines)
+        update_freq = int(nlines / 1000)
 
         # resets the node label as a flag to check progress?
-        with nogil:
-            for j in range(1, nnodes_plus_one):
-                nodes_label[j] = -1
+        for j in range(1, nnodes_plus_one):
+            nodes_label[j] = -1
 
-            while not feof(cfile):
-                fscanf(cfile, "%d %d %lf\n", &from_id, &to_id, &weight)
+        with Console.progress() as progress:
+            task = progress.add_task("Parsing contents", total=nlines)
+
+            for parts in csv.reader(lines, dialect=dialect):
+                linenum += 1
+
+                if len(parts) == 0:
+                    continue
+                elif len(parts) != 3:
+                    Console.error(
+                        f"Read invalid line from {filename} line {linenum}\n"
+                        f"{parts}")
+                    raise IOError(f"Invalid line read from {filename}")
+
+                from_id = int(parts[0])
+                to_id = int(parts[1])
+                weight = float(parts[2])
 
                 nlinks += 1
 
@@ -92,9 +109,12 @@ def build_play_matrix(network: Network,
                     break
 
                 if from_id == 0 or to_id == 0:
-                    error_from = from_id
-                    error_to = to_id
-                    break
+                    Console.error(
+                        f"{filename} is corrupted! Error on line {linenum}.\n"
+                        f"{parts}\n"
+                        f"Zero in link list: {from_id}-{to_id}!\n"
+                        f"Renumber files and start again")
+                    raise IOError(f"Corrupted file {filename}, line {linenum}")
 
                 if nodes_label[from_id] == -1:
                     nodes_label[from_id] = from_id
@@ -113,17 +133,15 @@ def build_play_matrix(network: Network,
                 nodes_denominator_p[from_id] += weight
                 nodes_play_suscept[from_id] += weight
 
-            fclose(cfile)
+                if linenum % update_freq == 0:
+                    progress.update(task, completed=linenum)
+
+            progress.update(task, completed=nlines, force_update=True)
 
         if nlinks >= MAX_LINKS:
             raise MemoryError(f"There are too many links (>{nlinks}) to fit "
                               f"into pre-allocated memory (max_links = "
                               f"{max_links}). Increase this and try again.")
-
-        if error_from != -1 or error_to != -1:
-            raise ValueError(f"{params.input_files.play} is corrupted. "
-                             f"Zero in link list: ${error_from}-${error_to}! "
-                             f"Renumber files and start again")
 
         p = p.stop()
     # end of if have playfile
@@ -159,16 +177,33 @@ def build_play_matrix(network: Network,
     else:
         # need to use C file reading as too slow in python
         p = p.start("read_play_size_file")
-        filename = params.input_files.play_size.encode("UTF-8")
-        fname = filename
-        cfile = fopen(fname, "r")
+        filename = params.input_files.play_size
 
-        if cfile == NULL:
-            raise FileNotFoundError(f"No such file or directory: {filename}")
+        Console.print(f"Reading {filename} into memory...")
+        lines = open(filename, "r").readlines()
 
-        try:
-            while not feof(cfile):
-                fscanf(cfile, "%d %d\n", &i1, &i2)
+        dialect = csv.Sniffer().sniff(lines[0], delimiters=[" ", ","])
+
+        linenum = 0
+        nlines = len(lines)
+        update_freq = int(nlines / 1000)
+
+        with Console.progress() as progress:
+            task = progress.add_task("Parsing contents", total=nlines)
+
+            for parts in csv.reader(lines, dialect=dialect):
+                linenum += 1
+
+                if len(parts) == 0:
+                    continue
+                elif len(parts) != 2:
+                    Console.error(
+                        f"Read invalid line from {filename} line {linenum}\n"
+                        f"{parts}")
+                    raise IOError(f"Invalid line read from {filename}")
+
+                i1 = int(parts[0])
+                i2 = int(parts[1])
 
                 if i1 > max_node_id:
                     max_node_id = i1
@@ -177,11 +212,10 @@ def build_play_matrix(network: Network,
                 nodes_denominator_p[i1] = i2
                 nodes_save_play_suscept[i1] = i2
 
-            fclose(cfile)
-        except Exception as e:
-            fclose(cfile)
-            raise ValueError(f"{params.input_files.play_size} is corrupted or "
-                            f"unreadable? Error = {e.__class__}: {e}")
+                if linenum % update_freq == 0:
+                    progress.update(task, completed=linenum)
+
+            progress.update(task, completed=nlines, force_update=True)
 
         # we now need to fill in the missing nodes that are defined
         # in the play_size file, but were not linked to in the node

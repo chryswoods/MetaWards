@@ -66,11 +66,11 @@ the core :mod:`metawards` module, but cannot guarantee it.
 Creating a release
 ------------------
 
-To create a release first checkout the "master" branch.
+To create a release first checkout the "main" branch.
 
 .. code-block:: bash
 
-   git checkout master
+   git checkout main
    git pull
 
 Next, merge in all changes from the "devel" branch.
@@ -182,7 +182,7 @@ that is included in the package to tag versions.
 
 This will also trigger a full CI/CD to test and build the new version.
 Again, it should work as this tag was taken from your fully-tested
-"master" branch.
+"main" branch.
 
 Uploading packages to pypi
 --------------------------

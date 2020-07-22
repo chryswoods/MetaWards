@@ -15,7 +15,7 @@ from .._network import Network
 
 from ._get_array_ptr cimport get_int_array_ptr, get_double_array_ptr
 
-__all__ = ["add_wards_network_distance"]
+__all__ = ["add_wards_network_distance", "calc_network_distance"]
 
 
 cdef inline double deg_to_rad(double x) nogil:
@@ -62,72 +62,55 @@ cdef double distance_x_y(double x1, double y1,
     return sqrt(dx + dy)
 
 
-def add_wards_network_distance(network: Network, nthreads: int = 1):
-    """Reads the location data in network.parameters.input_files.position
-       and adds those locations to all of the nodes in the passed
-       network. Then it calculates all of the distances between
-       the nodes for each link and puts that into the
-       'distance' property of each link
-    """
+def zero_distances(network, Network, nthreads: int = 1):
+    """Zero the link and play link distances"""
+    links = network.links
+    play = network.play
 
-    # ncov build does not have WEEKEND defined, so not writing this code now
-    params = network.params
+    cdef double * links_distance = get_double_array_ptr(links.distance)
+    cdef double * play_distance = get_double_array_ptr(play.distance)
+
+    cdef int nlinks_plus_one = network.nlinks + 1
+    cdef int nplay_plus_one = network.nplay + 1
+
+    cdef int i = 0
+    cdef int num_threads = nthreads
+
+    with nogil, parallel(num_threads=num_threads):
+        for i in prange(1, nlinks_plus_one, schedule="static"):
+            links_distance[i] = 0.0
+
+        for i in prange(1, nplay_plus_one, schedule="static"):
+            play_distance[i] = 0.0
+
+
+def calc_network_distance(network: Network, nthreads: int = 1):
+    """Recalculate and save all of the distances for the
+       work and play links between wards
+    """
     wards = network.nodes
     links = network.links
     play = network.play
 
-    line = None
-
-    from ._console import Console
-
-    Console.print("Reading in the positions...")
-
-    cdef int i1 = 0
-    cdef double x = 0.0
-    cdef double y = 0.0
+    if network.nodes.coordinates == "x/y":
+        calc_distance = distance_x_y
+    elif network.nodes.coordinates == "lat/long":
+        calc_distance = distance_lat_long
+    elif network.nodes.coordinates is None:
+        zero_distances(network, nthreads)
+        return
+    else:
+        raise ValueError(f"Unrecognised coordinate system "
+                         f"{network.nodes.coordinates}")
 
     cdef double * wards_x = get_double_array_ptr(wards.x)
     cdef double * wards_y = get_double_array_ptr(wards.y)
 
-    cdef scale_for_km = 1.0
-
-    if params.input_files.coordinates == "x/y":
-        calc_distance = distance_x_y
-        scale_for_km = 0.001
-    elif params.input_files.coordinates == "lat/long":
-        calc_distance = distance_lat_long
-        scale_for_km = 1.0
-    else:
-        raise ValueError(f"Unrecognised coordinate system "
-                         f"{params.input_files.coordinates}")
-
-    try:
-        with open(params.input_files.position, "r") as FILE:
-            line = FILE.readline()
-
-            while line:
-                words = line.split()
-                i1 = int(words[0])
-                x = float(words[1])
-                y = float(words[2])
-
-                wards.x[i1] = x * scale_for_km
-                wards.y[i1] = y * scale_for_km
-
-                if (x == 0) and (y == 0):
-                    Console.warning(
-                        f"WARNING: Position of ward {i1} is 0,0. This "
-                        f"doesn't seem right")
-
-                line = FILE.readline()
-    except Exception as e:
-        raise ValueError(f"{params.input_files.position} is corrupted or "
-                         f"unreadable? Error = {e.__class__}: {e}, "
-                         f"line = {line}")
-
     # make sure that all nodes have valid distances
     cdef int i = 0
     cdef int nmissing = 0
+
+    from ._console import Console
 
     for i in range(1, network.nnodes+1):
         x = wards.x[i]
@@ -170,7 +153,7 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
     cdef int nlinks_plus_one = network.nlinks + 1
     cdef int nplay_plus_one = network.nplay + 1
 
-    cdef double too_large = 1000000 * scale_for_km
+    cdef double too_large = 10000
 
     cdef int ifrom = 0
     cdef int ito = 0
@@ -239,5 +222,71 @@ def add_wards_network_distance(network: Network, nthreads: int = 1):
     Console.print(f"Total play distance equals {total_play_distance}")
     Console.print(
             f"Total distance equals {total_distance+total_play_distance}")
+
+
+def add_wards_network_distance(network: Network, nthreads: int = 1):
+    """Reads the location data in network.parameters.input_files.position
+       and adds those locations to all of the nodes in the passed
+       network. Then it calculates all of the distances between
+       the nodes for each link and puts that into the
+       'distance' property of each link
+    """
+
+    # ncov build does not have WEEKEND defined, so not writing this code now
+    params = network.params
+    wards = network.nodes
+    links = network.links
+    play = network.play
+
+    line = None
+
+    from ._console import Console
+
+    Console.print("Reading in the positions...")
+
+    cdef int i1 = 0
+    cdef double x = 0.0
+    cdef double y = 0.0
+
+    cdef double * wards_x = get_double_array_ptr(wards.x)
+    cdef double * wards_y = get_double_array_ptr(wards.y)
+
+    cdef scale_for_km = 1.0
+
+    if params.input_files.coordinates == "x/y":
+        scale_for_km = 0.001
+    elif params.input_files.coordinates == "lat/long":
+        scale_for_km = 1.0
+    else:
+        raise ValueError(f"Unrecognised coordinate system "
+                         f"{params.input_files.coordinates}")
+
+    try:
+        with open(params.input_files.position, "r") as FILE:
+            line = FILE.readline()
+
+            while line:
+                words = line.split()
+                i1 = int(words[0])
+                x = float(words[1])
+                y = float(words[2])
+
+                wards.x[i1] = x * scale_for_km
+                wards.y[i1] = y * scale_for_km
+
+                if (x == 0) and (y == 0):
+                    Console.warning(
+                        f"WARNING: Position of ward {i1} is 0,0. This "
+                        f"doesn't seem right")
+
+                line = FILE.readline()
+    except Exception as e:
+        raise ValueError(f"{params.input_files.position} is corrupted or "
+                         f"unreadable? Error = {e.__class__}: {e}, "
+                         f"line = {line}")
+
+    network.nodes.coordinates = params.input_files.coordinates
+
+    calc_network_distance(network=network, nthreads=nthreads)
 
     return network

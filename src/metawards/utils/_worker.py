@@ -8,12 +8,46 @@ from .._demographics import Demographics
 from .._parameters import Parameters
 from .._outputfiles import OutputFiles
 
-import os
-import sys
-
-__all__ = ["run_worker", "prepare_worker"]
+__all__ = ["run_worker", "prepare_worker", "must_rebuild_network"]
 
 global_network = None
+
+
+def must_rebuild_network(network: _Union[Network, Networks],
+                         params: Parameters,
+                         demographics: Demographics) -> bool:
+    """Return whether a change in parameters or demographics
+       would force a rebuild of the passed network
+    """
+    if network is None or params is None:
+        return True
+    elif demographics is None and isinstance(network, Networks):
+        return True
+    elif demographics is not None:
+        if len(demographics) <= 1 and isinstance(network, Networks):
+            return True
+        elif len(demographics) > 1 and isinstance(network, Network):
+            return True
+
+    if network.params.input_files != params.input_files:
+        return True
+
+    if demographics is None:
+        return False
+
+    if len(demographics) != len(network.demographics):
+        return True
+
+    if demographics.is_multi_network():
+        # check if any of the networks has changed
+        if not network.demographics.is_multi_network():
+            return True
+
+        for d1, d2 in zip(demographics, network.demographics):
+            if d1.network != d2.network:
+                return True
+
+    return False
 
 
 def prepare_worker(params: Parameters, demographics: Demographics,
@@ -32,7 +66,6 @@ def prepare_worker(params: Parameters, demographics: Demographics,
          If not None, then demographics used to specialise the Network
          into Networks
     """
-    # switch off printing to stdout and stderr
     global global_network
 
     max_nodes = options["max_nodes"]
@@ -44,21 +77,40 @@ def prepare_worker(params: Parameters, demographics: Demographics,
 
     profiler = options["profiler"]
 
-    if global_network is None:
-        network = Network.build(params=params,
-                                profiler=profiler,
-                                max_nodes=max_nodes,
-                                max_links=max_links)
+    from ._console import Console
+
+    if must_rebuild_network(network=global_network, params=params,
+                            demographics=demographics):
+
+        Console.print("Must rebuild network...")
 
         if demographics is not None:
-            network = demographics.specialise(network,
-                                              nthreads=nthreads,
-                                              profiler=profiler)
+            network = demographics.build(params=params,
+                                         population=options.get("population",
+                                                                None),
+                                         max_nodes=max_nodes,
+                                         max_links=max_links,
+                                         nthreads=nthreads,
+                                         profiler=profiler)
+        else:
+            network = Network.build(params=params,
+                                    population=options.get("population", None),
+                                    profiler=profiler,
+                                    nthreads=nthreads,
+                                    max_nodes=max_nodes,
+                                    max_links=max_links)
 
         global_network = network
 
     # always work in a copy
     network = global_network.copy()
+
+    if params.adjustments is not None:
+        Console.rule("Adjustable parameters to scan")
+        Console.print("\n".join([f"* {x}" for x in params.adjustments]),
+                      markdown=True)
+        Console.rule()
+
     network.update(params=params, demographics=demographics,
                    nthreads=nthreads, profiler=profiler)
 

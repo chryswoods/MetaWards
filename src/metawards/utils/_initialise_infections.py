@@ -25,7 +25,7 @@ def initialise_infections(network: Network):
     # single link in network.links. 1-indexing is used throughout
     # the code, hence why we size for n + 1
     for _ in range(0, n):
-        infections.append(create_int_array(network.nlinks + 1))
+        infections.append(create_int_array(network.nlinks + 1, 0.0))
 
     return infections
 
@@ -48,6 +48,6 @@ def initialise_play_infections(network: Network):
     # each ward (node) according to the 'play' rules. 1-indexing
     # is used throughout the code, hence why we size for n + 1
     for _ in range(0, n):
-        infections.append(create_int_array(network.nnodes+1))
+        infections.append(create_int_array(network.nnodes+1, 0.0))
 
     return infections

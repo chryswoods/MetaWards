@@ -1,12 +1,51 @@
 
 from dataclasses import dataclass as _dataclass
 from typing import Dict as _Dict
+from typing import List as _List
 
 __all__ = ["InputFiles"]
 
 _inputfiles = {}
 
 _default_folder_name = "model_data"
+
+
+def _expand_path(json_file):
+    from pathlib import Path
+    return str(Path(json_file).expanduser().absolute())
+
+
+def _is_description_json(json_file):
+    """Return whether or not this json file contains description data"""
+    import os
+    if not (os.path.exists(json_file) and os.path.isfile(json_file)):
+        return False
+
+    try:
+        import bz2
+        with bz2.open(json_file, "rt") as FILE:
+            while True:
+                line = FILE.readline().strip()
+                if len(line) > 0:
+                    if line.startswith("["):
+                        return False
+                    elif line.startswith("{"):
+                        return True
+
+        return False
+    except Exception:
+        pass
+
+    with open(json_file, "r") as FILE:
+        while True:
+            line = FILE.readline().strip()
+            if len(line) > 0:
+                if line.startswith("["):
+                    return False
+                elif line.startswith("{"):
+                    return True
+
+    return False
 
 
 @_dataclass
@@ -23,7 +62,7 @@ class InputFiles:
        >>> print(infiles)
        Model 2011Data version March 29 2020
        repository: https://github.com/metawards/MetaWardsData
-       repository_branch: master
+       repository_branch: main
        repository_version: 0.2.0
        etc.
     """
@@ -59,6 +98,8 @@ class InputFiles:
     uv: str = None
     #: Whether or not this is the special "single" ward model
     is_single: bool = False
+    #: The json file containing the wards data if this is a ward_json
+    wards_data: str = None
 
     _filename: str = None            # Full path of the description.json file
     _model_name: str = None          # Name of the model
@@ -71,24 +112,46 @@ class InputFiles:
     _repository_version: str = None  # Git version of the data
     _repository_branch: str = None   # Git branch for the data
 
+    @property
+    def is_model_dir(self) -> bool:
+        return self._model_name is not None
+
+    @property
+    def is_wards_data(self) -> bool:
+        return self.wards_data is not None
+
     def model_name(self):
         """Return the name of this model"""
-        return self._model_name
+        if self.is_wards_data:
+            return "custom"
+        elif self.is_single:
+            return "single"
+        else:
+            return self._model_name
 
     def model_path(self):
         """Return the path to the directory containing this model"""
-        return self._model_path
+        if self.is_wards_data or self.is_single:
+            return None
+        else:
+            return self._model_path
 
     def model_version(self):
         """Return the version of the data in this model"""
-        return self._model_version
+        if self.is_wards_data or self.is_single:
+            return None
+        else:
+            return self._model_version
 
     def __str__(self):
         if self.is_single:
             return "Model: single ward"
+        elif self.is_wards_data:
+            import os
+            filename = os.path.basename(self.wards_data)
+            return f"Model: {filename}"
         else:
-            return f"""
-* Model: {self._model_name}
+            return f"""* Model: {self._model_name}
 * loaded from: {self._filename}
 * repository: {self._repository}
 * repository_branch: {self._repository_branch}
@@ -105,20 +168,36 @@ class InputFiles:
 * lookup: {self.lookup}
 * lookup_columns: {self.lookup_columns}
 * seed: {self.seed}
-* nodes_to_track: {self.nodes_to_track}
-"""
+* nodes_to_track: {self.nodes_to_track}"""
+
+    def __repr__(self):
+        if self.is_single:
+            return f"InputFiles::single"
+        elif self.is_wards_data:
+            import os
+            filename = os.path.basename(self.wards_data)
+            return f"InputFiles(wards_data='{filename}')"
+        else:
+            return f"InputFiles(model='{self._model_name}')"
+
+    def __hash__(self):
+        return self._filename.__hash__()
 
     def _localise(self):
         """Localise the filenames in this input files set. This will
            prepend model_path/model to every filename and will also
            double-check that all files exist and are readable
         """
+        if self.is_single or self.is_wards_data:
+            return
+
         members = [attr for attr in dir(self)
                    if not callable(getattr(self, attr))
                    and not attr.startswith("_")]
 
         for member in members:
-            if member in ["coordinates", "lookup_columns"]:
+            if member in ["coordinates", "lookup_columns", "is_model_dir",
+                          "is_wards_data", "wards_data", "is_single"]:
                 continue
 
             filename = getattr(self, member)
@@ -136,7 +215,7 @@ class InputFiles:
     @staticmethod
     def load(model: str = "2011Data",
              repository: str = None,
-             folder: str = _default_folder_name,
+             folder: str = None,
              description: str = "description.json",
              filename: str = None):
         """Load the parameters associated with the passed model.
@@ -184,33 +263,64 @@ class InputFiles:
             from ._parameters import get_repository
             import os
 
-            repository, v = get_repository(repository)
+            if folder is None or os.path.isabs(model):
+                filename = model
+            else:
+                filename = os.path.join(folder, model)
 
-            filename = os.path.join(repository, folder,
-                                    model, description)
+            if os.path.exists(filename) and os.path.isfile(filename):
+                filename = _expand_path(filename)
+            else:
+                repository, v = get_repository(repository)
 
-            repository = v["repository"]
-            repository_version = v["version"]
-            repository_branch = v["branch"]
+                if folder is None:
+                    folder = _default_folder_name
+
+                filename = os.path.join(repository, folder,
+                                        model, description)
+
+                filename = _expand_path(filename)
+
+                repository = v["repository"]
+                repository_version = v["version"]
+                repository_branch = v["branch"]
 
         json_file = filename
         import os
         model_path = os.path.dirname(filename)
 
+        if not (os.path.exists(json_file) and os.path.isfile(json_file)):
+            from .utils._console import Console
+            Console.error(f"Cannot read file {json_file} as it doesn't exist")
+            raise IOError(
+                f"Cannot load inputfiles as {json_file} doesn't exist")
+
+        if not _is_description_json(json_file):
+            # this must be wards data...
+            json_file = _expand_path(json_file)
+            return InputFiles(wards_data=json_file,
+                              _filename=json_file)
+
         try:
-            with open(json_file, "r") as FILE:
-                import json
-                files = json.load(FILE)
+            import json
+            try:
+                import bz2
+                with bz2.open(json_file, "rt") as FILE:
+                    files = json.load(FILE)
+            except Exception:
+                files = None
+
+            if files is None:
+                with open(json_file, "r") as FILE:
+                    files = json.load(FILE)
 
         except Exception as e:
             from .utils._console import Console
-            Console.error(f"""
-
-
-Could not find the model file {json_file}. Either it does not exist of was
-corrupted. Error was {e.__class__} {e}. Please see
-https: // metawards.org/model_data for instructions on how to download
-and set the model data.""")
+            Console.error(f"""Could not find the model file {json_file}.
+Either it does not exist or was corrupted.
+Error was {e.__class__} {e}.
+Please see https://metawards.org/model_data for instructions on how
+to download and set the model data.""")
             raise FileNotFoundError(f"Could not find or read {json_file}: "
                                     f"{e.__class__} {e}")
 

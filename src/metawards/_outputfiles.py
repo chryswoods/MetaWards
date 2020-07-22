@@ -242,6 +242,7 @@ class OutputFiles:
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
         self._close_dir()
+        return False
 
     def _open_dir(self):
         """Internal function used to open the directory in which

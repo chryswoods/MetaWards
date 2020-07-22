@@ -50,6 +50,8 @@ class Nodes:
             self.x = create_double_array(N, 0.0)  # no good initialiser for x
             self.y = create_double_array(N, 0.0)  # no good initialiser for y
 
+            self.coordinates = "x/y"
+
     def is_null(self):
         return self._is_null
 

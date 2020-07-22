@@ -92,7 +92,7 @@ something like this;
 
 .. code-block:: bash
 
-    {"version": "0.2.0","repository": "https://github.com/metawards/MetaWardsData","branch": "master"}
+    {"version": "0.2.0","repository": "https://github.com/metawards/MetaWardsData","branch": "main"}
 
 This file will be read by metawards during a run to embed enough information
 in the outputs to enable others to download the same MetaWardsData input

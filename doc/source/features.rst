@@ -12,23 +12,20 @@ Features
     `Analysis of a simulation <https://uq4covid.github.io/vignettes/metawards_plot>`__
     run that used MetaWards to chart disease spread across England and Wales.
 
-MetaWards is a geographic SIR-based epidemic modelling program. The
-software models individuals who reside in a home ward (e.g. as in
-an electoral ward in the UK) and who, optionally commute to a work ward.
+MetaWards is a SIR-based metapopulation disease modelling program. The
+software models individuals who move as metapopulations between
+home wards and work (or play) wards. This is a highly flexible program,
+that can model custom geographies, networks, diseases and demographics.
+You can use MetaWards directly from within Python (including Jupyter),
+R (including RStudio) or from the command line (terminal / console).
+
+**For more information, take a look at the** :doc:`quick start guide <quickstart/index>`.
 
 The program is designed to enable researchers to model how an infection
 may spread, and what impact different control measures or individual
 behaviours may make.
 
 To this end, MetaWards features;
-
-* a flexible plugin architecture that makes it easy to implement new
-  control measures. For example, the tutorial shows how this can be
-  used to
-  :doc:`model shielding <tutorial/part05/03_custom>`,
-  :doc:`different lockdown scenarios <tutorial/part03/06_scan_lockdown>`
-  and to
-  :doc:`investigate necessary durations of quarantine or self-isolation <tutorial/part06/02_duration>`.
 
 .. figure:: images/demographic_model.jpg
     :width: 100%
@@ -38,6 +35,14 @@ To this end, MetaWards features;
     :figclass: align-right
 
     Multiple connected networks enable complex scenarios to be modelled
+
+* a flexible plugin architecture that makes it easy to implement new
+  control measures. For example, the tutorial shows how this can be
+  used to
+  :doc:`model shielding <tutorial/part05/03_custom>`,
+  :doc:`different lockdown scenarios <tutorial/part03/06_scan_lockdown>`
+  and to
+  :doc:`investigate necessary durations of quarantine or self-isolation <tutorial/part06/02_duration>`.
 
 * multi-network demographic support. Multiple networks can be run as
   a single combined group, with custom plugins used to merge data
@@ -65,7 +70,7 @@ To this end, MetaWards features;
   enough data to make reproduction easy, with results designed to
   be the same given the same inputs, random number seed and number of threads.
 
-* a :doc:`complete tutorial <tutorial/tutorial>` that takes you from beginning to
+* a :doc:`complete tutorial <tutorial/index>` that takes you from beginning to
   learn how to run SIR simulations, to writing powerful plugins that let you
   model complex scenarios.
 
@@ -76,6 +81,29 @@ To this end, MetaWards features;
   and scaling multiple runs up to full supercomputers (if you are lucky
   enough to have access to one)...
 
+.. figure:: images/rstudio.jpg
+    :width: 100%
+    :figwidth: 35%
+    :align: right
+    :alt: RStudio screenshot
+    :figclass: align-right
+
+    Run MetaWards and analyse results directly within RStudio via the
+    MetaWards R interface.
+
+* ...but - the individual code is optimised and can run happily on small
+  laptops. Individual networks fit in approximately 80 MB of memory, and model
+  runs can take 15-90 seconds to perform. This scales with the number of
+  demographics that are added, but high performance and low memory consumption
+  are design goals.
+
+* :doc:`flexible input files <model_data>` that would enable modelling of any
+  region or country to be undertaken (subject to good input data).
+  Models of the UK and England and Wales have been created, and a
+  Python and R API are provided to make it easy to create custom networks.
+  These can model everything from individual wards or local geographies,
+  up to full national- or international-scale metapopulation models.
+
 .. figure:: images/pandas_example.jpg
     :width: 100%
     :figwidth: 35%
@@ -85,19 +113,15 @@ To this end, MetaWards features;
 
     Easily load compressed data files into pandas, R or Excel for analysis
 
-* ...but - the individual code is optimised and can run happily on small
-  laptops. Individual networks fit in approximately 80 MB of memory, and model
-  runs can take 15-90 seconds to perform. This scales with the number of
-  demographics that are added, but high performance and low memory consumption
-  are design goals.
-
-* :doc:`flexible input files <model_data>` that would enable modelling of any
-  region or country to be undertaken (subject to good input data). Currently
-  models of the UK and England and Wales have been created.
-
 * a colourful, modern and informative console output, with full unicode
   support and progress indicators. All outputs are duplicated to
   text files to ensure that no data from a run is lost.
+
+* both command-line and API interfaces. Feel free to run MetaWards as
+  a standalone program, or to use the Python or R API to embed it as part
+  of a larger framework. A modular, robust design has been used, so
+  feel free to take and re-use the parts of MetaWards that are most
+  of use to you.
 
 .. figure:: images/parallel_output.jpg
     :width: 100%
@@ -109,12 +133,6 @@ To this end, MetaWards features;
     Perform multiple runs in parallel, with live summary updates as
     jobs finish
 
-* both command-line and API interfaces. Feel free to run MetaWards as
-  a standalone program, or to use the Python API to embed it as part
-  of a larger framework. A modular, robust design has been used, so
-  feel free to take and re-use the parts of MetaWards that are most
-  of use to you.
-
 Software design
 ---------------
 
@@ -124,8 +142,12 @@ lots of documentation, copious run-time and unit tests, and following
 a "tutorial-driven" development philosophy.
 
 The software is mostly Python, with C used (via cython) to accelerate
-key parts. This is parallelised using OpenMP, with multiple model runs
-parallelised using multiprocessing, scoop or MPI.
+key parts. An :doc:`R interface <quickstart/01_R>`
+is provided via `reticulate <https://rstudio.github.io/reticulate/>`__.
+The code is parallelised using `OpenMP <https://openmp.org>`__,
+with multiple model runs parallelised using multiprocessing,
+`scoop <https://scoop.readthedocs.io>`__ or
+`MPI, via mpi4py <https://mpi4py.readthedocs.io>`__.
 
 We take testing very seriously, and have lots of unit, integration and
 run-time tests. These are run as part of our CI/CD system deployed

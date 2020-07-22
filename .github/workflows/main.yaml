@@ -2,11 +2,11 @@ name: Build
 
 on:
   push:
-    branches: [master, devel]
+    branches: [main, devel]
     tags:
     - '*'
   pull_request:
-    branches: [master, devel]
+    branches: [main, devel]
 
 jobs:
   build:
@@ -40,7 +40,7 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Set up Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
       - name: Get tags
@@ -86,7 +86,7 @@ jobs:
           METAWARDSDATA: ./MetaWardsData
         if: matrix.python-version == 3.8 && matrix.config.os == 'ubuntu-latest' && github.event_name == 'push'
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v0.6.0
         with:
           branch: 'gh-pages'
           directory: 'gh-pages'
@@ -110,7 +110,7 @@ jobs:
           CYTHONIZE: 1
         if: github.event_name == 'push' && matrix.python-version == 3.7 && matrix.config.os == 'ubuntu-latest'
       - name: Upload sdist/bdist package(s)
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: dist
           path: ./dist

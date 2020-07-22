@@ -130,11 +130,14 @@ def create_thread_generators(rng, nthreads):
 
         from ._console import Console
 
+        lines = []
+
         for i in range(0, nthreads):
             seed = ran_int(rng)
-            Console.print(f"Random seed for thread {i} equals **{seed}**",
-                          markdown=True)
+            lines.append(f"* Random seed for thread {i} equals **{seed}**")
             rngs.append(seed_ran_binomial(seed))
+
+        Console.print("\n".join(lines), markdown=True)
 
     # need to return these as an array so that they are more easily
     # accessible from the OpenMP loops - rng is a unsigned 64-bit integer

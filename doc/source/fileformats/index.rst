@@ -14,7 +14,7 @@ There are three types of input files:
 
 2. Rigid-format: These have a rigid format, which is specific to their
    type. The main examples of this are the files used to specify
-   a model (e.g. the network, connections etc.)
+   a model (e.g. :doc:`the network, connections etc. <network>`)
 
 3. JSON-format: These are files that are in standard
    `JSON <https://en.wikipedia.org/wiki/JSON>`__ format. Examples include
@@ -57,16 +57,20 @@ the parameters for a disease, or specifying the data associated with
 different demographics. These files are read using the
 `Python JSON module <https://docs.python.org/3/library/json.html>`__
 into dictionaries, which are interpreted by the classes associated with
-each file (e.g. :class:`MetaWards.Disease` in the case of disease parameters).
+each file (e.g. :class:`~metawards.Disease` in the case of disease parameters).
 Many of these classes use :class:`metawards.Interpret` to interpret the
 data from the JSON file, meaning that these support expressions, random
 numbers etc. We plan to ensure that as much data as possible is interpreted
 using :class:`metawards.Interpret`, so that there is a consistent
 experience across the code.
 
+Detailed descriptions
+---------------------
+
 .. toctree::
    :maxdepth: 2
 
+   network
    extraseeds
    design
    userinput

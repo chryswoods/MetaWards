@@ -431,4 +431,5 @@ def distribute_remainders(network: Network,
     p = p.stop()
 
     Console.print(
-        f"Number of differences is {sum(diff_nodes)} + {sum(diff_links)}")
+        f"Number of differences is {int(sum(diff_nodes))} + "
+        f"{int(sum(diff_links))}")

@@ -1,13 +1,14 @@
 
+from ._outputfiles import OutputFiles
+from ._population import Population
+from ._demographics import Demographics
+from ._parameters import Parameters
+from ._network import Network
+
 from dataclasses import dataclass as _dataclass
 from dataclasses import field as _field
 from typing import List as _List
 
-from ._network import Network
-from ._parameters import Parameters
-from ._demographics import Demographics
-from ._population import Population
-from ._outputfiles import OutputFiles
 
 __all__ = ["Networks"]
 
@@ -113,6 +114,12 @@ class Networks:
             raise ValueError(f"You can only create a Networks object "
                              f"with a valid Demographics that contains "
                              f"more than one demographic")
+
+        if demographics.uses_named_network():
+            raise ValueError(
+                f"You cannot specialise an existing network with demographics "
+                f"that specify named networks - instead you need to call "
+                f"demographics.build(...)")
 
         if profiler is None:
             from .utils._profiler import NullProfiler
@@ -292,21 +299,22 @@ class Networks:
             randnums.append(str(ran_binomial(rng, 0.5, 100)))
 
         from .utils._console import Console
-        Console.print(f"First five random numbers equal {', '.join(randnums)}")
+        Console.print(
+            f"* First five random numbers equal **{'**, **'.join(randnums)}",
+            markdown=True)
         randnums = None
 
         if nthreads is None:
             from .utils._parallel import get_available_num_threads
             nthreads = get_available_num_threads()
 
-        Console.print(f"Number of threads used equals {nthreads}")
-
         from .utils._parallel import create_thread_generators
         rngs = create_thread_generators(rng, nthreads)
 
         # Create space to hold the results of the simulation
-        Console.print("Initialise infections...")
         infections = self.initialise_infections()
+
+        Console.rule("Running the model")
 
         from .utils import run_model
         population = run_model(network=self,
@@ -329,7 +337,7 @@ class Networks:
         for subnet in self.subnets:
             subnet.reset_everything(nthreads=nthreads, profiler=profiler)
 
-    def update(self, params: Parameters, demographics=None,
+    def update(self, params: Parameters, demographics=None, population=None,
                nthreads: int = 1, profiler=None):
         """Update this network with a new set of parameters
            (and optionally demographics).
@@ -368,19 +376,25 @@ class Networks:
 
         if demographics is not None:
             if demographics != self.demographics:
-                # we have a change in demographics, so need to re-specialise
-                networks = demographics.specialise(network=self.overall,
-                                                   profiler=p,
-                                                   nthreads=nthreads)
+                from .utils._worker import must_rebuild_network
+
+                if must_rebuild_network(network=self, params=self.params,
+                                        demographics=demographics):
+                    networks = demographics.build(
+                        params=self.params,
+                        population=population,
+                        nthreads=nthreads,
+                        profiler=p)
+                else:
+                    # we have a change in demographics, so need to re-specialise
+                    networks = demographics.specialise(network=self.overall,
+                                                       profiler=p,
+                                                       nthreads=nthreads)
                 p.stop()
                 return networks
 
         for i in range(0, len(self.demographics)):
             demographic = self.demographics[i]
-
-            # TODO::: RESET THE SUSCEPTIBLE POPULATIONS BACK TO
-            #         WHERE THEY SHOULD BE AT THE START OF THE RUN
-
             p = p.start(f"{demographic.name}.update")
             if demographic.name in params.specialised_demographics():
                 subnet_params = params[demographic.name]

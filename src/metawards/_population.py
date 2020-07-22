@@ -133,9 +133,6 @@ class Population:
         if self.n_inf_wards is not None:
             parts.append(f"IW: {self.n_inf_wards}")
 
-        if self.scale_uv is not None:
-            parts.append(f"UV: {self.scale_uv}")
-
         parts.append(f"TOTAL POPULATION {self.population}")
 
         s = "  ".join(parts)

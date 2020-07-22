@@ -87,12 +87,12 @@ def test_pathway():
     print(results[-1])
     print(results[-1].initial)
 
-    expected = Population(susceptibles=519,
+    expected = Population(susceptibles=39,
                           latent=0,
                           total=0,
-                          recovereds=481,
+                          recovereds=961,
                           n_inf_wards=0,
-                          day=90)
+                          day=71)
 
     print(expected)
 

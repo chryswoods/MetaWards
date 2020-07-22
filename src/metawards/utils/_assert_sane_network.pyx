@@ -28,10 +28,12 @@ def assert_sane_network(network: Network, profiler: Profiler):
 
     if filename is None:
         Console.warning(f"Skipping network validation as work_size is null")
+        return
 
     elif not os.path.exists(filename):
         Console.warning(
                 f"Skipping network validation as {filename} is unreadable")
+        return
 
     cdef char* fname
     cdef FILE* cfile

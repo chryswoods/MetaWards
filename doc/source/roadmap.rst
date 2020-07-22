@@ -8,24 +8,34 @@ scenarios. This roadmap is subject to change, and is given here to
 give insight into what the developers are thinking, and where
 they intend the code to go.
 
-Different demographics using different networks
------------------------------------------------
+More details about individual feature branches, which contain the new
+features being actively worked on, is available on the
+`GitHub issues <https://github.com/metawards/MetaWards/issues?q=is%3Aissue+is%3Aopen+label%3Afeature-branch>`_
+page.
 
-This is planned for MetaWards 1.3.
-Currently each demographic is using the same network topology. There is
-no technical reason why this should be the case, and a small amount of
-work is needed to enable different demographics to use different
-networks.
+Moving individuals between different networks
+---------------------------------------------
+
+This is planned for MetaWards 1.4. Currently the move functions move
+individuals between demographics but keeping the same location in
+the network. There is no technical reason why this should be the case.
+We'd like to write a move function that can move individuals to
+different locations in a network, and to also remember the move so
+that it can be reverted after a period of time, or when a condition
+is reached.
 
 This will enable modelling of;
 
 * holidays - we can move individuals to separate networks to represent
   holiday destinations, and then investigate what happens when they return
 
-* age-related behaviour - we can use different networks for different
-  societal demographics, so to better represent the behaviours of
-  different groups in society
+* returning from hospital, or moving between hospitals and care homes -
+  we can move an individual from their home ward to a separate ward
+  to represent a regional hospital, or to a regional care home.
 
+This work will take place in the
+`feature_holidays <https://github.com/metawards/MetaWards/issues/135>`_
+feature branch.
 
 Different nodes using different parameters
 ------------------------------------------

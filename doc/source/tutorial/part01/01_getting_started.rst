@@ -151,7 +151,7 @@ From this output it is clear that no-one has been infected by the lurgy.
 This is because we haven't yet seeded any outbreaks. We can seed an
 outbreak in a specific electoral ward by using an additional seeds file.
 In this case, we will seed an infection of the lurgy in London using
-the `ExtraSeedsLondon.dat <https://github.com/metawards/MetaWardsData/blob/master/extra_seeds/ExtraSeedsLondon.dat>`__
+the `ExtraSeedsLondon.dat <https://github.com/metawards/MetaWardsData/blob/main/extra_seeds/ExtraSeedsLondon.dat>`__
 file that comes in ``MetaWardsData``. You specify the additional seeds
 file to use via the ``--additional`` or ``-a`` options.
 

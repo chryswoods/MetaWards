@@ -2,6 +2,50 @@
 Changelog
 =========
 
+`1.3.0 <https://github.com/metawards/MetaWards/compare/1.2.0...1.3.0>`__ - July 22nd 2020
+-----------------------------------------------------------------------------------------
+
+* Added a new :doc:`quick start guide <quickstart/index>` that quickly
+  showcases the main features of MetaWards. A Python, R and command line
+  version is available, so this should suit a range of audiences.
+* Added support for different demographics to use different networks.
+  This is described partially in the :doc:`tutorial/index_part08`,
+  but mostly in the new :doc:`quick start guide <quickstart/index>`.
+  This will be documented further in the tutorial in a future release
+  (e.g. 1.3.1 or 1.4.0).
+* Added a :func:`metawards.run` function to run MetaWards jobs from the API.
+  This enables jobs to be run from within Python or R scripts, or to run
+  interactively from within, e.g. RStudio or Jupyter.
+* Added in R support via reticulate. You can now use the MetaWards API
+  within R, plus, via the new :func:`metawards.run` function you can
+  write nice tutorials or vignettes that include running the jobs.
+  Aim to create a CRAN MetaWards package in a future release.
+* Cleaned up the Python API so that this is as flexible as the R API.
+  Made sure that key classes, like :class:`~metawards.Disease`,
+  :class:`~metawards.InputFiles` and :class:`~metawards.Demographics`
+  are easy to use and can serialised to/from JSON.
+* New :class:`~metawards.Ward` / :class:`~metawards.Wards` API to let
+  you easily create new networks in Python or R.
+  You can convert :class:`~metawards.Network` to and from a
+  :class:`~metawards.Wards`, and these can be saved and loaded from JSON.
+  You can harmonise multiple Wards objects, which enables different
+  demographics to use different networks. Also can now refer to wards
+  in a network by name rather than index.
+* Fixed issues with the "single" ward model. This did not assign any
+  player weights, so outbreaks were incorrect. This is now fixed, and the
+  single-ward model now matches a manually-created single ward model.
+* Added convenience executables (metawards-python, metawards-jupyter
+  and metawards-reticulate) to make it easier for users to use the
+  right Python executable if many are installed on the system.
+* Cleaned up the output and changed "UV" to "scale_uv" as this clashed with
+  the UV command-line parameter (and confused people).
+* Fixed a bug where the "population" parameter was ignored for repeated
+  single-ward network runs.
+* More robust reading of the traditional network file format
+* Added progress bars for slow operations :-)
+* Better support for sequential naming of output directories for repeated runs
+* "master" branch was renamed to "main"
+
 `1.2.0 <https://github.com/metawards/MetaWards/compare/1.1.0...1.2.0>`__ - June 26th 2020
 -----------------------------------------------------------------------------------------
 

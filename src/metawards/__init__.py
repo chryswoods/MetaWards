@@ -25,8 +25,10 @@ Classes
     Populations
     VariableSet
     VariableSets
+    Ward
     WardInfo
     WardInfos
+    Wards
     Workspace
 
 Functions
@@ -36,36 +38,93 @@ Functions
     :toctree: generated/
 
     get_version_string
+    print_version_string
+    input
+    run
 
 """
 
-from . import analysis
-from . import app
-from . import movers
-from . import mixers
-from . import extractors
-from . import iterators
-from . import utils
-from ._version import get_versions
-from ._links import *
-from ._nodes import *
-from ._interpret import *
-from ._wardinfo import *
-from ._workspace import *
-from ._infections import *
-from ._variableset import *
-from ._outputfiles import *
-from ._networks import *
-from ._network import *
-from ._population import *
-from ._link import *
-from ._node import *
-from ._inputfiles import *
-from ._disease import *
-from ._demographics import *
-from ._demographic import *
-from ._parameters import *
 import sys as _sys
+import os as _os
+
+from ._version import get_versions
+
+__all__ = ["get_version_string", "print_version_string", "input",
+           "Demographic", "Demographics", "Disease", "Infections",
+           "InputFiles", "Interpret", "Link", "Links", "Network",
+           "Networks", "Node", "Nodes", "OutputFiles", "Parameters",
+           "Population", "Populations", "VariableSet", "VariableSets",
+           "Ward", "WardInfo", "WardInfos", "Wards", "Workspace"]
+
+# make sure that the directory containing this __init__.py is
+# early in the path - this will ensure that this versions modules
+# will be imported rather than globally installed modules. This is
+# needed so that lazily imported modules will come from this directory,
+# rather than any other installed version of metawards
+_install_path = _os.path.dirname(__file__)
+_sys.path.insert(0, _install_path)
+
+_disable_lazy_import = True
+
+try:
+    if _disable_lazy_import:
+        raise AssertionError()
+
+    import lazy_import as _lazy_import
+    _lazy_import.logging.disable(_lazy_import.logging.DEBUG)
+except Exception:
+    class _lazy_import:
+        """This is not lazy_import, but instead a thin stub that matches the
+           API but DOES NOT lazy_import anything. This imports at call time.
+        """
+        @staticmethod
+        def lazy_module(m):
+            from importlib import import_module
+            return import_module(m, package="metawards")
+
+        @staticmethod
+        def lazy_function(f):
+            module_name, unit_name = f.rsplit('.', 1)
+            module = _lazy_import.lazy_module(module_name)
+            return getattr(module, unit_name)
+
+        @staticmethod
+        def lazy_class(c):
+            return _lazy_import.lazy_function(c)
+
+analysis = _lazy_import.lazy_module(".analysis")
+app = _lazy_import.lazy_module(".app")
+movers = _lazy_import.lazy_module(".movers")
+mixers = _lazy_import.lazy_module(".mixers")
+extractors = _lazy_import.lazy_module(".extractors")
+iterators = _lazy_import.lazy_module(".iterators")
+utils = _lazy_import.lazy_module(".utils")
+
+Demographic = _lazy_import.lazy_class("._demographic.Demographic")
+Demographics = _lazy_import.lazy_class("._demographics.Demographics")
+Disease = _lazy_import.lazy_class("._disease.Disease")
+Infections = _lazy_import.lazy_class("._infections.Infections")
+InputFiles = _lazy_import.lazy_class("._inputfiles.InputFiles")
+Interpret = _lazy_import.lazy_class("._interpret.Interpret")
+Link = _lazy_import.lazy_class("._link.Link")
+Links = _lazy_import.lazy_class("._links.Links")
+Network = _lazy_import.lazy_class("._network.Network")
+Networks = _lazy_import.lazy_class("._networks.Networks")
+Node = _lazy_import.lazy_class("._node.Node")
+Nodes = _lazy_import.lazy_class("._nodes.Nodes")
+OutputFiles = _lazy_import.lazy_class("._outputfiles.OutputFiles")
+Parameters = _lazy_import.lazy_class("._parameters.Parameters")
+Population = _lazy_import.lazy_class("._population.Population")
+Populations = _lazy_import.lazy_class("._population.Populations")
+VariableSet = _lazy_import.lazy_class("._variableset.VariableSet")
+VariableSets = _lazy_import.lazy_class("._variableset.VariableSets")
+Ward = _lazy_import.lazy_class("._ward.Ward")
+WardInfo = _lazy_import.lazy_class("._wardinfo.WardInfo")
+WardInfos = _lazy_import.lazy_class("._wardinfo.WardInfos")
+Wards = _lazy_import.lazy_class("._wards.Wards")
+Workspace = _lazy_import.lazy_class("._workspace.Workspace")
+
+run = _lazy_import.lazy_class("._run.run")
 
 if _sys.version_info < (3, 7):
     print("MetaWards requires Python version 3.7 or above.")
@@ -73,12 +132,9 @@ if _sys.version_info < (3, 7):
     print(_sys.version)
     _sys.exit(-1)
 
-__all__ = ["get_version_string"]
-
-
 # import the pyx cython-compiled modules
 
-__manual_version__ = "0.9.0"
+__manual_version__ = "1.2.0"
 
 _v = get_versions()
 __version__ = _v['version']
@@ -108,7 +164,7 @@ def get_version_string():
     """Return a version string for metawards which can be printed
        into a file or written out to the screen
     """
-    from metawards import get_repository
+    from ._parameters import get_repository
     repository, v = get_repository(error_on_missing=False)
 
     if repository is None:
@@ -127,7 +183,7 @@ You may not be able to reproduce this run.***
             dirty = ""
 
         repo_info = f"""
-### MetaWardsData information
+# MetaWardsData information
 * version: {v['version']}
 * repository: {_url(v['repository'])}
 * branch: {v['branch']}
@@ -153,10 +209,10 @@ source code that was used to generate this run!**
         dirty = ""
 
     return f"""
-## MetaWards version {v['version']}
-## {_url('https://metawards.org')}
+# MetaWards version {v['version']}
+# {_url('https://metawards.org')}
 
-### Source information
+# Source information
 
 * repository: {_url(v['repository'])}
 * branch: {v['branch']}
@@ -165,7 +221,7 @@ source code that was used to generate this run!**
 {dirty}
 {repo_info}
 
-### Additional information
+# Additional information
 Visit {_url('https://metawards.org')} for more information
 about metawards, its authors and its license
 """

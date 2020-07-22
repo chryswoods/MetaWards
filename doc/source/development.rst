@@ -472,13 +472,13 @@ Continuous integration and delivery
 
 We use GitHub Actions to run a full continuous integration (CI)
 on all pull requests to devel and
-master, and all pushes to devel and master. We will not merge a pull
+main, and all pushes to devel and main. We will not merge a pull
 request until all tests pass. We only accept pull requests to devel.
-We only allow pull requests from devel to master. In addition to CI,
+We only allow pull requests from devel to main. In addition to CI,
 we also perform a build of the website on pushes to devel and tags
-to master. The website is versioned, so that old the docs for old
+to main. The website is versioned, so that old the docs for old
 versions of the code are always available. Finally, we have set up
-continuous delivery (CD) on pushes to master and devel, which build the
+continuous delivery (CD) on pushes to main and devel, which build the
 pypi source and binary wheels for Windows, Linux (manylinux2010)
 and OS X. These are manually uploaded to pypi when we tag
 releases, but we expect to automate this process soon.

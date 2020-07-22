@@ -14,7 +14,7 @@ Understanding the disease file
 ------------------------------
 
 The model of the lurgy is based on the
-`disease file <https://github.com/metawards/MetaWardsData/blob/master/diseases/lurgy.json>`__
+`disease file <https://github.com/metawards/MetaWardsData/blob/main/diseases/lurgy.json>`__
 contained in the
 `MetaWardsData <https://github.com/metawards/MetaWardsData>`__ repository.
 

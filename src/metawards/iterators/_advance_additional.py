@@ -51,10 +51,16 @@ def _load_additional_seeds(network: _Union[Network, Networks],
     if _os.path.exists(filename):
         Console.print(f"Loading additional seeds from {filename}")
         with open(filename, "r") as FILE:
-            lines = FILE.readlines()
+            ilines = FILE.readlines()
     else:
         Console.print(f"Loading additional seeds from the command line")
-        lines = filename.split("\\n")
+        ilines = filename.split("\\n")
+
+    lines = []
+
+    for line in ilines:
+        for l in line.split(";"):
+            lines.append(l.strip())
 
     seeds = []
 
@@ -77,14 +83,19 @@ def _load_additional_seeds(network: _Union[Network, Networks],
     try:
         dialect = csv.Sniffer().sniff(lines[0], delimiters=[" ", ","])
     except Exception:
-        Console.warning(
-            f"Could not identify what sort of separator to use to "
-            f"read the additional seeds, so will assume commas. If this is "
-            f"wrong then could you add commas to separate the "
-            f"fields?")
+        words = lines[0].strip().split(" ")
+
+        if len(words) > 1:
+            Console.warning(
+                f"Could not identify what sort of separator to use to "
+                f"read the additional seeds, so will assume commas. If this "
+                f"is wrong then could you add commas to separate the "
+                f"fields?")
+
         dialect = csv.excel  #  default comma-separated file
 
     titles = None
+    nwords = None
 
     for line in csv.reader(lines, dialect=dialect,
                            quoting=csv.QUOTE_ALL,
@@ -111,25 +122,54 @@ def _load_additional_seeds(network: _Union[Network, Networks],
         if len(words) == 0:
             continue
 
-        if len(words) < 3:
+        if nwords is None:
+            nwords = len(words)
+
+        if len(words) < nwords:
             continue
 
         if titles is None:
-            if "day" in words and "number" in words and "ward" in words:
+            if "day" in words or "number" in words or "ward" in words or \
+                    "demographics" in words:
                 titles = {}
-                titles["day"] = words.index("day")
-                titles["number"] = words.index("number")
-                titles["ward"] = words.index("ward")
+
+                try:
+                    titles["day"] = words.index("day")
+                except Exception:
+                    pass
+
+                try:
+                    titles["number"] = words.index("number")
+                except Exception:
+                    pass
+
+                try:
+                    titles["ward"] = words.index("ward")
+                except Exception:
+                    pass
 
                 try:
                     titles["demographic"] = words.index("demographic")
                 except Exception:
-                    titles["demographic"] = 3
+                    pass
 
                 continue
             else:
-                # yes, this is really the order of the seeds - "t num loc"
-                titles = {"day": 0, "number": 1, "ward": 2, "demographic": 3}
+                # try to guess the values based on the number of items and
+                # their type
+                if nwords == 1:
+                    titles = {"number": 0, "day": 1, "ward": 2}
+                    words.append(1)
+                    words.append(1)
+                elif nwords == 2:
+                    titles = {"day": 0, "number": 1, "ward": 2}
+                    words.append(1)
+                elif nwords == 3:
+                    titles = {"day": 0, "number": 1, "ward": 2}
+                else:
+                    # yes, this is really the order of the seeds - "t num loc"
+                    titles = {"day": 0, "number": 1,
+                              "ward": 2, "demographic": 3}
 
         row = []
 
@@ -142,7 +182,7 @@ def _load_additional_seeds(network: _Union[Network, Networks],
 
         this_network = network
 
-        if len(words) == 4:
+        if titles.get("demographic", None):
             demographic = _get_demographic(words[titles["demographic"]],
                                            network=network)
 
@@ -263,29 +303,30 @@ def advance_additional(network: _Union[Network, Networks],
                 else:
                     demographic = network.demographics.get_index(demographic)
 
-                network = network.subnets[demographic]
-                wards = network.nodes
-                play_infections = infections.subinfs[demographic].play
+                seed_network = network.subnets[demographic]
+                seed_wards = seed_network.nodes
+                seed_infections = infections.subinfs[demographic].play
             else:
                 demographic = None
-                wards = network.nodes
-                play_infections = infections.play
+                seed_network = network
+                seed_wards = seed_network.nodes
+                seed_infections = infections.play
 
             try:
-                ward = network.get_node_index(ward)
+                ward = seed_network.get_node_index(ward)
 
-                if wards.play_suscept[ward] == 0:
+                if seed_wards.play_suscept[ward] == 0:
                     Console.warning(
                         f"Cannot seed {num} infection(s) in ward {ward} "
                         f"as there are no susceptibles remaining")
                     continue
 
-                elif wards.play_suscept[ward] < num:
+                elif seed_wards.play_suscept[ward] < num:
                     Console.warning(
                         f"Not enough susceptibles in ward to see all {num}")
-                    num = wards.play_suscept[ward]
+                    num = seed_wards.play_suscept[ward]
 
-                wards.play_suscept[ward] -= num
+                seed_wards.play_suscept[ward] -= num
                 if demographic is not None:
                     Console.print(
                         f"seeding demographic {demographic} "
@@ -294,7 +335,7 @@ def advance_additional(network: _Union[Network, Networks],
                     Console.print(
                         f"seeding play_infections[0][{ward}] += {num}")
 
-                play_infections[0][ward] += num
+                seed_infections[0][ward] += num
 
             except Exception as e:
                 Console.error(

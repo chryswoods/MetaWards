@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -214,13 +215,13 @@
 <p>MetaWards is now fully tested and deployed using GitHub actions.
 The development process should be;</p>
 <ul class="simple">
-<li>New features are developed on feature branches, called <code class="docutils literal notranslate"><span class="pre">feature-{feature}</span></code>,
+<li><p>New features are developed on feature branches, called <code class="docutils literal notranslate"><span class="pre">feature-{feature}</span></code>,
 either in the <a class="reference external" href="https://github.com/metawards/MetaWards">main MetaWards repository</a>
 for authorised developers, or in personal forks for
-new developers.</li>
-<li>Bug fixes or issue fixes are developed on fix branches, called
-<code class="docutils literal notranslate"><span class="pre">fix-issue-{number}</span></code> (again in either the main repository or forks).</li>
-<li>Pull requests are issued from these branches to <code class="docutils literal notranslate"><span class="pre">devel</span></code>. All merge conflicts
+new developers.</p></li>
+<li><p>Bug fixes or issue fixes are developed on fix branches, called
+<code class="docutils literal notranslate"><span class="pre">fix-issue-{number}</span></code> (again in either the main repository or forks).</p></li>
+<li><p>Pull requests are issued from these branches to <code class="docutils literal notranslate"><span class="pre">devel</span></code>. All merge conflicts
 must be fixed in the branch and all tests must pass before the pull
 request can be merged into <code class="docutils literal notranslate"><span class="pre">devel</span></code>. NOTE THAT ONLY AUTHORISED
 DEVELOPERS CAN ACCEPT THE PULL REQUEST. Authorised developers will
@@ -228,14 +229,14 @@ review the pull request as quickly as they can. They will be greatly
 helped if the feature is accompanied with tests, examples and/or tutorial
 instructions, and if most changes are confined to plugins
 (e.g. <a class="reference internal" href="api/index_api_MetaWards_iterators.html#module-metawards.iterators" title="metawards.iterators"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards.iterators</span></code></a>, <a class="reference internal" href="api/index_api_MetaWards_extractors.html#module-metawards.extractors" title="metawards.extractors"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards.extractors</span></code></a>,
-<a class="reference internal" href="api/index_api_MetaWards_mixers.html#module-metawards.mixers" title="metawards.mixers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards.mixers</span></code></a> or <a class="reference internal" href="api/index_api_MetaWards_movers.html#module-metawards.movers" title="metawards.movers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards.movers</span></code></a>).</li>
+<a class="reference internal" href="api/index_api_MetaWards_mixers.html#module-metawards.mixers" title="metawards.mixers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards.mixers</span></code></a> or <a class="reference internal" href="api/index_api_MetaWards_movers.html#module-metawards.movers" title="metawards.movers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards.movers</span></code></a>).</p></li>
 </ul>
 <p>The result of this is that “devel” should contain the fully-working and
 tested, and most up-to-date version of <code class="docutils literal notranslate"><span class="pre">metawards</span></code>. However, this
 version should not be used for production runs.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The group of developers authorised to have access to the
+<p class="admonition-title">Note</p>
+<p>The group of developers authorised to have access to the
 <a class="reference external" href="https://github.com/metawards/MetaWards">main MetaWards repository</a>
 and to accept pull requests is not fixed,
 and will evolve over time. If you wish to join this group then
@@ -262,8 +263,8 @@ the core plugin interface API will not change). We will
 endeavour to retain backwards compatibility outside of
 the core <a class="reference internal" href="api/index_api_MetaWards.html#module-metawards" title="metawards"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards</span></code></a> module, but cannot guarantee it.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is the job of the release manager (currently
+<p class="admonition-title">Note</p>
+<p>It is the job of the release manager (currently
 <a class="reference external" href="https://github.com/chryswoods">chryswoods</a>) to decide when it is time
 to create a new release. If you are interested in helping join the release
 management group then please feel free to get in touch.</p>
@@ -385,8 +386,8 @@ the release version. For example, for the 0.11.2 release we had;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You will need a username and password for pypi and to have
+<p class="admonition-title">Note</p>
+<p>You will need a username and password for pypi and to have
 permission to upload code to this project. Currently only
 the release manager has permission. If you would like
 join the release management team then please get in touch.</p>
@@ -429,7 +430,7 @@ work as you have performed lots of prior testing to get to this stage.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

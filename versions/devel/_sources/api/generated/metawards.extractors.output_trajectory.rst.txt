@@ -1,4 +1,4 @@
-metawards.extractors.output\_trajectory
+﻿metawards.extractors.output\_trajectory
 =======================================
 
 .. currentmodule:: metawards.extractors

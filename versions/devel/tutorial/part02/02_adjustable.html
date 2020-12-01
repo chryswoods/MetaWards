@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -121,7 +122,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -271,8 +273,8 @@ represents a single model run using this pair of values. For example,
 the line <code class="docutils literal notranslate"><span class="pre">0.3</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0.00</span></code> will set <strong>beta[2]</strong> to 0.3 and
 <strong>too_ill_to_move[2]</strong> to 0.0.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The format of this file is very flexible. Columns can be space-separated
+<p class="admonition-title">Note</p>
+<p>The format of this file is very flexible. Columns can be space-separated
 or comma-separated, as long as this is consistent in the entire file.
 You can choose to adjust any of the parameters for any stage
 of a disease. Simply title the column with the parameter name, e.g.
@@ -293,8 +295,8 @@ individual <em>model runs</em> then using any other cores you have). If, like me
 you are running this on your laptop, then this may take 10+ minutes
 to complete.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you want to distribute this work over a set of disconnected
+<p class="admonition-title">Note</p>
+<p>If you want to distribute this work over a set of disconnected
 computers, you can tell <code class="docutils literal notranslate"><span class="pre">metawards</span></code> to only adjust parameters
 from a subset of the lines of the input file. To do this,
 use the <code class="docutils literal notranslate"><span class="pre">--line</span></code> (or <code class="docutils literal notranslate"><span class="pre">-l</span></code>) command line argument to specify
@@ -304,8 +306,8 @@ can be specified, e.g. <code class="docutils literal notranslate"><span class="p
 while <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">4-6</span></code> would use lines four to six (inclusive).</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">We are only going to use one repeat of each pair of values, which means
+<p class="admonition-title">Warning</p>
+<p>We are only going to use one repeat of each pair of values, which means
 that our results will suffer from a lot of random error. Ideally you
 should ask for multiple repeats using the <code class="docutils literal notranslate"><span class="pre">--repeats</span></code> command-line
 argument. A good value would be at least eight repeats. In this case,
@@ -488,7 +490,7 @@ beta_0i3_ill_0i50x002 beta_0i4_ill_0i50x002 beta_0i5_ill_0i50x002
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

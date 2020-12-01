@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,18 +29,19 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="metawards.movers.go_stage" href="metawards.movers.go_stage.html" />
+    <link rel="next" title="metawards.movers.go_record" href="metawards.movers.go_record.html" />
     <link rel="prev" title="MetaWards.movers API Detail" href="../index_api_MetaWards_movers.html" /> 
 </head>
 
@@ -212,7 +213,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="metawards.movers.go_stage.html" class="btn btn-neutral float-right" title="metawards.movers.go_stage" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metawards.movers.go_record.html" class="btn btn-neutral float-right" title="metawards.movers.go_record" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../index_api_MetaWards_movers.html" class="btn btn-neutral float-left" title="MetaWards.movers API Detail" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -226,39 +227,54 @@
             
   <div class="section" id="metawards-movers-go-isolate">
 <h1>metawards.movers.go_isolate<a class="headerlink" href="#metawards-movers-go-isolate" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.movers.go_isolate">
-<code class="descclassname">metawards.movers.</code><code class="descname">go_isolate</code><span class="sig-paren">(</span><em>nthreads: int = 1</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.movers.go_isolate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.movers.</code><code class="sig-name descname">go_isolate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>metawards._network.Network<span class="p">, </span>metawards._networks.Networks<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">go_from</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">, </span>List<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">from_demographic</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">, </span>List<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">go_to</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">, </span>List<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">to_demographic</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">, </span>List<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>int<span class="p">]</span><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">self_isolate_stage</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>int<span class="p">]</span><span class="p">, </span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">fraction</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">, </span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">number</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../_modules/metawards/movers/_go_isolate.html#go_isolate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.movers.go_isolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>This go function will move individuals from the “from”
 demographic(s) to the “to” demographic if they show any
 signs of infection (the disease stage is greater or equal
-to ‘self_isolate_stage’ - by default this is level ‘2’,
-which is one level above “latent”). Individuals are held
-in the new demographic for “duration” days, before being
-returned either to their original demographic, or
-released to the “release_to” demographic</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>from</strong> (<em>DemographicID</em><em> or </em><em>DemographicIDs</em>) – ID (name or index) or IDs of the demographics to scan for
-infected individuals</li>
-<li><strong>to</strong> (<em>DemographicID</em>) – ID (name or index) of the demographic to send infected
-individuals to</li>
-<li><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Networks" title="metawards.Networks"><em>Networks</em></a>) – The networks to be modelled. This must contain all of the
-demographics that are needed for this go function</li>
-<li><strong>self_isolate_stage</strong> (<em>int</em>) – The stage of infection an individual must be at before they
-are moved into this demographic</li>
-<li><strong>duration</strong> (<em>int</em>) – The number of days an individual should isolate for</li>
-<li><strong>release_to</strong> (<em>DemographicID</em>) – ID (name or index) that the individual should move to after
-existing isolation. If this is not set, then the individual
-will return to their original demographic</li>
+to ‘self_isolate_stage’. This can move
+a subset of individuals if ‘fraction’ is less than 1, e.g.
+0.5 would move 50% of individuals (chosen using
+a random binomial distribution)</p>
+<p>This can move a subset of individuals if ‘fraction’ is less than 1,
+e.g. 0.5 would move 50% of individuals (chosen using
+a random binomial distribution). You can also specify the
+maximum number of individuals to move per ward by
+specifying the ‘number’ parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>go_from</strong> (<em>int</em><em>, </em><em>str</em><em> or </em><em>list of int / str</em>) – The ID(s) of the demographic(s) to move from. This is the old
+parameter name used to maintain backwards compatibility.
+Prefer to use from_demo if you can</p></li>
+<li><p><strong>go_to</strong> (<em>int</em><em>, </em><em>str</em><em> or </em><em>list of int / str</em>) – The ID(s) of the demographic(s) to move to. This is the old
+parameter name used to maintain backwards compatibility.
+Prefer to use to_demo if you can</p></li>
+<li><p><strong>from_demographic</strong> (<em>int</em><em>, </em><em>str</em><em> or </em><em>list of int / str</em>) – The ID(s) of the demographic(s) to move from. This can be either
+a single demographic (identified by an integer ID or string),
+a list of demographics, or, if None, then all demographics.</p></li>
+<li><p><strong>to_demographic</strong> (<em>int</em><em>, </em><em>str</em><em> or </em><em>list of int / str</em>) – The ID(s) of the demographic to move to. This can be either
+a single demographic (identified by an integer ID or string),
+a list of demographics, or, if None, then all demographics.
+If this is not set, then it is equal to “from_demo”</p></li>
+<li><p><strong>self_isolate_stage</strong> (<em>int</em><em> or </em><em>List</em><em>[</em><em>int</em><em>]</em>) – The stage of infection an individual must be at before they
+are moved into this demographic. If a list is passed then
+this can be multiple stages, e.g. [2, 3] will move at
+stages 2 and 3. Multiple stages are needed if only
+a fraction of individuals move.</p></li>
+<li><p><strong>fraction</strong> (<em>float</em><em> or </em><em>List</em><em>[</em><em>float</em><em>]</em>) – The fraction (percentage) of individuals who are moved from
+this stage into isolation. If this is a single value then
+the same fraction applies to all self_isolation_stages. Otherwise,
+the fraction for self_isolate_stage[i] is fraction[i]</p></li>
+<li><p><strong>number</strong> (<em>int</em>) – The maximum number of individuals in each ward / ward-link to move.
+The fraction is taken from min(number, number_in_ward). By
+default all individuals in a ward / ward-link are sampled.</p></li>
+<li><p><strong>**kwargs</strong> – This calls go_ward, so any options that are acceptible to go_ward
+(with the exception of ‘generator’) can be passed here too</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -271,7 +287,7 @@ will return to their original demographic</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="metawards.movers.go_stage.html" class="btn btn-neutral float-right" title="metawards.movers.go_stage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metawards.movers.go_record.html" class="btn btn-neutral float-right" title="metawards.movers.go_record" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../index_api_MetaWards_movers.html" class="btn btn-neutral float-left" title="MetaWards.movers API Detail" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -284,7 +300,7 @@ will return to their original demographic</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -121,7 +122,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -320,13 +322,13 @@ the below;</p>
 </div>
 <p>This defines two functions;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">extract_population</span></code>, which tells <code class="docutils literal notranslate"><span class="pre">metawards</span></code> to use your
-<code class="docutils literal notranslate"><span class="pre">output_population</span></code> function,</li>
-<li>and <code class="docutils literal notranslate"><span class="pre">output_population</span></code> that uses the passed
+<li><p><code class="docutils literal notranslate"><span class="pre">extract_population</span></code>, which tells <code class="docutils literal notranslate"><span class="pre">metawards</span></code> to use your
+<code class="docutils literal notranslate"><span class="pre">output_population</span></code> function,</p></li>
+<li><p>and <code class="docutils literal notranslate"><span class="pre">output_population</span></code> that uses the passed
 <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Population" title="metawards.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">population</span></code></a> and
 <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">output_dir</span></code></a> objects to write
 the population of the different disease states to a file
-in the output directory called <code class="docutils literal notranslate"><span class="pre">population.dat</span></code>.</li>
+in the output directory called <code class="docutils literal notranslate"><span class="pre">population.dat</span></code>.</p></li>
 </ul>
 <p>Use this extractor using the command;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards --extractor population
@@ -348,8 +350,8 @@ pandas using;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">metawards</span></code> will auto-compress all files written into the output
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">metawards</span></code> will auto-compress all files written into the output
 directory. If you don’t want this, then use the command-line argument
 <code class="docutils literal notranslate"><span class="pre">--no-auto-bzip</span></code>.</p>
 </div>
@@ -393,8 +395,8 @@ file into pandas (or R or Excel) you will see something similar to;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note how I have used <code class="docutils literal notranslate"><span class="pre">index_col</span></code> to set the <code class="docutils literal notranslate"><span class="pre">day</span></code> as the index
+<p class="admonition-title">Note</p>
+<p>Note how I have used <code class="docutils literal notranslate"><span class="pre">index_col</span></code> to set the <code class="docutils literal notranslate"><span class="pre">day</span></code> as the index
 in pandas</p>
 </div>
 </div>
@@ -431,15 +433,15 @@ file on even days, change <code class="docutils literal notranslate"><span class
 <p>Run <code class="docutils literal notranslate"><span class="pre">metawards</span></code> using this extractor and you should see that the
 <code class="docutils literal notranslate"><span class="pre">population.dat.bz2</span></code> file contains output only for days 0, 2, and 4.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The line <code class="docutils literal notranslate"><span class="pre">population.day</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code> takes the remainder division
+<p class="admonition-title">Note</p>
+<p>The line <code class="docutils literal notranslate"><span class="pre">population.day</span> <span class="pre">%</span> <span class="pre">2</span> <span class="pre">==</span> <span class="pre">0</span></code> takes the remainder division
 of <code class="docutils literal notranslate"><span class="pre">population.day</span></code> with 2. Any day that is divisible by 2 will
 return 0. You can output every <code class="docutils literal notranslate"><span class="pre">N</span></code> days using
 <code class="docutils literal notranslate"><span class="pre">population.day</span> <span class="pre">%</span> <span class="pre">N</span> <span class="pre">==</span> <span class="pre">0</span></code>.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You are also able to only print out on other conditions, e.g.
+<p class="admonition-title">Note</p>
+<p>You are also able to only print out on other conditions, e.g.
 when the <em>model run</em> reaches a certain date, or when the
 infected population grows above a certain size.</p>
 </div>
@@ -534,8 +536,8 @@ copy in;</p>
 <a class="reference external" href="https://docs.python.org/3/library/datetime.html">datetime</a> module to
 calculate the time since <code class="docutils literal notranslate"><span class="pre">output_stop_time</span></code> was first called.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We’ve recorded this start time by adding an attribute to <code class="docutils literal notranslate"><span class="pre">network.params</span></code>
+<p class="admonition-title">Note</p>
+<p>We’ve recorded this start time by adding an attribute to <code class="docutils literal notranslate"><span class="pre">network.params</span></code>
 called <code class="docutils literal notranslate"><span class="pre">_start_model_time</span></code>. Adding attributes like this to the
 <code class="docutils literal notranslate"><span class="pre">network.params</span></code> object is a good way to store parameters between
 model runs, or to initialise values at the start of a model run.
@@ -597,7 +599,7 @@ Infection died ... Ending on day 41
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

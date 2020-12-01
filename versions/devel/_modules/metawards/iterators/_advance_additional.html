@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -371,19 +372,25 @@
         <span class="kn">from</span> <span class="nn">.._interpret</span> <span class="kn">import</span> <span class="n">Interpret</span>
 
         <span class="c1"># is in the file as &quot;t loc num&quot;</span>
-        <span class="n">day</span> <span class="o">=</span> <span class="n">Interpret</span><span class="o">.</span><span class="n">day_or_date</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">titles</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]],</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">day</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">day</span> <span class="o">=</span> <span class="n">Interpret</span><span class="o">.</span><span class="n">day_or_date</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">day</span><span class="p">],</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">day</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">day</span><span class="p">))</span>
 
         <span class="n">this_network</span> <span class="o">=</span> <span class="n">network</span>
 
-        <span class="k">if</span> <span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;demographic&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="n">demographic</span> <span class="o">=</span> <span class="n">_get_demographic</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">titles</span><span class="p">[</span><span class="s2">&quot;demographic&quot;</span><span class="p">]],</span>
-                                           <span class="n">network</span><span class="o">=</span><span class="n">network</span><span class="p">)</span>
+        <span class="n">demographic</span> <span class="o">=</span> <span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;demographic&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">demographic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="c1"># we need the right network to get the ward below</span>
-                <span class="n">this_network</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">subnets</span><span class="p">[</span><span class="n">demographic</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">demographic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">demographic</span> <span class="o">=</span> <span class="n">_get_demographic</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">demographic</span><span class="p">],</span> <span class="n">network</span><span class="o">=</span><span class="n">network</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">demographic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># we need the right network to get the ward below</span>
+            <span class="n">this_network</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">subnets</span><span class="p">[</span><span class="n">demographic</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">demographic</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -394,14 +401,25 @@
 
         <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">demographic</span><span class="p">))</span>
 
-        <span class="n">ward</span> <span class="o">=</span> <span class="n">_get_ward</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">titles</span><span class="p">[</span><span class="s2">&quot;ward&quot;</span><span class="p">]],</span> <span class="n">network</span><span class="o">=</span><span class="n">this_network</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+        <span class="n">ward</span> <span class="o">=</span> <span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ward&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ward</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ward</span> <span class="o">=</span> <span class="n">_get_ward</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">ward</span><span class="p">],</span> <span class="n">network</span><span class="o">=</span><span class="n">this_network</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ward</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ward</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">this_network</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="n">ward</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ward</span><span class="p">))</span>
 
-        <span class="n">seed</span> <span class="o">=</span> <span class="n">Interpret</span><span class="o">.</span><span class="n">integer</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">titles</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">]],</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">,</span> <span class="n">minval</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">seed</span> <span class="o">=</span> <span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="n">Interpret</span><span class="o">.</span><span class="n">integer</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">seed</span><span class="p">],</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">,</span> <span class="n">minval</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+
         <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">seed</span><span class="p">))</span>
         <span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
@@ -554,7 +572,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

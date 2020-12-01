@@ -1,4 +1,4 @@
-metawards.utils.get\_initialise\_functions
+﻿metawards.utils.get\_initialise\_functions
 ==========================================
 
 .. currentmodule:: metawards.utils

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -120,7 +121,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -288,8 +290,8 @@ infected individuals are sent straight from <code class="docutils literal notran
 This way we can compare runs that use self-isolation against a run
 where self-isolation is not performed.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We could of course increase the number of days of self-isolation that
+<p class="admonition-title">Note</p>
+<p>We could of course increase the number of days of self-isolation that
 could be modelled by editing <code class="docutils literal notranslate"><span class="pre">demographics.json</span></code> and
 <code class="docutils literal notranslate"><span class="pre">mix_isolate.py</span></code> and just increasing the number of <code class="docutils literal notranslate"><span class="pre">isolate_N</span></code>
 demographics.</p>
@@ -369,8 +371,8 @@ metawards -d lurgy4 -D demographics.json -a ExtraSeedsLondon.dat <span class="se
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Notice that we’ve set the output theme to <code class="docutils literal notranslate"><span class="pre">simple</span></code> using
+<p class="admonition-title">Note</p>
+<p>Notice that we’ve set the output theme to <code class="docutils literal notranslate"><span class="pre">simple</span></code> using
 <code class="docutils literal notranslate"><span class="pre">--theme</span> <span class="pre">simple</span></code> and have switched off the progress spinner
 using <code class="docutils literal notranslate"><span class="pre">--no-spinner</span></code> as these are unnecessary when run in batch
 mode on a cluster. All of the output will be written to the
@@ -450,7 +452,7 @@ adopting some control measures.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

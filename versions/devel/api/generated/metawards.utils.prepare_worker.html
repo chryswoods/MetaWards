@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -227,27 +228,23 @@
             
   <div class="section" id="metawards-utils-prepare-worker">
 <h1>metawards.utils.prepare_worker<a class="headerlink" href="#metawards-utils-prepare-worker" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.utils.prepare_worker">
-<code class="descclassname">metawards.utils.</code><code class="descname">prepare_worker</code><span class="sig-paren">(</span><em>params: metawards._parameters.Parameters, demographics: metawards._demographics.Demographics, options: Dict[str, any]</em><span class="sig-paren">)</span> &#x2192; Union[metawards._network.Network, metawards._networks.Networks]<a class="reference internal" href="../../_modules/metawards/utils/_worker.html#prepare_worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.prepare_worker" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.utils.</code><code class="sig-name descname">prepare_worker</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">params</span><span class="p">:</span> <span class="n">metawards._parameters.Parameters</span></em>, <em class="sig-param"><span class="n">demographics</span><span class="p">:</span> <span class="n">metawards._demographics.Demographics</span></em>, <em class="sig-param"><span class="n">options</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>any<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>metawards._network.Network<span class="p">, </span>metawards._networks.Networks<span class="p">]</span><a class="reference internal" href="../../_modules/metawards/utils/_worker.html#prepare_worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.prepare_worker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepare a worker to receive work to run a model using the passed
 parameters. This will build the network specified by the
 parameters and will store it in global memory ready to
 be used for a model run. Note that these are
 silent, printing nothing to stdout or stderr</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>params</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><em>Parameters</em></a>) – Parameters used to build the network</li>
-<li><strong>demographics</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographics" title="metawards.Demographics"><em>Demographics</em></a>) – If not None, then demographics used to specialise the Network
-into Networks</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><em>Parameters</em></a>) – Parameters used to build the network</p></li>
+<li><p><strong>demographics</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographics" title="metawards.Demographics"><em>Demographics</em></a>) – If not None, then demographics used to specialise the Network
+into Networks</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -273,7 +270,7 @@ into Networks</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

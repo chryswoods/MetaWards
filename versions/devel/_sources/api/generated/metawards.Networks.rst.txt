@@ -1,4 +1,4 @@
-metawards.Networks
+﻿metawards.Networks
 ==================
 
 .. currentmodule:: metawards
@@ -13,7 +13,26 @@ metawards.Networks
 
    .. autosummary::
    
+      ~Networks.__delattr__
+      ~Networks.__dir__
+      ~Networks.__eq__
+      ~Networks.__format__
+      ~Networks.__ge__
+      ~Networks.__getattribute__
+      ~Networks.__gt__
       ~Networks.__init__
+      ~Networks.__init_subclass__
+      ~Networks.__le__
+      ~Networks.__lt__
+      ~Networks.__ne__
+      ~Networks.__new__
+      ~Networks.__reduce__
+      ~Networks.__reduce_ex__
+      ~Networks.__repr__
+      ~Networks.__setattr__
+      ~Networks.__sizeof__
+      ~Networks.__str__
+      ~Networks.__subclasshook__
       ~Networks.aggregate
       ~Networks.assert_sane
       ~Networks.build
@@ -33,6 +52,14 @@ metawards.Networks
 
    .. autosummary::
    
+      ~Networks.__annotations__
+      ~Networks.__dataclass_fields__
+      ~Networks.__dataclass_params__
+      ~Networks.__dict__
+      ~Networks.__doc__
+      ~Networks.__hash__
+      ~Networks.__module__
+      ~Networks.__weakref__
       ~Networks.demographics
       ~Networks.overall
       ~Networks.params

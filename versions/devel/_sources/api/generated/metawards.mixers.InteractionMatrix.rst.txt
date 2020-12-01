@@ -1,4 +1,4 @@
-metawards.mixers.InteractionMatrix
+﻿metawards.mixers.InteractionMatrix
 ==================================
 
 .. currentmodule:: metawards.mixers
@@ -13,7 +13,29 @@ metawards.mixers.InteractionMatrix
 
    .. autosummary::
    
+      ~InteractionMatrix.__delattr__
+      ~InteractionMatrix.__dir__
+      ~InteractionMatrix.__eq__
+      ~InteractionMatrix.__format__
+      ~InteractionMatrix.__ge__
+      ~InteractionMatrix.__getattribute__
+      ~InteractionMatrix.__getitem__
+      ~InteractionMatrix.__gt__
       ~InteractionMatrix.__init__
+      ~InteractionMatrix.__init_subclass__
+      ~InteractionMatrix.__le__
+      ~InteractionMatrix.__len__
+      ~InteractionMatrix.__lt__
+      ~InteractionMatrix.__ne__
+      ~InteractionMatrix.__new__
+      ~InteractionMatrix.__reduce__
+      ~InteractionMatrix.__reduce_ex__
+      ~InteractionMatrix.__repr__
+      ~InteractionMatrix.__setattr__
+      ~InteractionMatrix.__setitem__
+      ~InteractionMatrix.__sizeof__
+      ~InteractionMatrix.__str__
+      ~InteractionMatrix.__subclasshook__
       ~InteractionMatrix.detach
       ~InteractionMatrix.diagonal
       ~InteractionMatrix.identity
@@ -24,5 +46,15 @@ metawards.mixers.InteractionMatrix
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~InteractionMatrix.__dict__
+      ~InteractionMatrix.__doc__
+      ~InteractionMatrix.__hash__
+      ~InteractionMatrix.__module__
+      ~InteractionMatrix.__weakref__
    
    

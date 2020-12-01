@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -226,26 +227,38 @@
 <span id="metawards-movers-api-detail"></span><h1>MetaWards.movers API Detail<a class="headerlink" href="#module-metawards.movers" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.movers.go_isolate.html#metawards.movers.go_isolate" title="metawards.movers.go_isolate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">go_isolate</span></code></a>(nthreads,&nbsp;**kwargs)</td>
-<td>This go function will move individuals from the “from” demographic(s) to the “to” demographic if they show any signs of infection (the disease stage is greater or equal to ‘self_isolate_stage’ - by default this is level ‘2’, which is one level above “latent”).</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/metawards.movers.go_isolate.html#metawards.movers.go_isolate" title="metawards.movers.go_isolate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">go_isolate</span></code></a>(network[, go_from, …])</p></td>
+<td><p>This go function will move individuals from the “from” demographic(s) to the “to” demographic if they show any signs of infection (the disease stage is greater or equal to ‘self_isolate_stage’.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/metawards.movers.go_stage.html#metawards.movers.go_stage" title="metawards.movers.go_stage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">go_stage</span></code></a>(nthreads,&nbsp;**kwargs)</td>
-<td>This go function will move individuals from the “from_stage” stage(s) of the “from” demographic(s) to the “to_stage” stage of the “to” demographic.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/metawards.movers.go_record.html#metawards.movers.go_record" title="metawards.movers.go_record"><code class="xref py py-obj docutils literal notranslate"><span class="pre">go_record</span></code></a>(moves, network, Networks], …)</p></td>
+<td><p>This go function will perform all (or as many possible) moves from the passed ‘moves’ MoveRecord.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.movers.go_to.html#metawards.movers.go_to" title="metawards.movers.go_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">go_to</span></code></a>(nthreads,&nbsp;**kwargs)</td>
-<td>This go function will move individuals from the “from” demographic(s) to the “to” demographic.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/metawards.movers.go_stage.html#metawards.movers.go_stage" title="metawards.movers.go_stage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">go_stage</span></code></a>([go_from, from_demographic, go_to, …])</p></td>
+<td><p>This go function will move individuals from the “go_from” demographic(s) to the “go_to” demographic, as well as the ‘from_stage’ disease stage(s) to the ‘to_stage’ diseaes stage(s).</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/metawards.movers.move_custom.html#metawards.movers.move_custom" title="metawards.movers.move_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_custom</span></code></a>(custom_function,&nbsp;None],&nbsp;stage,&nbsp;…)</td>
-<td>This returns the default list of ‘go_XXX’ functions that are called in sequence for each iteration of the model run.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/metawards.movers.go_to.html#metawards.movers.go_to" title="metawards.movers.go_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">go_to</span></code></a>([go_from, from_demographic, go_to, …])</p></td>
+<td><p>This go function will move individuals from the “go_from” demographic(s) to the “go_to” demographic, as well as the ‘from_stage’ disease stage(s) to the ‘to_stage’ diseaes stage(s), as well as ‘from_ward’ ward(s) to ‘to_ward’ ward(s).</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.movers.move_default.html#metawards.movers.move_default" title="metawards.movers.move_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_default</span></code></a>(**kwargs)</td>
-<td>This is the default mover.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/metawards.movers.go_ward.html#metawards.movers.go_ward" title="metawards.movers.go_ward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">go_ward</span></code></a>(generator, network, Networks], …)</p></td>
+<td><p>This go function will move individuals according to the flexible move specification described by the passed ‘generator’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/metawards.movers.move_custom.html#metawards.movers.move_custom" title="metawards.movers.move_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_custom</span></code></a>(custom_function, stage, **kwargs)</p></td>
+<td><p>This returns the default list of ‘go_XXX’ functions that are called in sequence for each iteration of the model run.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/metawards.movers.move_default.html#metawards.movers.move_default" title="metawards.movers.move_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move_default</span></code></a>(**kwargs)</p></td>
+<td><p>This is the default mover.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/metawards.movers.MoveGenerator.html#metawards.movers.MoveGenerator" title="metawards.movers.MoveGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MoveGenerator</span></code></a>(from_demographic, int, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/metawards.movers.MoveRecord.html#metawards.movers.MoveRecord" title="metawards.movers.MoveRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MoveRecord</span></code></a>()</p></td>
+<td><p>This class holds a record of mover-initiated moves.</p></td>
 </tr>
 </tbody>
 </table>
@@ -275,7 +288,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

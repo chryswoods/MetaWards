@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -227,79 +228,163 @@
             
   <div class="section" id="metawards-demographic">
 <h1>metawards.Demographic<a class="headerlink" href="#metawards-demographic" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="metawards.Demographic">
-<em class="property">class </em><code class="descclassname">metawards.</code><code class="descname">Demographic</code><span class="sig-paren">(</span><em>name: str = None</em>, <em>work_ratio: float = None</em>, <em>play_ratio: float = None</em>, <em>adjustment: metawards._variableset.VariableSet = None</em>, <em>disease: Union[str</em>, <em>metawards._disease.Disease] = None</em>, <em>network: Union[str</em>, <em>metawards._inputfiles.InputFiles] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">metawards.</code><code class="sig-name descname">Demographic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">work_ratio</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">play_ratio</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">adjustment</span><span class="p">:</span> <span class="n">metawards._variableset.VariableSet</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">disease</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>metawards._disease.Disease<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>metawards._inputfiles.InputFiles<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents a single demographic</p>
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.Demographic.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>name: str = None</em>, <em>work_ratio: float = None</em>, <em>play_ratio: float = None</em>, <em>adjustment: metawards._variableset.VariableSet = None</em>, <em>disease: Union[str</em>, <em>metawards._disease.Disease] = None</em>, <em>network: Union[str</em>, <em>metawards._inputfiles.InputFiles] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">work_ratio</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">play_ratio</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">adjustment</span><span class="p">:</span> <span class="n">metawards._variableset.VariableSet</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">disease</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>metawards._disease.Disease<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>metawards._inputfiles.InputFiles<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct the Demographics</p>
 </dd></dl>
 
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.__init__" title="metawards.Demographic.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(name,&nbsp;work_ratio,&nbsp;play_ratio,&nbsp;…)</td>
-<td>Construct the Demographics</td>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__add__</span></code>(other)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.specialise" title="metawards.Demographic.specialise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">specialise</span></code></a>(network[,&nbsp;profiler])</td>
-<td>Return a copy of the passed network that has been specialised for this demographic.</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__delattr__</span></code>(name, /)</p></td>
+<td><p>Implement delattr(self, name).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dir__</span></code>()</p></td>
+<td><p>Default dir() implementation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__eq__</span></code>(other)</p></td>
+<td><p>Return self==value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__format__</span></code>(format_spec, /)</p></td>
+<td><p>Default object formatter.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__ge__</span></code>(value, /)</p></td>
+<td><p>Return self&gt;=value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getattribute__</span></code>(name, /)</p></td>
+<td><p>Return getattr(self, name).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__gt__</span></code>(value, /)</p></td>
+<td><p>Return self&gt;value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.__init__" title="metawards.Demographic.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([name, work_ratio, play_ratio, …])</p></td>
+<td><p>Construct the Demographics</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init_subclass__</span></code></p></td>
+<td><p>This method is called when a class is subclassed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__le__</span></code>(value, /)</p></td>
+<td><p>Return self&lt;=value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__lt__</span></code>(value, /)</p></td>
+<td><p>Return self&lt;value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__ne__</span></code>(value, /)</p></td>
+<td><p>Return self!=value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__new__</span></code>(**kwargs)</p></td>
+<td><p>Create and return a new object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__reduce__</span></code>()</p></td>
+<td><p>Helper for pickle.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__reduce_ex__</span></code>(protocol, /)</p></td>
+<td><p>Helper for pickle.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.__repr__" title="metawards.Demographic.__repr__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__repr__</span></code></a>()</p></td>
+<td><p>Return repr(self).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setattr__</span></code>(name, value, /)</p></td>
+<td><p>Implement setattr(self, name, value).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__sizeof__</span></code>()</p></td>
+<td><p>Size of object in memory, in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.__str__" title="metawards.Demographic.__str__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__str__</span></code></a>()</p></td>
+<td><p>Return str(self).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__subclasshook__</span></code></p></td>
+<td><p>Abstract classes can override this to customize issubclass().</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.specialise" title="metawards.Demographic.specialise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">specialise</span></code></a>(network[, profiler, nthreads])</p></td>
+<td><p>Return a copy of the passed network that has been specialised for this demographic.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.adjustment" title="metawards.Demographic.adjustment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjustment</span></code></a></td>
-<td>How the parameters for this demographic should be changed compared to the parameters used for the whole population.</td>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__annotations__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.disease" title="metawards.Demographic.disease"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disease</span></code></a></td>
-<td>The Disease that should be used for this demographic.</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dataclass_fields__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.name" title="metawards.Demographic.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td>The name of this demographic.</td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dataclass_params__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.network" title="metawards.Demographic.network"><code class="xref py py-obj docutils literal notranslate"><span class="pre">network</span></code></a></td>
-<td>The network that describes the workers and player that are part of this demographic.</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dict__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.play_ratio" title="metawards.Demographic.play_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">play_ratio</span></code></a></td>
-<td>The proportion of “play” (random movement) members in this demographic out of the entire population.</td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__doc__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.work_ratio" title="metawards.Demographic.work_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">work_ratio</span></code></a></td>
-<td>The proportion of “work” (fixed movement) members in this demographic out of the entire population.</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__hash__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__module__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__weakref__</span></code></p></td>
+<td><p>list of weak references to the object (if defined)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.adjustment" title="metawards.Demographic.adjustment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjustment</span></code></a></p></td>
+<td><p>How the parameters for this demographic should be changed compared to the parameters used for the whole population.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.disease" title="metawards.Demographic.disease"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disease</span></code></a></p></td>
+<td><p>The Disease that should be used for this demographic.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.name" title="metawards.Demographic.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>The name of this demographic.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.network" title="metawards.Demographic.network"><code class="xref py py-obj docutils literal notranslate"><span class="pre">network</span></code></a></p></td>
+<td><p>The network that describes the workers and player that are part of this demographic.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.play_ratio" title="metawards.Demographic.play_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">play_ratio</span></code></a></p></td>
+<td><p>The proportion of “play” (random movement) members in this demographic out of the entire population.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic.work_ratio" title="metawards.Demographic.work_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">work_ratio</span></code></a></p></td>
+<td><p>The proportion of “work” (fixed movement) members in this demographic out of the entire population.</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt>
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>name: str = None</em>, <em>work_ratio: float = None</em>, <em>play_ratio: float = None</em>, <em>adjustment: metawards._variableset.VariableSet = None</em>, <em>disease: Union[str</em>, <em>metawards._disease.Disease] = None</em>, <em>network: Union[str</em>, <em>metawards._inputfiles.InputFiles] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.__init__"><span class="viewcode-link">[source]</span></a></dt>
+<dl class="py method">
+<dt id="id0">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">work_ratio</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">play_ratio</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">adjustment</span><span class="p">:</span> <span class="n">metawards._variableset.VariableSet</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">disease</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>metawards._disease.Disease<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>metawards._inputfiles.InputFiles<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct the Demographics</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.Demographic.__repr__">
-<code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic.__repr__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.__repr__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic.__repr__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return repr(self).</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.Demographic.__str__">
-<code class="descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic.__str__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__str__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.__str__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic.__str__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return str(self).</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.Demographic.adjustment">
-<code class="descname">adjustment</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Demographic.adjustment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">adjustment</code><em class="property">: metawards._variableset.VariableSet</em><em class="property"> = None</em><a class="headerlink" href="#metawards.Demographic.adjustment" title="Permalink to this definition">¶</a></dt>
 <dd><p>How the parameters for this demographic should be changed compared
 to the parameters used for the whole population. This is currently
 changed to fixed values, but future developments in VariableSet
@@ -308,32 +393,32 @@ If this is None then this demographic will have the same
 parameters as the whole population</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.Demographic.disease">
-<code class="descname">disease</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Demographic.disease" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">disease</code><em class="property">: metawards._disease.Disease</em><em class="property"> = None</em><a class="headerlink" href="#metawards.Demographic.disease" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Disease that should be used for this demographic. Is this
 is None, then the global Disease is used. Otherwise
 this demographic will follow this Disease</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.Demographic.name">
-<code class="descname">name</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Demographic.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = None</em><a class="headerlink" href="#metawards.Demographic.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>The name of this demographic. This will be used as a label,
 and should be unique within the Demographics</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.Demographic.network">
-<code class="descname">network</code><em class="property"> = None</em><a class="headerlink" href="#metawards.Demographic.network" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">network</code><em class="property">: metawards._inputfiles.InputFiles</em><em class="property"> = None</em><a class="headerlink" href="#metawards.Demographic.network" title="Permalink to this definition">¶</a></dt>
 <dd><p>The network that describes the workers and player that are part
 of this demographic. If this is None then the entire population
 network will be used (scaled by “work_ratio” and “play_ratio”)</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.Demographic.play_ratio">
-<code class="descname">play_ratio</code><em class="property"> = 0.0</em><a class="headerlink" href="#metawards.Demographic.play_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">play_ratio</code><em class="property">: float</em><em class="property"> = 0.0</em><a class="headerlink" href="#metawards.Demographic.play_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>The proportion of “play” (random movement) members in this
 demographic out of the entire population. This can also either
 be a single number, or a list with a value for every ward.
@@ -342,31 +427,30 @@ must equal 1.0 in each ward (every member of the play population
 must be represented)</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.Demographic.specialise">
-<code class="descname">specialise</code><span class="sig-paren">(</span><em>network: metawards._network.Network</em>, <em>profiler=None</em>, <em>nthreads: int = 1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.specialise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic.specialise" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">specialise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">metawards._network.Network</span></em>, <em class="sig-param"><span class="n">profiler</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nthreads</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_demographic.html#Demographic.specialise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.Demographic.specialise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a copy of the passed network that has been specialised
 for this demographic. The returned network will
 contain only members of this demographic, with the
 parameters of the network adjusted according to the rules
 of this demographic</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a>) – The network to be specialised</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>network</strong> – The specialised network</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network">Network</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a>) – The network to be specialised</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>network</strong> – The specialised network</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network">Network</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.Demographic.work_ratio">
-<code class="descname">work_ratio</code><em class="property"> = 0.0</em><a class="headerlink" href="#metawards.Demographic.work_ratio" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">work_ratio</code><em class="property">: float</em><em class="property"> = 0.0</em><a class="headerlink" href="#metawards.Demographic.work_ratio" title="Permalink to this definition">¶</a></dt>
 <dd><p>The proportion of “work” (fixed movement) members in this
 demographic out of the entire population. This can either
 be a single number, or a list with a value for every ward.
@@ -400,7 +484,7 @@ must be represented)</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

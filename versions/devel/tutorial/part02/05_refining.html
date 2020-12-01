@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -124,7 +125,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -310,8 +312,8 @@ vary <strong>beta</strong> between 0.4 and 0.7 in steps of 0.1,
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The file is space-separated, so it is not a problem that the columns
+<p class="admonition-title">Note</p>
+<p>The file is space-separated, so it is not a problem that the columns
 don’t line up with their titles. With a little more python you could
 make them line up. What approach would you take?</p>
 </div>
@@ -350,7 +352,7 @@ metawards --additional ExtraSeedsLondon.dat <span class="se">\</span>
 Once complete, the <code class="docutils literal notranslate"><span class="pre">results.csv.bz2</span></code> file contains all of the
 population trajectories and can be analysed in an identical way
 as before. If you want, you can
-<a class="reference download internal" download="" href="../../_downloads/5a44c0e178c83875f58aadb34b8b75ba/results.csv.bz2"><code class="xref download docutils literal notranslate"><span class="pre">my</span> <span class="pre">results.csv.bz2</span> <span class="pre">file</span> <span class="pre">here</span></code></a>.</p>
+<a class="reference download internal" download="" href="../../_downloads/10eb9768aebdbaaf11e2ecda911e428d/results.csv.bz2"><code class="xref download docutils literal notranslate"><span class="pre">my</span> <span class="pre">results.csv.bz2</span> <span class="pre">file</span> <span class="pre">here</span></code></a>.</p>
 <p>You can then produce graphs and animations using;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards-plot -i output/results.csv.bz2 --format jpg --dpi <span class="m">150</span>
 metawards-plot --animate output/overview*.jpg
@@ -395,8 +397,8 @@ metawards-plot -i output/results.csv --format jpg --dpi <span class="m">150</spa
 <p>If it works, then you should obtain a graph that looks something like this;</p>
 <img alt="Overview from a run using the refined parameters" src="../../_images/tutorial_2_5_2.jpg" />
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Remember that this is a completely fictional disease and is not
+<p class="admonition-title">Warning</p>
+<p>Remember that this is a completely fictional disease and is not
 related to any real outbreak. The graphs above are purely
 illustrative and chosen so that people following this tutorial
 can quickly see the impact of their work.</p>
@@ -425,7 +427,7 @@ can quickly see the impact of their work.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

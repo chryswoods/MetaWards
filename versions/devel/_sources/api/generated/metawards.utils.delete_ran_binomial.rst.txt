@@ -1,4 +1,4 @@
-metawards.utils.delete\_ran\_binomial
+﻿metawards.utils.delete\_ran\_binomial
 =====================================
 
 .. currentmodule:: metawards.utils

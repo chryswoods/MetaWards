@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -226,30 +227,26 @@
             
   <div class="section" id="metawards-extractors-output-core-serial">
 <h1>metawards.extractors.output_core_serial<a class="headerlink" href="#metawards-extractors-output-core-serial" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.extractors.output_core_serial">
-<code class="descclassname">metawards.extractors.</code><code class="descname">output_core_serial</code><span class="sig-paren">(</span><em>network: Network</em>, <em>population: Population</em>, <em>workspace: Workspace</em>, <em>infections: Infections</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#metawards.extractors.output_core_serial" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.extractors.</code><code class="sig-name descname">output_core_serial</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Network</span></em>, <em class="sig-param"><span class="n">population</span><span class="p">:</span> <span class="n">Population</span></em>, <em class="sig-param"><span class="n">workspace</span><span class="p">:</span> <span class="n">Workspace</span></em>, <em class="sig-param"><span class="n">infections</span><span class="p">:</span> <span class="n">Infections</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#metawards.extractors.output_core_serial" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the core output function that must be called
 every iteration as it is responsible for accumulating
 the core data each day, which is used to report a summary
 to the main output file. This is the serial version
 of this function.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a>) – The network over which the outbreak is being modelled</li>
-<li><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The population experiencing the outbreak</li>
-<li><strong>workspace</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Workspace" title="metawards.Workspace"><em>Workspace</em></a>) – A workspace that can be used to extract data</li>
-<li><strong>infections</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Infections" title="metawards.Infections"><em>Infections</em></a>) – All of the infections that have been recorded</li>
-<li><strong>nthreads</strong> (<em>int</em>) – The number of threads to use to help extract the data</li>
-<li><strong>kwargs</strong> – Extra argumentst that are ignored by this function</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a>) – The network over which the outbreak is being modelled</p></li>
+<li><p><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The population experiencing the outbreak</p></li>
+<li><p><strong>workspace</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Workspace" title="metawards.Workspace"><em>Workspace</em></a>) – A workspace that can be used to extract data</p></li>
+<li><p><strong>infections</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Infections" title="metawards.Infections"><em>Infections</em></a>) – All of the infections that have been recorded</p></li>
+<li><p><strong>nthreads</strong> (<em>int</em>) – The number of threads to use to help extract the data</p></li>
+<li><p><strong>kwargs</strong> – Extra argumentst that are ignored by this function</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -275,7 +272,7 @@ of this function.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

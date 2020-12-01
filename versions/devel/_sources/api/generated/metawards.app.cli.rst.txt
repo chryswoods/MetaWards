@@ -1,4 +1,4 @@
-metawards.app.cli
+﻿metawards.app.cli
 =================
 
 .. currentmodule:: metawards.app

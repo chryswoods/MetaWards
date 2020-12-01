@@ -1,4 +1,4 @@
-metawards.utils.build\_play\_matrix
+﻿metawards.utils.build\_play\_matrix
 ===================================
 
 .. currentmodule:: metawards.utils

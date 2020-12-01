@@ -1,4 +1,4 @@
-metawards.extractors.output\_core\_omp
+﻿metawards.extractors.output\_core\_omp
 ======================================
 
 .. currentmodule:: metawards.extractors

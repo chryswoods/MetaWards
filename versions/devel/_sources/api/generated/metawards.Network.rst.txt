@@ -1,4 +1,4 @@
-metawards.Network
+﻿metawards.Network
 =================
 
 .. currentmodule:: metawards
@@ -13,11 +13,32 @@ metawards.Network
 
    .. autosummary::
    
+      ~Network.__delattr__
+      ~Network.__dir__
+      ~Network.__eq__
+      ~Network.__format__
+      ~Network.__ge__
+      ~Network.__getattribute__
+      ~Network.__gt__
       ~Network.__init__
+      ~Network.__init_subclass__
+      ~Network.__le__
+      ~Network.__lt__
+      ~Network.__ne__
+      ~Network.__new__
+      ~Network.__reduce__
+      ~Network.__reduce_ex__
+      ~Network.__repr__
+      ~Network.__setattr__
+      ~Network.__sizeof__
+      ~Network.__str__
+      ~Network.__subclasshook__
+      ~Network._add_lookup
       ~Network.assert_sane
       ~Network.build
       ~Network.copy
       ~Network.from_wards
+      ~Network.get_index
       ~Network.get_min_max_distances
       ~Network.get_node_index
       ~Network.get_work_index
@@ -42,6 +63,15 @@ metawards.Network
 
    .. autosummary::
    
+      ~Network.__annotations__
+      ~Network.__dataclass_fields__
+      ~Network.__dataclass_params__
+      ~Network.__dict__
+      ~Network.__doc__
+      ~Network.__hash__
+      ~Network.__module__
+      ~Network.__weakref__
+      ~Network._work_index
       ~Network.info
       ~Network.links
       ~Network.max_links

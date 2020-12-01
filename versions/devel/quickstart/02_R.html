@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -243,8 +244,8 @@ value 0.1</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">MetaWards is a Python program, so the index is counted from 0.
+<p class="admonition-title">Note</p>
+<p>MetaWards is a Python program, so the index is counted from 0.
 Index 0 is E, index 1 is I and (before this call), index 2 was R.
 Inserting at index 2 will insert IR between I and R</p>
 </div>
@@ -261,8 +262,8 @@ to the screen.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">All of the output is written to the (randomly) named output directory
+<p class="admonition-title">Note</p>
+<p>All of the output is written to the (randomly) named output directory
 indicated, e.g. for me to output_n81uzd7l. The full log of the run
 is recorded in the file called <code class="docutils literal notranslate"><span class="pre">console.log.bz2</span></code> which is in
 this directory.</p>
@@ -308,8 +309,8 @@ which indexes each run with a repeat number, e.g.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Because <code class="docutils literal notranslate"><span class="pre">repeat</span></code> is a keyword in R, the column is automatically renamed
+<p class="admonition-title">Note</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">repeat</span></code> is a keyword in R, the column is automatically renamed
 as <code class="docutils literal notranslate"><span class="pre">repeat.</span></code></p>
 </div>
 <p>We can pivot and graph these runs using;</p>
@@ -321,8 +322,8 @@ as <code class="docutils literal notranslate"><span class="pre">repeat.</span></
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We have used <code class="docutils literal notranslate"><span class="pre">geom_point()</span></code> rather than <code class="docutils literal notranslate"><span class="pre">geom_line()</span></code> as this better
+<p class="admonition-title">Note</p>
+<p>We have used <code class="docutils literal notranslate"><span class="pre">geom_point()</span></code> rather than <code class="docutils literal notranslate"><span class="pre">geom_line()</span></code> as this better
 shows the different runs. With a bit more R you could adjust the
 point shape to match the repeat number.</p>
 </div>
@@ -346,8 +347,8 @@ from <em>home</em> to <em>work</em> or <em>school</em>.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The term <em>worker</em> is very broad in MetaWards. It means any individual
+<p class="admonition-title">Note</p>
+<p>The term <em>worker</em> is very broad in MetaWards. It means any individual
 that make regular, predictable movements each day. In this case, it
 refers to workers, teachers and students.</p>
 </div>
@@ -370,8 +371,8 @@ parameter.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The format is <strong>day number</strong> (in this case seed on day 1), then
+<p class="admonition-title">Note</p>
+<p>The format is <strong>day number</strong> (in this case seed on day 1), then
 <strong>number to seed</strong> (seeding 100 infections), then
 <strong>ward name or number</strong> (in this case, home)</p>
 </div>
@@ -454,7 +455,7 @@ re-copied below (this continues from the code in the last part);</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

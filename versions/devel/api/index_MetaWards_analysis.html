@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -41,7 +42,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MetaWards.analysis API Detail" href="index_api_MetaWards_analysis.html" />
-    <link rel="prev" title="metawards.movers.move_default" href="generated/metawards.movers.move_default.html" /> 
+    <link rel="prev" title="metawards.movers.MoveRecord" href="generated/metawards.movers.MoveRecord.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -208,7 +209,7 @@
         <a href="index_api_MetaWards_analysis.html" class="btn btn-neutral float-right" title="MetaWards.analysis API Detail" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="generated/metawards.movers.move_default.html" class="btn btn-neutral float-left" title="metawards.movers.move_default" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="generated/metawards.movers.MoveRecord.html" class="btn btn-neutral float-left" title="metawards.movers.MoveRecord" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -229,32 +230,32 @@ the <code class="docutils literal notranslate"><span class="pre">metawards</span
 example of such a tool is <a class="reference internal" href="../metawards_plot_help.html"><span class="doc">metawards-plot</span></a>.</p>
 <p>Core functions include;</p>
 <ul class="simple">
-<li><dl class="first docutils">
-<dt><a class="reference internal" href="generated/metawards.analysis.save_summary_plots.html#metawards.analysis.save_summary_plots" title="metawards.analysis.save_summary_plots"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_summary_plots()</span></code></a></dt>
-<dd>Quick function that creates and saves summary plots from the
-<code class="docutils literal notranslate"><span class="pre">results.csv.bz2</span></code> files that are produced by <code class="docutils literal notranslate"><span class="pre">metawards</span></code></dd>
+<li><dl class="simple">
+<dt><a class="reference internal" href="generated/metawards.analysis.save_summary_plots.html#metawards.analysis.save_summary_plots" title="metawards.analysis.save_summary_plots"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_summary_plots()</span></code></a></dt><dd><p>Quick function that creates and saves summary plots from the
+<code class="docutils literal notranslate"><span class="pre">results.csv.bz2</span></code> files that are produced by <code class="docutils literal notranslate"><span class="pre">metawards</span></code></p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt><a class="reference internal" href="generated/metawards.analysis.import_graphics_modules.html#metawards.analysis.import_graphics_modules" title="metawards.analysis.import_graphics_modules"><code class="xref py py-meth docutils literal notranslate"><span class="pre">import_graphics_modules()</span></code></a></dt>
-<dd>Safely import the graphics modules, and give a useful error message
+<li><dl class="simple">
+<dt><a class="reference internal" href="generated/metawards.analysis.import_graphics_modules.html#metawards.analysis.import_graphics_modules" title="metawards.analysis.import_graphics_modules"><code class="xref py py-meth docutils literal notranslate"><span class="pre">import_graphics_modules()</span></code></a></dt><dd><p>Safely import the graphics modules, and give a useful error message
 if this doesn’t work. <a class="reference internal" href="index_api_MetaWards_analysis.html#module-metawards.analysis" title="metawards.analysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metawards.analysis</span></code></a> needs Pandas and matplotlib,
 but these are often not available or are broken on clusters. We safely
 import these modules in this function to prevent any other part
 of <code class="docutils literal notranslate"><span class="pre">metawards</span></code> from being affected by a bad pandas or matplotlib
-install.</dd>
+install.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt><a class="reference internal" href="generated/metawards.analysis.create_average_plot.html#metawards.analysis.create_average_plot" title="metawards.analysis.create_average_plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_average_plot()</span></code></a></dt>
-<dd>Create the average plot and return the resulting matplotlib figure.
-Use this to get and view figures in, e.g. a Jupyter notebook</dd>
+<li><dl class="simple">
+<dt><a class="reference internal" href="generated/metawards.analysis.create_average_plot.html#metawards.analysis.create_average_plot" title="metawards.analysis.create_average_plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_average_plot()</span></code></a></dt><dd><p>Create the average plot and return the resulting matplotlib figure.
+Use this to get and view figures in, e.g. a Jupyter notebook</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt><a class="reference internal" href="generated/metawards.analysis.create_overview_plot.html#metawards.analysis.create_overview_plot" title="metawards.analysis.create_overview_plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_overview_plot()</span></code></a></dt>
-<dd>Create the overview plot and return the resulting matplotlib figure.
-Use this to get and view figures in, e.g. a Jupyter notebook</dd>
+<li><dl class="simple">
+<dt><a class="reference internal" href="generated/metawards.analysis.create_overview_plot.html#metawards.analysis.create_overview_plot" title="metawards.analysis.create_overview_plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_overview_plot()</span></code></a></dt><dd><p>Create the overview plot and return the resulting matplotlib figure.
+Use this to get and view figures in, e.g. a Jupyter notebook</p>
+</dd>
 </dl>
 </li>
 </ul>
@@ -276,7 +277,7 @@ Use this to get and view figures in, e.g. a Jupyter notebook</dd>
         <a href="index_api_MetaWards_analysis.html" class="btn btn-neutral float-right" title="MetaWards.analysis API Detail" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="generated/metawards.movers.move_default.html" class="btn btn-neutral float-left" title="metawards.movers.move_default" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="generated/metawards.movers.MoveRecord.html" class="btn btn-neutral float-left" title="metawards.movers.MoveRecord" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -286,7 +287,7 @@ Use this to get and view figures in, e.g. a Jupyter notebook</dd>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

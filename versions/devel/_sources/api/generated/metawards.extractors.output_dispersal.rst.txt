@@ -1,4 +1,4 @@
-metawards.extractors.output\_dispersal
+﻿metawards.extractors.output\_dispersal
 ======================================
 
 .. currentmodule:: metawards.extractors

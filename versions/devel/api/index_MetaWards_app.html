@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -223,21 +224,19 @@
 <code class="docutils literal notranslate"><span class="pre">metawards</span></code> command line application.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">metawards</span></code> command line application will automatically run itself
 in one of three modes;</p>
-<dl class="docutils">
-<dt>main</dt>
-<dd><p class="first">This is the default mode, and is used when you normally run metawards
+<dl>
+<dt>main</dt><dd><p>This is the default mode, and is used when you normally run metawards
 to perform calculations using a single computer. Key functions that are
 used in <code class="docutils literal notranslate"><span class="pre">main</span></code> mode are;</p>
 <ul class="simple">
-<li><a class="reference internal" href="generated/metawards.app.cli.html#metawards.app.cli" title="metawards.app.cli"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cli()</span></code></a>: The main command line interface</li>
-<li><a class="reference internal" href="generated/metawards.app.parse_args.html#metawards.app.parse_args" title="metawards.app.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>: Parse command line arguments</li>
+<li><p><a class="reference internal" href="generated/metawards.app.cli.html#metawards.app.cli" title="metawards.app.cli"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cli()</span></code></a>: The main command line interface</p></li>
+<li><p><a class="reference internal" href="generated/metawards.app.parse_args.html#metawards.app.parse_args" title="metawards.app.parse_args"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code></a>: Parse command line arguments</p></li>
 </ul>
-<p class="last">This mode is used to run either single model runs, or to run multiple
+<p>This mode is used to run either single model runs, or to run multiple
 runs in parallel on the same computer via a
 <a class="reference external" href="https://docs.python.org/3.4/library/multiprocessing.html?highlight=process#using-a-pool-of-workers">multiprocessing pool</a>.</p>
 </dd>
-<dt>worker</dt>
-<dd><p class="first">This is the mode used when <code class="docutils literal notranslate"><span class="pre">metawards</span></code> detects that it should be
+<dt>worker</dt><dd><p>This is the mode used when <code class="docutils literal notranslate"><span class="pre">metawards</span></code> detects that it should be
 running as a worker process as part of a simulation run on a large
 cluster. If this is the case, then the application will go to sleep
 until it is called upon as part of a parallel run on multiple
@@ -249,12 +248,11 @@ or an
 used based on which of these modules have been loaded via the
 <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">scoop</span></code> or <code class="docutils literal notranslate"><span class="pre">-m</span> <span class="pre">mpi4py</span></code> command line injector.</p>
 <p>The key function used in <code class="docutils literal notranslate"><span class="pre">worker</span></code> mode is;</p>
-<ul class="last simple">
-<li><a class="reference internal" href="generated/metawards.app.get_parallel_scheme.html#metawards.app.get_parallel_scheme" title="metawards.app.get_parallel_scheme"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_parallel_scheme()</span></code></a> : Auto-detect scoop or mpi4py</li>
+<ul class="simple">
+<li><p><a class="reference internal" href="generated/metawards.app.get_parallel_scheme.html#metawards.app.get_parallel_scheme" title="metawards.app.get_parallel_scheme"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_parallel_scheme()</span></code></a> : Auto-detect scoop or mpi4py</p></li>
 </ul>
 </dd>
-<dt>supervisor</dt>
-<dd><p class="first">This is the mode used when <code class="docutils literal notranslate"><span class="pre">metawards</span></code> detects that it is being
+<dt>supervisor</dt><dd><p>This is the mode used when <code class="docutils literal notranslate"><span class="pre">metawards</span></code> detects that it is being
 run across multiple computer nodes in a cluster. This is detected
 automatically via environment variables from common queueing systems
 that supply a <code class="docutils literal notranslate"><span class="pre">hostfile</span></code>, or by manually specifying a
@@ -266,12 +264,12 @@ user specifies, which modules are installed, or automatically
 choosing in the order scoop &gt; mpi4py (this order is simply because
 MPI is more error-prone to use automatically).</p>
 <p>Key functions used in <code class="docutils literal notranslate"><span class="pre">supervisor</span></code> mode are;</p>
-<ul class="last simple">
-<li><a class="reference internal" href="generated/metawards.app.get_hostfile.html#metawards.app.get_hostfile" title="metawards.app.get_hostfile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_hostfile()</span></code></a>: Get the hostfile</li>
-<li><a class="reference internal" href="generated/metawards.app.get_cores_per_node.html#metawards.app.get_cores_per_node" title="metawards.app.get_cores_per_node"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_cores_per_node()</span></code></a>: Work out the number of cores per compute node</li>
-<li><a class="reference internal" href="generated/metawards.app.get_threads_per_task.html#metawards.app.get_threads_per_task" title="metawards.app.get_threads_per_task"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_threads_per_task()</span></code></a>: Work out the number of threads per model run</li>
-<li><a class="reference internal" href="generated/metawards.app.scoop_supervisor.html#metawards.app.scoop_supervisor" title="metawards.app.scoop_supervisor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">scoop_supervisor()</span></code></a>: Run a scoop supervisor to start and manage jobs</li>
-<li><a class="reference internal" href="generated/metawards.app.mpi_supervisor.html#metawards.app.mpi_supervisor" title="metawards.app.mpi_supervisor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mpi_supervisor()</span></code></a>: Run a mpi4py supervisor to start and manage jobs</li>
+<ul class="simple">
+<li><p><a class="reference internal" href="generated/metawards.app.get_hostfile.html#metawards.app.get_hostfile" title="metawards.app.get_hostfile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_hostfile()</span></code></a>: Get the hostfile</p></li>
+<li><p><a class="reference internal" href="generated/metawards.app.get_cores_per_node.html#metawards.app.get_cores_per_node" title="metawards.app.get_cores_per_node"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_cores_per_node()</span></code></a>: Work out the number of cores per compute node</p></li>
+<li><p><a class="reference internal" href="generated/metawards.app.get_threads_per_task.html#metawards.app.get_threads_per_task" title="metawards.app.get_threads_per_task"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_threads_per_task()</span></code></a>: Work out the number of threads per model run</p></li>
+<li><p><a class="reference internal" href="generated/metawards.app.scoop_supervisor.html#metawards.app.scoop_supervisor" title="metawards.app.scoop_supervisor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">scoop_supervisor()</span></code></a>: Run a scoop supervisor to start and manage jobs</p></li>
+<li><p><a class="reference internal" href="generated/metawards.app.mpi_supervisor.html#metawards.app.mpi_supervisor" title="metawards.app.mpi_supervisor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mpi_supervisor()</span></code></a>: Run a mpi4py supervisor to start and manage jobs</p></li>
 </ul>
 </dd>
 </dl>
@@ -305,7 +303,7 @@ described <a class="reference internal" href="index_api_MetaWards_app.html"><spa
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

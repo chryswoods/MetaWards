@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,18 +29,19 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Part 4 - Customising the output" href="../index_part04.html" />
+    <link rel="next" title="Alternative lockdowns" href="07_cutoff.html" />
     <link rel="prev" title="Custom variables" href="05_scanning.html" /> 
 </head>
 
@@ -112,16 +113,18 @@
 <li class="toctree-l3"><a class="reference internal" href="05_scanning.html">Custom variables</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Scanning lockdown</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#running-on-a-cluster">Running on a cluster</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#moving-beyond-this-simple-demo">Moving beyond this simple demo</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="07_cutoff.html">Alternative lockdowns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="08_local_lockdown.html">Local lockdowns</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -215,7 +218,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="../index_part04.html" class="btn btn-neutral float-right" title="Part 4 - Customising the output" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="07_cutoff.html" class="btn btn-neutral float-right" title="Alternative lockdowns" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="05_scanning.html" class="btn btn-neutral float-left" title="Custom variables" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -441,8 +444,8 @@ copy in the following;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note that we have added comments to this file using ‘#’ - these
+<p class="admonition-title">Note</p>
+<p>Note that we have added comments to this file using ‘#’ - these
 are useful to help your future self understand what you were doing</p>
 </div>
 <p>Copy all of the files onto a cluster and submit the job where you
@@ -482,90 +485,6 @@ through to outbreaks that grow despite lockdown. These can all
 be seen here;</p>
 <img alt="Overview image of a lockdown with custom parameters" src="../../_images/tutorial_3_6.gif" />
 </div>
-<div class="section" id="moving-beyond-this-simple-demo">
-<h2>Moving beyond this simple demo<a class="headerlink" href="#moving-beyond-this-simple-demo" title="Permalink to this headline">¶</a></h2>
-<p>This was a simple demo of how different lockdown scenarios could
-be modelled using custom parameters and custom iterators.</p>
-<p>You can of course go further, e.g. by using your custom <code class="docutils literal notranslate"><span class="pre">advance</span> <span class="pre">function</span></code>
-to change actual parameters of the model or of the disease. Feel
-free to change any of the parameters in
-<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">network.params</span></code></a> or
-<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Disease" title="metawards.Disease"><code class="xref py py-class docutils literal notranslate"><span class="pre">network.params.disease_params</span></code></a> directly.
-You could, for example, reduce the
-<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters"><code class="xref py py-data docutils literal notranslate"><span class="pre">network.params.dyn_dist_cutoff</span></code></a>
-variable as lockdown starts. Or you could directly adjust
-<a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Disease.beta" title="metawards.Disease.beta"><code class="xref py py-data docutils literal notranslate"><span class="pre">network.params.disease_params.beta[0]</span></code></a>.</p>
-<p>A good example of an
-<a class="reference external" href="https://github.com/metawards/MetaWards/tree/devel/examples/lockdown">alternative lockdown model is here</a>.
-This is provided as an example in the MetaWards GitHub repository, and
-enacts lockdown by directly changing the <code class="docutils literal notranslate"><span class="pre">scale_uv</span></code> infection parameter.
-This has the effect of reducing the contribution from each infected
-individual to the overall <em>force of infection</em> of each ward.</p>
-<p>There are many parameters to adjust. You can also add these
-to your scan to investigate their impact.
-The full list of built-in adjustable parameters is below;</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UV:
-  Adjust the Parameters.UV parameter
-
-beta:
-  Adjust the Disease.beta parameter
-
-contrib_foi:
-  Adjust the Disease.contrib_foi parameter
-
-daily_imports:
-  Adjust the Parameters.daily_imports parameter
-
-daily_ward_vaccination_capacity:
-  Adjust the Parameters.daily_ward_vaccination_capacity
-  parameter
-
-dyn_dist_cutoff:
-  Adjust the Parameters.dyn_dist_cutoff parameter
-
-dyn_play_at_home:
-  Adjust the Parameters.dyn_play_at_home parameter
-
-global_detection_thresh:
-  Adjust the Parameters.global_detection_thresh parameter
-
-initial_inf:
-  Adjust the Parameters.initial_inf parameter
-
-length_day:
-  Adjust the Parameters.length_day parameter
-
-local_vaccination_thesh:
-  Adjust the Parameters.local_vaccination_thresh parameter
-
-neighbour_weight_threshold:
-  Adjust the Parameters.neighbour_weight_threshold parameter
-
-play_to_work:
-  Adjust the Parameters.play_to_work parameter
-
-plength_day:
-  Adjust the Parameters.plength_day parameter
-
-progress:
-  Adjust the Disease.progress parameter
-
-static_play_at_home:
-  Adjust the Parameters.static_play_at_home parameter
-
-too_ill_to_move:
-  Adjust the Disease.too_ill_to_move parameter
-
-user:
-  Adjust a custom user-supplied parameter, held in
-  Parameters.user_params[name]. Set a user parameter
-  called &#39;name&#39; via &#39;user.name&#39; or &#39;.name&#39;.
-
-work_to_play:
-  Adjust the Parameters.work_to_play parameter
-</pre></div>
-</div>
-</div>
 </div>
 
 
@@ -576,7 +495,7 @@ work_to_play:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../index_part04.html" class="btn btn-neutral float-right" title="Part 4 - Customising the output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="07_cutoff.html" class="btn btn-neutral float-right" title="Alternative lockdowns" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="05_scanning.html" class="btn btn-neutral float-left" title="Custom variables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -589,7 +508,7 @@ work_to_play:
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

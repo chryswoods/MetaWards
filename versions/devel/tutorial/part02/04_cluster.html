@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -124,7 +125,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -243,8 +245,8 @@ can use this to specify the number of times you want to repeat each
 <em>model run</em>, e.g. <code class="docutils literal notranslate"><span class="pre">--repeats</span> <span class="pre">8</span></code> would repeat each <strong>model run</strong>
 eight times.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You can pass multiple values to <code class="docutils literal notranslate"><span class="pre">--repeats</span></code> if you want different
+<p class="admonition-title">Note</p>
+<p>You can pass multiple values to <code class="docutils literal notranslate"><span class="pre">--repeats</span></code> if you want different
 adjustable variable sets to be repeated different numbers of times.
 Equally, you can add a <code class="docutils literal notranslate"><span class="pre">repeats</span></code> column to the <code class="docutils literal notranslate"><span class="pre">lurgyparams.csv</span></code>
 file that gives the number of times each line should be repeated.
@@ -380,7 +382,7 @@ overnight.</p>
 <p>In my case, the job took 2 hours in total to run. Once complete, the
 <code class="docutils literal notranslate"><span class="pre">results.csv.bz2</span></code> file contains all of the population trajectories
 and can be analysed in an identical way as before. If you want, you can
-<a class="reference download internal" download="" href="../../_downloads/e02a18b3a96a8e9ef3402b9022c2bd35/results.csv.bz2"><code class="xref download docutils literal notranslate"><span class="pre">my</span> <span class="pre">results.csv.bz2</span> <span class="pre">file</span> <span class="pre">here</span></code></a>.</p>
+<a class="reference download internal" download="" href="../../_downloads/f6249a2e545519ea619f78cccb93a54e/results.csv.bz2"><code class="xref download docutils literal notranslate"><span class="pre">my</span> <span class="pre">results.csv.bz2</span> <span class="pre">file</span> <span class="pre">here</span></code></a>.</p>
 <p>You can then produce graphs and animations using;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards-plot -i output/results.csv.bz2 --format jpg --dpi <span class="m">150</span>
 metawards-plot --animate output/overview*.jpg
@@ -412,7 +414,7 @@ metawards-plot --animate output/overview*.jpg
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

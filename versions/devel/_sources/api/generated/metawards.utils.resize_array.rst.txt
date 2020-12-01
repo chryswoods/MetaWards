@@ -1,4 +1,4 @@
-metawards.utils.resize\_array
+﻿metawards.utils.resize\_array
 =============================
 
 .. currentmodule:: metawards.utils

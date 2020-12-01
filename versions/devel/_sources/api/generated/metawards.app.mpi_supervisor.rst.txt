@@ -1,4 +1,4 @@
-metawards.app.mpi\_supervisor
+﻿metawards.app.mpi\_supervisor
 =============================
 
 .. currentmodule:: metawards.app

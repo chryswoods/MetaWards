@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -120,7 +121,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -238,33 +240,33 @@ printed to your screen.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ metawards --version
 ┌──────────────────────────────────────────────────────────────────────┐
 │                                                                      │
-│  ╔════════════════════════════════════════════════════════════════╗  │
-│  ║             MetaWards version 0.3.0b+646.gd74b998              ║  │
-│  ╚════════════════════════════════════════════════════════════════╝  │
+│   ╔══════════════════════════════════════════════════════════════╗   │
+│   ║            MetaWards version 0.3.0b+713.g46a182f             ║   │
+│   ╚══════════════════════════════════════════════════════════════╝   │
 │                                                                      │
-│  ╔════════════════════════════════════════════════════════════════╗  │
-│  ║                     https://metawards.org                      ║  │
-│  ╚════════════════════════════════════════════════════════════════╝  │
+│   ╔══════════════════════════════════════════════════════════════╗   │
+│   ║                    https://metawards.org                     ║   │
+│   ╚══════════════════════════════════════════════════════════════╝   │
 │                                                                      │
-│  ╔════════════════════════════════════════════════════════════════╗  │
-│  ║                       Source information                       ║  │
-│  ╚════════════════════════════════════════════════════════════════╝  │
+│   ╔══════════════════════════════════════════════════════════════╗   │
+│   ║                      Source information                      ║   │
+│   ╚══════════════════════════════════════════════════════════════╝   │
 │                                                                      │
-│   • repository: https://github.com/chryswoods/MetaWards              │
-│   • branch: devel                                                    │
-│   • revision: d74b99899d107fff3bb600f97b46fb67946b1cf9               │
-│   • last modified: 2020-07-22T20:01:22+0100                          │
+│    • repository: https://github.com/chryswoods/MetaWards             │
+│    • branch: devel                                                   │
+│    • revision: 46a182fb9a5115e6e5525238ad8c200b52f9c862              │
+│    • last modified: 2020-12-01T09:50:03+0000                         │
 │                                                                      │
-│  WARNING: MetaWardsData cannot be found! Please see                  │
-│  https://metawards.org/model_data for instructions on how to         │
-│  download and install this necessary data.                           │
+│   WARNING: MetaWardsData cannot be found! Please see                 │
+│   https://metawards.org/model_data for instructions on how to        │
+│   download and install this necessary data.                          │
 │                                                                      │
-│  ╔════════════════════════════════════════════════════════════════╗  │
-│  ║                     Additional information                     ║  │
-│  ╚════════════════════════════════════════════════════════════════╝  │
+│   ╔══════════════════════════════════════════════════════════════╗   │
+│   ║                    Additional information                    ║   │
+│   ╚══════════════════════════════════════════════════════════════╝   │
 │                                                                      │
-│  Visit https://metawards.org for more information about metawards,   │
-│  its authors and its license                                         │
+│   Visit https://metawards.org for more information about             │
+│   metawards, its authors and its license                             │
 │                                                                      │
 └──────────────────────────────────────────────────────────────────────┘
 </pre></div>
@@ -274,8 +276,8 @@ about to find <em class="xref py py-obj">MetaWardsData</em>, then please try
 <a class="reference internal" href="../../install.html"><span class="doc">installing MetaWards</span></a> or
 <a class="reference internal" href="../../model_data.html"><span class="doc">installing and configuring MetaWardsData</span></a> again.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This tutorial is written for <code class="docutils literal notranslate"><span class="pre">metawards</span></code> version 0.3.0b or
+<p class="admonition-title">Warning</p>
+<p>This tutorial is written for <code class="docutils literal notranslate"><span class="pre">metawards</span></code> version 0.3.0b or
 higher. If you are using an older version then please upgrade.</p>
 </div>
 <div class="section" id="introducing-the-lurgy">
@@ -312,8 +314,8 @@ Infection died ... Ending on day 5
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Do not worry if you don’t see exactly this output. You may be using
+<p class="admonition-title">Note</p>
+<p>Do not worry if you don’t see exactly this output. You may be using
 a different version of <code class="docutils literal notranslate"><span class="pre">metawards</span></code> compared to the one used to write
 this tutorial. The main thing to look for is the line
 <code class="docutils literal notranslate"><span class="pre">Infection</span> <span class="pre">died</span> <span class="pre">...</span> <span class="pre">Ending</span> <span class="pre">on</span> <span class="pre">day</span> <span class="pre">5</span></code></p>
@@ -324,8 +326,8 @@ output as above by typing;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This time when you ran <code class="docutils literal notranslate"><span class="pre">metawards</span></code> it stopped to say that the output
+<p class="admonition-title">Note</p>
+<p>This time when you ran <code class="docutils literal notranslate"><span class="pre">metawards</span></code> it stopped to say that the output
 directory already exists, and if you want to remove it.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">metawards</span></code> program takes care not to overwrite any of your output.
@@ -373,16 +375,16 @@ Infection died ... Ending on day 5
 together with how many people were infected. These are the numbers next
 to the codes;</p>
 <ul class="simple">
-<li><strong>S</strong>: The number of the population who are <em>susceptible</em> to infection</li>
-<li><strong>E</strong>: The number of the population who are <em>latent</em>, meaning they are
-infected, but not yet infectious.</li>
-<li><strong>I</strong>: The number of the population who are <em>infected</em>, meaning they
-have symptoms and are infectious</li>
-<li><strong>R</strong>: The number of the population who are removed from being susceptible,
+<li><p><strong>S</strong>: The number of the population who are <em>susceptible</em> to infection</p></li>
+<li><p><strong>E</strong>: The number of the population who are <em>latent</em>, meaning they are
+infected, but not yet infectious.</p></li>
+<li><p><strong>I</strong>: The number of the population who are <em>infected</em>, meaning they
+have symptoms and are infectious</p></li>
+<li><p><strong>R</strong>: The number of the population who are removed from being susceptible,
 either because they have been newly infected that day, or because they
-have recovered from the infection and are no longer susceptible to infection</li>
-<li><strong>IW</strong>: The number of electoral wards that contain at least one
-individual who was newly infected that day.</li>
+have recovered from the infection and are no longer susceptible to infection</p></li>
+<li><p><strong>IW</strong>: The number of electoral wards that contain at least one
+individual who was newly infected that day.</p></li>
 </ul>
 <p>For more information about these values, please
 <a class="reference external" href="https://doi.org/10.1016/j.epidem.2009.11.002">read</a>
@@ -426,8 +428,8 @@ Infection died ... Ending on day 219
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Do not worry if your numbers are different. All will be explained :-)</p>
+<p class="admonition-title">Note</p>
+<p>Do not worry if your numbers are different. All will be explained :-)</p>
 </div>
 </div>
 <div class="section" id="repeating-a-calculation">
@@ -490,8 +492,8 @@ if you always want to model the lurgy, then the config file would read;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">metawards</span></code> uses the <a class="reference external" href="https://pypi.org/project/ConfigArgParse/">ConfigArgParse</a>
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">metawards</span></code> uses the <a class="reference external" href="https://pypi.org/project/ConfigArgParse/">ConfigArgParse</a>
 python module for parsing command line arguments. Options can be passed
 on the command line, in a yaml or ini format config file, or in
 some identified cases as an environment variable. If an arg is
@@ -523,7 +525,7 @@ override defaults.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

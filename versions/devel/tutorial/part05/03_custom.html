@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -119,7 +120,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -239,26 +241,26 @@ demographics, and to call this via a custom mixer.</p>
 <p>An interaction matrix specifies how much the <em>force of infection</em> (FOI)
 calculated from one demographic influences another. It is an asymmetric
 matrix, e.g. for our <em>red</em> and <em>blue</em> demographics it could be;</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="30%" />
-<col width="35%" />
-<col width="35%" />
+<col style="width: 30%" />
+<col style="width: 35%" />
+<col style="width: 35%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">&#160;</th>
-<th class="head">red</th>
-<th class="head">blue</th>
+<thead>
+<tr class="row-odd"><th class="head stub"></th>
+<th class="head"><p>red</p></th>
+<th class="head"><p>blue</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub">red</th>
-<td>0.2</td>
-<td>0.1</td>
+<tbody>
+<tr class="row-even"><th class="stub"><p>red</p></th>
+<td><p>0.2</p></td>
+<td><p>0.1</p></td>
 </tr>
-<tr class="row-odd"><th class="stub">blue</th>
-<td>0.8</td>
-<td>1.0</td>
+<tr class="row-odd"><th class="stub"><p>blue</p></th>
+<td><p>0.8</p></td>
+<td><p>1.0</p></td>
 </tr>
 </tbody>
 </table>
@@ -267,8 +269,8 @@ affect that demographic, i.e. how easily the infection spreads within the
 demographic. It has a similar affect to <code class="docutils literal notranslate"><span class="pre">scale_uv</span></code>, though is not
 equivalent.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">scale_uv</span></code> scales the precursor to the calculation of each ward’s day
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">scale_uv</span></code> scales the precursor to the calculation of each ward’s day
 and night FOIs, while the <em>interaction matrix</em> mixes the day and night
 FOIs for each ward together.</p>
 </div>
@@ -313,17 +315,17 @@ Create a file called <code class="docutils literal notranslate"><span class="pre
 <p>Here we have created a new mixer called <code class="docutils literal notranslate"><span class="pre">mix_shield</span></code>. This function
 has two purposes:</p>
 <ol class="arabic simple">
-<li>It sets <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Demographics.interaction_matrix" title="metawards.Demographics.interaction_matrix"><code class="xref py py-data docutils literal notranslate"><span class="pre">interaction_matrix</span></code></a> equal to
+<li><p>It sets <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Demographics.interaction_matrix" title="metawards.Demographics.interaction_matrix"><code class="xref py py-data docutils literal notranslate"><span class="pre">interaction_matrix</span></code></a> equal to
 the desired interaction matrix in the networks’
 <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Demographics" title="metawards.Demographics"><code class="xref py py-class docutils literal notranslate"><span class="pre">Demographics</span></code></a> object.
 The matrix is as described above, and represents shielding of
-the <em>red</em> demographic by the <em>blue</em> demographic.</li>
-<li>It returns the <code class="xref py py-meth docutils literal notranslate"><span class="pre">merge_using_matrix()</span></code> merge
+the <em>red</em> demographic by the <em>blue</em> demographic.</p></li>
+<li><p>It returns the <code class="xref py py-meth docutils literal notranslate"><span class="pre">merge_using_matrix()</span></code> merge
 function as the function to use to merge the FOIs.
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">merge_using_matrix()</span></code>
 reads the interaction matrix from
 <code class="docutils literal notranslate"><span class="pre">network.demographics.interaction_matrix</span></code>, meaning that the
-value set in step 1 will be used for the merge.</li>
+value set in step 1 will be used for the merge.</p></li>
 </ol>
 <p>You set the mixer to use using the <code class="docutils literal notranslate"><span class="pre">--mixer</span></code> flag, e.g. run <code class="docutils literal notranslate"><span class="pre">metawards</span></code>
 using;</p>
@@ -470,8 +472,8 @@ metawards-plot --animate output/*x001/demographics.jpg -o output/demographics.gi
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We’ve only generated and animated the first repeat here (directories
+<p class="admonition-title">Note</p>
+<p>We’ve only generated and animated the first repeat here (directories
 are all named “SOMETHINGx001”). This makes processing quicker and the
 resulting animation smaller, as each repeat has almost the same plot.</p>
 </div>
@@ -507,7 +509,7 @@ of lockdown of the <em>red</em> demographic.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

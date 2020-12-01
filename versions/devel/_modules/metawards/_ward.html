@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -316,6 +317,12 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_pos</span> <span class="o">=</span> <span class="p">{}</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scale_uv</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cutoff</span> <span class="o">=</span> <span class="mf">99999.99</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_foi</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_params</span> <span class="o">=</span> <span class="p">{}</span>
+
         <span class="c1"># use this nomenclature to ensure this is a True/False data type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_auto_assign_players</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">auto_assign_players</span> <span class="k">else</span> <span class="kc">False</span></div>
 
@@ -379,6 +386,9 @@
 
 <span class="sd">           This will add the workers from &#39;other&#39; to this ward,</span>
 <span class="sd">           plus will average the player weights between the two</span>
+
+<span class="sd">           This will do nothing to the scale_uv, cutoff,</span>
+<span class="sd">           bg_foi or custom parameters</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_info</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">_info</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -453,6 +463,38 @@
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="k">return</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Ward.scale_uv"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.scale_uv">[docs]</a>    <span class="k">def</span> <span class="nf">scale_uv</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the scale_uv parameter for this ward. This is the amount</span>
+<span class="sd">           by which to scale the force of infection (FOI) during the</span>
+<span class="sd">           FOI calculation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale_uv</span></div>
+
+<div class="viewcode-block" id="Ward.cutoff"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.cutoff">[docs]</a>    <span class="k">def</span> <span class="nf">cutoff</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the cutoff parameter for this ward. This sets the</span>
+<span class="sd">           maximum distance that residents (or travellers) to this ward</span>
+<span class="sd">           can travel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cutoff</span></div>
+
+<div class="viewcode-block" id="Ward.bg_foi"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.bg_foi">[docs]</a>    <span class="k">def</span> <span class="nf">bg_foi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the background force of infection (FOI). This is the</span>
+<span class="sd">           starting value for ward FOI calculations. It defaults to 0.0.</span>
+<span class="sd">           Positive values are used when you want the ward to have some</span>
+<span class="sd">           background effect that drives infections independently of</span>
+<span class="sd">           the number of infecteds. Negative values imply a background</span>
+<span class="sd">           effect that reduces the risk of infection, regardless of</span>
+<span class="sd">           the number of infecteds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_foi</span></div>
+
+<div class="viewcode-block" id="Ward.custom"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.custom">[docs]</a>    <span class="k">def</span> <span class="nf">custom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the per-ward custom parameter at key &#39;key&#39;, returning</span>
+<span class="sd">           &#39;default&#39; if this has not been set. Note that all custom</span>
+<span class="sd">           parameters are stored as floats</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">default</span><span class="p">))</span></div>
+
 <div class="viewcode-block" id="Ward.assert_sane"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.assert_sane">[docs]</a>    <span class="k">def</span> <span class="nf">assert_sane</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Assert that the data in this ward is sane&quot;&quot;&quot;</span>
         <span class="n">t</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_players</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_player_total</span>
@@ -464,7 +506,15 @@
 
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_num_workers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Worker sum should be </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_workers</span><span class="si">}</span><span class="s2">, not </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+                <span class="sa">f</span><span class="s2">&quot;Worker sum should be </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_num_workers</span><span class="si">}</span><span class="s2">, not </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale_uv</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;scale_uv must be positive, not </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_scale_uv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cutoff</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;cutoff must be positive, not </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_cutoff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Ward.set_name"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.set_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the name of this ward&quot;&quot;&quot;</span>
@@ -528,6 +578,58 @@
 <div class="viewcode-block" id="Ward.set_region"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.set_region">[docs]</a>    <span class="k">def</span> <span class="nf">set_region</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">region</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the region of this ward&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_info</span><span class="o">.</span><span class="n">region</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">region</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Ward.set_scale_uv"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.set_scale_uv">[docs]</a>    <span class="k">def</span> <span class="nf">set_scale_uv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_uv</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the scale_uv parameter for this ward. This is the amount</span>
+<span class="sd">           by which to scale the FOI when caclulating the FOI. This</span>
+<span class="sd">           defaults to 1.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">scale_uv</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">scale_uv</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">scale_uv</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;You cannot set scale_uv to a negative value: </span><span class="si">{</span><span class="n">scale_uv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scale_uv</span> <span class="o">=</span> <span class="n">scale_uv</span></div>
+
+<div class="viewcode-block" id="Ward.set_cutoff"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.set_cutoff">[docs]</a>    <span class="k">def</span> <span class="nf">set_cutoff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the cutoff distance (in km) for this ward. This is the</span>
+<span class="sd">           maximum distance that residents (or travellers to) this ward</span>
+<span class="sd">           are allowed to travel. This defaults to 99999.99, which is</span>
+<span class="sd">           larger than any point to point distance on earth</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cutoff</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cutoff</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cutoff</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;You cannot set cutoff to a negative value: </span><span class="si">{</span><span class="n">cutoff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cutoff</span> <span class="o">=</span> <span class="n">cutoff</span></div>
+
+<div class="viewcode-block" id="Ward.set_bg_foi"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.set_bg_foi">[docs]</a>    <span class="k">def</span> <span class="nf">set_bg_foi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bg_foi</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the background force of infection (FOI). This is the</span>
+<span class="sd">           starting value for ward FOI calculations. It defaults to 0.0.</span>
+<span class="sd">           Positive values are used when you want the ward to have some</span>
+<span class="sd">           background effect that drives infections independently of</span>
+<span class="sd">           the number of infecteds. Negative values imply a background</span>
+<span class="sd">           effect that reduces the risk of infection, regardless of</span>
+<span class="sd">           the number of infecteds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bg_foi</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">bg_foi</span><span class="p">)</span>
+
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isnan</span>
+
+        <span class="k">if</span> <span class="n">isnan</span><span class="p">(</span><span class="n">bg_foi</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You cannot set bg_foi to NaN&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_foi</span> <span class="o">=</span> <span class="n">bg_foi</span></div>
+
+<div class="viewcode-block" id="Ward.set_custom"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.set_custom">[docs]</a>    <span class="k">def</span> <span class="nf">set_custom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the value of the custom ward parameter to &#39;value&#39;. Note</span>
+<span class="sd">           that this must be convertible to a float as all custom</span>
+<span class="sd">           parameters are stored as floats</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Ward.set_info"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.set_info">[docs]</a>    <span class="k">def</span> <span class="nf">set_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">WardInfo</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the info of this ward&quot;&quot;&quot;</span>
@@ -905,6 +1007,7 @@
         <span class="kn">from</span> <span class="nn">.utils._array</span> <span class="kn">import</span> <span class="n">create_int_array</span>
 
         <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_workers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
         <span class="n">keys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
         <span class="n">wards</span> <span class="o">=</span> <span class="n">create_int_array</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
@@ -1127,6 +1230,19 @@
             <span class="n">data</span><span class="p">[</span><span class="s2">&quot;players&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
                                <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="n">players</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale_uv</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;scale_uv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale_uv</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cutoff</span> <span class="o">!=</span> <span class="mf">99999.99</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cutoff&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cutoff</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_foi</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;bg_foi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_foi</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_custom_params</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;custom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_custom_params</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">data</span></div>
 
 <div class="viewcode-block" id="Ward.from_data"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Ward.from_data">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -1186,6 +1302,13 @@
         <span class="k">elif</span> <span class="n">ward</span><span class="o">.</span><span class="n">_player_total</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;The sum of player weights cannot be greater than zero&quot;</span><span class="p">)</span>
+
+        <span class="n">ward</span><span class="o">.</span><span class="n">_scale_uv</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;scale_uv&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+        <span class="n">ward</span><span class="o">.</span><span class="n">_cutoff</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cutoff&quot;</span><span class="p">,</span> <span class="mf">99999.99</span><span class="p">))</span>
+        <span class="n">ward</span><span class="o">.</span><span class="n">_bg_foi</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bg_foi&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;custom&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">ward</span><span class="o">.</span><span class="n">_custom_params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
         <span class="n">ward</span><span class="o">.</span><span class="n">assert_sane</span><span class="p">()</span>
 
@@ -1297,7 +1420,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

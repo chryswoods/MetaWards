@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -224,8 +225,8 @@
                  [-P POPULATION] [-n NSTEPS] [-u USER_VARIABLES]
                  [--iterator ITERATOR] [--extractor EXTRACTOR] [--mixer MIXER]
                  [--mover MOVER] [--star-is-E] [--star-is-R] [--disable-star]
-                 [--UV UV] [--theme THEME] [--no-spinner] [--no-progress]
-                 [--debug] [--debug-level DEBUG_LEVEL]
+                 [--UV UV] [--UV-max UV_MAX] [--theme THEME] [--no-spinner]
+                 [--no-progress] [--debug] [--debug-level DEBUG_LEVEL]
                  [--outdir-scheme OUTDIR_SCHEME] [--nthreads NTHREADS]
                  [--nprocs NPROCS] [--hostfile HOSTFILE]
                  [--cores-per-node CORES_PER_NODE] [--auto-bzip]
@@ -357,6 +358,10 @@ optional arguments:
                         latent state. There is no star state. (default: None)
   --UV UV               Value for the UV parameter for the model (default is
                         0.0) (default: None)
+  --UV-max UV_MAX       Date when the seasonal adjustment should be at its
+                        maximum. By default, this is January 1st on the
+                        assumption that disease spread is stronger in the
+                        (Northern) winter (default: None)
   --theme THEME         The theme to use to color the output. Use &#39;--theme
                         simple&#39; if you prefer a simple and colorless output.
                         (default: None)
@@ -447,7 +452,7 @@ optional arguments:
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

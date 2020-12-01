@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Part 8 - Different networks for different demographics &mdash; MetaWards Documentation</title>
+  <title>Part 8 - Creating your own models / networks &mdash; MetaWards Documentation</title>
   
 
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -109,13 +110,16 @@
 <li class="toctree-l2"><a class="reference internal" href="index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Part 8 - Different networks for different demographics</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Part 8 - Creating your own models / networks</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="part08/01_networks.html">Understanding the Model Network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="part08/02_custom_network.html">Creating a Custom Network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="part08/03_reticulate.html">Creating Networks in R</a></li>
 <li class="toctree-l3"><a class="reference internal" href="part08/04_using_custom.html">Using a Custom Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part08/05_local_network.html">Specifying ward-local parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part08/06_network_demographics.html">Different networks for different demographics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -193,7 +197,7 @@
         
           <li><a href="index.html">Tutorial</a> &raquo;</li>
         
-      <li>Part 8 - Different networks for different demographics</li>
+      <li>Part 8 - Creating your own models / networks</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -219,15 +223,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="part-8-different-networks-for-different-demographics">
-<h1>Part 8 - Different networks for different demographics<a class="headerlink" href="#part-8-different-networks-for-different-demographics" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="part-8-creating-your-own-models-networks">
+<h1>Part 8 - Creating your own models / networks<a class="headerlink" href="#part-8-creating-your-own-models-networks" title="Permalink to this headline">¶</a></h1>
 <p>In this eighth part of the tutorial you will;</p>
 <ul class="simple">
-<li>Learn how to assign different networks to different demographics.</li>
-<li>Explore how this can be used to model different behaviours for
-different demographic groups, e.g. school children versus workers</li>
-<li>See how this can be combined with move functions to model changes
-in behaviour, e.g. going on holiday</li>
+<li><p>Learn how the model network of wards and metapopulation movements is
+defined.</p></li>
+<li><p>Explore how to create your own model networks using the Python or R
+interface.</p></li>
+<li><p>Learn how to run MetaWards directly from within a Python or R script.</p></li>
+<li><p>Build more complex networks with ward-local parameters</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 <ul>
@@ -242,12 +247,20 @@ in behaviour, e.g. going on holiday</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="part08/03_reticulate.html">Creating Networks in R</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="part08/03_reticulate.html#installing-reticulate">Installing reticulate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part08/03_reticulate.html#installing-metawards-in-r">Installing MetaWards in R</a></li>
 <li class="toctree-l2"><a class="reference internal" href="part08/03_reticulate.html#using-metawards-in-r">Using metawards in R</a></li>
 <li class="toctree-l2"><a class="reference internal" href="part08/03_reticulate.html#going-further">Going further</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="part08/04_using_custom.html">Using a Custom Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="part08/04_using_custom.html">Using a Custom Network</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="part08/04_using_custom.html#running-metawards-from-within-python-or-r">Running MetaWards from within Python or R</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="part08/05_local_network.html">Specifying ward-local parameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="part08/05_local_network.html#networks-with-ward-local-parameters">Networks with ward-local parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="part08/06_network_demographics.html">Different networks for different demographics</a></li>
 </ul>
 </div>
 </div>
@@ -273,7 +286,7 @@ in behaviour, e.g. going on holiday</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

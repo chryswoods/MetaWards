@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -109,7 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="01_networks.html">Understanding the Model Network</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Creating a Custom Network</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#network-file-formats">Network file formats</a></li>
@@ -118,8 +119,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="03_reticulate.html">Creating Networks in R</a></li>
 <li class="toctree-l3"><a class="reference internal" href="04_using_custom.html">Using a Custom Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05_local_network.html">Specifying ward-local parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_network_demographics.html">Different networks for different demographics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -197,7 +201,7 @@
         
           <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
-          <li><a href="../index_part08.html">Part 8 - Different networks for different demographics</a> &raquo;</li>
+          <li><a href="../index_part08.html">Part 8 - Creating your own models / networks</a> &raquo;</li>
         
       <li>Creating a Custom Network</li>
     
@@ -233,24 +237,24 @@ region. Indeed, you can use the concepts of <code class="docutils literal notran
 <code class="docutils literal notranslate"><span class="pre">players</span></code> in a more generic way to model lots of different environments,
 e.g.</p>
 <ul class="simple">
-<li>Using wards to represent different university buildings, and then track
-disease spread between buildings as staff and students move around.</li>
-<li>Using wards to represent care homes, hospitals and homes in a single
+<li><p>Using wards to represent different university buildings, and then track
+disease spread between buildings as staff and students move around.</p></li>
+<li><p>Using wards to represent care homes, hospitals and homes in a single
 region, and then model the motion of staff, patients and the general
-population between these different environments.</li>
+population between these different environments.</p></li>
 </ul>
 <div class="section" id="network-file-formats">
 <h2>Network file formats<a class="headerlink" href="#network-file-formats" title="Permalink to this headline">¶</a></h2>
 <p>A lot of data needs to be loaded to define the network. There are two
 file formats for specifying this data;</p>
 <ol class="arabic simple">
-<li><a class="reference internal" href="../../fileformats/network.html"><span class="doc">A set of fixed-format files</span></a> that
+<li><p><a class="reference internal" href="../../fileformats/network.html"><span class="doc">A set of fixed-format files</span></a> that
 contain the data in a set of files that are contained in a single
 directory. This is an older format that is used predominantly for
-older model networks.</li>
-<li>A JSON-format file that contains all of the data needed to describe the
+older model networks.</p></li>
+<li><p>A JSON-format file that contains all of the data needed to describe the
 network in a single file. This file should only be manipulated or
-edited using the Python API described below.</li>
+edited using the Python API described below.</p></li>
 </ol>
 </div>
 <div class="section" id="creating-and-editing-networks-in-python">
@@ -282,7 +286,7 @@ workers who will work in Bristol, and <code class="docutils literal notranslate"
 <p>Next, we will create a <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Ward" title="metawards.Ward"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ward</span></code></a> object to represent
 London (which we will call <code class="docutils literal notranslate"><span class="pre">london</span></code>). We will add <code class="docutils literal notranslate"><span class="pre">8600</span></code>
 workers and <code class="docutils literal notranslate"><span class="pre">10000</span></code> players.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">london</span> <span class="o">=</span> <span class="n">Ward</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;London&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">london</span> <span class="o">=</span> <span class="n">Ward</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;London&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">london</span><span class="o">.</span><span class="n">add_workers</span><span class="p">(</span><span class="mi">8500</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">london</span><span class="o">.</span><span class="n">set_num_players</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
 </pre></div>
@@ -311,8 +315,8 @@ will commute each day to Bristol.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note that each <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Ward" title="metawards.Ward"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ward</span></code></a> in the <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Wards" title="metawards.Wards"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wards</span></code></a>
+<p class="admonition-title">Note</p>
+<p>Note that each <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Ward" title="metawards.Ward"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ward</span></code></a> in the <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Wards" title="metawards.Wards"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wards</span></code></a>
 collection has been automatically assigned an ID number (1 for Bristol
 and 2 for London). You can refer to the wards by their ID number, but
 should, in general, leave <code class="docutils literal notranslate"><span class="pre">metawards</span></code> to automatically generate
@@ -366,14 +370,14 @@ which we will stream to the file <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Note that the exact format of the JSON will change as <code class="docutils literal notranslate"><span class="pre">metawards</span></code>
 evolves. We will retain backwards compatibility, meaning that newer
 versions of <code class="docutils literal notranslate"><span class="pre">metawards</span></code> will be able to read old files, but older
 versions may not be able to read new files.</p>
 <p>Note that the file will be automatically compressed using bzip2. You
 can disable this by setting <code class="docutils literal notranslate"><span class="pre">auto_bzip=False</span></code>.</p>
-<p class="last">Note also that <code class="docutils literal notranslate"><span class="pre">indent=2</span></code> just sets the indentation used for printing.
+<p>Note also that <code class="docutils literal notranslate"><span class="pre">indent=2</span></code> just sets the indentation used for printing.
 You can set whatever indentation you want, including not setting any.
 It won’t affect the included information - just its human-readability.</p>
 </div>
@@ -407,7 +411,7 @@ It won’t affect the included information - just its human-readability.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

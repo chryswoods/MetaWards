@@ -1,4 +1,4 @@
-metawards.extractors.setup\_core
+﻿metawards.extractors.setup\_core
 ================================
 
 .. currentmodule:: metawards.extractors

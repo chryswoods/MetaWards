@@ -120,7 +120,7 @@ Naming
 
 We follow a Python style naming convention.
 
-* Packages: CamelCase
+* Packages: lowercase, singleword
 * Classes: CamelCase
 * Methods: snake_case
 * Functions: snake_case

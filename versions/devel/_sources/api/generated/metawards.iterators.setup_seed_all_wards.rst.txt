@@ -1,4 +1,4 @@
-metawards.iterators.setup\_seed\_all\_wards
+﻿metawards.iterators.setup\_seed\_all\_wards
 ===========================================
 
 .. currentmodule:: metawards.iterators

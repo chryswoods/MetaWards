@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -111,13 +112,16 @@
 <li class="toctree-l3"><a class="reference internal" href="part03/04_dynamic.html">Responding to changing conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="part03/05_scanning.html">Custom variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="part03/06_scan_lockdown.html">Scanning lockdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part03/07_cutoff.html">Alternative lockdowns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part03/08_local_lockdown.html">Local lockdowns</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index_part04.html">Part 4 - Customising the output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -225,17 +229,17 @@
 <h1>Part 3 - Customising the outbreak<a class="headerlink" href="#part-3-customising-the-outbreak" title="Permalink to this headline">¶</a></h1>
 <p>In this third part of the tutorial you will:</p>
 <ul class="simple">
-<li>Understand the purpose of <a class="reference internal" href="../api/generated/metawards.iterators.iterate_default.html#metawards.iterators.iterate_default" title="metawards.iterators.iterate_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metawards.iterators.iterate_default</span></code></a></li>
-<li>Learn how to use different iterators on different days, so that
-the program can model weekends</li>
-<li>Create a custom iterator to represent a lockdown</li>
-<li>Learn how to trigger a custom iterator to start at a specific date</li>
-<li>Create an adjustable variable so that you can model lockdowns with
-different levels of effectiveness</li>
-<li>Setup models in which lockdowns are ended, and then explore what
-happens next</li>
-<li>Create models in which lockdowns can be stopped and started in
-response to changing conditions</li>
+<li><p>Understand the purpose of <a class="reference internal" href="../api/generated/metawards.iterators.iterate_default.html#metawards.iterators.iterate_default" title="metawards.iterators.iterate_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metawards.iterators.iterate_default</span></code></a></p></li>
+<li><p>Learn how to use different iterators on different days, so that
+the program can model weekends</p></li>
+<li><p>Create a custom iterator to represent a lockdown</p></li>
+<li><p>Learn how to trigger a custom iterator to start at a specific date</p></li>
+<li><p>Create an adjustable variable so that you can model lockdowns with
+different levels of effectiveness</p></li>
+<li><p>Setup models in which lockdowns are ended, and then explore what
+happens next</p></li>
+<li><p>Create models in which lockdowns can be stopped and started in
+response to changing conditions</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 <ul>
@@ -270,7 +274,20 @@ response to changing conditions</li>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="part03/06_scan_lockdown.html">Scanning lockdown</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="part03/06_scan_lockdown.html#running-on-a-cluster">Running on a cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="part03/06_scan_lockdown.html#moving-beyond-this-simple-demo">Moving beyond this simple demo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="part03/07_cutoff.html">Alternative lockdowns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="part03/07_cutoff.html#force-of-infection">Force of infection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part03/07_cutoff.html#metapopulation-movements">Metapopulation movements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part03/07_cutoff.html#rates-of-infection">Rates of infection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part03/07_cutoff.html#enacting-lockdown">Enacting lockdown</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="part03/08_local_lockdown.html">Local lockdowns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="part03/08_local_lockdown.html#limiting-movement-at-a-local-level">Limiting movement at a local level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part03/08_local_lockdown.html#scaling-foi-at-a-local-level">Scaling FOI at a local level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part03/08_local_lockdown.html#reading-and-writing-local-parameters">Reading and writing local parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part03/08_local_lockdown.html#custom-ward-local-parameters">Custom ward-local parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -298,7 +315,7 @@ response to changing conditions</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

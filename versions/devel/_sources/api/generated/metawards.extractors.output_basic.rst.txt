@@ -1,4 +1,4 @@
-metawards.extractors.output\_basic
+﻿metawards.extractors.output\_basic
 ==================================
 
 .. currentmodule:: metawards.extractors

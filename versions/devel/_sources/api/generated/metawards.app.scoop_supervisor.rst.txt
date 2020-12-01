@@ -1,4 +1,4 @@
-metawards.app.scoop\_supervisor
+﻿metawards.app.scoop\_supervisor
 ===============================
 
 .. currentmodule:: metawards.app

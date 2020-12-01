@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -122,7 +123,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -304,15 +306,15 @@ argument <code class="docutils literal notranslate"><span class="pre">fraction</
                                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="n">go_released</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">go_to</span><span class="p">(</span><span class="n">go_from</span><span class="o">=</span><span class="n">isolate</span><span class="p">,</span>
-                                        <span class="n">go_to</span><span class="o">=</span><span class="s2">&quot;released&quot;</span><span class="p">,</span>
-                                        <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                                         <span class="n">go_to</span><span class="o">=</span><span class="s2">&quot;released&quot;</span><span class="p">,</span>
+                                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">go_early</span> <span class="o">+</span> <span class="p">[</span><span class="n">go_released</span><span class="p">,</span> <span class="n">go_isolate_day</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It would be nicer and less error-prone if we could create the
+<p class="admonition-title">Note</p>
+<p>It would be nicer and less error-prone if we could create the
 <code class="docutils literal notranslate"><span class="pre">go_early</span></code> functions in a loop. However, this would not work
 because of the way that Python lambda functions bind their arguments.
 If we did this, the arguments from the last iteration of the loop
@@ -321,8 +323,8 @@ try to move individuals out of the same <code class="docutils literal notranslat
 six times.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note that we’ve set <code class="docutils literal notranslate"><span class="pre">compliance</span></code> to 0.9 based on the results of the
+<p class="admonition-title">Note</p>
+<p>Note that we’ve set <code class="docutils literal notranslate"><span class="pre">compliance</span></code> to 0.9 based on the results of the
 last scan.</p>
 </div>
 <p>Here, we’ve created a new set of go functions called <code class="docutils literal notranslate"><span class="pre">go_release_early</span></code>.
@@ -523,12 +525,12 @@ break quarantine.</p>
 <p>All of these results suggest that, for the lurgy, that self-isolation and
 quarantine are only effective strategies if;</p>
 <ol class="arabic simple">
-<li>they start as quickly as possible once an individual is infectious
+<li><p>they start as quickly as possible once an individual is infectious
 (which may be difficult due to the early stage of the lurgy being largely
 asymptomatic - track and trace systems would likely need to be used
-and be extremely fast and effective),</li>
-<li>are observed by the vast majority (&gt;90%) of infected individuals, and</li>
-<li>&gt;95% of individuals remain in quarantine for the full seven days.</li>
+and be extremely fast and effective),</p></li>
+<li><p>are observed by the vast majority (&gt;90%) of infected individuals, and</p></li>
+<li><p>&gt;95% of individuals remain in quarantine for the full seven days.</p></li>
 </ol>
 <p>As noted at the start of this tutorial, the lurgy is not a serious disease,
 so would not warrant the level of social control needed to achieve these
@@ -562,7 +564,7 @@ widespread outbreak will always be very difficult to control.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

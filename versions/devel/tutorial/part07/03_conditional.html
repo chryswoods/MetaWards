@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -121,7 +122,8 @@
 <li class="toctree-l3"><a class="reference internal" href="06_hospital.html">Modelling a Hospital</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -241,9 +243,9 @@ can conditionally progress.</p>
 <p>In this example we will create a model of a hospital. The demographics
 involved will be;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">patients</span></code> : Patients at the hospital who are infected with the lurgy</li>
-<li><code class="docutils literal notranslate"><span class="pre">staff</span></code> : Hospital staff who care for the patients</li>
-<li><code class="docutils literal notranslate"><span class="pre">home</span></code> : The general population who are neither patients or staff</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">patients</span></code> : Patients at the hospital who are infected with the lurgy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">staff</span></code> : Hospital staff who care for the patients</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">home</span></code> : The general population who are neither patients or staff</p></li>
 </ul>
 <p>Members of the <code class="docutils literal notranslate"><span class="pre">staff</span></code> and <code class="docutils literal notranslate"><span class="pre">home</span></code> demographics will move along the
 stages of the lurgy according to <code class="docutils literal notranslate"><span class="pre">lurgy4.json</span></code>. Hospital <code class="docutils literal notranslate"><span class="pre">patients</span></code>
@@ -263,8 +265,8 @@ which you should create and copy in the below;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Every disease must include the <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">E</span></code> stages, which are
+<p class="admonition-title">Note</p>
+<p>Every disease must include the <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">E</span></code> stages, which are
 stages 0 and 1, and the <code class="docutils literal notranslate"><span class="pre">R</span></code> stage which is the last stage. This
 means that <code class="docutils literal notranslate"><span class="pre">H1</span></code> and <code class="docutils literal notranslate"><span class="pre">H2</span></code> are stages 2 and 3 in this file, both
 of which have <code class="docutils literal notranslate"><span class="pre">beta</span> <span class="pre">==</span> <span class="pre">0.2</span></code>, <code class="docutils literal notranslate"><span class="pre">progress</span> <span class="pre">==</span> <span class="pre">0.2</span></code> and
@@ -291,35 +293,35 @@ create and copy in the below;</p>
 <p>Next, we need a mixing function that will model the interactions between
 hospital staff, patients and the general population. We will use the
 following interaction matrix;</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head stub">&#160;</th>
-<th class="head">home</th>
-<th class="head">staff</th>
-<th class="head">patients</th>
+<thead>
+<tr class="row-odd"><th class="head stub"></th>
+<th class="head"><p>home</p></th>
+<th class="head"><p>staff</p></th>
+<th class="head"><p>patients</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><th class="stub">home</th>
-<td>1.0</td>
-<td>1.0</td>
-<td>0.0</td>
+<tbody>
+<tr class="row-even"><th class="stub"><p>home</p></th>
+<td><p>1.0</p></td>
+<td><p>1.0</p></td>
+<td><p>0.0</p></td>
 </tr>
-<tr class="row-odd"><th class="stub">staff</th>
-<td>0.0</td>
-<td>0.1</td>
-<td>0.1</td>
+<tr class="row-odd"><th class="stub"><p>staff</p></th>
+<td><p>0.0</p></td>
+<td><p>0.1</p></td>
+<td><p>0.1</p></td>
 </tr>
-<tr class="row-even"><th class="stub">patients</th>
-<td>0.0</td>
-<td>0.1</td>
-<td>0.0</td>
+<tr class="row-even"><th class="stub"><p>patients</p></th>
+<td><p>0.0</p></td>
+<td><p>0.1</p></td>
+<td><p>0.0</p></td>
 </tr>
 </tbody>
 </table>
@@ -336,8 +338,8 @@ in this model are already infected. However, you could add a susceptible
 patient population who do not have the lurgy, and then use this final
 element in the matrix to control the force of infection between patients.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This is not an entirely realistic interaction matrix, but is set up
+<p class="admonition-title">Note</p>
+<p>This is not an entirely realistic interaction matrix, but is set up
 to demonstrate how the only route of infection of <code class="docutils literal notranslate"><span class="pre">staff</span></code> is from
 <code class="docutils literal notranslate"><span class="pre">patients</span></code>.</p>
 </div>
@@ -356,8 +358,8 @@ and copy in the below.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This is essentially an identical mixing function as that used
+<p class="admonition-title">Note</p>
+<p>This is essentially an identical mixing function as that used
 in the <a class="reference internal" href="../part05/03_custom.html"><span class="doc">shielding example</span></a>.</p>
 </div>
 <p>Next, we want to make sure that we have output the populations in the
@@ -492,7 +494,7 @@ in the hospital for the two different stages.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

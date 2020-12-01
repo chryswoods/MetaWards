@@ -1,4 +1,4 @@
-metawards.utils.Console
+﻿metawards.utils.Console
 =======================
 
 .. currentmodule:: metawards.utils
@@ -13,6 +13,30 @@ metawards.utils.Console
 
    .. autosummary::
    
+      ~Console.__delattr__
+      ~Console.__dir__
+      ~Console.__eq__
+      ~Console.__format__
+      ~Console.__ge__
+      ~Console.__getattribute__
+      ~Console.__gt__
+      ~Console.__hash__
+      ~Console.__init__
+      ~Console.__init_subclass__
+      ~Console.__le__
+      ~Console.__lt__
+      ~Console.__ne__
+      ~Console.__new__
+      ~Console.__reduce__
+      ~Console.__reduce_ex__
+      ~Console.__repr__
+      ~Console.__setattr__
+      ~Console.__sizeof__
+      ~Console.__str__
+      ~Console.__subclasshook__
+      ~Console._get_console
+      ~Console._get_theme
+      ~Console._retrieve_name
       ~Console.center
       ~Console.command
       ~Console.debug
@@ -39,5 +63,14 @@ metawards.utils.Console
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Console.__dict__
+      ~Console.__doc__
+      ~Console.__module__
+      ~Console.__weakref__
    
    

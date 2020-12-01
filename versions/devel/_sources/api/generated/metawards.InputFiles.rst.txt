@@ -1,4 +1,4 @@
-metawards.InputFiles
+﻿metawards.InputFiles
 ====================
 
 .. currentmodule:: metawards
@@ -13,7 +13,28 @@ metawards.InputFiles
 
    .. autosummary::
    
+      ~InputFiles.__delattr__
+      ~InputFiles.__dir__
+      ~InputFiles.__eq__
+      ~InputFiles.__format__
+      ~InputFiles.__ge__
+      ~InputFiles.__getattribute__
+      ~InputFiles.__gt__
+      ~InputFiles.__hash__
       ~InputFiles.__init__
+      ~InputFiles.__init_subclass__
+      ~InputFiles.__le__
+      ~InputFiles.__lt__
+      ~InputFiles.__ne__
+      ~InputFiles.__new__
+      ~InputFiles.__reduce__
+      ~InputFiles.__reduce_ex__
+      ~InputFiles.__repr__
+      ~InputFiles.__setattr__
+      ~InputFiles.__sizeof__
+      ~InputFiles.__str__
+      ~InputFiles.__subclasshook__
+      ~InputFiles._localise
       ~InputFiles.load
       ~InputFiles.model_name
       ~InputFiles.model_path
@@ -27,6 +48,23 @@ metawards.InputFiles
 
    .. autosummary::
    
+      ~InputFiles.__annotations__
+      ~InputFiles.__dataclass_fields__
+      ~InputFiles.__dataclass_params__
+      ~InputFiles.__dict__
+      ~InputFiles.__doc__
+      ~InputFiles.__module__
+      ~InputFiles.__weakref__
+      ~InputFiles._authors
+      ~InputFiles._contacts
+      ~InputFiles._filename
+      ~InputFiles._model_name
+      ~InputFiles._model_path
+      ~InputFiles._model_version
+      ~InputFiles._references
+      ~InputFiles._repository
+      ~InputFiles._repository_branch
+      ~InputFiles._repository_version
       ~InputFiles.coordinates
       ~InputFiles.identifier
       ~InputFiles.identifier2

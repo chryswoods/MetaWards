@@ -1,4 +1,4 @@
-metawards.utils.initialise\_infections
+﻿metawards.utils.initialise\_infections
 ======================================
 
 .. currentmodule:: metawards.utils

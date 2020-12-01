@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -268,6 +269,11 @@
     <span class="c1">#: stage of the disease</span>
     <span class="n">contrib_foi</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
+    <span class="c1">#: Whether or not this stage is an infected stage. By default</span>
+    <span class="c1">#: all stages other than those mapped to &quot;R&quot; are classes</span>
+    <span class="c1">#: as infected stages</span>
+    <span class="n">is_infected</span><span class="p">:</span> <span class="n">_List</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1">#: Index of the first symptomatic stage</span>
     <span class="n">start_symptom</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -305,6 +311,7 @@
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* beta: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* progress: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* too_ill_to_move: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* is_infected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">!=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">!=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]:</span>
@@ -318,8 +325,7 @@
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Disease(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, stage=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="si">}</span><span class="s2">, &quot;</span> \
                <span class="sa">f</span><span class="s2">&quot;beta=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="si">}</span><span class="s2">, &quot;</span> \
                <span class="sa">f</span><span class="s2">&quot;progress=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="si">}</span><span class="s2">, &quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;too_ill_to_move=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="si">}</span><span class="s2">, contrib_foi=&quot;</span> \
-               <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+               <span class="sa">f</span><span class="s2">&quot;too_ill_to_move=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="si">}</span><span class="s2">)&quot;</span></div>
 
 <div class="viewcode-block" id="Disease.__eq__"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.__eq__">[docs]</a>    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> \
@@ -329,6 +335,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">progress</span> <span class="ow">and</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="ow">and</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">is_infected</span> <span class="ow">and</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">start_symptom</span></div>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -352,6 +359,7 @@
                 <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
                 <span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
                 <span class="s2">&quot;contrib_foi&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                <span class="s2">&quot;is_infected&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
                 <span class="s2">&quot;is_start_symptom&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span><span class="p">}</span></div>
 
 <div class="viewcode-block" id="Disease.__setitem__"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.__setitem__">[docs]</a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -427,12 +435,18 @@
                 <span class="sa">f</span><span class="s2">&quot;Invalid value of contrib_foi </span><span class="si">{</span><span class="n">contrib_foi</span><span class="si">}</span><span class="s2">. Should &quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;be 0 &lt;= contrib_foi&quot;</span><span class="p">)</span>
 
+        <span class="n">is_infected</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_infected&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">is_infected</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">is_infected</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">is_infected</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">beta</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">progress</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">too_ill_to_move</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">contrib_foi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_infected</span>
 
         <span class="k">if</span> <span class="n">is_start_symptom</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
@@ -443,6 +457,10 @@
 <div class="viewcode-block" id="Disease.N_INF_CLASSES"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.N_INF_CLASSES">[docs]</a>    <span class="k">def</span> <span class="nf">N_INF_CLASSES</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the number of stages of the disease&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Disease.assert_sane"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.assert_sane">[docs]</a>    <span class="k">def</span> <span class="nf">assert_sane</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assert that this disease is valid&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check that the loaded parameters make sense&quot;&quot;&quot;</span>
@@ -456,9 +474,9 @@
             <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data read for disease </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> &quot;</span>
                                  <span class="sa">f</span><span class="s2">&quot;is corrupted! </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;There must be at least 4 disease stages (&#39;*&#39;, &#39;E&#39;, &#39;I&#39;, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;There must be at least 3 disease stages (&#39;E&#39;, &#39;I&#39;, &quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;&#39;R&#39;) - the number of stages here is </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -471,6 +489,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
 
@@ -499,64 +518,20 @@
                     <span class="sa">f</span><span class="s2">&quot;Invalid disease parameter at index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="c1"># for the model to work the different stages have set meanings</span>
-        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
-
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># - stage 0 is newly infected that day, so progress must be 1</span>
-            <span class="c1">#   and beta must be 0 (not infective)</span>
-            <span class="c1"># This is not an error - the pox and flu2 diseases have this.</span>
-            <span class="c1"># I don&#39;t think I understand correctly though if that is right,</span>
-            <span class="c1"># as this means that individuals will stay longer in the</span>
-            <span class="c1"># post-infect but pre-latent stage and be recorded as &quot;recovered&quot;?</span>
-            <span class="c1"># if self.progress[0] != 1.0:</span>
-            <span class="c1">#    errors.append(</span>
-            <span class="c1">#        f&quot;The progress[0] value must be 1.0 as individuals are &quot;</span>
-            <span class="c1">#        f&quot;only newly infected for one day, and so must progress &quot;</span>
-            <span class="c1">#        f&quot;immediately to the &#39;latent&#39; stage.&quot;)</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
-                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The beta[0] value must be 0.0 as newly infected &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;individuals should not be infective and cannot &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;infect others.&quot;</span><span class="p">)</span>
-
-            <span class="c1"># - stage 1 is &#39;latent&#39;, meaning that beta must be 0</span>
-            <span class="c1"># (not infective)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
-                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The beta[1] value must be 0.0 as &#39;latent&#39; individuals &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;are not infectious and should not be able to infect &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;others.&quot;</span><span class="p">)</span>
-
-            <span class="c1"># - stage -1 is &#39;recovered&#39;, meaning that beta must not be 0</span>
-            <span class="c1">#   and progress is 0, as once recovered, always recovered</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
-                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The beta[-1] value must be 0.0 as &#39;recovered&#39; &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;are not infectious and should not be able to infect &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;others.&quot;</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
-                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The progress[-1] value must be 0.0 as &#39;recovered&#39; &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;individuals have no further disease stage to progress &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;to. We hope that once recovered, always recovered.&quot;</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">.utils._console</span> <span class="kn">import</span> <span class="n">Console</span>
-                <span class="n">Console</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
-                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;Invalid disease parameters!</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
-                                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
-
-            <span class="c1"># set the default names - these are &#39;*&#39;, &quot;E&quot;, &quot;I?&quot;, &quot;R&quot;</span>
+            <span class="c1"># set the default names - these are [&#39;*&#39;], &quot;E&quot;, &quot;I?&quot;, &quot;R&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">()</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;E&quot;</span>
 
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;I&quot;</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;I&quot;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_INF_CLASSES</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
@@ -603,10 +578,27 @@
                         <span class="sa">f</span><span class="s2">&quot;Invalid mapping value &#39;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&#39;. Valid values &quot;</span>
                         <span class="sa">f</span><span class="s2">&quot;are only </span><span class="si">{</span><span class="n">valid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
+        <span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">stage</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                    <span class="s2">&quot;The stage &#39;S&#39; is reserved for the Susceptible class. &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;You cannot use it for your disease: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">mapping</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                        <span class="s2">&quot;The R-mapped stages cannot have is_infected as True&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
 <div class="viewcode-block" id="Disease.insert"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                <span class="n">too_ill_to_move</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrib_foi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-               <span class="n">is_start_symptom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+               <span class="n">is_start_symptom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">is_infected</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Insert a new stage into the disease. This will insert a new stage</span>
 <span class="sd">           into the list of stages at index &#39;index&#39;</span>
 
@@ -639,8 +631,24 @@
 <span class="sd">             Whether this is the start symptom of the disease. This</span>
 <span class="sd">             normally doesn&#39;t need to be set as this will be worked</span>
 <span class="sd">             out automatically by the code.</span>
+<span class="sd">           is_infected: bool</span>
+<span class="sd">             Whether or not this stage is an infected stage. Infected</span>
+<span class="sd">             stages are any where the individual is infected by the</span>
+<span class="sd">             virus. Non-infected stages are thus &quot;S&quot; and &quot;R&quot;. If</span>
+<span class="sd">             you don&#39;t specify this then it will be guess based</span>
+<span class="sd">             on the stage name. Note that &quot;R&quot; stages cannot be</span>
+<span class="sd">             classed as infected. You typically don&#39;t need to set this</span>
+<span class="sd">             as the automatic guess is good. The only time you need</span>
+<span class="sd">             to use this is if you want to add additional non-infected</span>
+<span class="sd">             stages to &quot;S&quot; and &quot;R&quot;, e.g. &quot;V&quot; to represent</span>
+<span class="sd">             vaccinated individuals</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;You cannot add a disease stage called &#39;S&#39;. This name &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;is reserved for the Susceptible class&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -652,6 +660,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
             <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
@@ -661,6 +670,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
@@ -668,6 +678,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">too_ill_to_move</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">contrib_foi</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
                                  <span class="s2">&quot;mapping&quot;</span><span class="p">:</span> <span class="n">mapping</span><span class="p">,</span>
@@ -675,12 +686,14 @@
                                  <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="n">progress</span><span class="p">,</span>
                                  <span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">:</span> <span class="n">too_ill_to_move</span><span class="p">,</span>
                                  <span class="s2">&quot;contrib_foi&quot;</span><span class="p">:</span> <span class="n">contrib_foi</span><span class="p">,</span>
-                                 <span class="s2">&quot;is_start_symptom&quot;</span><span class="p">:</span> <span class="n">is_start_symptom</span><span class="p">})</span></div>
+                                 <span class="s2">&quot;is_start_symptom&quot;</span><span class="p">:</span> <span class="n">is_start_symptom</span><span class="p">,</span>
+                                 <span class="s2">&quot;is_infected&quot;</span><span class="p">:</span> <span class="n">is_infected</span><span class="p">})</span></div>
 
 <div class="viewcode-block" id="Disease.add"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">too_ill_to_move</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">contrib_foi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">is_start_symptom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">is_start_symptom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">is_infected</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Add a new stage to the disease. This will append a new stage</span>
 <span class="sd">           onto the list of stages.</span>
 
@@ -711,17 +724,35 @@
 <span class="sd">             Whether this is the start symptom of the disease. This</span>
 <span class="sd">             normally doesn&#39;t need to be set as this will be worked</span>
 <span class="sd">             out automatically by the code.</span>
+<span class="sd">           is_infected: bool</span>
+<span class="sd">             Whether or not this stage is an infected stage. Infected</span>
+<span class="sd">             stages are any where the individual is infected by the</span>
+<span class="sd">             virus. Non-infected stages are thus &quot;S&quot; and &quot;R&quot;. If</span>
+<span class="sd">             you don&#39;t specify this then it will be guess based</span>
+<span class="sd">             on the stage name. Note that &quot;R&quot; stages cannot be</span>
+<span class="sd">             classed as infected. You typically don&#39;t need to set this</span>
+<span class="sd">             as the automatic guess is good. The only time you need</span>
+<span class="sd">             to use this is if you want to add additional non-infected</span>
+<span class="sd">             stages to &quot;S&quot; and &quot;R&quot;, e.g. &quot;V&quot; to represent</span>
+<span class="sd">             vaccinated individuals</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="n">mapping</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
                     <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span> <span class="n">too_ill_to_move</span><span class="o">=</span><span class="n">too_ill_to_move</span><span class="p">,</span>
                     <span class="n">contrib_foi</span><span class="o">=</span><span class="n">contrib_foi</span><span class="p">,</span>
-                    <span class="n">is_start_symptom</span><span class="o">=</span><span class="n">is_start_symptom</span><span class="p">)</span></div>
+                    <span class="n">is_start_symptom</span><span class="o">=</span><span class="n">is_start_symptom</span><span class="p">,</span>
+                    <span class="n">is_infected</span><span class="o">=</span><span class="n">is_infected</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Disease.get_index"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Disease.get_index">[docs]</a>    <span class="k">def</span> <span class="nf">get_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the index of disease stage &#39;idx&#39; in this disease&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Return the index of disease stage &#39;idx&#39; in this disease.</span>
+<span class="sd">           Note that &quot;S&quot; is a special name that refers to the</span>
+<span class="sd">           susceptibles. This will return -1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">idx</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
             <span class="c1"># lookup by name</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
@@ -934,6 +965,18 @@
         <span class="n">progress</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;progress&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="n">too_ill_to_move</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;too_ill_to_move&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
         <span class="n">contrib_foi</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;contrib_foi&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+        <span class="n">is_infected</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;is_infected&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">is_infected</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">is_infected</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_infected</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span>
+                           <span class="k">else</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">is_infected</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">is_infected</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">beta</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                <span class="s2">&quot;Incompatible beta (</span><span class="si">{beta}</span><span class="s2">) and is_infected &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">is_infected</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 
         <span class="n">start_symptom</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;start_symptom&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
@@ -945,6 +988,7 @@
                           <span class="n">mapping</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mapping&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
                           <span class="n">stage</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stage&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
                           <span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;unnamed&quot;</span><span class="p">),</span>
+                          <span class="n">is_infected</span><span class="o">=</span><span class="n">is_infected</span><span class="p">,</span>
                           <span class="n">_authors</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;author(s)&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
                           <span class="n">_contacts</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;contact(s)&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
                           <span class="n">_references</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reference(s)&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
@@ -984,6 +1028,9 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">data</span><span class="p">[</span><span class="s2">&quot;start_symptom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_symptom</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;is_infected&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_infected</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">data</span><span class="p">[</span><span class="s2">&quot;author(s)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_authors</span><span class="p">)</span>
@@ -1102,7 +1149,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

@@ -1,4 +1,4 @@
-metawards.analysis.save\_summary\_plots
+﻿metawards.analysis.save\_summary\_plots
 =======================================
 
 .. currentmodule:: metawards.analysis

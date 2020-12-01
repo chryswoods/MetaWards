@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -123,7 +124,8 @@
 <li class="toctree-l3"><a class="reference internal" href="06_hospital.html">Modelling a Hospital</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -235,11 +237,11 @@
 scan through their parameters to so that we can investigate their impact.</p>
 <p>There are three parameters that we want to scan;</p>
 <ul class="simple">
-<li><strong>beta[2]</strong> for <code class="docutils literal notranslate"><span class="pre">lurgy_super</span></code>, which controls how infectious super-spreaders
-are in the asymptomatic (or pre-symptomatic) phase.</li>
-<li><strong>progress[2]</strong> for <code class="docutils literal notranslate"><span class="pre">lurgy_super</span></code>, which controls how long the super-spreaders
-remain in this phase.</li>
-<li>The percentage of super-spreaders in the normal population.</li>
+<li><p><strong>beta[2]</strong> for <code class="docutils literal notranslate"><span class="pre">lurgy_super</span></code>, which controls how infectious super-spreaders
+are in the asymptomatic (or pre-symptomatic) phase.</p></li>
+<li><p><strong>progress[2]</strong> for <code class="docutils literal notranslate"><span class="pre">lurgy_super</span></code>, which controls how long the super-spreaders
+remain in this phase.</p></li>
+<li><p>The percentage of super-spreaders in the normal population.</p></li>
 </ul>
 <div class="section" id="scanning-disease-parameters">
 <h2>Scanning disease parameters<a class="headerlink" href="#scanning-disease-parameters" title="Permalink to this headline">¶</a></h2>
@@ -297,8 +299,8 @@ also from 0.5 to 1.0. We specify that we are only changing these parameters
 for the <code class="docutils literal notranslate"><span class="pre">super</span></code> demographic by prefixing <code class="docutils literal notranslate"><span class="pre">beta[2]</span></code> and <code class="docutils literal notranslate"><span class="pre">super[2]</span></code> with
 <code class="docutils literal notranslate"><span class="pre">super:</span></code>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Adding <code class="docutils literal notranslate"><span class="pre">demographic_name:</span></code> before a parameter means that you will only
+<p class="admonition-title">Note</p>
+<p>Adding <code class="docutils literal notranslate"><span class="pre">demographic_name:</span></code> before a parameter means that you will only
 change that parameter for the demographic called <code class="docutils literal notranslate"><span class="pre">demographic_name</span></code>.
 Note that the name <code class="docutils literal notranslate"><span class="pre">overall</span></code> is reserved, and refers to the overall
 set of networks. Setting a parameter using <code class="docutils literal notranslate"><span class="pre">overall:</span></code> will only change
@@ -427,8 +429,8 @@ metawards -d lurgy_home -D demographics_20.json -a ExtraSeedsLondon.dat \
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Notice how the <code class="docutils literal notranslate"><span class="pre">--output</span></code> command line option is used to direct the
+<p class="admonition-title">Note</p>
+<p>Notice how the <code class="docutils literal notranslate"><span class="pre">--output</span></code> command line option is used to direct the
 output from each different demographic file to a different output
 directory. Also notice how we run the four <code class="docutils literal notranslate"><span class="pre">metawards</span></code> calculations
 one after another. There is little need to run them in parallel as
@@ -504,7 +506,7 @@ for the super-spreaders to match observed data.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

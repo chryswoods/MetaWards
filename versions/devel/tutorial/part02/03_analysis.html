@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -122,7 +123,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -259,8 +261,8 @@ the values of the variables that are being adjusted (columns
 <code class="docutils literal notranslate"><span class="pre">fingerprint</span></code> column, which contains a unique identifier for each
 pair of adjustable variables.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In the fingerprint the <code class="docutils literal notranslate"><span class="pre">i</span></code> character represents a decimal point
+<p class="admonition-title">Note</p>
+<p>In the fingerprint the <code class="docutils literal notranslate"><span class="pre">i</span></code> character represents a decimal point
 and <code class="docutils literal notranslate"><span class="pre">v</span></code> separates variables. For example <code class="docutils literal notranslate"><span class="pre">0.3</span>&#160; <span class="pre">0.0</span></code> becomes
 <code class="docutils literal notranslate"><span class="pre">0i3v0i0</span></code>, while <code class="docutils literal notranslate"><span class="pre">0.5</span> <span class="pre">0.5</span></code> becomes <code class="docutils literal notranslate"><span class="pre">0i5v0i5</span></code>.</p>
 </div>
@@ -287,8 +289,8 @@ values of selected columns from each group, e.g.</p>
 of <strong>beta</strong>, which is expected. However, different values of
 <strong>too_ill_to_move</strong> had little impact on the peaks.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Do not over-interpret the results of single runs, such as the above.
+<p class="admonition-title">Warning</p>
+<p>Do not over-interpret the results of single runs, such as the above.
 There is a lot of random
 error in these calculations and multiple <em>model runs</em> must be
 averaged over to gain a good understanding.</p>
@@ -305,8 +307,8 @@ do this type;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We have used the ‘jpg’ image format here are we want to create animations.
+<p class="admonition-title">Note</p>
+<p>We have used the ‘jpg’ image format here are we want to create animations.
 You can choose from many different formats, e.g. ‘pdf’ for publication
 quality graphs, ‘png’ etc. Use the <code class="docutils literal notranslate"><span class="pre">--dpi</span></code> option to set the
 resolution when creating bitmap (png, jpg) images.</p>
@@ -323,8 +325,8 @@ use;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You can only animate image files (e.g. jpeg, png). You can’t animate
+<p class="admonition-title">Note</p>
+<p>You can only animate image files (e.g. jpeg, png). You can’t animate
 pdfs (yet - although
 <a class="reference external" href="https://github.com/metawards/MetaWards/pulls">pull requests welcome</a>).
 Also, animation relies on you installing
@@ -340,7 +342,7 @@ and (optional but recommended)
 <div class="section" id="jupyter-notebook">
 <h2>Jupyter notebook<a class="headerlink" href="#jupyter-notebook" title="Permalink to this headline">¶</a></h2>
 <p>In addition, to the <code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code> command, we also have a
-<a class="reference download internal" download="" href="../../_downloads/9c074a8ab169b5e0fed845f059d0718a/2_3_analysis.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">notebook</span></code></a>
+<a class="reference download internal" download="" href="../../_downloads/3d344d5785403d5e95108b9874bba479/2_3_analysis.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">notebook</span></code></a>
 which you can look at which breaks down exactly how <code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code>
 uses pandas and matplotlib to render multi-fingerprint graphs.</p>
 </div>
@@ -367,7 +369,7 @@ uses pandas and matplotlib to render multi-fingerprint graphs.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

@@ -1,4 +1,4 @@
-metawards.analysis.import\_animate\_modules
+﻿metawards.analysis.import\_animate\_modules
 ===========================================
 
 .. currentmodule:: metawards.analysis

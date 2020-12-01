@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -227,51 +228,46 @@
             
   <div class="section" id="metawards-run">
 <h1>metawards.run<a class="headerlink" href="#metawards-run" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.run">
-<code class="descclassname">metawards.</code><code class="descname">run</code><span class="sig-paren">(</span><em>help: bool = None</em>, <em>version: bool = None</em>, <em>dry_run: bool = None</em>, <em>silent: bool = False</em>, <em>auto_load: bool = False</em>, <em>config: str = None</em>, <em>input: _Union[str</em>, <em>VariableSet</em>, <em>VariableSets] = None</em>, <em>line: int = None</em>, <em>repeats: int = None</em>, <em>seed: int = None</em>, <em>additional: _Union[str</em>, <em>_List[str]] = None</em>, <em>output: str = None</em>, <em>disease: _Union[str</em>, <em>Disease] = None</em>, <em>model: _Union[str</em>, <em>Wards</em>, <em>Ward] = None</em>, <em>demographics: _Union[str</em>, <em>Demographics</em>, <em>Demographic] = None</em>, <em>start_date: _Union[str</em>, <em>date] = None</em>, <em>start_day: int = None</em>, <em>parameters: _Union[str</em>, <em>Parameters] = None</em>, <em>repository: str = None</em>, <em>population: int = None</em>, <em>nsteps: int = None</em>, <em>user_variables: _Union[str</em>, <em>VariableSet] = None</em>, <em>iterator: str = None</em>, <em>extractor: str = None</em>, <em>mixer: str = None</em>, <em>mover: str = None</em>, <em>star_as_E: bool = None</em>, <em>star_as_R: bool = None</em>, <em>disable_star: bool = None</em>, <em>UV: float = None</em>, <em>debug: bool = None</em>, <em>debug_level: int = None</em>, <em>outdir_scheme: str = None</em>, <em>nthreads: int = None</em>, <em>nprocs: int = None</em>, <em>hostfile: str = None</em>, <em>cores_per_node: int = None</em>, <em>auto_bzip: bool = None</em>, <em>no_auto_bzip: bool = None</em>, <em>force_overwrite_output: bool = None</em>, <em>profile: bool = None</em>, <em>no_profile: bool = None</em>, <em>mpi: bool = None</em>, <em>scoop: bool = None</em><span class="sig-paren">)</span> &#x2192; _Union[str, 'pandas.DataFrame']<a class="reference internal" href="../../_modules/metawards/_run.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">help</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dry_run</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">silent</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">auto_load</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">config</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">input</span><span class="p">:</span> <span class="n">_Union<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSet" title="metawards.VariableSet">VariableSet</a><span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets" title="metawards.VariableSets">VariableSets</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">line</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">repeats</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">additional</span><span class="p">:</span> <span class="n">_Union<span class="p">[</span>str<span class="p">, </span>_List<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">output</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">disease</span><span class="p">:</span> <span class="n">_Union<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.Disease" title="metawards.Disease">Disease</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">_Union<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.Wards" title="metawards.Wards">Wards</a><span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.Ward" title="metawards.Ward">Ward</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">demographics</span><span class="p">:</span> <span class="n">_Union<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographics" title="metawards.Demographics">Demographics</a><span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.Demographic" title="metawards.Demographic">Demographic</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">start_date</span><span class="p">:</span> <span class="n">_Union<span class="p">[</span>str<span class="p">, </span>date<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">start_day</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">parameters</span><span class="p">:</span> <span class="n">_Union<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.Parameters" title="metawards.Parameters">Parameters</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">repository</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">population</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nsteps</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">user_variables</span><span class="p">:</span> <span class="n">_Union<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSet" title="metawards.VariableSet">VariableSet</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">iterator</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extractor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mixer</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mover</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">star_as_E</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">star_as_R</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">disable_star</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">UV</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debug</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debug_level</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outdir_scheme</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nthreads</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nprocs</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hostfile</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cores_per_node</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">auto_bzip</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">no_auto_bzip</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force_overwrite_output</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">profile</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">no_profile</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mpi</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scoop</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; _Union<span class="p">[</span>str<span class="p">, </span>pandas.DataFrame<span class="p">]</span><a class="reference internal" href="../../_modules/metawards/_run.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a MetaWards simulation</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>silent</strong> (<em>bool</em>) – Run without printing the output to the screen</li>
-<li><strong>dry_run</strong> (<em>bool</em>) – Don’t run anything - just print what will be run</li>
-<li><strong>help</strong> (<em>bool</em>) – Whether or not to print the full help</li>
-<li><strong>version</strong> (<em>bool</em>) – Whether or not to print the metawards version info</li>
-<li><strong>output</strong> (<em>str</em>) – The name of the directory in which to write the output. If this
-is not set, then a new, random-named directory will be used.</li>
-<li><strong>force_overwrite_output</strong> (<em>bool</em>) – Force overwriting the output directory - this will remove any
-existing directory before running</li>
-<li><strong>auto_load</strong> (<em>bool</em>) – Whether or not to automatically load and return a pandas dataframe
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>silent</strong> (<em>bool</em>) – Run without printing the output to the screen</p></li>
+<li><p><strong>dry_run</strong> (<em>bool</em>) – Don’t run anything - just print what will be run</p></li>
+<li><p><strong>help</strong> (<em>bool</em>) – Whether or not to print the full help</p></li>
+<li><p><strong>version</strong> (<em>bool</em>) – Whether or not to print the metawards version info</p></li>
+<li><p><strong>output</strong> (<em>str</em>) – The name of the directory in which to write the output. If this
+is not set, then a new, random-named directory will be used.</p></li>
+<li><p><strong>force_overwrite_output</strong> (<em>bool</em>) – Force overwriting the output directory - this will remove any
+existing directory before running</p></li>
+<li><p><strong>auto_load</strong> (<em>bool</em>) – Whether or not to automatically load and return a pandas dataframe
 of the output/results.csv.bz2 file. If pandas is available then
-this defaults to True, otherwise False</li>
-<li><strong>disease</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Disease" title="metawards.Disease"><em>Disease</em></a><em> or </em><em>str</em>) – The disease to model (or the filename of the json file containing
-the disease, or name of the disease)</li>
-<li><strong>model</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Ward" title="metawards.Ward"><em>Ward</em></a><em>, </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Wards" title="metawards.Wards"><em>Wards</em></a><em> or </em><em>str</em>) – The network wards to run (of the filename of the json file
-containing the network, or name of the network))</li>
-<li><strong>are many more parameters</strong><strong>, </strong><strong>based on the arguments to</strong> (<em>There</em>) – </li>
-<li><strong>--help.</strong> (<em>metawards</em>) – </li>
-<li><strong>set &quot;help&quot; to True to print out a full list of</strong> (<em>Please</em>) – </li>
-<li><strong>for all of the arguments</strong> (<em>help</em>) – <table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body"><strong>results</strong> – The file containing the output results (output/results.csv.bz2),
+this defaults to True, otherwise False</p></li>
+<li><p><strong>disease</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Disease" title="metawards.Disease"><em>Disease</em></a><em> or </em><em>str</em>) – The disease to model (or the filename of the json file containing
+the disease, or name of the disease)</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Ward" title="metawards.Ward"><em>Ward</em></a><em>, </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Wards" title="metawards.Wards"><em>Wards</em></a><em> or </em><em>str</em>) – The network wards to run (of the filename of the json file
+containing the network, or name of the network))</p></li>
+<li><p><strong>are many more parameters</strong> (<em>There</em>) – </p></li>
+<li><p><strong>on the arguments to</strong> (<em>based</em>) – </p></li>
+<li><p><strong>--help.</strong> (<em>metawards</em>) – </p></li>
+<li><p><strong>set &quot;help&quot; to True to print out a full list of</strong> (<em>Please</em>) – </p></li>
+<li><p><strong>for all of the arguments</strong> (<em>help</em>) – <dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p><strong>results</strong> – The file containing the output results (output/results.csv.bz2),
 or, if auto_load is True, the pandas.DataFrame containing
-those results</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">str or pandas.DataFrame</td>
-</tr>
-</tbody>
-</table>
-</li>
+those results</p>
+</dd>
+<dt class="field-even">rtype</dt>
+<dd class="field-even"><p>str or pandas.DataFrame</p>
+</dd>
+</dl>
+</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -297,7 +293,7 @@ those results</td>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

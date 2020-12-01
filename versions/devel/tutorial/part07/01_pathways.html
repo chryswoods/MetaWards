@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -121,7 +122,8 @@
 <li class="toctree-l3"><a class="reference internal" href="06_hospital.html">Modelling a Hospital</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -239,31 +241,31 @@ who are removed from the outbreak).</p>
 <h2>Stages of the lurgy<a class="headerlink" href="#stages-of-the-lurgy" title="Permalink to this headline">¶</a></h2>
 <p>For the lurgy, the disease stages are;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">S</span></code> - this is the starting point of all individuals</li>
-<li><code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">0</span></code> - this is a holding state. Individuals are moved into this
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code> - this is the starting point of all individuals</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">0</span></code> - this is a holding state. Individuals are moved into this
 state as soon as they are infected. This is used to record internally
 in <code class="docutils literal notranslate"><span class="pre">metawards</span></code> to record new infections each day. The <code class="docutils literal notranslate"><span class="pre">progress</span></code>
 value for this state (<code class="docutils literal notranslate"><span class="pre">progress[0]</span></code>) should be <code class="docutils literal notranslate"><span class="pre">1.0</span></code>, to show
 that individuals will immediately progress to <code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">1</span></code> (the latent, <code class="docutils literal notranslate"><span class="pre">E</span></code>
 state) the next day. Equally, the <code class="docutils literal notranslate"><span class="pre">beta</span></code> value for this state
 (<code class="docutils literal notranslate"><span class="pre">beta[0]</span></code>) should be <code class="docutils literal notranslate"><span class="pre">0.0</span></code> as individuals in this state should
-not contribute to the force of infection.</li>
-<li><code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">1</span></code> - this is the latent or <code class="docutils literal notranslate"><span class="pre">E</span></code> state. Individuals are held
+not contribute to the force of infection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">1</span></code> - this is the latent or <code class="docutils literal notranslate"><span class="pre">E</span></code> state. Individuals are held
 in this state with a duration defined by <code class="docutils literal notranslate"><span class="pre">progress[1]</span></code>. The <code class="docutils literal notranslate"><span class="pre">beta[1]</span></code>
 value should be <code class="docutils literal notranslate"><span class="pre">0.0</span></code> as latent individuals are not infectious and
-should not thus contribute to the force of infection.</li>
-<li><code class="docutils literal notranslate"><span class="pre">Stages</span> <span class="pre">2-4</span></code> - these are the infected or <code class="docutils literal notranslate"><span class="pre">I</span></code> states. The lurgy has
+should not thus contribute to the force of infection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Stages</span> <span class="pre">2-4</span></code> - these are the infected or <code class="docutils literal notranslate"><span class="pre">I</span></code> states. The lurgy has
 three such states, with <code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">2</span></code> (or <code class="docutils literal notranslate"><span class="pre">I1</span></code>) representing the
 asymptomatic infectious state (low <code class="docutils literal notranslate"><span class="pre">beta</span></code> but zero <code class="docutils literal notranslate"><span class="pre">too_ill_to_move</span></code>),
 then <code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">3</span></code> (or <code class="docutils literal notranslate"><span class="pre">I2</span></code>) representing the initial symptomatic
 state (medium <code class="docutils literal notranslate"><span class="pre">beta</span></code> and medium <code class="docutils literal notranslate"><span class="pre">too_ill_to_move</span></code>), and <code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">4</span></code>
 (or <code class="docutils literal notranslate"><span class="pre">I3</span></code>) representing the highly symptomatic state (medium <code class="docutils literal notranslate"><span class="pre">beta</span></code>
-and high <code class="docutils literal notranslate"><span class="pre">too_ill_to_move</span></code>).</li>
-<li><code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">5</span></code> - this is the removed or <code class="docutils literal notranslate"><span class="pre">R</span></code> state. Individuals in this
+and high <code class="docutils literal notranslate"><span class="pre">too_ill_to_move</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Stage</span> <span class="pre">5</span></code> - this is the removed or <code class="docutils literal notranslate"><span class="pre">R</span></code> state. Individuals in this
 state cannot infect others, and so <code class="docutils literal notranslate"><span class="pre">beta</span></code> is <code class="docutils literal notranslate"><span class="pre">0.0</span></code> and <code class="docutils literal notranslate"><span class="pre">too_ill_to_move</span></code>
 is <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (no need to model movements of non-infectious or infectable
 individuals). The <code class="docutils literal notranslate"><span class="pre">progress</span></code> value is <code class="docutils literal notranslate"><span class="pre">0.0</span></code> as, once removed,
-individuals remain in this stage for the remainder of the <em>model run</em>.</li>
+individuals remain in this stage for the remainder of the <em>model run</em>.</p></li>
 </ul>
 </div>
 <div class="section" id="modelling-a-fraction-of-asymptomatic-super-spreaders">
@@ -277,10 +279,10 @@ of those infected by the lurgy will become these asymptomatic
 of these super-spreaders, and their mobility and infectivity affects the
 progression of the outbreak. To do this, we will create two demographics;</p>
 <ol class="arabic simple">
-<li><strong>home</strong>, which will contain a population who do not progress through
-the asymptomatic infectious stage, and</li>
-<li><strong>super</strong>, which will contain a population of super-spreaders who do
-move through the asymptomatic infectious phase.</li>
+<li><p><strong>home</strong>, which will contain a population who do not progress through
+the asymptomatic infectious stage, and</p></li>
+<li><p><strong>super</strong>, which will contain a population of super-spreaders who do
+move through the asymptomatic infectious phase.</p></li>
 </ol>
 <p>To start, we need to create disease files for the <strong>home</strong> and <strong>super</strong>
 demographics. Do this by creating two files, first <code class="docutils literal notranslate"><span class="pre">lurgy_home.json</span></code> that
@@ -329,8 +331,8 @@ line here, <code class="docutils literal notranslate"><span class="pre">disease_
 for each demographic, e.g. <code class="docutils literal notranslate"><span class="pre">home</span></code> will follow the default disease, while
 <code class="docutils literal notranslate"><span class="pre">super</span></code> will follow <code class="docutils literal notranslate"><span class="pre">lurgy_super</span></code>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">null</span></code> in a json file means “nothing”. In this case, “nothing” means
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">null</span></code> in a json file means “nothing”. In this case, “nothing” means
 that the <code class="docutils literal notranslate"><span class="pre">home</span></code> demographic should use the disease parameters from
 the global disease file set by the user.</p>
 </div>
@@ -339,8 +341,8 @@ the global disease file set by the user.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Here we set the global disease file, via <code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">lurgy_home</span></code> to <code class="docutils literal notranslate"><span class="pre">lurgy_home</span></code>.
+<p class="admonition-title">Note</p>
+<p>Here we set the global disease file, via <code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">lurgy_home</span></code> to <code class="docutils literal notranslate"><span class="pre">lurgy_home</span></code>.
 This will be used by the <code class="docutils literal notranslate"><span class="pre">home</span></code> demographic. In theory we could have
 specified <code class="docutils literal notranslate"><span class="pre">lurgy_home</span></code> directly in the <code class="docutils literal notranslate"><span class="pre">demographics.json</span></code> file,
 but this would mean we would have to specify it twice, once there and once
@@ -358,7 +360,7 @@ burns quickly through the super-spreader demographic, moving through that
 entire demographic in just a couple of months.</p>
 <img alt="Demographic trajectory including the super-spreaders" src="../../_images/tutorial_7_1.jpg" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>It is counter-intuitive that the super-spreaders are all infected quickly,
 and complete the outbreak long before the general population. This is
 due to the model setup. The super-spreaders all interact with each other
@@ -373,7 +375,7 @@ become ill. As they will continue normally, it could make sense that
 they outbreak could burn through that population quickly,
 until the point where there are few remaining. Meanwhile, the larger,
 more general population experiences a slower outbreak.</p>
-<p class="last">One way to counter this effect would be to use an interaction matrix
+<p>One way to counter this effect would be to use an interaction matrix
 to slow down the rate of infection in the super-spreader demographic.
 This would reflect the reality that super-spreaders are more dispersed,
 and so less likely to interact with one another than with members
@@ -405,7 +407,7 @@ be needed to find the exact values.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

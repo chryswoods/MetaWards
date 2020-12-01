@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -117,13 +118,16 @@
 <li class="toctree-l3"><a class="reference internal" href="04_dynamic.html">Responding to changing conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_scanning.html">Custom variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="06_scan_lockdown.html">Scanning lockdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="07_cutoff.html">Alternative lockdowns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="08_local_lockdown.html">Local lockdowns</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -260,8 +264,8 @@ unspecified number of
 (more about these later). It returns an empty list (<code class="docutils literal notranslate"><span class="pre">[]</span></code>). All it does
 is print <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">iterate_weekend</span></code> to the screen.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Notice that you <em>must</em> print using the
+<p class="admonition-title">Note</p>
+<p>Notice that you <em>must</em> print using the
 <a class="reference internal" href="../../api/generated/metawards.utils.Console.html#metawards.utils.Console.print" title="metawards.utils.Console.print"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Console.print</span></code></a> function of
 <a class="reference internal" href="../../api/generated/metawards.utils.Console.html#metawards.utils.Console" title="metawards.utils.Console"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Console()</span></code></a>. This ensures that all printing
 goes to the right place and stays sane when multiple processes
@@ -365,8 +369,8 @@ command below;</p>
 <p>You should see <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">another_function</span></code> is now printed for
 every iteration.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Sometimes you may see <code class="docutils literal notranslate"><span class="pre">metawards</span></code> exit with a warning that it can’t
+<p class="admonition-title">Warning</p>
+<p>Sometimes you may see <code class="docutils literal notranslate"><span class="pre">metawards</span></code> exit with a warning that it can’t
 find your iterator function. This is likely because there is a typo
 or syntax error in your iterator. <code class="docutils literal notranslate"><span class="pre">metawards</span></code> does its best to
 detect these and report them to you, so check above the error in the
@@ -533,8 +537,8 @@ metawards-plot -i output/results.csv.bz2 --format jpg --dpi <span class="m">150<
 <p>There is a significant spread in the infection during weekdays,
 but then this growth falls back at weekends.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This “week” iterator is so important that it is supplied
+<p class="admonition-title">Note</p>
+<p>This “week” iterator is so important that it is supplied
 as the <a class="reference internal" href="../../api/generated/metawards.iterators.iterate_working_week.html#metawards.iterators.iterate_working_week" title="metawards.iterators.iterate_working_week"><code class="xref py py-meth docutils literal notranslate"><span class="pre">metawards.iterators.iterate_working_week()</span></code></a>
 iterator. You can use this via the command line option
 <code class="docutils literal notranslate"><span class="pre">--iterator</span> <span class="pre">iterate_working_week</span></code>. Similarly there
@@ -544,8 +548,8 @@ to iterate as a weekday only, and
 as weekends only.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">By default the outbreak is modelled to start from today.
+<p class="admonition-title">Note</p>
+<p>By default the outbreak is modelled to start from today.
 You can control the start date using the <code class="docutils literal notranslate"><span class="pre">--start-date</span></code>
 command line option.</p>
 </div>
@@ -573,7 +577,7 @@ command line option.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

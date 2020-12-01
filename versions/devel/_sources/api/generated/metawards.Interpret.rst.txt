@@ -1,4 +1,4 @@
-metawards.Interpret
+﻿metawards.Interpret
 ===================
 
 .. currentmodule:: metawards
@@ -13,6 +13,27 @@ metawards.Interpret
 
    .. autosummary::
    
+      ~Interpret.__delattr__
+      ~Interpret.__dir__
+      ~Interpret.__eq__
+      ~Interpret.__format__
+      ~Interpret.__ge__
+      ~Interpret.__getattribute__
+      ~Interpret.__gt__
+      ~Interpret.__hash__
+      ~Interpret.__init__
+      ~Interpret.__init_subclass__
+      ~Interpret.__le__
+      ~Interpret.__lt__
+      ~Interpret.__ne__
+      ~Interpret.__new__
+      ~Interpret.__reduce__
+      ~Interpret.__reduce_ex__
+      ~Interpret.__repr__
+      ~Interpret.__setattr__
+      ~Interpret.__sizeof__
+      ~Interpret.__str__
+      ~Interpret.__subclasshook__
       ~Interpret.boolean
       ~Interpret.date
       ~Interpret.day
@@ -26,5 +47,14 @@ metawards.Interpret
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Interpret.__dict__
+      ~Interpret.__doc__
+      ~Interpret.__module__
+      ~Interpret.__weakref__
    
    

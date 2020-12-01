@@ -1,4 +1,4 @@
-metawards.mixers.mix\_default
+﻿metawards.mixers.mix\_default
 =============================
 
 .. currentmodule:: metawards.mixers

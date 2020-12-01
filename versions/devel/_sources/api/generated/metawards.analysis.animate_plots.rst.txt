@@ -1,4 +1,4 @@
-metawards.analysis.animate\_plots
+﻿metawards.analysis.animate\_plots
 =================================
 
 .. currentmodule:: metawards.analysis

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -215,9 +216,8 @@
 the model is run. This data is stored in a separate
 <a class="reference external" href="https://github.com/metawards/MetaWardsData">MetaWardsData</a> repository.</p>
 <p>You can download this data in one of two ways;</p>
-<dl class="docutils">
-<dt>Direct download</dt>
-<dd><p class="first">Download one of the data releases from the
+<dl>
+<dt>Direct download</dt><dd><p>Download one of the data releases from the
 <a class="reference external" href="https://github.com/metawards/MetaWardsData/releases">releases page</a>.
 It is best to choose the latest release unless you are trying to
 reproduce an earler calculation.</p>
@@ -230,11 +230,10 @@ can unpack it using either;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip MetaWardsData-0.2.0.zip
 </pre></div>
 </div>
-<p class="last">if you downloaded the zip file.</p>
+<p>if you downloaded the zip file.</p>
 </dd>
-<dt>Git clone</dt>
-<dd><p class="first">You can clone the data repository using</p>
-<div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/metawards/MetaWardsData
+<dt>Git clone</dt><dd><p>You can clone the data repository using</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/metawards/MetaWardsData
 </pre></div>
 </div>
 </dd>
@@ -245,14 +244,14 @@ can unpack it using either;</p>
 <p>Once you have downloaded the data you will need to tell metawards
 where the data is located. This can be done in one of three ways;</p>
 <ol class="arabic">
-<li><p class="first">Set the <code class="docutils literal notranslate"><span class="pre">METAWARDSDATA</span></code> environment variable equal to the full path
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">METAWARDSDATA</span></code> environment variable equal to the full path
 to the data, e.g.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">METAWARDSDATA</span><span class="o">=</span><span class="nv">$HOME</span>/MetaWardsData
 </pre></div>
 </div>
 <p>(assuming you have placed it in your home directory)</p>
 </li>
-<li><p class="first">Pass the full path to the data to metawards using the command line argument
+<li><p>Pass the full path to the data to metawards using the command line argument
 <code class="docutils literal notranslate"><span class="pre">--repository</span></code>, e.g.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>    metawards --repository <span class="nv">$HOME</span>/MetaWardsData
 
@@ -260,7 +259,7 @@ to the data, e.g.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Move the data to <code class="docutils literal notranslate"><span class="pre">$HOME/GitHub/MetaWardsData</span></code> as this is the default
+<li><p>Move the data to <code class="docutils literal notranslate"><span class="pre">$HOME/GitHub/MetaWardsData</span></code> as this is the default
 search location, e.g.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir <span class="nv">$HOME</span>/GitHub
 mv <span class="nv">$HOME</span>/MetaWardsData <span class="nv">$HOME</span>/GitHub/
@@ -293,39 +292,39 @@ as you.</p>
 <div class="section" id="understanding-the-data">
 <h2>Understanding the data<a class="headerlink" href="#understanding-the-data" title="Permalink to this headline">¶</a></h2>
 <p>The MetaWardData repository contains four types of data;</p>
-<dl class="docutils">
-<dt>model_data</dt>
-<dd>The <code class="docutils literal notranslate"><span class="pre">model_data</span></code> directory contains the data needed to construct
+<dl class="simple">
+<dt>model_data</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">model_data</span></code> directory contains the data needed to construct
 a network of wards and links. Currently the 2011 model is included,
 in the <code class="docutils literal notranslate"><span class="pre">2011Data</span></code> directory. The manifest of files that
 comprise this model is <code class="docutils literal notranslate"><span class="pre">2011Data/description.json</span></code>. This json
 file is read by metawards to find and load all of the files that
-are needed for this model.</dd>
-<dt>diseases</dt>
-<dd>The <code class="docutils literal notranslate"><span class="pre">diseases</span></code> directory contains the parameters for different
+are needed for this model.</p>
+</dd>
+<dt>diseases</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">diseases</span></code> directory contains the parameters for different
 diseases. Each disease is described in its own json file, e.g.
 the parameters for SARS-Cov-2 are in <code class="docutils literal notranslate"><span class="pre">diseases/ncov.json</span></code>.
 Once of the main purposes of metawards is to perform parameter
 sweeps to adjust these disease parameters so that a model epidemic
 can more closely follow what is observed in reality. From there,
-more meaningful predictions should be able to be made.</dd>
-<dt>parameters</dt>
-<dd>The <code class="docutils literal notranslate"><span class="pre">parameters</span></code> directory contains parameters used to control
+more meaningful predictions should be able to be made.</p>
+</dd>
+<dt>parameters</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">parameters</span></code> directory contains parameters used to control
 metawards model runs. These represent “good defaults” for the
 values of the parameters, and are stored in the MetaWardsData
 repository to make it easier to version control and track
 provenance of the parameters used for different jobs.
 The parameters used for jobs in March 2020 (and correct as
-of March 29th) are in <code class="docutils literal notranslate"><span class="pre">parameters/march29.json</span></code>.</dd>
-<dt>extra_seeds</dt>
-<dd>The <code class="docutils literal notranslate"><span class="pre">extra_seeds</span></code> directory contains files that can be used
+of March 29th) are in <code class="docutils literal notranslate"><span class="pre">parameters/march29.json</span></code>.</p>
+</dd>
+<dt>extra_seeds</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">extra_seeds</span></code> directory contains files that can be used
 to seed new model disease clusters at different wards during
 a model run. Each file can contain as many additional seeds
 as needed. The format is three numbers per line;
 <code class="docutils literal notranslate"><span class="pre">t</span>&#160;&#160; <span class="pre">num</span>&#160;&#160; <span class="pre">loc</span></code>, where <code class="docutils literal notranslate"><span class="pre">t</span></code> is the step (day) on which
 the additional infection will be seeded, <code class="docutils literal notranslate"><span class="pre">num</span></code> is the number
 of additional infections, and <code class="docutils literal notranslate"><span class="pre">loc</span></code> is the index of the
-ward in the model network in which the infection will occur.</dd>
+ward in the model network in which the infection will occur.</p>
+</dd>
 </dl>
 </div>
 </div>
@@ -351,7 +350,7 @@ ward in the model network in which the infection will occur.</dd>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -41,7 +42,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="metawards.WardInfos" href="metawards.WardInfos.html" />
-    <link rel="prev" title="metawards.Ward" href="metawards.Ward.html" /> 
+    <link rel="prev" title="metawards.WardID" href="metawards.WardID.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -216,7 +217,7 @@
         <a href="metawards.WardInfos.html" class="btn btn-neutral float-right" title="metawards.WardInfos" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="metawards.Ward.html" class="btn btn-neutral float-left" title="metawards.Ward" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="metawards.WardID.html" class="btn btn-neutral float-left" title="metawards.WardID" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -227,138 +228,220 @@
             
   <div class="section" id="metawards-wardinfo">
 <h1>metawards.WardInfo<a class="headerlink" href="#metawards-wardinfo" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="metawards.WardInfo">
-<em class="property">class </em><code class="descclassname">metawards.</code><code class="descname">WardInfo</code><span class="sig-paren">(</span><em>name: str = ''</em>, <em>alternate_names: List[str] = &lt;factory&gt;</em>, <em>code: str = ''</em>, <em>alternate_codes: List[str] = &lt;factory&gt;</em>, <em>authority: str = ''</em>, <em>authority_code: str = ''</em>, <em>region: str = ''</em>, <em>region_code: str = ''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">metawards.</code><code class="sig-name descname">WardInfo</code><span class="sig-paren">(</span><em class="sig-param">name: str = ''</em>, <em class="sig-param">alternate_names: List[str] = &lt;factory&gt;</em>, <em class="sig-param">code: str = ''</em>, <em class="sig-param">alternate_codes: List[str] = &lt;factory&gt;</em>, <em class="sig-param">authority: str = ''</em>, <em class="sig-param">authority_code: str = ''</em>, <em class="sig-param">region: str = ''</em>, <em class="sig-param">region_code: str = ''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class holds metadata about a ward, e.g. its name(s),
 any ID code(s), any information about the region or
 authority it is in etc.</p>
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfo.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>name: str = ''</em>, <em>alternate_names: List[str] = &lt;factory&gt;</em>, <em>code: str = ''</em>, <em>alternate_codes: List[str] = &lt;factory&gt;</em>, <em>authority: str = ''</em>, <em>authority_code: str = ''</em>, <em>region: str = ''</em>, <em>region_code: str = ''</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.WardInfo.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">name: str = ''</em>, <em class="sig-param">alternate_names: List[str] = &lt;factory&gt;</em>, <em class="sig-param">code: str = ''</em>, <em class="sig-param">alternate_codes: List[str] = &lt;factory&gt;</em>, <em class="sig-param">authority: str = ''</em>, <em class="sig-param">authority_code: str = ''</em>, <em class="sig-param">region: str = ''</em>, <em class="sig-param">region_code: str = ''</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.WardInfo.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
 
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.WardInfo.__init__" title="metawards.WardInfo.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(name,&nbsp;alternate_names,&nbsp;code,&nbsp;…)</td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__delattr__</span></code>(name, /)</p></td>
+<td><p>Implement delattr(self, name).</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.from_data" title="metawards.WardInfo.from_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_data</span></code></a>(data)</td>
-<td>Construct from the passed dictionary, which has, e.g.</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dir__</span></code>()</p></td>
+<td><p>Default dir() implementation.</p></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_null</span></code>()</td>
-<td></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__eq__</span></code>(other)</p></td>
+<td><p>Return self==value.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.summary" title="metawards.WardInfo.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>()</td>
-<td>Return a summary string that identifies this WardInfo</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__format__</span></code>(format_spec, /)</p></td>
+<td><p>Default object formatter.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.to_data" title="metawards.WardInfo.to_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_data</span></code></a>()</td>
-<td>Return a dictionary that contains all of this data, in a format that can be serialised to JSON</td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__ge__</span></code>(value, /)</p></td>
+<td><p>Return self&gt;=value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getattribute__</span></code>(name, /)</p></td>
+<td><p>Return getattr(self, name).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__gt__</span></code>(value, /)</p></td>
+<td><p>Return self&gt;value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.__hash__" title="metawards.WardInfo.__hash__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__hash__</span></code></a>()</p></td>
+<td><p>Return hash(self).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#metawards.WardInfo.__init__" title="metawards.WardInfo.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([name, alternate_names, code, …])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init_subclass__</span></code></p></td>
+<td><p>This method is called when a class is subclassed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__le__</span></code>(value, /)</p></td>
+<td><p>Return self&lt;=value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__lt__</span></code>(value, /)</p></td>
+<td><p>Return self&lt;value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__ne__</span></code>(value, /)</p></td>
+<td><p>Return self!=value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__new__</span></code>(**kwargs)</p></td>
+<td><p>Create and return a new object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__reduce__</span></code>()</p></td>
+<td><p>Helper for pickle.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__reduce_ex__</span></code>(protocol, /)</p></td>
+<td><p>Helper for pickle.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__repr__</span></code>()</p></td>
+<td><p>Return repr(self).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setattr__</span></code>(name, value, /)</p></td>
+<td><p>Implement setattr(self, name, value).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__sizeof__</span></code>()</p></td>
+<td><p>Size of object in memory, in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__str__</span></code>()</p></td>
+<td><p>Return str(self).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__subclasshook__</span></code></p></td>
+<td><p>Abstract classes can override this to customize issubclass().</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.from_data" title="metawards.WardInfo.from_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_data</span></code></a>(data)</p></td>
+<td><p>Construct from the passed dictionary, which has, e.g.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_null</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.summary" title="metawards.WardInfo.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>()</p></td>
+<td><p>Return a summary string that identifies this WardInfo</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.to_data" title="metawards.WardInfo.to_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_data</span></code></a>()</p></td>
+<td><p>Return a dictionary that contains all of this data, in a format that can be serialised to JSON</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.authority" title="metawards.WardInfo.authority"><code class="xref py py-obj docutils literal notranslate"><span class="pre">authority</span></code></a></td>
-<td>The name of the local authority it is in</td>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__annotations__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.authority_code" title="metawards.WardInfo.authority_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">authority_code</span></code></a></td>
-<td>The ID of the local authority it is in</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dataclass_fields__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.code" title="metawards.WardInfo.code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">code</span></code></a></td>
-<td>Official ID code of the ward</td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dataclass_params__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.name" title="metawards.WardInfo.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td>Name of the ward</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dict__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.region" title="metawards.WardInfo.region"><code class="xref py py-obj docutils literal notranslate"><span class="pre">region</span></code></a></td>
-<td>The name of the region it is in</td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__doc__</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.region_code" title="metawards.WardInfo.region_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">region_code</span></code></a></td>
-<td>The ID of the region it is in</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__module__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__weakref__</span></code></p></td>
+<td><p>list of weak references to the object (if defined)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.authority" title="metawards.WardInfo.authority"><code class="xref py py-obj docutils literal notranslate"><span class="pre">authority</span></code></a></p></td>
+<td><p>The name of the local authority it is in</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.authority_code" title="metawards.WardInfo.authority_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">authority_code</span></code></a></p></td>
+<td><p>The ID of the local authority it is in</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.code" title="metawards.WardInfo.code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">code</span></code></a></p></td>
+<td><p>Official ID code of the ward</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.name" title="metawards.WardInfo.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>Name of the ward</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.region" title="metawards.WardInfo.region"><code class="xref py py-obj docutils literal notranslate"><span class="pre">region</span></code></a></p></td>
+<td><p>The name of the region it is in</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfo.region_code" title="metawards.WardInfo.region_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">region_code</span></code></a></p></td>
+<td><p>The ID of the region it is in</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfo.__hash__">
-<code class="descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo.__hash__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo.__hash__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__hash__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo.__hash__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo.__hash__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return hash(self).</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfo.alternate_codes">
-<code class="descname">alternate_codes</code><em class="property"> = None</em><a class="headerlink" href="#metawards.WardInfo.alternate_codes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">alternate_codes</code><em class="property">: List<span class="p">[</span>str<span class="p">]</span></em><a class="headerlink" href="#metawards.WardInfo.alternate_codes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Any alternative ID codes of the ward</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfo.alternate_names">
-<code class="descname">alternate_names</code><em class="property"> = None</em><a class="headerlink" href="#metawards.WardInfo.alternate_names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">alternate_names</code><em class="property">: List<span class="p">[</span>str<span class="p">]</span></em><a class="headerlink" href="#metawards.WardInfo.alternate_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Any alternative names of the ward</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfo.authority">
-<code class="descname">authority</code><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.authority" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">authority</code><em class="property">: str</em><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.authority" title="Permalink to this definition">¶</a></dt>
 <dd><p>The name of the local authority it is in</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfo.authority_code">
-<code class="descname">authority_code</code><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.authority_code" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">authority_code</code><em class="property">: str</em><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.authority_code" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ID of the local authority it is in</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfo.code">
-<code class="descname">code</code><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.code" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">code</code><em class="property">: str</em><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.code" title="Permalink to this definition">¶</a></dt>
 <dd><p>Official ID code of the ward</p>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="py method">
 <dt id="metawards.WardInfo.from_data">
-<em class="property">static </em><code class="descname">from_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo.from_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo.from_data" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">from_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo.from_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo.from_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct from the passed dictionary, which has, e.g. been
 deserialised from JSON</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfo.name">
-<code class="descname">name</code><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><em class="property">: str</em><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the ward</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfo.region">
-<code class="descname">region</code><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.region" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">region</code><em class="property">: str</em><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.region" title="Permalink to this definition">¶</a></dt>
 <dd><p>The name of the region it is in</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfo.region_code">
-<code class="descname">region_code</code><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.region_code" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">region_code</code><em class="property">: str</em><em class="property"> = ''</em><a class="headerlink" href="#metawards.WardInfo.region_code" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ID of the region it is in</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfo.summary">
-<code class="descname">summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo.summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo.summary" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo.summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo.summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a summary string that identifies this WardInfo</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfo.to_data">
-<code class="descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo.to_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">to_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfo.to_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfo.to_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a dictionary that contains all of this data, in
 a format that can be serialised to JSON</p>
 </dd></dl>
@@ -378,7 +461,7 @@ a format that can be serialised to JSON</p>
         <a href="metawards.WardInfos.html" class="btn btn-neutral float-right" title="metawards.WardInfos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="metawards.Ward.html" class="btn btn-neutral float-left" title="metawards.Ward" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="metawards.WardID.html" class="btn btn-neutral float-left" title="metawards.WardID" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -388,7 +471,7 @@ a format that can be serialised to JSON</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

@@ -1,4 +1,4 @@
-metawards.iterators.advance\_foi\_omp
+﻿metawards.iterators.advance\_foi\_omp
 =====================================
 
 .. currentmodule:: metawards.iterators

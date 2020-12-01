@@ -1,4 +1,4 @@
-metawards.OutputFiles
+﻿metawards.OutputFiles
 =====================
 
 .. currentmodule:: metawards
@@ -13,7 +13,31 @@ metawards.OutputFiles
 
    .. autosummary::
    
+      ~OutputFiles.__delattr__
+      ~OutputFiles.__dir__
+      ~OutputFiles.__enter__
+      ~OutputFiles.__eq__
+      ~OutputFiles.__exit__
+      ~OutputFiles.__format__
+      ~OutputFiles.__ge__
+      ~OutputFiles.__getattribute__
+      ~OutputFiles.__gt__
+      ~OutputFiles.__hash__
       ~OutputFiles.__init__
+      ~OutputFiles.__init_subclass__
+      ~OutputFiles.__le__
+      ~OutputFiles.__lt__
+      ~OutputFiles.__ne__
+      ~OutputFiles.__new__
+      ~OutputFiles.__reduce__
+      ~OutputFiles.__reduce_ex__
+      ~OutputFiles.__repr__
+      ~OutputFiles.__setattr__
+      ~OutputFiles.__sizeof__
+      ~OutputFiles.__str__
+      ~OutputFiles.__subclasshook__
+      ~OutputFiles._close_dir
+      ~OutputFiles._open_dir
       ~OutputFiles.auto_bzip
       ~OutputFiles.close
       ~OutputFiles.flush
@@ -31,5 +55,14 @@ metawards.OutputFiles
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~OutputFiles.__dict__
+      ~OutputFiles.__doc__
+      ~OutputFiles.__module__
+      ~OutputFiles.__weakref__
    
    

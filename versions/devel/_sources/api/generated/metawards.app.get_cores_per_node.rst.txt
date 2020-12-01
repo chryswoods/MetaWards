@@ -1,4 +1,4 @@
-metawards.app.get\_cores\_per\_node
+﻿metawards.app.get\_cores\_per\_node
 ===================================
 
 .. currentmodule:: metawards.app

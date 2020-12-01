@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -195,7 +196,9 @@
   <h1>Source code for metawards._parameters</h1><div class="highlight"><pre>
 <span></span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span> <span class="k">as</span> <span class="n">_dataclass</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span> <span class="k">as</span> <span class="n">_field</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span> <span class="k">as</span> <span class="n">_List</span><span class="p">,</span> <span class="n">Dict</span> <span class="k">as</span> <span class="n">_Dict</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span> <span class="k">as</span> <span class="n">_date</span>
 
 <span class="kn">from</span> <span class="nn">._inputfiles</span> <span class="kn">import</span> <span class="n">InputFiles</span>
 <span class="kn">from</span> <span class="nn">._disease</span> <span class="kn">import</span> <span class="n">Disease</span>
@@ -336,8 +339,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: The set of input files that define the model Network</span>
     <span class="n">input_files</span><span class="p">:</span> <span class="n">InputFiles</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="c1">#: The name of the UV file</span>
-    <span class="n">uv_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="c1">#: The set of parameters that define the disease</span>
     <span class="n">disease_params</span><span class="p">:</span> <span class="n">Disease</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -347,37 +349,47 @@
 
     <span class="c1">#: The fraction of day considered &quot;day&quot; for work, e.g. 0.7 * 24 hours</span>
     <span class="n">length_day</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span>
-    <span class="c1">#: The fraction of day considered &quot;day&quot; for play</span>
-    <span class="n">plength_day</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span>
-    <span class="c1">#: The number of initial infections</span>
-    <span class="n">initial_inf</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
 
     <span class="n">static_play_at_home</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">dyn_play_at_home</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
 
+    <span class="c1">#: The cutoff distance in km beyond which workers or players cannot move</span>
     <span class="n">dyn_dist_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">10000000.0</span>
 
     <span class="n">play_to_work</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">work_to_play</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    <span class="n">local_vaccination_thresh</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="n">global_detection_thresh</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="n">daily_ward_vaccination_capacity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
-    <span class="n">neighbour_weight_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-    <span class="c1">#: proportion of daily imports</span>
+    <span class="c1">#: proportion of daily imports if there are additional infections</span>
     <span class="n">daily_imports</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1">#: The index of the seeding ward if there are daily imports</span>
+    <span class="n">ward_seed_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: The number of initial infections if there are daily imports</span>
+    <span class="n">initial_inf</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
 
     <span class="c1">#: how to treat the * state (stage 0). This should be a string</span>
     <span class="c1">#: describing the method. Currently &quot;R&quot;, &quot;E&quot; and &quot;disable&quot; are</span>
-    <span class="c1">#: supported</span>
+    <span class="c1">#: supported. Not needed if the mapping is specified explicitly</span>
+    <span class="c1">#: in the disease</span>
     <span class="n">stage_0</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;R&quot;</span>
 
     <span class="c1">#: Seasonality parameter</span>
     <span class="n">UV</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
 
+    <span class="c1">#: Date when transmission should be at a maximum</span>
+    <span class="n">UV_max</span><span class="p">:</span> <span class="n">_date</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: The global scale_uv. This is combined with the population and</span>
+    <span class="c1">#: per-ward level scale_uvs to give a single value</span>
+    <span class="n">scale_uv</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1">#: The global background force of infection (FOI). This is combined</span>
+    <span class="c1">#: with the per-ward level bg_foi to give a single value</span>
+    <span class="n">bg_foi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+
     <span class="c1">#: User parameters</span>
-    <span class="n">user_params</span><span class="p">:</span> <span class="n">_Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">user_params</span><span class="p">:</span> <span class="n">_Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">_field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
 
     <span class="c1">#: All of the VariableSet adjustments that have been applied</span>
     <span class="c1">#: to these parameters</span>
@@ -407,17 +419,17 @@
                            <span class="p">(</span><span class="s2">&quot;repository_branch&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repository_branch</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;repository_version&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repository_version</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;length_day&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">length_day</span><span class="p">),</span>
-                           <span class="p">(</span><span class="s2">&quot;plength_day&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">plength_day</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;initial_inf&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_inf</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;static_play_at_home&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_play_at_home</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;dyn_play_at_home&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyn_play_at_home</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;dyn_dist_cutoff&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dyn_play_at_home</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;play_to_work&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">play_to_work</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;work_to_play&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">work_to_play</span><span class="p">),</span>
-                           <span class="p">(</span><span class="s2">&quot;neighbour_weight_threshold&quot;</span><span class="p">,</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">neighbour_weight_threshold</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;daily_imports&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">daily_imports</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;UV&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">UV</span><span class="p">),</span>
+                           <span class="p">(</span><span class="s2">&quot;UV_max&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">UV_max</span><span class="p">),</span>
+                           <span class="p">(</span><span class="s2">&quot;scale_uv&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_uv</span><span class="p">),</span>
+                           <span class="p">(</span><span class="s2">&quot;bg_foi&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bg_foi</span><span class="p">),</span>
                            <span class="p">(</span><span class="s2">&quot;stage_0&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_0</span><span class="p">)]:</span>
             <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -531,23 +543,17 @@
 
         <span class="n">par</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">(</span>
             <span class="n">length_day</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;length_day&quot;</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">),</span>
-            <span class="n">plength_day</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;plength_day&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
             <span class="n">initial_inf</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;initial_inf&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
             <span class="n">static_play_at_home</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;static_play_at_home&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="n">dyn_play_at_home</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dyn_play_at_home&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="n">dyn_dist_cutoff</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dyn_dist_cutoff&quot;</span><span class="p">,</span> <span class="mf">10000000.0</span><span class="p">),</span>
             <span class="n">play_to_work</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;play_to_work&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="n">work_to_play</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;work_to_play&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-            <span class="n">local_vaccination_thresh</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                <span class="s2">&quot;local_vaccination_threshold&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-            <span class="n">global_detection_thresh</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                <span class="s2">&quot;global_detection_threshold&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-            <span class="n">daily_ward_vaccination_capacity</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                <span class="s2">&quot;daily_ward_vaccination_capacity&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-            <span class="n">neighbour_weight_threshold</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                <span class="s2">&quot;neighbour_weight_threshold&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="n">daily_imports</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;daily_imports&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
             <span class="n">UV</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;UV&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">UV_max</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;UV_max&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">scale_uv</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;scale_uv&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+            <span class="n">bg_foi</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bg_foi&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="n">_name</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">parameters</span><span class="p">),</span>
             <span class="n">_authors</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;author(s)&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">),</span>
             <span class="n">_version</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">),</span>
@@ -727,7 +733,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

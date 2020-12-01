@@ -1,4 +1,4 @@
-metawards.utils.build\_wards\_network
+﻿metawards.utils.build\_wards\_network
 =====================================
 
 .. currentmodule:: metawards.utils

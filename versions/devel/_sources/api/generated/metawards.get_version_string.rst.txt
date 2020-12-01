@@ -1,4 +1,4 @@
-metawards.get\_version\_string
+﻿metawards.get\_version\_string
 ==============================
 
 .. currentmodule:: metawards

@@ -1,4 +1,4 @@
-metawards.analysis.create\_overview\_plot
+﻿metawards.analysis.create\_overview\_plot
 =========================================
 
 .. currentmodule:: metawards.analysis

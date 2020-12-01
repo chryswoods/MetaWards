@@ -1,4 +1,4 @@
-metawards.utils.reset\_work\_matrix
+﻿metawards.utils.reset\_work\_matrix
 ===================================
 
 .. currentmodule:: metawards.utils

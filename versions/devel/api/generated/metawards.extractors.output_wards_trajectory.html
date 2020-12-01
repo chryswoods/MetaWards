@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -226,28 +227,24 @@
             
   <div class="section" id="metawards-extractors-output-wards-trajectory">
 <h1>metawards.extractors.output_wards_trajectory<a class="headerlink" href="#metawards-extractors-output-wards-trajectory" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.extractors.output_wards_trajectory">
-<code class="descclassname">metawards.extractors.</code><code class="descname">output_wards_trajectory</code><span class="sig-paren">(</span><em>nthreads: int = 1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/extractors/_output_wards_trajectory.html#output_wards_trajectory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.extractors.output_wards_trajectory" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.extractors.</code><code class="sig-name descname">output_wards_trajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nthreads</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/extractors/_output_wards_trajectory.html#output_wards_trajectory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.extractors.output_wards_trajectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>This will output the complete trajectory for
 S, E, I and R for each of the wards in the model.
 This may take a lot of disk space (10’s MBs).</p>
 <p>The files are written to name “wards_trajectory_X.dat”,
 where “X” is one of S, E, I or R</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – Model population - used to get the day</li>
-<li><strong>output_dir</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><em>OutputFiles</em></a>) – Where to place the output files</li>
-<li><strong>workspace</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Workspace" title="metawards.Workspace"><em>Workspace</em></a>) – Workspace containing the raw data</li>
-<li><strong>**kwargs</strong> – Other arguments not needed by this function</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – Model population - used to get the day</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><em>OutputFiles</em></a>) – Where to place the output files</p></li>
+<li><p><strong>workspace</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Workspace" title="metawards.Workspace"><em>Workspace</em></a>) – Workspace containing the raw data</p></li>
+<li><p><strong>**kwargs</strong> – Other arguments not needed by this function</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -273,7 +270,7 @@ where “X” is one of S, E, I or R</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

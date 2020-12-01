@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -41,7 +42,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Custom extractors" href="part04/01_extractors.html" />
-    <link rel="prev" title="Scanning lockdown" href="part03/06_scan_lockdown.html" /> 
+    <link rel="prev" title="Local lockdowns" href="part03/08_local_lockdown.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -115,7 +116,8 @@
 <li class="toctree-l2"><a class="reference internal" href="index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -210,7 +212,7 @@
         <a href="part04/01_extractors.html" class="btn btn-neutral float-right" title="Custom extractors" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="part03/06_scan_lockdown.html" class="btn btn-neutral float-left" title="Scanning lockdown" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="part03/08_local_lockdown.html" class="btn btn-neutral float-left" title="Local lockdowns" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -223,13 +225,13 @@
 <h1>Part 4 - Customising the output<a class="headerlink" href="#part-4-customising-the-output" title="Permalink to this headline">¶</a></h1>
 <p>In this fourth part of the tutorial you will:</p>
 <ul class="simple">
-<li>Understand more about the other files that are output by <code class="docutils literal notranslate"><span class="pre">metawards</span></code>.</li>
-<li>Learn about <a class="reference internal" href="../api/index_api_MetaWards_extractors.html#module-metawards.extractors" title="metawards.extractors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metawards.extractors</span></code></a> and
-<a class="reference internal" href="../api/generated/metawards.extractors.extract_default.html#metawards.extractors.extract_default" title="metawards.extractors.extract_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_default</span></code></a>.</li>
-<li>Write a custom extractor that can output different information to a file
-during a <em>model run</em>.</li>
-<li>Learn how to extract geographical information and include this in
-the outputs.</li>
+<li><p>Understand more about the other files that are output by <code class="docutils literal notranslate"><span class="pre">metawards</span></code>.</p></li>
+<li><p>Learn about <a class="reference internal" href="../api/index_api_MetaWards_extractors.html#module-metawards.extractors" title="metawards.extractors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metawards.extractors</span></code></a> and
+<a class="reference internal" href="../api/generated/metawards.extractors.extract_default.html#metawards.extractors.extract_default" title="metawards.extractors.extract_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_default</span></code></a>.</p></li>
+<li><p>Write a custom extractor that can output different information to a file
+during a <em>model run</em>.</p></li>
+<li><p>Learn how to extract geographical information and include this in
+the outputs.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 <ul>
@@ -273,7 +275,7 @@ the outputs.</li>
         <a href="part04/01_extractors.html" class="btn btn-neutral float-right" title="Custom extractors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="part03/06_scan_lockdown.html" class="btn btn-neutral float-left" title="Scanning lockdown" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="part03/08_local_lockdown.html" class="btn btn-neutral float-left" title="Local lockdowns" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -283,7 +285,7 @@ the outputs.</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

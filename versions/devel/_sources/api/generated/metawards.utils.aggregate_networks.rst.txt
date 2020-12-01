@@ -1,4 +1,4 @@
-metawards.utils.aggregate\_networks
+﻿metawards.utils.aggregate\_networks
 ===================================
 
 .. currentmodule:: metawards.utils

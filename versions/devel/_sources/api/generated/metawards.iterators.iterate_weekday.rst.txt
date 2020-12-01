@@ -1,4 +1,4 @@
-metawards.iterators.iterate\_weekday
+﻿metawards.iterators.iterate\_weekday
 ====================================
 
 .. currentmodule:: metawards.iterators

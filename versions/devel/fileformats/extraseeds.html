@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -225,27 +226,27 @@ This is a column-based flexible-format file, with each line of the
 file containing information about a specific seeding event.</p>
 <p>There should be up to three pieces of information per line;</p>
 <ol class="arabic simple">
-<li><code class="docutils literal notranslate"><span class="pre">day</span></code> : The day or date to seed the infection(s). This should be
+<li><p><code class="docutils literal notranslate"><span class="pre">day</span></code> : The day or date to seed the infection(s). This should be
 an integer or a date that is interpreted via
 <a class="reference internal" href="../api/index_api_MetaWards.html#metawards.Interpret.day_or_date" title="metawards.Interpret.day_or_date"><code class="xref py py-func docutils literal notranslate"><span class="pre">Interpret.day_or_date</span></code></a> function.
 This either sets the day number on which to seed, or the exact date
-in which to seed.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ward</span></code> : The ward (either index or name) in which the infection
+in which to seed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ward</span></code> : The ward (either index or name) in which the infection
 will be seeded. This should either be an integer (whole number) specifying
 the index of the ward (1-indexed), or a string that identifies the
 ward by name, e.g. <code class="docutils literal notranslate"><span class="pre">Clifton/Bristol</span></code> would look for the ward called
 <code class="docutils literal notranslate"><span class="pre">Clifton</span></code> in the authority <code class="docutils literal notranslate"><span class="pre">Bristol</span></code>. The ward is looked up by
 name using the <a class="reference internal" href="../api/index_api_MetaWards.html#metawards.WardInfos.find" title="metawards.WardInfos.find"><code class="xref py py-func docutils literal notranslate"><span class="pre">WardInfos.find</span></code></a>
-function.</li>
-<li><code class="docutils literal notranslate"><span class="pre">number</span></code> : The number of infections to be seeded. This is an integer
+function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number</span></code> : The number of infections to be seeded. This is an integer
 that is interpreted via the
-<a class="reference internal" href="../api/index_api_MetaWards.html#metawards.Interpret.integer" title="metawards.Interpret.integer"><code class="xref py py-func docutils literal notranslate"><span class="pre">Interpret.integer</span></code></a> function.</li>
-<li><code class="docutils literal notranslate"><span class="pre">demographic</span></code> (optional) : The demographic (either index or name)
+<a class="reference internal" href="../api/index_api_MetaWards.html#metawards.Interpret.integer" title="metawards.Interpret.integer"><code class="xref py py-func docutils literal notranslate"><span class="pre">Interpret.integer</span></code></a> function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">demographic</span></code> (optional) : The demographic (either index or name)
 in which the infection will be seeded. If this is not specified,
 then the first demographic in the network is seeded. If this is
 the index it is interpreted via
 <a class="reference internal" href="../api/index_api_MetaWards.html#metawards.Interpret.integer" title="metawards.Interpret.integer"><code class="xref py py-func docutils literal notranslate"><span class="pre">Interpret.integer</span></code></a>, while if this
-is the name then this will direct look-up the demographic by name.</li>
+is the name then this will direct look-up the demographic by name.</p></li>
 </ol>
 <p>This is a column-formatted file. Like all flexible-format files you can use
 commas or spaces to separate columns. The separators used in the first line
@@ -318,7 +319,7 @@ each day.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

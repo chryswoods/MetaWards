@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -226,48 +227,43 @@
             
   <div class="section" id="metawards-iterators-build-custom-iterator">
 <h1>metawards.iterators.build_custom_iterator<a class="headerlink" href="#metawards-iterators-build-custom-iterator" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.iterators.build_custom_iterator">
-<code class="descclassname">metawards.iterators.</code><code class="descname">build_custom_iterator</code><span class="sig-paren">(</span><em>custom_function: Union[str, Callable[[...], None]], parent_name='__main__'</em><span class="sig-paren">)</span> &#x2192; Callable[[...], None]<a class="reference internal" href="../../_modules/metawards/iterators/_iterate_custom.html#build_custom_iterator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.iterators.build_custom_iterator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.iterators.</code><code class="sig-name descname">build_custom_iterator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">custom_function</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">parent_name</span><span class="o">=</span><span class="default_value">'__main__'</span></em><span class="sig-paren">)</span> &#x2192; Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span><a class="reference internal" href="../../_modules/metawards/iterators/_iterate_custom.html#build_custom_iterator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.iterators.build_custom_iterator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build and return a custom iterator from the passed
 function. This will wrap ‘iterate_custom’ around
 the function to double-check that the custom
 function is doing everything correctly</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>custom_function</strong> – <dl class="docutils">
-<dt>This can either be a function, which will be wrapped and</dt>
-<dd>returned, or it can be a string. If it is a string then
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>custom_function</strong> – <dl class="simple">
+<dt>This can either be a function, which will be wrapped and</dt><dd><p>returned, or it can be a string. If it is a string then
 we will attempt to locate or import the function associated
-with that string. The search order is;<ol class="last arabic simple">
-<li>Is this ‘metawards.iterators.custom_function’?</li>
-<li>Is this ‘custom_function’ that is already imported’?</li>
-<li>Is this a file name in the current path, if yes then
+with that string. The search order is;</p>
+<ol class="arabic simple">
+<li><p>Is this ‘metawards.iterators.custom_function’?</p></li>
+<li><p>Is this ‘custom_function’ that is already imported’?</p></li>
+<li><p>Is this a file name in the current path, if yes then
 find the function in that file (either the first function
 called ‘iterateXXX’ or the specified function if
-custom_function is in the form module::function)</li>
+custom_function is in the form module::function)</p></li>
 </ol>
 </dd>
-<dt>parent_name: str</dt>
-<dd>This should be the __name__ of the calling function, e.g.
-call this function as build_custom_iterator(func, __name__)</dd>
+<dt>parent_name: str</dt><dd><p>This should be the __name__ of the calling function, e.g.
+call this function as build_custom_iterator(func, __name__)</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body"><strong>iterator</strong> – The wrapped iterator</td>
-</tr>
-<tr class="field-even field"><th class="field-name">rtype:</th><td class="field-body">MetaFunction</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p><strong>iterator</strong> – The wrapped iterator</p>
+</dd>
+<dt class="field-even">rtype</dt>
+<dd class="field-even"><p>MetaFunction</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -293,7 +289,7 @@ call this function as build_custom_iterator(func, __name__)</dd>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

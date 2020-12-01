@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -275,11 +276,11 @@ deactivate the environment and return to the “standard” Python using;</p>
 <p>If is recommended that you have the following modules installed when
 developing metawards;</p>
 <ul class="simple">
-<li>cython</li>
-<li>numpy</li>
-<li>flake8</li>
-<li>pytest</li>
-<li>sphinx (plus sphinx_issues sphinx_rtd_theme)</li>
+<li><p>cython</p></li>
+<li><p>numpy</p></li>
+<li><p>flake8</p></li>
+<li><p>pytest</p></li>
+<li><p>sphinx (plus sphinx_issues sphinx_rtd_theme)</p></li>
 </ul>
 <p>You can install these manually, or all at once using;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-dev.txt
@@ -324,12 +325,12 @@ so please be careful when adding a dependency.</p>
 <h3>Naming<a class="headerlink" href="#naming" title="Permalink to this headline">¶</a></h3>
 <p>We follow a Python style naming convention.</p>
 <ul class="simple">
-<li>Packages: CamelCase</li>
-<li>Classes: CamelCase</li>
-<li>Methods: snake_case</li>
-<li>Functions: snake_case</li>
-<li>Variables: snake_case</li>
-<li>Source Files: snake_case with a leading underscore</li>
+<li><p>Packages: lowercase, singleword</p></li>
+<li><p>Classes: CamelCase</p></li>
+<li><p>Methods: snake_case</p></li>
+<li><p>Functions: snake_case</p></li>
+<li><p>Variables: snake_case</p></li>
+<li><p>Source Files: snake_case with a leading underscore</p></li>
 </ul>
 <p>Functions or variables that are private should be named with a leading
 underscore. This prevents them from being prominantly visible in Python’s
@@ -385,14 +386,14 @@ to understand, we have a set of rules that will ensure that only
 necessary public functions, classes and implementation details are
 exposed to the Python help system.</p>
 <ul class="simple">
-<li>Module files containing implementation details are prefixed with
-an underscore, i.e. <code class="docutils literal notranslate"><span class="pre">_parameters.py</span></code></li>
-<li>Where possible, external packages are hidden inside each module,
-e.g. <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">sys</span> <span class="pre">as</span> <span class="pre">_sys</span></code></li>
-<li>Each module file contains an <code class="docutils literal notranslate"><span class="pre">__all__</span></code> variable that lists the
-specific items that should be imported.</li>
-<li>The package <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> can be used to safely expose the required
-functionality to the user with:</li>
+<li><p>Module files containing implementation details are prefixed with
+an underscore, i.e. <code class="docutils literal notranslate"><span class="pre">_parameters.py</span></code></p></li>
+<li><p>Where possible, external packages are hidden inside each module,
+e.g. <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">sys</span> <span class="pre">as</span> <span class="pre">_sys</span></code></p></li>
+<li><p>Each module file contains an <code class="docutils literal notranslate"><span class="pre">__all__</span></code> variable that lists the
+specific items that should be imported.</p></li>
+<li><p>The package <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> can be used to safely expose the required
+functionality to the user with:</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">module</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
@@ -719,7 +720,7 @@ most of the procedures, scripts and documentation above is derived.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

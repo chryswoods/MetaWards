@@ -1,4 +1,4 @@
-metawards.utils.assert\_sane\_network
+﻿metawards.utils.assert\_sane\_network
 =====================================
 
 .. currentmodule:: metawards.utils

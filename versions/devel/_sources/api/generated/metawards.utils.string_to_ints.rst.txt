@@ -1,4 +1,4 @@
-metawards.utils.string\_to\_ints
+﻿metawards.utils.string\_to\_ints
 ================================
 
 .. currentmodule:: metawards.utils

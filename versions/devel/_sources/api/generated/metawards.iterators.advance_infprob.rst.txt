@@ -1,4 +1,4 @@
-metawards.iterators.advance\_infprob
+﻿metawards.iterators.advance\_infprob
 ====================================
 
 .. currentmodule:: metawards.iterators

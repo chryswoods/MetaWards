@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,18 +29,19 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="metawards.utils.clear_all_infections" href="metawards.utils.clear_all_infections.html" />
+    <link rel="next" title="metawards.utils.check_for_updates" href="metawards.utils.check_for_updates.html" />
     <link rel="prev" title="metawards.utils.build_wards_network" href="metawards.utils.build_wards_network.html" /> 
 </head>
 
@@ -213,7 +214,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="metawards.utils.clear_all_infections.html" class="btn btn-neutral float-right" title="metawards.utils.clear_all_infections" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metawards.utils.check_for_updates.html" class="btn btn-neutral float-right" title="metawards.utils.check_for_updates" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metawards.utils.build_wards_network.html" class="btn btn-neutral float-left" title="metawards.utils.build_wards_network" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -227,28 +228,24 @@
             
   <div class="section" id="metawards-utils-call-function-on-network">
 <h1>metawards.utils.call_function_on_network<a class="headerlink" href="#metawards-utils-call-function-on-network" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.utils.call_function_on_network">
-<code class="descclassname">metawards.utils.</code><code class="descname">call_function_on_network</code><span class="sig-paren">(</span><em>network: Union[metawards._network.Network, metawards._networks.Networks], infections: metawards._infections.Infections, workspace: metawards._workspace.Workspace, population: metawards._population.Population, func: Callable[[...], None] = None, parallel: Callable[[...], None] = None, nthreads: int = 1, switch_to_parallel: int = 2, call_on_overall: bool = False, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_get_functions.html#call_function_on_network"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.call_function_on_network" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.utils.</code><code class="sig-name descname">call_function_on_network</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>metawards._network.Network<span class="p">, </span>metawards._networks.Networks<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">infections</span><span class="p">:</span> <span class="n">metawards._infections.Infections</span></em>, <em class="sig-param"><span class="n">workspace</span><span class="p">:</span> <span class="n">metawards._workspace.Workspace</span></em>, <em class="sig-param"><span class="n">population</span><span class="p">:</span> <span class="n">metawards._population.Population</span></em>, <em class="sig-param"><span class="n">func</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">parallel</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nthreads</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">switch_to_parallel</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">call_on_overall</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/utils/_get_functions.html#call_function_on_network"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.call_function_on_network" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call either ‘func’ or ‘parallel’ (depending on the
 number of threads, nthreads) on the passed Network,
 or on all demographic subnetworks</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a><em> or </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Networks" title="metawards.Networks"><em>Networks</em></a>) – The network that is being modelled</li>
-<li><strong>nthreads</strong> (<em>int</em>) – The number of threads to use to perform the work</li>
-<li><strong>func</strong> (<em>MetaFunction</em>) – Function that performs the work in serial</li>
-<li><strong>parallel</strong> (<em>MetaFunction</em>) – Function that performs the work in parallel</li>
-<li><strong>switch_to_parallel</strong> (<em>int</em>) – Use the parallel function when nthreads is greater or equal
-to this value</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a><em> or </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Networks" title="metawards.Networks"><em>Networks</em></a>) – The network that is being modelled</p></li>
+<li><p><strong>nthreads</strong> (<em>int</em>) – The number of threads to use to perform the work</p></li>
+<li><p><strong>func</strong> (<em>MetaFunction</em>) – Function that performs the work in serial</p></li>
+<li><p><strong>parallel</strong> (<em>MetaFunction</em>) – Function that performs the work in parallel</p></li>
+<li><p><strong>switch_to_parallel</strong> (<em>int</em>) – Use the parallel function when nthreads is greater or equal
+to this value</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -261,7 +258,7 @@ to this value</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="metawards.utils.clear_all_infections.html" class="btn btn-neutral float-right" title="metawards.utils.clear_all_infections" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="metawards.utils.check_for_updates.html" class="btn btn-neutral float-right" title="metawards.utils.check_for_updates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="metawards.utils.build_wards_network.html" class="btn btn-neutral float-left" title="metawards.utils.build_wards_network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -274,7 +271,7 @@ to this value</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

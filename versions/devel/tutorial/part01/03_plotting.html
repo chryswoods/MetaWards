@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -118,7 +119,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -236,8 +238,8 @@ To run this, type;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code> uses <a class="reference external" href="https://pandas.pydata.org">pandas</a> and
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code> uses <a class="reference external" href="https://pandas.pydata.org">pandas</a> and
 <a class="reference external" href="https://matplotlib.org">matplotlib</a> for plotting. If you don’t have
 these on your computer then you will see an error message giving
 instructions on how to install the packages. Note that the default
@@ -251,21 +253,21 @@ to support output in some file formats.</p>
 <h2>Understanding the graphs<a class="headerlink" href="#understanding-the-graphs" title="Permalink to this headline">¶</a></h2>
 <p>This will create two sets of graphs;</p>
 <ul class="simple">
-<li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">output/overview.pdf</span></code></dt>
-<dd>This is an overview of the <strong>E</strong>, <strong>I</strong>, <strong>IW</strong> and <strong>R</strong> values
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">output/overview.pdf</span></code></dt><dd><p>This is an overview of the <strong>E</strong>, <strong>I</strong>, <strong>IW</strong> and <strong>R</strong> values
 from each day of the model outbreak for each of the four <em>model runs</em>.
-Your graph should look something like this;</dd>
+Your graph should look something like this;</p>
+</dd>
 </dl>
 </li>
 </ul>
 <img alt="Overview image of the outbreak of the lurgy" src="../../_images/tutorial_1_3_overview.jpg" />
 <ul class="simple">
-<li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">output/average.pdf</span></code></dt>
-<dd>This shows the average of the <strong>E</strong>, <strong>I</strong>, <strong>IW</strong> and <strong>R</strong> values,
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">output/average.pdf</span></code></dt><dd><p>This shows the average of the <strong>E</strong>, <strong>I</strong>, <strong>IW</strong> and <strong>R</strong> values,
 with the standard deviation shown as the error bars. Your graph should
-look something like this;</dd>
+look something like this;</p>
+</dd>
 </dl>
 </li>
 </ul>
@@ -282,8 +284,8 @@ showing exponential growth in the initial stage of the epidemic that
 tails off as the number of individuals susceptible to infection is
 reduced (e.g. as immunity in the population is built up).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Your graphs may look a little different in the exact numbers, but should
+<p class="admonition-title">Note</p>
+<p>Your graphs may look a little different in the exact numbers, but should
 be similar in shape. The purpose of this type of modelling is not to
 make exact numerical predictions, but to instead understand trends
 and timelines.</p>
@@ -294,7 +296,7 @@ and timelines.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code> command can be used for quick-and-simple plots.
 If you want something more complex then you can take a look at the functions
 in the <a class="reference internal" href="../../api/index_api_MetaWards_analysis.html#module-metawards.analysis" title="metawards.analysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metawards.analysis</span></code></a> module. In addition, we have a
-<a class="reference download internal" download="" href="../../_downloads/0a4b2ec193ed97e2aad7418818ebb69f/1_3_plotting.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">notebook</span></code></a>
+<a class="reference download internal" download="" href="../../_downloads/4e1a196c58d73f930aae80efab08480e/1_3_plotting.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">notebook</span></code></a>
 which you can look at which breaks down exactly how <code class="docutils literal notranslate"><span class="pre">metawards-plot</span></code>
 uses pandas and matplotlib to render these two graphs.</p>
 </div>
@@ -321,7 +323,7 @@ uses pandas and matplotlib to render these two graphs.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

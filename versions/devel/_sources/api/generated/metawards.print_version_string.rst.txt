@@ -1,4 +1,4 @@
-metawards.print\_version\_string
+﻿metawards.print\_version\_string
 ================================
 
 .. currentmodule:: metawards

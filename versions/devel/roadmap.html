@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -116,11 +117,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devsupport.html">Developer Support</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Roadmap</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#moving-individuals-between-different-networks">Moving individuals between different networks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#different-nodes-using-different-parameters">Different nodes using different parameters</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packaging.html">Packaging releases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="development.html">Developer’s guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="snaglist.html">Snag list</a></li>
@@ -207,51 +204,14 @@
             
   <div class="section" id="roadmap">
 <h1>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h1>
-<p>The planned development roadmap for <code class="docutils literal notranslate"><span class="pre">metawards</span></code> is below. These features
-are planned so that we can support urgent modelling of specific
-scenarios. This roadmap is subject to change, and is given here to
-give insight into what the developers are thinking, and where
-they intend the code to go.</p>
+<p>MetaWards is now fully featured for everything that the development
+team needs. If you would like to suggest features that should be
+added to the roadmap then please
+<a class="reference external" href="https://github.com/metawards/MetaWards/issues/new?assignees=chryswoods&amp;labels=enhancement&amp;template=feature_request.md&amp;title=%5BFEATURE+REQUEST%5D+-+I%27d+like+MetaWards+to">raise a feature request here</a>.</p>
 <p>More details about individual feature branches, which contain the new
 features being actively worked on, is available on the
 <a class="reference external" href="https://github.com/metawards/MetaWards/issues?q=is%3Aissue+is%3Aopen+label%3Afeature-branch">GitHub issues</a>
 page.</p>
-<div class="section" id="moving-individuals-between-different-networks">
-<h2>Moving individuals between different networks<a class="headerlink" href="#moving-individuals-between-different-networks" title="Permalink to this headline">¶</a></h2>
-<p>This is planned for MetaWards 1.4. Currently the move functions move
-individuals between demographics but keeping the same location in
-the network. There is no technical reason why this should be the case.
-We’d like to write a move function that can move individuals to
-different locations in a network, and to also remember the move so
-that it can be reverted after a period of time, or when a condition
-is reached.</p>
-<p>This will enable modelling of;</p>
-<ul class="simple">
-<li>holidays - we can move individuals to separate networks to represent
-holiday destinations, and then investigate what happens when they return</li>
-<li>returning from hospital, or moving between hospitals and care homes -
-we can move an individual from their home ward to a separate ward
-to represent a regional hospital, or to a regional care home.</li>
-</ul>
-<p>This work will take place in the
-<a class="reference external" href="https://github.com/metawards/MetaWards/issues/135">feature_holidays</a>
-feature branch.</p>
-</div>
-<div class="section" id="different-nodes-using-different-parameters">
-<h2>Different nodes using different parameters<a class="headerlink" href="#different-nodes-using-different-parameters" title="Permalink to this headline">¶</a></h2>
-<p>This is planned for MetaWards 1.4. Currently disease and control parameters
-affect all wards equally. Custom iterators can be written now that change
-those parameters on a ward-by-ward or regional basis, but this is clumsy.
-We would like to implement per-ward, and per-demographic/per-ward disease,
-control and user parameters.</p>
-<p>This will enable modelling of;</p>
-<ul class="simple">
-<li>regional and local differences in, e.g. beta depending on levels of
-adherence to lockdown or availability of suitable accommodation</li>
-<li>regional differences in control measures, and modelling local differences
-in enacting and releasing controls</li>
-</ul>
-</div>
 </div>
 
 
@@ -275,7 +235,7 @@ in enacting and releasing controls</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

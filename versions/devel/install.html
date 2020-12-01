@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -93,8 +94,8 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pip-install">pip install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-via-python">Installation via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-via-r">Installation via R</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#source-install">Source install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#for-developers">For developers</a></li>
 </ul>
@@ -209,8 +210,11 @@
             
   <div class="section" id="installation-instructions">
 <h1>Installation instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>MetaWards is a Python package, but it does come with R wrappers. This
+means that you can choose to install MetaWards either via Python or
+via R.</p>
+<div class="section" id="installation-via-python">
+<h2>Installation via Python<a class="headerlink" href="#installation-via-python" title="Permalink to this headline">¶</a></h2>
 <p>MetaWards is compiled and
 <a class="reference external" href="https://github.com/metawards/MetaWards/actions">tested on Windows, Linux and OS X</a>,
 but should be able to compile and install on any operating system
@@ -231,9 +235,6 @@ please use <code class="docutils literal notranslate"><span class="pre">python3<
 <p>If you don’t have Python &gt;=3.7 installed, then you can install Python
 either via your package manager, or more simply, by using
 <a class="reference external" href="https://anaconda.org">anaconda</a>.</p>
-</div>
-<div class="section" id="pip-install">
-<h2>pip install<a class="headerlink" href="#pip-install" title="Permalink to this headline">¶</a></h2>
 <p>Once you have a working Python &gt;= 3.7, the easiest way to install
 MetaWards is using
 <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a>.</p>
@@ -244,8 +245,8 @@ MetaWards is using
 or you may have to <a class="reference external" href="https://pip.pypa.io/en/stable/installing/">install pip</a>.
 If you have trouble installing pip then we recommend that you download
 and install <a class="reference external" href="https://anaconda.org">anaconda</a>, which has pip included)</p>
-<p>To install a specific version, e.g. 1.0.0, type</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">metawards</span><span class="o">==</span><span class="m">1</span>.0.0
+<p>To install a specific version, e.g. 1.4.0, type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="nv">metawards</span><span class="o">==</span><span class="m">1</span>.4.0
 </pre></div>
 </div>
 <p>This will install a binary version of metawards if it is avaiable for your
@@ -270,6 +271,44 @@ a different compiler, e.g. installing clang via
 <a class="reference external" href="https://brew.sh">homebrew</a>. If you have any problems then please
 <a class="reference external" href="https://github.com/metawards/MetaWards/issues">post an issue on GitHub</a>.</p>
 </div>
+<div class="section" id="installation-via-r">
+<h2>Installation via R<a class="headerlink" href="#installation-via-r" title="Permalink to this headline">¶</a></h2>
+<p>MetaWards can be used within R via the <a class="reference external" href="https://rstudio.github.io/reticulate/">reticulate</a>
+package. We have built a MetaWards R package that simplifies this use.</p>
+<p>First, open R or RStudio and install the MetaWards R package from GitHub;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;metawards/rpkg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, load the <code class="docutils literal notranslate"><span class="pre">metawards</span></code> package and use the <code class="docutils literal notranslate"><span class="pre">py_install_metawards</span></code>
+function to install metawards into the Python that is supplied
+with reticulate.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_install_metawards</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This may take a few minutes. If it works, then you can check that
+metawards is available by calling the <code class="docutils literal notranslate"><span class="pre">py_metawards_available</span></code> function,
+e.g.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_metawards_available</span><span class="p">()</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="kc">TRUE</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to use a different Python environment, then this can be
+set using <code class="docutils literal notranslate"><span class="pre">reticulate::use_python(&quot;/path/to/python&quot;,</span> <span class="pre">required</span> <span class="pre">=</span> <span class="pre">TRUE)</span></code>
+before you call any of the metawards functions.</p>
+</div>
+<p>This will install the latest version of metawards. You can check if there
+are any updates available via;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_metawards_update_available</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and you can update to the lastest version using;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_update_metawards</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="source-install">
 <h2>Source install<a class="headerlink" href="#source-install" title="Permalink to this headline">¶</a></h2>
 <p>You can download a source release of MetaWards from the
@@ -280,9 +319,9 @@ that directory using;</p>
 <span class="nb">cd</span> MetaWards-X.Y.Z
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">X.Y.Z</span></code> is the version you downloaded. For the 0.6.0 release
+<p>where <code class="docutils literal notranslate"><span class="pre">X.Y.Z</span></code> is the version you downloaded. For the 1.4.0 release
 this would be;</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -zxvf MetaWards-0.5.0.tar.gz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -zxvf MetaWards-1.4.0.tar.gz
 <span class="nb">cd</span> MetaWards-X.Y.Z
 </pre></div>
 </div>
@@ -360,7 +399,7 @@ and configured this as <a class="reference external" href="model_data.html">desc
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

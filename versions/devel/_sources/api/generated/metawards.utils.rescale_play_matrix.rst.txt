@@ -1,4 +1,4 @@
-metawards.utils.rescale\_play\_matrix
+﻿metawards.utils.rescale\_play\_matrix
 =====================================
 
 .. currentmodule:: metawards.utils

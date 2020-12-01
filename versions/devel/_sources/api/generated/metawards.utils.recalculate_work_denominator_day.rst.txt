@@ -1,4 +1,4 @@
-metawards.utils.recalculate\_work\_denominator\_day
+﻿metawards.utils.recalculate\_work\_denominator\_day
 ===================================================
 
 .. currentmodule:: metawards.utils

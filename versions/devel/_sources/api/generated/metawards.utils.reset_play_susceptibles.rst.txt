@@ -1,4 +1,4 @@
-metawards.utils.reset\_play\_susceptibles
+﻿metawards.utils.reset\_play\_susceptibles
 =========================================
 
 .. currentmodule:: metawards.utils

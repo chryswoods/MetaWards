@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -225,12 +226,15 @@
     <span class="c1"># us the list of extra disease stages to print out</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">trajectory</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">t0</span><span class="o">.</span><span class="n">totals</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">extra_stages</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">extra_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">extra_stages</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">t0</span><span class="o">.</span><span class="n">totals</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">totals</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">t0</span><span class="o">.</span><span class="n">totals</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">t0</span><span class="o">.</span><span class="n">totals</span>
+    <span class="n">other_totals</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">t0</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">t0</span><span class="o">.</span><span class="n">other_totals</span>
+
+    <span class="n">extra_stages</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">totals</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">other_totals</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extra_stages</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">extra_str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extra_stages</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">extra_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
     <span class="n">RESULTS</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;day,</span><span class="si">{</span><span class="n">datestring</span><span class="si">}</span><span class="s2">demographic,S,E,I,</span><span class="si">{</span><span class="n">extra_str</span><span class="si">}</span><span class="s2">R,IW</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -240,14 +244,19 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">d</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
+        <span class="n">totals</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">pop</span><span class="o">.</span><span class="n">totals</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pop</span><span class="o">.</span><span class="n">totals</span>
+        <span class="n">other_totals</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">pop</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pop</span><span class="o">.</span><span class="n">other_totals</span>
+
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extra_stages</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">extra_vals</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">extra_stages</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">pop</span><span class="o">.</span><span class="n">totals</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">totals</span><span class="p">:</span>
+                    <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">totals</span><span class="p">[</span><span class="n">stage</span><span class="p">]))</span>
+                <span class="k">elif</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">other_totals</span><span class="p">:</span>
+                    <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">other_totals</span><span class="p">[</span><span class="n">stage</span><span class="p">]))</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">totals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+                    <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
 
             <span class="n">extra_str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extra_vals</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
         <span class="k">else</span><span class="p">:</span>
@@ -268,14 +277,20 @@
                 <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
+                <span class="n">totals</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">subpop</span><span class="o">.</span><span class="n">totals</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">subpop</span><span class="o">.</span><span class="n">totals</span>
+                <span class="n">other_totals</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">subpop</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="kc">None</span> \
+                    <span class="k">else</span> <span class="n">subpop</span><span class="o">.</span><span class="n">other_totals</span>
+
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">extra_stages</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">extra_vals</span> <span class="o">=</span> <span class="p">[]</span>
 
                     <span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">extra_stages</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="n">subpop</span><span class="o">.</span><span class="n">totals</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                            <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">totals</span><span class="p">:</span>
+                            <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">totals</span><span class="p">[</span><span class="n">stage</span><span class="p">]))</span>
+                        <span class="k">elif</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">other_totals</span><span class="p">:</span>
+                            <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">other_totals</span><span class="p">[</span><span class="n">stage</span><span class="p">]))</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">totals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+                            <span class="n">extra_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
 
                     <span class="n">extra_str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">extra_vals</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -300,7 +315,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

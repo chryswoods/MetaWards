@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for build/lib.linux-x86_64-3.8/metawards/_networks.py: 69.01%</title>
+    <title>Coverage for build/lib.linux-x86_64-3.8/metawards/_networks.py: 70.42%</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -17,15 +17,15 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>build/lib.linux-x86_64-3.8/metawards/_networks.py</b> :
-            <span class="pc_cov">69.01%</span>
+            <span class="pc_cov">70.42%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             151 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">115 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">36 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">117 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">34 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
-            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">10 partial</button>
+            <button type="button" class="par run show_par shortkey_p button_toggle_par" title="Toggle lines partially run">9 partial</button>
         </h2>
     </div>
 </div>
@@ -358,9 +358,9 @@
     <p id="t304" class="pln"><span class="n"><a href="#t304">304</a></span><span class="t">            <span class="nam">markdown</span><span class="op">=</span><span class="key">True</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t305" class="run"><span class="n"><a href="#t305">305</a></span><span class="t">        <span class="nam">randnums</span> <span class="op">=</span> <span class="key">None</span>&nbsp;</span><span class="r"></span></p>
     <p id="t306" class="pln"><span class="n"><a href="#t306">306</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t307" class="par run show_par"><span class="n"><a href="#t307">307</a></span><span class="t">        <span class="key">if</span> <span class="nam">nthreads</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">307&#x202F;&#x219B;&#x202F;308</span><span class="annotate long">line 307 didn't jump to line 308, because the condition on line 307 was never true</span></span></p>
-    <p id="t308" class="mis show_mis"><span class="n"><a href="#t308">308</a></span><span class="t">            <span class="key">from</span> <span class="op">.</span><span class="nam">utils</span><span class="op">.</span><span class="nam">_parallel</span> <span class="key">import</span> <span class="nam">get_available_num_threads</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t309" class="mis show_mis"><span class="n"><a href="#t309">309</a></span><span class="t">            <span class="nam">nthreads</span> <span class="op">=</span> <span class="nam">get_available_num_threads</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t307" class="run"><span class="n"><a href="#t307">307</a></span><span class="t">        <span class="key">if</span> <span class="nam">nthreads</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t308" class="run"><span class="n"><a href="#t308">308</a></span><span class="t">            <span class="key">from</span> <span class="op">.</span><span class="nam">utils</span><span class="op">.</span><span class="nam">_parallel</span> <span class="key">import</span> <span class="nam">get_available_num_threads</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t309" class="run"><span class="n"><a href="#t309">309</a></span><span class="t">            <span class="nam">nthreads</span> <span class="op">=</span> <span class="nam">get_available_num_threads</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t310" class="pln"><span class="n"><a href="#t310">310</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t311" class="run"><span class="n"><a href="#t311">311</a></span><span class="t">        <span class="key">from</span> <span class="op">.</span><span class="nam">utils</span><span class="op">.</span><span class="nam">_parallel</span> <span class="key">import</span> <span class="nam">create_thread_generators</span>&nbsp;</span><span class="r"></span></p>
     <p id="t312" class="run"><span class="n"><a href="#t312">312</a></span><span class="t">        <span class="nam">rngs</span> <span class="op">=</span> <span class="nam">create_thread_generators</span><span class="op">(</span><span class="nam">rng</span><span class="op">,</span> <span class="nam">nthreads</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -490,8 +490,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.2</a>,
-            created at 2020-07-22 19:15
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.3</a>,
+            created at 2020-12-01 10:04 +0000
         </p>
     </div>
 </div>

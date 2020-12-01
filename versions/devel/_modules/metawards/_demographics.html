@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -288,6 +289,9 @@
         <span class="n">d</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="p">])</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="se">\n</span><span class="s2">  </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="se">\n</span><span class="s2">]&quot;</span></div>
 
+<div class="viewcode-block" id="Demographics.__repr__"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Demographics.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
+
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="p">)</span>
 
@@ -329,6 +333,21 @@
 
         <span class="k">return</span> <span class="n">demographics</span></div>
 
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Demographic</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span>
+
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Demographic</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">Demographics</span><span class="p">()</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="p">:</span>
+            <span class="n">r</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">r</span>
+
 <div class="viewcode-block" id="Demographics.add"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Demographics.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">demographic</span><span class="p">:</span> <span class="n">Demographic</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a demographic to the set to be modelled&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">demographic</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -341,7 +360,9 @@
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">demographic</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> in this set. Please rename &quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;and try again.&quot;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">demographic</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">demographic</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="p">[</span><span class="n">demographic</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="Demographics.get_name"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Demographics.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
@@ -522,6 +543,7 @@
         <span class="n">play_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">play_ratio</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="p">]</span>
         <span class="n">diseases</span> <span class="o">=</span> <span class="p">[</span><span class="n">_get_filename</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">disease</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="p">]</span>
         <span class="n">networks</span> <span class="o">=</span> <span class="p">[</span><span class="n">_get_filename</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">network</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="p">]</span>
+        <span class="n">adjustments</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">adjustment</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">demographics</span><span class="p">]</span>
 
         <span class="n">data</span><span class="p">[</span><span class="s2">&quot;demographics&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">demographics</span>
 
@@ -539,6 +561,10 @@
 
         <span class="k">if</span> <span class="n">networks</span> <span class="o">!=</span> <span class="n">all_none</span><span class="p">:</span>
             <span class="n">data</span><span class="p">[</span><span class="s2">&quot;networks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">networks</span>
+
+        <span class="k">if</span> <span class="n">adjustments</span> <span class="o">!=</span> <span class="n">all_none</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;adjustments&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">to_data</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+                                   <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">adjustments</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">data</span></div>
 
@@ -612,6 +638,7 @@
         <span class="n">random_seed</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;random_seed&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">diseases</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;diseases&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">networks</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;networks&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">adjustments</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;adjustments&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">diseases</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">diseases</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
@@ -627,10 +654,18 @@
             <span class="n">networks</span> <span class="o">=</span> <span class="p">[</span><span class="n">InputFiles</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="n">json_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
                         <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">networks</span><span class="p">]</span>
 
+        <span class="k">if</span> <span class="n">adjustments</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">adjustments</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span> <span class="o">*</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">._variableset</span> <span class="kn">import</span> <span class="n">VariableSet</span>
+            <span class="n">adjustments</span> <span class="o">=</span> <span class="p">[</span><span class="n">VariableSet</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                           <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">adjustments</span><span class="p">]</span>
+
         <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">work_ratios</span><span class="p">)</span> <span class="ow">or</span>
                 <span class="nb">len</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">play_ratios</span><span class="p">)</span> <span class="ow">or</span>
                 <span class="nb">len</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">diseases</span><span class="p">)</span> <span class="ow">or</span>
-                <span class="nb">len</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">networks</span><span class="p">)):</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">demographics</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">adjustments</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">networks</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;The number of work_ratios (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">work_ratios</span><span class="p">)</span><span class="si">}</span><span class="s2">) must &quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;equal to number of play_ratios &quot;</span>
@@ -649,7 +684,8 @@
                                       <span class="n">work_ratio</span><span class="o">=</span><span class="n">_get_value</span><span class="p">(</span><span class="n">work_ratios</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
                                       <span class="n">play_ratio</span><span class="o">=</span><span class="n">_get_value</span><span class="p">(</span><span class="n">play_ratios</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
                                       <span class="n">disease</span><span class="o">=</span><span class="n">diseases</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                                      <span class="n">network</span><span class="o">=</span><span class="n">networks</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                                      <span class="n">network</span><span class="o">=</span><span class="n">networks</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                      <span class="n">adjustment</span><span class="o">=</span><span class="n">adjustments</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="n">demos</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">demographic</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">demos</span></div>
@@ -688,7 +724,7 @@
             <span class="n">Console</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to load Demographics from &#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&#39;. Check that &quot;</span>
                           <span class="sa">f</span><span class="s2">&quot;this is valid JSON or that the file exists.&quot;</span><span class="p">)</span>
 
-            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot load Disease from &#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot load Demographics from &#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">Demographics</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">json_dir</span><span class="o">=</span><span class="n">json_dir</span><span class="p">)</span></div>
 
@@ -920,7 +956,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

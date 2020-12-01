@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -227,52 +228,48 @@
             
   <div class="section" id="metawards-utils-run-models">
 <h1>metawards.utils.run_models<a class="headerlink" href="#metawards-utils-run-models" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.utils.run_models">
-<code class="descclassname">metawards.utils.</code><code class="descname">run_models</code><span class="sig-paren">(</span><em>network: Union[metawards._network.Network, metawards._networks.Networks], variables: metawards._variableset.VariableSets, population: metawards._population.Population, nprocs: int, nthreads: int, seed: int, nsteps: int, output_dir: metawards._outputfiles.OutputFiles, iterator: Callable[[...], None] = None, extractor: Callable[[...], None] = None, mixer: Callable[[...], None] = None, mover: Callable[[...], None] = None, profiler: metawards.utils._profiler.Profiler = None, parallel_scheme: str = 'multiprocessing', debug_seeds=False</em><span class="sig-paren">)</span> &#x2192; List[Tuple[metawards._variableset.VariableSet, metawards._population.Population]]<a class="reference internal" href="../../_modules/metawards/utils/_run_models.html#run_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.run_models" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.utils.</code><code class="sig-name descname">run_models</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>metawards._network.Network<span class="p">, </span>metawards._networks.Networks<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">variables</span><span class="p">:</span> <span class="n">metawards._variableset.VariableSets</span></em>, <em class="sig-param"><span class="n">population</span><span class="p">:</span> <span class="n">metawards._population.Population</span></em>, <em class="sig-param"><span class="n">nprocs</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">nthreads</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">nsteps</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">output_dir</span><span class="p">:</span> <span class="n">metawards._outputfiles.OutputFiles</span></em>, <em class="sig-param"><span class="n">iterator</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extractor</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mixer</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mover</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">profiler</span><span class="p">:</span> <span class="n">metawards.utils._profiler.Profiler</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">parallel_scheme</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'multiprocessing'</span></em>, <em class="sig-param"><span class="n">debug_seeds</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Tuple<span class="p">[</span>metawards._variableset.VariableSet<span class="p">, </span>metawards._population.Population<span class="p">]</span><span class="p">]</span><a class="reference internal" href="../../_modules/metawards/utils/_run_models.html#run_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.run_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run all of the models on the passed Network that are described
 by the passed VariableSets</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a><em> or </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Networks" title="metawards.Networks"><em>Networks</em></a>) – The network(s) to model</li>
-<li><strong>variables</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets" title="metawards.VariableSets"><em>VariableSets</em></a>) – The sets of VariableSet that represent all of the model
-runs to perform</li>
-<li><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The initial population for all of the model runs. This also
-contains the starting date and day for the model outbreak</li>
-<li><strong>nprocs</strong> (<em>int</em>) – The number of model runs to perform in parallel</li>
-<li><strong>nthreads</strong> (<em>int</em>) – The number of threads to parallelise each model run over</li>
-<li><strong>seed</strong> (<em>int</em>) – Random number seed which is used to generate random seeds
-for all model runs</li>
-<li><strong>nsteps</strong> (<em>int</em>) – The maximum number of steps to perform for each model - this
-will run until the outbreak is over if this is None</li>
-<li><strong>output_dir</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><em>OutputFiles</em></a>) – The OutputFiles that represents the directory in which all
-output should be placed</li>
-<li><strong>iterator</strong> (<em>str</em>) – Iterator to load that will be used to iterate the outbreak</li>
-<li><strong>extractor</strong> (<em>str</em>) – Extractor to load that will be used to extract information</li>
-<li><strong>mixer</strong> (<em>str</em>) – Mixer to load that will be used to mix demographic data</li>
-<li><strong>mover</strong> (<em>str</em>) – Mover to load that will be used to move the population between
-different demographics</li>
-<li><strong>profiler</strong> (<a class="reference internal" href="metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><em>Profiler</em></a>) – Profiler used to profile the model run</li>
-<li><strong>parallel_scheme</strong> (<em>str</em>) – Which parallel scheme (multiprocessing, mpi4py or scoop) to use
-to run multiple model runs in parallel</li>
-<li><strong>debug_seeds</strong> (<em>bool</em><em> (</em><em>False</em><em>)</em>) – Set this parameter to force all runs to use the same seed
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a><em> or </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Networks" title="metawards.Networks"><em>Networks</em></a>) – The network(s) to model</p></li>
+<li><p><strong>variables</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSets" title="metawards.VariableSets"><em>VariableSets</em></a>) – The sets of VariableSet that represent all of the model
+runs to perform</p></li>
+<li><p><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The initial population for all of the model runs. This also
+contains the starting date and day for the model outbreak</p></li>
+<li><p><strong>nprocs</strong> (<em>int</em>) – The number of model runs to perform in parallel</p></li>
+<li><p><strong>nthreads</strong> (<em>int</em>) – The number of threads to parallelise each model run over</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – Random number seed which is used to generate random seeds
+for all model runs</p></li>
+<li><p><strong>nsteps</strong> (<em>int</em>) – The maximum number of steps to perform for each model - this
+will run until the outbreak is over if this is None</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><em>OutputFiles</em></a>) – The OutputFiles that represents the directory in which all
+output should be placed</p></li>
+<li><p><strong>iterator</strong> (<em>str</em>) – Iterator to load that will be used to iterate the outbreak</p></li>
+<li><p><strong>extractor</strong> (<em>str</em>) – Extractor to load that will be used to extract information</p></li>
+<li><p><strong>mixer</strong> (<em>str</em>) – Mixer to load that will be used to mix demographic data</p></li>
+<li><p><strong>mover</strong> (<em>str</em>) – Mover to load that will be used to move the population between
+different demographics</p></li>
+<li><p><strong>profiler</strong> (<a class="reference internal" href="metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><em>Profiler</em></a>) – Profiler used to profile the model run</p></li>
+<li><p><strong>parallel_scheme</strong> (<em>str</em>) – Which parallel scheme (multiprocessing, mpi4py or scoop) to use
+to run multiple model runs in parallel</p></li>
+<li><p><strong>debug_seeds</strong> (<em>bool</em><em> (</em><em>False</em><em>)</em>) – Set this parameter to force all runs to use the same seed
 (seed) - this is used for debugging and should never be set
-in production runs</li>
+in production runs</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> – The set of adjustable variables and final population at the
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>results</strong> – The set of adjustable variables and final population at the
 end of each run</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List[ tuple(<a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSet" title="metawards.VariableSet">VariableSet</a>, <a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population">Population</a>)]</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[ tuple(<a class="reference internal" href="../index_api_MetaWards.html#metawards.VariableSet" title="metawards.VariableSet">VariableSet</a>, <a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population">Population</a>)]</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -298,7 +295,7 @@ end of each run</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

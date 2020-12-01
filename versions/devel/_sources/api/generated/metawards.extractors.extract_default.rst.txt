@@ -1,4 +1,4 @@
-metawards.extractors.extract\_default
+﻿metawards.extractors.extract\_default
 =====================================
 
 .. currentmodule:: metawards.extractors

@@ -1,4 +1,4 @@
-metawards.utils.scale\_node\_susceptibles
+﻿metawards.utils.scale\_node\_susceptibles
 =========================================
 
 .. currentmodule:: metawards.utils

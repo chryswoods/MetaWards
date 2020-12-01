@@ -1,4 +1,4 @@
-metawards.utils.prepare\_worker
+﻿metawards.utils.prepare\_worker
 ===============================
 
 .. currentmodule:: metawards.utils

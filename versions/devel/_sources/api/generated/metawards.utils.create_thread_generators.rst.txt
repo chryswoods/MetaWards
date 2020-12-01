@@ -1,4 +1,4 @@
-metawards.utils.create\_thread\_generators
+﻿metawards.utils.create\_thread\_generators
 ==========================================
 
 .. currentmodule:: metawards.utils

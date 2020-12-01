@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -232,9 +233,9 @@ for different individuals.</p>
 <p>This is explored in more depth in the <a class="reference internal" href="../tutorial/index.html"><span class="doc">tutorial</span></a>.
 For this quick start guide, we will create three demographics;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">students</span></code> : experience a mild version of the lurgy and travel to school each day</li>
-<li><code class="docutils literal notranslate"><span class="pre">teachers</span></code> : experience the normal version of the lurgy, and also travel to school each day</li>
-<li><code class="docutils literal notranslate"><span class="pre">default</span></code> : experience the normal version of the lurgy and either travel to work each day or stay home and play</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">students</span></code> : experience a mild version of the lurgy and travel to school each day</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">teachers</span></code> : experience the normal version of the lurgy, and also travel to school each day</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default</span></code> : experience the normal version of the lurgy and either travel to work each day or stay home and play</p></li>
 </ul>
 <div class="section" id="creating-a-mild-disease">
 <h2>Creating a mild disease<a class="headerlink" href="#creating-a-mild-disease" title="Permalink to this headline">¶</a></h2>
@@ -368,8 +369,8 @@ specify the network and disease to use for each group.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Like before, it is easier to write these json file using the Python
+<p class="admonition-title">Note</p>
+<p>Like before, it is easier to write these json file using the Python
 or R APIs. Any small errors in the file can cause difficult-to-debug
 errors when running metawards.</p>
 </div>
@@ -382,8 +383,8 @@ to specify the model as this is now fully specified in the demographics.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We have added <code class="docutils literal notranslate"><span class="pre">default</span></code> to the additional seeding to specify that the
+<p class="admonition-title">Note</p>
+<p>We have added <code class="docutils literal notranslate"><span class="pre">default</span></code> to the additional seeding to specify that the
 initial infections will be in this demographic. This is needed as a current
 limitation of MetaWards is that you can only seed infections in players,
 and only the default demographic in this example has players.</p>
@@ -407,8 +408,8 @@ metawards-plot -i output/results.csv.bz2
 </div>
 <p>Now you should see that the outbreak spreads through the entire population.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">trajectory.csv.bz2</span></code> file in the output directory of the run
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">trajectory.csv.bz2</span></code> file in the output directory of the run
 contains the trajectory for each of the demographics in each
 disease state. You can load this to generate demographic graphs.</p>
 </div>
@@ -445,7 +446,7 @@ to model conditional branching, please do now follow the
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

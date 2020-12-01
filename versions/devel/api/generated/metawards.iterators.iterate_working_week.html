@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,17 +29,19 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="metawards.iterators.setup_seed_all_wards" href="metawards.iterators.setup_seed_all_wards.html" />
     <link rel="prev" title="metawards.iterators.iterate_weekend" href="metawards.iterators.iterate_weekend.html" /> 
 </head>
 
@@ -211,6 +213,8 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
+        <a href="metawards.iterators.setup_seed_all_wards.html" class="btn btn-neutral float-right" title="metawards.iterators.setup_seed_all_wards" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
       
         <a href="metawards.iterators.iterate_weekend.html" class="btn btn-neutral float-left" title="metawards.iterators.iterate_weekend" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
@@ -223,27 +227,26 @@
             
   <div class="section" id="metawards-iterators-iterate-working-week">
 <h1>metawards.iterators.iterate_working_week<a class="headerlink" href="#metawards-iterators-iterate-working-week" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.iterators.iterate_working_week">
-<code class="descclassname">metawards.iterators.</code><code class="descname">iterate_working_week</code><span class="sig-paren">(</span><em>population: metawards._population.Population</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/iterators/_iterate_working_week.html#iterate_working_week"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.iterators.iterate_working_week" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.iterators.</code><code class="sig-name descname">iterate_working_week</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">population</span><span class="p">:</span> <span class="n">metawards._population.Population</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/iterators/_iterate_working_week.html#iterate_working_week"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.iterators.iterate_working_week" title="Permalink to this definition">¶</a></dt>
 <dd><p>This returns the default list of ‘advance_XXX’ functions that
 are called in sequence for each iteration of the model run.
 This iterator understands the concept of a traditional working week,
 namely Monday-Friday is a work day, while Saturday and
 Sunday are weekends</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The population experiencing the outbreak. This includes
-information about the day and date of the outbreak</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>funcs</strong> – The list of functions that <code class="docutils literal notranslate"><span class="pre">`iterate`</span></code> will call in sequence</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List[function]</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The population experiencing the outbreak. This includes
+information about the day and date of the outbreak</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>funcs</strong> – The list of functions that <code class="docutils literal notranslate"><span class="pre">`iterate`</span></code> will call in sequence</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[function]</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -256,6 +259,8 @@ information about the day and date of the outbreak</td>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="metawards.iterators.setup_seed_all_wards.html" class="btn btn-neutral float-right" title="metawards.iterators.setup_seed_all_wards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
       
         <a href="metawards.iterators.iterate_weekend.html" class="btn btn-neutral float-left" title="metawards.iterators.iterate_weekend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
@@ -267,7 +272,7 @@ information about the day and date of the outbreak</td>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

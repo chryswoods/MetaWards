@@ -1,4 +1,4 @@
-metawards.utils.run\_worker
+﻿metawards.utils.run\_worker
 ===========================
 
 .. currentmodule:: metawards.utils

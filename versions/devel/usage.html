@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -232,33 +233,33 @@ type;</p>
 like this;</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>┌──────────────────────────────────────────────────────────────────────┐
 │                                                                      │
-│  ╔════════════════════════════════════════════════════════════════╗  │
-│  ║             MetaWards version 0.3.0b+646.gd74b998              ║  │
-│  ╚════════════════════════════════════════════════════════════════╝  │
+│   ╔══════════════════════════════════════════════════════════════╗   │
+│   ║            MetaWards version 0.3.0b+713.g46a182f             ║   │
+│   ╚══════════════════════════════════════════════════════════════╝   │
 │                                                                      │
-│  ╔════════════════════════════════════════════════════════════════╗  │
-│  ║                     https://metawards.org                      ║  │
-│  ╚════════════════════════════════════════════════════════════════╝  │
+│   ╔══════════════════════════════════════════════════════════════╗   │
+│   ║                    https://metawards.org                     ║   │
+│   ╚══════════════════════════════════════════════════════════════╝   │
 │                                                                      │
-│  ╔════════════════════════════════════════════════════════════════╗  │
-│  ║                       Source information                       ║  │
-│  ╚════════════════════════════════════════════════════════════════╝  │
+│   ╔══════════════════════════════════════════════════════════════╗   │
+│   ║                      Source information                      ║   │
+│   ╚══════════════════════════════════════════════════════════════╝   │
 │                                                                      │
-│   • repository: https://github.com/chryswoods/MetaWards              │
-│   • branch: devel                                                    │
-│   • revision: d74b99899d107fff3bb600f97b46fb67946b1cf9               │
-│   • last modified: 2020-07-22T20:01:22+0100                          │
+│    • repository: https://github.com/chryswoods/MetaWards             │
+│    • branch: devel                                                   │
+│    • revision: 46a182fb9a5115e6e5525238ad8c200b52f9c862              │
+│    • last modified: 2020-12-01T09:50:03+0000                         │
 │                                                                      │
-│  WARNING: MetaWardsData cannot be found! Please see                  │
-│  https://metawards.org/model_data for instructions on how to         │
-│  download and install this necessary data.                           │
+│   WARNING: MetaWardsData cannot be found! Please see                 │
+│   https://metawards.org/model_data for instructions on how to        │
+│   download and install this necessary data.                          │
 │                                                                      │
-│  ╔════════════════════════════════════════════════════════════════╗  │
-│  ║                     Additional information                     ║  │
-│  ╚════════════════════════════════════════════════════════════════╝  │
+│   ╔══════════════════════════════════════════════════════════════╗   │
+│   ║                    Additional information                    ║   │
+│   ╚══════════════════════════════════════════════════════════════╝   │
 │                                                                      │
-│  Visit https://metawards.org for more information about metawards,   │
-│  its authors and its license                                         │
+│   Visit https://metawards.org for more information about             │
+│   metawards, its authors and its license                             │
 │                                                                      │
 └──────────────────────────────────────────────────────────────────────┘
 </pre></div>
@@ -326,68 +327,68 @@ typing;</p>
 The most used and thus most important options are given first. These
 are;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">--disease</span> <span class="pre">/</span> <span class="pre">-d</span></code> : Specify the name of the disease file to load.
+<li><p><code class="docutils literal notranslate"><span class="pre">--disease</span> <span class="pre">/</span> <span class="pre">-d</span></code> : Specify the name of the disease file to load.
 These files are described in <a class="reference external" href="model_data.html">Model data</a>.
 If the file exists in your path then that will be used. Otherwise the
 file will be
 searched for from the <code class="docutils literal notranslate"><span class="pre">MetaWardsData/diseases</span></code> directory. Note that
 you don’t need to specify the file type, as this is assumed to be
-<code class="docutils literal notranslate"><span class="pre">.json</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--input</span> <span class="pre">/</span> <span class="pre">-i</span></code> : Specify the input file adjustable parameters that will be
+<code class="docutils literal notranslate"><span class="pre">.json</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--input</span> <span class="pre">/</span> <span class="pre">-i</span></code> : Specify the input file adjustable parameters that will be
 explored for the model run. You must supply an input file to be
-able to run a model. This file is described below.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--line</span> <span class="pre">/</span> <span class="pre">-l</span></code> : Specify the line number (or line numbers) of adjustable
+able to run a model. This file is described below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--line</span> <span class="pre">/</span> <span class="pre">-l</span></code> : Specify the line number (or line numbers) of adjustable
 parameter sets from the input file. Line numbers are counted from 0, and
 multiple line numbers can be given, e.g. <code class="docutils literal notranslate"><span class="pre">--line</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">7-10</span></code> will
 read from lines 3, 5, 7, 8, 9, and 10 (remembering that the first line
 of the file is line 0). If multiple lines are read, then multiple model
-runs will be performed.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--repeats</span> <span class="pre">/</span> <span class="pre">-r</span></code> : specify the number of times model runs for each
+runs will be performed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--repeats</span> <span class="pre">/</span> <span class="pre">-r</span></code> : specify the number of times model runs for each
 adjustable parameter set should be repeated. MetaWards model runs
 are stochastic, based on random numbers. The results for multiple
-runs must thus be processed to derive meaning.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--additional</span> <span class="pre">/</span> <span class="pre">-a</span></code> : specify the file (or files) containing additional
+runs must thus be processed to derive meaning.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--additional</span> <span class="pre">/</span> <span class="pre">-a</span></code> : specify the file (or files) containing additional
 seeds. These files are described in <a class="reference external" href="model_data.html">Model data</a>.
 You can specify as many or few files as you wish. If the file exists
 in your path then that will be used. Otherwise the file will be
 searched for from the <code class="docutils literal notranslate"><span class="pre">MetaWardsData/extra_seeds</span></code> directory.
 Note that you can write the additional seeds directly, rather
 than using a file. To see how, take a look at
-<a class="reference internal" href="tutorial/part08/01_networks.html"><span class="doc">this section of the tutorial</span></a>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">/</span> <span class="pre">-o</span></code> : specify the location to place all output files. By default
+<a class="reference internal" href="tutorial/part08/01_networks.html"><span class="doc">this section of the tutorial</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">/</span> <span class="pre">-o</span></code> : specify the location to place all output files. By default
 this will be in a new directory called <code class="docutils literal notranslate"><span class="pre">output</span></code>. A description of the
-output files is below.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--seed</span> <span class="pre">/</span> <span class="pre">-s</span></code> : specify the random number seed to use for a run. By default
+output files is below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--seed</span> <span class="pre">/</span> <span class="pre">-s</span></code> : specify the random number seed to use for a run. By default
 a truly random seed will be used. This will be printed into the output,
 so that you can use it together with this option to reproduce a run.
 The same version of <code class="docutils literal notranslate"><span class="pre">metawards</span></code> will reproduce the same output when
 given the same input, same random number seed, and run over the
-same number of threads.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--start-date</span></code> : specify the date of <em>day zero</em> of the model outbreak.
+same number of threads.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--start-date</span></code> : specify the date of <em>day zero</em> of the model outbreak.
 If this isn’t specified then this defaults to the current date. This
 recognises any date that is understood by
 <a class="reference internal" href="api/index_api_MetaWards.html#metawards.Interpret.date" title="metawards.Interpret.date"><code class="xref py py-func docutils literal notranslate"><span class="pre">metawards.Interpret.date()</span></code></a>,
 which includes dates like <em>today</em>, <em>tomorrow</em>, <em>Monday</em>, <em>Jan 2020</em> etc.
 The start date is used to trigger events based on day of week or
-date within a model outbreak (e.g. is the day a weekend)</li>
-<li><code class="docutils literal notranslate"><span class="pre">--start-day</span></code> : specify the day of the outbreak, e.g. the default
+date within a model outbreak (e.g. is the day a weekend)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--start-day</span></code> : specify the day of the outbreak, e.g. the default
 is <code class="docutils literal notranslate"><span class="pre">0</span></code> for <em>day zero</em>. This is useful if you want to start the
 model run from a later day than the start date. Note that the
 start date passed via <code class="docutils literal notranslate"><span class="pre">--start-date</span></code> is the date of <em>day zero</em>,
 so the first day modelled will be <code class="docutils literal notranslate"><span class="pre">--start-day</span></code> days
-after <code class="docutils literal notranslate"><span class="pre">--start-date</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--nthreads</span></code> : specify the number of threads over which to perform a
+after <code class="docutils literal notranslate"><span class="pre">--start-date</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nthreads</span></code> : specify the number of threads over which to perform a
 model run. The sequence of random numbers drawn in parallel is
 deterministic for a given number of threads, but will be different
 for different numbers of threads. This is why you can only reproduce
 a model run using a combination of the same random number seed and
 same number of threads. The number of threads used for a model run
-is written into the output.</li>
-<li><code class="docutils literal notranslate"><span class="pre">--nprocs</span></code> : specify the number of processes over which you want
+is written into the output.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--nprocs</span></code> : specify the number of processes over which you want
 to parallelise the model runs. This is useful if you have multiple
 processors on your computer and you are running multiple model runs.
 Note that this option is set automatically for you if you are
-<a class="reference external" href="cluster_usage.html">running on a cluster</a>.</li>
+<a class="reference external" href="cluster_usage.html">running on a cluster</a>.</p></li>
 </ul>
 <p>Using these options, a typical <code class="docutils literal notranslate"><span class="pre">metawards</span></code> run can be performed
 using;</p>
@@ -445,16 +446,16 @@ to the screen, e.g.</p>
 whether they become infected, and then progress through the outbreak.
 The codes mean;</p>
 <ul class="simple">
-<li><strong>S</strong>: The number of the population who are <em>susceptible</em> to infection</li>
-<li><strong>E</strong>: The number of the population who are <em>latent</em>, meaning they are
-infected, but not yet infectious.</li>
-<li><strong>I</strong>: The number of the population who are <em>infected</em>, meaning they
-have symptoms and are infectious</li>
-<li><strong>R</strong>: The number of the population who are removed from being susceptible,
+<li><p><strong>S</strong>: The number of the population who are <em>susceptible</em> to infection</p></li>
+<li><p><strong>E</strong>: The number of the population who are <em>latent</em>, meaning they are
+infected, but not yet infectious.</p></li>
+<li><p><strong>I</strong>: The number of the population who are <em>infected</em>, meaning they
+have symptoms and are infectious</p></li>
+<li><p><strong>R</strong>: The number of the population who are removed from being susceptible,
 either because they have been newly infected that day, or because they
-have recovered from the infection and are no longer susceptible to infection</li>
-<li><strong>IW</strong>: The number of electoral wards that contain at least one
-individual who was newly infected that day.</li>
+have recovered from the infection and are no longer susceptible to infection</p></li>
+<li><p><strong>IW</strong>: The number of electoral wards that contain at least one
+individual who was newly infected that day.</p></li>
 </ul>
 <p>As well as being printed to the screen, this data is also written
 to the CSV file <code class="docutils literal notranslate"><span class="pre">output/results.csv.bz2</span></code> for easy reading and analysis
@@ -475,8 +476,8 @@ file for easy combined analysis.</p>
 <p>We run a good online workshop on
 <a class="reference external" href="https://milliams.com/courses/data_analysis_python/index.html">how to use pandas for data analysis</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">I</span></code> and <code class="docutils literal notranslate"><span class="pre">R</span></code> stages are just the defaults, and <code class="docutils literal notranslate"><span class="pre">metawards</span></code>
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">I</span></code> and <code class="docutils literal notranslate"><span class="pre">R</span></code> stages are just the defaults, and <code class="docutils literal notranslate"><span class="pre">metawards</span></code>
 does support custom disease stages which may not have <code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">I</span></code> or <code class="docutils literal notranslate"><span class="pre">R</span></code>.
 To learn more, take a look at the
 <a class="reference internal" href="tutorial/part07/05_named_stages.html"><span class="doc">tutorial on custom named stages</span></a>.</p>
@@ -518,7 +519,7 @@ The full help is <a class="reference internal" href="metawards_plot_help.html"><
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

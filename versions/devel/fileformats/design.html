@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -236,30 +237,36 @@ will be assumed to be used for the rest of the file.</p>
 <p>You should name the variables you want to adjust in the column headers.
 The format of these is;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">variable</span></code> : Just the variable name will adjust that single variable
-for all copies in all demographics</li>
-<li><code class="docutils literal notranslate"><span class="pre">demographic:variable</span></code> : This will adjust the single variable in only
-the demographic named <code class="docutils literal notranslate"><span class="pre">demographic</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">variable[1]</span></code> : This will adjust index <code class="docutils literal notranslate"><span class="pre">1</span></code> of the named variable
-in all demographics.</li>
-<li><code class="docutils literal notranslate"><span class="pre">variable[&quot;E&quot;]</span></code> : This will adjust key <code class="docutils literal notranslate"><span class="pre">E</span></code> of the named variable,
-e.g. where the key refers to the disease stage.</li>
-<li><code class="docutils literal notranslate"><span class="pre">demographic:variable[&quot;KEY&quot;]</span></code> : This will adjust key <code class="docutils literal notranslate"><span class="pre">KEY</span></code> of the
-named variable in the named demographic.</li>
-<li><code class="docutils literal notranslate"><span class="pre">user.myvariable</span></code> : This will adjust a custom user variable called
-<code class="docutils literal notranslate"><span class="pre">myvariable</span></code> in all demographics.</li>
-<li><code class="docutils literal notranslate"><span class="pre">.myvariable</span></code> : This will also adjust a custom user variable called
+<li><p><code class="docutils literal notranslate"><span class="pre">variable</span></code> : Just the variable name will adjust that single variable
+for all copies in all demographics</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">demographic:variable</span></code> : This will adjust the single variable in only
+the demographic named <code class="docutils literal notranslate"><span class="pre">demographic</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variable[1]</span></code> : This will adjust index <code class="docutils literal notranslate"><span class="pre">1</span></code> of the named variable
+in all demographics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variable[&quot;E&quot;]</span></code> : This will adjust key <code class="docutils literal notranslate"><span class="pre">E</span></code> of the named variable,
+e.g. where the key refers to the disease stage.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">demographic:variable[&quot;KEY&quot;]</span></code> : This will adjust key <code class="docutils literal notranslate"><span class="pre">KEY</span></code> of the
+named variable in the named demographic.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user.myvariable</span></code> : This will adjust a custom user variable called
+<code class="docutils literal notranslate"><span class="pre">myvariable</span></code> in all demographics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.myvariable</span></code> : This will also adjust a custom user variable called
 <code class="docutils literal notranslate"><span class="pre">myvariable</span></code> in all demographic (we can drop the <code class="docutils literal notranslate"><span class="pre">user</span></code> to save
-space).</li>
-<li><code class="docutils literal notranslate"><span class="pre">demographic:.myvariable[0]</span></code> : This will adjust index 0 of the custom
-user variable <code class="docutils literal notranslate"><span class="pre">myvariable</span></code> in the demographic called <code class="docutils literal notranslate"><span class="pre">demographic</span></code>.</li>
+space).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">demographic:.myvariable[0]</span></code> : This will adjust index 0 of the custom
+user variable <code class="docutils literal notranslate"><span class="pre">myvariable</span></code> in the demographic called <code class="docutils literal notranslate"><span class="pre">demographic</span></code>.</p></li>
 </ul>
 <p>The full list of in-built parameters you can adjust are listed below;</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>UV:
   Adjust the Parameters.UV parameter
 
+UV_max:
+  Adjust the Parameters.UV parameter
+
 beta:
   Adjust the Disease.beta parameter
+
+bg_foi:
+  Adjust the Parameters.bg_foi parameter
 
 contrib_foi:
   Adjust the Disease.contrib_foi parameter
@@ -267,18 +274,11 @@ contrib_foi:
 daily_imports:
   Adjust the Parameters.daily_imports parameter
 
-daily_ward_vaccination_capacity:
-  Adjust the Parameters.daily_ward_vaccination_capacity
-  parameter
-
 dyn_dist_cutoff:
   Adjust the Parameters.dyn_dist_cutoff parameter
 
 dyn_play_at_home:
   Adjust the Parameters.dyn_play_at_home parameter
-
-global_detection_thresh:
-  Adjust the Parameters.global_detection_thresh parameter
 
 initial_inf:
   Adjust the Parameters.initial_inf parameter
@@ -286,20 +286,14 @@ initial_inf:
 length_day:
   Adjust the Parameters.length_day parameter
 
-local_vaccination_thesh:
-  Adjust the Parameters.local_vaccination_thresh parameter
-
-neighbour_weight_threshold:
-  Adjust the Parameters.neighbour_weight_threshold parameter
-
 play_to_work:
   Adjust the Parameters.play_to_work parameter
 
-plength_day:
-  Adjust the Parameters.plength_day parameter
-
 progress:
   Adjust the Disease.progress parameter
+
+scale_uv:
+  Adjust the Parameters.scale_uv parameter
 
 static_play_at_home:
   Adjust the Parameters.static_play_at_home parameter
@@ -323,17 +317,17 @@ as you would like.</p>
 <h2>Special columns<a class="headerlink" href="#special-columns" title="Permalink to this headline">¶</a></h2>
 <p>There are two special columns;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">repeats</span></code> : Specify the number of repeats of this row of values. This
+<li><p><code class="docutils literal notranslate"><span class="pre">repeats</span></code> : Specify the number of repeats of this row of values. This
 should be an integer (whole number) and gives more fine-grained control
-to specifying the number of repeats for different rows in a design.</li>
-<li><code class="docutils literal notranslate"><span class="pre">output</span></code>: Specify the output directory in which to place the output
+to specifying the number of repeats for different rows in a design.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output</span></code>: Specify the output directory in which to place the output
 of the model run using this row of adjustable variables. This overrides
 the default output directory, which is named using the fingerprint
 for this set of adjustable parameters. Use this if you want to have
 control over where all of the output is written. Note that <code class="docutils literal notranslate"><span class="pre">metawards</span></code>
 does not allow output for multiple model runs to be written to the
 same file, and will append numbers (e.g. <code class="docutils literal notranslate"><span class="pre">x002</span></code>, <code class="docutils literal notranslate"><span class="pre">x003</span></code>) to
-any duplicated names.</li>
+any duplicated names.</p></li>
 </ul>
 </div>
 <div class="section" id="default-columns">
@@ -344,8 +338,8 @@ don’t, then the default columns will be used. These are;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">These defaults came from the original C version of MetaWards, and are
+<p class="admonition-title">Note</p>
+<p>These defaults came from the original C version of MetaWards, and are
 retained so we keep backwards compatibility with the original
 input files.</p>
 </div>
@@ -360,16 +354,16 @@ then booleans, before returning the data as a string.</p>
 <p>You can force the type of the data using numpy-style quote characters. The
 type characters recognised are;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">d&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">value</span></code> to be interpreted as a date (isoformat or
-fuzzy date via the <a class="reference external" href="https://dateparser.readthedocs.io/en/latest/">Python dateparser module</a>).</li>
-<li><code class="docutils literal notranslate"><span class="pre">f&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">value</span></code> to be interpreted as a number (floating point
-or integer)</li>
-<li><code class="docutils literal notranslate"><span class="pre">i&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">value</span></code> to be interpreted as an integer (whole number)</li>
-<li><code class="docutils literal notranslate"><span class="pre">b&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">value</span></code> to be interpreted as a boolean (true or
+<li><p><code class="docutils literal notranslate"><span class="pre">d&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">value</span></code> to be interpreted as a date (isoformat or
+fuzzy date via the <a class="reference external" href="https://dateparser.readthedocs.io/en/latest/">Python dateparser module</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">value</span></code> to be interpreted as a number (floating point
+or integer)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">value</span></code> to be interpreted as an integer (whole number)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">value</span></code> to be interpreted as a boolean (true or
 false) value. The code recognises <code class="docutils literal notranslate"><span class="pre">true/false</span></code>, <code class="docutils literal notranslate"><span class="pre">on/off</span></code> and <code class="docutils literal notranslate"><span class="pre">yes/no</span></code>,
-as well as <code class="docutils literal notranslate"><span class="pre">1/0</span></code> (all case-insensitive).</li>
-<li><code class="docutils literal notranslate"><span class="pre">s&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">values</span></code> to be a string. Use this if you really want
-a string or want to interpret the value yourself in your plugin code.</li>
+as well as <code class="docutils literal notranslate"><span class="pre">1/0</span></code> (all case-insensitive).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s&quot;value&quot;</span></code> : forces <code class="docutils literal notranslate"><span class="pre">values</span></code> to be a string. Use this if you really want
+a string or want to interpret the value yourself in your plugin code.</p></li>
 </ul>
 </div>
 <div class="section" id="examples">
@@ -403,8 +397,8 @@ to either March 15th 2020 / 0.2 or April 1st 2020 / 0.1. Asking for
 called <code class="docutils literal notranslate"><span class="pre">lockdown_march</span></code>, and 3 repeats of the April lockdown,
 outputting the data to <code class="docutils literal notranslate"><span class="pre">lockdown_april</span></code>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The first repeats will be written to <code class="docutils literal notranslate"><span class="pre">lockdown_march</span></code> and
+<p class="admonition-title">Note</p>
+<p>The first repeats will be written to <code class="docutils literal notranslate"><span class="pre">lockdown_march</span></code> and
 <code class="docutils literal notranslate"><span class="pre">lockdown_april</span></code>, while the remainder will be written to
 numbered directories, e.g. <code class="docutils literal notranslate"><span class="pre">lockdown_marchx002</span></code> etc.</p>
 </div>
@@ -439,7 +433,7 @@ improved legibility.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

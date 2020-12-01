@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,18 +29,19 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Input files and formats" href="../../fileformats/index.html" />
+    <link rel="next" title="Specifying ward-local parameters" href="05_local_network.html" />
     <link rel="prev" title="Creating Networks in R" href="03_reticulate.html" /> 
 </head>
 
@@ -109,13 +110,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="01_networks.html">Understanding the Model Network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="02_custom_network.html">Creating a Custom Network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="03_reticulate.html">Creating Networks in R</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Using a Custom Network</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Using a Custom Network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#running-metawards-from-within-python-or-r">Running MetaWards from within Python or R</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="05_local_network.html">Specifying ward-local parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_network_demographics.html">Different networks for different demographics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -193,7 +200,7 @@
         
           <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
-          <li><a href="../index_part08.html">Part 8 - Different networks for different demographics</a> &raquo;</li>
+          <li><a href="../index_part08.html">Part 8 - Creating your own models / networks</a> &raquo;</li>
         
       <li>Using a Custom Network</li>
     
@@ -209,7 +216,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="../../fileformats/index.html" class="btn btn-neutral float-right" title="Input files and formats" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="05_local_network.html" class="btn btn-neutral float-right" title="Specifying ward-local parameters" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="03_reticulate.html" class="btn btn-neutral float-left" title="Creating Networks in R" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -271,6 +278,70 @@ Number of infections: 0
 Ending on day 132
 </pre></div>
 </div>
+<div class="section" id="running-metawards-from-within-python-or-r">
+<h2>Running MetaWards from within Python or R<a class="headerlink" href="#running-metawards-from-within-python-or-r" title="Permalink to this headline">¶</a></h2>
+<p>It is also possible to run your custom network by passing it in directly
+to the <a class="reference internal" href="../../api/generated/metawards.run.html#metawards.run" title="metawards.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">metawards.run()</span></code></a> function in Python or R. For example,
+in Python;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metawards</span> <span class="kn">import</span> <span class="n">Ward</span><span class="p">,</span> <span class="n">run</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bristol</span> <span class="o">=</span> <span class="n">Ward</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Bristol&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bristol</span><span class="o">.</span><span class="n">add_workers</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bristol</span><span class="o">.</span><span class="n">set_num_players</span><span class="p">(</span><span class="mi">750</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">london</span> <span class="o">=</span> <span class="n">Ward</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;London&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">london</span><span class="o">.</span><span class="n">add_workers</span><span class="p">(</span><span class="mi">8500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">london</span><span class="o">.</span><span class="n">set_num_players</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bristol</span><span class="o">.</span><span class="n">add_workers</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">london</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">london</span><span class="o">.</span><span class="n">add_workers</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">bristol</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wards</span> <span class="o">=</span> <span class="n">bristol</span> <span class="o">+</span> <span class="n">london</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">wards</span><span class="p">)</span>
+<span class="go">[ Ward( info=Bristol, id=1, num_workers=1000, num_players=750 ), Ward( info=London, id=2, num_workers=8600, num_players=10000 ) ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">wards</span><span class="p">,</span> <span class="n">additional</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This would create the wards, and then run the model. This will run in a
+new directory called <code class="docutils literal notranslate"><span class="pre">output_XXXX</span></code> (where XXXX is replaced by a random
+string). The <code class="docutils literal notranslate"><span class="pre">results</span></code> variable holds the full path to the resulting
+<code class="docutils literal notranslate"><span class="pre">results.csv.bz2</span></code> file for this run. The arguments to
+<a class="reference internal" href="../../api/generated/metawards.run.html#metawards.run" title="metawards.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">metawards.run()</span></code></a> match those of the command line program. Any Python
+objects (e.g. the wards, disease, demographics) can be passed in as
+Python objects. They will be automatically converted to JSON files and
+passed to the <code class="docutils literal notranslate"><span class="pre">metawards</span></code> processed in the background.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator to add multiple individual ward objects
+together to create the wards, e.g. <code class="docutils literal notranslate"><span class="pre">wards</span> <span class="pre">=</span> <span class="pre">bristol</span> <span class="pre">+</span> <span class="pre">london</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can force <a class="reference internal" href="../../api/generated/metawards.run.html#metawards.run" title="metawards.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">metawards.run()</span></code></a> to use a specified output directory
+by passing in the <code class="docutils literal notranslate"><span class="pre">output</span></code> argument. You will need to set
+<code class="docutils literal notranslate"><span class="pre">force_overwrite_output</span></code> to True to overwrite any existing output.
+You can silence the printing to the screen by passing in
+<code class="docutils literal notranslate"><span class="pre">silent</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p>
+</div>
+<p>You can achieve the same in R by typing;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="n">metawards</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">bristol</span> <span class="o">&lt;-</span> <span class="n">metawards</span><span class="o">$</span><span class="nf">Ward</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Bristol&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">bristol</span><span class="o">$</span><span class="nf">add_workers</span><span class="p">(</span><span class="m">500</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">bristol</span><span class="o">$</span><span class="nf">set_num_players</span><span class="p">(</span><span class="m">750</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">london</span> <span class="o">&lt;-</span> <span class="n">metawards</span><span class="o">$</span><span class="nf">Ward</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;London&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">london</span><span class="o">$</span><span class="nf">add_workers</span><span class="p">(</span><span class="m">8500</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">london</span><span class="o">$</span><span class="nf">set_num_players</span><span class="p">(</span><span class="m">10000</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">bristol</span><span class="o">$</span><span class="nf">add_workers</span><span class="p">(</span><span class="m">500</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">london</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">london</span><span class="o">$</span><span class="nf">add_workers</span><span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">bristol</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">wards</span> <span class="o">=</span> <span class="n">metawards</span><span class="o">$</span><span class="nf">Wards</span><span class="p">()</span>
+<span class="o">&gt;</span> <span class="n">wards</span><span class="o">$</span><span class="nf">add</span><span class="p">(</span><span class="n">bristol</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">wards</span><span class="o">$</span><span class="nf">add</span><span class="p">(</span><span class="n">london</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nf">print</span><span class="p">(</span><span class="n">wards</span><span class="p">)</span>
+<span class="p">[</span> <span class="nf">Ward</span><span class="p">(</span> <span class="n">info</span><span class="o">=</span><span class="n">Bristol</span><span class="p">,</span> <span class="n">id</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="m">1000</span><span class="p">,</span> <span class="n">num_players</span><span class="o">=</span><span class="m">750</span> <span class="p">),</span> <span class="nf">Ward</span><span class="p">(</span> <span class="n">info</span><span class="o">=</span><span class="n">London</span><span class="p">,</span> <span class="n">id</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="m">8600</span><span class="p">,</span> <span class="n">num_players</span><span class="o">=</span><span class="m">10000</span> <span class="p">)</span> <span class="p">]</span>
+<span class="o">&gt;</span> <span class="n">results</span> <span class="o">&lt;-</span> <span class="n">metawards</span><span class="o">$</span><span class="nf">run</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">wards</span><span class="p">,</span> <span class="n">additional</span><span class="o">=</span><span class="m">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>R does not support adding individual ward objects together to get Wards</p>
+</div>
+</div>
 </div>
 
 
@@ -281,7 +352,7 @@ Ending on day 132
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../fileformats/index.html" class="btn btn-neutral float-right" title="Input files and formats" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="05_local_network.html" class="btn btn-neutral float-right" title="Specifying ward-local parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="03_reticulate.html" class="btn btn-neutral float-left" title="Creating Networks in R" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -294,7 +365,7 @@ Ending on day 132
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

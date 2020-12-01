@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -214,11 +215,13 @@
 <span class="sd">    Nodes</span>
 <span class="sd">    OutputFiles</span>
 <span class="sd">    Parameters</span>
+<span class="sd">    PersonType</span>
 <span class="sd">    Population</span>
 <span class="sd">    Populations</span>
 <span class="sd">    VariableSet</span>
 <span class="sd">    VariableSets</span>
 <span class="sd">    Ward</span>
+<span class="sd">    WardID</span>
 <span class="sd">    WardInfo</span>
 <span class="sd">    WardInfos</span>
 <span class="sd">    Wards</span>
@@ -247,7 +250,7 @@
            <span class="s2">&quot;InputFiles&quot;</span><span class="p">,</span> <span class="s2">&quot;Interpret&quot;</span><span class="p">,</span> <span class="s2">&quot;Link&quot;</span><span class="p">,</span> <span class="s2">&quot;Links&quot;</span><span class="p">,</span> <span class="s2">&quot;Network&quot;</span><span class="p">,</span>
            <span class="s2">&quot;Networks&quot;</span><span class="p">,</span> <span class="s2">&quot;Node&quot;</span><span class="p">,</span> <span class="s2">&quot;Nodes&quot;</span><span class="p">,</span> <span class="s2">&quot;OutputFiles&quot;</span><span class="p">,</span> <span class="s2">&quot;Parameters&quot;</span><span class="p">,</span>
            <span class="s2">&quot;Population&quot;</span><span class="p">,</span> <span class="s2">&quot;Populations&quot;</span><span class="p">,</span> <span class="s2">&quot;VariableSet&quot;</span><span class="p">,</span> <span class="s2">&quot;VariableSets&quot;</span><span class="p">,</span>
-           <span class="s2">&quot;Ward&quot;</span><span class="p">,</span> <span class="s2">&quot;WardInfo&quot;</span><span class="p">,</span> <span class="s2">&quot;WardInfos&quot;</span><span class="p">,</span> <span class="s2">&quot;Wards&quot;</span><span class="p">,</span> <span class="s2">&quot;Workspace&quot;</span><span class="p">]</span>
+           <span class="s2">&quot;Ward&quot;</span><span class="p">,</span> <span class="s2">&quot;WardID&quot;</span><span class="p">,</span> <span class="s2">&quot;WardInfo&quot;</span><span class="p">,</span> <span class="s2">&quot;WardInfos&quot;</span><span class="p">,</span> <span class="s2">&quot;Wards&quot;</span><span class="p">,</span> <span class="s2">&quot;Workspace&quot;</span><span class="p">]</span>
 
 <span class="c1"># make sure that the directory containing this __init__.py is</span>
 <span class="c1"># early in the path - this will ensure that this versions modules</span>
@@ -307,11 +310,13 @@
 <span class="n">Nodes</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._nodes.Nodes&quot;</span><span class="p">)</span>
 <span class="n">OutputFiles</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._outputfiles.OutputFiles&quot;</span><span class="p">)</span>
 <span class="n">Parameters</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._parameters.Parameters&quot;</span><span class="p">)</span>
+<span class="n">PersonType</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._network.PersonType&quot;</span><span class="p">)</span>
 <span class="n">Population</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._population.Population&quot;</span><span class="p">)</span>
 <span class="n">Populations</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._population.Populations&quot;</span><span class="p">)</span>
 <span class="n">VariableSet</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._variableset.VariableSet&quot;</span><span class="p">)</span>
 <span class="n">VariableSets</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._variableset.VariableSets&quot;</span><span class="p">)</span>
 <span class="n">Ward</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._ward.Ward&quot;</span><span class="p">)</span>
+<span class="n">WardID</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._wardid.WardID&quot;</span><span class="p">)</span>
 <span class="n">WardInfo</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._wardinfo.WardInfo&quot;</span><span class="p">)</span>
 <span class="n">WardInfos</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._wardinfo.WardInfos&quot;</span><span class="p">)</span>
 <span class="n">Wards</span> <span class="o">=</span> <span class="n">_lazy_import</span><span class="o">.</span><span class="n">lazy_class</span><span class="p">(</span><span class="s2">&quot;._wards.Wards&quot;</span><span class="p">)</span>
@@ -327,7 +332,7 @@
 
 <span class="c1"># import the pyx cython-compiled modules</span>
 
-<span class="n">__manual_version__</span> <span class="o">=</span> <span class="s2">&quot;1.2.0&quot;</span>
+<span class="n">__manual_version__</span> <span class="o">=</span> <span class="s2">&quot;1.4.0&quot;</span>
 
 <span class="n">_v</span> <span class="o">=</span> <span class="n">get_versions</span><span class="p">()</span>
 <span class="n">__version__</span> <span class="o">=</span> <span class="n">_v</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
@@ -460,7 +465,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

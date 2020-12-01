@@ -1,4 +1,4 @@
-metawards.analysis.create\_average\_plot
+﻿metawards.analysis.create\_average\_plot
 ========================================
 
 .. currentmodule:: metawards.analysis

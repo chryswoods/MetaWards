@@ -1,4 +1,4 @@
-metawards.iterators.advance\_recovery
+﻿metawards.iterators.advance\_recovery
 =====================================
 
 .. currentmodule:: metawards.iterators

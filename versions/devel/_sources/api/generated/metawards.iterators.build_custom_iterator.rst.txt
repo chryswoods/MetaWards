@@ -1,4 +1,4 @@
-metawards.iterators.build\_custom\_iterator
+﻿metawards.iterators.build\_custom\_iterator
 ===========================================
 
 .. currentmodule:: metawards.iterators

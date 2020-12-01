@@ -1,4 +1,4 @@
-metawards.utils.reset\_play\_matrix
+﻿metawards.utils.reset\_play\_matrix
 ===================================
 
 .. currentmodule:: metawards.utils

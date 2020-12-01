@@ -1,4 +1,4 @@
-metawards.iterators.iterate\_default
+﻿metawards.iterators.iterate\_default
 ====================================
 
 .. currentmodule:: metawards.iterators

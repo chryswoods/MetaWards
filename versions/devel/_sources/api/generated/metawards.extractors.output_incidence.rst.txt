@@ -1,4 +1,4 @@
-metawards.extractors.output\_incidence
+﻿metawards.extractors.output\_incidence
 ======================================
 
 .. currentmodule:: metawards.extractors

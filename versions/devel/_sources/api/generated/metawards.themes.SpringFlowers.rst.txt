@@ -1,4 +1,4 @@
-metawards.themes.SpringFlowers
+﻿metawards.themes.SpringFlowers
 ==============================
 
 .. currentmodule:: metawards.themes
@@ -13,7 +13,26 @@ metawards.themes.SpringFlowers
 
    .. autosummary::
    
+      ~SpringFlowers.__delattr__
+      ~SpringFlowers.__dir__
+      ~SpringFlowers.__eq__
+      ~SpringFlowers.__format__
+      ~SpringFlowers.__ge__
+      ~SpringFlowers.__getattribute__
+      ~SpringFlowers.__gt__
       ~SpringFlowers.__init__
+      ~SpringFlowers.__init_subclass__
+      ~SpringFlowers.__le__
+      ~SpringFlowers.__lt__
+      ~SpringFlowers.__ne__
+      ~SpringFlowers.__new__
+      ~SpringFlowers.__reduce__
+      ~SpringFlowers.__reduce_ex__
+      ~SpringFlowers.__repr__
+      ~SpringFlowers.__setattr__
+      ~SpringFlowers.__sizeof__
+      ~SpringFlowers.__str__
+      ~SpringFlowers.__subclasshook__
       ~SpringFlowers.error
       ~SpringFlowers.get_frames
       ~SpringFlowers.highlighter
@@ -37,6 +56,14 @@ metawards.themes.SpringFlowers
 
    .. autosummary::
    
+      ~SpringFlowers.__annotations__
+      ~SpringFlowers.__dataclass_fields__
+      ~SpringFlowers.__dataclass_params__
+      ~SpringFlowers.__dict__
+      ~SpringFlowers.__doc__
+      ~SpringFlowers.__hash__
+      ~SpringFlowers.__module__
+      ~SpringFlowers.__weakref__
       ~SpringFlowers.panel_color_count
    
    

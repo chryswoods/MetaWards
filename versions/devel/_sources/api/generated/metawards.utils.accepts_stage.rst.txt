@@ -1,4 +1,4 @@
-metawards.utils.accepts\_stage
+﻿metawards.utils.accepts\_stage
 ==============================
 
 .. currentmodule:: metawards.utils

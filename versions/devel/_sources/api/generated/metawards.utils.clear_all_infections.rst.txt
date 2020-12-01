@@ -1,4 +1,4 @@
-metawards.utils.clear\_all\_infections
+﻿metawards.utils.clear\_all\_infections
 ======================================
 
 .. currentmodule:: metawards.utils

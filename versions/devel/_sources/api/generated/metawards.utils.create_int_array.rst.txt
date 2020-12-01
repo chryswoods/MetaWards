@@ -1,4 +1,4 @@
-metawards.utils.create\_int\_array
+﻿metawards.utils.create\_int\_array
 ==================================
 
 .. currentmodule:: metawards.utils

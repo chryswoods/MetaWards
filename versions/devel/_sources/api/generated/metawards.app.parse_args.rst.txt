@@ -1,4 +1,4 @@
-metawards.app.parse\_args
+﻿metawards.app.parse\_args
 =========================
 
 .. currentmodule:: metawards.app

@@ -2,6 +2,93 @@
 Changelog
 =========
 
+`1.4.1 <https://github.com/metawards/MetaWards/compare/1.4.0...1.4.1>`__ - November 18th 2020
+---------------------------------------------------------------------------------------------
+
+* Fixed a small bug in `output_core` where the Workspace of a demographic
+  subnetwork (its subspace) was being zeroed incorrectly after statistics
+  had been accumulated and processed, when the code was run on more than
+  4 processors. This prevented extractors from getting this data for
+  demographics. Simple fix :-). Bug does not impact any previous runs
+  or would have been likely to have caused any issues.
+* Added Python 3.9 to the GitHub Actions build matrix, and tested that
+  the Python 3.9 packages are built and run correctly.
+* Bumped Sphinx up to the latest version.
+
+
+`1.4.0 <https://github.com/metawards/MetaWards/compare/1.3.0...1.4.0>`__ - August 14th 2020
+-------------------------------------------------------------------------------------------
+
+* MetaWards now includes ward-local parameters (e.g. cutoff and scale_uv), plus
+  supports custom user ward-local parameters. This supports modelling of
+  different ward-local behaviour, e.g. local control measures or
+  local lockdowns. Examples of a local lockdown model is
+  in :doc:`chapter 7 <tutorial/part03/07_cutoff>` and
+  :doc:`chapter 8 <tutorial/part03/08_local_lockdown>` of
+  :doc:`part 3 <tutorial/index_part03>` of the tutorial, plus
+  :doc:`chapter 5 of part 8 <tutorial/part08/05_local_network>`.
+  This can also be used to model
+  :doc:`ward-local vaccination strategies <tutorial/part09/02_vaccinate>`.
+* We have re-worked the go_functions. We have added
+  :func:`~metawards.movers.go_ward` that can be used with
+  :class:`~metawards.movers.MoveGenerator` to specify moves between
+  any and all combinations of demographics, disease stages and wards
+  (for players) and ward links (for workers). Individuals can move
+  from worker to player, player to worker, move around the network,
+  move to different networks in different demographics, move
+  between different disease stages, move from susceptible to
+  infected or infected to susceptible etc. etc. This enables
+  some advanced modelling, e.g. of vaccinated or recovered individuals
+  who gradually lose immunity and become susceptible again, movements
+  associated with, e.g. start of university, and movements and
+  quarantine associated with holidays.
+* Added a :meth:`Ward.bg_foi <metawards.Ward.bg_foi>` per-ward
+  parameter to set a background force of infection that can be used
+  to drive (or suppress) infections regardless of the number of
+  infecteds in each ward.
+* Added a global :meth:`Parameters.bg_foi <metawards.Parameters.bg_foi>`
+  to set a per-network background force of infection. This is
+  useful as a way to model
+  :doc:`holiday destinations as different networks <tutorial/part09/05_holidays>`.
+* Added a global :meth:`Parameters.scale_uv <metawards.Parameters.scale_uv`
+  make it easier to set and control the scale_uv parameter via
+  a design file, parameter or via an adjustment in a demographic.
+* Finalised demographic adjustment support, enabling you to create
+  demographics with adjusted parameters, e.g. see the
+  :doc:`holiday destinations example <tutorial/part09/05_holidays>`.
+* Added :class:`~metawards.movers.MoveRecord` that can be used to
+  record all moves performed by a mover or go_function. Added
+  :func:`~metawards.go_record` that can move specific individuals
+  according to specific moves indicated in the
+  :class:`~metawards.movers.MoveRecord`. As there is a
+  :func:`MoveRecord.invert <metawards.movers.MoveRecord.invert>` you can
+  use this to reverse moves.
+* Added :meth:`is_infected <metawards.Disease.is_infected>` parameter
+  to :class:`~metawards.Disease` to mark whether a disease stage is classed
+  as being an infected stage. This is useful for non-recovered,
+  non-susceptible and non-infected stages, e.g. vaccinated (V) stages.
+  For example see :doc:`this tutorial <tutorial/part09/02_vaccinate>`.
+* MetaWards now has a `proper R package <https://github.com/metawards/rpkg>`_.
+  You can now install and update
+  MetaWards directly from within R. See the updated
+  :doc:`installation instructions <install>` and the
+  :doc:`R quickstart guide <quickstart/01_R>`.
+* Added a ``--UV-max`` command line parameter so that you can specify
+  the date in the year when disease transmission is highest (if UV is not
+  equal to 1.0, and thus disease transmission is seasonal). This defaults
+  to the first day of the outbreak.
+* Optimised :func:`~metawards.iterators.advance_foi` to skip calculations
+  of FOI for a stage if beta[stage] is zero. This changes the order
+  of random numbers, so meaning that this version of metawards will
+  give different output than older versions for the same input and
+  same random number seed. We've made a similar change to the original
+  C code to make sure that this has not invalidated the results.
+* Added a "null" or "scratch" ward that can be used to temporarily
+  store individuals during a day. This is useful when implementing more
+  complex moves that involve gathering and scattering populations.
+* Removed all parameters and dead code that were ported from the original
+  C code but are unused.
+
 `1.3.0 <https://github.com/metawards/MetaWards/compare/1.2.0...1.3.0>`__ - July 22nd 2020
 -----------------------------------------------------------------------------------------
 

@@ -1,4 +1,4 @@
-metawards.utils.get\_available\_num\_threads
+﻿metawards.utils.get\_available\_num\_threads
 ============================================
 
 .. currentmodule:: metawards.utils

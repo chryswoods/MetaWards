@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -287,8 +288,8 @@ in each function or sub-section of the function (more on that later ;-)).</p>
 </div>
 <p>for the timing of each iteration.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The timings will vary for each iteration as more individuals are
+<p class="admonition-title">Note</p>
+<p>The timings will vary for each iteration as more individuals are
 infected. It will also vary depending on the computer and number
 of threads used.</p>
 </div>
@@ -348,8 +349,8 @@ iterator <code class="docutils literal notranslate"><span class="pre">iterate_pr
 several times and taking an average, especially if you are interested
 in plotting parallel scaling of the individual <code class="docutils literal notranslate"><span class="pre">metawards</span></code> functions.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">A <a class="reference internal" href="api/generated/metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Profiler</span></code></a> is always passed as the <code class="docutils literal notranslate"><span class="pre">profiler</span></code>
+<p class="admonition-title">Note</p>
+<p>A <a class="reference internal" href="api/generated/metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Profiler</span></code></a> is always passed as the <code class="docutils literal notranslate"><span class="pre">profiler</span></code>
 keyword argument to all of the plugin classes (iterators, extractors etc.)</p>
 </div>
 <p>By default, all plugin functions are timed, hence why in the output
@@ -395,8 +396,8 @@ in the file <code class="docutils literal notranslate"><span class="pre">iterate
 </div>
 <p>printed for every iteration.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The time of the printout is on the top-left, and the filename and line
+<p class="admonition-title">Note</p>
+<p>The time of the printout is on the top-left, and the filename and line
 for the debug statement is on the top-right. The time is only printed
 once for each second, so if you have a lot of debug statements printed
 in a single second then they won’t show the time.</p>
@@ -446,15 +447,15 @@ not be printed.</p>
 <p>It is better to avoid constructing expensive debug strings if they are
 not going to be printed to the screen. There are two ways to avoid this;</p>
 <ol class="arabic simple">
-<li>Use the <a class="reference internal" href="api/generated/metawards.utils.Console.html#metawards.utils.Console.debugging_enabled" title="metawards.utils.Console.debugging_enabled"><code class="xref py py-meth docutils literal notranslate"><span class="pre">debugging_enabled()</span></code></a> function of
+<li><p>Use the <a class="reference internal" href="api/generated/metawards.utils.Console.html#metawards.utils.Console.debugging_enabled" title="metawards.utils.Console.debugging_enabled"><code class="xref py py-meth docutils literal notranslate"><span class="pre">debugging_enabled()</span></code></a> function of
 <a class="reference internal" href="api/generated/metawards.utils.Console.html#metawards.utils.Console" title="metawards.utils.Console"><code class="xref py py-class docutils literal notranslate"><span class="pre">Console</span></code></a> to see if debugging is enabled for
 the level you wish, and only call
-<a class="reference internal" href="api/generated/metawards.utils.Console.html#metawards.utils.Console.debug" title="metawards.utils.Console.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Console.debug</span></code></a> if it is.</li>
-<li>Put your debug string into a lambda function. The
+<a class="reference internal" href="api/generated/metawards.utils.Console.html#metawards.utils.Console.debug" title="metawards.utils.Console.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Console.debug</span></code></a> if it is.</p></li>
+<li><p>Put your debug string into a lambda function. The
 <a class="reference internal" href="api/generated/metawards.utils.Console.html#metawards.utils.Console.debug" title="metawards.utils.Console.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Console.debug</span></code></a>
 function will call this lambda function only if the debug output
 is enabled. This is really easy to do, e.g. here we change the
-debug statement to;</li>
+debug statement to;</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">metawards</span> <span class="kn">import</span> <span class="n">Population</span>
 <span class="kn">from</span> <span class="nn">metawards.iterators</span> <span class="kn">import</span> <span class="n">iterate_default</span>
@@ -505,7 +506,7 @@ We also encourage you to write your own tests for your new code :-)</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

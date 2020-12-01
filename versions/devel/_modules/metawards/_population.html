@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -211,24 +212,27 @@
     <span class="c1">#: The initial population loaded into the model</span>
     <span class="n">initial</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="c1">#: The number of members who could be infected</span>
+    <span class="c1">#: The number of members who could be infected (S)</span>
     <span class="n">susceptibles</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="c1">#: The number of latent infections</span>
+    <span class="c1">#: The number of latent infections (E)</span>
     <span class="n">latent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="c1">#: The total number of infections</span>
+    <span class="c1">#: The total number of infections (I)</span>
     <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="c1">#: The totao number of infections in other states</span>
+    <span class="c1">#: The total number of infections in other infected states (X)</span>
     <span class="n">totals</span><span class="p">:</span> <span class="n">_Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1">#: The total number of individuals in other non-infected states (X)</span>
+    <span class="n">other_totals</span><span class="p">:</span> <span class="n">_Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1">#: The total number who are removed from the outbreak,</span>
     <span class="c1">#: either because they have recovered, or are otherwise</span>
-    <span class="c1">#: no longer able to be infected</span>
+    <span class="c1">#: no longer able to be infected (R)</span>
     <span class="n">recovereds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="c1">#: The number infected in all wards</span>
+    <span class="c1">#: The number infected in all wards (IW)</span>
     <span class="n">n_inf_wards</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="c1">#: The scale_uv parameter that can be used to affect the</span>
@@ -258,14 +262,34 @@
             <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">totals</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                 <span class="n">pop</span> <span class="o">+=</span> <span class="n">val</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">pop</span> <span class="o">+=</span> <span class="n">val</span>
+
         <span class="k">return</span> <span class="n">pop</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">others</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the number who are in the &#39;other&#39; state, i.e.</span>
+<span class="sd">           not classed as susceptible, latent, infected or recovered/removed.</span>
+<span class="sd">           This is the sum of states that are set as &quot;is_infected=False&quot;</span>
+<span class="sd">           in the disease model, e.g. V (vaccinated)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">t</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">t</span> <span class="o">+=</span> <span class="n">val</span>
+
+        <span class="k">return</span> <span class="n">t</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">infecteds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;The number who are infected across all wards&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">population</span> <span class="o">-</span> \
             <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">susceptibles</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> \
-            <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> \
+            <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">others</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Population.has_equal_SEIR"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Population.has_equal_SEIR">[docs]</a>    <span class="k">def</span> <span class="nf">has_equal_SEIR</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return whether or not the SEIR values for this population</span>
@@ -275,6 +299,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">latent</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">latent</span> <span class="ow">and</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">total</span> <span class="ow">and</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">others</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">others</span> <span class="ow">and</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">totals</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">totals</span></div>
 
 <div class="viewcode-block" id="Population.increment_day"><a class="viewcode-back" href="../../api/index_api_MetaWards.html#metawards.Population.increment_day">[docs]</a>    <span class="k">def</span> <span class="nf">increment_day</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ndays</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -322,6 +347,10 @@
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -346,7 +375,8 @@
 
         <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">susceptibles</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infecteds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">susceptibles</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">infecteds</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">others</span><span class="p">]:</span>
             <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">t</span> <span class="o">+=</span> <span class="n">val</span>
 
@@ -358,6 +388,7 @@
             <span class="n">S</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">E</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">I</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">O</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">R</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">P</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -365,6 +396,7 @@
                 <span class="n">S</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">susceptibles</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
                 <span class="n">E</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">latent</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
                 <span class="n">I</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">total</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">O</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">others</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
                 <span class="n">R</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
                 <span class="n">P</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">subpop</span><span class="o">.</span><span class="n">population</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
 
@@ -379,6 +411,10 @@
             <span class="k">if</span> <span class="n">I</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Disagreement in I: </span><span class="si">{</span><span class="n">I</span><span class="si">}</span><span class="s2"> &quot;</span>
                               <span class="sa">f</span><span class="s2">&quot;versus </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">O</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">others</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Disagreement in O: </span><span class="si">{</span><span class="n">O</span><span class="si">}</span><span class="s2"> &quot;</span>
+                              <span class="sa">f</span><span class="s2">&quot;versus </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">others</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">R</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Disagreement in R: </span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s2"> &quot;</span>
@@ -415,6 +451,11 @@
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># use items as need to be same order as items below</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">)</span>
 
@@ -441,6 +482,10 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -486,6 +531,12 @@
                 <span class="n">columns</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">footer</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">columns</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="n">footer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">recovereds</span><span class="p">)</span>
             <span class="n">columns</span><span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span>
@@ -516,6 +567,10 @@
 
             <span class="k">if</span> <span class="n">subpop</span><span class="o">.</span><span class="n">totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">subpop</span><span class="o">.</span><span class="n">totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">row</span><span class="p">[</span><span class="n">columns</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+
+            <span class="k">if</span> <span class="n">subpop</span><span class="o">.</span><span class="n">other_totals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">subpop</span><span class="o">.</span><span class="n">other_totals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="n">row</span><span class="p">[</span><span class="n">columns</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
 
             <span class="n">row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">subpop</span><span class="o">.</span><span class="n">population</span>
@@ -589,7 +644,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

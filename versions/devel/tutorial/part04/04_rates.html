@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -121,7 +122,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -240,28 +242,25 @@ data to disk, and then running analysis in a post-processing step.</p>
 <p>The <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace" title="metawards.Workspace"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workspace</span></code></a> class provides a workspace in which data
 is accumulated and analysis performed. It is cleared between iterations,
 and holds the following information;</p>
-<dl class="docutils">
-<dt>Data indexed by disease stage:</dt>
-<dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">inf_tot</span></code>: The total number of workers in each disease stage, summed over all wards.</li>
-<li><code class="docutils literal notranslate"><span class="pre">pinf_tot</span></code>: The total number of players in each disease stage, summed over all wards.</li>
-<li><code class="docutils literal notranslate"><span class="pre">n_inf_wards</span></code>: The number of wards which have at least one individual in the disease stage,</li>
+<dl class="simple">
+<dt>Data indexed by disease stage:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">inf_tot</span></code>: The total number of workers in each disease stage, summed over all wards.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pinf_tot</span></code>: The total number of players in each disease stage, summed over all wards.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_inf_wards</span></code>: The number of wards which have at least one individual in the disease stage,</p></li>
 </ul>
 </dd>
-<dt>Data indexed by ward:</dt>
-<dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">total_inf_ward</span></code>: The total number of infections in each ward</li>
-<li><code class="docutils literal notranslate"><span class="pre">total_new_inf_ward</span></code>: The total number of new infections in each ward</li>
-<li><code class="docutils literal notranslate"><span class="pre">incidence</span></code>: The incidence of infection in each ward</li>
-<li><code class="docutils literal notranslate"><span class="pre">S_in_wards</span></code>: The total population in the <code class="docutils literal notranslate"><span class="pre">S</span></code> state in each ward</li>
-<li><code class="docutils literal notranslate"><span class="pre">E_in_wards</span></code>: The total population in the <code class="docutils literal notranslate"><span class="pre">E</span></code> state in each ward</li>
-<li><code class="docutils literal notranslate"><span class="pre">I_in_wards</span></code>: The total population in the <code class="docutils literal notranslate"><span class="pre">I</span></code> state in each ward</li>
-<li><code class="docutils literal notranslate"><span class="pre">R_in_wards</span></code>: The total population in the <code class="docutils literal notranslate"><span class="pre">R</span></code> state in each ward</li>
+<dt>Data indexed by ward:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">total_inf_ward</span></code>: The total number of infections in each ward</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_new_inf_ward</span></code>: The total number of new infections in each ward</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incidence</span></code>: The incidence of infection in each ward</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S_in_wards</span></code>: The total population in the <code class="docutils literal notranslate"><span class="pre">S</span></code> state in each ward</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">E_in_wards</span></code>: The total population in the <code class="docutils literal notranslate"><span class="pre">E</span></code> state in each ward</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">I_in_wards</span></code>: The total population in the <code class="docutils literal notranslate"><span class="pre">I</span></code> state in each ward</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R_in_wards</span></code>: The total population in the <code class="docutils literal notranslate"><span class="pre">R</span></code> state in each ward</p></li>
 </ul>
 </dd>
-<dt>Data indexed by disease stage and then by ward</dt>
-<dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">ward_inf_tot</span></code>: The total population in each disease stage in each ward</li>
+<dt>Data indexed by disease stage and then by ward</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ward_inf_tot</span></code>: The total population in each disease stage in each ward</p></li>
 </ul>
 </dd>
 </dl>
@@ -301,8 +300,8 @@ in the below;</p>
 in <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> to open the file <code class="docutils literal notranslate"><span class="pre">total_i1.csv</span></code> in the output
 directory.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">OutputFiles</span></code></a> class is clever enough to only
+<p class="admonition-title">Note</p>
+<p>The <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">OutputFiles</span></code></a> class is clever enough to only
 open the file once, and will automatically close it when needed. It
 will also ensure that the file is opened in the correct output
 directory for a <em>model run</em> and will compress the file using bz2
@@ -315,8 +314,8 @@ stage as the first stage (<code class="docutils literal notranslate"><span class
 used for advanced bookkeeping, while the second stage (<code class="docutils literal notranslate"><span class="pre">ward_inf_tot[1]</span></code>)
 is the latent, <code class="docutils literal notranslate"><span class="pre">E</span></code> stage.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal notranslate"><span class="pre">*</span></code> stage is used to help evaluate how many wards see new infections.
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">*</span></code> stage is used to help evaluate how many wards see new infections.
 Individuals are moved into the <code class="docutils literal notranslate"><span class="pre">*</span></code> stage at the point of infection,
 and are moved into the <code class="docutils literal notranslate"><span class="pre">E</span></code> stage on the day after infection. By default,
 individuals in the <code class="docutils literal notranslate"><span class="pre">*</span></code> stage are counted into <code class="docutils literal notranslate"><span class="pre">R</span></code>, which is why this
@@ -338,8 +337,8 @@ starting each line with the day number obtained from the passed
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note that we’ve set <code class="docutils literal notranslate"><span class="pre">nsteps</span></code> to 30 for illustration only,
+<p class="admonition-title">Note</p>
+<p>Note that we’ve set <code class="docutils literal notranslate"><span class="pre">nsteps</span></code> to 30 for illustration only,
 just to limit the runtime and the size of the file. In a real production
 run you wouldn’t need to set the number of steps.</p>
 </div>
@@ -638,7 +637,7 @@ COMMIT<span class="p">;</span>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

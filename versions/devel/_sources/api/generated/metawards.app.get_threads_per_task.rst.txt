@@ -1,4 +1,4 @@
-metawards.app.get\_threads\_per\_task
+﻿metawards.app.get\_threads\_per\_task
 =====================================
 
 .. currentmodule:: metawards.app

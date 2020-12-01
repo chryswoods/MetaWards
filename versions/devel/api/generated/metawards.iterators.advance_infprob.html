@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -226,31 +227,27 @@
             
   <div class="section" id="metawards-iterators-advance-infprob">
 <h1>metawards.iterators.advance_infprob<a class="headerlink" href="#metawards-iterators-advance-infprob" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.iterators.advance_infprob">
-<code class="descclassname">metawards.iterators.</code><code class="descname">advance_infprob</code><span class="sig-paren">(</span><em>nthreads: int</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#metawards.iterators.advance_infprob" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.iterators.</code><code class="sig-name descname">advance_infprob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nthreads</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#metawards.iterators.advance_infprob" title="Permalink to this definition">¶</a></dt>
 <dd><p>Advance the calculation of the day and night infection probabilities
 for each ward. You need to call this function after you have
 changed them, and before you use them in, e.g. advance_fixed
 and advance_play. This is the parallel version of this function</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a>) – The network being modelled</li>
-<li><strong>nthreads</strong> (<em>int</em>) – The number of threads over which to parallelise the calculation</li>
-<li><strong>profiler</strong> (<a class="reference internal" href="metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><em>Profiler</em></a>) – The profiler used to profile this calculation</li>
-<li><strong>scale_rate</strong> (<em>float</em>) – Optional parameter to scale the calculated infection rates.
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a>) – The network being modelled</p></li>
+<li><p><strong>nthreads</strong> (<em>int</em>) – The number of threads over which to parallelise the calculation</p></li>
+<li><p><strong>profiler</strong> (<a class="reference internal" href="metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><em>Profiler</em></a>) – The profiler used to profile this calculation</p></li>
+<li><p><strong>scale_rate</strong> (<em>float</em>) – Optional parameter to scale the calculated infection rates.
 This can very bluntly model the impact of broad measures
-to reduce the infection rate</li>
-<li><strong>kwargs</strong> – Extra arguments that may be used by other advancers, but which
-are not used by advance_infprob</li>
+to reduce the infection rate</p></li>
+<li><p><strong>kwargs</strong> – Extra arguments that may be used by other advancers, but which
+are not used by advance_infprob</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -276,7 +273,7 @@ are not used by advance_infprob</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

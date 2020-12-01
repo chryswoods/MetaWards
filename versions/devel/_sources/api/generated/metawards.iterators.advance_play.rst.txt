@@ -1,4 +1,4 @@
-metawards.iterators.advance\_play
+﻿metawards.iterators.advance\_play
 =================================
 
 .. currentmodule:: metawards.iterators

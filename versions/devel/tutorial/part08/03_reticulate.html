@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -109,18 +110,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="01_networks.html">Understanding the Model Network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="02_custom_network.html">Creating a Custom Network</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Creating Networks in R</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#installing-reticulate">Installing reticulate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-metawards-in-r">Installing MetaWards in R</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-metawards-in-r">Using metawards in R</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#going-further">Going further</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="04_using_custom.html">Using a Custom Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05_local_network.html">Specifying ward-local parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_network_demographics.html">Different networks for different demographics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -198,7 +202,7 @@
         
           <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
-          <li><a href="../index_part08.html">Part 8 - Different networks for different demographics</a> &raquo;</li>
+          <li><a href="../index_part08.html">Part 8 - Creating your own models / networks</a> &raquo;</li>
         
       <li>Creating Networks in R</li>
     
@@ -232,33 +236,50 @@
 module directly in R.</p>
 <p>This is because the <a class="reference external" href="https://rstudio.github.io/reticulate/">reticulate project</a>
 lets you embed and use Python directly in your R scripts.</p>
-<div class="section" id="installing-reticulate">
-<h2>Installing reticulate<a class="headerlink" href="#installing-reticulate" title="Permalink to this headline">¶</a></h2>
-<p>You can install reticulate by starting R and typing;</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;reticulate&quot;</span><span class="p">)</span>
+<div class="section" id="installing-metawards-in-r">
+<h2>Installing MetaWards in R<a class="headerlink" href="#installing-metawards-in-r" title="Permalink to this headline">¶</a></h2>
+<p>You can install MetaWards by starting R and typing;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;metawards/rpkg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Next, you need to set the path to the <code class="docutils literal notranslate"><span class="pre">python</span></code> executable for which
-<code class="docutils literal notranslate"><span class="pre">metawards</span></code> has been installed. For me, this is
-<code class="docutils literal notranslate"><span class="pre">/Users/chris/miniconda3/bin/python</span></code>. Your path will be different.
-To set this, use the <code class="docutils literal notranslate"><span class="pre">use_python</span></code> function in R, e.g.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="n">reticulate</span><span class="p">)</span>
-<span class="o">&gt;</span> <span class="nf">use_python</span><span class="p">(</span><span class="s">&quot;/Users/chris/miniconda3/bin/python&quot;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<p>This will install the MetaWards R package.</p>
+<p>Next, you need to install MetaWards itself. The R package provides
+a convenient function to support this. Type;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_install_metawards</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>(remembering to use the path that is appropriate for your computer)</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We have provided the <code class="docutils literal notranslate"><span class="pre">metawards-reticulate</span></code> command. Run this from
-the console/terminal to get the list of commmands you need to type into
-R to import reticulate, set the Python executable and import the
-<a class="reference internal" href="../../api/index_api_MetaWards.html#module-metawards" title="metawards"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards</span></code></a> module.</p>
+<p>This will download and install the <a class="reference internal" href="../../api/index_api_MetaWards.html#module-metawards" title="metawards"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards</span></code></a> module into the
+Python interpreter associated with reticulate. If you want to specify
+the Python interpreter manually, you would need to type;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">reticulate</span><span class="o">::</span><span class="nf">use_python</span><span class="p">(</span><span class="s">&quot;/path/to/python&quot;</span><span class="p">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>before calling <code class="docutils literal notranslate"><span class="pre">py_install_metawards()</span></code>. Here <code class="docutils literal notranslate"><span class="pre">/path/to/python</span></code>
+is the path to the Python interpreter you want to use.</p>
+<p>You can double-check that MetaWards is available and working by typing;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_metawards_available</span><span class="p">()</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="kc">TRUE</span>
+</pre></div>
+</div>
+<p>You can get the version of MetaWards Python installed using;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_version_metawards</span><span class="p">()</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="s">&quot;1.3.0&quot;</span>
+</pre></div>
+</div>
+<p>You can check if updates to MetaWards are available using;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_metawards_update_available</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and can update MetaWards in Python to the latest version using;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span><span class="o">::</span><span class="nf">py_update_metawards</span><span class="p">()</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="using-metawards-in-r">
 <h2>Using metawards in R<a class="headerlink" href="#using-metawards-in-r" title="Permalink to this headline">¶</a></h2>
-<p>Next, you can import the <a class="reference internal" href="../../api/index_api_MetaWards.html#module-metawards" title="metawards"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards</span></code></a> module by typing;</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">metawards</span> <span class="o">&lt;-</span> <span class="nf">import</span><span class="p">(</span><span class="s">&quot;metawards&quot;</span><span class="p">)</span>
+<p>To load the <a class="reference internal" href="../../api/index_api_MetaWards.html#module-metawards" title="metawards"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards</span></code></a> module type;</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="n">metawards</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This loads all of the <a class="reference internal" href="../../api/index_api_MetaWards.html#module-metawards" title="metawards"><code class="xref py py-mod docutils literal notranslate"><span class="pre">metawards</span></code></a> Python objects into the
@@ -363,7 +384,7 @@ code completion and inline help are also available at the
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

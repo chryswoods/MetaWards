@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -115,13 +116,16 @@
 <li class="toctree-l3"><a class="reference internal" href="04_dynamic.html">Responding to changing conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_scanning.html">Custom variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="06_scan_lockdown.html">Scanning lockdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="07_cutoff.html">Alternative lockdowns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="08_local_lockdown.html">Local lockdowns</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part04.html">Part 4 - Customising the output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -236,24 +240,26 @@ model that <code class="docutils literal notranslate"><span class="pre">metaward
 <h2>Work and play<a class="headerlink" href="#work-and-play" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">metawards</span></code> models disease transmission via two main modes;</p>
 <ol class="arabic simple">
-<li>Infections at “work”</li>
+<li><p>Infections at “work”</p></li>
 </ol>
 <blockquote>
-<div>These are random infections that individuals acquire in the electoral
+<div><p>These are random infections that individuals acquire in the electoral
 ward in which they “work”, based on random interactions with others
 who are also in that “work” ward. In this nomenclature, “work” means
-any regular (daily), predictable travel that an individual makes.</div></blockquote>
+any regular (daily), predictable travel that an individual makes.</p>
+</div></blockquote>
 <ol class="arabic simple">
-<li>Infections at “play”</li>
+<li><p>Infections at “play”</p></li>
 </ol>
 <blockquote>
-<div>These are random infections that individuals acquire in the
+<div><p>These are random infections that individuals acquire in the
 electoral ward in which they live, based on random interactions
 with others who are also in their ward. In this nomenclature, “play”
-means random, unpredictable interactions that are not regular.</div></blockquote>
+means random, unpredictable interactions that are not regular.</p>
+</div></blockquote>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Do not read too much into the definitions of “work” and “play”. They
+<p class="admonition-title">Warning</p>
+<p>Do not read too much into the definitions of “work” and “play”. They
 have very broad meanings in <code class="docutils literal notranslate"><span class="pre">metawards</span></code>, and, in essence, capture
 the difference between predicatable daily travel and interactions
 (commuting, colleagues in an office, students in a school), and
@@ -276,37 +282,37 @@ what happens in each electoral ward on each day.</p>
 <p>The <a class="reference internal" href="../../api/generated/metawards.iterators.iterate_default.html#metawards.iterators.iterate_default" title="metawards.iterators.iterate_default"><code class="xref py py-func docutils literal notranslate"><span class="pre">iterate_default()</span></code></a> iterator applies the
 following <code class="docutils literal notranslate"><span class="pre">advance_functions</span></code> in sequence;</p>
 <ol class="arabic simple">
-<li><a class="reference internal" href="../../api/generated/metawards.iterators.advance_additional.html#metawards.iterators.advance_additional" title="metawards.iterators.advance_additional"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_additional()</span></code></a> is applied to
+<li><p><a class="reference internal" href="../../api/generated/metawards.iterators.advance_additional.html#metawards.iterators.advance_additional" title="metawards.iterators.advance_additional"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_additional()</span></code></a> is applied to
 add any additional seeds of the disease in the ward,
 which leads to new infections. These additional seeds represent, e.g.
-new sources of infection arriving in the ward via outside travel.</li>
-<li><a class="reference internal" href="../../api/generated/metawards.iterators.advance_foi.html#metawards.iterators.advance_foi" title="metawards.iterators.advance_foi"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_foi()</span></code></a> is applied to advance the
+new sources of infection arriving in the ward via outside travel.</p></li>
+<li><p><a class="reference internal" href="../../api/generated/metawards.iterators.advance_foi.html#metawards.iterators.advance_foi" title="metawards.iterators.advance_foi"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_foi()</span></code></a> is applied to advance the
 calculation of the <em>force of infection (foi)</em> for each ward. This must
 be called at the beginning of the day after
 <a class="reference internal" href="../../api/generated/metawards.iterators.advance_additional.html#metawards.iterators.advance_additional" title="metawards.iterators.advance_additional"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_additional()</span></code></a>, as the <em>foi</em> parameters
 are used to guide the path of the outbreak in each ward for the
-rest of the day.</li>
-<li><a class="reference internal" href="../../api/generated/metawards.iterators.advance_recovery.html#metawards.iterators.advance_recovery" title="metawards.iterators.advance_recovery"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_recovery()</span></code></a> is applied to all
+rest of the day.</p></li>
+<li><p><a class="reference internal" href="../../api/generated/metawards.iterators.advance_recovery.html#metawards.iterators.advance_recovery" title="metawards.iterators.advance_recovery"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_recovery()</span></code></a> is applied to all
 individuals in a ward who are infected. This will see whether an
 individual progresses from one stage of the disease to the next.
 This decision is based on the <strong>progress</strong> disease parameter for the stage
-that the individual is at.</li>
-<li><a class="reference internal" href="../../api/generated/metawards.iterators.advance_infprob.html#metawards.iterators.advance_infprob" title="metawards.iterators.advance_infprob"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_infprob()</span></code></a> is applied to recalculate
+that the individual is at.</p></li>
+<li><p><a class="reference internal" href="../../api/generated/metawards.iterators.advance_infprob.html#metawards.iterators.advance_infprob" title="metawards.iterators.advance_infprob"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_infprob()</span></code></a> is applied to recalculate
 the infection probabilities needed to guide new infections. These are
 based on the <em>foi</em> parameters for each ward and the number of
 individuals who are at each stage of the disease (based on the
-<strong>contrib_foi</strong> disease parameter).</li>
-<li><a class="reference internal" href="../../api/generated/metawards.iterators.advance_fixed.html#metawards.iterators.advance_fixed" title="metawards.iterators.advance_fixed"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_fixed()</span></code></a> is applied to advance
+<strong>contrib_foi</strong> disease parameter).</p></li>
+<li><p><a class="reference internal" href="../../api/generated/metawards.iterators.advance_fixed.html#metawards.iterators.advance_fixed" title="metawards.iterators.advance_fixed"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_fixed()</span></code></a> is applied to advance
 all infections that are based on fixed (predictable) movements
 of individuals (the so-called “work” mode). Infected individuals
 continue to “work” unless they become too symptomatic
 (<strong>too_ill_to_move</strong>, based on the parameter for the stage of the
-disease at which the individual is at).</li>
-<li>Finally <a class="reference internal" href="../../api/generated/metawards.iterators.advance_play.html#metawards.iterators.advance_play" title="metawards.iterators.advance_play"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_play()</span></code></a> is applied to
+disease at which the individual is at).</p></li>
+<li><p>Finally <a class="reference internal" href="../../api/generated/metawards.iterators.advance_play.html#metawards.iterators.advance_play" title="metawards.iterators.advance_play"><code class="xref py py-func docutils literal notranslate"><span class="pre">advance_play()</span></code></a> is applied to
 advance all infections that are based on random movements of
 individuals (the so-called “play” mode). Infected individuals
 continue to “play” unless they become too symptomatic
-(again controlled by the <strong>too_ill_to_move</strong> disease parameters).</li>
+(again controlled by the <strong>too_ill_to_move</strong> disease parameters).</p></li>
 </ol>
 <p>Once all of these functions have been applied, then a day is considered
 complete. The statistics for the day, e.g. numbers of individuals
@@ -337,7 +343,7 @@ these functions are applied again.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

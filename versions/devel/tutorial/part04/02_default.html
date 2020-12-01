@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -119,7 +120,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -234,18 +236,18 @@
 the infection data into a single <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace" title="metawards.Workspace"><code class="xref py py-class docutils literal notranslate"><span class="pre">metawards.Workspace</span></code></a> object.</p>
 <p>This <a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace" title="metawards.Workspace"><code class="xref py py-class docutils literal notranslate"><span class="pre">metawards.Workspace</span></code></a> object contains;</p>
 <ul class="simple">
-<li><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.inf_tot" title="metawards.Workspace.inf_tot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">inf_tot()</span></code></a>: The total population size at each
-of the different disease stages from the <code class="docutils literal notranslate"><span class="pre">work</span></code> infections.</li>
-<li><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.pinf_tot" title="metawards.Workspace.pinf_tot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pinf_tot()</span></code></a>: The total population size at each
-of the different disease stages from the <code class="docutils literal notranslate"><span class="pre">play</span></code> infections.</li>
-<li><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.n_inf_wards" title="metawards.Workspace.n_inf_wards"><code class="xref py py-meth docutils literal notranslate"><span class="pre">n_inf_wards()</span></code></a>: The number of wards with at
-least one member for each disease stage.</li>
-<li><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.total_inf_ward" title="metawards.Workspace.total_inf_ward"><code class="xref py py-meth docutils literal notranslate"><span class="pre">total_inf_ward()</span></code></a>: The size of the infected
-population in each ward (the prevalence).</li>
-<li><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.total_new_inf_ward" title="metawards.Workspace.total_new_inf_ward"><code class="xref py py-meth docutils literal notranslate"><span class="pre">total_new_inf_ward()</span></code></a>: The number of new infections
-on this day in each ward.</li>
-<li><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.incidence" title="metawards.Workspace.incidence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">incidence()</span></code></a>: The incidence of infection in each
-ward.</li>
+<li><p><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.inf_tot" title="metawards.Workspace.inf_tot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">inf_tot()</span></code></a>: The total population size at each
+of the different disease stages from the <code class="docutils literal notranslate"><span class="pre">work</span></code> infections.</p></li>
+<li><p><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.pinf_tot" title="metawards.Workspace.pinf_tot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pinf_tot()</span></code></a>: The total population size at each
+of the different disease stages from the <code class="docutils literal notranslate"><span class="pre">play</span></code> infections.</p></li>
+<li><p><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.n_inf_wards" title="metawards.Workspace.n_inf_wards"><code class="xref py py-meth docutils literal notranslate"><span class="pre">n_inf_wards()</span></code></a>: The number of wards with at
+least one member for each disease stage.</p></li>
+<li><p><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.total_inf_ward" title="metawards.Workspace.total_inf_ward"><code class="xref py py-meth docutils literal notranslate"><span class="pre">total_inf_ward()</span></code></a>: The size of the infected
+population in each ward (the prevalence).</p></li>
+<li><p><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.total_new_inf_ward" title="metawards.Workspace.total_new_inf_ward"><code class="xref py py-meth docutils literal notranslate"><span class="pre">total_new_inf_ward()</span></code></a>: The number of new infections
+on this day in each ward.</p></li>
+<li><p><a class="reference internal" href="../../api/index_api_MetaWards.html#metawards.Workspace.incidence" title="metawards.Workspace.incidence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">incidence()</span></code></a>: The incidence of infection in each
+ward.</p></li>
 </ul>
 <div class="section" id="output-incidence">
 <h2>Output incidence<a class="headerlink" href="#output-incidence" title="Permalink to this headline">¶</a></h2>
@@ -282,8 +284,8 @@ to read;</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">See how we are calling <code class="docutils literal notranslate"><span class="pre">output_incidence</span></code> on every day, but
+<p class="admonition-title">Note</p>
+<p>See how we are calling <code class="docutils literal notranslate"><span class="pre">output_incidence</span></code> on every day, but
 <code class="docutils literal notranslate"><span class="pre">output_population</span></code> only on even days.</p>
 </div>
 <p>If you run this extractor using</p>
@@ -299,15 +301,15 @@ as no infection has been seeded.</p>
 <p>The default extractor is <a class="reference internal" href="../../api/generated/metawards.extractors.extract_default.html#metawards.extractors.extract_default" title="metawards.extractors.extract_default"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_default()</span></code></a>.
 This returns;</p>
 <ul class="simple">
-<li><a class="reference internal" href="../../api/generated/metawards.extractors.output_basic.html#metawards.extractors.output_basic" title="metawards.extractors.output_basic"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_basic()</span></code></a>: Writes out basic information
-to the files <code class="docutils literal notranslate"><span class="pre">NumberWardsInfected.dat</span></code>, <code class="docutils literal notranslate"><span class="pre">TotalInfections.dat</span></code> etc.</li>
-<li><a class="reference internal" href="../../api/generated/metawards.extractors.output_dispersal.html#metawards.extractors.output_dispersal" title="metawards.extractors.output_dispersal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_dispersal()</span></code></a>: Calculates and writes out
+<li><p><a class="reference internal" href="../../api/generated/metawards.extractors.output_basic.html#metawards.extractors.output_basic" title="metawards.extractors.output_basic"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_basic()</span></code></a>: Writes out basic information
+to the files <code class="docutils literal notranslate"><span class="pre">NumberWardsInfected.dat</span></code>, <code class="docutils literal notranslate"><span class="pre">TotalInfections.dat</span></code> etc.</p></li>
+<li><p><a class="reference internal" href="../../api/generated/metawards.extractors.output_dispersal.html#metawards.extractors.output_dispersal" title="metawards.extractors.output_dispersal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_dispersal()</span></code></a>: Calculates and writes out
 the geographic disperal of the outbreak to <code class="docutils literal notranslate"><span class="pre">MeanXY.dat</span></code>, <code class="docutils literal notranslate"><span class="pre">VarXY.day</span></code>
-and <code class="docutils literal notranslate"><span class="pre">Dispersal.dat</span></code></li>
-<li><a class="reference internal" href="../../api/generated/metawards.extractors.output_prevalence.html#metawards.extractors.output_prevalence" title="metawards.extractors.output_prevalence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_prevalence()</span></code></a>: Writes the (large)
-prevalence matrix to <code class="docutils literal notranslate"><span class="pre">prevalence.dat</span></code>.</li>
-<li><a class="reference internal" href="../../api/generated/metawards.extractors.output_incidence.html#metawards.extractors.output_incidence" title="metawards.extractors.output_incidence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_incidence()</span></code></a>: Writes the (large) incidence
-matrix to <code class="docutils literal notranslate"><span class="pre">incidence.dat</span></code>.</li>
+and <code class="docutils literal notranslate"><span class="pre">Dispersal.dat</span></code></p></li>
+<li><p><a class="reference internal" href="../../api/generated/metawards.extractors.output_prevalence.html#metawards.extractors.output_prevalence" title="metawards.extractors.output_prevalence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_prevalence()</span></code></a>: Writes the (large)
+prevalence matrix to <code class="docutils literal notranslate"><span class="pre">prevalence.dat</span></code>.</p></li>
+<li><p><a class="reference internal" href="../../api/generated/metawards.extractors.output_incidence.html#metawards.extractors.output_incidence" title="metawards.extractors.output_incidence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_incidence()</span></code></a>: Writes the (large) incidence
+matrix to <code class="docutils literal notranslate"><span class="pre">incidence.dat</span></code>.</p></li>
 </ul>
 <p>You can use <a class="reference internal" href="../../api/generated/metawards.extractors.extract_default.html#metawards.extractors.extract_default" title="metawards.extractors.extract_default"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_default()</span></code></a>
 either by not supplying an extractor
@@ -348,7 +350,7 @@ you want to restrict output only to <code class="docutils literal notranslate"><
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

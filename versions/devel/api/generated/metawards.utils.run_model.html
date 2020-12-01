@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -227,53 +228,49 @@
             
   <div class="section" id="metawards-utils-run-model">
 <h1>metawards.utils.run_model<a class="headerlink" href="#metawards-utils-run-model" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="metawards.utils.run_model">
-<code class="descclassname">metawards.utils.</code><code class="descname">run_model</code><span class="sig-paren">(</span><em>network: Union[metawards._network.Network, metawards._networks.Networks], infections: metawards._infections.Infections, rngs, output_dir: metawards._outputfiles.OutputFiles, population: metawards._population.Population = Population(initial=57104043, susceptibles=0, latent=0, total=0, totals=None, recovereds=0, n_inf_wards=0, scale_uv=1.0, day=0, date=None), nsteps: int = None, profiler: metawards.utils._profiler.Profiler = None, nthreads: int = None, iterator: Union[str, Callable[[...], None]] = None, extractor: Union[str, Callable[[...], None]] = None, mixer: Union[str, Callable[[...], None]] = None, mover: Union[str, Callable[[...], None]] = None</em><span class="sig-paren">)</span> &#x2192; metawards._population.Populations<a class="reference internal" href="../../_modules/metawards/utils/_run_model.html#run_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.run_model" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">metawards.utils.</code><code class="sig-name descname">run_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>metawards._network.Network<span class="p">, </span>metawards._networks.Networks<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">infections</span><span class="p">:</span> <span class="n">metawards._infections.Infections</span></em>, <em class="sig-param"><span class="n">rngs</span></em>, <em class="sig-param"><span class="n">output_dir</span><span class="p">:</span> <span class="n">metawards._outputfiles.OutputFiles</span></em>, <em class="sig-param"><span class="n">population</span><span class="p">:</span> <span class="n">metawards._population.Population</span> <span class="o">=</span> <span class="default_value">Population(initial=57104043, susceptibles=0, latent=0, total=0, totals=None, other_totals=None, recovereds=0, n_inf_wards=0, scale_uv=1.0, day=0, date=None)</span></em>, <em class="sig-param"><span class="n">nsteps</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">profiler</span><span class="p">:</span> <span class="n">metawards.utils._profiler.Profiler</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nthreads</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">iterator</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extractor</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mixer</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mover</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>Callable<span class="p">[</span><span class="p">[</span><span class="p">…</span><span class="p">]</span><span class="p">, </span>None<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; metawards._population.Populations<a class="reference internal" href="../../_modules/metawards/utils/_run_model.html#run_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.utils.run_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Actually run the model… Real work happens here. The model
 will run until completion or until ‘nsteps’ have been
 completed, whichever happens first.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a><em> or </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Networks" title="metawards.Networks"><em>Networks</em></a>) – The network(s) on which to run the model</li>
-<li><strong>infections</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Infections" title="metawards.Infections"><em>Infections</em></a>) – The space used to record the infections</li>
-<li><strong>rngs</strong> (<em>list</em>) – The list of random number generators to use, one per thread</li>
-<li><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The initial population at the start of the model outbreak.
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>network</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Network" title="metawards.Network"><em>Network</em></a><em> or </em><a class="reference internal" href="../index_api_MetaWards.html#metawards.Networks" title="metawards.Networks"><em>Networks</em></a>) – The network(s) on which to run the model</p></li>
+<li><p><strong>infections</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Infections" title="metawards.Infections"><em>Infections</em></a>) – The space used to record the infections</p></li>
+<li><p><strong>rngs</strong> (<em>list</em>) – The list of random number generators to use, one per thread</p></li>
+<li><p><strong>population</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.Population" title="metawards.Population"><em>Population</em></a>) – The initial population at the start of the model outbreak.
 This is also used to set the date and day of the start of
-the model outbreak</li>
-<li><strong>seed</strong> (<em>int</em>) – The random number seed used for this model run. If this is
-None then a very random random number seed will be used</li>
-<li><strong>output_dir</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><em>OutputFiles</em></a>) – The directory to write all of the output into</li>
-<li><strong>nsteps</strong> (<em>int</em>) – The maximum number of steps to run in the outbreak. If None
-then run until the outbreak has finished</li>
-<li><strong>profiler</strong> (<a class="reference internal" href="metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><em>Profiler</em></a>) – The profiler to use to profile - a new one is created if
-one isn’t passed</li>
-<li><strong>nthreads</strong> (<em>int</em>) – Number of threads over which to parallelise this model run</li>
-<li><strong>iterator</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will be used to dynamically get the functions
+the model outbreak</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – The random number seed used for this model run. If this is
+None then a very random random number seed will be used</p></li>
+<li><p><strong>output_dir</strong> (<a class="reference internal" href="../index_api_MetaWards.html#metawards.OutputFiles" title="metawards.OutputFiles"><em>OutputFiles</em></a>) – The directory to write all of the output into</p></li>
+<li><p><strong>nsteps</strong> (<em>int</em>) – The maximum number of steps to run in the outbreak. If None
+then run until the outbreak has finished</p></li>
+<li><p><strong>profiler</strong> (<a class="reference internal" href="metawards.utils.Profiler.html#metawards.utils.Profiler" title="metawards.utils.Profiler"><em>Profiler</em></a>) – The profiler to use to profile - a new one is created if
+one isn’t passed</p></li>
+<li><p><strong>nthreads</strong> (<em>int</em>) – Number of threads over which to parallelise this model run</p></li>
+<li><p><strong>iterator</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will be used to dynamically get the functions
 that will be used at each iteration to advance the
 model. Any additional files or parameters needed by these
-functions should be included in the <em class="xref py py-obj">network.params</em> object.</li>
-<li><strong>extractor</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will be used to dynamically get the functions
+functions should be included in the <em class="xref py py-obj">network.params</em> object.</p></li>
+<li><p><strong>extractor</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will be used to dynamically get the functions
 that will be used at each iteration to extract data from
-the model run</li>
-<li><strong>mixer</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will mix data from multiple demographics
-so that this is shared during a model run</li>
-<li><strong>mover</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that can move the population between different
-demographics</li>
+the model run</p></li>
+<li><p><strong>mixer</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that will mix data from multiple demographics
+so that this is shared during a model run</p></li>
+<li><p><strong>mover</strong> (<em>MetaFunction</em><em> or </em><em>string</em>) – Function that can move the population between different
+demographics</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>trajectory</strong> – The trajectory of the population for every day of the model run</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="../index_api_MetaWards.html#metawards.Populations" title="metawards.Populations">Populations</a></p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>trajectory</strong> – The trajectory of the population for every day of the model run</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.Populations" title="metawards.Populations">Populations</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -299,7 +296,7 @@ demographics</li>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

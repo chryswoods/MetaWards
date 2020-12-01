@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -231,25 +232,25 @@ and the links (communiting/movement) of individuals between nodes.</p>
 <p>The Network files are a collection of files that must all exist in the
 same directory. They comprise;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">description.json</span></code>: This file must exist in the directory, and provides
-the metadata needed to locate all of the other necessary files.</li>
-<li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">work_size</span> <span class="pre">/</span> <span class="pre">play_size</span></code>: These files list the index and population of</dt>
-<dd>workers (in <code class="docutils literal notranslate"><span class="pre">work_size</span></code>) and players (in <code class="docutils literal notranslate"><span class="pre">play_size</span></code>) in
+<li><p><code class="docutils literal notranslate"><span class="pre">description.json</span></code>: This file must exist in the directory, and provides
+the metadata needed to locate all of the other necessary files.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">work_size</span> <span class="pre">/</span> <span class="pre">play_size</span></code>: These files list the index and population of</dt><dd><p>workers (in <code class="docutils literal notranslate"><span class="pre">work_size</span></code>) and players (in <code class="docutils literal notranslate"><span class="pre">play_size</span></code>) in
 each ward in the network. The total population in each ward (node) is
-the sum of the work and play populations.</dd>
+the sum of the work and play populations.</p>
+</dd>
 </dl>
 </li>
-<li><code class="docutils literal notranslate"><span class="pre">work</span></code>: This file lists all of the work connections between nodes, giving
+<li><p><code class="docutils literal notranslate"><span class="pre">work</span></code>: This file lists all of the work connections between nodes, giving
 the population of workers who commute from the source node to the
-destination.</li>
-<li><code class="docutils literal notranslate"><span class="pre">play</span></code>: This file lists all of the play connections between nodes, giving
+destination.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">play</span></code>: This file lists all of the play connections between nodes, giving
 the <strong>proportion</strong> of players who make random movements from the source
-node to the destination node.</li>
-<li><code class="docutils literal notranslate"><span class="pre">position</span></code>: This file contains the coordinates of the centre of each node.
-These coordinates can be X/Y or latitude/longitude coordinates.</li>
-<li><code class="docutils literal notranslate"><span class="pre">lookup</span></code>: This file contains the names and other metadata about each
-node, e.g. the name, local authority, region etc.</li>
+node to the destination node.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>: This file contains the coordinates of the centre of each node.
+These coordinates can be X/Y or latitude/longitude coordinates.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lookup</span></code>: This file contains the names and other metadata about each
+node, e.g. the name, local authority, region etc.</p></li>
 </ul>
 <p>These files are all described below.</p>
 <div class="section" id="description-json">
@@ -258,21 +259,21 @@ node, e.g. the name, local authority, region etc.</li>
 that is contained in the directory. The file describes a simple dictionary
 of the following key-value pairs;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">work</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">work</span></code> file.</li>
-<li><code class="docutils literal notranslate"><span class="pre">work_size</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">work_size</span></code> file.</li>
-<li><code class="docutils literal notranslate"><span class="pre">play</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">play</span></code> file.</li>
-<li><code class="docutils literal notranslate"><span class="pre">play_size</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">play_size</span></code> file.</li>
-<li><code class="docutils literal notranslate"><span class="pre">position</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">position</span></code> file.</li>
-<li><code class="docutils literal notranslate"><span class="pre">coordinates</span></code>: Whether the coordinates in the <code class="docutils literal notranslate"><span class="pre">position</span></code> file are
-in x/y (<code class="docutils literal notranslate"><span class="pre">x/y</span></code>) or latitude/longitude (<code class="docutils literal notranslate"><span class="pre">lat/long</span></code>) format.</li>
-<li><code class="docutils literal notranslate"><span class="pre">coordinate_units</span></code>: (Optional) - the units for x/y coordinates. This should
+<li><p><code class="docutils literal notranslate"><span class="pre">work</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">work</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">work_size</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">work_size</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">play</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">play</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">play_size</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">play_size</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>: Filename of the <code class="docutils literal notranslate"><span class="pre">position</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coordinates</span></code>: Whether the coordinates in the <code class="docutils literal notranslate"><span class="pre">position</span></code> file are
+in x/y (<code class="docutils literal notranslate"><span class="pre">x/y</span></code>) or latitude/longitude (<code class="docutils literal notranslate"><span class="pre">lat/long</span></code>) format.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coordinate_units</span></code>: (Optional) - the units for x/y coordinates. This should
 be either <code class="docutils literal notranslate"><span class="pre">m</span></code> for meters, or <code class="docutils literal notranslate"><span class="pre">km</span></code> for kilometers. Distances in
-<code class="docutils literal notranslate"><span class="pre">metawards</span></code> are always reported as kilometers.</li>
-<li><code class="docutils literal notranslate"><span class="pre">lookup</span></code>: (Optional) Filename of the <code class="docutils literal notranslate"><span class="pre">lookup</span></code> file.</li>
-<li><code class="docutils literal notranslate"><span class="pre">lookup_columns</span></code>: (Optional) A dictionary that gives the column numbers
+<code class="docutils literal notranslate"><span class="pre">metawards</span></code> are always reported as kilometers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lookup</span></code>: (Optional) Filename of the <code class="docutils literal notranslate"><span class="pre">lookup</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lookup_columns</span></code>: (Optional) A dictionary that gives the column numbers
 (zero-indexed)for the <code class="docutils literal notranslate"><span class="pre">code</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">alternate_code</span></code>,
 <code class="docutils literal notranslate"><span class="pre">alternate_name</span></code>, <code class="docutils literal notranslate"><span class="pre">authority_code</span></code> and <code class="docutils literal notranslate"><span class="pre">authority_name</span></code> fields for
-the ward metadata.</li>
+the ward metadata.</p></li>
 </ul>
 </div>
 <div class="section" id="work">
@@ -300,8 +301,8 @@ to the destination node.</p>
 ward in which they live). 3 workers commute from ward 1 to ward 2,
 139 commute from ward 1 to ward 5 etc.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">All of the source wards have to be listed contiguously, i.e.
+<p class="admonition-title">Note</p>
+<p>All of the source wards have to be listed contiguously, i.e.
 you must list all of the connections where the source ward is
 equal to <code class="docutils literal notranslate"><span class="pre">1</span></code> before you list all of the connections where the
 source ward is equal to <code class="docutils literal notranslate"><span class="pre">2</span></code> etc.</p>
@@ -352,8 +353,8 @@ ward to the destination ward.</p>
 <p>In this case, <code class="docutils literal notranslate"><span class="pre">0.0426...</span></code> of players will remain in ward 1, while
 <code class="docutils literal notranslate"><span class="pre">0.00044...</span></code> of players will randomly move from ward 1 to ward 2.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Be careful as the third number is a fraction (floating point number
+<p class="admonition-title">Note</p>
+<p>Be careful as the third number is a fraction (floating point number
 between 0 and 1) and not the number of players that move. Also note
 that the same ordering requirements as for the <code class="docutils literal notranslate"><span class="pre">work</span></code> file apply,
 namely that all connections for source ward 1 have to be listed before
@@ -405,8 +406,8 @@ set in this file.</p>
 is the (1-indexed) index of the ward. The second column is the X coordinate,
 while the third is the Y coordinate.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If lat/long was used, then the second column would be the latitude, and
+<p class="admonition-title">Note</p>
+<p>If lat/long was used, then the second column would be the latitude, and
 the third column the longitude.</p>
 </div>
 <p>So ward 1 has its center are (524.7km, 190.1km), while ward 2 has its center
@@ -461,7 +462,7 @@ and so the first ward has code <code class="docutils literal notranslate"><span 
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

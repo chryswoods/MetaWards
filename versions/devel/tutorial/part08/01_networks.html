@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -41,7 +42,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Creating a Custom Network" href="02_custom_network.html" />
-    <link rel="prev" title="Part 8 - Different networks for different demographics" href="../index_part08.html" /> 
+    <link rel="prev" title="Part 8 - Creating your own models / networks" href="../index_part08.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -109,7 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../index_part05.html">Part 5 - Modelling multiple demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part06.html">Part 6 - Moving between demographics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index_part07.html">Part 7 - Different pathways for different demographics</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index_part08.html">Part 8 - Different networks for different demographics</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index_part08.html">Part 8 - Creating your own models / networks</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Understanding the Model Network</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#the-single-node-network">The single-node network</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#seeding-the-outbreak">Seeding the outbreak</a></li>
@@ -118,8 +119,11 @@
 <li class="toctree-l3"><a class="reference internal" href="02_custom_network.html">Creating a Custom Network</a></li>
 <li class="toctree-l3"><a class="reference internal" href="03_reticulate.html">Creating Networks in R</a></li>
 <li class="toctree-l3"><a class="reference internal" href="04_using_custom.html">Using a Custom Network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05_local_network.html">Specifying ward-local parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_network_demographics.html">Different networks for different demographics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../index_part09.html">Part 9 - Advanced Moves and Scenarios</a></li>
 </ul>
 </li>
 </ul>
@@ -197,7 +201,7 @@
         
           <li><a href="../index.html">Tutorial</a> &raquo;</li>
         
-          <li><a href="../index_part08.html">Part 8 - Different networks for different demographics</a> &raquo;</li>
+          <li><a href="../index_part08.html">Part 8 - Creating your own models / networks</a> &raquo;</li>
         
       <li>Understanding the Model Network</li>
     
@@ -216,7 +220,7 @@
         <a href="02_custom_network.html" class="btn btn-neutral float-right" title="Creating a Custom Network" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index_part08.html" class="btn btn-neutral float-left" title="Part 8 - Different networks for different demographics" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index_part08.html" class="btn btn-neutral float-left" title="Part 8 - Creating your own models / networks" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -252,18 +256,18 @@ is <code class="docutils literal notranslate"><span class="pre">2011Data</span><
 electoral ward in England and Wales.</p>
 <p>There are two other models supplied;</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">2011UK</span></code> : Again, this is based on the 2011 census, but includes Scotland
-and Northern Ireland. This model is still a work in progress.</li>
-<li><code class="docutils literal notranslate"><span class="pre">single</span></code> : This is a single-ward network that is used for testing, or
-when you don’t want to model geographic behaviour.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2011UK</span></code> : Again, this is based on the 2011 census, but includes Scotland
+and Northern Ireland. This model is still a work in progress.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">single</span></code> : This is a single-ward network that is used for testing, or
+when you don’t want to model geographic behaviour.</p></li>
 </ul>
 <p>You can run a single-ward simulation using the command line;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metawards -d lurgy_home -m single -P <span class="m">100</span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We are using the <code class="docutils literal notranslate"><span class="pre">lurgy_home.json</span></code> file from the last chapter of this
+<p class="admonition-title">Note</p>
+<p>We are using the <code class="docutils literal notranslate"><span class="pre">lurgy_home.json</span></code> file from the last chapter of this
 tutorial. Note that we also need to set the population of this single
 ward using the <code class="docutils literal notranslate"><span class="pre">-P</span></code> or <code class="docutils literal notranslate"><span class="pre">--population</span></code> command line argument. In this
 case, we are setting the population to 100 individuals.</p>
@@ -282,8 +286,8 @@ every outbreak. This file contains the single line;</p>
 (the first number), infecting 5 individuals (the second number) in
 ward 255 (the third number).</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The name of this file is misleading, as it is really seeding
+<p class="admonition-title">Warning</p>
+<p>The name of this file is misleading, as it is really seeding
 the ward with index 255, not seeding a ward in London. This will
 only be seeding London if the network this is used with has a
 ward in London at index 255.</p>
@@ -306,8 +310,8 @@ IndexError: Invalid node index 255. Number of nodes in this container equals 2
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The traceback can be long and complex, and is really only of use for <code class="docutils literal notranslate"><span class="pre">metawards</span></code>
+<p class="admonition-title">Note</p>
+<p>The traceback can be long and complex, and is really only of use for <code class="docutils literal notranslate"><span class="pre">metawards</span></code>
 developers. You can normally work out what has gone wrong by scrolling up
 to before the traceback, and seeing if there is a <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> printed immediately
 before.</p>
@@ -319,8 +323,8 @@ in ward 1 on the first day of the outbreak. This contains the line;</p>
 </div>
 <p>which says to seed 5 individuals on the first day in ward 1.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Nodes are indexed from 1 rather than 0. This means that <code class="docutils literal notranslate"><span class="pre">ward[1]</span></code>
+<p class="admonition-title">Note</p>
+<p>Nodes are indexed from 1 rather than 0. This means that <code class="docutils literal notranslate"><span class="pre">ward[1]</span></code>
 is the first node, and <code class="docutils literal notranslate"><span class="pre">ward[nnodes]</span></code> is the last node in the
 network.</p>
 </div>
@@ -343,8 +347,8 @@ and then 10 individuals on day 2, via;</p>
 <p>The contents of the string is interpreted identically to if it had been
 read from a file, with <code class="docutils literal notranslate"><span class="pre">\n</span></code> representing a newline character.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The extra seeds file has a flexible and powerful format, e.g. supporting
+<p class="admonition-title">Note</p>
+<p>The extra seeds file has a flexible and powerful format, e.g. supporting
 seeding by date, seeding random wards or by random amounts etc.
 More information on the format of this file can
 be <a class="reference internal" href="../../fileformats/extraseeds.html"><span class="doc">found here</span></a>.</p>
@@ -363,7 +367,7 @@ be <a class="reference internal" href="../../fileformats/extraseeds.html"><span 
         <a href="02_custom_network.html" class="btn btn-neutral float-right" title="Creating a Custom Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index_part08.html" class="btn btn-neutral float-left" title="Part 8 - Different networks for different demographics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index_part08.html" class="btn btn-neutral float-left" title="Part 8 - Creating your own models / networks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -373,7 +377,7 @@ be <a class="reference internal" href="../../fileformats/extraseeds.html"><span 
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -227,109 +228,223 @@
             
   <div class="section" id="metawards-wardinfos">
 <h1>metawards.WardInfos<a class="headerlink" href="#metawards-wardinfos" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="metawards.WardInfos">
-<em class="property">class </em><code class="descclassname">metawards.</code><code class="descname">WardInfos</code><span class="sig-paren">(</span><em>wards: List[metawards._wardinfo.WardInfo] = &lt;factory&gt;</em>, <em>_index: Dict[metawards._wardinfo.WardInfo</em>, <em>int] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">metawards.</code><code class="sig-name descname">WardInfos</code><span class="sig-paren">(</span><em class="sig-param">wards: List[metawards._wardinfo.WardInfo] = &lt;factory&gt;</em>, <em class="sig-param">_index: Dict[metawards._wardinfo.WardInfo</em>, <em class="sig-param">int] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple class that holds a list of WardInfo objects, and provides
 useful search functions over that list. This prevents me from
 cluttering up the interface of Network</p>
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfos.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>wards: List[metawards._wardinfo.WardInfo] = &lt;factory&gt;</em>, <em>_index: Dict[metawards._wardinfo.WardInfo</em>, <em>int] = None</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.WardInfos.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">wards: List[metawards._wardinfo.WardInfo] = &lt;factory&gt;</em>, <em class="sig-param">_index: Dict[metawards._wardinfo.WardInfo</em>, <em class="sig-param">int] = None</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#metawards.WardInfos.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
 
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#metawards.WardInfos.__init__" title="metawards.WardInfos.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(wards,&nbsp;_index,&nbsp;int]&nbsp;=&nbsp;None)</td>
-<td></td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.__contains__" title="metawards.WardInfos.__contains__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__contains__</span></code></a>(info)</p></td>
+<td><p>Return whether or not this contains the passed WardInfo</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.contains" title="metawards.WardInfos.contains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contains</span></code></a>(info)</td>
-<td>Return whether or not this contains the passed WardInfo</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__delattr__</span></code>(name, /)</p></td>
+<td><p>Implement delattr(self, name).</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.find" title="metawards.WardInfos.find"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find</span></code></a>(name,&nbsp;authority,&nbsp;region,&nbsp;match,&nbsp;…)</td>
-<td>Generic search function that will search using any or all of the terms provided.</td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dir__</span></code>()</p></td>
+<td><p>Default dir() implementation.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.index" title="metawards.WardInfos.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code></a>(info)</td>
-<td>Return the index of the passed ‘info’ object if it is in this list.</td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__eq__</span></code>(other)</p></td>
+<td><p>Return self==value.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.reindex" title="metawards.WardInfos.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reindex</span></code></a>()</td>
-<td>Rebuild the WardInfo index.</td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__format__</span></code>(format_spec, /)</p></td>
+<td><p>Default object formatter.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__ge__</span></code>(value, /)</p></td>
+<td><p>Return self&gt;=value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getattribute__</span></code>(name, /)</p></td>
+<td><p>Return getattr(self, name).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__getitem__</span></code>(index)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__gt__</span></code>(value, /)</p></td>
+<td><p>Return self&gt;value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#metawards.WardInfos.__init__" title="metawards.WardInfos.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([wards, _index])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init_subclass__</span></code></p></td>
+<td><p>This method is called when a class is subclassed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__le__</span></code>(value, /)</p></td>
+<td><p>Return self&lt;=value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__len__</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__lt__</span></code>(value, /)</p></td>
+<td><p>Return self&lt;value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__ne__</span></code>(value, /)</p></td>
+<td><p>Return self!=value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__new__</span></code>(**kwargs)</p></td>
+<td><p>Create and return a new object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__reduce__</span></code>()</p></td>
+<td><p>Helper for pickle.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__reduce_ex__</span></code>(protocol, /)</p></td>
+<td><p>Helper for pickle.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__repr__</span></code>()</p></td>
+<td><p>Return repr(self).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setattr__</span></code>(name, value, /)</p></td>
+<td><p>Implement setattr(self, name, value).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.__setitem__" title="metawards.WardInfos.__setitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__setitem__</span></code></a>(i, info)</p></td>
+<td><p>Set the ith WardInfo equal to ‘info’.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__sizeof__</span></code>()</p></td>
+<td><p>Size of object in memory, in bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__str__</span></code>()</p></td>
+<td><p>Return str(self).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__subclasshook__</span></code></p></td>
+<td><p>Abstract classes can override this to customize issubclass().</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_find_authority</span></code>(name, match)</p></td>
+<td><p>Internal function that flexibly finds a ward by authority</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_find_region</span></code>(name, match)</p></td>
+<td><p>Internal function that flexibly finds a ward by region</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_find_ward</span></code>(name, match, include_alternates)</p></td>
+<td><p>Internal function that flexibly finds a ward by name</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_intersect</span></code>(list1, list2)</p></td>
+<td><p>Return the intersection of two lists</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.contains" title="metawards.WardInfos.contains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contains</span></code></a>(info)</p></td>
+<td><p>Return whether or not this contains the passed WardInfo</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.find" title="metawards.WardInfos.find"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find</span></code></a>([name, authority, region, match, …])</p></td>
+<td><p>Generic search function that will search using any or all of the terms provided.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.index" title="metawards.WardInfos.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code></a>(info)</p></td>
+<td><p>Return the index of the passed ‘info’ object if it is in this list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../index_api_MetaWards.html#metawards.WardInfos.reindex" title="metawards.WardInfos.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reindex</span></code></a>()</p></td>
+<td><p>Rebuild the WardInfo index.</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="method">
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__annotations__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dataclass_fields__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dataclass_params__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__dict__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__doc__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__hash__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__module__</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__weakref__</span></code></p></td>
+<td><p>list of weak references to the object (if defined)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_index</span></code></p></td>
+<td><p>The index used to speed up lookup of wards</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
 <dt id="metawards.WardInfos.__contains__">
-<code class="descname">__contains__</code><span class="sig-paren">(</span><em>info: metawards._wardinfo.WardInfo</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.__contains__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__contains__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">metawards._wardinfo.WardInfo</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.__contains__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.__contains__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return whether or not this contains the passed WardInfo</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfos.__setitem__">
-<code class="descname">__setitem__</code><span class="sig-paren">(</span><em>i: int</em>, <em>info: metawards._wardinfo.WardInfo</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.__setitem__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__setitem__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">metawards._wardinfo.WardInfo</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.__setitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.__setitem__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the ith WardInfo equal to ‘info’.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfos.contains">
-<code class="descname">contains</code><span class="sig-paren">(</span><em>info: metawards._wardinfo.WardInfo</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.contains" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">contains</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">metawards._wardinfo.WardInfo</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.contains" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return whether or not this contains the passed WardInfo</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfos.find">
-<code class="descname">find</code><span class="sig-paren">(</span><em>name: str = None</em>, <em>authority: str = None</em>, <em>region: str = None</em>, <em>match: bool = False</em>, <em>match_authority_and_region: bool = False</em>, <em>include_alternates: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.find" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">authority</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">region</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">match</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">match_authority_and_region</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">include_alternates</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.find" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic search function that will search using any or all
 of the terms provided. This returns a list of indicies
 of wards that match the search</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the ward to search. You can also include
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the ward to search. You can also include
 the authority adn region by separating usign “/”, e.g.
-“Clifton/Bristol”.</li>
-<li><strong>authority</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the authority to search</li>
-<li><strong>region</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the region to search</li>
-<li><strong>match</strong> (<em>bool</em><em>(</em><em>False</em><em>)</em>) – Use a regular expression match for the ward rather than a
-search. This forces the match to be at the start of the string</li>
-<li><strong>match_authority_and_region</strong> (<em>bool</em><em>(</em><em>False</em><em>)</em>) – Use a regular expression match for the authority and region
+“Clifton/Bristol”.</p></li>
+<li><p><strong>authority</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the authority to search</p></li>
+<li><p><strong>region</strong> (<em>str</em><em> or </em><em>regexp</em>) – Name or code of the region to search</p></li>
+<li><p><strong>match</strong> (<em>bool</em><em>(</em><em>False</em><em>)</em>) – Use a regular expression match for the ward rather than a
+search. This forces the match to be at the start of the string</p></li>
+<li><p><strong>match_authority_and_region</strong> (<em>bool</em><em>(</em><em>False</em><em>)</em>) – Use a regular expression match for the authority and region
 rather than a search. This forces the match to be at the start
-of the string</li>
-<li><strong>include_alternates</strong> (<em>bool</em><em>(</em><em>True</em><em>)</em>) – Whether or not to include alternative names and codes when
-searching for the ward</li>
+of the string</p></li>
+<li><p><strong>include_alternates</strong> (<em>bool</em><em>(</em><em>True</em><em>)</em>) – Whether or not to include alternative names and codes when
+searching for the ward</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfos.index">
-<code class="descname">index</code><span class="sig-paren">(</span><em>info: metawards._wardinfo.WardInfo</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.index" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info</span><span class="p">:</span> <span class="n">metawards._wardinfo.WardInfo</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the index of the passed ‘info’ object if it is in this
 list. If not, then a ValueError exception is raised. Note that
 only the first matching WardInfo will be returned</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="metawards.WardInfos.reindex">
-<code class="descname">reindex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.reindex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.reindex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reindex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/metawards/_wardinfo.html#WardInfos.reindex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#metawards.WardInfos.reindex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rebuild the WardInfo index. You must call this function after
 you have modified the list of WardInfo objects, as otherwise
 this will fall out of date. Note that this will be automatically
 called the first time you use the “contains” or “index” functions</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="metawards.WardInfos.wards">
-<code class="descname">wards</code><em class="property"> = None</em><a class="headerlink" href="#metawards.WardInfos.wards" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">wards</code><em class="property">: List<span class="p">[</span>metawards._wardinfo.WardInfo<span class="p">]</span></em><a class="headerlink" href="#metawards.WardInfos.wards" title="Permalink to this definition">¶</a></dt>
 <dd><p>The list of WardInfo objects, one for each ward in order</p>
 </dd></dl>
 
@@ -358,7 +473,7 @@ called the first time you use the “contains” or “index” functions</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

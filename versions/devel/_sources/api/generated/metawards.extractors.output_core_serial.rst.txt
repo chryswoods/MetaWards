@@ -1,4 +1,4 @@
-metawards.extractors.output\_core\_serial
+﻿metawards.extractors.output\_core\_serial
 =========================================
 
 .. currentmodule:: metawards.extractors

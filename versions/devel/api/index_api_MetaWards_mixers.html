@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -226,29 +227,29 @@
 <span id="metawards-mixers-api-detail"></span><h1>MetaWards.mixers API Detail<a class="headerlink" href="#module-metawards.mixers" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.mixers.InteractionMatrix.html#metawards.mixers.InteractionMatrix" title="metawards.mixers.InteractionMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InteractionMatrix</span></code></a>(n,&nbsp;value)</td>
-<td>This is an interaction matrix, which is used to control how the FOIs of different demographics are merged together.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/metawards.mixers.InteractionMatrix.html#metawards.mixers.InteractionMatrix" title="metawards.mixers.InteractionMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InteractionMatrix</span></code></a>(n, value)</p></td>
+<td><p>This is an interaction matrix, which is used to control how the FOIs of different demographics are merged together.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/metawards.mixers.merge_evenly.html#metawards.mixers.merge_evenly" title="metawards.mixers.merge_evenly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_evenly</span></code></a>(network,&nbsp;nthreads,&nbsp;profiler,&nbsp;…)</td>
-<td>This merge_function merges the FOIs across all demographic sub-networks evenly.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/metawards.mixers.merge_evenly.html#metawards.mixers.merge_evenly" title="metawards.mixers.merge_evenly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_evenly</span></code></a>(network, nthreads, profiler, …)</p></td>
+<td><p>This merge_function merges the FOIs across all demographic sub-networks evenly.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.mixers.mix_custom.html#metawards.mixers.mix_custom" title="metawards.mixers.mix_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mix_custom</span></code></a>(custom_function,&nbsp;None],&nbsp;stage,&nbsp;…)</td>
-<td>This returns the default list of ‘merge_XXX’ functions that are called in sequence for each iteration of the model run.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/metawards.mixers.mix_custom.html#metawards.mixers.mix_custom" title="metawards.mixers.mix_custom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mix_custom</span></code></a>(custom_function, stage, **kwargs)</p></td>
+<td><p>This returns the default list of ‘merge_XXX’ functions that are called in sequence for each iteration of the model run.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/metawards.mixers.mix_default.html#metawards.mixers.mix_default" title="metawards.mixers.mix_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mix_default</span></code></a>(**kwargs)</td>
-<td>This is the default mixer.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/metawards.mixers.mix_default.html#metawards.mixers.mix_default" title="metawards.mixers.mix_default"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mix_default</span></code></a>(**kwargs)</p></td>
+<td><p>This is the default mixer.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/metawards.mixers.mix_evenly.html#metawards.mixers.mix_evenly" title="metawards.mixers.mix_evenly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mix_evenly</span></code></a>(stage,&nbsp;network,&nbsp;**kwargs)</td>
-<td>This mixer will evenly mix all demographics.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/metawards.mixers.mix_evenly.html#metawards.mixers.mix_evenly" title="metawards.mixers.mix_evenly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mix_evenly</span></code></a>(stage, network, **kwargs)</p></td>
+<td><p>This mixer will evenly mix all demographics.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="generated/metawards.mixers.mix_none.html#metawards.mixers.mix_none" title="metawards.mixers.mix_none"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mix_none</span></code></a>(**kwargs)</td>
-<td>This mixer will perform no mixing.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/metawards.mixers.mix_none.html#metawards.mixers.mix_none" title="metawards.mixers.mix_none"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mix_none</span></code></a>(**kwargs)</p></td>
+<td><p>This mixer will perform no mixing.</p></td>
 </tr>
 </tbody>
 </table>
@@ -278,7 +279,7 @@
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

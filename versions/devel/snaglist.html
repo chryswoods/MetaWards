@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -216,19 +217,19 @@ work, so that no-one else duplicates your effort.</p>
 <div class="section" id="snags">
 <h2>Snags<a class="headerlink" href="#snags" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>[feature_improve_rng] - Random number generator is potentially quite slow</li>
+<li><p>[feature_improve_rng] - Random number generator is potentially quite slow</p></li>
 </ul>
 <p>We are using the numpy random number generator in single threaded,
 not-vectorised mode. There is a lot of scope for speed-up, so someone
 who wants to take a look would be very welcome (and appreciated).</p>
 <ul class="simple">
-<li>[feature_multinomial] - Replace ran_binomial loop in advance_foi</li>
+<li><p>[feature_multinomial] - Replace ran_binomial loop in advance_foi</p></li>
 </ul>
 <p>We think that a ran_multinomial call can replace the slow and multiple
 calls to ran_binomial in advance_foi. If the maths works out, then
 this should be significantly quicker.</p>
 <ul class="simple">
-<li>[feature_bigtests] - Create a larger test suite full of examples</li>
+<li><p>[feature_bigtests] - Create a larger test suite full of examples</p></li>
 </ul>
 <p>We’d like to create a repo full of examples of MetaWards runs, which can
 serve as both a learning resource and also a fuller suite of regression
@@ -259,7 +260,7 @@ repo to the main code as the examples will take up a lot of space.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

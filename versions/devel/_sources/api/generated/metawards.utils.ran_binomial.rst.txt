@@ -1,4 +1,4 @@
-metawards.utils.ran\_binomial
+﻿metawards.utils.ran\_binomial
 =============================
 
 .. currentmodule:: metawards.utils

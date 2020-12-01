@@ -1,4 +1,4 @@
-metawards.utils.get\_min\_max\_distances
+﻿metawards.utils.get\_min\_max\_distances
 ========================================
 
 .. currentmodule:: metawards.utils

@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -223,23 +224,21 @@
 to extract data from the outbreak to process and write live to files.
 The functions divide into two main types,
 the most important of which are described below;</p>
-<dl class="docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">extract_functions</span></code> which determine which functions will be called to output data</dt>
-<dd><ul class="first last simple">
-<li><a class="reference internal" href="generated/metawards.extractors.extract_default.html#metawards.extractors.extract_default" title="metawards.extractors.extract_default"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_default()</span></code></a></li>
-<li><a class="reference internal" href="generated/metawards.extractors.extract_custom.html#metawards.extractors.extract_custom" title="metawards.extractors.extract_custom"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_custom()</span></code></a></li>
-<li><a class="reference internal" href="generated/metawards.extractors.extract_large.html#metawards.extractors.extract_large" title="metawards.extractors.extract_large"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_large()</span></code></a></li>
-<li><a class="reference internal" href="generated/metawards.extractors.extract_small.html#metawards.extractors.extract_small" title="metawards.extractors.extract_small"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_small()</span></code></a></li>
-<li><a class="reference internal" href="generated/metawards.extractors.extract_none.html#metawards.extractors.extract_none" title="metawards.extractors.extract_none"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_none()</span></code></a></li>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">extract_functions</span></code> which determine which functions will be called to output data</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="generated/metawards.extractors.extract_default.html#metawards.extractors.extract_default" title="metawards.extractors.extract_default"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_default()</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/metawards.extractors.extract_custom.html#metawards.extractors.extract_custom" title="metawards.extractors.extract_custom"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_custom()</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/metawards.extractors.extract_large.html#metawards.extractors.extract_large" title="metawards.extractors.extract_large"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_large()</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/metawards.extractors.extract_small.html#metawards.extractors.extract_small" title="metawards.extractors.extract_small"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_small()</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/metawards.extractors.extract_none.html#metawards.extractors.extract_none" title="metawards.extractors.extract_none"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_none()</span></code></a></p></li>
 </ul>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">output_functions</span></code> which perform the actual work of outputting data</dt>
-<dd><ul class="first last simple">
-<li><a class="reference internal" href="generated/metawards.extractors.output_basic.html#metawards.extractors.output_basic" title="metawards.extractors.output_basic"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_basic()</span></code></a></li>
-<li><a class="reference internal" href="generated/metawards.extractors.output_core.html#metawards.extractors.output_core" title="metawards.extractors.output_core"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_core()</span></code></a></li>
-<li><a class="reference internal" href="generated/metawards.extractors.output_dispersal.html#metawards.extractors.output_dispersal" title="metawards.extractors.output_dispersal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_dispersal()</span></code></a></li>
-<li><a class="reference internal" href="generated/metawards.extractors.output_incidence.html#metawards.extractors.output_incidence" title="metawards.extractors.output_incidence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_incidence()</span></code></a></li>
-<li><a class="reference internal" href="generated/metawards.extractors.output_prevalence.html#metawards.extractors.output_prevalence" title="metawards.extractors.output_prevalence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_prevalence()</span></code></a></li>
+<dt><code class="docutils literal notranslate"><span class="pre">output_functions</span></code> which perform the actual work of outputting data</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="generated/metawards.extractors.output_basic.html#metawards.extractors.output_basic" title="metawards.extractors.output_basic"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_basic()</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/metawards.extractors.output_core.html#metawards.extractors.output_core" title="metawards.extractors.output_core"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_core()</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/metawards.extractors.output_dispersal.html#metawards.extractors.output_dispersal" title="metawards.extractors.output_dispersal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_dispersal()</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/metawards.extractors.output_incidence.html#metawards.extractors.output_incidence" title="metawards.extractors.output_incidence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_incidence()</span></code></a></p></li>
+<li><p><a class="reference internal" href="generated/metawards.extractors.output_prevalence.html#metawards.extractors.output_prevalence" title="metawards.extractors.output_prevalence"><code class="xref py py-meth docutils literal notranslate"><span class="pre">output_prevalence()</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -273,7 +272,7 @@ described <a class="reference internal" href="index_api_MetaWards_extractors.htm
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

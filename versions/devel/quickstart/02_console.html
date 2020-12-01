@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -29,11 +29,12 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/custom.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/custom.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -276,8 +277,8 @@ which indexes each run with a repeat number, e.g.</p>
 that looks something like this;</p>
 <img alt="Plot of the outbreak with a long recovery stage" src="../_images/console02.jpg" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You will need to load the data into Python pandas, R or Excel to
+<p class="admonition-title">Note</p>
+<p>You will need to load the data into Python pandas, R or Excel to
 visualise more data, as metawards-plot is limited in its
 visualisation capabilities.</p>
 </div>
@@ -316,15 +317,15 @@ Edit your <code class="docutils literal notranslate"><span class="pre">network.j
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Writing these network files by hand is quite difficult, and any small
+<p class="admonition-title">Warning</p>
+<p>Writing these network files by hand is quite difficult, and any small
 errors will cause issues. It is much better to construct this file
 using the Python or R API, and then save the file using the
 <a class="reference internal" href="../api/index_api_MetaWards.html#metawards.Wards.to_json" title="metawards.Wards.to_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">metawards.Wards.to_json()</span></code></a> function.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The term <em>worker</em> is very broad in MetaWards. It means any individual
+<p class="admonition-title">Note</p>
+<p>The term <em>worker</em> is very broad in MetaWards. It means any individual
 that make regular, predictable movements each day. In this case, it
 refers to workers, teachers and students.</p>
 </div>
@@ -338,8 +339,8 @@ parameter.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The format is <strong>day number</strong> (in this case seed on day 1), then
+<p class="admonition-title">Note</p>
+<p>The format is <strong>day number</strong> (in this case seed on day 1), then
 <strong>number to seed</strong> (seeding 100 infections), then
 <strong>ward name or number</strong> (in this case, home)</p>
 </div>
@@ -384,7 +385,7 @@ the seeding, e.g.</p>
   <div role="contentinfo">
     <p>
       <span class="lastupdated">
-        Last updated on Jul 22, 2020.
+        Last updated on Dec 01, 2020.
       </span>
 
     </p>

@@ -34,7 +34,9 @@ def run_docker():
 
 
 def build_wheels():
-    pybins = ["/opt/python/cp37-cp37m/bin", "/opt/python/cp38-cp38/bin"]
+    pybins = ["/opt/python/cp37-cp37m/bin",
+              "/opt/python/cp38-cp38/bin",
+              "/opt/python/cp39-cp39/bin"]
     print(pybins)
 
     PLAT = os.getenv("PLAT")

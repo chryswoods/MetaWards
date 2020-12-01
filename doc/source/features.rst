@@ -48,9 +48,7 @@ To this end, MetaWards features;
   a single combined group, with custom plugins used to merge data
   between networks, and conditionally move individuals between
   different demographics. We've used to model shielding and self-isolation,
-  with future plans to use this to model hospital admissions,
-  impact of demography on transmission, regional variation in disease
-  parameters and the impact of holidays.
+  hospital admissions, impact of individuals returning from holidays etc.
 
 .. figure:: images/tutorial_5_3_1_demographics.jpg
     :width: 100%
@@ -61,6 +59,16 @@ To this end, MetaWards features;
 
     Built in metawards-plot tool for rapid visualisation of results,
     including across multiple networks
+
+* per-ward custom parameter support. Different wards can have different
+  parameters, meaning that you can easily model local behaviour
+  (e.g. local lockdowns, changes in local control measures etc.).
+
+* complete-detail and full control over horizontal and vertical movements
+  through disease stages or across demographics. We've used this to
+  :doc:`model vaccination <tutorial/part09/02_vaccinate>` and also
+  to :doc:`model waning immunity <tutorial/part09/03_fading_immunity>`,
+  with individuals returned from the R or V stages back to S.
 
 * flexible data output support - again handled using an array of in-built
   or user-supplied data extraction plugin functions. Output the data you
@@ -92,10 +100,12 @@ To this end, MetaWards features;
     MetaWards R interface.
 
 * ...but - the individual code is optimised and can run happily on small
-  laptops. Individual networks fit in approximately 80 MB of memory, and model
-  runs can take 15-90 seconds to perform. This scales with the number of
+  laptops. Individual national-scale networks fit in approximately
+  80 MB of memory, and model runs can take 15-90 seconds to perform.
+  This scales with the number of
   demographics that are added, but high performance and low memory consumption
-  are design goals.
+  are design goals. Models using only a few wards are kilobytes, and take
+  less than a second.
 
 * :doc:`flexible input files <model_data>` that would enable modelling of any
   region or country to be undertaken (subject to good input data).

@@ -3,6 +3,8 @@ from typing import List as _List
 from typing import Dict as _Dict
 from typing import Union as _Union
 
+from datetime import date as _date
+
 __all__ = ["VariableSets", "VariableSet"]
 
 
@@ -38,20 +40,23 @@ def _set_lengthday(params, name: str, index: int, value: float):
     params.length_day = float(value)
 
 
-def _set_plengthday(params, name: str, index: int, value: float):
-    """Adjust the Parameters.plength_day parameter"""
-    if index is not None:
-        raise IndexError("You cannot index the lengthday")
-
-    params.plength_day = float(value)
-
-
 def _set_uv(params, name: str, index: int, value: float):
     """Adjust the Parameters.UV parameter"""
     if index is not None:
         raise IndexError("You cannot index the UV parameter")
 
     params.UV = float(value)
+
+
+def _set_UV_max(params, name: str, index: int, value: _date):
+    """Adjust the Parameters.UV parameter"""
+    if index is not None:
+        raise IndexError("You cannot index the UV_max parameter")
+
+    if not isinstance(value, _date):
+        raise TypeError("The passed UV_max must be a date")
+
+    params.UV_max = value
 
 
 def _set_initial_inf(params, name: str, index: int, value: float):
@@ -102,44 +107,25 @@ def _set_work_to_play(params, name: str, index: int, value: float):
     params.work_to_play = float(value)
 
 
-def _set_local_vaccination_thresh(params, name: str, index: int, value: float):
-    """Adjust the Parameters.local_vaccination_thresh parameter"""
+def _set_scale_uv(params, name: str, index: int, value: float):
+    """Adjust the Parameters.scale_uv parameter"""
     if index is not None:
-        raise IndexError("You cannot index the local_vaccination_thresh "
-                         "parameter")
+        raise IndexError("You cannot index the scale_uv parameter")
 
-    params.local_vaccination_thresh = float(value)
+    value = float(value)
+
+    if value < 0:
+        raise ValueError("Negative values of scale_uv are not permitted.")
+
+    params.scale_uv = value
 
 
-def _set_global_detection_thresh(params, name: str, index: int, value: float):
-    """Adjust the Parameters.global_detection_thresh parameter"""
+def _set_bg_foi(params, name: str, index: int, value: float):
+    """Adjust the Parameters.bg_foi parameter"""
     if index is not None:
-        raise IndexError("You cannot index the global_detection_thresh "
-                         "parameter")
+        raise IndexError("You cannot index the bg_foi parameter")
 
-    params.global_detection_thresh = float(value)
-
-
-def _set_daily_ward_vaccination_capacity(params, name: str,
-                                         index: int, value: float):
-    """Adjust the Parameters.daily_ward_vaccination_capacity
-       parameter
-    """
-    if index is not None:
-        raise IndexError("You cannot index the daily_ward_vaccination "
-                         "parameter")
-
-    params.daily_ward_vaccination_capacity = float(value)
-
-
-def _set_neighbour_weight_threshold(params, name: str,
-                                    index: int, value: float):
-    """Adjust the Parameters.neighbour_weight_threshold parameter"""
-    if index is not None:
-        raise IndexError("You cannot index the neighbour_weight_threshold "
-                         "parameter")
-
-    params.neighbour_weight_threshold = float(value)
+    params.bg_foi = float(value)
 
 
 def _set_daily_imports(params, name: str, index: int, value: float):
@@ -182,7 +168,6 @@ _adjustable["too_ill_to_move"] = _set_too_ill_to_move
 _adjustable["contrib_foi"] = _set_contrib_foi
 _adjustable["user"] = _set_user_params
 _adjustable["length_day"] = _set_lengthday
-_adjustable["plength_day"] = _set_plengthday
 _adjustable["UV"] = _set_uv
 _adjustable["initial_inf"] = _set_initial_inf
 _adjustable["static_play_at_home"] = _set_static_play_at_home
@@ -190,12 +175,10 @@ _adjustable["dyn_play_at_home"] = _set_dyn_play_at_home
 _adjustable["dyn_dist_cutoff"] = _set_dyn_dist_cutoff
 _adjustable["play_to_work"] = _set_play_to_work
 _adjustable["work_to_play"] = _set_work_to_play
-_adjustable["local_vaccination_thesh"] = _set_local_vaccination_thresh
-_adjustable["global_detection_thresh"] = _set_global_detection_thresh
-_adjustable["daily_ward_vaccination_capacity"] = \
-    _set_daily_ward_vaccination_capacity
-_adjustable["neighbour_weight_threshold"] = _set_neighbour_weight_threshold
 _adjustable["daily_imports"] = _set_daily_imports
+_adjustable["scale_uv"] = _set_scale_uv
+_adjustable["bg_foi"] = _set_bg_foi
+_adjustable["UV_max"] = _set_UV_max
 
 
 def _clean(x):
@@ -395,6 +378,9 @@ class VariableSet:
         if isinstance(other, dict):
             other = VariableSet(variables=other)
 
+        if self.__class__ != other.__class__:
+            return False
+
         if self._idx != other._idx:
             return False
 
@@ -453,6 +439,14 @@ class VariableSet:
                 return
 
         self._add(key, value)
+
+    def set_value(self, key, value):
+        """Set the value of 'key' to 'value'"""
+        self.__setitem__(key, value)
+
+    def get_value(self, key):
+        """Return the value of 'key'"""
+        return self.__getitem__(key)
 
     def _add(self, name, value):
         """Internal function to add a new variable called 'name' to
@@ -1004,6 +998,151 @@ class VariableSet:
             raise ValueError(
                 f"Unable to set parameters from {self}. Error "
                 f"equals {e.__class__}: {e}")
+
+    def to_data(self):
+        """Return a data dictionary that can be serialised to json"""
+        data = {}
+
+        if self._names is None:
+            return data
+
+        d = {}
+
+        for name, value in zip(self._names, self._vals):
+            name = str(name)
+            try:
+                value = float(value)
+                if value.is_integer():
+                    d[name] = int(value)
+                else:
+                    d[name] = value
+            except Exception:
+                d[name] = str(value)
+
+        data["variables"] = d
+
+        if self._idx != 1:
+            data["index"] = self._idx
+
+        if self._nrepeats != 1:
+            data["nrepeats"] = self._nrepeats
+
+        if self._output:
+            data["output"] = str(self._output)
+
+        return data
+
+    @staticmethod
+    def from_data(data):
+        """Build a VariableSet from the passed data dictionary (which
+           may have been deserialised from json
+        """
+        v = VariableSet()
+
+        d = data.get("variables", {})
+
+        for key, value in d.items():
+            v[key] = value
+
+        v._idx = data.get("index", 1)
+        v._nrepreats = data.get("nrepeats", 1)
+        v._output = data.get("output", None)
+
+        return v
+
+    def to_json(self, filename: str = None, indent: int = None,
+                auto_bzip: bool = True) -> str:
+        """Serialise the VariableSet to JSON. This will write to a file
+           if filename is set, otherwise it will return a JSON string.
+
+           Parameters
+           ----------
+           filename: str
+             The name of the file to write the JSON to. The absolute
+             path to the written file will be returned. If filename is None
+             then this will serialise to a JSON string which will be
+             returned.
+           indent: int
+             The number of spaces of indent to use when writing the json
+           auto_bzip: bool
+             Whether or not to automatically bzip2 the written json file
+
+           Returns
+           -------
+           str
+             Returns either the absolute path to the written file, or
+             the json-serialised string
+        """
+        import json
+
+        if indent is not None:
+            indent = int(indent)
+
+        if filename is None:
+            return json.dumps(self.to_data(), indent=indent)
+        else:
+            from pathlib import Path
+            filename = str(Path(filename).expanduser().resolve().absolute())
+
+            if auto_bzip:
+                if not filename.endswith(".bz2"):
+                    filename += ".bz2"
+
+                import bz2
+                with bz2.open(filename, "wt") as FILE:
+                    try:
+                        json.dump(self.to_data(), FILE, indent=indent)
+                    except Exception:
+                        import os
+                        FILE.close()
+                        os.unlink(filename)
+                        raise
+            else:
+                with open(filename, "w") as FILE:
+                    try:
+                        json.dump(self.to_data(), FILE, indent=indent)
+                    except Exception:
+                        import os
+                        FILE.close()
+                        os.unlink(filename)
+                        raise
+
+            return filename
+
+    @staticmethod
+    def from_json(s: str):
+        """Construct and return VariableSet loaded from the passed
+           json file
+        """
+        import os
+        import json
+
+        if os.path.exists(s):
+            try:
+                import bz2
+                with bz2.open(s, "rt") as FILE:
+                    data = json.load(FILE)
+            except Exception:
+                data = None
+
+            if data is None:
+                with open(s, "rt") as FILE:
+                    data = json.load(FILE)
+        else:
+            try:
+                data = json.loads(s)
+            except Exception:
+                data = None
+
+        if data is None:
+            from .utils._console import Console
+            Console.error(
+                f"Unable to load the VariableSet from '{s}'. Check that "
+                f"this is valid JSON or that the file exists.")
+
+            raise IOError(f"Cannot load VariableSet from '{s}'")
+
+        return VariableSet.from_data(data)
 
 
 class VariableSets:

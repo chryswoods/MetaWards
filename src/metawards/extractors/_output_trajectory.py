@@ -30,12 +30,15 @@ def output_trajectory(network: _Union[Network, Networks],
     # us the list of extra disease stages to print out
     t0 = trajectory[0]
 
-    if t0.totals is None:
-        extra_stages = []
-        extra_str = ""
-    else:
-        extra_stages = list(t0.totals.keys())
+    totals = {} if t0.totals is None else t0.totals
+    other_totals = {} if t0.other_totals is None else t0.other_totals
+
+    extra_stages = list(totals.keys()) + list(other_totals.keys())
+
+    if len(extra_stages) > 0:
         extra_str = ",".join(extra_stages) + ","
+    else:
+        extra_str = ""
 
     RESULTS.write(f"day,{datestring}demographic,S,E,I,{extra_str}R,IW\n")
 
@@ -45,14 +48,19 @@ def output_trajectory(network: _Union[Network, Networks],
         else:
             d = ""
 
+        totals = {} if pop.totals is None else pop.totals
+        other_totals = {} if pop.other_totals is None else pop.other_totals
+
         if len(extra_stages) > 0:
             extra_vals = []
 
             for stage in extra_stages:
-                if pop.totals is None:
-                    extra_vals.append("0")
+                if stage in totals:
+                    extra_vals.append(str(totals[stage]))
+                elif stage in other_totals:
+                    extra_vals.append(str(other_totals[stage]))
                 else:
-                    extra_vals.append(str(pop.totals.get(stage, 0)))
+                    extra_vals.append("0")
 
             extra_str = ",".join(extra_vals) + ","
         else:
@@ -73,14 +81,20 @@ def output_trajectory(network: _Union[Network, Networks],
                 if name is None or len(name) == 0:
                     name = str(i)
 
+                totals = {} if subpop.totals is None else subpop.totals
+                other_totals = {} if subpop.other_totals is None \
+                    else subpop.other_totals
+
                 if len(extra_stages) > 0:
                     extra_vals = []
 
                     for stage in extra_stages:
-                        if subpop.totals is None:
-                            extra_vals.append("0")
+                        if stage in totals:
+                            extra_vals.append(str(totals[stage]))
+                        elif stage in other_totals:
+                            extra_vals.append(str(other_totals[stage]))
                         else:
-                            extra_vals.append(str(subpop.totals.get(stage, 0)))
+                            extra_vals.append("0")
 
                     extra_str = ",".join(extra_vals) + ","
                 else:

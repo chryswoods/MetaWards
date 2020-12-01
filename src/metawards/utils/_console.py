@@ -39,24 +39,39 @@ class _NullProgress:
 
 class _Progress:
     def __init__(self, show_limit: int = 50):
-        from rich.progress import Progress
-        self._progress = Progress(auto_refresh=False)
+        from rich.progress import Progress, BarColumn, TimeRemainingColumn
+        self._progress = Progress(
+            "[progress.description]{task.description}",
+            BarColumn(style="bar.back",
+                      complete_style="bar.complete",
+                      finished_style="bar.complete"),
+            "[progress.percentage]{task.percentage:>3.0f}%",
+            TimeRemainingColumn(),
+            auto_refresh=False)
         self._last_update = _datetime.now()
         self._show_limit = show_limit
         self._completed = {}
 
+        self._have_entered = False
+        self._enter_args = None
+
     def __enter__(self, *args, **kwargs):
+        self._enter_args = (args, kwargs)
         return self
 
     def __exit__(self, *args, **kwargs):
-        if len(self._completed) > 0:
-            self._progress.refresh()
-            Console.print("")
+        if self._have_entered:
+            self._progress.__exit__(*args, **kwargs)
 
         return False
 
     def add_task(self, description: str, total: int):
         if total > self._show_limit:
+            if not self._have_entered:
+                args, kwargs = self._enter_args
+                self._progress.__enter__(*args, **kwargs)
+                self._have_entered = True
+
             task_id = self._progress.add_task(description=description,
                                               total=total)
             self._completed[task_id] = 0
@@ -342,7 +357,7 @@ class Console:
 
     @staticmethod
     def print(text: str, markdown: bool = False, style: str = None,
-              *args, **kwargs):
+              markup: bool = None, *args, **kwargs):
         """Print to the console"""
         if markdown:
             from rich.markdown import Markdown as _Markdown
@@ -355,7 +370,7 @@ class Console:
         style = theme.text(style)
 
         try:
-            Console._get_console().print(text, style=style)
+            Console._get_console().print(text, style=style, markup=markup)
         except UnicodeEncodeError:
             # this output can't cope with a complex theme - switch
             # to theme 'simple'
@@ -366,7 +381,7 @@ class Console:
                 try:
                     text = text.encode("latin-1",
                                        errors="replace").decode("latin-1")
-                    Console._get_console().print(text)
+                    Console._get_console().print(text, markup=markup)
                 except Exception:
                     # accept that this isn't going to be printable
                     pass

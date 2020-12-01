@@ -93,6 +93,9 @@ class Demographics:
         d = "\n  ".join([str(x) for x in self.demographics])
         return f"[\n  {d}\n]"
 
+    def __repr__(self):
+        return self.__str__()
+
     def __len__(self):
         return len(self.demographics)
 
@@ -134,6 +137,21 @@ class Demographics:
 
         return demographics
 
+    def __add__(self, other: Demographic):
+        from copy import deepcopy
+        r = deepcopy(self)
+        r.add(other)
+        return r
+
+    def __radd__(self, other: Demographic):
+        r = Demographics()
+        r.add(other)
+
+        for d in self.demographics:
+            r.add(d)
+
+        return r
+
     def add(self, demographic: Demographic):
         """Add a demographic to the set to be modelled"""
         if demographic.name is None:
@@ -146,7 +164,9 @@ class Demographics:
                 f"{demographic.name} in this set. Please rename "
                 f"and try again.")
 
-        self.demographics.append(demographic)
+        from copy import deepcopy
+
+        self.demographics.append(deepcopy(demographic))
         self._names[demographic.name] = len(self.demographics) - 1
 
     def get_name(self, item):
@@ -327,6 +347,7 @@ follow the instructions at
         play_ratios = [float(x.play_ratio) for x in self.demographics]
         diseases = [_get_filename(x.disease) for x in self.demographics]
         networks = [_get_filename(x.network) for x in self.demographics]
+        adjustments = [x.adjustment for x in self.demographics]
 
         data["demographics"] = demographics
 
@@ -344,6 +365,10 @@ follow the instructions at
 
         if networks != all_none:
             data["networks"] = networks
+
+        if adjustments != all_none:
+            data["adjustments"] = [x.to_data() if x is not None else None
+                                   for x in adjustments]
 
         return data
 
@@ -417,6 +442,7 @@ follow the instructions at
         random_seed = data.get("random_seed", None)
         diseases = data.get("diseases", None)
         networks = data.get("networks", None)
+        adjustments = data.get("adjustments", None)
 
         if diseases is None:
             diseases = len(demographics) * [None]
@@ -432,10 +458,18 @@ follow the instructions at
             networks = [InputFiles.load(x, folder=json_dir) if x is not None
                         else None for x in networks]
 
+        if adjustments is None:
+            adjustments = len(demographics) * [None]
+        else:
+            from ._variableset import VariableSet
+            adjustments = [VariableSet.from_data(x) if x is not None
+                           else None for x in adjustments]
+
         if (len(demographics) != len(work_ratios) or
                 len(demographics) != len(play_ratios) or
                 len(demographics) != len(diseases) or
-                len(demographics) != len(networks)):
+                len(demographics) != len(networks) or
+                len(adjustments) != len(networks)):
             raise ValueError(
                 f"The number of work_ratios ({len(work_ratios)}) must "
                 f"equal to number of play_ratios "
@@ -454,7 +488,8 @@ follow the instructions at
                                       work_ratio=_get_value(work_ratios[i]),
                                       play_ratio=_get_value(play_ratios[i]),
                                       disease=diseases[i],
-                                      network=networks[i])
+                                      network=networks[i],
+                                      adjustment=adjustments[i])
             demos.add(demographic)
 
         return demos
@@ -493,7 +528,7 @@ follow the instructions at
             Console.error(f"Unable to load Demographics from '{s}'. Check that "
                           f"this is valid JSON or that the file exists.")
 
-            raise IOError(f"Cannot load Disease from '{s}'")
+            raise IOError(f"Cannot load Demographics from '{s}'")
 
         return Demographics.from_data(data, json_dir=json_dir)
 

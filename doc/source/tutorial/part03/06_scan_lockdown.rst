@@ -280,32 +280,3 @@ be seen here;
 
 .. image:: ../../images/tutorial_3_6.gif
    :alt: Overview image of a lockdown with custom parameters
-
-Moving beyond this simple demo
-------------------------------
-
-This was a simple demo of how different lockdown scenarios could
-be modelled using custom parameters and custom iterators.
-
-You can of course go further, e.g. by using your custom ``advance function``
-to change actual parameters of the model or of the disease. Feel
-free to change any of the parameters in
-:class:`network.params <metawards.Parameters>` or
-:class:`network.params.disease_params <metawards.Disease>` directly.
-You could, for example, reduce the
-:data:`network.params.dyn_dist_cutoff <metawards.Parameters>`
-variable as lockdown starts. Or you could directly adjust
-:data:`network.params.disease_params.beta[0] <metawards.Disease.beta>`.
-
-A good example of an
-`alternative lockdown model is here <https://github.com/metawards/MetaWards/tree/devel/examples/lockdown>`__.
-This is provided as an example in the MetaWards GitHub repository, and
-enacts lockdown by directly changing the ``scale_uv`` infection parameter.
-This has the effect of reducing the contribution from each infected
-individual to the overall *force of infection* of each ward.
-
-There are many parameters to adjust. You can also add these
-to your scan to investigate their impact.
-The full list of built-in adjustable parameters is below;
-
-.. program-output:: python get_variableset_help.py

@@ -49,3 +49,28 @@ class Node:
 
     #: y coordinate of the ward (location)
     y: float = 0.0
+
+    #: The per-ward scale_uv (amount to scale up or down the FOI
+    scale_uv: float = 1.0
+
+    #: The per-ward cutoff (restrict movement to below this distance in km)
+    cutoff: float = 99999.99
+
+    #: Per-ward background FOI (starting value for FOI calculations)
+    bg_foi: float = 0.0
+
+    #: The per-ward custom user parameters
+    _custom_params = {}
+
+    def get_custom(self, key: str, default: float = 0.0) -> float:
+        """Return the value of the custom parameter at key 'key',
+           returning 'default' if this doesn't exist
+        """
+        return self._custom_params.get(key, default)
+
+    def set_custom(self, key: str, value: float) -> None:
+        """Set the value of the custom parameter at key 'key' to 'value'.
+           Note that this *must* be a floating point value, or something
+           that can be converted to a float
+        """
+        self._custom_params[key] = float(value)

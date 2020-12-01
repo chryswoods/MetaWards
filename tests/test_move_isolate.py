@@ -12,20 +12,17 @@ isolate_json = os.path.join(script_dir, "data", "isolate.json")
 
 
 def move_isolate(**kwargs):
-    func = lambda **kwargs: go_isolate(go_from="home",
-                                       go_to="isolate",
-                                       release_to="released",
-                                       self_isolate_stage=2,
-                                       duration=7,
-                                       **kwargs)
+    func = lambda **kwargs2: go_isolate(go_from="home",
+                                        go_to="isolate",
+                                        self_isolate_stage=2,
+                                        **kwargs2)
 
     return [func]
 
 
 def mix_isolate(network, **kwargs):
-    matrix = [[1.0, 1.0, 1.0],
-              [1.0, 1.0, 1.0],
-              [1.0, 1.0, 1.0]]
+    matrix = [[1.0, 1.0],
+              [1.0, 1.0]]
 
     network.demographics.interaction_matrix = matrix
 
@@ -70,17 +67,14 @@ def test_move_isolate(prompt=None, nthreads=1):
     outdir = os.path.join(script_dir, "test_zero_demographic_output")
 
     with OutputFiles(outdir, force_empty=True, prompt=prompt) as output_dir:
-        trajectory = network.run(population=population, seed=seed,
-                                 output_dir=output_dir,
-                                 nsteps=nsteps, profiler=None,
-                                 mixer=mix_isolate,
-                                 mover=move_isolate,
-                                 nthreads=nthreads)
+        trajectory = network.copy().run(population=population, seed=seed,
+                                        output_dir=output_dir,
+                                        nsteps=nsteps, profiler=None,
+                                        mixer=mix_isolate,
+                                        mover=move_isolate,
+                                        nthreads=nthreads)
 
     OutputFiles.remove(outdir, prompt=None)
-
-    # no-one should be in the 'released' demographic yet...
-    assert trajectory[-1].subpops[2].population == 0
 
     # there should be no latents in the 'isolate' demographic
     assert trajectory[-1].subpops[1].latent == 0

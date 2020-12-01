@@ -54,6 +54,7 @@ def advance_play_omp(network: Network, infections: Infections, rngs,
     cdef int * wards_begin_p = get_int_array_ptr(wards.begin_p)
     cdef int * wards_end_p = get_int_array_ptr(wards.end_p)
 
+    cdef int * play_ifrom = get_int_array_ptr(play.ifrom)
     cdef int * play_ito = get_int_array_ptr(play.ito)
     cdef double * play_weight = get_double_array_ptr(play.weight)
 
@@ -68,8 +69,12 @@ def advance_play_omp(network: Network, infections: Infections, rngs,
     cdef double * wards_night_inf_prob = get_double_array_ptr(
                                                     wards.night_inf_prob)
 
+    cdef double * wards_cutoff = get_double_array_ptr(wards.cutoff)
+
     cdef double dyn_play_at_home = params.dyn_play_at_home
+
     cdef double cutoff = params.dyn_dist_cutoff
+    cdef double local_cutoff = cutoff
 
     # Pointer to the play_infections array - only need [0] as this loop
     # is creating new infections
@@ -86,6 +91,7 @@ def advance_play_omp(network: Network, infections: Infections, rngs,
     cdef int j = 0
     cdef int k = 0
     cdef int l = 0
+    cdef int ifrom = 0
     cdef int ito = 0
     cdef int nnodes_plus_one = network.nnodes + 1
 
@@ -121,9 +127,13 @@ def advance_play_omp(network: Network, infections: Infections, rngs,
 
             # daytime infection of play matrix moves
             for k in range(wards_begin_p[j], wards_end_p[j]):
-                if play_distance[k] < cutoff:
-                    ito = play_ito[k]
+                ifrom = play_ifrom[k]
+                ito = play_ito[k]
 
+                local_cutoff = min(cutoff, wards_cutoff[ifrom])
+                local_cutoff = min(local_cutoff, wards_cutoff[ito])
+
+                if play_distance[k] < local_cutoff:
                     if wards_day_foi[ito] > 0.0:
                         weight = play_weight[k]
                         prob_scaled = weight / (1.0-cumulative_prob)
@@ -202,6 +212,7 @@ def advance_play_serial(network: Network, infections: Infections, rngs,
     cdef int * wards_begin_p = get_int_array_ptr(wards.begin_p)
     cdef int * wards_end_p = get_int_array_ptr(wards.end_p)
 
+    cdef int * play_ifrom = get_int_array_ptr(play.ifrom)
     cdef int * play_ito = get_int_array_ptr(play.ito)
     cdef double * play_weight = get_double_array_ptr(play.weight)
 
@@ -211,13 +222,17 @@ def advance_play_serial(network: Network, infections: Infections, rngs,
     cdef double * wards_play_suscept = get_double_array_ptr(wards.play_suscept)
     cdef double * play_distance = get_double_array_ptr(play.distance)
 
+    cdef double * wards_cutoff = get_double_array_ptr(wards.cutoff)
+
     cdef double * wards_day_inf_prob = get_double_array_ptr(
                                                     wards.day_inf_prob)
     cdef double * wards_night_inf_prob = get_double_array_ptr(
                                                     wards.night_inf_prob)
 
     cdef double dyn_play_at_home = params.dyn_play_at_home
+
     cdef double cutoff = params.dyn_dist_cutoff
+    cdef double local_cutoff = cutoff
 
     # Pointer to the play_infections array - only need [0] as this loop
     # is creating new infections
@@ -229,6 +244,7 @@ def advance_play_serial(network: Network, infections: Infections, rngs,
     cdef int j = 0
     cdef int k = 0
     cdef int l = 0
+    cdef int ifrom = 0
     cdef int ito = 0
     cdef int nnodes_plus_one = network.nnodes + 1
 
@@ -261,9 +277,13 @@ def advance_play_serial(network: Network, infections: Infections, rngs,
 
             # daytime infection of play matrix moves
             for k in range(wards_begin_p[j], wards_end_p[j]):
-                if play_distance[k] < cutoff:
-                    ito = play_ito[k]
+                ifrom = play_ifrom[k]
+                ito = play_ito[k]
 
+                local_cutoff = min(cutoff, wards_cutoff[ifrom])
+                local_cutoff = min(local_cutoff, wards_cutoff[ito])
+
+                if play_distance[k] < local_cutoff:
                     if wards_day_foi[ito] > 0.0:
                         weight = play_weight[k]
                         prob_scaled = weight / (1.0-cumulative_prob)

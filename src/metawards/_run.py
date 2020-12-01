@@ -184,8 +184,10 @@ def run(help: bool = None,
 
     if help:
         args.append("--help")
+        output = None
     elif version:
         args.append("--version")
+        output = None
     else:
         if output is None and not dry_run:
             output = tempfile.mkdtemp(prefix="output_", dir=".")
@@ -426,7 +428,8 @@ def run(help: bool = None,
         Console.info(f"[DRY-RUN] {cmd}")
         return_val = 0
     else:
-        Console.info(f"Writing output to directory {output}")
+        if output is not None:
+            Console.info(f"Writing output to directory {output}")
 
         try:
             import shlex
@@ -450,9 +453,13 @@ def run(help: bool = None,
             Console.error(f"[ERROR] {e.__class__}: {e}")
             return_val = -1
 
-    _rmdir(tmpdir)
+    if tmpdir is not None:
+        _rmdir(tmpdir)
 
     if dry_run:
+        return
+
+    if output is None:
         return
 
     if return_val == 0:

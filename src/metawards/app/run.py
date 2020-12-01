@@ -209,6 +209,12 @@ def parse_args():
                         help="Value for the UV parameter for the model "
                              "(default is 0.0)")
 
+    parser.add_argument('--UV-max', type=str, default=None,
+                        help="Date when the seasonal adjustment should be at "
+                             "its maximum. By default, this is January 1st "
+                             "on the assumption that disease spread is "
+                             "stronger in the (Northern) winter")
+
     parser.add_argument('--theme', type=str, default=None,
                         help=f"The theme to use to color the output. "
                              f"Use '--theme simple' if you prefer a "
@@ -1064,6 +1070,37 @@ def cli():
         params.UV = 0.0
     else:
         params.UV = float(args.UV)
+
+    if args.UV_max is None:
+        from datetime import date
+        # default to January 1st of the starting year
+        params.UV_max = date(day=1, month=1, year=start_day_date.year)
+    else:
+        try:
+            # is this a day number?
+            from datetime import timedelta
+            UV_max = start_day_date + timedelta(days=int(args.UV_max))
+        except Exception:
+            UV_max = None
+
+        if UV_max is None:
+            try:
+                from .._interpret import Interpret
+                UV_max = Interpret.date(args.UV_max)
+            except Exception:
+                UV_max = None
+
+        if UV_max is None:
+            from datetime import date
+            try:
+                UV_max = date.fromisoformat(args.UV_max)
+            except Exception as e:
+                raise ValueError(
+                    f"Cannot interpret a valid date from "
+                    f"'{args.UV_max}'. Error is "
+                    f"{e.__class__} {e}")
+
+        params.UV_max = UV_max
 
     # set these extra parameters to 0
     params.static_play_at_home = 0

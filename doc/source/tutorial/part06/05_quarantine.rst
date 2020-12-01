@@ -81,8 +81,8 @@ argument ``fraction`` to
                                             **kwargs)
 
         go_released = lambda **kwargs: go_to(go_from=isolate,
-                                            go_to="released",
-                                            **kwargs)
+                                             go_to="released",
+                                             **kwargs)
 
         return go_early + [go_released, go_isolate_day]
 

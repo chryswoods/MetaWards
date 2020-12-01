@@ -87,7 +87,7 @@ class SpringFlowers:
 
     def padding_style(self, style):
         if style == "header":
-            return "on #220077"
+            return "on black"
         elif style == "command":
             return "bold white on #222222"
         else:
@@ -115,7 +115,7 @@ class SpringFlowers:
             return f"on {color}"
 
         elif style == "header":
-            return f"on #0000FF"
+            return "on purple"
 
         else:
             return "on black"

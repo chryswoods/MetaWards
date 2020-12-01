@@ -21,7 +21,6 @@ def test_adjustable():
     variables["contrib_foi[4]"] = 0.45
 
     variables["length_day"] = 0.75
-    variables["plength_day"] = 0.85
 
     variables["UV"] = 0.4
 
@@ -52,7 +51,6 @@ def test_adjustable():
     assert params.disease_params.contrib_foi[4] == 0.45
 
     assert params.length_day == 0.75
-    assert params.plength_day == 0.85
     assert params.UV == 0.4
 
 

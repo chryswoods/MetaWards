@@ -15,20 +15,28 @@ class Links:
         """Create a container for up to "N" Links"""
         if N <= 0:
             self._is_null = True
-        else:
-            self._is_null = False
+            return
 
-            from .utils._array import create_double_array, create_int_array
+        from .utils._array import create_double_array, create_int_array
 
-            # Struct of arrays for each piece of data. See the
-            # Link class for information about what each variable
-            # holds. Code uses "-1" to represent a null value
-            self.ifrom = create_int_array(N, -1)
-            self.ito = create_int_array(N, -1)
+        #: Whether or not this is null
+        self._is_null = False
 
-            self.weight = create_double_array(N, 0.0)
-            self.suscept = create_double_array(N, 0.0)
-            self.distance = create_double_array(N, 0.0)
+        #: The index of the home ward
+        self.ifrom = create_int_array(N, -1)
+
+        #: The index of the commute ward
+        self.ito = create_int_array(N, -1)
+
+        #: The number of workers in this link, or the
+        #: weight if this is a player link
+        self.weight = create_double_array(N, 0.0)
+
+        #: The number of susceptible workers in this link
+        self.suscept = create_double_array(N, 0.0)
+
+        #: The distance between the two wards of this link
+        self.distance = create_double_array(N, 0.0)
 
     def is_null(self):
         return self._is_null

@@ -73,6 +73,11 @@ class Disease:
     #: stage of the disease
     contrib_foi: _List[float] = None
 
+    #: Whether or not this stage is an infected stage. By default
+    #: all stages other than those mapped to "R" are classes
+    #: as infected stages
+    is_infected: _List[bool] = None
+
     #: Index of the first symptomatic stage
     start_symptom: int = None
 
@@ -110,6 +115,7 @@ class Disease:
         parts.append(f"* beta: {self.beta}")
         parts.append(f"* progress: {self.progress}")
         parts.append(f"* too_ill_to_move: {self.too_ill_to_move}")
+        parts.append(f"* is_infected: {self.is_infected}")
 
         if self.contrib_foi != [1.0] * len(self.beta):
             if self.contrib_foi != [1.0] * (len(self.beta) - 1) + [0.0]:
@@ -123,8 +129,7 @@ class Disease:
         return f"Disease(name={self.name}, stage={self.stage}, " \
                f"beta={self.beta}, " \
                f"progress={self.progress}, " \
-               f"too_ill_to_move={self.too_ill_to_move}, contrib_foi=" \
-               f"{self.contrib_foi})"
+               f"too_ill_to_move={self.too_ill_to_move})"
 
     def __eq__(self, other):
         return \
@@ -134,6 +139,7 @@ class Disease:
             self.progress == other.progress and \
             self.too_ill_to_move == other.too_ill_to_move and \
             self.contrib_foi == other.contrib_foi and \
+            self.is_infected == other.is_infected and \
             self.start_symptom == other.start_symptom
 
     def __len__(self):
@@ -157,6 +163,7 @@ class Disease:
                 "progress": self.progress[index],
                 "too_ill_to_move": self.too_ill_to_move[index],
                 "contrib_foi": self.contrib_foi[index],
+                "is_infected": self.is_infected[index],
                 "is_start_symptom": (index+1) == self.start_symptom}
 
     def __setitem__(self, index: int,
@@ -232,12 +239,18 @@ class Disease:
                 f"Invalid value of contrib_foi {contrib_foi}. Should "
                 f"be 0 <= contrib_foi")
 
+        is_infected = value.get("is_infected", None)
+
+        if is_infected is not None:
+            is_infected = bool(is_infected)
+
         self.stage[index] = name
         self.mapping[index] = mapping
         self.beta[index] = beta
         self.progress[index] = progress
         self.too_ill_to_move[index] = too_ill_to_move
         self.contrib_foi[index] = contrib_foi
+        self.is_infected[index] = is_infected
 
         if is_start_symptom:
             self.start_symptom = index + 1
@@ -248,6 +261,10 @@ class Disease:
     def N_INF_CLASSES(self):
         """Return the number of stages of the disease"""
         return len(self.beta)
+
+    def assert_sane(self):
+        """Assert that this disease is valid"""
+        self._validate()
 
     def _validate(self):
         """Check that the loaded parameters make sense"""
@@ -261,9 +278,9 @@ class Disease:
             raise AssertionError(f"Data read for disease {self.name} "
                                  f"is corrupted! {e.__class__}: {e}")
 
-        if self.stage is None and n < 4:
+        if self.stage is None and n < 3:
             raise AssertionError(
-                f"There must be at least 4 disease stages ('*', 'E', 'I', "
+                f"There must be at least 3 disease stages ('E', 'I', "
                 f"'R') - the number of stages here is {n}")
 
         elif n == 0:
@@ -276,6 +293,7 @@ class Disease:
             self.progress = [1.0] * n
             self.too_ill_to_move = [0.0] * n
             self.contrib_foi = [1.0] * n
+            self.is_infected = [None] * n
 
             self.progress[-1] = 0.0
 
@@ -304,64 +322,20 @@ class Disease:
                     f"Invalid disease parameter at index {i}: "
                     f"{e.__class__} {e}")
 
-        # for the model to work the different stages have set meanings
-        errors = []
-
         if self.stage is None:
-            # - stage 0 is newly infected that day, so progress must be 1
-            #   and beta must be 0 (not infective)
-            # This is not an error - the pox and flu2 diseases have this.
-            # I don't think I understand correctly though if that is right,
-            # as this means that individuals will stay longer in the
-            # post-infect but pre-latent stage and be recorded as "recovered"?
-            # if self.progress[0] != 1.0:
-            #    errors.append(
-            #        f"The progress[0] value must be 1.0 as individuals are "
-            #        f"only newly infected for one day, and so must progress "
-            #        f"immediately to the 'latent' stage.")
-
-            if self.beta[0] != 0.0:
-                errors.append(
-                    f"The beta[0] value must be 0.0 as newly infected "
-                    f"individuals should not be infective and cannot "
-                    f"infect others.")
-
-            # - stage 1 is 'latent', meaning that beta must be 0
-            # (not infective)
-            if self.beta[1] != 0.0:
-                errors.append(
-                    f"The beta[1] value must be 0.0 as 'latent' individuals "
-                    f"are not infectious and should not be able to infect "
-                    f"others.")
-
-            # - stage -1 is 'recovered', meaning that beta must not be 0
-            #   and progress is 0, as once recovered, always recovered
-            if self.beta[-1] != 0.0:
-                errors.append(
-                    f"The beta[-1] value must be 0.0 as 'recovered' "
-                    f"are not infectious and should not be able to infect "
-                    f"others.")
-
-            if self.progress[-1] != 0.0:
-                errors.append(
-                    f"The progress[-1] value must be 0.0 as 'recovered' "
-                    f"individuals have no further disease stage to progress "
-                    f"to. We hope that once recovered, always recovered.")
-
-            if len(errors) > 0:
-                from .utils._console import Console
-                Console.error("\n".join(errors))
-                raise AssertionError("Invalid disease parameters!\n" +
-                                     "\n".join(errors))
-
-            # set the default names - these are '*', "E", "I?", "R"
+            # set the default names - these are ['*'], "E", "I?", "R"
             self.stage = ["R"] * self.N_INF_CLASSES()
 
-            self.stage[0] = "*"
-            self.stage[1] = "E"
+            if len(self.stage) >= 4:
+                self.stage[0] = "*"
+                self.stage[1] = "E"
+            else:
+                self.stage[0] = "E"
 
             if len(self.stage) == 4:
                 self.stage[2] = "I"
+            elif len(self.stage) == 3:
+                self.stage[1] = "I"
             else:
                 j = 1
                 for i in range(2, self.N_INF_CLASSES() - 1):
@@ -408,10 +382,27 @@ class Disease:
                         f"Invalid mapping value '{v}'. Valid values "
                         f"are only {valid}")
 
+        for stage in self.stage:
+            if stage.strip().lower() == "s":
+                raise AssertionError(
+                    "The stage 'S' is reserved for the Susceptible class. "
+                    f"You cannot use it for your disease: {self.stage}")
+
+        for i, mapping in enumerate(self.mapping):
+            if mapping.strip().lower() == "r":
+                if self.is_infected[i] is None:
+                    self.is_infected[i] = False
+                elif self.is_infected[i]:
+                    raise AssertionError(
+                        "The R-mapped stages cannot have is_infected as True")
+            elif self.is_infected[i] is None:
+                self.is_infected[i] = True
+
     def insert(self, index: int, name: str, mapping: str = None,
                beta: float = None, progress: float = None,
                too_ill_to_move: float = None, contrib_foi: float = None,
-               is_start_symptom: bool = None) -> None:
+               is_start_symptom: bool = None,
+               is_infected: bool = None) -> None:
         """Insert a new stage into the disease. This will insert a new stage
            into the list of stages at index 'index'
 
@@ -444,8 +435,24 @@ class Disease:
              Whether this is the start symptom of the disease. This
              normally doesn't need to be set as this will be worked
              out automatically by the code.
+           is_infected: bool
+             Whether or not this stage is an infected stage. Infected
+             stages are any where the individual is infected by the
+             virus. Non-infected stages are thus "S" and "R". If
+             you don't specify this then it will be guess based
+             on the stage name. Note that "R" stages cannot be
+             classed as infected. You typically don't need to set this
+             as the automatic guess is good. The only time you need
+             to use this is if you want to add additional non-infected
+             stages to "S" and "R", e.g. "V" to represent
+             vaccinated individuals
         """
         index = int(index)
+
+        if name.strip().lower() == "s":
+            raise ValueError(
+                f"You cannot add a disease stage called 'S'. This name "
+                f"is reserved for the Susceptible class")
 
         if self.beta is None:
             if self.name is None:
@@ -457,6 +464,7 @@ class Disease:
             self.progress = []
             self.too_ill_to_move = []
             self.contrib_foi = []
+            self.is_infected = []
 
         if len(self.beta) <= abs(index):
             while len(self.beta) <= abs(index):
@@ -466,6 +474,7 @@ class Disease:
                 self.progress.append(1.0)
                 self.too_ill_to_move.append(0.0)
                 self.contrib_foi.append(1.0)
+                self.is_infected.append(None)
         else:
             self.stage.insert(index, "*")
             self.mapping.insert(index, "*")
@@ -473,6 +482,7 @@ class Disease:
             self.progress.insert(index, 1.0)
             self.too_ill_to_move.insert(index, 0.0)
             self.contrib_foi.insert(index, 1.0)
+            self.is_infected.insert(index, None)
 
         self.__setitem__(index, {"name": name,
                                  "mapping": mapping,
@@ -480,12 +490,14 @@ class Disease:
                                  "progress": progress,
                                  "too_ill_to_move": too_ill_to_move,
                                  "contrib_foi": contrib_foi,
-                                 "is_start_symptom": is_start_symptom})
+                                 "is_start_symptom": is_start_symptom,
+                                 "is_infected": is_infected})
 
     def add(self, name: str, mapping: str = None,
             beta: float = None, progress: float = None,
             too_ill_to_move: float = None, contrib_foi: float = None,
-            is_start_symptom: bool = None) -> None:
+            is_start_symptom: bool = None,
+            is_infected: bool = None) -> None:
         """Add a new stage to the disease. This will append a new stage
            onto the list of stages.
 
@@ -516,17 +528,35 @@ class Disease:
              Whether this is the start symptom of the disease. This
              normally doesn't need to be set as this will be worked
              out automatically by the code.
+           is_infected: bool
+             Whether or not this stage is an infected stage. Infected
+             stages are any where the individual is infected by the
+             virus. Non-infected stages are thus "S" and "R". If
+             you don't specify this then it will be guess based
+             on the stage name. Note that "R" stages cannot be
+             classed as infected. You typically don't need to set this
+             as the automatic guess is good. The only time you need
+             to use this is if you want to add additional non-infected
+             stages to "S" and "R", e.g. "V" to represent
+             vaccinated individuals
         """
         idx = 0 if self.beta is None else len(self.beta)
 
         self.insert(idx, name=name, mapping=mapping, beta=beta,
                     progress=progress, too_ill_to_move=too_ill_to_move,
                     contrib_foi=contrib_foi,
-                    is_start_symptom=is_start_symptom)
+                    is_start_symptom=is_start_symptom,
+                    is_infected=is_infected)
 
     def get_index(self, idx):
-        """Return the index of disease stage 'idx' in this disease"""
+        """Return the index of disease stage 'idx' in this disease.
+           Note that "S" is a special name that refers to the
+           susceptibles. This will return -1
+        """
         if isinstance(idx, str):
+            if idx.strip().lower() == "s":
+                return -1
+
             # lookup by name
             for i, name in enumerate(self.stage):
                 if idx == name:
@@ -739,6 +769,18 @@ set the model data.""")
         progress = data.get("progress", [])
         too_ill_to_move = data.get("too_ill_to_move", default)
         contrib_foi = data.get("contrib_foi", default)
+        is_infected = data.get("is_infected", None)
+
+        if is_infected is None:
+            is_infected = len(beta) * [None]
+        else:
+            is_infected = [None if x is None
+                           else bool(x) for x in is_infected]
+
+        if len(is_infected) != len(beta):
+            raise AssertionError(
+                "Incompatible beta ({beta}) and is_infected "
+                f"({is_infected})")
 
         start_symptom = data.get("start_symptom", None)
 
@@ -750,6 +792,7 @@ set the model data.""")
                           mapping=data.get("mapping", None),
                           stage=data.get("stage", None),
                           name=data.get("name", "unnamed"),
+                          is_infected=is_infected,
                           _authors=data.get("author(s)", None),
                           _contacts=data.get("contact(s)", None),
                           _references=data.get("reference(s)", None))
@@ -789,6 +832,9 @@ set the model data.""")
 
         if self.start_symptom is not None:
             data["start_symptom"] = int(self.start_symptom)
+
+        if self.is_infected is not None:
+            data["is_infected"] = [bool(x) for x in self.is_infected]
 
         if self._authors is not None:
             data["author(s)"] = str(self._authors)

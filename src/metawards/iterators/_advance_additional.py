@@ -176,19 +176,25 @@ def _load_additional_seeds(network: _Union[Network, Networks],
         from .._interpret import Interpret
 
         # is in the file as "t loc num"
-        day = Interpret.day_or_date(words[titles["day"]], rng=rng)
+        day = titles.get("day", None)
+
+        if day is not None:
+            day = Interpret.day_or_date(words[day], rng=rng)
+        else:
+            day = 1
 
         row.append(str(day))
 
         this_network = network
 
-        if titles.get("demographic", None):
-            demographic = _get_demographic(words[titles["demographic"]],
-                                           network=network)
+        demographic = titles.get("demographic", None)
 
-            if demographic is not None:
-                # we need the right network to get the ward below
-                this_network = network.subnets[demographic]
+        if demographic is not None:
+            demographic = _get_demographic(words[demographic], network=network)
+
+        if demographic is not None:
+            # we need the right network to get the ward below
+            this_network = network.subnets[demographic]
         else:
             demographic = None
 
@@ -199,14 +205,25 @@ def _load_additional_seeds(network: _Union[Network, Networks],
 
         row.append(str(demographic))
 
-        ward = _get_ward(words[titles["ward"]], network=this_network, rng=rng)
+        ward = titles.get("ward", None)
+
+        if ward is not None:
+            ward = _get_ward(words[ward], network=this_network, rng=rng)
+        else:
+            ward = 1
 
         try:
             row.append(f"{ward} : {this_network.info[ward]}")
         except Exception:
             row.append(str(ward))
 
-        seed = Interpret.integer(words[titles["number"]], rng=rng, minval=0)
+        seed = titles.get("number", None)
+
+        if seed is not None:
+            seed = Interpret.integer(words[seed], rng=rng, minval=0)
+        else:
+            seed = 0
+
         row.append(str(seed))
         table.add_row(row)
 

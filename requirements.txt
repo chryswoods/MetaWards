@@ -1,5 +1,5 @@
 dateparser>=0.7.0
 configargparse>=1.2.0
 lazy_import>=0.2.2
-rich==1.1.7
-yaspin==0.17.0
+rich>=4.2.0
+yaspin>=0.18.0

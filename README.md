@@ -47,6 +47,14 @@ pip install metawards
 
 (this assumes that you have pip installed and are using Python 3.7 or above - if this doesn't work please follow the [full installation instructions](https://metawards.org/install.html)).
 
+Alternatively, you can also install from within R (or RStudio) by typing;
+
+```
+library(devtools)
+install_github("metawards/rpkg")
+metawards::py_install_metawards()
+```
+
 But, as you are here, I guess you want to install the latest code from GitHub ;-)
 
 To do that, first clone and install the requirements;

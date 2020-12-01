@@ -123,6 +123,13 @@ class Demographic:
     def __repr__(self):
         return str(self)
 
+    def __add__(self, other):
+        from ._demographics import Demographics
+        r = Demographics()
+        r.add(self)
+        r.add(other)
+        return r
+
     def specialise(self, network: Network, profiler=None,
                    nthreads: int = 1):
         """Return a copy of the passed network that has been specialised

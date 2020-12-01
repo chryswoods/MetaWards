@@ -8,42 +8,70 @@ module directly in R.
 This is because the `reticulate project <https://rstudio.github.io/reticulate/>`__
 lets you embed and use Python directly in your R scripts.
 
-Installing reticulate
----------------------
+Installing MetaWards in R
+-------------------------
 
-You can install reticulate by starting R and typing;
-
-.. code-block:: R
-
-    > install.packages("reticulate")
-
-Next, you need to set the path to the ``python`` executable for which
-``metawards`` has been installed. For me, this is
-``/Users/chris/miniconda3/bin/python``. Your path will be different.
-To set this, use the ``use_python`` function in R, e.g.
+You can install MetaWards by starting R and typing;
 
 .. code-block:: R
 
-   > library(reticulate)
-   > use_python("/Users/chris/miniconda3/bin/python", required = TRUE)
+    > library(devtools)
+    > install_github("metawards/rpkg")
 
-(remembering to use the path that is appropriate for your computer)
+This will install the MetaWards R package.
 
-.. note::
+Next, you need to install MetaWards itself. The R package provides
+a convenient function to support this. Type;
 
-   We have provided the ``metawards-reticulate`` command. Run this from
-   the console/terminal to get the list of commmands you need to type into
-   R to import reticulate, set the Python executable and import the
-   :mod:`metawards` module.
+.. code-block:: R
+
+   > metawards::py_install_metawards()
+
+This will download and install the :mod:`metawards` module into the
+Python interpreter associated with reticulate. If you want to specify
+the Python interpreter manually, you would need to type;
+
+.. code-block:: R
+
+   > reticulate::use_python("/path/to/python", required = TRUE)
+
+before calling ``py_install_metawards()``. Here ``/path/to/python``
+is the path to the Python interpreter you want to use.
+
+You can double-check that MetaWards is available and working by typing;
+
+.. code-block:: R
+
+   > metawards::py_metawards_available()
+   [1] TRUE
+
+You can get the version of MetaWards Python installed using;
+
+.. code-block:: R
+
+   > metawards::py_version_metawards()
+   [1] "1.3.0"
+
+You can check if updates to MetaWards are available using;
+
+.. code-block:: R
+
+   > metawards::py_metawards_update_available()
+
+and can update MetaWards in Python to the latest version using;
+
+.. code-block:: R
+
+   > metawards::py_update_metawards()
 
 Using metawards in R
 --------------------
 
-Next, you can import the :mod:`metawards` module by typing;
+To load the :mod:`metawards` module type;
 
 .. code-block:: R
 
-   > metawards <- import("metawards")
+   > library(metawards)
 
 This loads all of the :mod:`metawards` Python objects into the
 ``metawards`` namespace in R. You can then call those objects directly

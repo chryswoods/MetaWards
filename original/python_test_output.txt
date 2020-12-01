@@ -1,124 +1,147 @@
+┌──────────────────────────────────────────────────────────────────────┐
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║           MetaWards version 1.3.0+47.g2d303f9d.dirty           ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║                     https://metawards.org                      ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║                       Source information                       ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│   • repository: https://github.com/metawards/MetaWards               │
+│   • branch: feature_vaccinate                                        │
+│   • revision: 2d303f9d33619f5e872b8f27a87d5380dbc964b5               │
+│   • last modified: 2020-08-13T14:13:24+0100                          │
+│                                                                      │
+│  WARNING: This version has not been committed to git, so you may     │
+│  not be able to recover the original source code that was used to    │
+│  generate this run!                                                  │
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║                   MetaWardsData information                    ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│   • version: 1.0.0                                                   │
+│   • repository: https://github.com/metawards/MetaWardsData           │
+│   • branch: master                                                   │
+│                                                                      │
+│  ╔════════════════════════════════════════════════════════════════╗  │
+│  ║                     Additional information                     ║  │
+│  ╚════════════════════════════════════════════════════════════════╝  │
+│                                                                      │
+│  Visit https://metawards.org for more information about metawards,   │
+│  its authors and its license                                         │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
 
-    ****************************************
-    metawards version 0.8.4+6.gccdb267.dirty
-    ****************************************
+────────────────────────────────── Initialise ──────────────────────────────────
 
-            -- Source information --
-repository: https://github.com/metawards/MetaWards
-           branch: feature_lockdown2
-revision: ccdb267a9b675c8b987f59ba73e5c46cbdd9479c
-    last modified: 2020-04-23T18:21:50+0100
+ • Using parameters from line 0 of tests/data/ncovparams.csv                    
 
-WARNING: This version has not been committed to git,
-WARNING: so you may not be able to recover the original
-WARNING: source code that was used to generate this run!
+ • Performing a single run of each set of parameters                            
 
-          -- Additional information --
-Visit https://metawards.org for more information
-  about metawards, its authors and its license
+ • Naming output subdirectories using a run's fingerprint                       
 
-Command used to run this job:
-/Users/chris/anaconda3/bin/metawards --seed 15324 --nthreads 1 -a ExtraSeedsBrighton.dat -i tests/data/ncovparams.csv -l 0 --iterator tests/iterators/lockdown.py
+ • Number of threads to use for each model run is 1                             
 
-Using parameters from line 0 of tests/data/ncovparams.csv
-Performing a single run of each set of parameters
+ • Number of processes used to parallelise model runs is 8                      
 
-Number of threads to use for each model run is 1
-Number of processes used to parallelise model runs is 4
-Parallelisation will be achieved using multiprocessing
+ • Parallelisation will be achieved using multiprocessing                       
 
-Using random number seed 15324
+ • Day zero is Thursday August 13 2020                                          
 
-Day zero is Friday April 24 2020
+ • Using MetaWardsData at /Users/chris/GitHub/MetaWardsData                     
 
-Using MetaWardsData at /Users/chris/GitHub/MetaWardsData
-This is cloned from https://github.com/metawards/MetaWardsData
-branch main, version 0.3.0-3-gac8965c
-
-******************************************
-*** To repeat this job use the command ***
-******************************************
-
-metawards --input tests/data/ncovparams.csv --line 0 --repeats 1 --seed 15324 --additional ExtraSeedsBrighton.dat --output output --start-date 2020-04-24 --start-day 0 --parameters march29 --repository /Users/chris/GitHub/MetaWardsData --population 57104043 --nsteps 730 --iterator tests/iterators/lockdown.py --UV 0.0 --nthreads 1 --nprocs 4 --max-nodes 16384 --max-links 4194304
-
-Using parameters:
-Parameters march29
-loaded from /Users/chris/GitHub/MetaWardsData/parameters/march29.json
-version: 29 March 2020
-author(s): Leon Danon
-contact(s): l.danon@bristol.ac.uk
-references(s): ...
-repository: https://github.com/metawards/MetaWardsData
-repository_branch: main
-repository_version: 0.3.0-3-gac8965c
-
-length_day = 0.7
-plength_day = 0.5
-initial_inf = 5
-static_play_at_home = 0.0
-dyn_play_at_home = 0.0
-data_dist_cutoff = 10000000.0
-dyn_dist_cutoff = 10000000.0
-play_to_work = 0.0
-work_to_play = 0.0
-local_vaccination_thresh = 4
-global_detection_thresh = 4
-daily_ward_vaccination_capacity = 5
-neighbour_weight_threshold = 0.0
-daily_imports = 0
-UV = 0.0
-additional_seeds = None
+─────────────────────────────── Souce of inputs ────────────────────────────────
+Command Line Args:   --seed 15324 --nthreads 1 -a ExtraSeedsBrighton.dat -i 
+tests/data/ncovparams.csv -l 0
+Environment Variables:
+  METAWARDSDATA:     /Users/chris/GitHub/MetaWardsData
 
 
-Using disease
-Disease ncov
-loaded from /Users/chris/GitHub/MetaWardsData/diseases/ncov.json
-version: None
-author(s): Leon Danon
-contact(s): l.danon@bristol.ac.uk
-references(s): references...
-repository: https://github.com/metawards/MetaWardsData
-repository_branch: main
-repository_version: 0.3.0-3-gac8965c
+────────────────────────────── Repeating this run ──────────────────────────────
+To repeat this job use the command;
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ metawards --input tests/data/ncovparams.csv --line 0 --repeats 1 --seed      │
+│ 15324 --additional ExtraSeedsBrighton.dat --start-date 2020-08-13            │
+│ --repository /Users/chris/GitHub/MetaWardsData --nthreads 1 --nprocs 8       │
+└──────────────────────────────────────────────────────────────────────────────┘
+Or alternatively use the config.yaml file that will be written to the output 
+directory and use the command;
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ metawards -c config.yaml                                                     │
+└──────────────────────────────────────────────────────────────────────────────┘
 
-beta = [0.0, 0.0, 0.8695652173913044, 0.8695652173913044, 0.0]
-progress = [1.0, 0.1923076923076923, 0.8695652173913044, 0.8695652173913044, 0.0]
-too_ill_to_move = [0.0, 0.0, 0.0, 0.0, 0.0]
-contrib_foi = [1.0, 1.0, 1.0, 1.0, 0.0]
-start_symptom = 3
-
-
-Using input files:
-Model 2011Data version March 29 2020
-loaded from /Users/chris/GitHub/MetaWardsData/model_data/2011Data/description.json
-root directory /Users/chris/GitHub/MetaWardsData/model_data/2011Data
-author(s): Leon Danon
-contact(s): l.danon@bristol.ac.uk
-references(s): ...
-repository: https://github.com/metawards/MetaWardsData
-repository_branch: main
-repository_version: 0.3.0-3-gac8965c
-
-work = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/EW1.dat
-play = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlayMatrix.dat
-identifier = None
-identifier2 = None
-weekend = None
-work_size = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/WorkSize.dat
-play_size = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlaySize.dat
-position = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/CBB2011.dat
-coordinates = x/y
-seed = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat
-nodes_to_track = /Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat
-
-
+────────────────────────────────── Parameters ──────────────────────────────────
 Loading additional seeds from ExtraSeedsBrighton.dat
+Setting the * state as an additional R state.
 
-Building the network...
+ • repository: https://github.com/metawards/MetaWardsData                       
+ • repository_branch: master                                                    
+ • repository_version: 1.0.0                                                    
+ • length_day: 0.7                                                              
+ • initial_inf: 5                                                               
+ • static_play_at_home: 0                                                       
+ • dyn_play_at_home: 0.0                                                        
+ • dyn_dist_cutoff: 0.0                                                         
+ • play_to_work: 0                                                              
+ • work_to_play: 0                                                              
+ • daily_imports: 0.0                                                           
+ • UV: 0.0                                                                      
+ • UV_max: 2020-01-01                                                           
+ • stage_0: R                                                                   
+
+──────────────────────────────────── Model ─────────────────────────────────────
+
+ • Model: 2011Data                                                              
+ • loaded from:                                                                 
+   /Users/chris/GitHub/MetaWardsData/model_data/2011Data/description.json       
+ • repository: https://github.com/metawards/MetaWardsData                       
+ • repository_branch: master                                                    
+ • repository_version: 1.0.0                                                    
+ • work: /Users/chris/GitHub/MetaWardsData/model_data/2011Data/EW1.dat          
+ • play: /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlayMatrix.dat   
+ • identifier: None                                                             
+ • identifier2: None                                                            
+ • weekend: None                                                                
+ • work_size: /Users/chris/GitHub/MetaWardsData/model_data/2011Data/WorkSize.dat
+ • play_size: /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlaySize.dat
+ • position: /Users/chris/GitHub/MetaWardsData/model_data/2011Data/CBB2011.dat  
+ • coordinates: x/y                                                             
+ • lookup: /Users/chris/GitHub/MetaWardsData/model_data/2011Data/Ward_Lookup.csv
+ • lookup_columns: {'code': 0, 'name': 1, 'alternate_code': 3, 'alternate_name':
+   4, 'authority_code': 7, 'authority_name': 8}                                 
+ • seed: None                                                                   
+ • nodes_to_track: None                                                         
+
+─────────────────────────────────── Disease ────────────────────────────────────
+
+ • Disease: ncov                                                                
+ • loaded from: ('/Users/chris/GitHub/MetaWardsData/diseases/ncov.json',)       
+ • repository: ('https://github.com/metawards/MetaWardsData',)                  
+ • repository_branch: ('master',)                                               
+ • repository_version: 1.0.0                                                    
+ • stage: ['*', 'E', 'I1', 'I2', 'R']                                           
+ • mapping: ['*', 'E', 'I', 'I', 'R']                                           
+ • beta: [0, 0, 0.8695652173913044, 0.8695652173913044, 0]                      
+ • progress: [1, 0.1923076923076923, 0.8695652173913044, 0.8695652173913044, 0] 
+ • too_ill_to_move: [0, 0, 0, 0, 0]                                             
+ • is_infected: [True, True, True, True, False]                                 
+ • start_symptom: 3                                                             
+
+───────────────────────────── Building the network ─────────────────────────────
+Reading /Users/chris/GitHub/MetaWardsData/model_data/2011Data/EW1.dat into 
+memory...
 Number of nodes equals 8588
 Number of links equals 2412393
 Number of added nodes equals 0
 Number of nodes after filling equals 8588
+Reading /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlayMatrix.dat 
+into memory...
 ADDING LINK 15 24 8588
 ADDING LINK 16 27 8588
 ADDING LINK 17 28 8588
@@ -138,6 +161,8 @@ ADDING LINK 38 54 8588
 ADDING LINK 571 38 8588
 ADDING LINK 735144 6817 8588
 Number of added nodes equals 0
+Reading /Users/chris/GitHub/MetaWardsData/model_data/2011Data/PlaySize.dat into 
+memory...
 Adding missing nodes from 8589 to 8588
 Number of play links equals 2411396
 Number of nodes after build play equals 8588
@@ -149,505 +174,1496 @@ Calculating distances...
 Total links distance equals 132420818.64462519
 Total play distance equals 132407248.5969165
 Total distance equals 264828067.24154168
-Get min/max distances...
-maxdist 668.3577722971484 mindist 0.16782459146549497
-/Users/chris/GitHub/MetaWardsData/model_data/2011Data/seeds.dat --
-[12.0]
-Number of seeds equals 1
-Reset everything...
-Rescale play matrix...
-recalculate_play_denominator_day sum 1 = 33613071.999989584
-recalculate_play_denominator_day sum 2 = 33613072.0
-Move population from play to work...
-recalculate_work_denominator_day sum = 22469005.0
-recalculate_play_denominator_day sum 1 = 33613071.999989584
-recalculate_play_denominator_day sum 2 = 33613072.0
+Network loaded. Population: 56082077, Workers: 22469005, Players: 33613072
 
-Run the model...
-recalculate_play_denominator_day sum 1 = 33613071.999989584
-recalculate_play_denominator_day sum 2 = 33613072.0
-recalculate_work_denominator_day sum = 22469005.0
-recalculate_play_denominator_day sum 1 = 33613071.999989584
-recalculate_play_denominator_day sum 2 = 33613072.0
-Using random number seed: 15324
-First five random numbers equal 42, 49, 51, 50, 52
-Number of threads used equals 1
-Initialise infections...
-Initialise play infections...
-Importing a custom iterator from tests/iterators/lockdown.py
-Loaded iterator from tests/iterators/lockdown.py
-Building a custom iterator for <function iterate_lockdown at 0x1039fb200>
-Setup by seeding all wards
-Loading additional seeds from /Users/chris/GitHub/MetaWardsData/extra_seeds/ExtraSeedsBrighton.dat...
-(1, 2124, 5)
-S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+──────────────────────── Preparing the output directory ────────────────────────
 
- 0 0
-S: 56082077    E: 0    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
+─────────────────────────────── Preparing to run ───────────────────────────────
+
+ • Adjusting (beta[2]=0.95, beta[3]=0.95, progress[1]=0.19, progress[2]=0.91,   
+   progress[3]=0.91)[repeat 1]                                                  
+
+ • Using random number seed 15324                                               
+ • First five random numbers equal 42, 49, 51, 50, 52                           
+
+─────────────────────── Running the model using 1 thread ───────────────────────
+
+──────────────────────────────────── Day 0 ─────────────────────────────────────
+S: 56082077  E: 0  I: 0  R: 0  IW: 0  POPULATION: 56082077
+
+──────────────────────────────────── Day 1 ─────────────────────────────────────
+Loading additional seeds from 
+/Users/chris/GitHub/MetaWardsData/extra_seeds/ExtraSeedsBrighton.dat
+┏━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Day ┃ Demographic ┃                   Ward                   ┃ Number seeded ┃
+┡━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│  1  │    None     │      2124 : WardInfo(name='Newquay       │       5       │
+│     │             │  Treviglas', alternate_names=['Newquay   │               │
+│     │             │      Treviglas'], code='E05008261',      │               │
+│     │             │      alternate_codes=['E36001416'],      │               │
+│     │             │          authority='Cornwall',           │               │
+│     │             │  authority_code='E06000052', region='',  │               │
+│     │             │             region_code='')              │               │
+└─────┴─────────────┴──────────────────────────────────────────┴───────────────┘
+
 seeding play_infections[0][2124] += 5
-
- 1 0
-S: 56082072    E: 5    I: 0    R: 0    IW: 0   TOTAL POPULATION 56082077
-
- 2 5
-S: 56082072    E: 4    I: 1    R: 0    IW: 0   TOTAL POPULATION 56082077
-
- 3 5
-S: 56082070    E: 4    I: 1    R: 2    IW: 2   TOTAL POPULATION 56082077
-
- 4 5
-S: 56082069    E: 6    I: 1    R: 1    IW: 1   TOTAL POPULATION 56082077
-
- 5 7
-S: 56082068    E: 7    I: 0    R: 2    IW: 1   TOTAL POPULATION 56082077
-
- 6 7
-S: 56082068    E: 6    I: 2    R: 1    IW: 0   TOTAL POPULATION 56082077
-
- 7 8
-S: 56082065    E: 4    I: 4    R: 4    IW: 3   TOTAL POPULATION 56082077
-
- 8 8
-S: 56082054    E: 6    I: 3    R: 14    IW: 5   TOTAL POPULATION 56082077
-
- 9 9
-S: 56082050    E: 17    I: 1    R: 9    IW: 2   TOTAL POPULATION 56082077
-
- 10 18
-S: 56082048    E: 19    I: 3    R: 7    IW: 2   TOTAL POPULATION 56082077
-
- 11 22
-S: 56082044    E: 20    I: 3    R: 10    IW: 2   TOTAL POPULATION 56082077
-
- 12 23
-S: 56082038    E: 21    I: 5    R: 13    IW: 5   TOTAL POPULATION 56082077
-
- 13 26
-S: 56082033    E: 24    I: 6    R: 14    IW: 4   TOTAL POPULATION 56082077
-
- 14 30
-S: 56082025    E: 28    I: 4    R: 20    IW: 5   TOTAL POPULATION 56082077
-
- 15 32
-S: 56082022    E: 33    I: 5    R: 17    IW: 3   TOTAL POPULATION 56082077
-
- 16 38
-S: 56082014    E: 29    I: 10    R: 24    IW: 5   TOTAL POPULATION 56082077
-
- 17 39
-S: 56082003    E: 34    I: 11    R: 29    IW: 8   TOTAL POPULATION 56082077
-
- 18 45
-S: 56081991    E: 34    I: 16    R: 36    IW: 10   TOTAL POPULATION 56082077
-
- 19 50
-S: 56081967    E: 36    I: 21    R: 53    IW: 19   TOTAL POPULATION 56082077
-
- 20 57
-S: 56081950    E: 52    I: 19    R: 56    IW: 15   TOTAL POPULATION 56082077
-
- 21 71
-S: 56081915    E: 57    I: 24    R: 81    IW: 24   TOTAL POPULATION 56082077
-
- 22 81
-S: 56081888    E: 86    I: 24    R: 79    IW: 24   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 23 110
-S: 56081883    E: 92    I: 30    R: 72    IW: 5   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 24 122
-S: 56081880    E: 78    I: 42    R: 77    IW: 3   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 25 120
-S: 56081873    E: 68    I: 35    R: 101    IW: 7   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 26 103
-S: 56081870    E: 60    I: 32    R: 115    IW: 2   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 27 92
-S: 56081868    E: 50    I: 31    R: 128    IW: 2   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 28 81
-S: 56081862    E: 44    I: 23    R: 148    IW: 5   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 29 67
-S: 56081859    E: 41    I: 22    R: 155    IW: 3   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 30 63
-S: 56081858    E: 36    I: 20    R: 163    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 31 56
-S: 56081855    E: 31    I: 17    R: 174    IW: 2   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 32 48
-S: 56081854    E: 31    I: 10    R: 182    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 33 41
-S: 56081852    E: 24    I: 13    R: 188    IW: 2   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 34 37
-S: 56081849    E: 22    I: 12    R: 194    IW: 3   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 35 34
-S: 56081846    E: 20    I: 10    R: 201    IW: 3   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 36 30
-S: 56081845    E: 16    I: 13    R: 203    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 37 29
-S: 56081843    E: 17    I: 10    R: 207    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 38 27
-S: 56081840    E: 15    I: 6    R: 216    IW: 3   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 39 21
-S: 56081839    E: 16    I: 6    R: 216    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 40 22
-S: 56081835    E: 11    I: 10    R: 221    IW: 3   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 41 21
-S: 56081834    E: 13    I: 8    R: 222    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 42 21
-S: 56081833    E: 13    I: 3    R: 228    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 43 16
-S: 56081831    E: 9    I: 7    R: 230    IW: 2   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 44 16
-S: 56081828    E: 5    I: 11    R: 233    IW: 2   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 45 16
-S: 56081823    E: 7    I: 8    R: 239    IW: 3   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 46 15
-S: 56081820    E: 11    I: 7    R: 239    IW: 2   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 47 18
-S: 56081820    E: 14    I: 2    R: 241    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 48 16
-S: 56081820    E: 13    I: 1    R: 243    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 49 14
-S: 56081819    E: 11    I: 3    R: 244    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 50 14
-S: 56081818    E: 10    I: 4    R: 245    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 51 14
-S: 56081818    E: 9    I: 4    R: 246    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 52 13
-S: 56081817    E: 8    I: 5    R: 247    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 53 13
-S: 56081814    E: 8    I: 3    R: 252    IW: 2   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 54 11
-S: 56081813    E: 9    I: 3    R: 252    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 55 12
-S: 56081813    E: 10    I: 2    R: 252    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 56 12
-S: 56081812    E: 8    I: 2    R: 255    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 57 10
-S: 56081812    E: 7    I: 4    R: 254    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 58 11
-S: 56081811    E: 6    I: 3    R: 257    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 59 9
-S: 56081811    E: 6    I: 2    R: 258    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 60 8
-S: 56081810    E: 4    I: 3    R: 260    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 61 7
-S: 56081810    E: 5    I: 2    R: 260    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 62 7
-S: 56081810    E: 4    I: 1    R: 262    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 63 5
-S: 56081810    E: 3    I: 2    R: 262    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 64 5
-S: 56081810    E: 2    I: 2    R: 263    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 65 4
-S: 56081810    E: 2    I: 2    R: 263    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 66 4
-S: 56081809    E: 2    I: 0    R: 266    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 67 2
-S: 56081809    E: 2    I: 1    R: 265    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 68 3
-S: 56081808    E: 1    I: 2    R: 266    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 69 3
-S: 56081807    E: 2    I: 2    R: 266    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 70 4
-S: 56081806    E: 3    I: 0    R: 268    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 71 3
-S: 56081806    E: 3    I: 1    R: 267    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 72 4
-S: 56081806    E: 3    I: 1    R: 267    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 73 4
-S: 56081804    E: 3    I: 0    R: 270    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 74 3
-S: 56081804    E: 5    I: 0    R: 268    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 75 5
-S: 56081804    E: 4    I: 1    R: 268    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 76 5
-S: 56081804    E: 4    I: 1    R: 268    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 77 5
-S: 56081804    E: 3    I: 1    R: 269    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 78 4
-S: 56081804    E: 3    I: 1    R: 269    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 79 4
-S: 56081804    E: 3    I: 0    R: 270    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 80 3
-S: 56081804    E: 3    I: 0    R: 270    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 81 3
-S: 56081804    E: 1    I: 2    R: 270    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 82 3
-S: 56081804    E: 1    I: 2    R: 270    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 83 3
-S: 56081804    E: 1    I: 1    R: 271    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 84 2
-S: 56081803    E: 1    I: 0    R: 273    IW: 1   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 85 1
-S: 56081803    E: 2    I: 0    R: 272    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 86 2
-S: 56081803    E: 2    I: 0    R: 272    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 87 2
-S: 56081803    E: 2    I: 0    R: 272    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 88 2
-S: 56081803    E: 1    I: 1    R: 272    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 89 2
-S: 56081803    E: 1    I: 1    R: 272    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 90 2
-S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 91 1
-S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 92 1
-S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 93 1
-S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 94 1
-S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 95 1
-S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 96 1
-S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 97 1
-S: 56081803    E: 1    I: 0    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 98 1
-S: 56081803    E: 0    I: 1    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 99 1
-S: 56081803    E: 0    I: 1    R: 273    IW: 0   TOTAL POPULATION 56082077
-
-LOCKDOWN: scale_uv = 0.07142857142857144, cutoff = 1.0 km
-
- 100 1
-S: 56081802    E: 0    I: 0    R: 275    IW: 1   TOTAL POPULATION 56082077
-Infection died ... Ending on day 101
-
-Writing a summary of all results into the
-csv file /Users/chris/GitHub/MetaWards/output/results.csv.bz2.
-You can use this to quickly look at statistics across
-all runs using e.g. R or pandas
-End of the run
-
-metawards --seed 15324 --nthreads 1 -a ExtraSeedsBrighton.dat -i  -l 0   >   10.31s user 0.28s system 98% cpu 10.708 total
-
+S: 56082072  E: 5  I: 0  R: 0  IW: 0  POPULATION: 56082077
+Number of infections: 5
+
+──────────────────────────────────── Day 2 ─────────────────────────────────────
+S: 56082072  E: 3  I: 2  R: 0  IW: 0  POPULATION: 56082077
+Number of infections: 5
+
+──────────────────────────────────── Day 3 ─────────────────────────────────────
+S: 56082068  E: 3  I: 2  R: 4  IW: 3  POPULATION: 56082077
+Number of infections: 5
+
+──────────────────────────────────── Day 4 ─────────────────────────────────────
+S: 56082066  E: 6  I: 2  R: 3  IW: 2  POPULATION: 56082077
+Number of infections: 8
+
+──────────────────────────────────── Day 5 ─────────────────────────────────────
+S: 56082064  E: 8  I: 1  R: 4  IW: 2  POPULATION: 56082077
+Number of infections: 9
+
+──────────────────────────────────── Day 6 ─────────────────────────────────────
+S: 56082064  E: 10  I: 0  R: 3  IW: 0  POPULATION: 56082077
+Number of infections: 10
+
+──────────────────────────────────── Day 7 ─────────────────────────────────────
+S: 56082064  E: 8  I: 2  R: 3  IW: 0  POPULATION: 56082077
+Number of infections: 10
+
+──────────────────────────────────── Day 8 ─────────────────────────────────────
+S: 56082060  E: 6  I: 4  R: 7  IW: 3  POPULATION: 56082077
+Number of infections: 10
+
+──────────────────────────────────── Day 9 ─────────────────────────────────────
+S: 56082055  E: 10  I: 2  R: 10  IW: 5  POPULATION: 56082077
+Number of infections: 12
+
+──────────────────────────────────── Day 10 ────────────────────────────────────
+S: 56082054  E: 15  I: 0  R: 8  IW: 1  POPULATION: 56082077
+Number of infections: 15
+
+──────────────────────────────────── Day 11 ────────────────────────────────────
+S: 56082054  E: 13  I: 3  R: 7  IW: 0  POPULATION: 56082077
+Number of infections: 16
+
+──────────────────────────────────── Day 12 ────────────────────────────────────
+S: 56082049  E: 10  I: 6  R: 12  IW: 5  POPULATION: 56082077
+Number of infections: 16
+
+──────────────────────────────────── Day 13 ────────────────────────────────────
+S: 56082039  E: 13  I: 5  R: 20  IW: 9  POPULATION: 56082077
+Number of infections: 18
+
+──────────────────────────────────── Day 14 ────────────────────────────────────
+S: 56082034  E: 21  I: 4  R: 18  IW: 5  POPULATION: 56082077
+Number of infections: 25
+
+──────────────────────────────────── Day 15 ────────────────────────────────────
+S: 56082027  E: 23  I: 5  R: 22  IW: 6  POPULATION: 56082077
+Number of infections: 28
+
+──────────────────────────────────── Day 16 ────────────────────────────────────
+S: 56082015  E: 24  I: 9  R: 29  IW: 8  POPULATION: 56082077
+Number of infections: 33
+
+──────────────────────────────────── Day 17 ────────────────────────────────────
+S: 56082006  E: 35  I: 7  R: 29  IW: 7  POPULATION: 56082077
+Number of infections: 42
+
+──────────────────────────────────── Day 18 ────────────────────────────────────
+S: 56081998  E: 40  I: 7  R: 32  IW: 7  POPULATION: 56082077
+Number of infections: 47
+
+──────────────────────────────────── Day 19 ────────────────────────────────────
+S: 56081990  E: 42  I: 12  R: 33  IW: 7  POPULATION: 56082077
+Number of infections: 54
+
+──────────────────────────────────── Day 20 ────────────────────────────────────
+S: 56081976  E: 45  I: 12  R: 44  IW: 11  POPULATION: 56082077
+Number of infections: 57
+
+──────────────────────────────────── Day 21 ────────────────────────────────────
+S: 56081960  E: 52  I: 14  R: 51  IW: 15  POPULATION: 56082077
+Number of infections: 66
+
+──────────────────────────────────── Day 22 ────────────────────────────────────
+S: 56081946  E: 51  I: 26  R: 54  IW: 10  POPULATION: 56082077
+Number of infections: 77
+
+──────────────────────────────────── Day 23 ────────────────────────────────────
+S: 56081909  E: 52  I: 31  R: 85  IW: 28  POPULATION: 56082077
+Number of infections: 83
+
+──────────────────────────────────── Day 24 ────────────────────────────────────
+S: 56081879  E: 82  I: 26  R: 90  IW: 25  POPULATION: 56082077
+Number of infections: 108
+
+──────────────────────────────────── Day 25 ────────────────────────────────────
+S: 56081847  E: 98  I: 23  R: 109  IW: 23  POPULATION: 56082077
+Number of infections: 121
+
+──────────────────────────────────── Day 26 ────────────────────────────────────
+S: 56081815  E: 119  I: 25  R: 118  IW: 24  POPULATION: 56082077
+Number of infections: 144
+
+──────────────────────────────────── Day 27 ────────────────────────────────────
+S: 56081784  E: 127  I: 38  R: 128  IW: 24  POPULATION: 56082077
+Number of infections: 165
+
+──────────────────────────────────── Day 28 ────────────────────────────────────
+S: 56081745  E: 133  I: 51  R: 148  IW: 32  POPULATION: 56082077
+Number of infections: 184
+
+──────────────────────────────────── Day 29 ────────────────────────────────────
+S: 56081695  E: 137  I: 64  R: 181  IW: 38  POPULATION: 56082077
+Number of infections: 201
+
+──────────────────────────────────── Day 30 ────────────────────────────────────
+S: 56081610  E: 167  I: 60  R: 240  IW: 56  POPULATION: 56082077
+Number of infections: 227
+
+──────────────────────────────────── Day 31 ────────────────────────────────────
+S: 56081547  E: 218  I: 58  R: 254  IW: 48  POPULATION: 56082077
+Number of infections: 276
+
+──────────────────────────────────── Day 32 ────────────────────────────────────
+S: 56081480  E: 249  I: 74  R: 274  IW: 50  POPULATION: 56082077
+Number of infections: 323
+
+──────────────────────────────────── Day 33 ────────────────────────────────────
+S: 56081408  E: 263  I: 93  R: 313  IW: 56  POPULATION: 56082077
+Number of infections: 356
+
+──────────────────────────────────── Day 34 ────────────────────────────────────
+S: 56081284  E: 286  I: 107  R: 400  IW: 86  POPULATION: 56082077
+Number of infections: 393
+
+──────────────────────────────────── Day 35 ────────────────────────────────────
+S: 56081165  E: 364  I: 107  R: 441  IW: 83  POPULATION: 56082077
+Number of infections: 471
+
+──────────────────────────────────── Day 36 ────────────────────────────────────
+S: 56081027  E: 413  I: 123  R: 514  IW: 84  POPULATION: 56082077
+Number of infections: 536
+
+──────────────────────────────────── Day 37 ────────────────────────────────────
+S: 56080888  E: 470  I: 168  R: 551  IW: 104  POPULATION: 56082077
+Number of infections: 638
+
+──────────────────────────────────── Day 38 ────────────────────────────────────
+S: 56080684  E: 507  I: 196  R: 690  IW: 127  POPULATION: 56082077
+Number of infections: 703
+
+──────────────────────────────────── Day 39 ────────────────────────────────────
+S: 56080483  E: 622  I: 209  R: 763  IW: 135  POPULATION: 56082077
+Number of infections: 831
+
+──────────────────────────────────── Day 40 ────────────────────────────────────
+S: 56080223  E: 718  I: 214  R: 922  IW: 165  POPULATION: 56082077
+Number of infections: 932
+
+──────────────────────────────────── Day 41 ────────────────────────────────────
+S: 56079966  E: 849  I: 248  R: 1014  IW: 178  POPULATION: 56082077
+Number of infections: 1097
+
+──────────────────────────────────── Day 42 ────────────────────────────────────
+S: 56079676  E: 931  I: 323  R: 1147  IW: 183  POPULATION: 56082077
+Number of infections: 1254
+
+──────────────────────────────────── Day 43 ────────────────────────────────────
+S: 56079383  E: 1043  I: 375  R: 1276  IW: 211  POPULATION: 56082077
+Number of infections: 1418
+
+──────────────────────────────────── Day 44 ────────────────────────────────────
+S: 56078969  E: 1121  I: 424  R: 1563  IW: 251  POPULATION: 56082077
+Number of infections: 1545
+
+──────────────────────────────────── Day 45 ────────────────────────────────────
+S: 56078502  E: 1332  I: 445  R: 1798  IW: 301  POPULATION: 56082077
+Number of infections: 1777
+
+──────────────────────────────────── Day 46 ────────────────────────────────────
+S: 56077978  E: 1557  I: 482  R: 2060  IW: 339  POPULATION: 56082077
+Number of infections: 2039
+
+──────────────────────────────────── Day 47 ────────────────────────────────────
+S: 56077459  E: 1768  I: 609  R: 2241  IW: 330  POPULATION: 56082077
+Number of infections: 2377
+
+──────────────────────────────────── Day 48 ────────────────────────────────────
+S: 56076769  E: 1944  I: 711  R: 2653  IW: 411  POPULATION: 56082077
+Number of infections: 2655
+
+──────────────────────────────────── Day 49 ────────────────────────────────────
+S: 56075959  E: 2256  I: 794  R: 3068  IW: 483  POPULATION: 56082077
+Number of infections: 3050
+
+──────────────────────────────────── Day 50 ────────────────────────────────────
+S: 56075078  E: 2620  I: 896  R: 3483  IW: 535  POPULATION: 56082077
+Number of infections: 3516
+
+──────────────────────────────────── Day 51 ────────────────────────────────────
+S: 56074110  E: 3024  I: 999  R: 3944  IW: 551  POPULATION: 56082077
+Number of infections: 4023
+
+──────────────────────────────────── Day 52 ────────────────────────────────────
+S: 56073043  E: 3452  I: 1103  R: 4479  IW: 629  POPULATION: 56082077
+Number of infections: 4555
+
+──────────────────────────────────── Day 53 ────────────────────────────────────
+S: 56071872  E: 3866  I: 1280  R: 5059  IW: 675  POPULATION: 56082077
+Number of infections: 5146
+
+──────────────────────────────────── Day 54 ────────────────────────────────────
+S: 56070495  E: 4274  I: 1528  R: 5780  IW: 760  POPULATION: 56082077
+Number of infections: 5802
+
+──────────────────────────────────── Day 55 ────────────────────────────────────
+S: 56068838  E: 4855  I: 1707  R: 6677  IW: 925  POPULATION: 56082077
+Number of infections: 6562
+
+──────────────────────────────────── Day 56 ────────────────────────────────────
+S: 56067020  E: 5638  I: 1835  R: 7584  IW: 964  POPULATION: 56082077
+Number of infections: 7473
+
+──────────────────────────────────── Day 57 ────────────────────────────────────
+S: 56065142  E: 6364  I: 2111  R: 8460  IW: 1063  POPULATION: 56082077
+Number of infections: 8475
+
+──────────────────────────────────── Day 58 ────────────────────────────────────
+S: 56062987  E: 6995  I: 2523  R: 9572  IW: 1138  POPULATION: 56082077
+Number of infections: 9518
+
+──────────────────────────────────── Day 59 ────────────────────────────────────
+S: 56060403  E: 7801  I: 2814  R: 11059  IW: 1333  POPULATION: 56082077
+Number of infections: 10615
+
+──────────────────────────────────── Day 60 ────────────────────────────────────
+S: 56057539  E: 8847  I: 3146  R: 12545  IW: 1481  POPULATION: 56082077
+Number of infections: 11993
+
+──────────────────────────────────── Day 61 ────────────────────────────────────
+S: 56054206  E: 10044  I: 3464  R: 14363  IW: 1604  POPULATION: 56082077
+Number of infections: 13508
+
+──────────────────────────────────── Day 62 ────────────────────────────────────
+S: 56050641  E: 11474  I: 3865  R: 16097  IW: 1729  POPULATION: 56082077
+Number of infections: 15339
+
+──────────────────────────────────── Day 63 ────────────────────────────────────
+S: 56046559  E: 12886  I: 4377  R: 18255  IW: 1869  POPULATION: 56082077
+Number of infections: 17263
+
+──────────────────────────────────── Day 64 ────────────────────────────────────
+S: 56042126  E: 14497  I: 5006  R: 20448  IW: 1992  POPULATION: 56082077
+Number of infections: 19503
+
+──────────────────────────────────── Day 65 ────────────────────────────────────
+S: 56036913  E: 16153  I: 5694  R: 23317  IW: 2237  POPULATION: 56082077
+Number of infections: 21847
+
+──────────────────────────────────── Day 66 ────────────────────────────────────
+S: 56031255  E: 18313  I: 6277  R: 26232  IW: 2410  POPULATION: 56082077
+Number of infections: 24590
+
+──────────────────────────────────── Day 67 ────────────────────────────────────
+S: 56024713  E: 20557  I: 6979  R: 29828  IW: 2637  POPULATION: 56082077
+Number of infections: 27536
+
+──────────────────────────────────── Day 68 ────────────────────────────────────
+S: 56017738  E: 23101  I: 7981  R: 33257  IW: 2764  POPULATION: 56082077
+Number of infections: 31082
+
+──────────────────────────────────── Day 69 ────────────────────────────────────
+S: 56009738  E: 25728  I: 9002  R: 37609  IW: 2997  POPULATION: 56082077
+Number of infections: 34730
+
+──────────────────────────────────── Day 70 ────────────────────────────────────
+S: 56000627  E: 28952  I: 9931  R: 42567  IW: 3307  POPULATION: 56082077
+Number of infections: 38883
+
+──────────────────────────────────── Day 71 ────────────────────────────────────
+S: 55990834  E: 32513  I: 11186  R: 47544  IW: 3462  POPULATION: 56082077
+Number of infections: 43699
+
+──────────────────────────────────── Day 72 ────────────────────────────────────
+S: 55979775  E: 36214  I: 12575  R: 53513  IW: 3704  POPULATION: 56082077
+Number of infections: 48789
+
+──────────────────────────────────── Day 73 ────────────────────────────────────
+S: 55967288  E: 40232  I: 14195  R: 60362  IW: 3990  POPULATION: 56082077
+Number of infections: 54427
+
+──────────────────────────────────── Day 74 ────────────────────────────────────
+S: 55953289  E: 45146  I: 15749  R: 67893  IW: 4240  POPULATION: 56082077
+Number of infections: 60895
+
+──────────────────────────────────── Day 75 ────────────────────────────────────
+S: 55937923  E: 50499  I: 17622  R: 76033  IW: 4415  POPULATION: 56082077
+Number of infections: 68121
+
+──────────────────────────────────── Day 76 ────────────────────────────────────
+S: 55920694  E: 56383  I: 19574  R: 85426  IW: 4701  POPULATION: 56082077
+Number of infections: 75957
+
+──────────────────────────────────── Day 77 ────────────────────────────────────
+S: 55901729  E: 62946  I: 21754  R: 95648  IW: 4936  POPULATION: 56082077
+Number of infections: 84700
+
+──────────────────────────────────── Day 78 ────────────────────────────────────
+S: 55880696  E: 70072  I: 24358  R: 106951  IW: 5293  POPULATION: 56082077
+Number of infections: 94430
+
+──────────────────────────────────── Day 79 ────────────────────────────────────
+S: 55857499  E: 77811  I: 27284  R: 119483  IW: 5440  POPULATION: 56082077
+Number of infections: 105095
+
+──────────────────────────────────── Day 80 ────────────────────────────────────
+S: 55831614  E: 86292  I: 30333  R: 133838  IW: 5659  POPULATION: 56082077
+Number of infections: 116625
+
+──────────────────────────────────── Day 81 ────────────────────────────────────
+S: 55802629  E: 95995  I: 33473  R: 149980  IW: 5978  POPULATION: 56082077
+Number of infections: 129468
+
+──────────────────────────────────── Day 82 ────────────────────────────────────
+S: 55770744  E: 106714  I: 37343  R: 167276  IW: 6244  POPULATION: 56082077
+Number of infections: 144057
+
+──────────────────────────────────── Day 83 ────────────────────────────────────
+S: 55735420  E: 118320  I: 41727  R: 186610  IW: 6396  POPULATION: 56082077
+Number of infections: 160047
+
+──────────────────────────────────── Day 84 ────────────────────────────────────
+S: 55695924  E: 131155  I: 46310  R: 208688  IW: 6663  POPULATION: 56082077
+Number of infections: 177465
+
+──────────────────────────────────── Day 85 ────────────────────────────────────
+S: 55652357  E: 145730  I: 51371  R: 232619  IW: 6889  POPULATION: 56082077
+Number of infections: 197101
+
+──────────────────────────────────── Day 86 ────────────────────────────────────
+S: 55604183  E: 161439  I: 57130  R: 259325  IW: 7126  POPULATION: 56082077
+Number of infections: 218569
+
+──────────────────────────────────── Day 87 ────────────────────────────────────
+S: 55551037  E: 178845  I: 63477  R: 288718  IW: 7235  POPULATION: 56082077
+Number of infections: 242322
+
+──────────────────────────────────── Day 88 ────────────────────────────────────
+S: 55492200  E: 198097  I: 70133  R: 321647  IW: 7438  POPULATION: 56082077
+Number of infections: 268230
+
+──────────────────────────────────── Day 89 ────────────────────────────────────
+S: 55427117  E: 219246  I: 77493  R: 358221  IW: 7572  POPULATION: 56082077
+Number of infections: 296739
+
+──────────────────────────────────── Day 90 ────────────────────────────────────
+S: 55355492  E: 242751  I: 85859  R: 397975  IW: 7721  POPULATION: 56082077
+Number of infections: 328610
+
+──────────────────────────────────── Day 91 ────────────────────────────────────
+S: 55276562  E: 268405  I: 94951  R: 442159  IW: 7863  POPULATION: 56082077
+Number of infections: 363356
+
+──────────────────────────────────── Day 92 ────────────────────────────────────
+S: 55189907  E: 296471  I: 105043  R: 490656  IW: 7980  POPULATION: 56082077
+Number of infections: 401514
+
+──────────────────────────────────── Day 93 ────────────────────────────────────
+S: 55093558  E: 326837  I: 116088  R: 545594  IW: 8034  POPULATION: 56082077
+Number of infections: 442925
+
+──────────────────────────────────── Day 94 ────────────────────────────────────
+S: 54988269  E: 360805  I: 128560  R: 604443  IW: 8141  POPULATION: 56082077
+Number of infections: 489365
+
+──────────────────────────────────── Day 95 ────────────────────────────────────
+S: 54871922  E: 397290  I: 142084  R: 670781  IW: 8244  POPULATION: 56082077
+Number of infections: 539374
+
+──────────────────────────────────── Day 96 ────────────────────────────────────
+S: 54744210  E: 438021  I: 156633  R: 743213  IW: 8297  POPULATION: 56082077
+Number of infections: 594654
+
+──────────────────────────────────── Day 97 ────────────────────────────────────
+S: 54604343  E: 482299  I: 172388  R: 823047  IW: 8319  POPULATION: 56082077
+Number of infections: 654687
+
+──────────────────────────────────── Day 98 ────────────────────────────────────
+S: 54450880  E: 530923  I: 189450  R: 910824  IW: 8389  POPULATION: 56082077
+Number of infections: 720373
+
+──────────────────────────────────── Day 99 ────────────────────────────────────
+S: 54282925  E: 583681  I: 208295  R: 1007176  IW: 8421  POPULATION: 56082077
+Number of infections: 791976
+
+─────────────────────────────────── Day 100 ────────────────────────────────────
+S: 54098311  E: 640562  I: 229725  R: 1113479  IW: 8463  POPULATION: 56082077
+Number of infections: 870287
+
+─────────────────────────────────── Day 101 ────────────────────────────────────
+S: 53897679  E: 703163  I: 252599  R: 1228636  IW: 8501  POPULATION: 56082077
+Number of infections: 955762
+
+─────────────────────────────────── Day 102 ────────────────────────────────────
+S: 53678339  E: 770322  I: 277182  R: 1356234  IW: 8524  POPULATION: 56082077
+Number of infections: 1047504
+
+─────────────────────────────────── Day 103 ────────────────────────────────────
+S: 53438452  E: 843032  I: 304252  R: 1496341  IW: 8526  POPULATION: 56082077
+Number of infections: 1147284
+
+─────────────────────────────────── Day 104 ────────────────────────────────────
+S: 53177378  E: 922925  I: 332626  R: 1649148  IW: 8562  POPULATION: 56082077
+Number of infections: 1255551
+
+─────────────────────────────────── Day 105 ────────────────────────────────────
+S: 52892924  E: 1008475  I: 364279  R: 1816399  IW: 8555  POPULATION: 56082077
+Number of infections: 1372754
+
+─────────────────────────────────── Day 106 ────────────────────────────────────
+S: 52582848  E: 1101168  I: 398396  R: 1999665  IW: 8563  POPULATION: 56082077
+Number of infections: 1499564
+
+─────────────────────────────────── Day 107 ────────────────────────────────────
+S: 52246423  E: 1201694  I: 435218  R: 2198742  IW: 8574  POPULATION: 56082077
+Number of infections: 1636912
+
+─────────────────────────────────── Day 108 ────────────────────────────────────
+S: 51883332  E: 1309239  I: 476006  R: 2413500  IW: 8573  POPULATION: 56082077
+Number of infections: 1785245
+
+─────────────────────────────────── Day 109 ────────────────────────────────────
+S: 51489960  E: 1424407  I: 517886  R: 2649824  IW: 8581  POPULATION: 56082077
+Number of infections: 1942293
+
+─────────────────────────────────── Day 110 ────────────────────────────────────
+S: 51065600  E: 1547549  I: 563160  R: 2905768  IW: 8583  POPULATION: 56082077
+Number of infections: 2110709
+
+─────────────────────────────────── Day 111 ────────────────────────────────────
+S: 50609680  E: 1676846  I: 613672  R: 3181879  IW: 8583  POPULATION: 56082077
+Number of infections: 2290518
+
+─────────────────────────────────── Day 112 ────────────────────────────────────
+S: 50117413  E: 1814133  I: 666560  R: 3483971  IW: 8584  POPULATION: 56082077
+Number of infections: 2480693
+
+─────────────────────────────────── Day 113 ────────────────────────────────────
+S: 49588073  E: 1962569  I: 720030  R: 3811405  IW: 8585  POPULATION: 56082077
+Number of infections: 2682599
+
+─────────────────────────────────── Day 114 ────────────────────────────────────
+S: 49023617  E: 2119306  I: 778890  R: 4160264  IW: 8586  POPULATION: 56082077
+Number of infections: 2898196
+
+─────────────────────────────────── Day 115 ────────────────────────────────────
+S: 48420518  E: 2281241  I: 842679  R: 4537639  IW: 8585  POPULATION: 56082077
+Number of infections: 3123920
+
+─────────────────────────────────── Day 116 ────────────────────────────────────
+S: 47778619  E: 2450874  I: 908899  R: 4943685  IW: 8585  POPULATION: 56082077
+Number of infections: 3359773
+
+─────────────────────────────────── Day 117 ────────────────────────────────────
+S: 47097776  E: 2626764  I: 978026  R: 5379511  IW: 8587  POPULATION: 56082077
+Number of infections: 3604790
+
+─────────────────────────────────── Day 118 ────────────────────────────────────
+S: 46375631  E: 2808605  I: 1049605  R: 5848236  IW: 8586  POPULATION: 56082077
+Number of infections: 3858210
+
+─────────────────────────────────── Day 119 ────────────────────────────────────
+S: 45613205  E: 2997401  I: 1123598  R: 6347873  IW: 8586  POPULATION: 56082077
+Number of infections: 4120999
+
+─────────────────────────────────── Day 120 ────────────────────────────────────
+S: 44813319  E: 3190467  I: 1200098  R: 6878193  IW: 8586  POPULATION: 56082077
+Number of infections: 4390565
+
+─────────────────────────────────── Day 121 ────────────────────────────────────
+S: 43975861  E: 3383721  I: 1280610  R: 7441885  IW: 8586  POPULATION: 56082077
+Number of infections: 4664331
+
+─────────────────────────────────── Day 122 ────────────────────────────────────
+S: 43096926  E: 3578482  I: 1361354  R: 8045315  IW: 8587  POPULATION: 56082077
+Number of infections: 4939836
+
+─────────────────────────────────── Day 123 ────────────────────────────────────
+S: 42181586  E: 3777815  I: 1441465  R: 8681211  IW: 8588  POPULATION: 56082077
+Number of infections: 5219280
+
+─────────────────────────────────── Day 124 ────────────────────────────────────
+S: 41233050  E: 3974326  I: 1524663  R: 9350038  IW: 8586  POPULATION: 56082077
+Number of infections: 5498989
+
+─────────────────────────────────── Day 125 ────────────────────────────────────
+S: 40250740  E: 4168069  I: 1606655  R: 10056613  IW: 8588  POPULATION: 56082077
+Number of infections: 5774724
+
+─────────────────────────────────── Day 126 ────────────────────────────────────
+S: 39238508  E: 4357933  I: 1688610  R: 10797026  IW: 8587  POPULATION: 56082077
+Number of infections: 6046543
+
+─────────────────────────────────── Day 127 ────────────────────────────────────
+S: 38200663  E: 4542511  I: 1768502  R: 11570401  IW: 8587  POPULATION: 56082077
+Number of infections: 6311013
+
+─────────────────────────────────── Day 128 ────────────────────────────────────
+S: 37138472  E: 4718794  I: 1845427  R: 12379384  IW: 8587  POPULATION: 56082077
+Number of infections: 6564221
+
+─────────────────────────────────── Day 129 ────────────────────────────────────
+S: 36061000  E: 4884582  I: 1920616  R: 13215879  IW: 8587  POPULATION: 56082077
+Number of infections: 6805198
+
+─────────────────────────────────── Day 130 ────────────────────────────────────
+S: 34966738  E: 5033272  I: 1993833  R: 14088234  IW: 8588  POPULATION: 56082077
+Number of infections: 7027105
+
+─────────────────────────────────── Day 131 ────────────────────────────────────
+S: 33858038  E: 5171897  I: 2060579  R: 14991563  IW: 8587  POPULATION: 56082077
+Number of infections: 7232476
+
+─────────────────────────────────── Day 132 ────────────────────────────────────
+S: 32747300  E: 5298417  I: 2120755  R: 15915605  IW: 8588  POPULATION: 56082077
+Number of infections: 7419172
+
+─────────────────────────────────── Day 133 ────────────────────────────────────
+S: 31634115  E: 5402447  I: 2177268  R: 16868247  IW: 8586  POPULATION: 56082077
+Number of infections: 7579715
+
+─────────────────────────────────── Day 134 ────────────────────────────────────
+S: 30523441  E: 5490034  I: 2225374  R: 17843228  IW: 8588  POPULATION: 56082077
+Number of infections: 7715408
+
+─────────────────────────────────── Day 135 ────────────────────────────────────
+S: 29420834  E: 5559115  I: 2265260  R: 18836868  IW: 8587  POPULATION: 56082077
+Number of infections: 7824375
+
+─────────────────────────────────── Day 136 ────────────────────────────────────
+S: 28331212  E: 5605787  I: 2300055  R: 19845023  IW: 8587  POPULATION: 56082077
+Number of infections: 7905842
+
+─────────────────────────────────── Day 137 ────────────────────────────────────
+S: 27255060  E: 5630413  I: 2326335  R: 20870269  IW: 8587  POPULATION: 56082077
+Number of infections: 7956748
+
+─────────────────────────────────── Day 138 ────────────────────────────────────
+S: 26202495  E: 5636819  I: 2342842  R: 21899921  IW: 8588  POPULATION: 56082077
+Number of infections: 7979661
+
+─────────────────────────────────── Day 139 ────────────────────────────────────
+S: 25178327  E: 5619761  I: 2349304  R: 22934685  IW: 8586  POPULATION: 56082077
+Number of infections: 7969065
+
+─────────────────────────────────── Day 140 ────────────────────────────────────
+S: 24182143  E: 5575711  I: 2349185  R: 23975038  IW: 8587  POPULATION: 56082077
+Number of infections: 7924896
+
+─────────────────────────────────── Day 141 ────────────────────────────────────
+S: 23219905  E: 5510912  I: 2340180  R: 25011080  IW: 8586  POPULATION: 56082077
+Number of infections: 7851092
+
+─────────────────────────────────── Day 142 ────────────────────────────────────
+S: 22292567  E: 5425616  I: 2319348  R: 26044546  IW: 8585  POPULATION: 56082077
+Number of infections: 7744964
+
+─────────────────────────────────── Day 143 ────────────────────────────────────
+S: 21405186  E: 5322276  I: 2288623  R: 27065992  IW: 8585  POPULATION: 56082077
+Number of infections: 7610899
+
+─────────────────────────────────── Day 144 ────────────────────────────────────
+S: 20559272  E: 5198765  I: 2248717  R: 28075323  IW: 8587  POPULATION: 56082077
+Number of infections: 7447482
+
+─────────────────────────────────── Day 145 ────────────────────────────────────
+S: 19757771  E: 5057534  I: 2202209  R: 29064563  IW: 8586  POPULATION: 56082077
+Number of infections: 7259743
+
+─────────────────────────────────── Day 146 ────────────────────────────────────
+S: 18997796  E: 4897488  I: 2148664  R: 30038129  IW: 8584  POPULATION: 56082077
+Number of infections: 7046152
+
+─────────────────────────────────── Day 147 ────────────────────────────────────
+S: 18283194  E: 4725316  I: 2088691  R: 30984876  IW: 8581  POPULATION: 56082077
+Number of infections: 6814007
+
+─────────────────────────────────── Day 148 ────────────────────────────────────
+S: 17613140  E: 4542296  I: 2020678  R: 31905963  IW: 8581  POPULATION: 56082077
+Number of infections: 6562974
+
+─────────────────────────────────── Day 149 ────────────────────────────────────
+S: 16986372  E: 4349600  I: 1945946  R: 32800159  IW: 8580  POPULATION: 56082077
+Number of infections: 6295546
+
+─────────────────────────────────── Day 150 ────────────────────────────────────
+S: 16403813  E: 4149609  I: 1868396  R: 33660259  IW: 8580  POPULATION: 56082077
+Number of infections: 6018005
+
+─────────────────────────────────── Day 151 ────────────────────────────────────
+S: 15862928  E: 3944368  I: 1786213  R: 34488568  IW: 8580  POPULATION: 56082077
+Number of infections: 5730581
+
+─────────────────────────────────── Day 152 ────────────────────────────────────
+S: 15362004  E: 3736920  I: 1699868  R: 35283285  IW: 8578  POPULATION: 56082077
+Number of infections: 5436788
+
+─────────────────────────────────── Day 153 ────────────────────────────────────
+S: 14898377  E: 3527784  I: 1615586  R: 36040330  IW: 8578  POPULATION: 56082077
+Number of infections: 5143370
+
+─────────────────────────────────── Day 154 ────────────────────────────────────
+S: 14471373  E: 3320425  I: 1530176  R: 36760103  IW: 8573  POPULATION: 56082077
+Number of infections: 4850601
+
+─────────────────────────────────── Day 155 ────────────────────────────────────
+S: 14079823  E: 3115878  I: 1444503  R: 37441873  IW: 8574  POPULATION: 56082077
+Number of infections: 4560381
+
+─────────────────────────────────── Day 156 ────────────────────────────────────
+S: 13720282  E: 2915259  I: 1357723  R: 38088813  IW: 8573  POPULATION: 56082077
+Number of infections: 4272982
+
+─────────────────────────────────── Day 157 ────────────────────────────────────
+S: 13392104  E: 2719801  I: 1272780  R: 38697392  IW: 8569  POPULATION: 56082077
+Number of infections: 3992581
+
+─────────────────────────────────── Day 158 ────────────────────────────────────
+S: 13092139  E: 2531206  I: 1189557  R: 39269175  IW: 8574  POPULATION: 56082077
+Number of infections: 3720763
+
+─────────────────────────────────── Day 159 ────────────────────────────────────
+S: 12817896  E: 2349824  I: 1109090  R: 39805267  IW: 8566  POPULATION: 56082077
+Number of infections: 3458914
+
+─────────────────────────────────── Day 160 ────────────────────────────────────
+S: 12568533  E: 2177974  I: 1031364  R: 40304206  IW: 8563  POPULATION: 56082077
+Number of infections: 3209338
+
+─────────────────────────────────── Day 161 ────────────────────────────────────
+S: 12341590  E: 2013503  I: 956515  R: 40770469  IW: 8554  POPULATION: 56082077
+Number of infections: 2970018
+
+─────────────────────────────────── Day 162 ────────────────────────────────────
+S: 12134698  E: 1857503  I: 885876  R: 41204000  IW: 8552  POPULATION: 56082077
+Number of infections: 2743379
+
+─────────────────────────────────── Day 163 ────────────────────────────────────
+S: 11946607  E: 1711746  I: 818543  R: 41605181  IW: 8554  POPULATION: 56082077
+Number of infections: 2530289
+
+─────────────────────────────────── Day 164 ────────────────────────────────────
+S: 11776452  E: 1574962  I: 754469  R: 41976194  IW: 8536  POPULATION: 56082077
+Number of infections: 2329431
+
+─────────────────────────────────── Day 165 ────────────────────────────────────
+S: 11621459  E: 1445889  I: 695088  R: 42319641  IW: 8518  POPULATION: 56082077
+Number of infections: 2140977
+
+─────────────────────────────────── Day 166 ────────────────────────────────────
+S: 11481246  E: 1325589  I: 639739  R: 42635503  IW: 8501  POPULATION: 56082077
+Number of infections: 1965328
+
+─────────────────────────────────── Day 167 ────────────────────────────────────
+S: 11354072  E: 1213535  I: 587498  R: 42926972  IW: 8492  POPULATION: 56082077
+Number of infections: 1801033
+
+─────────────────────────────────── Day 168 ────────────────────────────────────
+S: 11238798  E: 1109394  I: 538636  R: 43195249  IW: 8464  POPULATION: 56082077
+Number of infections: 1648030
+
+─────────────────────────────────── Day 169 ────────────────────────────────────
+S: 11133792  E: 1014451  I: 492033  R: 43441801  IW: 8427  POPULATION: 56082077
+Number of infections: 1506484
+
+─────────────────────────────────── Day 170 ────────────────────────────────────
+S: 11039231  E: 926538  I: 449474  R: 43666834  IW: 8364  POPULATION: 56082077
+Number of infections: 1376012
+
+─────────────────────────────────── Day 171 ────────────────────────────────────
+S: 10953880  E: 845129  I: 410864  R: 43872204  IW: 8313  POPULATION: 56082077
+Number of infections: 1255993
+
+─────────────────────────────────── Day 172 ────────────────────────────────────
+S: 10876524  E: 769729  I: 375228  R: 44060596  IW: 8299  POPULATION: 56082077
+Number of infections: 1144957
+
+─────────────────────────────────── Day 173 ────────────────────────────────────
+S: 10806360  E: 700679  I: 342442  R: 44232596  IW: 8217  POPULATION: 56082077
+Number of infections: 1043121
+
+─────────────────────────────────── Day 174 ────────────────────────────────────
+S: 10742802  E: 638010  I: 311668  R: 44389597  IW: 8101  POPULATION: 56082077
+Number of infections: 949678
+
+─────────────────────────────────── Day 175 ────────────────────────────────────
+S: 10685540  E: 581100  I: 282725  R: 44532712  IW: 8072  POPULATION: 56082077
+Number of infections: 863825
+
+─────────────────────────────────── Day 176 ────────────────────────────────────
+S: 10633678  E: 528247  I: 257174  R: 44662978  IW: 7969  POPULATION: 56082077
+Number of infections: 785421
+
+─────────────────────────────────── Day 177 ────────────────────────────────────
+S: 10587445  E: 479711  I: 234818  R: 44780103  IW: 7780  POPULATION: 56082077
+Number of infections: 714529
+
+─────────────────────────────────── Day 178 ────────────────────────────────────
+S: 10545108  E: 434633  I: 213981  R: 44888355  IW: 7708  POPULATION: 56082077
+Number of infections: 648614
+
+─────────────────────────────────── Day 179 ────────────────────────────────────
+S: 10506844  E: 394243  I: 194419  R: 44986571  IW: 7627  POPULATION: 56082077
+Number of infections: 588662
+
+─────────────────────────────────── Day 180 ────────────────────────────────────
+S: 10471977  E: 357197  I: 176472  R: 45076431  IW: 7430  POPULATION: 56082077
+Number of infections: 533669
+
+─────────────────────────────────── Day 181 ────────────────────────────────────
+S: 10440399  E: 323820  I: 160307  R: 45157551  IW: 7254  POPULATION: 56082077
+Number of infections: 484127
+
+─────────────────────────────────── Day 182 ────────────────────────────────────
+S: 10411465  E: 293755  I: 145096  R: 45231761  IW: 7112  POPULATION: 56082077
+Number of infections: 438851
+
+─────────────────────────────────── Day 183 ────────────────────────────────────
+S: 10385664  E: 267020  I: 131059  R: 45298334  IW: 6855  POPULATION: 56082077
+Number of infections: 398079
+
+─────────────────────────────────── Day 184 ────────────────────────────────────
+S: 10362692  E: 241807  I: 119073  R: 45358505  IW: 6713  POPULATION: 56082077
+Number of infections: 360880
+
+─────────────────────────────────── Day 185 ────────────────────────────────────
+S: 10341678  E: 219149  I: 107945  R: 45413305  IW: 6559  POPULATION: 56082077
+Number of infections: 327094
+
+─────────────────────────────────── Day 186 ────────────────────────────────────
+S: 10322725  E: 198477  I: 97627  R: 45463248  IW: 6318  POPULATION: 56082077
+Number of infections: 296104
+
+─────────────────────────────────── Day 187 ────────────────────────────────────
+S: 10305344  E: 179632  I: 88667  R: 45508434  IW: 6079  POPULATION: 56082077
+Number of infections: 268299
+
+─────────────────────────────────── Day 188 ────────────────────────────────────
+S: 10289655  E: 162913  I: 80299  R: 45549210  IW: 5874  POPULATION: 56082077
+Number of infections: 243212
+
+─────────────────────────────────── Day 189 ────────────────────────────────────
+S: 10275528  E: 147577  I: 72648  R: 45586324  IW: 5668  POPULATION: 56082077
+Number of infections: 220225
+
+─────────────────────────────────── Day 190 ────────────────────────────────────
+S: 10262844  E: 133889  I: 65668  R: 45619676  IW: 5370  POPULATION: 56082077
+Number of infections: 199557
+
+─────────────────────────────────── Day 191 ────────────────────────────────────
+S: 10251169  E: 120900  I: 59746  R: 45650262  IW: 5179  POPULATION: 56082077
+Number of infections: 180646
+
+─────────────────────────────────── Day 192 ────────────────────────────────────
+S: 10240741  E: 109440  I: 54387  R: 45677509  IW: 4892  POPULATION: 56082077
+Number of infections: 163827
+
+─────────────────────────────────── Day 193 ────────────────────────────────────
+S: 10230973  E: 99201  I: 49038  R: 45702865  IW: 4777  POPULATION: 56082077
+Number of infections: 148239
+
+─────────────────────────────────── Day 194 ────────────────────────────────────
+S: 10222193  E: 90010  I: 44205  R: 45725669  IW: 4488  POPULATION: 56082077
+Number of infections: 134215
+
+─────────────────────────────────── Day 195 ────────────────────────────────────
+S: 10214528  E: 81316  I: 40579  R: 45745654  IW: 4181  POPULATION: 56082077
+Number of infections: 121895
+
+─────────────────────────────────── Day 196 ────────────────────────────────────
+S: 10207296  E: 73545  I: 36742  R: 45764494  IW: 4027  POPULATION: 56082077
+Number of infections: 110287
+
+─────────────────────────────────── Day 197 ────────────────────────────────────
+S: 10200756  E: 66791  I: 32831  R: 45781699  IW: 3760  POPULATION: 56082077
+Number of infections: 99622
+
+─────────────────────────────────── Day 198 ────────────────────────────────────
+S: 10195123  E: 60514  I: 29910  R: 45796530  IW: 3521  POPULATION: 56082077
+Number of infections: 90424
+
+─────────────────────────────────── Day 199 ────────────────────────────────────
+S: 10189814  E: 54675  I: 27067  R: 45810521  IW: 3340  POPULATION: 56082077
+Number of infections: 81742
+
+─────────────────────────────────── Day 200 ────────────────────────────────────
+S: 10184949  E: 49488  I: 24538  R: 45823102  IW: 3147  POPULATION: 56082077
+Number of infections: 74026
+
+─────────────────────────────────── Day 201 ────────────────────────────────────
+S: 10180596  E: 45052  I: 22089  R: 45834340  IW: 2931  POPULATION: 56082077
+Number of infections: 67141
+
+─────────────────────────────────── Day 202 ────────────────────────────────────
+S: 10176633  E: 40848  I: 19973  R: 45844623  IW: 2778  POPULATION: 56082077
+Number of infections: 60821
+
+─────────────────────────────────── Day 203 ────────────────────────────────────
+S: 10173135  E: 36938  I: 18349  R: 45853655  IW: 2499  POPULATION: 56082077
+Number of infections: 55287
+
+─────────────────────────────────── Day 204 ────────────────────────────────────
+S: 10169731  E: 33448  I: 16647  R: 45862251  IW: 2470  POPULATION: 56082077
+Number of infections: 50095
+
+─────────────────────────────────── Day 205 ────────────────────────────────────
+S: 10166746  E: 30572  I: 14818  R: 45869941  IW: 2237  POPULATION: 56082077
+Number of infections: 45390
+
+─────────────────────────────────── Day 206 ────────────────────────────────────
+S: 10164094  E: 27743  I: 13504  R: 45876736  IW: 2055  POPULATION: 56082077
+Number of infections: 41247
+
+─────────────────────────────────── Day 207 ────────────────────────────────────
+S: 10161640  E: 25229  I: 12204  R: 45883004  IW: 1891  POPULATION: 56082077
+Number of infections: 37433
+
+─────────────────────────────────── Day 208 ────────────────────────────────────
+S: 10159358  E: 23052  I: 10987  R: 45888680  IW: 1801  POPULATION: 56082077
+Number of infections: 34039
+
+─────────────────────────────────── Day 209 ────────────────────────────────────
+S: 10157336  E: 21081  I: 9929  R: 45893731  IW: 1654  POPULATION: 56082077
+Number of infections: 31010
+
+─────────────────────────────────── Day 210 ────────────────────────────────────
+S: 10155502  E: 19078  I: 9225  R: 45898272  IW: 1493  POPULATION: 56082077
+Number of infections: 28303
+
+─────────────────────────────────── Day 211 ────────────────────────────────────
+S: 10153746  E: 17311  I: 8442  R: 45902578  IW: 1462  POPULATION: 56082077
+Number of infections: 25753
+
+─────────────────────────────────── Day 212 ────────────────────────────────────
+S: 10152164  E: 15846  I: 7612  R: 45906455  IW: 1336  POPULATION: 56082077
+Number of infections: 23458
+
+─────────────────────────────────── Day 213 ────────────────────────────────────
+S: 10150795  E: 14417  I: 6947  R: 45909918  IW: 1178  POPULATION: 56082077
+Number of infections: 21364
+
+─────────────────────────────────── Day 214 ────────────────────────────────────
+S: 10149470  E: 13087  I: 6346  R: 45913174  IW: 1159  POPULATION: 56082077
+Number of infections: 19433
+
+─────────────────────────────────── Day 215 ────────────────────────────────────
+S: 10148273  E: 11895  I: 5829  R: 45916080  IW: 1057  POPULATION: 56082077
+Number of infections: 17724
+
+─────────────────────────────────── Day 216 ────────────────────────────────────
+S: 10147175  E: 10867  I: 5281  R: 45918754  IW: 983  POPULATION: 56082077
+Number of infections: 16148
+
+─────────────────────────────────── Day 217 ────────────────────────────────────
+S: 10146191  E: 9961  I: 4725  R: 45921200  IW: 879  POPULATION: 56082077
+Number of infections: 14686
+
+─────────────────────────────────── Day 218 ────────────────────────────────────
+S: 10145204  E: 9047  I: 4371  R: 45923455  IW: 883  POPULATION: 56082077
+Number of infections: 13418
+
+─────────────────────────────────── Day 219 ────────────────────────────────────
+S: 10144360  E: 8371  I: 3983  R: 45925363  IW: 771  POPULATION: 56082077
+Number of infections: 12354
+
+─────────────────────────────────── Day 220 ────────────────────────────────────
+S: 10143544  E: 7652  I: 3614  R: 45927267  IW: 754  POPULATION: 56082077
+Number of infections: 11266
+
+─────────────────────────────────── Day 221 ────────────────────────────────────
+S: 10142838  E: 6983  I: 3378  R: 45928878  IW: 646  POPULATION: 56082077
+Number of infections: 10361
+
+─────────────────────────────────── Day 222 ────────────────────────────────────
+S: 10142158  E: 6265  I: 3239  R: 45930415  IW: 633  POPULATION: 56082077
+Number of infections: 9504
+
+─────────────────────────────────── Day 223 ────────────────────────────────────
+S: 10141538  E: 5746  I: 2937  R: 45931856  IW: 581  POPULATION: 56082077
+Number of infections: 8683
+
+─────────────────────────────────── Day 224 ────────────────────────────────────
+S: 10140958  E: 5263  I: 2577  R: 45933279  IW: 536  POPULATION: 56082077
+Number of infections: 7840
+
+─────────────────────────────────── Day 225 ────────────────────────────────────
+S: 10140449  E: 4842  I: 2328  R: 45934458  IW: 471  POPULATION: 56082077
+Number of infections: 7170
+
+─────────────────────────────────── Day 226 ────────────────────────────────────
+S: 10139969  E: 4400  I: 2193  R: 45935515  IW: 453  POPULATION: 56082077
+Number of infections: 6593
+
+─────────────────────────────────── Day 227 ────────────────────────────────────
+S: 10139536  E: 4074  I: 1973  R: 45936494  IW: 407  POPULATION: 56082077
+Number of infections: 6047
+
+─────────────────────────────────── Day 228 ────────────────────────────────────
+S: 10139110  E: 3724  I: 1796  R: 45937447  IW: 396  POPULATION: 56082077
+Number of infections: 5520
+
+─────────────────────────────────── Day 229 ────────────────────────────────────
+S: 10138765  E: 3434  I: 1652  R: 45938226  IW: 332  POPULATION: 56082077
+Number of infections: 5086
+
+─────────────────────────────────── Day 230 ────────────────────────────────────
+S: 10138418  E: 3154  I: 1491  R: 45939014  IW: 329  POPULATION: 56082077
+Number of infections: 4645
+
+─────────────────────────────────── Day 231 ────────────────────────────────────
+S: 10138110  E: 2881  I: 1397  R: 45939689  IW: 297  POPULATION: 56082077
+Number of infections: 4278
+
+─────────────────────────────────── Day 232 ────────────────────────────────────
+S: 10137805  E: 2610  I: 1327  R: 45940335  IW: 287  POPULATION: 56082077
+Number of infections: 3937
+
+─────────────────────────────────── Day 233 ────────────────────────────────────
+S: 10137518  E: 2408  I: 1206  R: 45940945  IW: 276  POPULATION: 56082077
+Number of infections: 3614
+
+─────────────────────────────────── Day 234 ────────────────────────────────────
+S: 10137249  E: 2212  I: 1094  R: 45941522  IW: 260  POPULATION: 56082077
+Number of infections: 3306
+
+─────────────────────────────────── Day 235 ────────────────────────────────────
+S: 10137007  E: 2083  I: 979  R: 45942008  IW: 233  POPULATION: 56082077
+Number of infections: 3062
+
+─────────────────────────────────── Day 236 ────────────────────────────────────
+S: 10136819  E: 1956  I: 855  R: 45942447  IW: 179  POPULATION: 56082077
+Number of infections: 2811
+
+─────────────────────────────────── Day 237 ────────────────────────────────────
+S: 10136632  E: 1778  I: 807  R: 45942860  IW: 184  POPULATION: 56082077
+Number of infections: 2585
+
+─────────────────────────────────── Day 238 ────────────────────────────────────
+S: 10136463  E: 1620  I: 791  R: 45943203  IW: 164  POPULATION: 56082077
+Number of infections: 2411
+
+─────────────────────────────────── Day 239 ────────────────────────────────────
+S: 10136306  E: 1486  I: 720  R: 45943565  IW: 154  POPULATION: 56082077
+Number of infections: 2206
+
+─────────────────────────────────── Day 240 ────────────────────────────────────
+S: 10136150  E: 1357  I: 657  R: 45943913  IW: 150  POPULATION: 56082077
+Number of infections: 2014
+
+─────────────────────────────────── Day 241 ────────────────────────────────────
+S: 10136003  E: 1242  I: 612  R: 45944220  IW: 142  POPULATION: 56082077
+Number of infections: 1854
+
+─────────────────────────────────── Day 242 ────────────────────────────────────
+S: 10135893  E: 1177  I: 547  R: 45944460  IW: 107  POPULATION: 56082077
+Number of infections: 1724
+
+─────────────────────────────────── Day 243 ────────────────────────────────────
+S: 10135770  E: 1069  I: 497  R: 45944741  IW: 120  POPULATION: 56082077
+Number of infections: 1566
+
+─────────────────────────────────── Day 244 ────────────────────────────────────
+S: 10135647  E: 999  I: 460  R: 45944971  IW: 118  POPULATION: 56082077
+Number of infections: 1459
+
+─────────────────────────────────── Day 245 ────────────────────────────────────
+S: 10135558  E: 912  I: 440  R: 45945167  IW: 87  POPULATION: 56082077
+Number of infections: 1352
+
+─────────────────────────────────── Day 246 ────────────────────────────────────
+S: 10135470  E: 830  I: 421  R: 45945356  IW: 86  POPULATION: 56082077
+Number of infections: 1251
+
+─────────────────────────────────── Day 247 ────────────────────────────────────
+S: 10135386  E: 756  I: 381  R: 45945554  IW: 78  POPULATION: 56082077
+Number of infections: 1137
+
+─────────────────────────────────── Day 248 ────────────────────────────────────
+S: 10135296  E: 711  I: 327  R: 45945743  IW: 85  POPULATION: 56082077
+Number of infections: 1038
+
+─────────────────────────────────── Day 249 ────────────────────────────────────
+S: 10135212  E: 656  I: 308  R: 45945901  IW: 76  POPULATION: 56082077
+Number of infections: 964
+
+─────────────────────────────────── Day 250 ────────────────────────────────────
+S: 10135142  E: 612  I: 297  R: 45946026  IW: 70  POPULATION: 56082077
+Number of infections: 909
+
+─────────────────────────────────── Day 251 ────────────────────────────────────
+S: 10135081  E: 566  I: 273  R: 45946157  IW: 59  POPULATION: 56082077
+Number of infections: 839
+
+─────────────────────────────────── Day 252 ────────────────────────────────────
+S: 10135014  E: 524  I: 248  R: 45946291  IW: 66  POPULATION: 56082077
+Number of infections: 772
+
+─────────────────────────────────── Day 253 ────────────────────────────────────
+S: 10134960  E: 487  I: 241  R: 45946389  IW: 52  POPULATION: 56082077
+Number of infections: 728
+
+─────────────────────────────────── Day 254 ────────────────────────────────────
+S: 10134886  E: 444  I: 232  R: 45946515  IW: 72  POPULATION: 56082077
+Number of infections: 676
+
+─────────────────────────────────── Day 255 ────────────────────────────────────
+S: 10134841  E: 432  I: 205  R: 45946599  IW: 42  POPULATION: 56082077
+Number of infections: 637
+
+─────────────────────────────────── Day 256 ────────────────────────────────────
+S: 10134796  E: 400  I: 183  R: 45946698  IW: 40  POPULATION: 56082077
+Number of infections: 583
+
+─────────────────────────────────── Day 257 ────────────────────────────────────
+S: 10134751  E: 374  I: 161  R: 45946791  IW: 45  POPULATION: 56082077
+Number of infections: 535
+
+─────────────────────────────────── Day 258 ────────────────────────────────────
+S: 10134717  E: 349  I: 153  R: 45946858  IW: 33  POPULATION: 56082077
+Number of infections: 502
+
+─────────────────────────────────── Day 259 ────────────────────────────────────
+S: 10134681  E: 322  I: 148  R: 45946926  IW: 36  POPULATION: 56082077
+Number of infections: 470
+
+─────────────────────────────────── Day 260 ────────────────────────────────────
+S: 10134652  E: 286  I: 149  R: 45946990  IW: 28  POPULATION: 56082077
+Number of infections: 435
+
+─────────────────────────────────── Day 261 ────────────────────────────────────
+S: 10134614  E: 259  I: 141  R: 45947063  IW: 37  POPULATION: 56082077
+Number of infections: 400
+
+─────────────────────────────────── Day 262 ────────────────────────────────────
+S: 10134566  E: 248  I: 125  R: 45947138  IW: 48  POPULATION: 56082077
+Number of infections: 373
+
+─────────────────────────────────── Day 263 ────────────────────────────────────
+S: 10134541  E: 246  I: 110  R: 45947180  IW: 23  POPULATION: 56082077
+Number of infections: 356
+
+─────────────────────────────────── Day 264 ────────────────────────────────────
+S: 10134524  E: 221  I: 107  R: 45947225  IW: 17  POPULATION: 56082077
+Number of infections: 328
+
+─────────────────────────────────── Day 265 ────────────────────────────────────
+S: 10134497  E: 186  I: 118  R: 45947276  IW: 27  POPULATION: 56082077
+Number of infections: 304
+
+─────────────────────────────────── Day 266 ────────────────────────────────────
+S: 10134467  E: 174  I: 104  R: 45947332  IW: 29  POPULATION: 56082077
+Number of infections: 278
+
+─────────────────────────────────── Day 267 ────────────────────────────────────
+S: 10134446  E: 173  I: 83  R: 45947375  IW: 21  POPULATION: 56082077
+Number of infections: 256
+
+─────────────────────────────────── Day 268 ────────────────────────────────────
+S: 10134422  E: 161  I: 69  R: 45947425  IW: 24  POPULATION: 56082077
+Number of infections: 230
+
+─────────────────────────────────── Day 269 ────────────────────────────────────
+S: 10134396  E: 153  I: 69  R: 45947459  IW: 25  POPULATION: 56082077
+Number of infections: 222
+
+─────────────────────────────────── Day 270 ────────────────────────────────────
+S: 10134377  E: 150  I: 66  R: 45947484  IW: 18  POPULATION: 56082077
+Number of infections: 216
+
+─────────────────────────────────── Day 271 ────────────────────────────────────
+S: 10134361  E: 144  I: 62  R: 45947510  IW: 15  POPULATION: 56082077
+Number of infections: 206
+
+─────────────────────────────────── Day 272 ────────────────────────────────────
+S: 10134346  E: 140  I: 50  R: 45947541  IW: 15  POPULATION: 56082077
+Number of infections: 190
+
+─────────────────────────────────── Day 273 ────────────────────────────────────
+S: 10134333  E: 127  I: 51  R: 45947566  IW: 13  POPULATION: 56082077
+Number of infections: 178
+
+─────────────────────────────────── Day 274 ────────────────────────────────────
+S: 10134316  E: 110  I: 59  R: 45947592  IW: 16  POPULATION: 56082077
+Number of infections: 169
+
+─────────────────────────────────── Day 275 ────────────────────────────────────
+S: 10134306  E: 97  I: 68  R: 45947606  IW: 10  POPULATION: 56082077
+Number of infections: 165
+
+─────────────────────────────────── Day 276 ────────────────────────────────────
+S: 10134291  E: 91  I: 54  R: 45947641  IW: 15  POPULATION: 56082077
+Number of infections: 145
+
+─────────────────────────────────── Day 277 ────────────────────────────────────
+S: 10134279  E: 84  I: 49  R: 45947665  IW: 12  POPULATION: 56082077
+Number of infections: 133
+
+─────────────────────────────────── Day 278 ────────────────────────────────────
+S: 10134263  E: 75  I: 45  R: 45947694  IW: 16  POPULATION: 56082077
+Number of infections: 120
+
+─────────────────────────────────── Day 279 ────────────────────────────────────
+S: 10134251  E: 77  I: 39  R: 45947710  IW: 10  POPULATION: 56082077
+Number of infections: 116
+
+─────────────────────────────────── Day 280 ────────────────────────────────────
+S: 10134242  E: 75  I: 32  R: 45947728  IW: 7  POPULATION: 56082077
+Number of infections: 107
+
+─────────────────────────────────── Day 281 ────────────────────────────────────
+S: 10134235  E: 66  I: 35  R: 45947741  IW: 6  POPULATION: 56082077
+Number of infections: 101
+
+─────────────────────────────────── Day 282 ────────────────────────────────────
+S: 10134220  E: 49  I: 44  R: 45947764  IW: 14  POPULATION: 56082077
+Number of infections: 93
+
+─────────────────────────────────── Day 283 ────────────────────────────────────
+S: 10134210  E: 55  I: 36  R: 45947776  IW: 10  POPULATION: 56082077
+Number of infections: 91
+
+─────────────────────────────────── Day 284 ────────────────────────────────────
+S: 10134201  E: 51  I: 25  R: 45947800  IW: 9  POPULATION: 56082077
+Number of infections: 76
+
+─────────────────────────────────── Day 285 ────────────────────────────────────
+S: 10134196  E: 55  I: 20  R: 45947806  IW: 5  POPULATION: 56082077
+Number of infections: 75
+
+─────────────────────────────────── Day 286 ────────────────────────────────────
+S: 10134191  E: 50  I: 16  R: 45947820  IW: 5  POPULATION: 56082077
+Number of infections: 66
+
+─────────────────────────────────── Day 287 ────────────────────────────────────
+S: 10134186  E: 45  I: 21  R: 45947825  IW: 5  POPULATION: 56082077
+Number of infections: 66
+
+─────────────────────────────────── Day 288 ────────────────────────────────────
+S: 10134179  E: 44  I: 19  R: 45947835  IW: 7  POPULATION: 56082077
+Number of infections: 63
+
+─────────────────────────────────── Day 289 ────────────────────────────────────
+S: 10134174  E: 43  I: 16  R: 45947844  IW: 5  POPULATION: 56082077
+Number of infections: 59
+
+─────────────────────────────────── Day 290 ────────────────────────────────────
+S: 10134172  E: 40  I: 16  R: 45947849  IW: 2  POPULATION: 56082077
+Number of infections: 56
+
+─────────────────────────────────── Day 291 ────────────────────────────────────
+S: 10134170  E: 36  I: 18  R: 45947853  IW: 2  POPULATION: 56082077
+Number of infections: 54
+
+─────────────────────────────────── Day 292 ────────────────────────────────────
+S: 10134167  E: 32  I: 14  R: 45947864  IW: 3  POPULATION: 56082077
+Number of infections: 46
+
+─────────────────────────────────── Day 293 ────────────────────────────────────
+S: 10134160  E: 31  I: 13  R: 45947873  IW: 6  POPULATION: 56082077
+Number of infections: 44
+
+─────────────────────────────────── Day 294 ────────────────────────────────────
+S: 10134157  E: 35  I: 8  R: 45947877  IW: 3  POPULATION: 56082077
+Number of infections: 43
+
+─────────────────────────────────── Day 295 ────────────────────────────────────
+S: 10134152  E: 31  I: 12  R: 45947882  IW: 5  POPULATION: 56082077
+Number of infections: 43
+
+─────────────────────────────────── Day 296 ────────────────────────────────────
+S: 10134148  E: 32  I: 13  R: 45947884  IW: 4  POPULATION: 56082077
+Number of infections: 45
+
+─────────────────────────────────── Day 297 ────────────────────────────────────
+S: 10134143  E: 32  I: 8  R: 45947894  IW: 5  POPULATION: 56082077
+Number of infections: 40
+
+─────────────────────────────────── Day 298 ────────────────────────────────────
+S: 10134143  E: 32  I: 12  R: 45947890  IW: 0  POPULATION: 56082077
+Number of infections: 44
+
+─────────────────────────────────── Day 299 ────────────────────────────────────
+S: 10134142  E: 28  I: 9  R: 45947898  IW: 1  POPULATION: 56082077
+Number of infections: 37
+
+─────────────────────────────────── Day 300 ────────────────────────────────────
+S: 10134138  E: 25  I: 8  R: 45947906  IW: 4  POPULATION: 56082077
+Number of infections: 33
+
+─────────────────────────────────── Day 301 ────────────────────────────────────
+S: 10134136  E: 23  I: 11  R: 45947907  IW: 2  POPULATION: 56082077
+Number of infections: 34
+
+─────────────────────────────────── Day 302 ────────────────────────────────────
+S: 10134135  E: 21  I: 11  R: 45947910  IW: 1  POPULATION: 56082077
+Number of infections: 32
+
+─────────────────────────────────── Day 303 ────────────────────────────────────
+S: 10134131  E: 15  I: 12  R: 45947919  IW: 4  POPULATION: 56082077
+Number of infections: 27
+
+─────────────────────────────────── Day 304 ────────────────────────────────────
+S: 10134128  E: 17  I: 10  R: 45947922  IW: 3  POPULATION: 56082077
+Number of infections: 27
+
+─────────────────────────────────── Day 305 ────────────────────────────────────
+S: 10134125  E: 16  I: 6  R: 45947930  IW: 3  POPULATION: 56082077
+Number of infections: 22
+
+─────────────────────────────────── Day 306 ────────────────────────────────────
+S: 10134124  E: 16  I: 8  R: 45947929  IW: 1  POPULATION: 56082077
+Number of infections: 24
+
+─────────────────────────────────── Day 307 ────────────────────────────────────
+S: 10134121  E: 17  I: 4  R: 45947935  IW: 3  POPULATION: 56082077
+Number of infections: 21
+
+─────────────────────────────────── Day 308 ────────────────────────────────────
+S: 10134119  E: 19  I: 3  R: 45947936  IW: 2  POPULATION: 56082077
+Number of infections: 22
+
+─────────────────────────────────── Day 309 ────────────────────────────────────
+S: 10134119  E: 16  I: 6  R: 45947936  IW: 0  POPULATION: 56082077
+Number of infections: 22
+
+─────────────────────────────────── Day 310 ────────────────────────────────────
+S: 10134118  E: 14  I: 8  R: 45947937  IW: 1  POPULATION: 56082077
+Number of infections: 22
+
+─────────────────────────────────── Day 311 ────────────────────────────────────
+S: 10134118  E: 14  I: 3  R: 45947942  IW: 0  POPULATION: 56082077
+Number of infections: 17
+
+─────────────────────────────────── Day 312 ────────────────────────────────────
+S: 10134118  E: 10  I: 7  R: 45947942  IW: 0  POPULATION: 56082077
+Number of infections: 17
+
+─────────────────────────────────── Day 313 ────────────────────────────────────
+S: 10134115  E: 7  I: 7  R: 45947948  IW: 3  POPULATION: 56082077
+Number of infections: 14
+
+─────────────────────────────────── Day 314 ────────────────────────────────────
+S: 10134112  E: 10  I: 3  R: 45947952  IW: 3  POPULATION: 56082077
+Number of infections: 13
+
+─────────────────────────────────── Day 315 ────────────────────────────────────
+S: 10134112  E: 11  I: 2  R: 45947952  IW: 0  POPULATION: 56082077
+Number of infections: 13
+
+─────────────────────────────────── Day 316 ────────────────────────────────────
+S: 10134112  E: 10  I: 3  R: 45947952  IW: 0  POPULATION: 56082077
+Number of infections: 13
+
+─────────────────────────────────── Day 317 ────────────────────────────────────
+S: 10134112  E: 8  I: 5  R: 45947952  IW: 0  POPULATION: 56082077
+Number of infections: 13
+
+─────────────────────────────────── Day 318 ────────────────────────────────────
+S: 10134110  E: 4  I: 6  R: 45947957  IW: 2  POPULATION: 56082077
+Number of infections: 10
+
+─────────────────────────────────── Day 319 ────────────────────────────────────
+S: 10134107  E: 5  I: 5  R: 45947960  IW: 3  POPULATION: 56082077
+Number of infections: 10
+
+─────────────────────────────────── Day 320 ────────────────────────────────────
+S: 10134105  E: 6  I: 3  R: 45947963  IW: 1  POPULATION: 56082077
+Number of infections: 9
+
+─────────────────────────────────── Day 321 ────────────────────────────────────
+S: 10134101  E: 8  I: 2  R: 45947966  IW: 4  POPULATION: 56082077
+Number of infections: 10
+
+─────────────────────────────────── Day 322 ────────────────────────────────────
+S: 10134100  E: 11  I: 1  R: 45947965  IW: 1  POPULATION: 56082077
+Number of infections: 12
+
+─────────────────────────────────── Day 323 ────────────────────────────────────
+S: 10134099  E: 12  I: 1  R: 45947965  IW: 1  POPULATION: 56082077
+Number of infections: 13
+
+─────────────────────────────────── Day 324 ────────────────────────────────────
+S: 10134099  E: 10  I: 3  R: 45947965  IW: 0  POPULATION: 56082077
+Number of infections: 13
+
+─────────────────────────────────── Day 325 ────────────────────────────────────
+S: 10134099  E: 7  I: 6  R: 45947965  IW: 0  POPULATION: 56082077
+Number of infections: 13
+
+─────────────────────────────────── Day 326 ────────────────────────────────────
+S: 10134097  E: 7  I: 3  R: 45947970  IW: 2  POPULATION: 56082077
+Number of infections: 10
+
+─────────────────────────────────── Day 327 ────────────────────────────────────
+S: 10134097  E: 9  I: 1  R: 45947970  IW: 0  POPULATION: 56082077
+Number of infections: 10
+
+─────────────────────────────────── Day 328 ────────────────────────────────────
+S: 10134095  E: 6  I: 3  R: 45947973  IW: 1  POPULATION: 56082077
+Number of infections: 9
+
+─────────────────────────────────── Day 329 ────────────────────────────────────
+S: 10134095  E: 8  I: 3  R: 45947971  IW: 0  POPULATION: 56082077
+Number of infections: 11
+
+─────────────────────────────────── Day 330 ────────────────────────────────────
+S: 10134093  E: 5  I: 4  R: 45947975  IW: 2  POPULATION: 56082077
+Number of infections: 9
+
+─────────────────────────────────── Day 331 ────────────────────────────────────
+S: 10134093  E: 6  I: 5  R: 45947973  IW: 0  POPULATION: 56082077
+Number of infections: 11
+
+─────────────────────────────────── Day 332 ────────────────────────────────────
+S: 10134092  E: 5  I: 2  R: 45947978  IW: 1  POPULATION: 56082077
+Number of infections: 7
+
+─────────────────────────────────── Day 333 ────────────────────────────────────
+S: 10134088  E: 5  I: 2  R: 45947982  IW: 3  POPULATION: 56082077
+Number of infections: 7
+
+─────────────────────────────────── Day 334 ────────────────────────────────────
+S: 10134087  E: 9  I: 2  R: 45947979  IW: 1  POPULATION: 56082077
+Number of infections: 11
+
+─────────────────────────────────── Day 335 ────────────────────────────────────
+S: 10134086  E: 9  I: 1  R: 45947981  IW: 1  POPULATION: 56082077
+Number of infections: 10
+
+─────────────────────────────────── Day 336 ────────────────────────────────────
+S: 10134086  E: 5  I: 6  R: 45947980  IW: 0  POPULATION: 56082077
+Number of infections: 11
+
+─────────────────────────────────── Day 337 ────────────────────────────────────
+S: 10134084  E: 2  I: 8  R: 45947983  IW: 2  POPULATION: 56082077
+Number of infections: 10
+
+─────────────────────────────────── Day 338 ────────────────────────────────────
+S: 10134081  E: 4  I: 3  R: 45947989  IW: 3  POPULATION: 56082077
+Number of infections: 7
+
+─────────────────────────────────── Day 339 ────────────────────────────────────
+S: 10134081  E: 6  I: 2  R: 45947988  IW: 0  POPULATION: 56082077
+Number of infections: 8
+
+─────────────────────────────────── Day 340 ────────────────────────────────────
+S: 10134081  E: 5  I: 2  R: 45947989  IW: 0  POPULATION: 56082077
+Number of infections: 7
+
+─────────────────────────────────── Day 341 ────────────────────────────────────
+S: 10134081  E: 4  I: 2  R: 45947990  IW: 0  POPULATION: 56082077
+Number of infections: 6
+
+─────────────────────────────────── Day 342 ────────────────────────────────────
+S: 10134081  E: 4  I: 1  R: 45947991  IW: 0  POPULATION: 56082077
+Number of infections: 5
+
+─────────────────────────────────── Day 343 ────────────────────────────────────
+S: 10134081  E: 4  I: 0  R: 45947992  IW: 0  POPULATION: 56082077
+Number of infections: 4
+
+─────────────────────────────────── Day 344 ────────────────────────────────────
+S: 10134081  E: 3  I: 1  R: 45947992  IW: 0  POPULATION: 56082077
+Number of infections: 4
+
+─────────────────────────────────── Day 345 ────────────────────────────────────
+S: 10134081  E: 3  I: 1  R: 45947992  IW: 0  POPULATION: 56082077
+Number of infections: 4
+
+─────────────────────────────────── Day 346 ────────────────────────────────────
+S: 10134081  E: 2  I: 1  R: 45947993  IW: 0  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 347 ────────────────────────────────────
+S: 10134081  E: 2  I: 1  R: 45947993  IW: 0  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 348 ────────────────────────────────────
+S: 10134080  E: 2  I: 1  R: 45947994  IW: 1  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 349 ────────────────────────────────────
+S: 10134080  E: 3  I: 0  R: 45947994  IW: 0  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 350 ────────────────────────────────────
+S: 10134080  E: 1  I: 2  R: 45947994  IW: 0  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 351 ────────────────────────────────────
+S: 10134079  E: 1  I: 2  R: 45947995  IW: 1  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 352 ────────────────────────────────────
+S: 10134078  E: 2  I: 0  R: 45947997  IW: 1  POPULATION: 56082077
+Number of infections: 2
+
+─────────────────────────────────── Day 353 ────────────────────────────────────
+S: 10134078  E: 2  I: 1  R: 45947996  IW: 0  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 354 ────────────────────────────────────
+S: 10134076  E: 2  I: 1  R: 45947998  IW: 2  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 355 ────────────────────────────────────
+S: 10134076  E: 4  I: 0  R: 45947997  IW: 0  POPULATION: 56082077
+Number of infections: 4
+
+─────────────────────────────────── Day 356 ────────────────────────────────────
+S: 10134076  E: 3  I: 1  R: 45947997  IW: 0  POPULATION: 56082077
+Number of infections: 4
+
+─────────────────────────────────── Day 357 ────────────────────────────────────
+S: 10134075  E: 2  I: 2  R: 45947998  IW: 1  POPULATION: 56082077
+Number of infections: 4
+
+─────────────────────────────────── Day 358 ────────────────────────────────────
+S: 10134075  E: 2  I: 2  R: 45947998  IW: 0  POPULATION: 56082077
+Number of infections: 4
+
+─────────────────────────────────── Day 359 ────────────────────────────────────
+S: 10134075  E: 2  I: 1  R: 45947999  IW: 0  POPULATION: 56082077
+Number of infections: 3
+
+─────────────────────────────────── Day 360 ────────────────────────────────────
+S: 10134075  E: 1  I: 1  R: 45948000  IW: 0  POPULATION: 56082077
+Number of infections: 2
+
+─────────────────────────────────── Day 361 ────────────────────────────────────
+S: 10134075  E: 0  I: 2  R: 45948000  IW: 0  POPULATION: 56082077
+Number of infections: 2
+
+─────────────────────────────────── Day 362 ────────────────────────────────────
+S: 10134075  E: 0  I: 2  R: 45948000  IW: 0  POPULATION: 56082077
+Number of infections: 2
+
+─────────────────────────────────── Day 363 ────────────────────────────────────
+S: 10134075  E: 0  I: 0  R: 45948002  IW: 0  POPULATION: 56082077
+Number of infections: 0
+Ending on day 363
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│  Writing a summary of all results into the csv file                          │
+│  /Users/chris/GitHub/MetaWards/output/results.csv.bz2. You can use this to   │
+│  quickly look at statistics across all runs using e.g. R or pandas           │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+──────────────────────────────── End of the run ────────────────────────────────

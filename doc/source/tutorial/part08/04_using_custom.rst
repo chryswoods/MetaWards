@@ -54,3 +54,73 @@ to;
     S: 2895  E: 0  I: 0  R: 17455  IW: 0  POPULATION: 20350
     Number of infections: 0
     Ending on day 132
+
+Running MetaWards from within Python or R
+-----------------------------------------
+
+It is also possible to run your custom network by passing it in directly
+to the :func:`metawards.run` function in Python or R. For example,
+in Python;
+
+.. code-block:: python
+
+   >>> from metawards import Ward, run
+   >>> bristol = Ward(name="Bristol")
+   >>> bristol.add_workers(500)
+   >>> bristol.set_num_players(750)
+   >>> london = Ward(name="London")
+   >>> london.add_workers(8500)
+   >>> london.set_num_players(10000)
+   >>> bristol.add_workers(500, destination=london)
+   >>> london.add_workers(100, destination=bristol)
+   >>> wards = bristol + london
+   >>> print(wards)
+   [ Ward( info=Bristol, id=1, num_workers=1000, num_players=750 ), Ward( info=London, id=2, num_workers=8600, num_players=10000 ) ]
+   >>> results = run(model=wards, additional=5)
+
+This would create the wards, and then run the model. This will run in a
+new directory called ``output_XXXX`` (where XXXX is replaced by a random
+string). The ``results`` variable holds the full path to the resulting
+``results.csv.bz2`` file for this run. The arguments to
+:func:`metawards.run` match those of the command line program. Any Python
+objects (e.g. the wards, disease, demographics) can be passed in as
+Python objects. They will be automatically converted to JSON files and
+passed to the ``metawards`` processed in the background.
+
+.. note::
+
+   You can use the ``+`` operator to add multiple individual ward objects
+   together to create the wards, e.g. ``wards = bristol + london``.
+
+.. note::
+
+   You can force :func:`metawards.run` to use a specified output directory
+   by passing in the ``output`` argument. You will need to set
+   ``force_overwrite_output`` to True to overwrite any existing output.
+   You can silence the printing to the screen by passing in
+   ``silent = True``.
+
+You can achieve the same in R by typing;
+
+.. code-block:: R
+
+   > library(metawards)
+   > bristol <- metawards$Ward(name="Bristol")
+   > bristol$add_workers(500)
+   > bristol$set_num_players(750)
+   > london <- metawards$Ward(name="London")
+   > london$add_workers(8500)
+   > london$set_num_players(10000)
+   > bristol$add_workers(500, destination=london)
+   > london$add_workers(100, destination=bristol)
+   > wards = metawards$Wards()
+   > wards$add(bristol)
+   > wards$add(london)
+   > print(wards)
+   [ Ward( info=Bristol, id=1, num_workers=1000, num_players=750 ), Ward( info=London, id=2, num_workers=8600, num_players=10000 ) ]
+   > results <- metawards$run(model=wards, additional=5)
+
+.. note::
+
+   R does not support adding individual ward objects together to get Wards
+

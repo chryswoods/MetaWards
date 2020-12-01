@@ -5,7 +5,20 @@ Getting Started in R
 Prerequisites
 -------------
 
-Make sure you have installed and imported
+Open R or RStudio.
+
+Make sure you have installed MetaWards according to the
+:doc:`R installation instructions <../install>`. Check this is
+the case by typing;
+
+.. code-block:: R
+
+   > metawards::py_metawards_available()
+   [1] TRUE
+
+If you don't see ``TRUE`` returned, then double-check your installation.
+
+Now make sure that you have installed the
 `tidyverse <https://www.tidyverse.org>`__, e.g. via;
 
 .. code-block:: R
@@ -13,49 +26,11 @@ Make sure you have installed and imported
    > install.packages("tidyverse")
    > library(tidyverse)
 
-Importing metawards
--------------------
+Then, finally, load the metawards R module;
 
-First, you need to get the list of R commands you will need to type
-to import the :mod:`metawards` module into R. You can print these commands
-by opening the console (also called the terminal or command prompt)
-and typing;
+.. code-block:: R
 
-.. code-block:: bash
-
-   metawards-reticulate
-
-and then pressing return. This should print the commands to the screen,
-e.g. for me I see;
-
-::
-
-    Start R or RStudio.
-
-    If you haven't installed 'reticulate' then type at the prompt:
-    > install.packages("reticulate")
-
-    Once this has been installed you should now import reticulate via;
-    > library("reticulate")
-
-    Next, tell R where this Python executable is located via;
-    > use_python("/Users/chris/miniconda3/bin/python", required = TRUE)
-
-    Finally, import the metawards module using;
-    > metawards <- import("metawards")
-
-    You can now use metawards, e.g. via;
-    > metawards$run(model="single", additional=5)
-
-(note that your output will be different)
-
-Follow these instructions to start R or RStudio and import :mod:`metawards`.
-
-.. note::
-
-   We plan to create and upload a metawards R module to CRAN for the next
-   version of MetaWards (1.4). This will make it much easier to download
-   and import the :mod:`metawards` R module.
+   > library(metawards)
 
 Creating the disease
 --------------------
@@ -310,10 +285,7 @@ re-copied below;
 
    # Load the dependencies / libraries
    library(tidyverse)
-   library(reticulate)
-   # Remember to use your own path to python (from metawards-reticulate)
-   use_python("/path/to/your/python", required = TRUE)
-   metawards <- import("metawards")
+   library(metawards)
 
    # Create the disease
    lurgy <- metawards$Disease(name="lurgy")

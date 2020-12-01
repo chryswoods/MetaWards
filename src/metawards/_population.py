@@ -16,24 +16,27 @@ class Population:
     #: The initial population loaded into the model
     initial: int = 0
 
-    #: The number of members who could be infected
+    #: The number of members who could be infected (S)
     susceptibles: int = 0
 
-    #: The number of latent infections
+    #: The number of latent infections (E)
     latent: int = 0
 
-    #: The total number of infections
+    #: The total number of infections (I)
     total: int = 0
 
-    #: The totao number of infections in other states
+    #: The total number of infections in other infected states (X)
     totals: _Dict[str, int] = None
+
+    #: The total number of individuals in other non-infected states (X)
+    other_totals: _Dict[str, int] = None
 
     #: The total number who are removed from the outbreak,
     #: either because they have recovered, or are otherwise
-    #: no longer able to be infected
+    #: no longer able to be infected (R)
     recovereds: int = 0
 
-    #: The number infected in all wards
+    #: The number infected in all wards (IW)
     n_inf_wards: int = 0
 
     #: The scale_uv parameter that can be used to affect the
@@ -63,14 +66,34 @@ class Population:
             for val in self.totals.values():
                 pop += val
 
+        if self.other_totals is not None:
+            for val in self.other_totals.values():
+                pop += val
+
         return pop
+
+    @property
+    def others(self) -> int:
+        """Return the number who are in the 'other' state, i.e.
+           not classed as susceptible, latent, infected or recovered/removed.
+           This is the sum of states that are set as "is_infected=False"
+           in the disease model, e.g. V (vaccinated)
+        """
+        t: int = 0
+
+        if self.other_totals is not None:
+            for val in self.other_totals.values():
+                t += val
+
+        return t
 
     @property
     def infecteds(self) -> int:
         """The number who are infected across all wards"""
         return self.population - \
             int(self.susceptibles or 0) - \
-            int(self.recovereds or 0)
+            int(self.recovereds or 0) - \
+            int(self.others or 0)
 
     def has_equal_SEIR(self, other):
         """Return whether or not the SEIR values for this population
@@ -80,6 +103,7 @@ class Population:
             self.latent == other.latent and \
             self.total == other.total and \
             self.recovereds == other.recovereds and \
+            self.others == other.others and \
             self.totals == other.totals
 
     def increment_day(self, ndays: int = 1) -> None:
@@ -127,6 +151,10 @@ class Population:
             for key, value in self.totals.items():
                 parts.append(f"{key}: {value}")
 
+        if self.other_totals is not None:
+            for key, value in self.other_totals.items():
+                parts.append(f"{key}: {value}")
+
         if self.recovereds is not None:
             parts.append(f"R: {self.recovereds}")
 
@@ -151,7 +179,8 @@ class Population:
 
         t = 0
 
-        for val in [self.susceptibles, self.infecteds, self.recovereds]:
+        for val in [self.susceptibles, self.infecteds,
+                    self.recovereds, self.others]:
             if val is not None:
                 t += val
 
@@ -163,6 +192,7 @@ class Population:
             S = 0
             E = 0
             I = 0
+            O = 0
             R = 0
             P = 0
 
@@ -170,6 +200,7 @@ class Population:
                 S += int(subpop.susceptibles or 0)
                 E += int(subpop.latent or 0)
                 I += int(subpop.total or 0)
+                O += int(subpop.others or 0)
                 R += int(subpop.recovereds or 0)
                 P += int(subpop.population or 0)
 
@@ -184,6 +215,10 @@ class Population:
             if I != int(self.total or 0):
                 errors.append(f"Disagreement in I: {I} "
                               f"versus {self.total}")
+
+            if O != int(self.others or 0):
+                errors.append(f"Disagreement in O: {O} "
+                              f"versus {self.others}")
 
             if R != int(self.recovereds or 0):
                 errors.append(f"Disagreement in R: {R} "
@@ -220,6 +255,11 @@ class Population:
             for key, _ in self.totals.items():
                 headers.append(key)
 
+        if self.other_totals is not None:
+            # use items as need to be same order as items below
+            for key, _ in self.other_totals.items():
+                headers.append(key)
+
         if self.recovereds is not None:
             headers.append("R")
 
@@ -246,6 +286,10 @@ class Population:
 
         if self.totals is not None:
             for key, value in self.totals.items():
+                parts.append(f"{key}: {value}")
+
+        if self.other_totals is not None:
+            for key, value in self.other_totals.items():
                 parts.append(f"{key}: {value}")
 
         if self.recovereds is not None:
@@ -291,6 +335,12 @@ class Population:
                 columns[key] = count
                 count += 1
 
+        if self.other_totals is not None:
+            for key, value in self.other_totals.items():
+                table.add_column(key, footer=value)
+                columns[key] = count
+                count += 1
+
         if self.recovereds is not None:
             table.add_column("R", footer=self.recovereds)
             columns["R"] = count
@@ -321,6 +371,10 @@ class Population:
 
             if subpop.totals is not None:
                 for key, value in subpop.totals.items():
+                    row[columns[key]] = value
+
+            if subpop.other_totals is not None:
+                for key, value in subpop.other_totals.items():
                     row[columns[key]] = value
 
             row[-1] = subpop.population

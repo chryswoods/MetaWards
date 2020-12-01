@@ -1,5 +1,5 @@
 
-from metawards import Demographics
+from metawards import Demographics, Demographic, VariableSet
 
 import os
 
@@ -54,3 +54,35 @@ def test_demographics():
     d2.add(blue)
 
     assert d0 == d2
+
+    home = Demographic("home")
+    home.work_ratio = 1.0
+    home.play_ratio = 1.0
+
+    holiday = Demographic("holiday")
+    holiday.work_ratio = 0.0
+    holiday.play_ratio = 0.0
+
+    adjustment = VariableSet()
+    adjustment["scale_uv"] = 0.0
+    adjustment["dyn_dist_cutoff"] = 0.0
+    adjustment["bg_foi"] = 100
+
+    holiday.adjustment = adjustment
+
+    demographics = home + holiday
+
+    s = demographics.to_json(indent=2)
+    print(s)
+
+    d2 = Demographics.from_json(s)
+
+    print(d2)
+
+    print(demographics == d2)
+
+    assert demographics == d2
+
+
+if __name__ == "__main__":
+    test_demographics()

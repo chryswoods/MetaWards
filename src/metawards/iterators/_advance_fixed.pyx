@@ -60,7 +60,10 @@ def advance_fixed_omp(network: Network, infections, rngs,
     cdef double * wards_night_inf_prob = get_double_array_ptr(
                                                         wards.night_inf_prob)
 
+    cdef double * wards_cutoff = get_double_array_ptr(wards.cutoff)
+
     cdef double cutoff = params.dyn_dist_cutoff
+    cdef double local_cutoff = cutoff
 
     # Pointer to the infections array - only need [0] as this loop
     # is creating new infections
@@ -100,7 +103,10 @@ def advance_fixed_omp(network: Network, infections, rngs,
             ito = links_ito[j]
             distance = links_distance[j]
 
-            if distance < cutoff:
+            local_cutoff = min(cutoff, wards_cutoff[ifrom])
+            local_cutoff = min(local_cutoff, wards_cutoff[ito])
+
+            if distance < local_cutoff:
                 # distance is below cutoff (reasonable distance)
                 # infect in work ward
                 if wards_day_foi[ito] > 0:
@@ -181,7 +187,10 @@ def advance_fixed_serial(network: Network, infections, rngs,
     cdef double * wards_night_inf_prob = get_double_array_ptr(
                                                         wards.night_inf_prob)
 
+    cdef double * wards_cutoff = get_double_array_ptr(wards.cutoff)
+
     cdef double cutoff = params.dyn_dist_cutoff
+    cdef double local_cutoff = cutoff
 
     # Pointer to the infections array - only need [0] as this loop
     # is creating new infections
@@ -215,7 +224,10 @@ def advance_fixed_serial(network: Network, infections, rngs,
             ito = links_ito[j]
             distance = links_distance[j]
 
-            if distance < cutoff:
+            local_cutoff = min(cutoff, wards_cutoff[ifrom])
+            local_cutoff = min(local_cutoff, wards_cutoff[ito])
+
+            if distance < local_cutoff:
                 # distance is below cutoff (reasonable distance)
                 # infect in work ward
                 if wards_day_foi[ito] > 0:

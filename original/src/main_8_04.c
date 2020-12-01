@@ -61,7 +61,7 @@ int main(int argc, char *argv[]){
 	par->UV=atof(argv[4]);
 
 
-	par->n_restrict = 2; // how many restrictions shall we have. 2 means one, because we use this to only trigger once
+	par->n_restrict = 0; // how many restrictions shall we have. 2 means one, because we use this to only trigger once
 	par->InfectedsTrigger = 3097*20; // at what number of infecteds shall we start restrictions (i.e. when is 23 March)
 //	par->controlScale[0] = 1; //R0=2.8
 //	Xdays =27*7; //From 1 March - End August

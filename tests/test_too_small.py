@@ -85,11 +85,11 @@ def test_too_small(prompt=None):
     print(f"Model output: {trajectory}")
 
     expected = Population(initial=57104043,
-                          susceptibles=56081438,
-                          latent=244,
-                          total=81,
-                          recovereds=314,
-                          n_inf_wards=76,
+                          susceptibles=56081610,
+                          latent=167,
+                          total=60,
+                          recovereds=240,
+                          n_inf_wards=56,
                           day=30)
 
     print(f"Expect output: {expected}")

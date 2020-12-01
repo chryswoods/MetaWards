@@ -334,7 +334,8 @@ def setup_package():
                 "metawards-install = metawards.scripts.install:cli",
                 "metawards-python = metawards.scripts.pyexe:cli",
                 "metawards-jupyter = metawards.scripts.jupexe:cli",
-                "metawards-reticulate = metawards.scripts.retexe:cli"
+                "metawards-reticulate = metawards.scripts.retexe:cli",
+                "metawards-update = metawards.scripts.update:cli"
             ]
         },
         data_files=[("share/metawards/requirements",
